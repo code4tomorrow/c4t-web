@@ -5,7 +5,7 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import createCache from '@emotion/cache';
 
 storyblokInit({
-  accessToken: process.env.STORYBLOK_PREVIEW_TOKEN,
+  accessToken: process.env.STORYBLOK_TOKEN,
   use: [apiPlugin]
 });
 
