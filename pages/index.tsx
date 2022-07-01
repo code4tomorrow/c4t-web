@@ -19,8 +19,8 @@ export default function Home(props:any) {
       <Navbar/>
       <header className="flex flex-col space-y-6 justify-center items-center p-3">
         <h1 
-          style={{ textShadow: "0px 0px 25px rgba(255,255,255,0.45)"}} 
-          className="text-white text-6xl mt-16 text-center">
+          style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)"}} 
+          className="text-white text-5xl md:text-6xl mt-16 text-center">
             Master to Code Today.
         </h1>
         <h2 className="text-xl font-medium text-medium-grey-primary text-center">
@@ -29,19 +29,19 @@ export default function Home(props:any) {
         <BrandButton title="Apply Today" label="100% Free" />
       </header>
       <main className="p-3 mt-10 flex flex-col items-center">
-         <div className="w-[125vw] h-[60vw] max-w-[1950px] max-h-[850px] flex items-center justify-center">
-            <div className="w-[25%] h-[100%] space-y-3 p-3 flex flex-col items-end justify-center">
+         <div className="w-screen p-3 md:w-[125vw] h-[80vw] md:h-[60vw] max-w-[1950px] max-h-[850px] flex items-center justify-center">
+            <div className="hidden w-[25%] h-[100%] space-y-3 p-3 md:flex flex-col items-end justify-center">
               <Paper containerClass="w-[75%] min-h-[25%]"></Paper>
               <Paper containerClass="w-[35%] min-h-[35%]"></Paper>
             </div>
-            <div className="w-[70%] h-[100%] flex flex-col justify-center space-y-3">
+            <div className="w-full md:w-[70%] h-[100%] flex flex-col justify-center space-y-3">
               <div className={clsx("w-full h-[80%]", classes.carouselContainer)}>
                 <Paper containerClass={clsx("relative w-full h-full")}>
                     <Image
                         draggable={false}
                         src="/code.png"
-                        width={"100%"}
-                        height={"100%"}
+                        priority
+                        alt="code-example"
                         objectFit="cover"
                         layout="fill"
                     />
@@ -53,7 +53,7 @@ export default function Home(props:any) {
                   <Paper containerClass="w-[35%] h-[45%]"></Paper>
               </div>
             </div>
-            <div className="w-[25%] h-[100%] space-y-3 p-3 flex flex-col items-start justify-center">
+            <div className="hidden w-[25%] h-[100%] space-y-3 p-3 md:flex flex-col items-start justify-center">
               <Paper containerClass="w-[75%] min-h-[25%]"></Paper>
               <Paper containerClass="w-[35%] min-h-[35%]"></Paper>
             </div>

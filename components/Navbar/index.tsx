@@ -22,7 +22,7 @@ const Navbar = () => {
         <div>
             <nav className="px-10 py-5 flex justify-between items-center">
                 <h1 className="text-lg text-white">C4T</h1>
-                <ul className="list-none flex space-x-3">
+                <ul className="list-none flex space-x-4">
                     <NavListItem href="/">Home</NavListItem>
                     <NavListItem href="/about">About</NavListItem>
                     <NavListItem href="/courses">Courses</NavListItem>
