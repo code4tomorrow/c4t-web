@@ -69,12 +69,14 @@ export async function getStaticProps() {
  
   // load the draft version
   let sbParams = {
-    version: process.env.NODE_ENV === "production" ? "published" : "draft", // or 'published'
+    version: "draft" //  process.env.NODE_ENV === "production" ? "published" : "draft", // or 'published'
   };
  
-  const token = "";
   const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams).catch(e => {
+    console.log(e);
+    return { data: null };
+  });
  
   return {
     props: {
