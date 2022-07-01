@@ -3,7 +3,7 @@ import { getStoryblokApi } from "@storyblok/react"
 import BrandButton from "../components/BrandButton";
 import Paper from "../components/Paper";
 import Image from "next/image";
-import { useStyles } from "./styles";
+import { useStyles } from "../styles/styles";
 import clsx from "clsx";
 import Navbar from "../components/Navbar";
  
