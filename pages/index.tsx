@@ -11,7 +11,9 @@ export default function Home(props:any) {
   const { classes } = useStyles();
 
   return (
-    <div className="w-screen min-h-screen bg-gradient-to-b from-dark-grey-primary to-dark-blue-primary">
+    <div 
+      style={{ width: "100vw", overflowX: "hidden" }}
+      className="w-screen min-h-screen bg-gradient-to-b from-dark-grey-primary to-dark-blue-primary">
       <Head>
         <title>Home | C4T</title>
         <link rel="icon" href="/favicon.ico" />
