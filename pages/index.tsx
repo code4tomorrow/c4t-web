@@ -1,12 +1,11 @@
 import Head from "next/head"
-import { getStoryblokApi } from "@storyblok/react"
-import BrandButton from "../components/BrandButton";
-import Paper from "../components/Paper";
+import BrandButton from "@components/BrandButton";
+import Paper from "@components/Paper";
 import Image from "next/image";
 import { useStyles } from "../styles/styles";
 import clsx from "clsx";
-import Navbar from "../components/Navbar";
- 
+import Navbar from "@components/Navbar";
+
 export default function Home(props:any) {
   const { classes } = useStyles();
 
@@ -22,7 +21,7 @@ export default function Home(props:any) {
       <header className="flex flex-col space-y-6 justify-center items-center p-3">
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)"}} 
-          className="text-white text-5xl md:text-6xl mt-16 text-center">
+          className="text-white text-5xl font-bold md:text-6xl mt-16 text-center">
             Master to Code Today.
         </h1>
         <h2 className="text-xl font-medium text-medium-grey-primary text-center">
@@ -63,28 +62,4 @@ export default function Home(props:any) {
       </main>
     </div>
   )
-}
- 
-export async function getStaticProps() {
-  // home is the default slug for the homepage in Storyblok
-  let slug = "home";
- 
-  // load the draft version
-  let sbParams = {
-    version: "draft" //  process.env.NODE_ENV === "production" ? "published" : "draft", // or 'published'
-  };
- 
-  const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams).catch(e => {
-    console.log(e);
-    return { data: null };
-  });
- 
-  return {
-    props: {
-      story: data ? data.story : false,
-      key: data ? data.story.id : false,
-    },
-    revalidate: 3600, // revalidate every hour
-  };
 }

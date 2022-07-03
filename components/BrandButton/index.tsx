@@ -9,10 +9,11 @@ interface BrandButtonProps extends React.HTMLProps<HTMLButtonElement> {
     flex?: number,
     containerClass?: string,
     children?: ReactNode,
-    label?: string
+    label?: string,
+    variant?: 'gradient' | 'default'
 } 
 
-const BrandButton : React.FC<BrandButtonProps> = ({ disabled, label, containerClass, title, className, onClick, flex = 0, children }) => {
+const BrandButton : React.FC<BrandButtonProps> = ({ variant = "gradient", disabled, label, containerClass, title, className, onClick, flex = 0, children }) => {
     const handleOnClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         e.stopPropagation();
@@ -56,12 +57,12 @@ const BrandButton : React.FC<BrandButtonProps> = ({ disabled, label, containerCl
                 onClick={handleOnClick}
                 className={clsx(
                     "",
-                    "bg-gradient-to-b from-brand-blue-primary to-brand-green font-medium text-white border-0 rounded-xl py-3 px-7", 
+                    "bg-gradient-to-b from-brand-blue-primary to-brand-green font-medium text-white border-0 rounded-xl py-3 px-6", 
                     "items-center flex justify-center space-x-2",
                     classes.button,
                     className
                 )}>
-                    <span>{ title }</span>
+                    <span className="text-sm">{ title }</span>
                     
                     { children }
             </button>
@@ -72,7 +73,7 @@ const BrandButton : React.FC<BrandButtonProps> = ({ disabled, label, containerCl
                         <span 
                             style={{ whiteSpace: "nowrap", transform: "translateY(25%)" }} 
                             className="text-medium-grey-primary text-xs">
-                                100% Free
+                                { label }
                         </span>
                     </div>
                 )

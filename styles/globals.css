@@ -1,5 +1,6 @@
 @tailwind components;
 @tailwind utilities;
+@tailwind base;
 
 *, 
 *::before,

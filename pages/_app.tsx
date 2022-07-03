@@ -1,13 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { storyblokInit, apiPlugin } from "@storyblok/react";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createCache from '@emotion/cache';
-
-storyblokInit({
-  accessToken: process.env.STORYBLOK_TOKEN,
-  use: [apiPlugin]
-});
 
 let muiCache: EmotionCache | undefined = undefined;
 
