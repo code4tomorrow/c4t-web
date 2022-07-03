@@ -28,11 +28,11 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
             <main className="w-full h-full flex flex-col justify-center items-center">
                 <div className="w-full mt-[100px] flex justify-center" ref={emblaRef}>
                     <div className="flex w-full space-x-8 items-center justify-center">
-                        {
+                        {/* {
                             courses.map((course, i) => (
                                 <Course key={i} course={course} />
                             ))
-                        }
+                        } */}
                     </div>
                 </div>
             </main>

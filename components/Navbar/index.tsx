@@ -12,7 +12,7 @@ const NavListItem : React.FC<NavListItemProps> = ({ children, href, ...props }) 
     return (
         <li className="text-white hover:opacity-75 transition-opacity text-base font-medium">
             <Link href={href || "/"} passHref>
-                <a className="flex space-x-2" { ...props }>
+                <a className="flex space-x-2 py-[5px] md:py-0" { ...props }>
                     { children }
                 </a>
             </Link>
@@ -50,7 +50,7 @@ const Navbar = () => {
                     clsx(
                         classes.linksContainer,
                         "list-none scale-50 opacity-0 z-50",
-                        "absolute top-16 right-8 space-y-2 bg-dark-grey-secondary border-solid border-0 border-t border-[#333333] px-5 py-3 rounded-lg",
+                        "absolute top-16 right-8 space-y-0 bg-dark-grey-secondary border-solid border-0 border-t border-[#333333] px-6 py-4 rounded-lg",
                         "md:relative md:scale-100 md:top-0 md:transition-none md:opacity-100 md:space-y-0 md:rounded-none md:px-0 md:py-0 md:bg-transparent md:border-none md:right-0 md:flex md:space-x-4",
                         mobileNavOpen && "scale-100 opacity-100"
                     )
