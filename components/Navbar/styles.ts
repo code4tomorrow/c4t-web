@@ -2,6 +2,7 @@ import { makeStyles } from "tss-react/mui";
 
 export const useStyles = makeStyles()(() => ({
     linksContainer: {
+        boxShadow: "0px 0px 0px 1px #000000",
         transition: `150ms transform ease, 
                     150ms opacity ease`
     },

@@ -5,6 +5,9 @@ import Image from "next/image";
 import { useStyles } from "../styles/styles";
 import clsx from "clsx";
 import Navbar from "@components/Navbar";
+import Typist from "react-typist-component";
+
+const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "Apps." ];
 
 export default function Home() {
   const { classes } = useStyles();
@@ -22,7 +25,19 @@ export default function Home() {
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)"}} 
           className="text-white text-5xl font-bold md:text-6xl mt-16 text-center">
-            Master to Code Today.
+            Master to Code&nbsp;
+            <Typist cursor={<span className={classes.blinkingCursor}>|</span>} loop={true}>
+                {
+                  CODE_ITEMS.map((item, idx) => (
+                    <span key={idx}>
+                      <span>{item}</span>
+                      <Typist.Delay ms={1750}/>
+                      <Typist.Backspace count={item.length} />
+                      <Typist.Delay ms={250}/>
+                    </span>
+                  ))
+                }
+            </Typist>
         </h1>
         <h2 className="text-xl font-medium text-medium-grey-primary text-center">
           We teach K-12 students around the globe how to code for free.
