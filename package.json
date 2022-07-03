@@ -17,6 +17,7 @@
     "axios": "^0.27.2",
     "clsx": "^1.1.1",
     "embla-carousel-react": "^7.0.0-rc01",
+    "graphql": "^16.5.0",
     "graphql-request": "^4.3.0",
     "lodash": "^4.17.21",
     "next": "12.2.0",
