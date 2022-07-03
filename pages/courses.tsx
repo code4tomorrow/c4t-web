@@ -29,8 +29,8 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                 <div className="w-full mt-[100px] flex justify-center" ref={emblaRef}>
                     <div className="flex w-full space-x-8 items-center justify-center">
                         {
-                            courses.map(course => (
-                                <Course course={course} />
+                            courses.map((course, i) => (
+                                <Course key={i} course={course} />
                             ))
                         }
                     </div>
