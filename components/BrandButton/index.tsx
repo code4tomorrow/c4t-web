@@ -72,7 +72,7 @@ const BrandButton : React.FC<BrandButtonProps> = ({ variant = "gradient", disabl
                         <Arrow className="mt-2" width="15px" />
                         <span 
                             style={{ whiteSpace: "nowrap", transform: "translateY(25%)" }} 
-                            className="text-medium-grey-primary text-xs">
+                            className="text-medium-grey-primary text-sm">
                                 { label }
                         </span>
                     </div>

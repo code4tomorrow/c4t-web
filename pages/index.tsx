@@ -6,7 +6,7 @@ import { useStyles } from "../styles/styles";
 import clsx from "clsx";
 import Navbar from "@components/Navbar";
 
-export default function Home(props:any) {
+export default function Home() {
   const { classes } = useStyles();
 
   return (
@@ -42,6 +42,7 @@ export default function Home(props:any) {
                         draggable={false}
                         src="/code.png"
                         priority
+                        quality={100}
                         alt="code-example"
                         objectFit="cover"
                         layout="fill"
