@@ -48,7 +48,7 @@ const Element = <T extends ElementType = "div">({
             gsap.killTweensOf(containerRef.current);
             tl.kill();
         }
-    }, [ containerRef.current ]);
+    }, [ containerRef, resetAfterTriggered ]);
 
     const animateContainer = useCallback(() => {
         if (!containerRef.current) return;
@@ -61,7 +61,7 @@ const Element = <T extends ElementType = "div">({
         return () => {
             gsap.killTweensOf(containerRef.current);
         }
-    }, [ containerRef.current, triggered, from, to ]);
+    }, [ containerRef, triggered, from, to ]);
 
     useEffect(animateContainer, [ animateContainer ]);
     useEffect(setTriggerListeners, [ setTriggerListeners ]);

@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import React from 'react';
 import type { AppProps } from 'next/app'
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createCache from '@emotion/cache';

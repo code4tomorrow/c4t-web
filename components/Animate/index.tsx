@@ -25,7 +25,7 @@ const Animate : React.FC<AnimateProps> = ({ children }) => {
     useEffect(() => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [ handleResize ]);
 
     useEffect(() => {
         if (resizedWidth === null) return; 
