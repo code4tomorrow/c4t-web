@@ -5,6 +5,8 @@ import { useRef } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import { useDebounce } from "use-debounce";
+import clsx from "clsx";
+import { useStyles } from "./styles";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,8 +79,10 @@ const Animate = <T extends ElementType = "div">({
 
     const Component = as || "div";
 
+    const { classes } = useStyles();
+
     return (
-        <Component className={className} { ...props } ref={containerRef}>
+        <Component className={clsx(classes.container, className)} { ...props } ref={containerRef}>
             { children }
         </Component>
     )
