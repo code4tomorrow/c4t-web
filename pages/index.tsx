@@ -49,15 +49,16 @@ export default function Home() {
         </h2>
         <BrandButton title="Apply Today" label="100% Free" />
       </header>
+      <Animate>
       <main className="p-3 mt-10 space-y-32 flex flex-col items-center">
          <section className="w-screen p-3 md:w-[125vw] h-[80vw] md:h-[60vw] max-w-[1950px] max-h-[850px] flex items-center justify-center">
-            <Animate 
+            <Animate.Element 
                 resetAfterTriggered={false}
                 from={{ x: -200 }} to={{ x: 0}}
                 className="hidden w-[25%] h-[100%] space-y-3 p-3 md:flex flex-col items-end justify-center">
                 <Paper containerClass="w-[75%] min-h-[25%]"></Paper>
                 <Paper containerClass="w-[35%] min-h-[35%]"></Paper>
-            </Animate>
+            </Animate.Element>
             <div className="w-full md:w-[70%] h-[100%] flex flex-col justify-center space-y-3">
               <div className={clsx("w-full h-[80%] z-10", classes.carouselContainer)}>
                 <Paper containerClass={clsx("relative w-full h-full")}>
@@ -72,26 +73,26 @@ export default function Home() {
                     />
                 </Paper>
               </div>
-              <Animate resetAfterTriggered={false} from={{ y: 200 }} to={{ y: 0 }} className="h-[20%] flex space-x-3">
+              <Animate.Element resetAfterTriggered={false} from={{ y: 200 }} to={{ y: 0 }} className="h-[20%] flex space-x-3">
                   <Paper containerClass="w-[30%] h-[50%]"></Paper>
                   <Paper containerClass="w-[35%] h-[100%]"></Paper>
                   <Paper containerClass="w-[35%] h-[45%]"></Paper>
-              </Animate>
+              </Animate.Element>
             </div>
-            <Animate 
+            <Animate.Element 
               resetAfterTriggered={false}
               from={{ x: 200 }} to={{ x: 0, delay: 0.2 }}
               className="hidden w-[25%] h-[100%] space-y-3 p-3 md:flex flex-col items-start justify-center">
               <Paper containerClass="w-[75%] min-h-[25%]"></Paper>
               <Paper containerClass="w-[35%] min-h-[35%]"></Paper>
-            </Animate>
+            </Animate.Element>
          </section>
          <section className="flex py-5 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
               <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
-                <Animate from={{ x: -200 }} to={{ x: 0}}>
+                <Animate.Element from={{ x: -200 }} to={{ x: 0}}>
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Begin Your Summer Adventure.</h1>
-                </Animate>
-                <Animate from={{ x: -200 }} to={{ x: 0}}>
+                </Animate.Element>
+                <Animate.Element from={{ x: -200 }} to={{ x: 0}}>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
                     <p className="text-medium-grey-primary">
                         C4T&apos;s summer session is open for registration now! Learn languages like Python, Java, and more—all for free!
@@ -100,7 +101,7 @@ export default function Home() {
                       The student application is open till July 3rd. Classes are twice a week from July 11th to August 22nd.
                     </p>
                   </div>
-                </Animate>
+                </Animate.Element>
                 <BrandButton containerClass="mr-auto" title="Sign Up" label="Quick & Easy" />
               </article>
               <div className={"md:my-0 my-8"}>
@@ -109,13 +110,13 @@ export default function Home() {
          </section>
          <section className="flex py-10 flex-col-reverse md:flex-row-reverse md:items-center justify-around w-full max-w-[1250px]">
               <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
-                <Animate from={{ x: 200 }} to={{ x: 0}}>
+                <Animate.Element from={{ x: 200 }} to={{ x: 0}}>
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Consider Supporting a STEM Initiative.</h1>
-                </Animate>
+                </Animate.Element>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
-                    <Animate from={{ x: 200 }} to={{ x: 0}} className="text-medium-grey-primary">
+                    <Animate.Element as="p" from={{ x: 200 }} to={{ x: 0}} className="text-medium-grey-primary">
                       If you would like to support our efforts to make STEM education accessible to all, please consider donating.
-                    </Animate>
+                    </Animate.Element>
                   </div>
                 <BrandButton containerClass="mr-auto" title="Donate Now" label="Every bit Matters" />
               </article>
@@ -125,13 +126,13 @@ export default function Home() {
          </section>
          <section className="flex py-10 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
               <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
-                <Animate from={{ x: -200 }} to={{ x: 0}}>
+                <Animate.Element from={{ x: -200 }} to={{ x: 0}}>
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Let&apos;s Build a Partnership.</h1>
-                </Animate>
+                </Animate.Element>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
-                    <Animate as="p" from={{ x: -200 }} to={{ x: 0}} className="text-medium-grey-primary">
+                    <Animate.Element as="p" from={{ x: -200 }} to={{ x: 0}} className="text-medium-grey-primary">
                       At C4T, we believe in the power of partnership. We know it will take a large coalition of change-makers in order to have the greatest impact. This is why we collaborate with other non-profit organizations to bring STEM-related opportunities to students.
-                    </Animate>
+                    </Animate.Element>
                   </div>
                 <BrandButton containerClass="mr-auto" title="Let's Team Up" />
               </article>
@@ -140,6 +141,7 @@ export default function Home() {
               </div>
          </section>
       </main>
+      </Animate>
     </div>
   )
 }

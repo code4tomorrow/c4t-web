@@ -1,29 +1,20 @@
-import React, { ComponentPropsWithoutRef, ElementType, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { useRef } from "react";
-import { useCallback } from "react";
-import { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
-import clsx from "clsx";
-import { useStyles } from "./styles";
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import Element from "./Element";
+import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface AnimateProps<T extends ElementType = "div"> {
-    as?: T,
-    className?: string;
-    children: React.ReactNode;
-    from?: gsap.TweenVars,
-    to?: gsap.TweenVars,
-    resetAfterTriggered?: boolean,
+export const AnimateContext = React.createContext({
+    isNestedInAnimate: false,
+})
+
+interface AnimateProps {
+    children: React.ReactNode
 }
 
-const Animate = <T extends ElementType = "div">({ 
-        as, className, children, from = {}, to = {}, resetAfterTriggered = true, ...props
-    } : AnimateProps<T> & ComponentPropsWithoutRef<T>) => {
-    const containerRef = useRef<HTMLDivElement | null>(null);
-    const [ triggered, setTriggered ] = useState(false);
+const Animate : React.FC<AnimateProps> = ({ children }) => {
     const [ viewportWidth, setViewportWidth ] = useState<number | null>(null);
     const [ resizedWidth ] = useDebounce(viewportWidth, 500);
 
@@ -36,56 +27,16 @@ const Animate = <T extends ElementType = "div">({
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const setTriggerListeners = useCallback(() => {
-        if (!containerRef.current) return;
-
-        const tl = gsap.timeline({
-            repeat: 0,
-            scrollTrigger: {
-                invalidateOnRefresh: true,
-                trigger: containerRef.current,
-                onEnter: () => setTriggered(true),
-                onLeaveBack: () => resetAfterTriggered && setTriggered(false),
-                onLeave: () => resetAfterTriggered && setTriggered(false),
-                onEnterBack: () => resetAfterTriggered && setTriggered(true),
-            }
-        })
-        return () => {
-            gsap.killTweensOf(containerRef.current);
-            tl.kill();
-        }
-    }, [ containerRef.current ]);
-
-    const animateContainer = useCallback(() => {
-        if (!containerRef.current) return;
-
-        if (triggered) {
-            gsap.fromTo(containerRef.current, from, to);
-        } else {
-            gsap.to(containerRef.current, from);
-        }
-        return () => {
-            gsap.killTweensOf(containerRef.current);
-        }
-    }, [ containerRef.current, triggered, from, to ]);
-
-    useEffect(animateContainer, [ animateContainer ]);
-    useEffect(setTriggerListeners, [ setTriggerListeners ]);
-
     useEffect(() => {
-        if (resizedWidth === null || !containerRef.current) return; 
+        if (resizedWidth === null) return; 
         ScrollTrigger.refresh();
-    }, [ resizedWidth, containerRef.current ]);
-
-    const Component = as || "div";
-
-    const { classes } = useStyles();
+    }, [ resizedWidth ]);
 
     return (
-        <Component className={clsx(classes.container, className)} { ...props } ref={containerRef}>
+        <AnimateContext.Provider value={{ isNestedInAnimate: true }}>
             { children }
-        </Component>
+        </AnimateContext.Provider>
     )
-}  
+}
 
-export default Animate; 
+export default Object.assign(Animate, { Element });
