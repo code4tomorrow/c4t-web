@@ -25,22 +25,28 @@ const Navbar = () => {
     const { classes } = useStyles();
 
     const [ mobileNavOpen, setMobileNavOpen ] = useState(false);
-    const [ navHidden, setNavHidden ] = useState(false);
+    const [ navOffset, setNavOffset ] = useState(0);
 
     const scrollOffset = useRef(0);
+    const navRef = useRef<HTMLElement>(null);
 
     const handleScroll = useCallback(() => {
-        if (window.scrollY >= scrollOffset.current && window.scrollY !== 0) setNavHidden(true);
-        else setNavHidden(false);
+        if (!navRef.current) return;
+
+        const navHeight = navRef.current.clientHeight; 
+        const next = navOffset - (window.scrollY - scrollOffset.current);
+
+        if (window.scrollY >= scrollOffset.current && window.scrollY !== 0) 
+            setNavOffset(next < -navHeight ? -navHeight : next); 
+        else setNavOffset(next > 0 ? 0 : next); 
 
         let scrollY = window.scrollY;
         if (scrollY < 0) scrollY = 0; 
-        else if (scrollY > document.body.scrollHeight - window.innerHeight) {
+        else if (scrollY > document.body.scrollHeight - window.innerHeight) 
             scrollY = document.body.scrollHeight - window.innerHeight;
-        }
-
         scrollOffset.current = scrollY;  
-    }, []);
+        
+    }, [ navOffset, navRef, scrollOffset ]);
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -48,11 +54,15 @@ const Navbar = () => {
     }, [ handleScroll ]);
 
     return (
-        <nav className={clsx(
-            "px-10 py-5 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
-            navHidden ? "-translate-y-full" : "translate-y-0",
-            classes.nav
-        )}>
+        <nav 
+            ref={navRef}
+            style={{
+                transform: `translateY(${navOffset}px)`,
+            }}
+            className={clsx(
+                "px-10 py-5 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
+                classes.nav
+            )}>
             <Link href="/" passHref>
                 <a>
                     <h1 className="text-lg font-bold text-white">C4T</h1>
