@@ -80,7 +80,7 @@ export default function Home() {
          </section>
          <section className="flex py-5 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
               <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
-                <h1 className="text-white text-5xl font-extrabold">Begin Your Summer Adventure.</h1>
+                <h1 className="text-white text-4xl md:text-5xl font-extrabold">Begin Your Summer Adventure.</h1>
                 <div className="space-y-3 md:max-w-[75%] text-lg">
                   <p className="text-medium-grey-primary">
                     C4T&apos;s summer session is open for registration now! Learn languages like Python, Java, and more—all for free!
@@ -97,7 +97,7 @@ export default function Home() {
          </section>
          <section className="flex py-10 flex-col-reverse md:flex-row-reverse md:items-center justify-around w-full max-w-[1250px]">
               <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
-                <h1 className="text-white text-5xl font-extrabold">Consider Supporting a STEM Initiative.</h1>
+                <h1 className="text-white text-4xl md:text-5xl font-extrabold">Consider Supporting a STEM Initiative.</h1>
                 <div className="space-y-3 md:max-w-[75%] text-lg">
                   <p className="text-medium-grey-primary">
                     If you would like to support our efforts to make STEM education accessible to all, please consider donating.
@@ -111,7 +111,7 @@ export default function Home() {
          </section>
          <section className="flex py-10 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
               <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
-                <h1 className="text-white text-5xl font-extrabold">Let&apos;s Build a Partnership.</h1>
+                <h1 className="text-white text-4xl md:text-5xl font-extrabold">Let&apos;s Build a Partnership.</h1>
                 <div className="space-y-3 md:max-w-[75%] text-lg">
                   <p className="text-medium-grey-primary">
                     At C4T, we believe in the power of partnership. We know it will take a large coalition of change-makers in order to have the greatest impact. This is why we collaborate with other non-profit organizations to bring STEM-related opportunities to students.

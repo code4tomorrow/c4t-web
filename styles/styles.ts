@@ -11,8 +11,8 @@ export const useStyles = makeStyles()(() => ({
             background: "rgba(0,0,0,0)",
             display: "block",
             position: "absolute",
-            boxShadow: `-50px -25px 100px 25px rgba(94, 158, 255, 0.2),    
-                        50px -25px 100px 25px rgba(227, 146, 255, 0.2)`,
+            boxShadow: `-50px -25px 175px 0px rgba(94, 158, 255, 0.35),    
+                        50px -25px 175px 0px rgba(227, 146, 255, 0.35)`,
         }
     },
     blinkingCursor: {
