@@ -42,7 +42,7 @@ const Navbar = () => {
 
     return (
         <nav className={clsx(
-            "px-10 py-5 flex bg-gradient-to-b from-dark-grey-primary bg-opacity-50 fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
+            "px-10 py-5 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
             navHidden ? "-translate-y-full" : "translate-y-0",
             classes.nav
         )}>
