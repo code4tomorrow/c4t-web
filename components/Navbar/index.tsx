@@ -30,9 +30,16 @@ const Navbar = () => {
     const scrollOffset = useRef(0);
 
     const handleScroll = useCallback(() => {
-        if (window.scrollY > scrollOffset.current) setNavHidden(true);
+        if (window.scrollY >= scrollOffset.current && window.scrollY !== 0) setNavHidden(true);
         else setNavHidden(false);
-        scrollOffset.current = window.scrollY; 
+
+        let scrollY = window.scrollY;
+        if (scrollY < 0) scrollY = 0; 
+        else if (scrollY > document.body.scrollHeight - window.innerHeight) {
+            scrollY = document.body.scrollHeight - window.innerHeight;
+        }
+
+        scrollOffset.current = scrollY;  
     }, []);
 
     useEffect(() => {
