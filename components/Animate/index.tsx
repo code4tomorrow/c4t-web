@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ComponentPropsWithoutRef, ElementType, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useRef } from "react";
@@ -8,15 +8,18 @@ import { useDebounce } from "use-debounce";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface AnimateProps {
+interface AnimateProps<T extends ElementType = "div"> {
+    as?: T,
     className?: string;
     children: React.ReactNode;
     from?: gsap.TweenVars,
     to?: gsap.TweenVars,
-    resetAfterTriggered?: boolean
+    resetAfterTriggered?: boolean,
 }
 
-const Animate : React.FC<AnimateProps> = ({ className, children, from = {}, to = {}, resetAfterTriggered = true }) => {
+const Animate = <T extends ElementType = "div">({ 
+        as, className, children, from = {}, to = {}, resetAfterTriggered = true, ...props
+    } : AnimateProps<T> & ComponentPropsWithoutRef<T>) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [ triggered, setTriggered ] = useState(false);
     const [ viewportWidth, setViewportWidth ] = useState<number | null>(null);
@@ -32,10 +35,9 @@ const Animate : React.FC<AnimateProps> = ({ className, children, from = {}, to =
     }, []);
 
     const setTriggerListeners = useCallback(() => {
-        console.log("resized");
         if (!containerRef.current) return;
 
-        gsap.timeline({
+        const tl = gsap.timeline({
             repeat: 0,
             scrollTrigger: {
                 invalidateOnRefresh: true,
@@ -48,6 +50,7 @@ const Animate : React.FC<AnimateProps> = ({ className, children, from = {}, to =
         })
         return () => {
             gsap.killTweensOf(containerRef.current);
+            tl.kill();
         }
     }, [ containerRef.current ]);
 
@@ -65,19 +68,19 @@ const Animate : React.FC<AnimateProps> = ({ className, children, from = {}, to =
     }, [ containerRef.current, triggered, from, to ]);
 
     useEffect(animateContainer, [ animateContainer ]);
-    useEffect(() => {
-        setTriggerListeners();
-    }, [ setTriggerListeners ]);
+    useEffect(setTriggerListeners, [ setTriggerListeners ]);
 
     useEffect(() => {
         if (resizedWidth === null || !containerRef.current) return; 
         ScrollTrigger.refresh();
     }, [ resizedWidth, containerRef.current ]);
 
+    const Component = as || "div";
+
     return (
-        <div className={className} ref={containerRef}>
+        <Component className={className} { ...props } ref={containerRef}>
             { children }
-        </div>
+        </Component>
     )
 }  
 

@@ -112,13 +112,11 @@ export default function Home() {
                 <Animate from={{ x: 200 }} to={{ x: 0}}>
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Consider Supporting a STEM Initiative.</h1>
                 </Animate>
-                <Animate from={{ x: 200 }} to={{ x: 0}}>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
-                    <p className="text-medium-grey-primary">
+                    <Animate from={{ x: 200 }} to={{ x: 0}} className="text-medium-grey-primary">
                       If you would like to support our efforts to make STEM education accessible to all, please consider donating.
-                    </p>
+                    </Animate>
                   </div>
-                </Animate>
                 <BrandButton containerClass="mr-auto" title="Donate Now" label="Every bit Matters" />
               </article>
               <div className="md:my-0 my-8">
@@ -130,13 +128,11 @@ export default function Home() {
                 <Animate from={{ x: -200 }} to={{ x: 0}}>
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Let&apos;s Build a Partnership.</h1>
                 </Animate>
-                <Animate from={{ x: -200 }} to={{ x: 0}}>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
-                    <p className="text-medium-grey-primary">
+                    <Animate as="p" from={{ x: -200 }} to={{ x: 0}} className="text-medium-grey-primary">
                       At C4T, we believe in the power of partnership. We know it will take a large coalition of change-makers in order to have the greatest impact. This is why we collaborate with other non-profit organizations to bring STEM-related opportunities to students.
-                    </p>
+                    </Animate>
                   </div>
-                </Animate>
                 <BrandButton containerClass="mr-auto" title="Let's Team Up" />
               </article>
               <div className="md:my-0 my-8">
