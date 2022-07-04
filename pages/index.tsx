@@ -24,11 +24,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar/>
-      <header className="flex flex-col space-y-6 justify-center items-center p-3">
+      <header className="flex pt-16 flex-col space-y-6 justify-center items-center p-3">
         <h1 
-          style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)"}} 
+          style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)", whiteSpace: "nowrap"}} 
           className="text-white text-5xl font-bold md:text-6xl mt-16 text-center">
-            Master to Code&nbsp;
+            Master to&nbsp;<br className="md:hidden block"/>Code&nbsp;
             <Typist cursor={<span className={classes.blinkingCursor}>|</span>} loop={true}>
                 {
                   CODE_ITEMS.map((item, idx) => (
@@ -91,8 +91,8 @@ export default function Home() {
                 </div>
                 <BrandButton containerClass="mr-auto" title="Sign Up" label="Quick & Easy" />
               </article>
-              <div className="md:my-0 my-8">
-                <LearnSVG className="w-[100%] md:max-w-[400px] md:w-[40vw] "/>
+              <div className={"md:my-0 my-8"}>
+                <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] "/>
               </div>
          </section>
          <section className="flex py-10 flex-col-reverse md:flex-row-reverse md:items-center justify-around w-full max-w-[1250px]">
@@ -106,7 +106,7 @@ export default function Home() {
                 <BrandButton containerClass="mr-auto" title="Donate Now" label="Every bit Matters" />
               </article>
               <div className="md:my-0 my-8">
-                <GiftsSVG className="w-[100%] md:max-w-[500px] md:w-[50vw] "/>
+                <GiftsSVG className="w-[100%] max-w-[500px]  md:max-w-[500px] md:w-[50vw] "/>
               </div>
          </section>
          <section className="flex py-10 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
@@ -120,7 +120,7 @@ export default function Home() {
                 <BrandButton containerClass="mr-auto" title="Let's Team Up" />
               </article>
               <div className="md:my-0 my-8">
-                <TeamSVG className="w-[100%] md:max-w-[500px] md:w-[50vw] "/>
+                <TeamSVG className="w-[100%] max-w-[500px]  md:max-w-[500px] md:w-[50vw] "/>
               </div>
          </section>
       </main>
