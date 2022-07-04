@@ -56,7 +56,7 @@ const BrandButton : React.FC<BrandButtonProps> = ({ variant = "gradient", disabl
                 disabled={disabled}
                 onClick={handleOnClick}
                 className={clsx(
-                    "",
+                    "m-auto",
                     "bg-gradient-to-b from-brand-blue-primary to-brand-green font-medium text-white border-0 rounded-xl py-3 px-6", 
                     "items-center flex justify-center space-x-2",
                     classes.button,
