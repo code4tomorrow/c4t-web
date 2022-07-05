@@ -11,6 +11,7 @@ import LearnSVG from "@svg/learn.svg";
 import TeamSVG from "@svg/team.svg";
 import GiftsSVG from "@svg/gifts.svg";
 import Animate from "@components/Animate";
+import Footer from "@components/Footer";
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "Apps." ];
 
@@ -47,7 +48,14 @@ export default function Home() {
         <h2 className="text-xl font-medium text-medium-grey-primary text-center">
           We teach K-12 students around the globe how to code for free.
         </h2>
-        <BrandButton title="Apply Today" label="100% Free" />
+        <BrandButton 
+          title="Apply Today" 
+          label="100% Free" 
+          href="https://forms.gle/JPneDCk34WUWyvBF7"
+          as="a"
+          target={"_blank"}
+          rel="noopener noreferrer"
+        />
       </header>
       <Animate>
       <main className="p-3 mt-10 space-y-32 flex flex-col items-center">
@@ -102,7 +110,15 @@ export default function Home() {
                     </p>
                   </div>
                 </Animate.Element>
-                <BrandButton containerClass="mr-auto" title="Sign Up" label="Quick & Easy" />
+                <BrandButton 
+                  containerClass="mr-auto" 
+                  title="Sign Up" 
+                  label="Quick & Easy" 
+                  href="https://forms.gle/JPneDCk34WUWyvBF7"
+                  as="a"
+                  target={"_blank"}
+                  rel="noopener noreferrer"
+                />
               </article>
               <div className={"md:my-0 my-8"}>
                 <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] "/>
@@ -118,7 +134,15 @@ export default function Home() {
                       If you would like to support our efforts to make STEM education accessible to all, please consider donating.
                     </Animate.Element>
                   </div>
-                <BrandButton containerClass="mr-auto" title="Donate Now" label="Every bit Matters" />
+                <BrandButton 
+                  href="https://gofund.me/8945a55a" 
+                  containerClass="mr-auto" 
+                  title="Donate Now" 
+                  label="Every bit Matters" 
+                  target={"_blank"}
+                  rel="noopener noreferrer"
+                  as="a"
+                />
               </article>
               <div className="md:my-0 my-8">
                 <GiftsSVG className="w-[100%] max-w-[500px]  md:max-w-[500px] md:w-[50vw] "/>
@@ -134,7 +158,14 @@ export default function Home() {
                       At C4T, we believe in the power of partnership. We know it will take a large coalition of change-makers in order to have the greatest impact. This is why we collaborate with other non-profit organizations to bring STEM-related opportunities to students.
                     </Animate.Element>
                   </div>
-                <BrandButton containerClass="mr-auto" title="Let's Team Up" />
+                <BrandButton 
+                  containerClass="mr-auto" 
+                  title="Let's Team Up" 
+                  as="a"
+                  rel="noopener noreferrer"
+                  target={"_blank"}
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdkN5FLmWXJSUSAZCgpLGdQ4uyfokO0QjAg05ZDtYdIka6ASg/viewform"
+                />
               </article>
               <div className="md:my-0 my-8">
                 <TeamSVG className="w-[100%] max-w-[500px]  md:max-w-[500px] md:w-[50vw] "/>
@@ -142,6 +173,7 @@ export default function Home() {
          </section>
       </main>
       </Animate>
+      <Footer />
     </div>
   )
 }

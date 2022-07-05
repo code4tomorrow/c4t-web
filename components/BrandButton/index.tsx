@@ -3,19 +3,24 @@ import React, { ReactNode, useRef, useState } from "react";
 import { useStyles } from "./styles";
 import Arrow from "../../public/svg/arrow.svg";
 
-interface BrandButtonProps extends React.HTMLProps<HTMLButtonElement> {
+interface BrandButtonProps<T extends React.ElementType = "div">  {
     title: string; 
     onClick?: (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => void; 
     flex?: number,
     containerClass?: string,
     children?: ReactNode,
     label?: string,
-    variant?: 'gradient' | 'default'
+    variant?: 'gradient' | 'default',
+    href?: string; 
+    disabled?: boolean; 
+    className?: string; 
+    as?: T;
 } 
 
-const BrandButton : React.FC<BrandButtonProps> = ({ variant = "gradient", disabled, label, containerClass, title, className, onClick, flex = 0, children }) => {
+const BrandButton = <T extends React.ElementType = "div">({ 
+        as, variant = "gradient", disabled, label, containerClass, title, className, onClick, flex = 0, children, ...props 
+    } : BrandButtonProps<T> & React.ComponentPropsWithoutRef<T>) => {
     const handleOnClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
         e.stopPropagation();
         if (onClick && typeof onClick === "function") onClick(e);
     }
@@ -39,45 +44,49 @@ const BrandButton : React.FC<BrandButtonProps> = ({ variant = "gradient", disabl
         });
     }
 
+    const Component = as || "div";
+
     return (
         <div className={clsx("relative", containerClass)} style={{ flex }}>
-            <button 
-                ref={buttonRef}
-                onMouseOver={() => setMouseActive(true)}
-                onMouseLeave={() => setMouseActive(false)}
-                onMouseMove={handleMouseMove}
-                style={{ 
-                    "--x": mouseCoords.x + "px",
-                    "--y": mouseCoords.y + "px",
-                    "--size": mouseActive ? "150px" : "0px",
-                    cursor: disabled ? "not-allowed" : "pointer",
-                    filter: disabled ? "brightness(75%)" : "initial",
-                } as React.CSSProperties}
-                disabled={disabled}
-                onClick={handleOnClick}
-                className={clsx(
-                    "m-auto",
-                    "bg-gradient-to-b from-brand-blue-primary to-brand-green font-medium text-white border-0 rounded-xl py-3 px-6", 
-                    "items-center flex justify-center space-x-2",
-                    classes.button,
-                    className
-                )}>
-                    <span className="text-sm">{ title }</span>
-                    
-                    { children }
-            </button>
-            {
-                label && (
-                    <div style={{ transform: "translate(-50%)" }} className="absolute flex items-end left-1/2">
-                        <Arrow className="mt-2" width="15px" />
-                        <span 
-                            style={{ whiteSpace: "nowrap", transform: "translateY(25%)" }} 
-                            className="text-medium-grey-primary text-sm">
-                                { label }
-                        </span>
-                    </div>
-                )
-            }
+            <Component { ...props }>
+                <button 
+                    ref={buttonRef}
+                    onMouseOver={() => setMouseActive(true)}
+                    onMouseLeave={() => setMouseActive(false)}
+                    onMouseMove={handleMouseMove}
+                    style={{ 
+                        "--x": mouseCoords.x + "px",
+                        "--y": mouseCoords.y + "px",
+                        "--size": mouseActive ? "150px" : "0px",
+                        cursor: disabled ? "not-allowed" : "pointer",
+                        filter: disabled ? "brightness(75%)" : "initial",
+                    } as React.CSSProperties}
+                    disabled={disabled}
+                    onClick={handleOnClick}
+                    className={clsx(
+                        "m-auto",
+                        "bg-gradient-to-b from-brand-blue-primary to-brand-green font-medium text-white border-0 rounded-xl py-3 px-6", 
+                        "items-center flex justify-center space-x-2",
+                        classes.button,
+                        className
+                    )}>
+                        <span className="text-sm">{ title }</span>
+                        
+                        { children }
+                </button>
+                {
+                    label && (
+                        <div style={{ transform: "translate(-50%)" }} className="absolute flex items-end left-1/2">
+                            <Arrow className="mt-2" width="15px" />
+                            <span 
+                                style={{ whiteSpace: "nowrap", transform: "translateY(25%)" }} 
+                                className="text-medium-grey-primary text-sm">
+                                    { label }
+                            </span>
+                        </div>
+                    )
+                }
+            </Component>
         </div>
     )
 }
