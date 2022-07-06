@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div 
       style={{ width: "100vw", overflowX: "hidden" }}
-      className="w-screen min-h-screen bg-dark-grey-primary">
+      className="w-screen flex flex-col min-h-screen bg-dark-grey-primary">
       <Head>
         <title>Home | C4T</title>
         <link rel="icon" href="/favicon.ico" />

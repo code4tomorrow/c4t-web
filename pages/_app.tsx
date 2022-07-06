@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app'
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createCache from '@emotion/cache';
 import Head from 'next/head';
+import NextNProgress from "nextjs-progressbar";
 
 let muiCache: EmotionCache | undefined = undefined;
 
@@ -22,7 +23,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
           <meta name="theme-color" content="#111111" />
       </Head>
-      <Component {...pageProps} />
+      <>
+        <NextNProgress
+        options={{ showSpinner: false }}
+          color={"#fff"}
+          height={2}
+        />
+        <Component {...pageProps} />
+      </>
     </CacheProvider>
   )
 }

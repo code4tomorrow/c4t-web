@@ -5,6 +5,7 @@ import Head from "next/head";
 import Navbar from "@components/Navbar";
 import useEmblaCarousel from 'embla-carousel-react'
 import Course from "@components/Course";
+import Footer from "@components/Footer";
 
 export interface ICourse {
     title?: string; 
@@ -20,7 +21,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
 
     return (
         <div style={{ width: "100vw", overflowX: "hidden" }}
-            className="w-screen min-h-screen bg-gradient-to-b from-dark-grey-primary to-dark-blue-primary">
+            className="flex flex-col w-screen min-h-screen bg-dark-grey-primary">
             <Head>
                 <title>Courses | C4T</title>
             </Head>
@@ -36,6 +37,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                     </div>
                 </div>
             </main>
+            <Footer />
         </div>
     )
 }

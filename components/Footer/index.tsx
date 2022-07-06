@@ -33,8 +33,8 @@ const FooterItem : React.FC<FooterItemProps> = ({ href = "/", children, ...props
 
 const Footer = () => {
     return (
-        <footer className="bg-dark-grey-secondary w-full space-y-3 mt-4 flex justify-center items-center flex-col p-4">
-            <div className="grid w-full justify-items-center grid-cols-2 md:grid-cols-4">
+        <footer className="bg-dark-grey-secondary w-full space-y-3 mt-auto flex justify-center items-center flex-col p-4">
+            <div className="grid w-full justify-items-center grid-cols-2 md:grid-cols-4 max-w-[1450px]">
                 <ul>
                     <FooterHeader>sitemap</FooterHeader>
                     <FooterItem>Home</FooterItem>
