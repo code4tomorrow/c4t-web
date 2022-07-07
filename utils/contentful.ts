@@ -5,3 +5,8 @@ export const graphQLClient = new GraphQLClient(`https://graphql.contentful.com/c
         'Authorization': `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
     }
 });
+
+export enum ContentModelID {
+    COURSE = "course",
+    PROMOTIONAL_LABEL = "promotionalLabel"
+}

@@ -1,4 +1,5 @@
 
+import { ContentModelID } from '@utils/contentful';
 import type { NextApiRequest, NextApiResponse } from 'next'
 require("dotenv").config();
 
@@ -23,10 +24,10 @@ export default async function handler(
     }
 
     try {
-        console.log("Body: ", req.body);
-        console.log("Body: ", req.body?.sys);
-        console.log("Body: ", req.body?.sys?.contentType);
-        console.log("Body: ", req.body?.sys?.contentType?.sys);
+        const modelId = req.body?.sys?.contentType?.sys?.id; 
+        console.log("Content Id: ", modelId);
+        console.log("Enum Id", ContentModelID.COURSE);
+        console.log(modelId === ContentModelID.COURSE);
 
         await res.revalidate('/courses')
         return res.json({ revalidated: true, error: false })
