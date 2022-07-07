@@ -9,6 +9,7 @@ import Footer from "@components/Footer";
 import CoursesSVG from "@svg/courses.svg";
 import Animate from "@components/Animate";
 import clsx from "clsx";
+import { useCallback, useEffect, useState } from "react";
 
 export interface ICourse {
     title?: string; 
@@ -28,14 +29,53 @@ interface CoursesProps {
 }
 
 const Courses : NextPage<CoursesProps> = ({ courses }) => {
-    const [emblaRef, _emblaAPI ] = useEmblaCarousel({ 
+    const [emblaRef, emblaAPI ] = useEmblaCarousel({ 
       axis: "y",
       skipSnaps: false,
       speed: 1,
       align: "start",
     })
 
-    return (
+    const [ carouselMeta, setCarouselMeta ] = useState<{
+        currentIndex: number,
+        hasNext: boolean,
+        hasPrev: boolean,
+    }>({
+        currentIndex: 0,
+        hasNext: false,
+        hasPrev: false,
+    });
+
+  const onSelect = useCallback(() => {
+      if (!emblaAPI) return; 
+      setCarouselMeta({ 
+          currentIndex: emblaAPI.selectedScrollSnap(),
+          hasNext: emblaAPI.canScrollNext(),
+          hasPrev: emblaAPI.canScrollPrev(),
+      })
+  }, [ emblaAPI ]);
+
+  const handleLeft = () => {
+      if (emblaAPI?.canScrollPrev()) {
+          emblaAPI?.scrollPrev();
+      }
+  }
+
+  const handleRight = () => {
+      if (emblaAPI?.canScrollNext()) {
+          emblaAPI?.scrollNext();
+      }
+  }
+
+  useEffect(() => {
+      if (!emblaAPI) return; 
+      emblaAPI.on("select", onSelect);
+      return () => {
+          emblaAPI.off("select", onSelect)
+      }
+  }, [ emblaAPI, onSelect ]);
+
+  return (
         <div style={{ width: "100vw", overflowX: "hidden" }}
             className="flex flex-col w-screen min-h-screen items-center bg-dark-grey-primary">
             <Head>
@@ -67,6 +107,9 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                                 ))
                             }
                         </div>
+                        <div>
+                       
+                        </div>
                       </div>
                       <div 
                           style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))"}}
@@ -75,7 +118,9 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                           )}>
                           {
                             courses.map((course, i) => (
-                                <Course key={i} course={course} />
+                                <Animate.Element key={i} resetAfterTriggered={false} from={{ y: 50 }} to={{ y: 0 }}>
+                                  <Course course={course} />
+                                </Animate.Element>
                             ))
                           }
                       </div>
