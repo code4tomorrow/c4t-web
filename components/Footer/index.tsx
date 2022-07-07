@@ -1,6 +1,6 @@
+import clsx from "clsx";
 import Link from "next/link";
 import React from "react";
-import { ChevronUpIcon} from "@heroicons/react/outline";
 
 interface FooterHeaderProps {
     children: React.ReactNode;
@@ -31,9 +31,14 @@ const FooterItem : React.FC<FooterItemProps> = ({ href = "/", children, ...props
     )
 }
 
-const Footer = () => {
+interface FooterProps extends React.HTMLProps<HTMLDivElement> {}
+
+const Footer : React.FC<FooterProps> = ({ className, ...props }) => {
     return (
-        <footer className="bg-dark-grey-secondary w-full space-y-3 mt-auto flex justify-center items-center flex-col p-4">
+        <footer
+            className={clsx("bg-dark-grey-secondary w-full space-y-3 mt-auto flex justify-center items-center flex-col p-4", className)}
+            { ...props}
+        >
             <div className="grid w-full justify-items-center grid-cols-2 md:grid-cols-4 max-w-[1450px]">
                 <ul>
                     <FooterHeader>sitemap</FooterHeader>
