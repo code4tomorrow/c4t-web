@@ -47,7 +47,10 @@ const Course : React.FC<CourseProps> = ({ course }) => {
                         </div>
                     )
                 }
-                <p className="!mb-4 text-medium-grey-primary text-center overflow-auto h-[150px]">
+                <p className={clsx(
+                    "!mb-4 text-medium-grey-primary text-center overflow-auto h-[150px]",
+                    classes.description
+                )}>
                     { course.description }
                 </p>
                 <BrandButton 

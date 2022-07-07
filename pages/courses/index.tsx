@@ -12,7 +12,6 @@ import clsx from "clsx";
 import { useCallback, useEffect, useState } from "react";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { useMemo } from "react";
-import _, { iteratee } from "lodash";
 
 export interface ICourse {
     title?: string; 
