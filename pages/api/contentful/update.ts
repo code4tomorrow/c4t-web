@@ -37,13 +37,17 @@ export default async function handler(
     let pagesRevalidated:string[] = [];
 
     try {
-        const modelId = req.body?.sys?.contentType?.sys?.id; 
+        const modelId = req.body?.sys?.contentType?.sys?.id;
+        console.log(req.body) 
+        console.log(req.body?.sys) 
+        console.log(req.body?.sys?.contentType) 
 
-        if (modelId === ContentModelID.COURSE) {
+        if (modelId === ContentModelID.COURSE || modelId === ContentModelID.PROMOTIONAL_LABEL) {
             await attemptRevalidation(res, Pages.COURSES) && pagesRevalidated.push(Pages.COURSES);
         }
 
-        console.log("Pages Revalidated", pagesRevalidated);
+        console.log("Model ID: ", modelId);
+        console.log("Pages Revalidated: ", pagesRevalidated);
         return res.json({ revalidatedPages: pagesRevalidated, error: false })
     } catch (err) {
         return res.status(500).send({ revalidatedPages: [], error: true });
