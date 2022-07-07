@@ -61,10 +61,6 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
         hasPrev: false,
     });
 
-  useEffect(() => {
-      onSelect();
-  }, [ emblaAPI ]);
-
   const onSelect = useCallback(() => {
       if (!emblaAPI) return; 
       setCarouselMeta({ 
@@ -73,6 +69,10 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
           hasPrev: emblaAPI.canScrollPrev(),
       })
   }, [ emblaAPI ]);
+
+    useEffect(() => {
+      onSelect();
+  }, [ onSelect ]);
 
   const handleLeft = () => {
       if (emblaAPI?.canScrollPrev()) {

@@ -8,5 +8,6 @@ export const graphQLClient = new GraphQLClient(`https://graphql.contentful.com/c
 
 export enum ContentModelID {
     COURSE = "course",
-    PROMOTIONAL_LABEL = "promotionalLabel"
+    PROMOTIONAL_LABEL = "promotionalLabel",
+    IMAGE = "image"
 }

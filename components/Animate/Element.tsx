@@ -59,7 +59,7 @@ const Element = <T extends ElementType = "div">({
         if (!_.isEqual(from, animation.from) || ! _.isEqual(to, animation.to)) {
             setAnimation({ from, to });
         }
-    }, [ from, to ]);
+    }, [ from, to, animation.from, animation.to ]);
 
     const animateContainer = useCallback(() => {
         if (!containerRef.current || !animation.from || !animation.to) return;

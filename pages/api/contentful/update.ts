@@ -38,11 +38,8 @@ export default async function handler(
 
     try {
         const modelId = req.body?.sys?.contentType?.sys?.id;
-        console.log(req.body) 
-        console.log(req.body?.sys) 
-        console.log(req.body?.sys?.contentType) 
 
-        if (modelId === ContentModelID.COURSE || modelId === ContentModelID.PROMOTIONAL_LABEL) {
+        if ([ ContentModelID.COURSE, ContentModelID.PROMOTIONAL_LABEL ].includes(modelId)) {
             await attemptRevalidation(res, Pages.COURSES) && pagesRevalidated.push(Pages.COURSES);
         }
 

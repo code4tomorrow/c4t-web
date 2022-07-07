@@ -22,6 +22,7 @@ const Course : React.FC<CourseProps> = ({ course }) => {
                     {
                         !!course.image ? (
                             <NextImage 
+                                alt={`${course.title} Logo`}
                                 src={getCloudinaryURL(course.image.src)}
                                 layout={"fill"}
                                 fallbackSrc={"/svg/code.svg"}
