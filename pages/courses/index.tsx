@@ -13,6 +13,14 @@ import clsx from "clsx";
 export interface ICourse {
     title?: string; 
     description?: string; 
+    learnMoreLink?: string; 
+    promotionalLabel?: {
+      label: string; 
+      color?: string; 
+    },
+    image?: {
+      src: string; 
+    }
 }
 
 interface CoursesProps {
@@ -81,19 +89,37 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
 
 export async function getStaticProps() {
     const response = await graphQLClient.request(gql`
-      query($limit:Int) {
-        courseCollection(limit:$limit) {
+      query {
+        courseCollection {
           items {
             title,
-            description
+            description,
+            learnMoreLink,
+            promotionalLabel {
+              label,
+              color
+            },
+            image {
+              src
+            }
           }
         }
       }
-    `, { limit: 10 });
+    `, {});
+
+    const courses:ICourse[] = response?.courseCollection?.items || [];
+
+    // Sorts the courses first by whether it has a promotional label and 
+    // retains the default order (sys_publishedAt) by Contentful 
+    courses.sort((a, b) => {
+       const rankOne = a.promotionalLabel?.label !== undefined ? 1 : 0; 
+       const rankTwo = b.promotionalLabel?.label !== undefined ? 1 : 0; 
+       return rankTwo - rankOne; 
+    });
       
     return {
       props: { 
-        courses: response?.courseCollection?.items || [],
+        courses
       },
       // - At most once every 15 minutes
       revalidate: 60 * 15, // In seconds
