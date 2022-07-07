@@ -118,12 +118,12 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                 "w-full pt-16 flex-col items-center space-y-6 max-w-screen-2xl px-3 h-full my-8 flex justify-center",
                 "md:flex-row md:space-y-0 md:items-start md:px-8 md:space-x-6"
               )}>
-                  <div className="relative">
-                    <div className="sticky top-10">
+                  <div>
+                    <div className="!sticky top-10">
                       <CoursesSVG className="w-full max-w-[250px] md:max-w-xl md:w-[35vw]"/>
                     </div>
                   </div>
-                  <article className="md:w-1/2 w-full space-y-2 flex flex-col items-center">
+                  <article className="md:w-1/2 w-full relative space-y-2 flex flex-col items-center">
                     <Animate.Element resetAfterTriggered={false} from={{ y: 50, opacity: 0 }} to={{ y: 0, opacity: 1 }}>
                       <h1 className="text-white text-center font-bold text-4xl">Browse our <span className="text-brand-green">Quality</span> Courses.</h1>
                     </Animate.Element>
@@ -160,40 +160,42 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                             ))
                           }
                       </div>
+                      <div 
+                        style={{ transform: "translate(calc(100% + 16px), -50%)"}}
+                        className="hidden !w-8 top-[45%] absolute right-0 lg:flex flex-col items-center">
+                        <ChevronUpIcon 
+                          className={clsx(
+                            "hover:opacity-50 transition-opacity cursor-pointer",
+                            !carouselMeta.hasPrev && "!opacity-50 cursor-not-allowed"
+                          )}
+                          onClick={handleLeft} 
+                          color="#fff" 
+                          width={25} 
+                        />
+                        <div className="space-y-2">
+                          {
+                            coursesPaired.map((_, i) => (
+                              <span 
+                                className={clsx(
+                                  "w-1 h-4 block rounded-full transition-all",
+                                  carouselMeta.currentIndex === i ? "bg-brand-green" : "bg-medium-grey-primary"
+                                )}
+                                key={i} 
+                              />
+                            ))
+                          }
+                        </div>
+                        <ChevronDownIcon 
+                          className={clsx(
+                            "hover:opacity-50 transition-opacity cursor-pointer",
+                            !carouselMeta.hasNext && "!opacity-50 cursor-not-allowed"
+                          )}
+                          onClick={handleRight} 
+                          color="#fff" 
+                          width={25} 
+                        />
+                    </div>
                   </article>
-                  <div className="hidden !w-8 !mt-[27.5%] lg:flex flex-col items-center">
-                      <ChevronUpIcon 
-                        className={clsx(
-                          "hover:opacity-50 transition-opacity cursor-pointer",
-                          !carouselMeta.hasPrev && "!opacity-50 cursor-not-allowed"
-                        )}
-                        onClick={handleLeft} 
-                        color="#fff" 
-                        width={25} 
-                      />
-                      <div className="space-y-2">
-                        {
-                          coursesPaired.map((_, i) => (
-                            <span 
-                              className={clsx(
-                                "w-1 h-4 block rounded-full transition-all",
-                                carouselMeta.currentIndex === i ? "bg-brand-green" : "bg-medium-grey-primary"
-                              )}
-                              key={i} 
-                            />
-                          ))
-                        }
-                      </div>
-                      <ChevronDownIcon 
-                        className={clsx(
-                          "hover:opacity-50 transition-opacity cursor-pointer",
-                          !carouselMeta.hasNext && "!opacity-50 cursor-not-allowed"
-                        )}
-                        onClick={handleRight} 
-                        color="#fff" 
-                        width={25} 
-                      />
-                  </div>
               </main>
             </Animate>
             <Footer />
