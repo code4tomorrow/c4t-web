@@ -161,7 +161,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                           }
                       </div>
                   </article>
-                  <div className="hidden w-8 !mt-[27.5%] lg:flex flex-col items-center">
+                  <div className="hidden !w-8 !mt-[27.5%] lg:flex flex-col items-center">
                       <ChevronUpIcon 
                         className={clsx(
                           "hover:opacity-50 transition-opacity cursor-pointer",

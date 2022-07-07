@@ -39,7 +39,7 @@ const Course : React.FC<CourseProps> = ({ course }) => {
                 {
                     course.promotionalLabel && (
                         <div className="!mt-1 space-x-1 flex items-baseline">
-                            <img className="-rotate-[13deg]" src="/svg/arrow.svg" />
+                            <img alt={`arrow`} className="-rotate-[13deg]" src="/svg/arrow.svg" />
                             <span 
                                 style={{ color: course.promotionalLabel?.color }}
                                 className="uppercase text-xs font-semibold text-orange-400">
