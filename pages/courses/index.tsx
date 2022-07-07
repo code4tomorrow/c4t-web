@@ -9,7 +9,6 @@ import Footer from "@components/Footer";
 import CoursesSVG from "@svg/courses.svg";
 import Animate from "@components/Animate";
 import clsx from "clsx";
-import { useStyles } from "./styles";
 
 export interface ICourse {
     title?: string; 
@@ -27,8 +26,6 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
       speed: 1,
       align: "start",
     })
-
-    const { classes } = useStyles();
 
     return (
         <div style={{ width: "100vw", overflowX: "hidden" }}
@@ -64,9 +61,9 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                         </div>
                       </div>
                       <div 
+                          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))"}}
                           className={clsx(
                             "lg:hidden !mt-8 w-full grid justify-items-center justify-center gap-4",
-                            classes.mobileCoursesContainer
                           )}>
                           {
                             courses.map((course, i) => (
