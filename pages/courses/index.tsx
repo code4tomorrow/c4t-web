@@ -130,7 +130,11 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                     <Animate.Element resetAfterTriggered={false} from={{ y: 50, opacity: 0 }} to={{ y: 0, opacity: 1, delay: 0.15 }}>
                       <h2 className="text-medium-grey-primary text-center font-medium text-lg">Choose as many as you want from Beginner to Advanced.</h2>
                     </Animate.Element>
-                    <div className="!mt-8 hidden w-full relative lg:flex overflow-y-hidden max-h-[750px] justify-center" ref={emblaRef}> 
+                    <div 
+                        style={{
+                          WebkitMaskImage: "-webkit-gradient(linear, left 75%, left 100%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"
+                        }}
+                        className="!mt-8 hidden w-full relative lg:flex overflow-y-hidden max-h-[750px] justify-center" ref={emblaRef}> 
                         <div className="flex flex-col gap-3">
                             {
                                 coursesPaired.map((coursePaired, i) => (
@@ -157,7 +161,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                           }
                       </div>
                   </article>
-                  <div className="hidden !mt-[27.5%] lg:flex flex-col items-center">
+                  <div className="hidden w-8 !mt-[27.5%] lg:flex flex-col items-center">
                       <ChevronUpIcon 
                         className={clsx(
                           "hover:opacity-50 transition-opacity cursor-pointer",

@@ -24,7 +24,9 @@ export default async function handler(
 
     try {
         console.log("Body: ", req.body);
-        console.log("Query: ", req.query);
+        console.log("Body: ", req.body?.sys);
+        console.log("Body: ", req.body?.sys?.contentType);
+        console.log("Body: ", req.body?.sys?.contentType?.sys);
 
         await res.revalidate('/courses')
         return res.json({ revalidated: true, error: false })
