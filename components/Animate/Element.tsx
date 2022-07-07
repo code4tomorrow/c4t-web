@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, ElementType, useContext, useState } from "react";
+import React, { ComponentPropsWithoutRef, ElementType, useContext, useMemo, useState } from "react";
 import gsap from "gsap";
 import { useRef } from "react";
 import { useCallback } from "react";
@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import clsx from "clsx";
 import { useStyles } from "./styles";
 import { AnimateContext } from ".";
+import _ from "lodash";
 
 interface ElementProps<T extends ElementType = "div"> {
     as?: T,
@@ -50,18 +51,31 @@ const Element = <T extends ElementType = "div">({
         }
     }, [ containerRef, resetAfterTriggered ]);
 
+    const [ animation, setAnimation ] = useState<{
+        from?: gsap.TweenVars, to?: gsap.TweenVars,
+    }>({ from: undefined, to: undefined});
+
+    useEffect(() => {
+        if (!_.isEqual(from, animation.from) || ! _.isEqual(to, animation.to)) {
+            setAnimation({ from, to });
+        }
+    }, [ from, to ]);
+
     const animateContainer = useCallback(() => {
-        if (!containerRef.current) return;
+        if (!containerRef.current || !animation.from || !animation.to) return;
+
+        const fromTemp = _.cloneDeep(animation.from);
+        const toTemp = _.cloneDeep(animation.to);
 
         if (triggered) {
-            gsap.fromTo(containerRef.current, from, to);
+            gsap.fromTo(containerRef.current, fromTemp, toTemp);
         } else {
-            gsap.fromTo(containerRef.current, to, from);
+            gsap.fromTo(containerRef.current, toTemp, fromTemp);
         }
         return () => {
             gsap.killTweensOf(containerRef.current);
         }
-    }, [ containerRef, triggered, from, to ]);
+    }, [ containerRef, triggered, animation.from, animation.to ]);
 
     useEffect(animateContainer, [ animateContainer ]);
     useEffect(setTriggerListeners, [ setTriggerListeners ]);
@@ -77,4 +91,4 @@ const Element = <T extends ElementType = "div">({
     )
 }  
 
-export default Element; 
+export default React.memo(Element); 

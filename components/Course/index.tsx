@@ -32,7 +32,7 @@ const Course : React.FC<CourseProps> = ({ course }) => {
                         )
                     }
                 </div>
-                <h1 className="text-white text-center font-semibold">
+                <h1 className="text-white text-center text-lg font-semibold">
                     { course?.title}
                 </h1>
                 {

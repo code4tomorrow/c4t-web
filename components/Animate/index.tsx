@@ -39,4 +39,4 @@ const Animate : React.FC<AnimateProps> = ({ children }) => {
     )
 }
 
-export default Object.assign(Animate, { Element });
+export default Object.assign(React.memo(Animate), { Element });
