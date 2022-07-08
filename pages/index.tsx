@@ -72,6 +72,7 @@ export default function Home() {
                 <Paper containerClass={clsx("relative w-full h-full")}>
                     <Image
                         draggable={false}
+                        loading="eager"
                         src="/code.png"
                         priority
                         quality={100}

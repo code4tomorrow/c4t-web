@@ -8,7 +8,7 @@ interface FooterHeaderProps {
 
 const FooterHeader : React.FC<FooterHeaderProps> = ({ children }) => {
     return (
-        <li className="list-none uppercase text-white my-6 font-bold">
+        <li className="list-none uppercase px-2 text-white my-6 font-bold">
             { children }
         </li>
     )
@@ -21,9 +21,9 @@ interface FooterItemProps extends React.HTMLProps<HTMLAnchorElement> {
 
 const FooterItem : React.FC<FooterItemProps> = ({ href = "/", children, ...props }) => {
     return (
-        <li className="list-none text-medium-grey-primary my-3 font-medium">
+        <li className={clsx("list-none w-min hover:bg-black transition-all rounded-md px-2 hover:bg-opacity-10 p-1 text-medium-grey-primary my-2 font-medium")}>
             <Link href={href} passHref>
-                <a { ...props }>
+                <a className="flex whitespace-nowrap items-center" { ...props }>
                     { children }
                 </a>
             </Link>
@@ -50,16 +50,16 @@ const Footer : React.FC<FooterProps> = ({ className, ...props }) => {
                 </ul>
                 <ul>
                     <FooterHeader>Resources</FooterHeader>
-                    <FooterItem target="_blank" rel="noopener noreferrer" href="https://www.notion.so/code4tomorrow">Notion</FooterItem>
-                    <FooterItem target="_blank" rel="noopener noreferrer" href="https://discord.code4tomorrow.org/">Discord Guide</FooterItem>
+                    <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://www.notion.so/code4tomorrow">Notion</FooterItem>
+                    <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://discord.code4tomorrow.org/">Discord Guide</FooterItem>
                 </ul>
                 <ul>
                     <FooterHeader>Socials</FooterHeader>
-                    <FooterItem target="_blank" rel="noopener noreferrer" href="https://github.com/code4tomorrow">Github</FooterItem>
-                    <FooterItem target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/code4tomorrow/">Linkedin</FooterItem>
-                    <FooterItem target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/code4tomorrow/">Instagram</FooterItem>
-                    <FooterItem target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/Code-4-Tomorrow-112320087256142">Facebook</FooterItem>
-                    <FooterItem target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/channel/UCpf6llXUoEEx2AygLEzImKw">Youtube</FooterItem>
+                    <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://github.com/code4tomorrow">Github</FooterItem>
+                    <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://www.linkedin.com/company/code4tomorrow/">Linkedin</FooterItem>
+                    <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://www.instagram.com/code4tomorrow/">Instagram</FooterItem>
+                    <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://www.facebook.com/Code-4-Tomorrow-112320087256142">Facebook</FooterItem>
+                    <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://www.youtube.com/channel/UCpf6llXUoEEx2AygLEzImKw">Youtube</FooterItem>
                 </ul>
                 <ul>
                     <FooterHeader>Support Us</FooterHeader>
