@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { useRouter } from "next/router";
 import gsap from "gsap";
 import { useThrottledCallback } from "use-debounce";
+import { useNavigator } from "hooks/useNavigator";
 
 interface ILink { 
     el: HTMLLIElement,
@@ -20,12 +21,12 @@ interface NavListItemProps extends React.HTMLProps<HTMLAnchorElement> {
 const NavListItem = React.forwardRef<ILink[], NavListItemProps>(({ children, href = "/", ...props }, ref) => {
     const containerRef = useRef<HTMLLIElement | null>(null);
 
-    const router = useRouter();
+    const router = useNavigator();
 
     const handleRouteChange = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        router.push(href, { pathname: href, query: { ref: router.pathname }}, { shallow: true });
+        router.push(href, { pathname: href });
     };
 
     return (
@@ -56,7 +57,7 @@ const Navbar = () => {
 
     const linkHighlightRef = useRef<HTMLDivElement | null>(null);
 
-    const router = useRouter();
+    const router = useNavigator();
 
     const scrollOffset = useRef(0);
 
@@ -67,9 +68,7 @@ const Navbar = () => {
 
         if (!currentLink) return; 
 
-        const url = new URL(document.URL);
-        const params = url.searchParams;
-        const ref = params.get("ref"); 
+        const ref = router.previousRoute()?.toString();
 
         let prevLink:ILink | undefined; 
    

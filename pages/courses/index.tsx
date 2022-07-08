@@ -118,8 +118,8 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                 "w-full pt-16 flex-col items-center space-y-6 max-w-screen-2xl px-3 h-full my-8 flex justify-center",
                 "md:flex-row md:space-y-0 md:items-start md:px-8 md:space-x-6"
               )}>
-                  <div>
-                    <div className="!sticky top-10">
+                  <div className="sticky top-10">
+                    <div className="sticky top-10">
                       <CoursesSVG className="w-full max-w-[250px] md:max-w-xl md:w-[35vw]"/>
                     </div>
                   </div>
@@ -162,7 +162,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                       </div>
                       <div 
                         style={{ transform: "translate(calc(100% + 16px), -50%)"}}
-                        className="hidden !w-8 top-[45%] absolute right-0 lg:flex flex-col items-center">
+                        className="hidden !w-8 !top-[50%] absolute right-0 lg:flex flex-col items-center">
                         <ChevronUpIcon 
                           className={clsx(
                             "hover:opacity-50 transition-opacity cursor-pointer",
