@@ -55,9 +55,9 @@ const Course : React.FC<CourseProps> = ({ course }) => {
                     { course.description }
                 </p>
                 <BrandButton 
-                    as="a"
-                    target={"_blank"}
-                    rel="nofollow noreferrer noopener"
+                    as={!!course.learnMoreLink ? "a" : "div"}
+                    target={!!course.learnMoreLink ? "_blank" : undefined}
+                    rel={!!course.learnMoreLink ? "nofollow noreferrer noopener" : undefined}
                     href={course.learnMoreLink}
                     disabled={!!!course.learnMoreLink}
                     containerClass="!mt-auto"
