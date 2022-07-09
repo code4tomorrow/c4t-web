@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^15.12.1",
+    "@contentful/rich-text-types": "^15.12.1",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@heroicons/react": "^1.0.6",

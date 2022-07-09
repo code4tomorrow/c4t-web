@@ -107,7 +107,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
   }, [ courses ]);
 
   return (
-        <div style={{ width: "100vw", overflowX: "hidden" }}
+        <div style={{ width: "100vw", overflowX: "clip" }}
             className="flex flex-col w-screen min-h-screen items-center bg-dark-grey-primary">
             <Head>
                 <title>Courses | C4T</title>
@@ -118,11 +118,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                 "w-full pt-16 flex-col items-center space-y-6 max-w-screen-2xl px-3 h-full my-8 flex justify-center",
                 "md:flex-row md:space-y-0 md:items-start md:px-8 md:space-x-6"
               )}>
-                  <div className="sticky top-10">
-                    <div className="sticky top-10">
-                      <CoursesSVG className="w-full max-w-[250px] md:max-w-xl md:w-[35vw]"/>
-                    </div>
-                  </div>
+                  <CoursesSVG className="w-full max-w-[250px] md:max-w-xl md:w-[35vw]"/>
                   <article className="md:w-1/2 w-full relative space-y-2 flex flex-col items-center">
                     <Animate.Element resetAfterTriggered={false} from={{ y: 50, opacity: 0 }} to={{ y: 0, opacity: 1 }}>
                       <h1 className="text-white text-center font-bold text-4xl">Browse our <span className="text-brand-green">Quality</span> Courses.</h1>

@@ -129,7 +129,7 @@ const Navbar = () => {
         <div 
             style={{ transition: "opacity 200ms ease" }}
             className={clsx(
-                "fixed z-50 cursor-pointer hidden pointer-events-none md:pointer-events-auto md:block rounded-md bg-white bg-opacity-5 left-0 right-0",
+                "fixed z-50 top-0 cursor-pointer hidden pointer-events-none md:pointer-events-auto md:block rounded-md bg-white bg-opacity-5 left-0 right-0",
                 navHidden ? "!opacity-0" : "opacity-1"
             )}
             ref={linkHighlightRef}
