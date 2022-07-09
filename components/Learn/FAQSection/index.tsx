@@ -16,7 +16,7 @@ const FAQSection : React.FC<FAQSectionProps> = ({ faqsGroupedByType }) => {
             <div className="flex w-full flex-col space-y-6">
                 {
                     Object.keys(faqsGroupedByType).map((type:string, idx:number) => (
-                        <div>
+                        <div key={idx}>
                             <h2 className="uppercase text-medium-grey-primary text-1xl font-bold">{ type }</h2>
                             <ul key={idx} className="w-full flex flex-col items-center">
                                 {
