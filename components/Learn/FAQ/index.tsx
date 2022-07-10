@@ -47,7 +47,7 @@ const FAQ : React.FC<FAQProps> = ({ faq }) => {
                     height: expanded.height,
                 }} 
                 className={clsx(
-                    "h-0 overflow-clip transition-all",
+                    "h-0 overflow-hidden transition-all",
                     expanded.expanded && "!overflow-auto"
                 )}>
                 <div className="p-3 space-y-3">

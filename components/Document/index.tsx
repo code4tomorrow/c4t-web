@@ -16,7 +16,7 @@ const Text : React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> = ({ node, children }) => {
     const link:string = useMemo(() => node.data.uri || "", [ node ]);
-    const origin = useMemo(() => typeof window === "undefined" ? null : `${window.location.protocol}://${window.location.hostname}`, []);
+    const origin = useMemo(() => typeof window === "undefined" ? null : `${window.location.protocol}//${window.location.hostname}`, []);
     const currentPage = useMemo(() => (
         link.startsWith("/") || (origin && link.startsWith(origin))
     ), [ link, origin ]);
@@ -25,7 +25,7 @@ const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> 
             href={link}
             passHref>
                 <a
-                   className="text-brand-green cursor-pointer" 
+                   className="text-brand-green hover:underline cursor-pointer" 
                    target={currentPage ? "_self" : "_blank"} 
                    rel="noopener nofollow noreferrer"
                 >
