@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { IFAQ } from "pages/learn";
 import Document from "@components/Document";
+import { useStyles } from "./styles";
 
 interface FAQProps {
     faq: IFAQ
@@ -18,6 +19,8 @@ const FAQ : React.FC<FAQProps> = ({ faq }) => {
         const height = !isExpanded ? answerRef.current.scrollHeight : 0; 
         setExpanded({ expanded: !isExpanded, height }); 
     };
+
+    const { classes } = useStyles();
 
     return (
         <li className="list-none w-full border-b border-dim-grey-primary py-6">
@@ -48,7 +51,8 @@ const FAQ : React.FC<FAQProps> = ({ faq }) => {
                 }} 
                 className={clsx(
                     "h-0 overflow-hidden transition-all",
-                    expanded.expanded && "!overflow-auto"
+                    expanded.expanded && "!overflow-auto",
+                    classes.answerContainer
                 )}>
                 <div className="p-3 space-y-3">
                     {

@@ -1,16 +1,15 @@
+import Paper from "@components/Paper";
 import clsx from "clsx";
+import Link from "next/link";
 import { GroupedFAQS, IFAQ } from "pages/learn";
 import React from "react";
 import FAQ from "../FAQ";
-import { useStyles } from "./styles";
 
 interface FAQSectionProps {
     faqsGroupedByType: GroupedFAQS
 }
 
 const FAQSection : React.FC<FAQSectionProps> = ({ faqsGroupedByType }) => {
-    const { classes } = useStyles();
-
     return (
         <div className="w-full flex space-y-10 mb-10 flex-col items-center">
            <div className="space-y-1 flex flex-col items-center">
@@ -25,7 +24,7 @@ const FAQSection : React.FC<FAQSectionProps> = ({ faqsGroupedByType }) => {
                                 className={clsx(
                                     "z-10 bg-dark-grey-primary uppercase text-medium-grey-primary text-1xl font-bold text-left",
                                 )}>
-                                    <u>{ type }</u>
+                                    { type }
                             </h2>
                             <ul key={idx} className="w-full flex flex-col items-center">
                                 {
@@ -38,6 +37,14 @@ const FAQSection : React.FC<FAQSectionProps> = ({ faqsGroupedByType }) => {
                     ))
                 }
             </div>
+            <Paper containerClass="p-2 flex justify-center items-center">
+                <p className="text-medium-grey-primary max-w-4xl text-center">
+                    If your questions haven't been answered by the FAQs above, first check out our General FAQs on our&nbsp;
+                    <Link href={"/about"} passHref><a className="text-brand-green hover:underline">About page</a></Link>. 
+                    If your question still hasn't been answered, ask your question in the <b>#questions</b> channel on the C4T Classes Discord server or email us at&nbsp;
+                    <a className="text-brand-green hover:underline" href="mailto:classes@code4tomorrow.org">classes@code4tomorrow.org</a>.
+                </p>
+            </Paper>
         </div>
     )
 }
