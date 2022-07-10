@@ -30,18 +30,20 @@ const NavListItem = React.forwardRef<ILink[], NavListItemProps>(({ children, hre
     };
 
     return (
-        <li onClick={handleRouteChange} ref={(el) => {
-            containerRef.current = el;
-            if (ref) {
-               (ref as any).current = [ ...((ref as any).current || []), { el, route: href }]
-            }
-        }} className={clsx(
-            "text-white cursor-pointer hover:opacity-75 transition-opacity text-base font-medium"
-        )}>
-            <a href={href} className="flex md:px-2 space-x-2 md:space-x-0 py-[5px] md:py-1" { ...props }>
-                { children }
-            </a>
-        </li>
+        <Link href={{ pathname: href }}>
+            <li onClick={handleRouteChange} ref={(el) => {
+                containerRef.current = el;
+                if (ref) {
+                (ref as any).current = [ ...((ref as any).current || []), { el, route: href }]
+                }
+            }} className={clsx(
+                "text-white cursor-pointer hover:opacity-75 transition-opacity text-base font-medium"
+            )}>
+                <a href={href} className="flex md:px-2 space-x-2 md:space-x-0 py-[5px] md:py-1" { ...props }>
+                    { children }
+                </a>
+            </li>
+        </Link>
     )
 })
 

@@ -3,6 +3,7 @@ import { Block, BLOCKS, Document, Inline, INLINES } from '@contentful/rich-text-
 import { documentToReactComponents, Options as DocumentOptions } from '@contentful/rich-text-react-renderer';
 import { makeStyles } from "tss-react/mui";
 import clsx from "clsx";
+import Link from "next/link";
 
 interface DocumentProps {
     document: Document,
@@ -14,14 +15,23 @@ const Text : React.FC<{ children: React.ReactNode }> = ({ children }) => {
 }
 
 const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> = ({ node, children }) => {
+    const link:string = useMemo(() => node.data.uri || "", [ node ]);
+    const origin = useMemo(() => typeof window === "undefined" ? null : `${window.location.protocol}://${window.location.hostname}`, []);
+    const currentPage = useMemo(() => (
+        link.startsWith("/") || (origin && link.startsWith(origin))
+    ), [ link, origin ]);
     return (
-        <a 
-            href={node.data.uri}
-            className="text-brand-green cursor-pointer" 
-            target={"_blank"} 
-            rel="noopener nofollow noreferrer">
-                { children }
-        </a>
+        <Link 
+            href={link}
+            passHref>
+                <a
+                   className="text-brand-green cursor-pointer" 
+                   target={currentPage ? "_self" : "_blank"} 
+                   rel="noopener nofollow noreferrer"
+                >
+                    { children }
+                </a>
+        </Link>
     )
 }
 
