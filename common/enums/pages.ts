@@ -1,4 +1,5 @@
 export enum Pages {
     INDEX = "/",
-    COURSES = "/courses"
+    COURSES = "/courses",
+    LEARN = "/learn"
 }

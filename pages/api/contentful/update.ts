@@ -43,6 +43,10 @@ export default async function handler(
             await attemptRevalidation(res, Pages.COURSES) && pagesRevalidated.push(Pages.COURSES);
         }
 
+        if ([ ContentModelID.FAQ ].includes(modelId)) {
+            await attemptRevalidation(res, Pages.LEARN) && pagesRevalidated.push(Pages.LEARN);
+        }
+
         console.log("Model ID: ", modelId);
         console.log("Pages Revalidated: ", pagesRevalidated);
         return res.json({ revalidatedPages: pagesRevalidated, error: false })

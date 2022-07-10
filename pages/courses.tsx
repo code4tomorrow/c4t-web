@@ -174,7 +174,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                               <span 
                                 className={clsx(
                                   "w-1 h-4 block rounded-full transition-all",
-                                  carouselMeta.currentIndex === i ? "bg-brand-green" : "bg-medium-grey-primary"
+                                  carouselMeta.currentIndex === i ? "bg-brand-green" : "bg-dim-grey-primary"
                                 )}
                                 key={i} 
                               />
