@@ -45,13 +45,12 @@ const FAQ : React.FC<FAQProps> = ({ faq }) => {
                 ref={answerRef} 
                 style={{ 
                     height: expanded.height,
-                    WebkitMaskImage: "-webkit-gradient(linear, left 90%, left 100%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"
                 }} 
                 className={clsx(
                     "h-0 overflow-clip transition-all",
                     expanded.expanded && "!overflow-auto"
                 )}>
-                <div className="p-3">
+                <div className="p-3 space-y-3">
                     {
                         faq.answer?.json && <Document document={faq.answer.json} />
                     }
