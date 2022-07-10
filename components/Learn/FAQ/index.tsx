@@ -21,7 +21,7 @@ const FAQ : React.FC<FAQProps> = ({ faq }) => {
 
     return (
         <li className="list-none w-full border-b border-dim-grey-primary py-6">
-             <div className="flex justify-between space-x-3 items-center">
+             <div onClick={handleExpand} className="flex cursor-pointer justify-between space-x-3 items-center">
                 <h1 className="text-white font-semibold text-lg">{ faq.question }</h1>
                 <div onClick={handleExpand} className="flex justify-center items-center relative w-4 h-4 cursor-pointer transition-opacity">
                     <span role="button" 

@@ -20,6 +20,7 @@ const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> 
     const currentPage = useMemo(() => (
         link.startsWith("/") || (origin && link.startsWith(origin))
     ), [ link, origin ]);
+    
     return (
         <Link 
             href={link}
