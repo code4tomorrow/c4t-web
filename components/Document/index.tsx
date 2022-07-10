@@ -16,10 +16,12 @@ const Text : React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> = ({ node, children }) => {
     const link:string = useMemo(() => node.data.uri || "", [ node ]);
-    const origin = useMemo(() => typeof window === "undefined" ? null : `${window.location.protocol}//${window.location.hostname}`, []);
+    const origin = useMemo(() => typeof window === "undefined" ? null : `${window.location.protocol}//${window.location.hostname}`, [ typeof window ]);
+    const origin2 = useMemo(() => typeof window === "undefined" ? null : window.location.origin, [ typeof window ]);
+    console.log(origin, origin2);
     const currentPage = useMemo(() => (
-        link.startsWith("/") || (origin && link.startsWith(origin))
-    ), [ link, origin ]);
+        link.startsWith("/") || (origin2 && link.startsWith(origin2))
+    ), [ link, origin2 ]);
     return (
         <Link 
             href={link}
