@@ -39,9 +39,9 @@ const FAQSection : React.FC<FAQSectionProps> = ({ faqsGroupedByType }) => {
             </div>
             <Paper containerClass="p-2 flex justify-center items-center">
                 <p className="text-medium-grey-primary max-w-4xl text-center">
-                    If your questions haven't been answered by the FAQs above, first check out our General FAQs on our&nbsp;
+                    If your questions haven&apos;t been answered by the FAQs above, first check out our General FAQs on our&nbsp;
                     <Link href={"/about"} passHref><a className="text-brand-green hover:underline">About page</a></Link>. 
-                    If your question still hasn't been answered, ask your question in the <b>#questions</b> channel on the C4T Classes Discord server or email us at&nbsp;
+                    If your question still hasn&apos;t been answered, ask your question in the <b>#questions</b> channel on the C4T Classes Discord server or email us at&nbsp;
                     <a className="text-brand-green hover:underline" href="mailto:classes@code4tomorrow.org">classes@code4tomorrow.org</a>.
                 </p>
             </Paper>
