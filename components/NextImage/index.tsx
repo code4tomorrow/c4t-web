@@ -5,13 +5,14 @@ interface NextImageProps extends ImageProps {
     fallbackSrc?: string; 
 }
 
-const NextImage : React.FC<NextImageProps> = ({ src, fallbackSrc, ...props }) => {
+const NextImage : React.FC<NextImageProps> = ({ src, alt, fallbackSrc, ...props }) => {
     const [ currentSrc, setCurrentSrc ] = useState(src);
 
     useEffect(() => { setCurrentSrc(src)}, [ src ]);
 
     return (
         <Image 
+            alt={alt}
             src={currentSrc}
             onError={() => {
                 console.error(`%cImage Resource Not Found: ${src}`, "color:red");

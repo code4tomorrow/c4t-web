@@ -16,7 +16,7 @@ const Text : React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> = ({ node, children }) => {
     const link:string = useMemo(() => node.data.uri || "", [ node ]);
-    const origin = useMemo(() => typeof window === "undefined" ? null : window.location.origin, [ typeof window ]);
+    const origin = useMemo(() => typeof window === "undefined" ? null : window.location.origin, []);
     const currentPage = useMemo(() => (
         link.startsWith("/") || (origin && link.startsWith(origin))
     ), [ link, origin ]);
