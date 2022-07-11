@@ -87,7 +87,7 @@ const Navbar = () => {
             { x, y, width, height }, 
             { x:x2, y:y2, width: width2, height:height2, duration: 0.15 },
         )
-    }, [ navItemRefs, router ]);
+    }, [ navItemRefs, router.pathname ]);
 
     useEffect(handleRouterChange, [ handleRouterChange ]);
 
