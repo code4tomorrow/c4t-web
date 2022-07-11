@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useStyles } from "./styles";
 import { HomeIcon, LightBulbIcon, HandIcon, CodeIcon, BookOpenIcon } from "@heroicons/react/outline";
 import { useRef } from "react";
-import { useRouter } from "next/router";
 import gsap from "gsap";
 import { useThrottledCallback } from "use-debounce";
 import { useNavigator } from "hooks/useNavigator";

@@ -2,6 +2,7 @@ import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
 import { NextPage } from "next";
 import Head from "next/head";
+import VolunteerCard from "@components/Volunteer";
 
 const Volunteer : NextPage = () => {
     return (
@@ -11,6 +12,9 @@ const Volunteer : NextPage = () => {
                 <title>Volunteer | C4T</title>
             </Head>
             <Navbar />
+            <main className="pt-16 my-6">
+              
+            </main>
             <Footer />
         </div>
     )
