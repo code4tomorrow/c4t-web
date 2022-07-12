@@ -18,7 +18,7 @@ const Course : React.FC<CourseProps> = ({ course }) => {
     return (
         <Paper containerClass={clsx("max-w-[300px] md:max-w-none w-full min-h-[300px] rounded-md", classes.course)}>
             <div className="w-full h-full relative space-y-3 p-4 flex items-center flex-col">
-                <div className="w-[100px] h-[100px] relative flex justify-center items-center">
+                <div className="w-[150px] h-[100px] relative flex justify-center items-center">
                     {
                         !!course.image ? (
                             <NextImage 

@@ -13,7 +13,7 @@ const Volunteer : NextPage = () => {
             </Head>
             <Navbar />
             <main className="pt-16 my-6">
-              
+                <VolunteerCard />
             </main>
             <Footer />
         </div>
