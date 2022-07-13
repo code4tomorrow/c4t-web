@@ -25,8 +25,9 @@ export const useStyles = makeStyles<{ accentColor: string }>()(({ palette }, { a
             transform: "translate3d(0px, -5%, 0px)",
         },
         "&::after": {
-            WebkitBackground: `-webkit-linear-gradient(90deg, ${accentColor} 25%, #7892EE 100%)`,
-            background: `linear-gradient(0deg, ${accentColor} 25%, #7892EE 100%)`,
+            // WebkitBackground: `-webkit-linear-gradient(90deg, ${accentColor} 25%, #7892EE 100%)`,
+            // background: `linear-gradient(0deg, ${accentColor} 25%, #7892EE 100%)`,
+            background: "#7892EE",
             transition: "transform 400ms ease, background 350ms ease, 150ms opacity ease",
             content: "''",
             display: "block",
