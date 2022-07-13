@@ -12,3 +12,9 @@ export enum ContentModelID {
     IMAGE = "image",
     FAQ = "faq"
 }
+
+export interface IBaseContentModel {
+    sys?: {
+        id?: string; 
+    }
+}
