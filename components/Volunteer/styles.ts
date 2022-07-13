@@ -2,7 +2,11 @@ import { makeStyles } from "tss-react/mui";
 
 export const useStyles = makeStyles<{ accentColor: string }>()(({ palette }, { accentColor }) => ({
     container: {
+        backfaceVisibility: "hidden",
         transition: "250ms transform ease",
+        "&::before, &::after": {
+            backfaceVisibility: "hidden",
+        },  
         "&::before": {
             transition: "transform 400ms ease, background 350ms ease",
             content: "''",
@@ -34,17 +38,11 @@ export const useStyles = makeStyles<{ accentColor: string }>()(({ palette }, { a
             transition: "1000ms background ease",
             animation: "waveBefore 5000ms linear infinite forwards",
             animationPlayState: "paused",
-            "@media (max-width: 768px)": {
-                transitionDelay: "500ms",
-            }
         },
         "&::after": {
             transition: "1000ms background ease, 150ms opacity linear",
             animation: "waveAfter 3500ms linear infinite forwards",
             animationPlayState: "paused",
-            "@media (max-width: 768px)": {
-                transitionDelay: "500ms",
-            }
         },
         "@keyframes waveBefore": {
             from: {
@@ -71,19 +69,19 @@ export const useStyles = makeStyles<{ accentColor: string }>()(({ palette }, { a
     },
     flowMotion: {
         "&::before": {
-            animationPlayState: "running"
+            animationPlayState: "running !important"
         },
         "&::after": {
-            animationPlayState: "running"
+            animationPlayState: "running !important"
         },
     },
     flowMotionMobile: {
         "@media (max-width: 768px)": {
             "&::before": {
-                animationPlayState: "running"
+                animationPlayState: "running !important"
             },
             "&::after": {
-                animationPlayState: "running"
+                animationPlayState: "running !important"
             },
         }
     }

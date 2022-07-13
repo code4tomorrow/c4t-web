@@ -36,11 +36,13 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
 
     return (
       <Animate.Element 
+        start={"center 70%"}
+        end={"center 30%"}
         onMouseOver={() => setActivated(true)}
         onMouseLeave={() => setActivated(false)}
         className={clsx(
             "w-[300px] min-h-[400px] cursor-pointer relative rounded-sm overflow-hidden bg-dark-grey-secondary",
-            "before:bg-dark-blue-primary flex flex-col items-center p-4 md:hover:-translate-y-3",
+            "before:bg-dark-blue-primary flex flex-col items-center p-4 md:hover:!-translate-y-3",
             activated ? "after:opacity-100" : "md:after:!opacity-0",
             classes.container,
             classes.flowSetup,

@@ -28,6 +28,8 @@ const Element = <T extends ElementType = "div">({
         resetAfterTriggered = true, 
         onDeactivatedClasses,
         onActivatedClasses,
+        start,
+        end,
         ...props
     } : ElementProps<T> & ComponentPropsWithoutRef<T>) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -47,6 +49,8 @@ const Element = <T extends ElementType = "div">({
         const tl = gsap.timeline({
             repeat: 0,
             scrollTrigger: {
+                start: start,
+                end: end,
                 invalidateOnRefresh: true,
                 trigger: containerRef.current,
                 onEnter: () => setTriggered(true),
@@ -59,7 +63,7 @@ const Element = <T extends ElementType = "div">({
             gsap.killTweensOf(containerRef.current);
             tl.kill();
         }
-    }, [ containerRef, resetAfterTriggered ]);
+    }, [ containerRef, resetAfterTriggered, start, end ]);
 
     const [ animation, setAnimation ] = useState<{
         from?: gsap.TweenVars, to?: gsap.TweenVars,
