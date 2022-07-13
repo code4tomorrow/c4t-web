@@ -15,6 +15,7 @@ interface ElementProps<T extends ElementType = "div"> {
     from?: gsap.TweenVars,
     to?: gsap.TweenVars,
     onActivatedClasses?: string; 
+    onDeactivatedClasses?: string; 
     resetAfterTriggered?: boolean,
 }
 
@@ -25,6 +26,7 @@ const Element = <T extends ElementType = "div">({
         from = {}, 
         to = {},
         resetAfterTriggered = true, 
+        onDeactivatedClasses,
         onActivatedClasses,
         ...props
     } : ElementProps<T> & ComponentPropsWithoutRef<T>) => {
@@ -98,7 +100,11 @@ const Element = <T extends ElementType = "div">({
                 opacity: from.opacity !== undefined ? from.opacity as number : "initial",
                 transform: `translate(${from.x || 0}px, ${from.y || 0}px)`
             }}
-            className={clsx(classes.container, className, triggered && onActivatedClasses)} { ...props } 
+            className={clsx(
+                classes.container, 
+                className, 
+                triggered ? onActivatedClasses : onDeactivatedClasses,
+            )} { ...props } 
             ref={containerRef}>
             { children }
         </Component>

@@ -35,7 +35,7 @@ export const useStyles = makeStyles<{ accentColor: string }>()(({ palette }, { a
             animation: "waveBefore 5000ms linear infinite forwards",
             animationPlayState: "paused",
             "@media (max-width: 768px)": {
-                transitionDelay: "750ms",
+                transitionDelay: "500ms",
             }
         },
         "&::after": {
