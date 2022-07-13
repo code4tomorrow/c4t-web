@@ -7,6 +7,7 @@ import { Options as DocumentOptions } from '@contentful/rich-text-react-renderer
 import { useMemo } from "react";
 import { BLOCKS } from "@contentful/rich-text-types";
 import BrandButton from "@components/BrandButton";
+import Animate from "@components/Animate";
 
 interface VolunteerProps {
   opportunity: IVolunteerOpportunity
@@ -34,16 +35,19 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
   }, []);
 
     return (
-      <div 
+      <Animate.Element 
         onMouseOver={() => setActivated(true)}
         onMouseLeave={() => setActivated(false)}
         className={clsx(
             "w-[300px] min-h-[400px] cursor-pointer relative rounded-sm overflow-hidden bg-dark-grey-secondary",
             "before:bg-dark-blue-primary flex flex-col items-center p-4 md:hover:-translate-y-3",
-            "after:opacity-0 hover:after:opacity-100",
+            activated ? "after:opacity-100" : "md:after:!opacity-0 after:opacity-0",
             classes.container,
-            classes.flow
-        )}>
+            classes.flowSetup,
+            activated && classes.flowMotion
+        )}
+        onActivatedClasses={clsx(classes.flowMotionMobile, "after:opacity-100")}
+        >
           <div className="relative space-y-3 z-10 h-full flex flex-col items-center">
             <h1 className="text-white font-bold text-3xl mt-10">{ opportunity.name }</h1>
             <div className={clsx("space-y-3 !mt-auto max-h-[150px] overflow-auto", classes.description)}>
@@ -66,7 +70,7 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
                 title={`Become a ${opportunity.name}`} 
             />
           </div>
-      </div>
+      </Animate.Element>
     )
 }
 

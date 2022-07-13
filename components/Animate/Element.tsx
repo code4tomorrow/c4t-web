@@ -14,11 +14,19 @@ interface ElementProps<T extends ElementType = "div"> {
     children: React.ReactNode;
     from?: gsap.TweenVars,
     to?: gsap.TweenVars,
+    onActivatedClasses?: string; 
     resetAfterTriggered?: boolean,
 }
 
 const Element = <T extends ElementType = "div">({ 
-        as, className, children, from = {}, to = {}, resetAfterTriggered = true, ...props
+        as, 
+        className, 
+        children, 
+        from = {}, 
+        to = {},
+        resetAfterTriggered = true, 
+        onActivatedClasses,
+        ...props
     } : ElementProps<T> & ComponentPropsWithoutRef<T>) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [ triggered, setTriggered ] = useState(false);
@@ -90,7 +98,7 @@ const Element = <T extends ElementType = "div">({
                 opacity: from.opacity !== undefined ? from.opacity as number : "initial",
                 transform: `translate(${from.x || 0}px, ${from.y || 0}px)`
             }}
-            className={clsx(classes.container, className)} { ...props } 
+            className={clsx(classes.container, className, triggered && onActivatedClasses)} { ...props } 
             ref={containerRef}>
             { children }
         </Component>
