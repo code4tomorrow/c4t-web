@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, ElementType, useContext, useMemo, useState } from "react";
+import React, { ComponentPropsWithoutRef, ElementType, useContext, useState } from "react";
 import gsap from "gsap";
 import { useRef } from "react";
 import { useCallback } from "react";
@@ -85,7 +85,13 @@ const Element = <T extends ElementType = "div">({
     const { classes } = useStyles();
 
     return (
-        <Component className={clsx(classes.container, className)} { ...props } ref={containerRef}>
+        <Component 
+            style={{ 
+                opacity: from.opacity !== undefined ? from.opacity as number : "initial",
+                transform: `translate(${from.x || 0}px, ${from.y || 0}px)`
+            }}
+            className={clsx(classes.container, className)} { ...props } 
+            ref={containerRef}>
             { children }
         </Component>
     )

@@ -13,7 +13,7 @@ import GiftsSVG from "@svg/gifts.svg";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 
-const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "Apps." ];
+const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
 export default function Home() {
   const { classes } = useStyles();
@@ -31,7 +31,7 @@ export default function Home() {
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)", whiteSpace: "nowrap"}} 
           className="text-white text-5xl font-bold md:text-6xl mt-16 text-center">
-            Master to&nbsp;<br className="md:hidden block"/>Code&nbsp;
+            Master Coding&nbsp;<br className="md:hidden block"/>
             <Typist cursor={<span className={classes.blinkingCursor}>|</span>} loop={true}>
                 {
                   CODE_ITEMS.map((item, idx) => (
