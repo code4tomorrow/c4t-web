@@ -6,6 +6,8 @@ import VolunteerCard from "@components/Volunteer";
 import { gql } from "graphql-request";
 import Image from "next/image";
 import { graphQLClient, IBaseContentModel } from "@utils/contentful";
+import Animate from "@components/Animate";
+import VolunteerTeamSVG from "@svg/volunteer-team.svg";
 
 export interface IVolunteerOpportunity extends IBaseContentModel {
     name?: string; 
@@ -28,28 +30,43 @@ const Volunteer : NextPage<VolunteerProps> = ({ volunteerOpportunities }) => {
                 <title>Volunteer | C4T</title>
             </Head>
             <Navbar />
-            <main className="pt-4 px-6 w-full my-12 flex flex-col items-center">
-                <div className="w-full relative h-[200px] mb-8">
-                    <Image
-                        src="/svg/volunteer-team.svg"
-                        layout="fill"
-                    />
-                </div>
-                <h1 className="text-5xl font-bold text-white text-center">Volunteer Opportunities</h1>
-                <p className="text-lg !mt-3 text-medium-grey-primary text-center">
-                    Apply today for an opportunity to hone your skills and help others, all while gaining 
-                    &nbsp;<u>volunteer hours</u>.
-                </p>
-                <div 
-                    style={{ gridTemplateColumns: "repeat(auto-fit, 300px)"}}
-                    className="grid w-full mt-9 gap-6 justify-items-center justify-center">
-                    {
-                        volunteerOpportunities.map((opportunity) => (
-                            <VolunteerCard key={opportunity.sys?.id} opportunity={opportunity} />
-                        ))
-                    }
-                </div>
-            </main>
+            <Animate>
+                <main className="pt-4 px-6 w-full my-12 flex flex-col items-center">
+                    <Animate.Element 
+                        resetAfterTriggered={false}
+                        from={{ y: 30, opacity: 0 }}
+                        to={{ y: 0, opacity: 1, delay: 0 }}
+                        className="w-full flex justify-center items-center relative h-[200px] mb-8">
+                        <VolunteerTeamSVG width={"100%"} height={"100%"} />
+                    </Animate.Element>
+                    <Animate.Element
+                        resetAfterTriggered={false}
+                        as="h1" 
+                        from={{ y: 60, opacity: 0 }}
+                        to={{ y: 0, opacity: 1, delay: 0.15 }}
+                        className="text-5xl font-bold text-white text-center">
+                            Volunteer Opportunities
+                    </Animate.Element>
+                    <Animate.Element
+                        resetAfterTriggered={false}
+                        as="p" 
+                        from={{ y: 90, opacity: 0 }}
+                        to={{ y: 0, opacity: 1, delay: 0.3 }}
+                        className="text-lg !mt-3 text-medium-grey-primary text-center">
+                        Apply today for an opportunity to hone your skills and help others, all while gaining 
+                        &nbsp;<u>volunteer hours</u>.
+                    </Animate.Element>
+                    <div 
+                        style={{ gridTemplateColumns: "repeat(auto-fit, 300px)"}}
+                        className="grid w-full mt-9 gap-6 justify-items-center justify-center">
+                        {
+                            volunteerOpportunities.map((opportunity) => (
+                                <VolunteerCard key={opportunity.sys?.id} opportunity={opportunity} />
+                            ))
+                        }
+                    </div>
+                </main>
+            </Animate>
             <Footer />
         </div>
     )

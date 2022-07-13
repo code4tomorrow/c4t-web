@@ -39,7 +39,7 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
         onMouseLeave={() => setActivated(false)}
         className={clsx(
             "w-[300px] min-h-[400px] cursor-pointer relative rounded-sm overflow-hidden bg-dark-grey-secondary",
-            "before:bg-dark-blue-primary flex flex-col items-center p-4 hover:-translate-y-3",
+            "before:bg-dark-blue-primary flex flex-col items-center p-4 md:hover:-translate-y-3",
             "after:opacity-0 hover:after:opacity-100",
             classes.container,
             classes.flow
