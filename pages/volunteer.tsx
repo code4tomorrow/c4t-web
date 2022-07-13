@@ -15,6 +15,7 @@ export interface IVolunteerOpportunity extends IBaseContentModel {
         json: any; 
     },
     link?: string; 
+    buttonLabel?: string; 
     accentColor?: string; 
 }
 
@@ -84,6 +85,7 @@ export async function getStaticProps() {
                 }
                 accentColor,
                 name,
+                buttonLabel,
                 link,
                 description {
                     json

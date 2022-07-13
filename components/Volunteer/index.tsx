@@ -70,7 +70,7 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
                 href={opportunity.link}
                 disabled={!!!opportunity.link}
                 containerClass="!mt-auto"
-                title={`Become a ${opportunity.name}`} 
+                title={opportunity.buttonLabel ? opportunity.buttonLabel : "Volunteer"} 
             />
           </div>
       </Animate.Element>
