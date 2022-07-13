@@ -38,12 +38,12 @@ export const useStyles = makeStyles<{ accentColor: string }>()(({ palette }, { a
     flowSetup: {
         "&::before": {
             transition: "1000ms background ease",
-            animation: "waveBefore 5000ms linear infinite forwards",
+            animation: "waveBefore 5000ms linear infinite",
             animationPlayState: "paused",
         },
         "&::after": {
             transition: "1000ms background ease, 150ms opacity linear",
-            animation: "waveAfter 3500ms linear infinite forwards",
+            animation: "waveAfter 3500ms linear infinite",
             animationPlayState: "paused",
         },
         "@keyframes waveBefore": {

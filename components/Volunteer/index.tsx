@@ -48,7 +48,7 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
             classes.flowSetup,
             activated && classes.flowMotion
         )}
-        onDeactivatedClasses="after:opacity-0"
+        onDeactivatedClasses="after:opacity-0 hover:after:opacity-100"
         onActivatedClasses={clsx(classes.flowMotionMobile, "after:opacity-100")}
         >
           <div className="relative space-y-3 z-10 h-full flex flex-col items-center">
