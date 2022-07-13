@@ -38,6 +38,9 @@ export const useStyles = makeStyles<{ accentColor: string }>()(({ palette }, { a
             height: "100%",
             transform: "translate3d(0px, -8%, 0px)",
         },
+        "&:hover h1[class$=opportunityTitle]": {
+            transform: "scale(1.05)"
+        }
     },
     flowSetup: {
         "&::before": {
@@ -90,5 +93,6 @@ export const useStyles = makeStyles<{ accentColor: string }>()(({ palette }, { a
                 animationPlayState: "running !important"
             },
         }
-    }
+    },
+    opportunityTitle: {}
 }))

@@ -12,6 +12,7 @@ import TeamSVG from "@svg/team.svg";
 import GiftsSVG from "@svg/gifts.svg";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
+import Link from "next/link";
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
@@ -48,14 +49,13 @@ export default function Home() {
         <h2 className="text-xl font-medium text-medium-grey-primary text-center">
           We teach K-12 students around the globe how to code for free.
         </h2>
-        <BrandButton 
-          title="Apply Today" 
-          label="100% Free" 
-          href="https://forms.gle/JPneDCk34WUWyvBF7"
-          as="a"
-          target={"_blank"}
-          rel="noopener noreferrer"
-        />
+        <Link href="/about" passHref>
+          <BrandButton 
+            title="Learn More" 
+            label="100% Free" 
+            as="a"
+          />
+        </Link>
       </header>
       <Animate>
       <main className="p-3 mt-10 space-y-32 flex flex-col items-center">
@@ -99,22 +99,23 @@ export default function Home() {
          <section className="flex py-5 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
               <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
                 <Animate.Element from={{ x: -200 }} to={{ x: 0}}>
-                  <h1 className="text-white text-4xl md:text-5xl font-extrabold">Begin Your Summer Adventure.</h1>
+                  <h1 className="text-white text-4xl md:text-5xl font-extrabold">Fall Session Coming Soon.</h1>
                 </Animate.Element>
                 <Animate.Element from={{ x: -200 }} to={{ x: 0}}>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
                     <p className="text-medium-grey-primary">
-                        C4T&apos;s summer session is open for registration now! Learn languages like Python, Java, and more—all for free!
+                        C4T&apos;s summer session is in progress, Fall session coming soon! Learn languages like Python, Java, and more—all for free!
                     </p>
                     <p className="text-medium-grey-primary">
-                      The student application is open till July 3rd. Classes are twice a week from July 11th to August 22nd.
+                      Fall session start date is to be determined. Stay Tuned for updates.
                     </p>
                   </div>
                 </Animate.Element>
                 <BrandButton 
                   containerClass="mr-auto" 
                   title="Sign Up" 
-                  label="Quick & Easy" 
+                  disabled
+                  label="Coming Soon" 
                   href="https://forms.gle/JPneDCk34WUWyvBF7"
                   as="a"
                   target={"_blank"}

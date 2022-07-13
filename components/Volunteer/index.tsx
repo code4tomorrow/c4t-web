@@ -52,7 +52,7 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
         onActivatedClasses={clsx(classes.flowMotionMobile, "after:opacity-100")}
         >
           <div className="relative space-y-3 z-10 h-full flex flex-col items-center">
-            <h1 className="text-white font-bold text-3xl mt-10">{ opportunity.name }</h1>
+            <h1 className={clsx("text-white transition-transform font-bold text-3xl mt-10", classes.opportunityTitle)}>{ opportunity.name }</h1>
             <div className={clsx("space-y-3 !mt-auto max-h-[150px] overflow-auto", classes.description)}>
                 {
                     opportunity.description?.json && (
