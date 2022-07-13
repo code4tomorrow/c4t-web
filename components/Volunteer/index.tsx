@@ -37,7 +37,7 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
     return (
       <Animate.Element 
         start={"center 70%"}
-        end={"center 30%"}
+        end={"center 25%"}
         onMouseOver={() => setActivated(true)}
         onMouseLeave={() => setActivated(false)}
         className={clsx(

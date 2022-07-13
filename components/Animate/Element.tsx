@@ -102,7 +102,8 @@ const Element = <T extends ElementType = "div">({
         <Component 
             style={{ 
                 opacity: from.opacity !== undefined ? from.opacity as number : "initial",
-                transform: `translate(${from.x || 0}px, ${from.y || 0}px)`
+                transform: `translate3d(${from.x || 0}px, ${from.y || 0}px,0px)`,
+                WebkitTransform: `translate3d(${from.x || 0}px, ${from.y || 0}px,0px)`
             }}
             className={clsx(
                 classes.container, 
