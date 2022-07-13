@@ -101,7 +101,7 @@ const Element = <T extends ElementType = "div">({
     return (
         <Component 
             style={{ 
-                opacity: from.opacity !== undefined ? from.opacity as number : "initial",
+                opacity: from.opacity !== undefined ? from.opacity as number : undefined,
                 transform: `translate3d(${from.x || 0}px, ${from.y || 0}px,0px)`,
                 WebkitTransform: `translate3d(${from.x || 0}px, ${from.y || 0}px,0px)`
             }}
