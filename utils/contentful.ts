@@ -10,7 +10,8 @@ export enum ContentModelID {
     COURSE = "course",
     PROMOTIONAL_LABEL = "promotionalLabel",
     IMAGE = "image",
-    FAQ = "faq"
+    FAQ = "faq",
+    VOLUNTEER_OPPORTUNITY = "volunteerOpportunity"
 }
 
 export interface IBaseContentModel {
