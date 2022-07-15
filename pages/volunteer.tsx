@@ -4,7 +4,6 @@ import { NextPage } from "next";
 import Head from "next/head";
 import VolunteerCard from "@components/Volunteer";
 import { gql } from "graphql-request";
-import Image from "next/image";
 import { graphQLClient, IBaseContentModel } from "@utils/contentful";
 import Animate from "@components/Animate";
 import VolunteerTeamSVG from "@svg/volunteer-team.svg";

@@ -1,4 +1,5 @@
 import {Client} from "@notionhq/client";
+import { notionColorMap } from "common/maps/color";
 import config from "config";
 require("dotenv").config();
 
@@ -56,20 +57,24 @@ export const getDirectory = async () : Promise<IDirectoryRow[]> => {
             name: properties?.Name?.title[0]?.text.content || null,
             position: {
                 name: position?.name || null,
-                color: position?.color || null
+                color: position?.color ? notionColorMap(position.color) : null
             },
-            department: department.map(({ name = null, color = null } : IDirectoryItem) => ({ name, color })),
-            projects:  projects.map(({ name = null, color = null } : IDirectoryItem) => ({ name, color })),
+            department: department.map(({ name = null, color = null } : IDirectoryItem) => ({ 
+                name, color: color ? notionColorMap(color) : null
+            })),
+            projects:  projects.map(({ name = null, color = null } : IDirectoryItem) => ({
+                name, color: color ? notionColorMap(color) : null
+            })),
             state: {
                 name: state?.name || null,
-                color: state?.color || null
+                color: state?.color ? notionColorMap(state.color) : null
             },
             country: {
                 name: country?.name || null,
-                color: country?.color || null
+                color: country?.color ? notionColorMap(country.color) : null
             },
         };
     });
   
-    return rows;
+    return rows.reverse();
 }
