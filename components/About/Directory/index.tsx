@@ -151,7 +151,7 @@ const Directory : React.FC<IDirectoryProps> = ({ directoryEntries }) => {
             containerClass="w-full !p-0 max-w-7xl flex !overflow-x-auto">
             <div {...getTableProps()} 
                 className="p-3 w-full pt-0 inline-block relative">
-                <div className={clsx("absolute bg-dark-grey-secondary bg-opacity-75 z-10 px-9", classes.thead)}>
+                <div className={clsx("absolute bg-dark-grey-secondary z-10 md:px-9", classes.thead)}>
                     {headerGroups.map((headerGroup, idx) => (
                     <div {...headerGroup.getHeaderGroupProps()} key={idx}>
                         {headerGroup.headers.map((column, idx) => (
@@ -163,7 +163,7 @@ const Directory : React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                     ))}
                 </div>
                 <div {...getTableBodyProps()} 
-                    className="w-full px-9">
+                    className="w-full md:px-9">
                     <VirtualList
                         // onItemsRendered={handleNewItemsRendered}
                         height={Math.min(780, 40 * rows.length)}
