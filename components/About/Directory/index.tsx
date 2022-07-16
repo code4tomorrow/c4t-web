@@ -1,9 +1,9 @@
 import Paper from "@components/Paper";
 import { IDirectoryRow } from "@utils/notion/directory";
 import clsx from "clsx";
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { useStyles } from "./styles";
-import { FixedSizeList as VirtualList, ListOnItemsRenderedProps } from "react-window";
+import { FixedSizeList as VirtualList } from "react-window";
 import { useTable, useBlockLayout, Column } from 'react-table';
 
 interface IDirectoryProps {
@@ -120,10 +120,11 @@ const Directory : React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                 style: { ...style, top: style.top + 80 },
               })}
             >
-              {row.cells.map(cell => {
+              {row.cells.map((cell, idx) => {
                 return (
                   <div 
                     {...cell.getCellProps()} 
+                    key={idx}
                     className={clsx(
                         "[&>div>span[data-tag]]:bg-brand-green px-5",
                         classes.cell
@@ -135,7 +136,7 @@ const Directory : React.FC<IDirectoryProps> = ({ directoryEntries }) => {
             </div>
           )
         },
-        [prepareRow, rows]
+        [prepareRow, rows, classes.cell ]
       )
 
     // const [ reachedEnd, setReachedEnd ] = useState(false);
@@ -151,10 +152,10 @@ const Directory : React.FC<IDirectoryProps> = ({ directoryEntries }) => {
             <div {...getTableProps()} 
                 className="p-3 w-full pt-0 inline-block relative">
                 <div className={clsx("absolute bg-dark-grey-secondary bg-opacity-75 z-10 px-9", classes.thead)}>
-                    {headerGroups.map(headerGroup => (
-                    <div {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map(column => (
-                        <div {...column.getHeaderProps()} className="text-white font-bold px-5 py-6">
+                    {headerGroups.map((headerGroup, idx) => (
+                    <div {...headerGroup.getHeaderGroupProps()} key={idx}>
+                        {headerGroup.headers.map((column, idx) => (
+                        <div  {...column.getHeaderProps()} key={idx} className="text-white font-bold px-5 py-6">
                             {column.render('Header')}
                         </div>
                         ))}
