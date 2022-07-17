@@ -2,7 +2,7 @@ import { makeStyles } from "tss-react/mui";
 
 export const useStyles = makeStyles()(() => ({
     thead: {
-        boxShadow: "0px 5px 15px 3px #202124",
+        boxShadow: "0px 5px 7.5px 3px #202124",
     },
     cell: {
         overflow: "auto",

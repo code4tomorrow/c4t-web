@@ -53,8 +53,7 @@ const Volunteer : NextPage<VolunteerProps> = ({ volunteerOpportunities }) => {
                         from={{ y: 90, opacity: 0 }}
                         to={{ y: 0, opacity: 1, delay: 0.3 }}
                         className="text-lg !mt-3 text-medium-grey-primary text-center">
-                        Apply today for an opportunity to hone your skills and help others, all while gaining 
-                        &nbsp;<u>volunteer hours</u>.
+                        Apply today for an opportunity to hone your skills and help others, all while gaining <b>volunteer hours</b>.
                     </Animate.Element>
                     <div 
                         style={{ gridTemplateColumns: "repeat(auto-fit, 300px)"}}

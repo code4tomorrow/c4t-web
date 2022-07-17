@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    minimumCacheTTL: 30 * 60 * 60 * 1000,
     domains: [
       "res.cloudinary.com"
     ]

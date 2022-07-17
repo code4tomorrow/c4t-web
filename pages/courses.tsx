@@ -124,7 +124,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                       <h1 className="text-white text-center font-bold text-4xl">Browse our <span className="text-brand-green">Quality</span> Courses.</h1>
                     </Animate.Element>
                     <Animate.Element resetAfterTriggered={false} from={{ y: 50, opacity: 0 }} to={{ y: 0, opacity: 1, delay: 0.15 }}>
-                      <h2 className="text-medium-grey-primary text-center font-medium text-lg">Choose as many as you want from Beginner to Advanced.</h2>
+                      <h2 className="text-medium-grey-primary text-center font-medium text-lg">Choose as many as you want from Beginner to <b>Advanced</b>.</h2>
                     </Animate.Element>
                     <div 
                         style={{
