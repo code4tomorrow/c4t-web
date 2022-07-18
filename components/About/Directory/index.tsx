@@ -17,7 +17,7 @@ const Directory : React.FC<IDirectoryProps> = ({ directoryEntries }) => {
         () => [
           {
             Header: 'Name',
-            accessor: (e) => <div className="text-medium-grey-primary"><span>{ e.name }</span></div>,
+            accessor: (e) => <div className="text-medium-grey"><span>{ e.name }</span></div>,
           },
           {
             Header: "Position",
@@ -126,7 +126,7 @@ const Directory : React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                     {...cell.getCellProps()} 
                     key={idx}
                     className={clsx(
-                        "[&>div>span[data-tag]]:bg-brand-green px-5",
+                        "[&>div>span[data-tag]]:bg-brand-purple-secondary px-5",
                         classes.cell
                     )}>
                     {cell.render('Cell')}

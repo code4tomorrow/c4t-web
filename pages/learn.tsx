@@ -1,3 +1,4 @@
+import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import FAQSection from "@components/Learn/FAQSection";
 import Navbar from "@components/Navbar";
@@ -30,9 +31,11 @@ const Learn : NextPage<LearnProps> = ({ faqsGroupedByType }) => {
                 <title>Learn | C4T</title>
             </Head>
             <Navbar />
-            <main className="w-full mt-16 p-4 px-8 flex flex-col items-center">
-                <FAQSection faqsGroupedByType={faqsGroupedByType}/>
-            </main>
+            <Animate>
+                <main className="w-full mt-16 p-4 px-8 flex flex-col items-center">
+                    <FAQSection faqsGroupedByType={faqsGroupedByType}/>
+                </main>
+            </Animate>
             <Footer />
         </div>
     )

@@ -46,7 +46,7 @@ export default function Home() {
                 }
             </Typist>
         </h1>
-        <h2 className="text-xl font-medium text-medium-grey-primary text-center">
+        <h2 className="text-xl font-medium text-medium-grey text-center">
           We teach K-12 students around the globe how to code for free.
         </h2>
         <Link href="/about" passHref>
@@ -118,11 +118,11 @@ export default function Home() {
                 </Animate.Element>
                 <Animate.Element from={{ x: -200 }} to={{ x: 0}}>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
-                    <p className="text-medium-grey-primary">
+                    <p className="text-medium-grey">
                         C4T&apos;s summer session is in progress, Fall session coming soon! Learn languages like Python, Java, and more—all for free!&nbsp;
                         <Link href="/courses"><a className="underline hover:opacity-75 transition-opacity">View Courses.</a></Link>
                     </p>
-                    <p className="text-medium-grey-primary">
+                    <p className="text-medium-grey">
                       Fall session start date is to be determined. Stay Tuned for updates.
                     </p>
                   </div>
@@ -148,7 +148,7 @@ export default function Home() {
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Consider Supporting a STEM Initiative.</h1>
                 </Animate.Element>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
-                    <Animate.Element as="p" from={{ x: 200 }} to={{ x: 0}} className="text-medium-grey-primary">
+                    <Animate.Element as="p" from={{ x: 200 }} to={{ x: 0}} className="text-medium-grey">
                       If you would like to support our efforts to make STEM education accessible to all, please consider donating.
                     </Animate.Element>
                   </div>
@@ -172,7 +172,7 @@ export default function Home() {
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Let&apos;s Build a Partnership.</h1>
                 </Animate.Element>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
-                    <Animate.Element as="p" from={{ x: -200 }} to={{ x: 0}} className="text-medium-grey-primary">
+                    <Animate.Element as="p" from={{ x: -200 }} to={{ x: 0}} className="text-medium-grey">
                       At C4T, we believe in the power of partnership. We know it will take a large coalition of change-makers in order to have the greatest impact. This is why we collaborate with other non-profit organizations to bring STEM-related opportunities to students.
                     </Animate.Element>
                   </div>

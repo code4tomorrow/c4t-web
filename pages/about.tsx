@@ -34,7 +34,7 @@ const About : NextPage<AboutProps> = ({ directoryEntries }) => {
                             as="p" 
                             from={{ y: 90,  opacity: 0 }}
                             to={{ y: 0, opacity: 1, delay: 0.15 }}
-                            className="text-lg !mt-3 text-medium-grey-primary text-center">
+                            className="text-lg !mt-3 text-medium-grey text-center">
                             Together, a devoted set of High schoolers embark on making quality coding lessons <b>more accessible</b>.
                         </Animate.Element>
                     </div>

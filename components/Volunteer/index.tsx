@@ -14,7 +14,7 @@ interface VolunteerProps {
 }
 
 const Description : React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <p className="text-medium-grey-primary text-center">{ children }</p>
+  return <p className="text-medium-grey text-center">{ children }</p>
 }
 
 const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
@@ -42,7 +42,7 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
         onMouseLeave={() => setActivated(false)}
         className={clsx(
             "w-[300px] min-h-[400px] cursor-pointer relative rounded-sm overflow-hidden bg-dark-grey-secondary",
-            "before:bg-dark-blue-primary flex flex-col items-center p-4 md:hover:!-translate-y-3",
+            "before:bg-dark-grey-accent flex flex-col items-center p-4 md:hover:!-translate-y-3",
             activated ? "after:!opacity-100" : "md:after:!opacity-0",
             classes.container,
             classes.flowSetup,
