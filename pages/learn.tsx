@@ -3,6 +3,7 @@ import Footer from "@components/Footer";
 import FAQSection from "@components/Learn/FAQSection";
 import Navbar from "@components/Navbar";
 import { graphQLClient } from "@utils/contentful";
+import config from "config";
 import { gql } from "graphql-request";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -43,8 +44,8 @@ const Learn : NextPage<LearnProps> = ({ faqsGroupedByType }) => {
 
 export async function getStaticProps() {
     const response = await graphQLClient.request(gql`
-      query {
-        faqCollection {
+      query($preview:Boolean) {
+        faqCollection(preview:$preview) {
             items {
                 question,
                 type,
@@ -54,7 +55,7 @@ export async function getStaticProps() {
             }
         }
     }
-    `, {});
+    `, { preview: config.contentful.preview});
 
     const faqs:IFAQ[]= response?.faqCollection?.items || [];
 

@@ -2,7 +2,7 @@ export {};
 
 const config = {
     contentful: {
-      
+        preview: !!process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
     },
     cloudinary: {
         cloudName: "code4tomorrow",
