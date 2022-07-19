@@ -46,6 +46,10 @@ export default async function handler(
         if ([ ContentModelID.FAQ ].includes(modelId)) {
             await attemptRevalidation(res, Pages.LEARN) && pagesRevalidated.push(Pages.LEARN);
         }
+        
+        if ([ ContentModelID.VOLUNTEER_OPPORTUNITY ].includes(modelId)) {
+            await attemptRevalidation(res, Pages.VOLUNTEER) && pagesRevalidated.push(Pages.VOLUNTEER);
+        }
 
         console.log("Model ID: ", modelId);
         console.log("Pages Revalidated: ", pagesRevalidated);

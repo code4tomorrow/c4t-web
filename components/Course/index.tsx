@@ -56,7 +56,7 @@ const Course : React.FC<CourseProps> = ({ course }) => {
                     )
                 }
                 <p className={clsx(
-                    "!mb-4 text-medium-grey-primary text-center overflow-auto h-[150px]",
+                    "!mb-4 text-medium-grey text-center overflow-auto h-[150px]",
                     classes.description
                 )}>
                     { course.description }

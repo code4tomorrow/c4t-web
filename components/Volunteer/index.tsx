@@ -14,7 +14,7 @@ interface VolunteerProps {
 }
 
 const Description : React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <p className="text-medium-grey-primary text-center">{ children }</p>
+  return <p className="text-medium-grey text-center">{ children }</p>
 }
 
 const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
@@ -41,8 +41,8 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
         onMouseOver={() => setActivated(true)}
         onMouseLeave={() => setActivated(false)}
         className={clsx(
-            "w-[300px] min-h-[400px] cursor-pointer relative rounded-sm overflow-hidden bg-dark-grey-secondary",
-            "before:bg-dark-blue-primary flex flex-col items-center p-4 md:hover:!-translate-y-3",
+            "w-[300px] min-h-[400px] after:bg-brand-purple-secondary cursor-pointer relative rounded-sm overflow-hidden bg-dark-grey-secondary",
+            "before:bg-dark-grey-accent flex flex-col items-center p-4 md:hover:!-translate-y-3",
             activated ? "after:!opacity-100" : "md:after:!opacity-0",
             classes.container,
             classes.flowSetup,
@@ -52,7 +52,7 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
         onActivatedClasses={clsx(classes.flowMotionMobile, "after:opacity-100")}
         >
           <div className="relative space-y-3 z-10 h-full flex flex-col items-center">
-            <h1 className="text-white font-bold text-3xl mt-10">{ opportunity.name }</h1>
+            <h1 className={clsx("text-white transition-transform font-bold text-3xl mt-10", classes.opportunityTitle)}>{ opportunity.name }</h1>
             <div className={clsx("space-y-3 !mt-auto max-h-[150px] overflow-auto", classes.description)}>
                 {
                     opportunity.description?.json && (

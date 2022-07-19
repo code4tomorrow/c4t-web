@@ -11,7 +11,7 @@ interface DocumentProps {
 }
 
 const Text : React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    return <p className="text-medium-grey-primary">{ children }</p>
+    return <p className="text-medium-grey">{ children }</p>
 }
 
 const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> = ({ node, children }) => {
@@ -26,7 +26,7 @@ const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> 
             href={link}
             passHref>
                 <a
-                   className="text-brand-green hover:underline cursor-pointer" 
+                   className="text-brand-purple-secondary hover:underline cursor-pointer" 
                    target={currentPage ? "_self" : "_blank"} 
                    rel="noopener nofollow noreferrer"
                 >
@@ -37,7 +37,7 @@ const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> 
 }
 
 const OrderedList : React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    return <ol className="text-medium-grey-primary space-y-1 list-inside my-3">{ children }</ol>
+    return <ol className="text-medium-grey space-y-1 list-inside my-3">{ children }</ol>
 }
 
 const ListItem : React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -49,7 +49,7 @@ const ListItem : React.FC<{ children: React.ReactNode }> = ({ children }) => {
         }
     }))();
 
-    return <li className={clsx("text-medium-grey-primary list-decimal", classes.li)}>{ children }</li>
+    return <li className={clsx("text-medium-grey list-decimal", classes.li)}>{ children }</li>
 }
 
 const Document : React.FC<DocumentProps> = ({ document, options = {} }) => {

@@ -121,10 +121,10 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                   <CoursesSVG className="w-full max-w-[250px] md:max-w-xl md:w-[35vw]"/>
                   <article className="md:w-1/2 w-full relative space-y-2 flex flex-col items-center">
                     <Animate.Element resetAfterTriggered={false} from={{ y: 50, opacity: 0 }} to={{ y: 0, opacity: 1 }}>
-                      <h1 className="text-white text-center font-bold text-4xl">Browse our <span className="text-brand-green">Quality</span> Courses.</h1>
+                      <h1 className="text-white text-center font-bold text-4xl">Browse our <span className="text-brand-purple-secondary">Quality</span> Courses.</h1>
                     </Animate.Element>
                     <Animate.Element resetAfterTriggered={false} from={{ y: 50, opacity: 0 }} to={{ y: 0, opacity: 1, delay: 0.15 }}>
-                      <h2 className="text-medium-grey-primary text-center font-medium text-lg">Choose as many as you want from Beginner to Advanced.</h2>
+                      <h2 className="text-medium-grey text-center font-medium text-lg">Choose as many as you want from Beginner to <b>Advanced</b>.</h2>
                     </Animate.Element>
                     <div 
                         style={{
@@ -174,7 +174,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
                               <span 
                                 className={clsx(
                                   "w-1 h-4 block rounded-full transition-all",
-                                  carouselMeta.currentIndex === i ? "bg-brand-green" : "bg-dim-grey-primary"
+                                  carouselMeta.currentIndex === i ? "bg-brand-purple-secondary" : "bg-dim-grey"
                                 )}
                                 key={i} 
                               />

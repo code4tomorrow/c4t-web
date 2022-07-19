@@ -49,9 +49,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <React.StrictMode>
         <NextNProgress
-        options={{ showSpinner: false }}
-          color={"#fff"}
-          height={2}
+          options={{ showSpinner: false }}
+            color={"#fff"}
+            height={2}
         />
         <Component {...pageProps} />
       </React.StrictMode>

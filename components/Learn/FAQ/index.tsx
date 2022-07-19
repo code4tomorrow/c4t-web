@@ -23,7 +23,7 @@ const FAQ : React.FC<FAQProps> = ({ faq }) => {
     const { classes } = useStyles();
 
     return (
-        <li className="list-none w-full border-b border-dim-grey-primary py-6">
+        <li className="list-none w-full border-b border-dim-grey py-6">
              <div onClick={handleExpand} className="flex cursor-pointer justify-between space-x-3 items-center">
                 <h1 className="text-white font-semibold text-lg">{ faq.question }</h1>
                 <div 
@@ -35,14 +35,14 @@ const FAQ : React.FC<FAQProps> = ({ faq }) => {
                     className="flex justify-center items-center relative w-4 h-4 cursor-pointer transition-opacity">
                     <span
                         className={clsx(
-                            "w-[2px] h-4 rounded-full transition-transform duration-200  bg-brand-green block absolute",
+                            "w-[2px] h-4 rounded-full transition-transform duration-200  bg-brand-purple-secondary block absolute",
                             expanded.expanded && "-rotate-90 opacity-0"
                         )}
                     />
 
                     <span 
                         className={clsx(
-                            "w-[2px] h-4 bg-brand-green rounded-full duration-200 block transition-transform -rotate-90 absolute",
+                            "w-[2px] h-4 bg-brand-purple-secondary rounded-full duration-200 block transition-transform -rotate-90 absolute",
 
                             expanded.expanded && "!-rotate-[270deg] !bg-white"
                         )}

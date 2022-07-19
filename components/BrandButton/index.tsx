@@ -46,9 +46,13 @@ const BrandButton = <T extends React.ElementType = "div">({
 
     const Component = as || "div";
 
+    const handlePolymorphicClick = (e: React.MouseEvent) => {
+        if (disabled) e.preventDefault();
+    }
+
     return (
         <div className={clsx("relative", containerClass)} style={{ flex }}>
-            <Component { ...props }>
+            <Component onClick={handlePolymorphicClick} { ...props }>
                 <button 
                     ref={buttonRef}
                     onMouseOver={() => setMouseActive(true)}
@@ -65,7 +69,7 @@ const BrandButton = <T extends React.ElementType = "div">({
                     onClick={handleOnClick}
                     className={clsx(
                         "m-auto",
-                        "bg-gradient-to-b from-brand-blue-primary to-brand-green font-medium text-white border-0 rounded-xl py-3 px-6", 
+                        "bg-gradient-to-b from-brand-blue-primary to-brand-purple-secondary font-medium text-white border-0 rounded-xl py-3 px-6", 
                         "items-center flex justify-center space-x-2",
                         classes.button,
                         className
@@ -80,7 +84,7 @@ const BrandButton = <T extends React.ElementType = "div">({
                             <Arrow className="mt-2" width="15px" />
                             <span 
                                 style={{ whiteSpace: "nowrap", transform: "translateY(25%)" }} 
-                                className="text-medium-grey-primary text-sm">
+                                className="text-medium-grey text-sm">
                                     { label }
                             </span>
                         </div>

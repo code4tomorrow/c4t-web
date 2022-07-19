@@ -4,7 +4,6 @@ import { NextPage } from "next";
 import Head from "next/head";
 import VolunteerCard from "@components/Volunteer";
 import { gql } from "graphql-request";
-import Image from "next/image";
 import { graphQLClient, IBaseContentModel } from "@utils/contentful";
 import Animate from "@components/Animate";
 import VolunteerTeamSVG from "@svg/volunteer-team.svg";
@@ -53,9 +52,8 @@ const Volunteer : NextPage<VolunteerProps> = ({ volunteerOpportunities }) => {
                         as="p" 
                         from={{ y: 90, opacity: 0 }}
                         to={{ y: 0, opacity: 1, delay: 0.3 }}
-                        className="text-lg !mt-3 text-medium-grey-primary text-center">
-                        Apply today for an opportunity to hone your skills and help others, all while gaining 
-                        &nbsp;<u>volunteer hours</u>.
+                        className="text-lg !mt-3 text-medium-grey text-center">
+                        Apply today for an opportunity to hone your skills and help others, all while gaining <b>volunteer hours</b>.
                     </Animate.Element>
                     <div 
                         style={{ gridTemplateColumns: "repeat(auto-fit, 300px)"}}
