@@ -41,7 +41,7 @@ const Volunteer : React.FC<VolunteerProps> = ({ opportunity }) => {
         onMouseOver={() => setActivated(true)}
         onMouseLeave={() => setActivated(false)}
         className={clsx(
-            "w-[300px] min-h-[400px] cursor-pointer relative rounded-sm overflow-hidden bg-dark-grey-secondary",
+            "w-[300px] min-h-[400px] after:bg-brand-purple-secondary cursor-pointer relative rounded-sm overflow-hidden bg-dark-grey-secondary",
             "before:bg-dark-grey-accent flex flex-col items-center p-4 md:hover:!-translate-y-3",
             activated ? "after:!opacity-100" : "md:after:!opacity-0",
             classes.container,
