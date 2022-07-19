@@ -37,6 +37,7 @@ export default async function handler(
     let pagesRevalidated:string[] = [];
 
     try {
+        console.log(req.body);
         const modelId = req.body?.sys?.contentType?.sys?.id;
 
         if ([ ContentModelID.COURSE, ContentModelID.PROMOTIONAL_LABEL ].includes(modelId)) {
