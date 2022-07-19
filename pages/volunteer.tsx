@@ -7,6 +7,7 @@ import { gql } from "graphql-request";
 import { graphQLClient, IBaseContentModel } from "@utils/contentful";
 import Animate from "@components/Animate";
 import VolunteerTeamSVG from "@svg/volunteer-team.svg";
+import config from "config";
 
 export interface IVolunteerOpportunity extends IBaseContentModel {
     name?: string; 
@@ -75,8 +76,8 @@ export default Volunteer;
 
 export async function getStaticProps() {
     const response = await graphQLClient.request(gql`
-      query {
-        volunteerOpportunityCollection {
+      query($preview:Boolean) {
+        volunteerOpportunityCollection(preview:$preview) {
             items {
                 sys {
                     id
@@ -91,7 +92,7 @@ export async function getStaticProps() {
             }
         }
       }
-    `, {});
+    `, { preview: config.contentful.preview });
 
     const volunteerOpportunities:IVolunteerOpportunity[] = response?.volunteerOpportunityCollection?.items || [];
       

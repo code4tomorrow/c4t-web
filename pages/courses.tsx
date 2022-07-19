@@ -12,6 +12,7 @@ import clsx from "clsx";
 import { useCallback, useEffect, useState } from "react";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { useMemo } from "react";
+import config from "config";
 
 export interface ICourse {
     title?: string; 
@@ -201,8 +202,8 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
 
 export async function getStaticProps() {
     const response = await graphQLClient.request(gql`
-      query {
-        courseCollection {
+      query($preview:Boolean) {
+        courseCollection(preview:$preview) {
           items {
             title,
             description,
@@ -217,7 +218,7 @@ export async function getStaticProps() {
           }
         }
       }
-    `, {});
+    `, { preview: config.contentful.preview });
 
     const courses:ICourse[] = response?.courseCollection?.items || [];
 

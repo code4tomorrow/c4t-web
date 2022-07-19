@@ -10,7 +10,7 @@ import Typist from "react-typist-component";
 import LearnSVG from "@svg/learn.svg";
 import TeamSVG from "@svg/team.svg";
 import GiftsSVG from "@svg/gifts.svg";
-import Animate, { AnimateContext } from "@components/Animate";
+import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import Link from "next/link";
 
@@ -52,7 +52,7 @@ export default function Home() {
         <Link href="/about" passHref>
           <BrandButton 
             title="Learn More" 
-            label="100% Free" 
+            label="100% free" 
             as="a"
           />
         </Link>
