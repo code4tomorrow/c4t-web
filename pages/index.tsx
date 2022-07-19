@@ -52,7 +52,7 @@ export default function Home() {
         <Link href="/about" passHref>
           <BrandButton 
             title="Learn More" 
-            label="100% Free" 
+            label="100% FREE" 
             as="a"
           />
         </Link>
