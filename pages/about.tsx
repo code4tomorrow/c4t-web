@@ -37,7 +37,7 @@ const About : NextPage<AboutProps> = ({ directoryEntries }) => {
                             from={{ y: 90,  opacity: 0 }}
                             to={{ y: 0, opacity: 1, delay: 0.15 }}
                             className="text-lg !mt-3 text-medium-grey text-center max-w-4xl">
-                            During a 6 week session, learn the most <b>in-demand skills</b> with motivated students and teachers from the comfort of your home, <b>plus it's free.</b>
+                            During a 6 week session, learn the most <b>in-demand skills</b> with motivated students and teachers from the comfort of your home, <b>plus it&apos;s free.</b>
                         </Animate.Element>
                     </div>
                     <section className="md:[&>div]:w-1/2 md:space-x-6 w-screen flex md:flex-row flex-col-reverse p-3 sm:p-6 max-w-7xl justify-items-center">
