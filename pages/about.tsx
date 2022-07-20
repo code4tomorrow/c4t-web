@@ -121,7 +121,7 @@ const About : NextPage<AboutProps> = ({ directoryEntries }) => {
                             </div>
                         </div>
                     </section>
-                    <section className="flex my-32 flex-col items-center">
+                    <section className="flex my-32 w-full flex-col items-center">
                         <div className="my-6 max-w-4xl">
                                 <Animate.Element
                                     resetAfterTriggered={false}
