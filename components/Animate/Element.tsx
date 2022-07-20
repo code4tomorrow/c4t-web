@@ -1,11 +1,10 @@
-import React, { ComponentPropsWithoutRef, ElementType, useContext, useState } from "react";
+import React, { ComponentPropsWithoutRef, ElementType, useState } from "react";
 import gsap from "gsap";
 import { useRef } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import clsx from "clsx";
 import { useStyles } from "./styles";
-import { AnimateContext } from ".";
 import _ from "lodash";
 
 interface ElementProps<T extends ElementType = "div"> {
@@ -34,14 +33,6 @@ const Element = <T extends ElementType = "div">({
     } : ElementProps<T> & ComponentPropsWithoutRef<T>) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [ triggered, setTriggered ] = useState(false);
-
-    const ctx = useContext(AnimateContext);
-    
-    useEffect(() => {
-        if (!ctx.isNestedInAnimate) {
-            throw new Error("Animate.Element is not nested within Animate parent component.");
-        }
-    }, [ ctx ]);
 
     const setTriggerListeners = useCallback(() => {
         if (!containerRef.current) return;

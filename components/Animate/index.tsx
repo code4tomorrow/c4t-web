@@ -3,6 +3,8 @@ import { useDebounce } from "use-debounce";
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Element from "./Element";
 import gsap from "gsap";
+import Scrub from "./Scrub";
+import { withAnimateBase } from "./withAnimateBase";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +16,7 @@ interface AnimateProps {
     children: React.ReactNode
 }
 
-const Animate : React.FC<AnimateProps> = ({ children }) => {
+const Animate : React.FC<AnimateProps> = ({ children }) => {    
     const [ viewportWidth, setViewportWidth ] = useState<number | null>(null);
     const [ resizedWidth ] = useDebounce(viewportWidth, 500);
 
@@ -39,4 +41,7 @@ const Animate : React.FC<AnimateProps> = ({ children }) => {
     )
 }
 
-export default Object.assign(React.memo(Animate), { Element });
+export default Object.assign(React.memo(Animate), { 
+    Element: withAnimateBase(Element), 
+    Scrub: withAnimateBase(Scrub)
+});
