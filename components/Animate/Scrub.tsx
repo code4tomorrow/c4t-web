@@ -60,7 +60,7 @@ const Scrub = <T extends ElementType = "div">({
             tl.kill();
         }
 
-    } , [  containerRef, animation.from, animation.to, ref ]);
+    } , [  containerRef, animation.from, animation.to, ref, end, start ]);
 
     const Component = as || "div";
 
@@ -79,4 +79,4 @@ const Scrub = <T extends ElementType = "div">({
     )
 }
 
-export default React.forwardRef(Scrub); 
+export default React.forwardRef(Scrub) as <T extends ElementType = "div", R = HTMLDivElement>(props: ScrubProps<T> & React.RefAttributes<R>) => React.ReactElement | null;;

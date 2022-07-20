@@ -6,12 +6,6 @@ import gsap from "gsap";
 import Scrub from "./Scrub";
 import { withAnimateBase } from "./withAnimateBase";
 
-declare module "react" {
-    function forwardRef<T, P = {}>(
-      render: (props: P, ref: React.Ref<T>) => React.ReactElement | null
-    ): (props: P & React.RefAttributes<T>) => React.ReactElement | null;
-}
-
 gsap.registerPlugin(ScrollTrigger);
 
 export const AnimateContext = React.createContext({
@@ -22,7 +16,7 @@ interface AnimateProps {
     children: React.ReactNode
 }
 
-const Animate : React.FC<AnimateProps> = ({ children }) => {
+const Animate : React.FC<AnimateProps> = ({ children }) => {    
     const [ viewportWidth, setViewportWidth ] = useState<number | null>(null);
     const [ resizedWidth ] = useDebounce(viewportWidth, 500);
 
