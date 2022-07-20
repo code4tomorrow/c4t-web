@@ -1,6 +1,6 @@
 import BrandButton from "@components/BrandButton";
 import Paper from "@components/Paper";
-import { getCloudinaryURL } from "@utils/cloudinary-loader";
+import { cloudinaryLoader, getCloudinaryURL } from "@utils/cloudinary-loader";
 import clsx from "clsx";
 import { ICourse } from "pages/courses";
 import React from "react";
@@ -22,8 +22,9 @@ const Course : React.FC<CourseProps> = ({ course }) => {
                     {
                         !!course.image ? (
                             <NextImage 
+                                loader={cloudinaryLoader}
                                 alt={`${course.title} Logo`}
-                                src={getCloudinaryURL(course.image.src)}
+                                src={course.image.src}
                                 layout={"fill"}
                                 fallbackSrc={"/svg/code.svg"}
                                 objectFit={"contain"}

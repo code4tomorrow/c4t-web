@@ -5,7 +5,7 @@ import config from "../config";
 export const cloudinaryLoader : ImageLoader = ({ src, width, quality } : ImageLoaderProps) : string => {
     return `${config.cloudinary.url}/image/upload/w_${width},q_${
         quality || 75
-    },fl_sanitize/web-assets/${src}`;
+    },f_auto/web-assets/${src}`;
 };
 
 export const cloudinaryTransformLoader = ({ transformations } : {transformations: string[]}) : ImageLoader => {
@@ -18,7 +18,7 @@ export const cloudinaryTransformLoader = ({ transformations } : {transformations
     return ({ src, width, quality } : ImageLoaderProps) => {
         return `${config.cloudinary.url}/image/upload/w_${width},q_${
             quality || 75
-        },fl_sanitize${transformProperties}/web-assets/${src}`;
+        },f_auto${transformProperties}/web-assets/${src}`;
     }
 };
 
