@@ -3,6 +3,14 @@ import { useDebounce } from "use-debounce";
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Element from "./Element";
 import gsap from "gsap";
+import Scrub from "./Scrub";
+import { withAnimateBase } from "./withAnimateBase";
+
+declare module "react" {
+    function forwardRef<T, P = {}>(
+      render: (props: P, ref: React.Ref<T>) => React.ReactElement | null
+    ): (props: P & React.RefAttributes<T>) => React.ReactElement | null;
+}
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,4 +47,7 @@ const Animate : React.FC<AnimateProps> = ({ children }) => {
     )
 }
 
-export default Object.assign(React.memo(Animate), { Element });
+export default Object.assign(React.memo(Animate), { 
+    Element: withAnimateBase(Element), 
+    Scrub: withAnimateBase(Scrub)
+});
