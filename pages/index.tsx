@@ -13,6 +13,7 @@ import GiftsSVG from "@svg/gifts.svg";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import Link from "next/link";
+import { cloudinaryLoader } from "@utils/cloudinary-loader";
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
@@ -82,8 +83,9 @@ export default function Home() {
                     <Image
                         draggable={false}
                         loading="eager"
-                        src="/code.png"
+                        src="code"
                         priority
+                        loader={cloudinaryLoader}
                         quality={100}
                         alt="code-example"
                         objectFit="cover"
