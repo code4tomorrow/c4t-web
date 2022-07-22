@@ -13,6 +13,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { useMemo } from "react";
 import config from "config";
+import { INotificationFlag } from "common/interfaces/navigationFlag";
 
 export interface ICourse {
     title?: string; 
@@ -28,7 +29,8 @@ export interface ICourse {
 }
 
 interface CoursesProps {
-    courses: ICourse[]
+    courses: ICourse[],
+    notificationFlags: INotificationFlag[]
 }
 
 function* pair<T>(iterable:Iterable<T>) : Iterable<Iterable<T>> {
@@ -45,7 +47,7 @@ function* pair<T>(iterable:Iterable<T>) : Iterable<Iterable<T>> {
     }
 }
 
-const Courses : NextPage<CoursesProps> = ({ courses }) => {
+const Courses : NextPage<CoursesProps> = ({ courses, notificationFlags }) => {
     const [emblaRef, emblaAPI ] = useEmblaCarousel({ 
       axis: "y",
       skipSnaps: false,
@@ -113,10 +115,10 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
             <Head>
                 <title>Courses | C4T</title>
             </Head>
-            <Navbar />
+            <Navbar notificationFlags={notificationFlags} />
             <Animate>
               <main className={clsx(
-                "w-full pt-16 flex-col items-center space-y-6 max-w-screen-2xl px-3 h-full my-8 flex justify-center",
+                "w-full pt-3 flex-col items-center space-y-6 max-w-screen-2xl px-3 h-full my-8 flex justify-center",
                 "md:flex-row md:space-y-0 md:items-start md:px-8 md:space-x-6"
               )}>
                   <CoursesSVG className="w-full max-w-[250px] md:max-w-xl md:w-[35vw]"/>
@@ -202,7 +204,7 @@ const Courses : NextPage<CoursesProps> = ({ courses }) => {
 
 export async function getStaticProps() {
     const response = await graphQLClient.request(gql`
-      query($preview:Boolean) {
+      query($preview:Boolean, $where:NotificationFlagFilter) {
         courseCollection(preview:$preview) {
           items {
             title,
@@ -217,10 +219,26 @@ export async function getStaticProps() {
             }
           }
         }
+        notificationFlagCollection(preview:$preview, where:$where) {
+          items {
+            notification {
+              json
+            },
+            type,
+            link
+          }
+        }
       }
-    `, { preview: config.contentful.preview });
+    `, { 
+        preview: config.contentful.preview,
+        where: { 
+          isVisible:true, 
+          pages_contains_some:["/courses", "*"]
+        }
+      });
 
     const courses:ICourse[] = response?.courseCollection?.items || [];
+    const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
 
     // Sorts the courses first by whether it has a promotional label and 
     // retains the default order (sys_publishedAt) by Contentful 
@@ -232,7 +250,8 @@ export async function getStaticProps() {
       
     return {
       props: { 
-        courses
+        courses,
+        notificationFlags
       },
       // - At most once every 15 minutes
       revalidate: 60 * 15, // In seconds

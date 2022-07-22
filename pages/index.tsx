@@ -14,21 +14,30 @@ import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import Link from "next/link";
 import { cloudinaryLoader } from "@utils/cloudinary-loader";
+import config from "config";
+import { graphQLClient } from "@utils/contentful";
+import { gql } from "graphql-request";
+import { INotificationFlag } from "common/interfaces/navigationFlag";
+import { NextPage } from "next";
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
-export default function Home() {
+interface HomeProps {
+  notificationFlags: INotificationFlag[]
+}
+
+const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
   const { classes } = useStyles();
 
   return (
     <div 
-      style={{ width: "100vw", overflowX: "hidden" }}
+      style={{ width: "100vw"  }}
       className="w-screen flex flex-col min-h-screen bg-dark-grey-primary">
       <Head>
         <title>Home | C4T</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar/>
+      <Navbar notificationFlags={notificationFlags}/>
       <header className="flex pt-16 flex-col space-y-6 justify-center items-center p-3">
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)", whiteSpace: "nowrap"}} 
@@ -95,7 +104,12 @@ export default function Home() {
               </Animate.Element>
               <Animate.Element resetAfterTriggered={false} from={{ y: 200 }} to={{ y: 0 }} className="h-[20%] flex space-x-3">
                   <Paper containerClass="w-[30%] h-[50%]"></Paper>
-                  <Paper containerClass="w-[35%] h-[100%]"></Paper>
+                  <Paper containerClass="w-[35%] h-[100%] flex flex-col p-10 justify-center items-center">
+                    {/* <blockquote className="italic text-medium-grey text-lg">
+                      The teachers are patient and very helpful.
+                    </blockquote>
+                    <span className="block w-full text-right italic">- Sandy</span> */}
+                  </Paper>
                   <Paper containerClass="w-[35%] h-[45%]"></Paper>
               </Animate.Element>
             </div>
@@ -197,3 +211,37 @@ export default function Home() {
     </div>
   )
 }
+
+export async function getStaticProps() {
+  const response = await graphQLClient.request(gql`
+    query($preview:Boolean, $where:NotificationFlagFilter) {
+      notificationFlagCollection(preview:$preview, where:$where) {
+        items {
+          notification {
+            json
+          },
+          type,
+          link
+        }
+      }
+    }
+  `, { 
+      preview: config.contentful.preview, 
+      where: { 
+        isVisible:true, 
+        pages_contains_some:["/", "*"]
+      }}
+    );
+
+  const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
+  
+  return {
+    props: { 
+      notificationFlags
+    },
+    // - At most once every 15 minutes
+    revalidate: 60 * 15, // In seconds
+  }
+}
+
+export default Home; 

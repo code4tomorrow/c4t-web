@@ -30,3 +30,12 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.chevrow-container:hover svg[data-go-arrow] {
+  transform: translateX(0px);
+}
+
+.chevrow-container:hover svg[data-go-arrow] .octicon-chevrow-stem {
+  stroke-dasharray: 0px;
+  stroke-dashoffset: 0px;
+}
