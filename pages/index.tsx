@@ -38,7 +38,7 @@ const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar notificationFlags={notificationFlags}/>
-      <header className="flex pt-16 flex-col space-y-6 justify-center items-center p-3">
+      <header className="flex pt-8 flex-col space-y-6 justify-center items-center p-3">
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)", whiteSpace: "nowrap"}} 
           className="text-white text-5xl font-bold md:text-6xl mt-16 text-center">

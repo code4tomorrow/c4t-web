@@ -23,14 +23,14 @@ const NavNotification = ({ notificationFlag } : { notificationFlag: INotificatio
             target: "_blank"
         } : {})}
         className={clsx(
-            "flex justify-center items-center",
+            "flex justify-center mt-3 items-center",
             !!notificationFlag.link && "[&>span>p]:hover:underline cursor-pointer chevrow-container"
         )}>
-            <span className={clsx("inline-block flex-shrink-0 w-2 h-2 rounded-full mx-3 bg-brand-purple-secondary before:bg-brand-blue-primary", classes.notificationDot)} />
-            <span className="text-brand-purple-secondary text-sm font-semibold">
+            <span className={clsx("hidden md:inline-block flex-shrink-0 w-2 h-2 rounded-full mx-3 bg-brand-purple-secondary before:bg-brand-blue-primary", classes.notificationDot)} />
+            <span className="text-brand-purple-secondary text-center text-sm font-semibold">
                 <Document color="text-brand-purple-secondary" document={notificationFlag.notification?.json}/>
             </span>
-            { !!notificationFlag.link && <GoArrow className="mx-1" /> }
+            { !!notificationFlag.link && <GoArrow className="hidden md:inline mx-1" /> }
         </Component>
     )
 }
