@@ -57,7 +57,7 @@ export default async function handler(
             let validPages = [];
             for (const pageLocale in pageLocales) {
                 const pages = pageLocales[pageLocale];
-                const validatedPages = pages.filter((page:string) => Object.keys(Pages).includes(page))
+                const validatedPages = pages.filter((page:Pages) => Object.values(Pages).includes(page))
                 validPages.push(...validatedPages);
             }
 
