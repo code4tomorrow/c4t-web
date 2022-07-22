@@ -11,12 +11,15 @@ interface DocumentProps {
     color?: string; 
 }
 
-const withBaseStyles = <P extends object>(Component: React.ComponentType<P>, color?:string) => ({ ...props }) => {
-    return (
-        <span className={clsx(color ? color : "text-medium-grey", "inline-block")}>
-            <Component { ...props as P } />
-        </span>
-    )
+const withBaseStyles = <P extends object>(Component: React.ComponentType<P>, color?:string) => {
+    const WithBaseStyles = ({ ...props }) => {
+        return (
+            <span className={clsx(color ? color : "text-medium-grey", "inline-block")}>
+                <Component { ...props as P } />
+            </span>
+        )
+    }
+    return WithBaseStyles; 
 }
 
 const Text : React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -76,7 +79,7 @@ const Document : React.FC<DocumentProps> = ({ document, color, options = {} }) =
         }
 
         return Object.assign(base, options)
-    }, [ options]);
+    }, [ options, color ]);
 
     return (
         <>
