@@ -51,6 +51,10 @@ export default async function handler(
             await attemptRevalidation(res, Pages.VOLUNTEER) && pagesRevalidated.push(Pages.VOLUNTEER);
         }
 
+        if ([ ContentModelID.NOTIFICATION_FLAG].includes(modelId)) {
+            console.log(req.body);
+        }
+
         console.log("Model ID: ", modelId);
         console.log("Pages Revalidated: ", pagesRevalidated);
         return res.json({ revalidatedPages: pagesRevalidated, error: false })

@@ -2,5 +2,6 @@ export enum Pages {
     INDEX = "/",
     COURSES = "/courses",
     LEARN = "/learn",
-    VOLUNTEER = "/volunteer"
+    VOLUNTEER = "/volunteer",
+    ABOUT = "/about"
 }
