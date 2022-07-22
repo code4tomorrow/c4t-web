@@ -52,10 +52,19 @@ export default async function handler(
         }
 
         if ([ ContentModelID.NOTIFICATION_FLAG].includes(modelId)) {
-            const pageLocales = req.body.fields.pages; 
+            const pageLocales = req.body.fields.pages;
+            
+            let validPages = [];
             for (const pageLocale in pageLocales) {
-                console.log(pageLocale, pageLocales[pageLocale])
+                const pages = pageLocales[pageLocale];
+                const validatedPages = pages.filter((page:string) => Object.keys(Pages).includes(page))
+                validPages.push(...validatedPages);
             }
+
+            console.log(validPages);
+            await Promise.all(validPages.map(async (page:Pages) => ( 
+                await attemptRevalidation(res, page) && pagesRevalidated.push(page)
+            )))
         }
 
         console.log("Model ID: ", modelId);
