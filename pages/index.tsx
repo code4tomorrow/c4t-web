@@ -33,7 +33,7 @@ const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
 
   return (
     <div 
-      style={{ width: "100vw"  }}
+      style={{ width: "100vw", overflowX: "hidden" }}
       className="w-screen flex flex-col min-h-screen bg-dark-grey-primary">
       <Head>
         <title>Home | C4T</title>

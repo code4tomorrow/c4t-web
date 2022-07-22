@@ -46,7 +46,7 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                             from={{ y: 60, opacity: 0 }}
                             to={{ y: 0, opacity: 1 }}
                             className="md:text-6xl text-4xl font-bold text-white text-center">
-                                What is <span className="text-brand-purple-secondary">Code4Tomorrow</span> ?
+                                What is <span className="text-brand-purple-secondary">Code4Tomorrow</span>?
                         </Animate.Element>
                         <Animate.Element
                             resetAfterTriggered={false}
