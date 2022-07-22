@@ -7,6 +7,33 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useThrottledCallback } from "use-debounce";
 import { useNavigator } from "hooks/useNavigator";
+import GoArrow from "@components/GoArrow";
+import { INotificationFlag } from "common/interfaces/navigationFlag";
+import Document from "@components/Document";
+
+const NavNotification = ({ notificationFlag } : { notificationFlag: INotificationFlag }) => {
+    const { classes } = useStyles();
+
+    const Component = !!notificationFlag.link ? "a" : "div";
+
+    return (
+        <Component { ...(!!notificationFlag.link ? { 
+            href: notificationFlag.link,
+            rel: "noopener noreferrer nofollow",
+            target: "_blank"
+        } : {})}
+        className={clsx(
+            "flex px-3 justify-center mt-3 items-center",
+            !!notificationFlag.link && "[&>span>p]:hover:underline cursor-pointer chevrow-container"
+        )}>
+            <span className={clsx("hidden md:inline-block flex-shrink-0 w-2 h-2 rounded-full mx-3 bg-brand-purple-secondary before:bg-brand-blue-primary", classes.notificationDot)} />
+            <span className="text-brand-purple-secondary text-center text-sm font-semibold">
+                <Document color="text-brand-purple-secondary" document={notificationFlag.notification?.json}/>
+            </span>
+            { !!notificationFlag.link && <GoArrow className="hidden md:inline mx-1" /> }
+        </Component>
+    )
+}
 
 interface ILink { 
     el: HTMLLIElement,
@@ -48,13 +75,18 @@ const NavListItem = React.forwardRef<ILink[], NavListItemProps>(({ children, hre
 
 NavListItem.displayName = "NavListItem";
 
-const Navbar = () => {
+interface NavbarProps {
+    notificationFlags?: INotificationFlag[]
+}
+
+const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
     const { classes } = useStyles();
 
     const [ mobileNavOpen, setMobileNavOpen ] = useState(false);
     const [ navHidden, setNavHidden ] = useState(false);
 
     const navItemRefs = React.useRef<ILink[]>(null);
+    const navRef = React.useRef<HTMLDivElement | null>(null);
 
     const linkHighlightRef = useRef<HTMLDivElement | null>(null);
 
@@ -90,6 +122,22 @@ const Navbar = () => {
 
     useEffect(handleRouterChange, [ handleRouterChange ]);
 
+    const handleResize = useThrottledCallback(() => {
+        if (!linkHighlightRef.current || !navItemRefs.current || !navRef.current) return; 
+        const currentLink = navItemRefs.current.find(link => link.route === router.pathname);
+        if (!currentLink) return; 
+        const { x, width, height, y } = currentLink.el.getBoundingClientRect();
+        gsap.to(
+            linkHighlightRef.current, 
+            { opacity: 1, x, y, width, height, duration: 0.15 }
+        )
+    }, 350);
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [ handleResize, linkHighlightRef, navItemRefs ]);
+
     const handleScroll = useCallback(() => {
         if (window.scrollY >= scrollOffset.current && window.scrollY !== 0) setNavHidden(true);
         else setNavHidden(false);
@@ -108,23 +156,6 @@ const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [ handleScroll ]);
 
-    const handleResize = useThrottledCallback(() => {
-        if (!linkHighlightRef.current || !navItemRefs.current) return; 
-        const currentLink = navItemRefs.current.find(link => link.route === router.pathname);
-        if (!currentLink) return; 
-        const { x, y, width, height } = currentLink.el.getBoundingClientRect();
-        gsap.fromTo(
-            linkHighlightRef.current, 
-            { opacity: 0 },
-            { opacity: 1, x, y, width, height, duration: 0.15 }
-        )
-    }, 350);
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [ handleResize, linkHighlightRef, navItemRefs ]);
-
     return (
         <>
         <div 
@@ -135,16 +166,19 @@ const Navbar = () => {
             )}
             ref={linkHighlightRef}
         />
-        <nav className={clsx(
+        <nav ref={navRef} className={clsx(
             "px-10 py-5 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
             navHidden ? "-translate-y-full" : "translate-y-0",
-            classes.nav
+            classes.nav,
         )}>
             <Link href="/" passHref>
                 <a>
                     <h1 className="text-lg font-bold text-white">C4T</h1>
                 </a>
             </Link>
+            {/* <div className="hidden lg:block">
+                <NavNotification />
+            </div> */}
             <div className={clsx(
                 "flex md:hidden flex-col space-y-1 cursor-pointer", 
                 classes.barsContainer,
@@ -188,6 +222,9 @@ const Navbar = () => {
                 </NavListItem>
             </ul>
         </nav>
+        <div className="w-screen z-10 lg:none flex justify-center items-center mt-16">
+            { !!notificationFlags?.length && <NavNotification notificationFlag={notificationFlags[0]} /> }
+        </div>
         </>
     )
 }

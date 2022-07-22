@@ -10,12 +10,17 @@ import PairCoding from "@svg/pair-coding.svg";
 import MissionImage from "@svg/mission.svg"
 import Book from "@svg/book.svg"
 import { useRef } from "react";
+import { graphQLClient } from "@utils/contentful";
+import { gql } from "graphql-request";
+import config from "config";
+import { INotificationFlag } from "common/interfaces/navigationFlag";
 
 interface AboutProps {
-    directoryEntries: IDirectoryRow[]
+    directoryEntries: IDirectoryRow[],
+    notificationFlags: INotificationFlag[]
 }
 
-const About : NextPage<AboutProps> = ({ directoryEntries }) => {
+const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) => {
     const missionRef = useRef<HTMLDivElement | null>(null);
 
     return (
@@ -24,9 +29,9 @@ const About : NextPage<AboutProps> = ({ directoryEntries }) => {
             <Head>
                 <title>About | C4T</title>
             </Head>
-            <Navbar />
+            <Navbar notificationFlags={notificationFlags} />
             <Animate>
-                <main className="pt-4 md:px-6 px-4 w-full my-12 flex flex-col items-center">
+                <main className="pt-4 md:px-6 px-4 w-full my-8 flex flex-col items-center">
                     <section className="my-6 flex flex-col items-center">
                         <Animate.Element 
                             resetAfterTriggered={false}
@@ -41,7 +46,7 @@ const About : NextPage<AboutProps> = ({ directoryEntries }) => {
                             from={{ y: 60, opacity: 0 }}
                             to={{ y: 0, opacity: 1 }}
                             className="md:text-6xl text-4xl font-bold text-white text-center">
-                                What is <span className="text-brand-purple-secondary">Code4Tomorrow</span> ?
+                                What is <span className="text-brand-purple-secondary">Code4Tomorrow</span>?
                         </Animate.Element>
                         <Animate.Element
                             resetAfterTriggered={false}
@@ -154,9 +159,33 @@ export default About;
 export async function getStaticProps() {
     const directoryEntries = await getDirectory();
 
+    const response = await graphQLClient.request(gql`
+    query($preview:Boolean, $where:NotificationFlagFilter) {
+      notificationFlagCollection(preview:$preview, where:$where) {
+        items {
+          notification {
+            json
+          },
+          type,
+          link
+        }
+      }
+    }
+  `, { 
+      preview: config.contentful.preview, 
+      where: { 
+        isVisible:true, 
+        pages_contains_some:["/about", "*"]
+      }}
+    );
+
+  const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
+  
+
     return {
       props: { 
-        directoryEntries
+        directoryEntries,
+        notificationFlags
       },
       // - At most once every 15 minutes
       revalidate: 60 * 15, // In seconds

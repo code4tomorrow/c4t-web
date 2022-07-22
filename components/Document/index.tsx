@@ -7,11 +7,23 @@ import Link from "next/link";
 
 interface DocumentProps {
     document: Document,
-    options?: DocumentOptions
+    options?: DocumentOptions,
+    color?: string; 
+}
+
+const withBaseStyles = <P extends object>(Component: React.ComponentType<P>, color?:string) => {
+    const WithBaseStyles = ({ ...props }) => {
+        return (
+            <span className={clsx(color ? color : "text-medium-grey", "inline-block")}>
+                <Component { ...props as P } />
+            </span>
+        )
+    }
+    return WithBaseStyles; 
 }
 
 const Text : React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    return <p className="text-medium-grey">{ children }</p>
+    return <p>{ children }</p>
 }
 
 const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> = ({ node, children }) => {
@@ -52,19 +64,22 @@ const ListItem : React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return <li className={clsx("text-medium-grey list-decimal", classes.li)}>{ children }</li>
 }
 
-const Document : React.FC<DocumentProps> = ({ document, options = {} }) => {
+const Document : React.FC<DocumentProps> = ({ document, color, options = {} }) => {
     const documentOptions = useMemo<DocumentOptions>(() => {
         let base: DocumentOptions = {
             renderNode: {
                 [INLINES.HYPERLINK]: (node, children) => <HyperLink node={node}>{children}</HyperLink>,
-                [BLOCKS.PARAGRAPH]: (_node, children) => <Text>{children}</Text>,
+                [BLOCKS.PARAGRAPH]: (_node, children) => {
+                    const TextWithColor = withBaseStyles(Text, color);
+                    return <TextWithColor>{children}</TextWithColor>
+                },
                 [BLOCKS.OL_LIST]: (_node, children) => <OrderedList>{children}</OrderedList>,
                 [BLOCKS.LIST_ITEM]: (_node, children) => <ListItem>{children}</ListItem>,
             },
         }
 
         return Object.assign(base, options)
-    }, [ options]);
+    }, [ options, color ]);
 
     return (
         <>

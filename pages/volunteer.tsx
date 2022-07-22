@@ -8,6 +8,7 @@ import { graphQLClient, IBaseContentModel } from "@utils/contentful";
 import Animate from "@components/Animate";
 import VolunteerTeamSVG from "@svg/volunteer-team.svg";
 import config from "config";
+import { INotificationFlag } from "common/interfaces/navigationFlag";
 
 export interface IVolunteerOpportunity extends IBaseContentModel {
     name?: string; 
@@ -21,16 +22,17 @@ export interface IVolunteerOpportunity extends IBaseContentModel {
 
 interface VolunteerProps {
     volunteerOpportunities: IVolunteerOpportunity[];
+    notificationFlags: INotificationFlag[]
 }
 
-const Volunteer : NextPage<VolunteerProps> = ({ volunteerOpportunities }) => {
+const Volunteer : NextPage<VolunteerProps> = ({ volunteerOpportunities, notificationFlags }) => {
     return (
         <div style={{ width: "100vw", overflowX: "hidden" }} 
             className="flex flex-col w-screen min-h-screen items-center bg-dark-grey-primary">
             <Head>
                 <title>Volunteer | C4T</title>
             </Head>
-            <Navbar />
+            <Navbar notificationFlags={notificationFlags} />
             <Animate>
                 <main className="pt-4 px-6 w-full my-12 flex flex-col items-center">
                     <Animate.Element 
@@ -76,7 +78,7 @@ export default Volunteer;
 
 export async function getStaticProps() {
     const response = await graphQLClient.request(gql`
-      query($preview:Boolean) {
+      query($preview:Boolean, $where:NotificationFlagFilter) {
         volunteerOpportunityCollection(preview:$preview) {
             items {
                 sys {
@@ -90,15 +92,32 @@ export async function getStaticProps() {
                     json
                 }
             }
+        },
+        notificationFlagCollection(preview:$preview, where:$where) {
+          items {
+            notification {
+              json
+            },
+            type,
+            link
+          }
         }
       }
-    `, { preview: config.contentful.preview });
+    `, { 
+        preview: config.contentful.preview,
+        where: { 
+            isVisible:true, 
+            pages_contains_some:["/volunteer", "*"]
+        }
+    });
 
     const volunteerOpportunities:IVolunteerOpportunity[] = response?.volunteerOpportunityCollection?.items || [];
-      
+    const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];  
+
     return {
       props: { 
-        volunteerOpportunities
+        volunteerOpportunities,
+        notificationFlags
       },
       // - At most once every 15 minutes
       revalidate: 60 * 15, // In seconds

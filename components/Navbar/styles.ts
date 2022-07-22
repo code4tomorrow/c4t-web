@@ -33,5 +33,31 @@ export const useStyles = makeStyles()(() => ({
             transformOrigin: "center right",
             transform: "rotate(45deg)",
         }
-    }
+    },
+    notificationDot: {
+        position: 'relative',
+        "&::before": {
+            content: "''",
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            transform: "scale(2.5)",
+            zIndex: -1,
+            borderRadius: "100%",
+            animation: "radio 3000ms ease infinite",
+        },
+        "@keyframes radio": {
+            "0%": {
+                transform: "scale(1)",
+            },
+            "90%": {
+                transform: "scale(2.5)",
+            },
+            "100%": {
+                backgroundColor: "rgba(0,0,0,0)"
+            }
+        }
+    },
 }))

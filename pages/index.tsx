@@ -14,11 +14,22 @@ import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import Link from "next/link";
 import { cloudinaryLoader } from "@utils/cloudinary-loader";
+import config from "config";
+import { graphQLClient } from "@utils/contentful";
+import { gql } from "graphql-request";
+import { INotificationFlag } from "common/interfaces/navigationFlag";
+import { NextPage } from "next";
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
-export default function Home() {
+interface HomeProps {
+  notificationFlags: INotificationFlag[]
+}
+
+const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
   const { classes } = useStyles();
+
+  const mainRef = React.useRef<HTMLDivElement | null>(null);
 
   return (
     <div 
@@ -28,8 +39,8 @@ export default function Home() {
         <title>Home | C4T</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar/>
-      <header className="flex pt-16 flex-col space-y-6 justify-center items-center p-3">
+      <Navbar notificationFlags={notificationFlags}/>
+      <header className="flex flex-col space-y-6 justify-center items-center p-3">
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)", whiteSpace: "nowrap"}} 
           className="text-white text-5xl font-bold md:text-6xl mt-16 text-center">
@@ -59,7 +70,7 @@ export default function Home() {
         </Link>
       </header>
       <Animate>
-      <main className="p-3 mt-10 space-y-32 flex flex-col items-center">
+      <main ref={mainRef} className="p-3 mt-10 space-y-32 flex flex-col items-center">
          <section className="w-screen p-3 md:w-[125vw] h-[80vw] md:h-[60vw] max-w-[1950px] max-h-[850px] flex items-center justify-center">
             <Animate.Element 
                 resetAfterTriggered={false}
@@ -76,7 +87,9 @@ export default function Home() {
             </Animate.Element>
             <div className="w-full md:w-[70%] h-[100%] flex flex-col justify-center space-y-3">
               <Animate.Element 
+                ref={mainRef}
                 resetAfterTriggered={false}
+                start="top bottom"
                 from={{ y: 200 }} to={{ y: 0 }}
                 className={clsx("w-full h-[80%] z-10", classes.carouselContainer)}>
                 <Paper containerClass={clsx("relative w-full h-full")}>
@@ -95,7 +108,12 @@ export default function Home() {
               </Animate.Element>
               <Animate.Element resetAfterTriggered={false} from={{ y: 200 }} to={{ y: 0 }} className="h-[20%] flex space-x-3">
                   <Paper containerClass="w-[30%] h-[50%]"></Paper>
-                  <Paper containerClass="w-[35%] h-[100%]"></Paper>
+                  <Paper containerClass="w-[35%] h-[100%] flex flex-col p-10 justify-center items-center">
+                    {/* <blockquote className="italic text-medium-grey text-lg">
+                      The teachers are patient and very helpful.
+                    </blockquote>
+                    <span className="block w-full text-right italic">- Sandy</span> */}
+                  </Paper>
                   <Paper containerClass="w-[35%] h-[45%]"></Paper>
               </Animate.Element>
             </div>
@@ -197,3 +215,37 @@ export default function Home() {
     </div>
   )
 }
+
+export async function getStaticProps() {
+  const response = await graphQLClient.request(gql`
+    query($preview:Boolean, $where:NotificationFlagFilter) {
+      notificationFlagCollection(preview:$preview, where:$where) {
+        items {
+          notification {
+            json
+          },
+          type,
+          link
+        }
+      }
+    }
+  `, { 
+      preview: config.contentful.preview, 
+      where: { 
+        isVisible:true, 
+        pages_contains_some:["/", "*"]
+      }}
+    );
+
+  const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
+  
+  return {
+    props: { 
+      notificationFlags
+    },
+    // - At most once every 15 minutes
+    revalidate: 60 * 15, // In seconds
+  }
+}
+
+export default Home; 

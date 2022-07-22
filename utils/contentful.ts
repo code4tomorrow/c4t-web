@@ -13,6 +13,7 @@ export enum ContentModelID {
     PROMOTIONAL_LABEL = "promotionalLabel",
     IMAGE = "image",
     FAQ = "faq",
+    NOTIFICATION_FLAG = "notificationFlag",
     VOLUNTEER_OPPORTUNITY = "volunteerOpportunity"
 }
 

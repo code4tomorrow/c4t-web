@@ -51,6 +51,22 @@ export default async function handler(
             await attemptRevalidation(res, Pages.VOLUNTEER) && pagesRevalidated.push(Pages.VOLUNTEER);
         }
 
+        if ([ ContentModelID.NOTIFICATION_FLAG].includes(modelId)) {
+            const pageLocales = req.body.fields.pages;
+            
+            let validPages = [];
+            for (const pageLocale in pageLocales) {
+                const pages = pageLocales[pageLocale];
+                const validatedPages = pages.filter((page:Pages) => Object.values(Pages).includes(page))
+                validPages.push(...validatedPages);
+            }
+
+            console.log(validPages);
+            await Promise.all(validPages.map(async (page:Pages) => ( 
+                await attemptRevalidation(res, page) && pagesRevalidated.push(page)
+            )))
+        }
+
         console.log("Model ID: ", modelId);
         console.log("Pages Revalidated: ", pagesRevalidated);
         return res.json({ revalidatedPages: pagesRevalidated, error: false })
