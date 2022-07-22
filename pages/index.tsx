@@ -29,6 +29,8 @@ interface HomeProps {
 const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
   const { classes } = useStyles();
 
+  const mainRef = React.useRef<HTMLDivElement | null>(null);
+
   return (
     <div 
       style={{ width: "100vw"  }}
@@ -41,7 +43,7 @@ const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
       <header className="flex flex-col space-y-6 justify-center items-center p-3">
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)", whiteSpace: "nowrap"}} 
-          className="text-white text-5xl font-bold md:text-6xl mt-6 text-center">
+          className="text-white text-5xl font-bold md:text-6xl mt-16 text-center">
             Master Coding&nbsp;<br className="md:hidden block"/>
             <Typist cursor={<span className={classes.blinkingCursor}>|</span>} loop={true}>
                 {
@@ -68,7 +70,7 @@ const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
         </Link>
       </header>
       <Animate>
-      <main className="p-3 mt-4 space-y-32 flex flex-col items-center">
+      <main ref={mainRef} className="p-3 mt-10 space-y-32 flex flex-col items-center">
          <section className="w-screen p-3 md:w-[125vw] h-[80vw] md:h-[60vw] max-w-[1950px] max-h-[850px] flex items-center justify-center">
             <Animate.Element 
                 resetAfterTriggered={false}
@@ -85,6 +87,7 @@ const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
             </Animate.Element>
             <div className="w-full md:w-[70%] h-[100%] flex flex-col justify-center space-y-3">
               <Animate.Element 
+                ref={mainRef}
                 resetAfterTriggered={false}
                 start="top bottom"
                 from={{ y: 200 }} to={{ y: 0 }}

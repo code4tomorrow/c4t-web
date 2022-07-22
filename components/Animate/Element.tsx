@@ -16,6 +16,8 @@ interface ElementProps<T extends ElementType = "div"> {
     onActivatedClasses?: string; 
     onDeactivatedClasses?: string; 
     resetAfterTriggered?: boolean,
+    start?: string; 
+    end?: string; 
 }
 
 const Element = <T extends ElementType = "div">({ 
@@ -30,7 +32,7 @@ const Element = <T extends ElementType = "div">({
         start,
         end,
         ...props
-    } : ElementProps<T> & ComponentPropsWithoutRef<T>) => {
+    } : ElementProps<T> & ComponentPropsWithoutRef<T>, ref:any) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [ triggered, setTriggered ] = useState(false);
 
@@ -43,7 +45,7 @@ const Element = <T extends ElementType = "div">({
                 start: start,
                 end: end,
                 invalidateOnRefresh: true,
-                trigger: containerRef.current,
+                trigger: ref?.current || containerRef.current,
                 onEnter: () => setTriggered(true),
                 onLeaveBack: () => resetAfterTriggered && setTriggered(false),
                 onLeave: () => resetAfterTriggered && setTriggered(false),
@@ -51,10 +53,11 @@ const Element = <T extends ElementType = "div">({
             }
         })
         return () => {
+            if (ref?.current) gsap.killTweensOf(ref.current);
             gsap.killTweensOf(containerRef.current);
             tl.kill();
         }
-    }, [ containerRef, resetAfterTriggered, start, end ]);
+    }, [ containerRef, resetAfterTriggered, start, end, ref ]);
 
     const [ animation, setAnimation ] = useState<{
         from?: gsap.TweenVars, to?: gsap.TweenVars,
@@ -107,4 +110,4 @@ const Element = <T extends ElementType = "div">({
     )
 }  
 
-export default React.memo(Element); 
+export default React.forwardRef(Element) as <T extends ElementType = "div", R = HTMLDivElement>(props: ElementProps<T> & React.RefAttributes<R>) => React.ReactElement | null;
