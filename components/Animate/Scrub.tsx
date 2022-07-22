@@ -79,4 +79,4 @@ const Scrub = <T extends ElementType = "div">({
     )
 }
 
-export default React.forwardRef(Scrub) as <T extends ElementType = "div", R = HTMLDivElement>(props: ScrubProps<T> & React.RefAttributes<R>) => React.ReactElement | null;
+export default React.forwardRef(Scrub) as <T extends ElementType = "div", R = HTMLDivElement>(props: ScrubProps<T> & React.RefAttributes<R> & ComponentPropsWithoutRef<T>) => React.ReactElement | null;

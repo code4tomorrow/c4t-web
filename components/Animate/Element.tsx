@@ -110,4 +110,4 @@ const Element = <T extends ElementType = "div">({
     )
 }  
 
-export default React.forwardRef(Element) as <T extends ElementType = "div", R = HTMLDivElement>(props: ElementProps<T> & React.RefAttributes<R>) => React.ReactElement | null;
+export default React.forwardRef(Element) as <T extends ElementType = "div", R = HTMLDivElement>(props: ElementProps<T> & ComponentPropsWithoutRef<T> & React.RefAttributes<R>) => React.ReactElement | null;
