@@ -52,7 +52,10 @@ export default async function handler(
         }
 
         if ([ ContentModelID.NOTIFICATION_FLAG].includes(modelId)) {
-            console.log(req.body);
+            const pageLocales = req.body.fields.pages; 
+            for (const pageLocale in pageLocales) {
+                console.log(pageLocale, pageLocales[pageLocale])
+            }
         }
 
         console.log("Model ID: ", modelId);
