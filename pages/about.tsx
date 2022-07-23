@@ -199,8 +199,13 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                                 <Image
                                     style={{
                                         clipPath: `url(#svgPath)`,
-                                    
-                                    }}
+                                        userSelect: "none",
+                                        pointerEvents: "none",
+                                        WebkitUserSelect: "none",
+                                    }} 
+                                    draggable={false}
+                                    quality={100}
+                                    priority={true}
                                     loader={cloudinaryLoader}
                                     objectFit={"cover"}
                                     alt="Graduated Kids"
@@ -209,7 +214,7 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                                     width={800}
                                     height={800}
                                 />
-                                <svg className="absolute" width={0} height={0} >   
+                                <svg width={0} height={0} >   
                                     <clipPath transform="scale(0.0125, 0.0125)" id="svgPath" clipPathUnits="objectBoundingBox">           
                                         <path 
                                             transform="translate(40, 40)"
