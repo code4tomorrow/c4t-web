@@ -197,13 +197,14 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                             end="bottom bottom"
                             from={{ y: 30, scale: 0.75 }}
                             to={{ y: 0, scale: 1 }} style={{ "will-change": "transform" }}>
-                           <div className="w-full">
+                           <div style={{ "transform": "translateZ(0)" }} className="w-full">
                                 <Image
                                     style={{
                                         clipPath: `url(#svgPath)`,
                                         WebkitClipPath:`url(#svgPath)`,
                                         userSelect: "none",
                                         pointerEvents: "none",
+                                        transform: "translateZ(0)",
                                         WebkitUserSelect: "none",
                                         backfaceVisibility: "hidden",
                                         WebkitBackfaceVisibility: "hidden"
