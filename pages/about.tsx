@@ -171,14 +171,14 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                                     from={{ y: 60, opacity: 0 }}
                                     to={{ y: 0, opacity: 1 }}
                                     className="text-lg !mt-6 text-medium-grey">
-                                    Code 4 Tomorrow’s roots lie in Code It Bay Area (CIBA), a local Bay Area, dozen-sized volunteer group that lasted for 3 years until March 2020, when only two active members (Ansh Nagwekar and Jyoti Rani) remained. However, when the global pandemic struck, the students decided to step up, unite, and collaborate to aid the 1 billion children out of school. That’s when Code 4 Tomorrow launched and became an official non-profit. In just a few weeks, students with similar interests gathered at Code 4 Tomorrow, forming a team of 30+ dedicated members. Though the pandemic presented numerous difficulties, the students' resilience completely restructured the organization. New teams were formed to create new custom online courses and facilitate multiple partnerships to enable global expansion.
+                                    Code 4 Tomorrow&apos;s roots lie in Code It Bay Area (CIBA), a local Bay Area, dozen-sized volunteer group that lasted for 3 years until March 2020, when only two active members (Ansh Nagwekar and Jyoti Rani) remained. However, when the global pandemic struck, the students decided to step up, unite, and collaborate to aid the 1 billion children out of school. That’s when Code 4 Tomorrow launched and became an official non-profit. In just a few weeks, students with similar interests gathered at Code 4 Tomorrow, forming a team of 30+ dedicated members. Though the pandemic presented numerous difficulties, the students&apos; resilience completely restructured the organization. New teams were formed to create new custom online courses and facilitate multiple partnerships to enable global expansion.
                                 </Animate.Element>
                                 <Animate.Element
                                     as="p"
                                     from={{ y: 90, opacity: 0 }}
                                     to={{ y: 0, opacity: 1 }}
                                     className="text-lg !mt-3 text-medium-grey">
-                                    Ranging from New York to Lebanon, our students now enjoy over 7 different courses taught by 60+ teachers, and our dedicated volunteer team continues to broaden our impact and spread our mission. The C4T Family has always had a focus on empowering the underprivileged. Especially given the context of today’s world, where solutions to societal problems lie in innovation and technology, we believe that improving access to technical education and resources is the best way to uplift the underrepresented. So, we’re here to teach them those skills, turning today's students into tomorrow's innovators.
+                                    Ranging from New York to Lebanon, our students now enjoy over 7 different courses taught by 60+ teachers, and our dedicated volunteer team continues to broaden our impact and spread our mission. The C4T Family has always had a focus on empowering the underprivileged. Especially given the context of today’s world, where solutions to societal problems lie in innovation and technology, we believe that improving access to technical education and resources is the best way to uplift the underrepresented. So, we’re here to teach them those skills, turning today&apos;s students into tomorrow&apos;s innovators.
                                 </Animate.Element>
                             </div>
                             <button 
@@ -193,7 +193,6 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                         <Animate.Scrub 
                             start="top bottom"
                             end="bottom bottom"
-                            resetAfterTriggered={false}
                             from={{ y: 30, scale: 0.75 }}
                             to={{ y: 0, scale: 1 }}>
                            <div className="w-full">

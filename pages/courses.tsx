@@ -109,6 +109,10 @@ const Courses : NextPage<CoursesProps> = ({ courses, notificationFlags }) => {
     return result; 
   }, [ courses ]);
 
+  const handleSlideChange = (slide:number) => () => {
+    emblaAPI?.scrollTo(slide);
+};
+
   return (
         <div style={{ width: "100vw", overflowX: "clip" }}
             className="flex flex-col w-screen min-h-screen items-center bg-dark-grey-primary">
@@ -175,8 +179,9 @@ const Courses : NextPage<CoursesProps> = ({ courses, notificationFlags }) => {
                           {
                             coursesPaired.map((_, i) => (
                               <span 
+                                onClick={handleSlideChange(i)}
                                 className={clsx(
-                                  "w-1 h-4 block rounded-full transition-all",
+                                  "w-1 h-4 cursor-pointer block rounded-full transition-all",
                                   carouselMeta.currentIndex === i ? "bg-brand-purple-secondary" : "bg-dim-grey"
                                 )}
                                 key={i} 
