@@ -2257,6 +2257,11 @@
   "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.173.tgz"
   "version" "1.4.173"
 
+"embla-carousel-autoplay@^7.0.0-rc05":
+  "integrity" "sha512-AaWH12De4gI1QvRv+SHiCiyzjTsICoZRWNVwBgwmPSIhWH4vqtkhnKpyQS+X/1Q2lyJWEcCsHCBXyEzZiMtCtA=="
+  "resolved" "https://registry.npmjs.org/embla-carousel-autoplay/-/embla-carousel-autoplay-7.0.0-rc05.tgz"
+  "version" "7.0.0-rc05"
+
 "embla-carousel-react@^7.0.0-rc01":
   "integrity" "sha512-PvgXEtMDzSIEVHOom35ZklEkbeamtEghXQ6ewlHR/qRznnK1udXJSxbZKZEDGRBZ/TMMMYgeKRwlbOxSDNmDKA=="
   "resolved" "https://registry.npmjs.org/embla-carousel-react/-/embla-carousel-react-7.0.0-rc01.tgz"
@@ -2268,6 +2273,11 @@
   "integrity" "sha512-IBTSKcPw7u9K0zoLvsnWYsijKsI0msFqzNp6ASIthTXiMZNJNGQt8k0ax7KqUVinDZeNM07WPWqYsjrvUM/Epw=="
   "resolved" "https://registry.npmjs.org/embla-carousel/-/embla-carousel-7.0.0-rc01.tgz"
   "version" "7.0.0-rc01"
+
+"embla-carousel@7.0.0-rc05":
+  "integrity" "sha512-zRPQniDxj3t3Q/okKzP8XsMRtANItAK7nhQ3Smpqfbtw3OMoZRebojUDCMD02sb5CY7ghYqL/XFEuXxS/7vJ5w=="
+  "resolved" "https://registry.npmjs.org/embla-carousel/-/embla-carousel-7.0.0-rc05.tgz"
+  "version" "7.0.0-rc05"
 
 "emoji-regex@^9.2.2":
   "integrity" "sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg=="

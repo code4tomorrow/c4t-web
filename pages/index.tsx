@@ -19,14 +19,17 @@ import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { NextPage } from "next";
+import Testimonals from "@components/Testimonials";
+import { ITestimonial } from "common/interfaces/testimonial";
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
 interface HomeProps {
-  notificationFlags: INotificationFlag[]
+  notificationFlags: INotificationFlag[],
+  testimonials?: ITestimonial[]
 }
 
-const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
+const Home : NextPage<HomeProps> = ({ notificationFlags, testimonials = [] }) => {
   const { classes } = useStyles();
 
   const mainRef = React.useRef<HTMLDivElement | null>(null);
@@ -109,10 +112,6 @@ const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
               <Animate.Element resetAfterTriggered={false} from={{ y: 200 }} to={{ y: 0 }} className="h-[20%] flex space-x-3">
                   <Paper containerClass="w-[30%] h-[50%]"></Paper>
                   <Paper containerClass="w-[35%] h-[100%] flex flex-col p-10 justify-center items-center">
-                    {/* <blockquote className="italic text-medium-grey text-lg">
-                      The teachers are patient and very helpful.
-                    </blockquote>
-                    <span className="block w-full text-right italic">- Sandy</span> */}
                   </Paper>
                   <Paper containerClass="w-[35%] h-[45%]"></Paper>
               </Animate.Element>
@@ -161,6 +160,27 @@ const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
               <div className={"md:my-0 my-8"}>
                 <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] "/>
               </div>
+         </section>
+         <section className="w-full flex flex-col items-center">
+              <div className="mb-12 w-full">
+                  <Animate.Element
+                      resetAfterTriggered={false}
+                      as="h1" 
+                      from={{ y: 60, opacity: 0 }}
+                      to={{ y: 0, opacity: 1 }}
+                      className="text-5xl font-bold text-white text-center">
+                          Parent <span className="text-brand-purple-secondary">Testimonials</span>
+                  </Animate.Element>
+                  <Animate.Element
+                      resetAfterTriggered={false}
+                      as="p" 
+                      from={{ y: 90,  opacity: 0 }}
+                      to={{ y: 0, opacity: 1, delay: 0.15 }}
+                      className="text-lg !mt-3 text-medium-grey text-center">
+                        Read what the Parents of graduated students are saying...
+                  </Animate.Element>
+              </div>
+              <Testimonals testimonials={testimonials} />
          </section>
          <section className="flex py-10 flex-col-reverse md:flex-row-reverse md:items-center justify-around w-full max-w-[1250px]">
               <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
@@ -218,7 +238,7 @@ const Home : NextPage<HomeProps> = ({ notificationFlags }) => {
 
 export async function getStaticProps() {
   const response = await graphQLClient.request(gql`
-    query($preview:Boolean, $where:NotificationFlagFilter) {
+    query($preview:Boolean, $where:NotificationFlagFilter, $testimonialLimit:Int) {
       notificationFlagCollection(preview:$preview, where:$where) {
         items {
           notification {
@@ -228,9 +248,17 @@ export async function getStaticProps() {
           link
         }
       }
+      testimonialCollection(limit:$testimonialLimit) {
+        items {
+          text,
+          rating,
+          attestant
+        }
+      }
     }
   `, { 
       preview: config.contentful.preview, 
+      testimonialLimit: 5,
       where: { 
         isVisible:true, 
         pages_contains_some:["/", "*"]
@@ -238,10 +266,12 @@ export async function getStaticProps() {
     );
 
   const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
+  const testimonials:ITestimonial[] = response?.testimonialCollection?.items || [];
   
   return {
     props: { 
-      notificationFlags
+      notificationFlags,
+      testimonials
     },
     // - At most once every 15 minutes
     revalidate: 60 * 15, // In seconds

@@ -23,7 +23,7 @@ const NavNotification = ({ notificationFlag } : { notificationFlag: INotificatio
             target: "_blank"
         } : {})}
         className={clsx(
-            "flex px-3 justify-center mt-3 items-center",
+            "flex px-8 justify-center mt-3 items-center",
             !!notificationFlag.link && "[&>span>p]:hover:underline cursor-pointer chevrow-container"
         )}>
             <span className={clsx("hidden md:inline-block flex-shrink-0 w-2 h-2 rounded-full mx-3 bg-brand-purple-secondary before:bg-brand-blue-primary", classes.notificationDot)} />
