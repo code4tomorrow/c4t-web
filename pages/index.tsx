@@ -164,7 +164,6 @@ const Home : NextPage<HomeProps> = ({ notificationFlags, testimonials = [] }) =>
          <section className="w-full flex flex-col items-center">
               <div className="mb-20 w-full">
                   <Animate.Element
-                      resetAfterTriggered={false}
                       as="h1" 
                       from={{ y: 60, opacity: 0 }}
                       to={{ y: 0, opacity: 1 }}
@@ -172,7 +171,6 @@ const Home : NextPage<HomeProps> = ({ notificationFlags, testimonials = [] }) =>
                           Parent <span className="text-brand-purple-secondary">Testimonials</span>
                   </Animate.Element>
                   <Animate.Element
-                      resetAfterTriggered={false}
                       as="p" 
                       from={{ y: 90,  opacity: 0 }}
                       to={{ y: 0, opacity: 1, delay: 0.15 }}

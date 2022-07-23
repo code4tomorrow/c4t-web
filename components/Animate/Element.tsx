@@ -35,7 +35,7 @@ const Element = <T extends ElementType = "div">({
         ...props
     } : ElementProps<T> & ComponentPropsWithoutRef<T>, ref:any) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const [ triggered, setTriggered ] = useState(false);
+    const [ triggered, setTriggered ] = useState<boolean | undefined>(undefined);
 
     const setTriggerListeners = useCallback(() => {
         if (!containerRef.current) return;
@@ -71,7 +71,7 @@ const Element = <T extends ElementType = "div">({
     }, [ from, to, animation.from, animation.to ]);
 
     const animateContainer = useCallback(() => {
-        if (!containerRef.current || !animation.from || !animation.to) return;
+        if (!containerRef.current || !animation.from || !animation.to || triggered === undefined) return;
 
         const fromTemp = _.cloneDeep(animation.from);
         const toTemp = _.cloneDeep(animation.to);
@@ -79,12 +79,12 @@ const Element = <T extends ElementType = "div">({
         if (triggered) {
             gsap.fromTo(containerRef.current, fromTemp, toTemp);
         } else {
-            gsap.fromTo(containerRef.current, toTemp, fromTemp);
+           gsap.fromTo(containerRef.current, toTemp, fromTemp);
         }
         return () => {
             gsap.killTweensOf(containerRef.current);
         }
-    }, [ containerRef, triggered, animation.from, animation.to ]);
+    }, [ containerRef, triggered, animation ]);
 
     useEffect(animateContainer, [ animateContainer ]);
     useEffect(setTriggerListeners, [ setTriggerListeners ]);
