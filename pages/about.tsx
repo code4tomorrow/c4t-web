@@ -168,12 +168,14 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                             >
                                 <Animate.Element
                                     as="p"
+                                    resetAfterTriggered={false}
                                     from={{ y: 60, opacity: 0 }}
                                     to={{ y: 0, opacity: 1 }}
                                     className="text-lg !mt-6 text-medium-grey">
                                     Code 4 Tomorrow&apos;s roots lie in Code It Bay Area (CIBA), a local Bay Area, dozen-sized volunteer group that lasted for 3 years until March 2020, when only two active members (Ansh Nagwekar and Jyoti Rani) remained. However, when the global pandemic struck, the students decided to step up, unite, and collaborate to aid the 1 billion children out of school. That’s when Code 4 Tomorrow launched and became an official non-profit. In just a few weeks, students with similar interests gathered at Code 4 Tomorrow, forming a team of 30+ dedicated members. Though the pandemic presented numerous difficulties, the students&apos; resilience completely restructured the organization. New teams were formed to create new custom online courses and facilitate multiple partnerships to enable global expansion.
                                 </Animate.Element>
                                 <Animate.Element
+                                    resetAfterTriggered={false}
                                     as="p"
                                     from={{ y: 90, opacity: 0 }}
                                     to={{ y: 0, opacity: 1 }}
@@ -194,14 +196,17 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                             start="top bottom"
                             end="bottom bottom"
                             from={{ y: 30, scale: 0.75 }}
-                            to={{ y: 0, scale: 1 }}>
+                            to={{ y: 0, scale: 1 }} style={{ "will-change": "transform" }}>
                            <div className="w-full">
                                 <Image
                                     style={{
                                         clipPath: `url(#svgPath)`,
+                                        WebkitClipPath:`url(#svgPath)`,
                                         userSelect: "none",
                                         pointerEvents: "none",
                                         WebkitUserSelect: "none",
+                                        backfaceVisibility: "hidden",
+                                        WebkitBackfaceVisibility: "hidden"
                                     }} 
                                     draggable={false}
                                     quality={100}
@@ -211,6 +216,7 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                                     alt="Graduated Kids"
                                     src={"graduated-kids"}
                                     layout="intrinsic"
+                                    loading="eager"
                                     width={800}
                                     height={800}
                                 />
