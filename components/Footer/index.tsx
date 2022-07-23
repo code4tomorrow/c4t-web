@@ -52,6 +52,7 @@ const Footer : React.FC<FooterProps> = ({ className, ...props }) => {
                     <FooterHeader>Resources</FooterHeader>
                     <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://www.notion.so/code4tomorrow">Notion</FooterItem>
                     <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://discord.code4tomorrow.org/">Discord Guide</FooterItem>
+                    <FooterItem href="/learn#faqs">FAQs</FooterItem>
                 </ul>
                 <ul>
                     <FooterHeader>Socials</FooterHeader>

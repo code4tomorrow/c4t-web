@@ -12,7 +12,7 @@ interface FAQSectionProps {
 
 const FAQSection : React.FC<FAQSectionProps> = ({ faqsGroupedByType }) => {
     return (
-        <div className="w-full flex space-y-10 mb-10 flex-col items-center">
+        <div id="faqs" className="w-full flex space-y-10 mb-10 flex-col items-center">
            <div className="space-y-1 flex flex-col z-10 items-center">
                 <Animate.Element 
                     as="h1" 

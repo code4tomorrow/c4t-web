@@ -162,7 +162,7 @@ const Home : NextPage<HomeProps> = ({ notificationFlags, testimonials = [] }) =>
               </div>
          </section>
          <section className="w-full flex flex-col items-center">
-              <div className="mb-12 w-full">
+              <div className="mb-20 w-full">
                   <Animate.Element
                       resetAfterTriggered={false}
                       as="h1" 
