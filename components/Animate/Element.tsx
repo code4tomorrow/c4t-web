@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import clsx from "clsx";
 import { useStyles } from "./styles";
 import _ from "lodash";
+import isEqual from "react-fast-compare";
 
 interface ElementProps<T extends ElementType = "div"> {
     as?: T,
@@ -65,7 +66,7 @@ const Element = <T extends ElementType = "div">({
 
     useEffect(() => {
         if (!_.isEqual(from, animation.from) || ! _.isEqual(to, animation.to)) {
-            setAnimation({ from, to });
+            setAnimation({ from: _.cloneDeep(from), to: _.cloneDeep(to) });
         }
     }, [ from, to, animation.from, animation.to ]);
 
@@ -110,4 +111,4 @@ const Element = <T extends ElementType = "div">({
     )
 }  
 
-export default React.forwardRef(Element) as <T extends ElementType = "div", R = HTMLDivElement>(props: ElementProps<T> & ComponentPropsWithoutRef<T> & React.RefAttributes<R>) => React.ReactElement | null;
+export default React.memo(React.forwardRef(Element) as <T extends ElementType = "div", R = HTMLDivElement>(props: ElementProps<T> & ComponentPropsWithoutRef<T> & React.RefAttributes<R>) => React.ReactElement | null, isEqual);

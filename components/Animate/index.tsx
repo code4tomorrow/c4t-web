@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Element from "./Element";
 import gsap from "gsap";
 import Scrub from "./Scrub";
 import { withAnimateBase } from "./withAnimateBase";
+import isEqual from "react-fast-compare";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,14 +35,16 @@ const Animate : React.FC<AnimateProps> = ({ children }) => {
         ScrollTrigger.refresh();
     }, [ resizedWidth ]);
 
+    const childs = useMemo(() => <>{children}</>, [ children ]);
+
     return (
         <AnimateContext.Provider value={{ isNestedInAnimate: true }}>
-            { children }
+            { childs }
         </AnimateContext.Provider>
     )
 }
 
-export default Object.assign(React.memo(Animate), { 
+export default Object.assign(React.memo(Animate, isEqual), { 
     Element: withAnimateBase(Element), 
     Scrub: withAnimateBase(Scrub)
 });

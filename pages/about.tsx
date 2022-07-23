@@ -152,6 +152,15 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                             </div>
                             <Directory directoryEntries={directoryEntries} />
                     </section>
+                    <svg width={0} height={0} >   
+                        <clipPath transform="scale(0.0125, 0.0125)" id="svgPath" clipPathUnits="objectBoundingBox">           
+                            <path 
+                                transform="translate(40, 40)"
+                                d="M20.8,-27.7C28.5,-23.1,37.2,-19,38.6,-12.9C40.1,-6.8,34.3,1.2,31.6,10.4C28.9,19.7,29.1,30,24.3,33.1C19.6,36.2,9.8,32.1,2.4,28.8C-5,25.5,-9.9,23,-16.5,20.4C-23,17.9,-31.2,15.3,-35.8,9.6C-40.4,3.9,-41.4,-5,-38.2,-11.7C-35,-18.4,-27.5,-22.9,-20.4,-27.6C-13.3,-32.4,-6.6,-37.3,0,-37.3C6.6,-37.3,13.2,-32.3,20.8,-27.7Z" 
+                            >
+                            </path>    
+                        </clipPath>  
+                    </svg>
                     <section className="[&>*]:w-full [&>*]:lg:w-1/2 flex lg:flex-row flex-col-reverse itmes-center lg:space-x-6 mb-16 max-w-7xl justify-center">
                         <div className="relative">
                             <Animate.Element
@@ -196,7 +205,7 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                             start="top bottom"
                             end="bottom bottom"
                             from={{ y: 30, scale: 0.75 }}
-                            to={{ y: 0, scale: 1 }} style={{ "will-change": "transform" }}>
+                            to={{ y: 0, scale: 1 }} style={{ willChange: "transform" }}>
                            <div className="w-full">
                                 <Image
                                     style={{
@@ -220,15 +229,6 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                                     width={800}
                                     height={800}
                                 />
-                                <svg width={0} height={0} >   
-                                    <clipPath transform="scale(0.0125, 0.0125)" id="svgPath" clipPathUnits="objectBoundingBox">           
-                                        <path 
-                                            transform="translate(40, 40)"
-                                            d="M20.8,-27.7C28.5,-23.1,37.2,-19,38.6,-12.9C40.1,-6.8,34.3,1.2,31.6,10.4C28.9,19.7,29.1,30,24.3,33.1C19.6,36.2,9.8,32.1,2.4,28.8C-5,25.5,-9.9,23,-16.5,20.4C-23,17.9,-31.2,15.3,-35.8,9.6C-40.4,3.9,-41.4,-5,-38.2,-11.7C-35,-18.4,-27.5,-22.9,-20.4,-27.6C-13.3,-32.4,-6.6,-37.3,0,-37.3C6.6,-37.3,13.2,-32.3,20.8,-27.7Z" 
-                                        >
-                                        </path>    
-                                    </clipPath>  
-                                </svg>
                            </div>
                         </Animate.Scrub>
                     </section>

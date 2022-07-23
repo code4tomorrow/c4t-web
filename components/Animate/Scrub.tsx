@@ -3,7 +3,8 @@ import _ from 'lodash';
 import React, { ComponentPropsWithoutRef, ElementType, useCallback, useEffect, useRef, useState } from 'react';
 import { useStyles } from './styles';
 import gsap from "gsap";
-  
+import isEqual from "react-fast-compare";
+
 interface ScrubProps<T extends ElementType = "div"> {
     as?: T,
     className?: string;
@@ -25,14 +26,14 @@ const Scrub = <T extends ElementType = "div">({
         ...props
     } : ScrubProps<T> & ComponentPropsWithoutRef<T>, ref: any) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
-
+        
     const [ animation, setAnimation ] = useState<{
         from?: gsap.TweenVars, to?: gsap.TweenVars,
     }>({ from: undefined, to: undefined});
 
     useEffect(() => {
-        if (!_.isEqual(from, animation.from) || ! _.isEqual(to, animation.to)) {
-            setAnimation({ from, to });
+        if (!_.isEqual(from, animation.from) || !_.isEqual(to, animation.to)) {
+            setAnimation({ from: _.cloneDeep(from), to: _.cloneDeep(to) });
         }
     }, [ from, to, animation.from, animation.to ]);
 
@@ -79,4 +80,4 @@ const Scrub = <T extends ElementType = "div">({
     )
 }
 
-export default React.forwardRef(Scrub) as <T extends ElementType = "div", R = HTMLDivElement>(props: ScrubProps<T> & React.RefAttributes<R> & ComponentPropsWithoutRef<T>) => React.ReactElement | null;
+export default React.memo(React.forwardRef(Scrub) as <T extends ElementType = "div", R = HTMLDivElement>(props: ScrubProps<T> & React.RefAttributes<R> & ComponentPropsWithoutRef<T>) => React.ReactElement | null, isEqual);
