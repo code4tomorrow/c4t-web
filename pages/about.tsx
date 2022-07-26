@@ -113,17 +113,17 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
                         </div>
                         <div className="md:[&>div]:w-1/2 md:space-x-6 w-screen flex md:flex-row flex-col-reverse p-3 sm:p-6 max-w-7xl justify-items-center">
                             <div style={{ gridTemplateColumns: "1fr 1fr"}} className="grid md:pt-0 pt-12 sm:gap-6 gap-3 justify-center items-center">
-                                <Skill stat={"2800+"} label="Alumni Students">
-                                    Just under a month and a half students are taught priceless skills by qualified teachers.
+                                <Skill stat={"3200+"} label="Students Educated">
+                                    In just 6 weeks, students are taught priceless skills by qualified teachers.
                                 </Skill>
-                                <Skill stat={"134+"} label="Teachers">
-                                    Over a hundred dedicated high-school teachers pouring their knowledge to k-12 students.
+                                <Skill stat={"165+"} label="Teachers">
+                                    Over a hundred dedicated high-school teachers passing along their knowledge to k-12 students.
                                 </Skill>
-                                <Skill stat={"20+"} label="Cities">
-                                    Our organization has reached over 20 cities globally attempting to provide quality coding guidance and training.
+                                <Skill stat={"15+"} label="Countries">
+                                    Our organization has reached 150+ cities spread across 15+ countries including Kazakhstan, Kenya, Turkey, Malaysia, and Uzbekistan.
                                 </Skill>
-                                <Skill stat={"139+"} label="Classes Taught">
-                                    Just under a month and a half students are taught priceless skills by qualified teachers.
+                                <Skill stat={"40,000+"} label="Individuals Impacted">
+                                    Through our non-profit, STEM initiative we have globally reached this milestone by our numerous programs.
                                 </Skill>
                             </div>
                             <div className="flex flex-col justify-center">
