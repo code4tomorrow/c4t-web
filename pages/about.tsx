@@ -4,12 +4,11 @@ import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
 import { getDirectory, IDirectoryRow } from "@utils/notion/directory";
-import { NextPage } from "next";
 import Head from "next/head";
 import PairCoding from "@svg/pair-coding.svg";
 import MissionImage from "@svg/mission.svg"
 import Book from "@svg/book.svg"
-import { useRef, useState } from "react";
+import { ReactElement, useRef, useState } from "react";
 import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
 import config from "config";
@@ -17,13 +16,15 @@ import { INotificationFlag } from "common/interfaces/navigationFlag";
 import Image from "next/image";
 import { cloudinaryLoader } from "@utils/cloudinary-loader";
 import clsx from "clsx";
+import WatsonAssistantChat from "layouts/WatsonAssistantChat";
+import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 
 interface AboutProps {
     directoryEntries: IDirectoryRow[],
     notificationFlags: INotificationFlag[]
 }
 
-const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) => {
+const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notificationFlags }) => {
     const missionRef = useRef<HTMLDivElement | null>(null);
 
     const [ foundingStoryExpanded, setFoundingStoryExpanded ] = useState(false);
@@ -238,6 +239,15 @@ const About : NextPage<AboutProps> = ({ directoryEntries, notificationFlags }) =
         </div>
     )
 }
+
+About.getLayout = (page: ReactElement ) => {
+    return (
+      <WatsonAssistantChat>
+        { page }
+      </WatsonAssistantChat>
+    )
+  }
+
 
 export default About; 
 

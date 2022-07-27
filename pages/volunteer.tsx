@@ -1,6 +1,5 @@
 import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
-import { NextPage } from "next";
 import Head from "next/head";
 import VolunteerCard from "@components/Volunteer";
 import { gql } from "graphql-request";
@@ -9,6 +8,9 @@ import Animate from "@components/Animate";
 import VolunteerTeamSVG from "@svg/volunteer-team.svg";
 import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
+import { ReactElement } from "react";
+import WatsonAssistantChat from "layouts/WatsonAssistantChat";
+import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 
 export interface IVolunteerOpportunity extends IBaseContentModel {
     name?: string; 
@@ -25,7 +27,7 @@ interface VolunteerProps {
     notificationFlags: INotificationFlag[]
 }
 
-const Volunteer : NextPage<VolunteerProps> = ({ volunteerOpportunities, notificationFlags }) => {
+const Volunteer : NextPageWithLayout<VolunteerProps> = ({ volunteerOpportunities, notificationFlags }) => {
     return (
         <div style={{ width: "100vw", overflowX: "hidden" }} 
             className="flex flex-col w-screen min-h-screen items-center bg-dark-grey-primary">
@@ -73,6 +75,15 @@ const Volunteer : NextPage<VolunteerProps> = ({ volunteerOpportunities, notifica
         </div>
     )
 }
+
+Volunteer.getLayout = (page: ReactElement ) => {
+    return (
+      <WatsonAssistantChat>
+        { page }
+      </WatsonAssistantChat>
+    )
+  }
+
 
 export default Volunteer; 
 

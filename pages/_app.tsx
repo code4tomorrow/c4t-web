@@ -1,22 +1,29 @@
 import '../styles/globals.css'
-import React from 'react';
+import React, { ReactElement } from 'react';
 import type { AppProps } from 'next/app'
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createCache from '@emotion/cache';
 import Head from 'next/head';
 import NextNProgress from "nextjs-progressbar";
 import { NextSeo } from 'next-seo';
+import { NextPageWithLayout } from 'common/interfaces/nextPageWithLayout';
 
 let muiCache: EmotionCache | undefined = undefined;
 
-export const createMuiCache = () =>
+export const createMuiCache = () => (
     muiCache = createCache({
         key: "code-four-tomorrow",
         prepend: true,
         speedy: true,
-    });
+    })
+)
 
-function MyApp({ Component, pageProps }: AppProps) {
+type AppPropWithLayout = AppProps & {
+  Component: NextPageWithLayout,
+}
+
+function MyApp({ Component, pageProps }: AppPropWithLayout) {
+  const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
   return (
     <CacheProvider value={muiCache ?? createMuiCache()}>
       <Head>
@@ -35,7 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         ]}
         description="Code4Tomorrow is entirely student-run, from the official website to merch design and finance management. Fiscally sponsored by Irvine LIGHTS, C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers."
         openGraph={{
-          url: "https://c4t.vercel.app/",
+          url: "https://v2.code4tomorrow.org/",
           title: "Code4Tomorrow",
           description: "Code4Tomorrow is entirely student-run, from the official website to merch design and finance management. Fiscally sponsored by Irvine LIGHTS, C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers.",
           images: [
@@ -43,7 +50,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           site_name: "Code4Tomorrow",
         }}
         twitter={{
-          site: 'https://c4t.vercel.app/',
+          site: 'https://v2.code4tomorrow.org/',
           cardType: 'summary_large_image',
         }}
       />
@@ -53,7 +60,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             color={"#fff"}
             height={2}
         />
-        <Component {...pageProps} />
+        { getLayout(<Component {...pageProps} />) }
       </React.StrictMode>
     </CacheProvider>
   )

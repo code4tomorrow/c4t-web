@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement }  from "react";
 import Head from "next/head"
 import BrandButton from "@components/BrandButton";
 import Paper from "@components/Paper";
@@ -18,18 +18,20 @@ import config from "config";
 import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
-import { NextPage } from "next";
 import Testimonals from "@components/Testimonials";
 import { ITestimonial } from "common/interfaces/testimonial";
+import WatsonAssistantChat from "layouts/WatsonAssistantChat";
+import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
 interface HomeProps {
   notificationFlags: INotificationFlag[],
-  testimonials?: ITestimonial[]
+  testimonials?: ITestimonial[],
+  createWebChatInstance: any
 }
 
-const Home : NextPage<HomeProps> = ({ notificationFlags, testimonials = [] }) => {
+const Home : NextPageWithLayout<HomeProps> = ({ notificationFlags, testimonials = []  }) => {
   const { classes } = useStyles();
 
   const mainRef = React.useRef<HTMLDivElement | null>(null);
@@ -234,6 +236,14 @@ const Home : NextPage<HomeProps> = ({ notificationFlags, testimonials = [] }) =>
   )
 }
 
+Home.getLayout = (page: ReactElement ) => {
+  return (
+    <WatsonAssistantChat>
+      { page }
+    </WatsonAssistantChat>
+  )
+}
+
 export async function getStaticProps() {
   const response = await graphQLClient.request(gql`
     query($preview:Boolean, $where:NotificationFlagFilter, $testimonialLimit:Int) {
@@ -276,4 +286,4 @@ export async function getStaticProps() {
   }
 }
 
-export default Home; 
+export default Home;

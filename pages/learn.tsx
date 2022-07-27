@@ -4,10 +4,12 @@ import FAQSection from "@components/Learn/FAQSection";
 import Navbar from "@components/Navbar";
 import { graphQLClient } from "@utils/contentful";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
+import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import config from "config";
 import { gql } from "graphql-request";
-import { NextPage } from "next";
+import WatsonAssistantChat from "layouts/WatsonAssistantChat";
 import Head from "next/head";
+import { ReactElement } from "react";
 
 export interface IFAQ {
     question?: string; 
@@ -26,7 +28,7 @@ interface LearnProps {
     notificationFlags: INotificationFlag[]
 }
 
-const Learn : NextPage<LearnProps> = ({ faqsGroupedByType, notificationFlags }) => {
+const Learn : NextPageWithLayout<LearnProps> = ({ faqsGroupedByType, notificationFlags }) => {
     return ( 
         <div style={{ width: "100vw", overflowX: "clip" }} 
             className="flex flex-col w-screen sticky top-[100px] min-h-screen items-center bg-dark-grey-primary">
@@ -43,6 +45,14 @@ const Learn : NextPage<LearnProps> = ({ faqsGroupedByType, notificationFlags }) 
         </div>
     )
 }
+
+Learn.getLayout = (page: ReactElement ) => {
+    return (
+      <WatsonAssistantChat>
+        { page }
+      </WatsonAssistantChat>
+    )
+  }
 
 export async function getStaticProps() {
     const response = await graphQLClient.request(gql`

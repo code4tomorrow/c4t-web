@@ -1,6 +1,5 @@
 import { gql } from "graphql-request";
 import { graphQLClient } from "@utils/contentful";
-import { NextPage } from "next";
 import Head from "next/head";
 import Navbar from "@components/Navbar";
 import useEmblaCarousel from 'embla-carousel-react'
@@ -9,11 +8,13 @@ import Footer from "@components/Footer";
 import CoursesSVG from "@svg/courses.svg";
 import Animate from "@components/Animate";
 import clsx from "clsx";
-import { useCallback, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { useMemo } from "react";
 import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
+import WatsonAssistantChat from "layouts/WatsonAssistantChat";
+import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 
 export interface ICourse {
     title?: string; 
@@ -47,7 +48,7 @@ function* pair<T>(iterable:Iterable<T>) : Iterable<Iterable<T>> {
     }
 }
 
-const Courses : NextPage<CoursesProps> = ({ courses, notificationFlags }) => {
+const Courses : NextPageWithLayout<CoursesProps> = ({ courses, notificationFlags }) => {
     const [emblaRef, emblaAPI ] = useEmblaCarousel({ 
       axis: "y",
       skipSnaps: false,
@@ -206,6 +207,15 @@ const Courses : NextPage<CoursesProps> = ({ courses, notificationFlags }) => {
         </div>
     )
 }
+
+Courses.getLayout = (page: ReactElement ) => {
+  return (
+    <WatsonAssistantChat>
+      { page }
+    </WatsonAssistantChat>
+  )
+}
+
 
 export async function getStaticProps() {
     const response = await graphQLClient.request(gql`
