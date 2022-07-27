@@ -19,7 +19,7 @@ interface BrandButtonProps<T extends React.ElementType = "div">  {
 
 const BrandButton = <T extends React.ElementType = "div">({ 
         as, variant = "gradient", disabled, label, containerClass, title, className, onClick, flex = 0, children, ...props 
-    } : BrandButtonProps<T> & React.ComponentPropsWithoutRef<T>) => {
+    } : BrandButtonProps<T> & React.ComponentPropsWithoutRef<T>, ref:any) => {
     const handleOnClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation();
         if (onClick && typeof onClick === "function") onClick(e);
@@ -51,7 +51,7 @@ const BrandButton = <T extends React.ElementType = "div">({
     }
 
     return (
-        <div className={clsx("relative", containerClass)} style={{ flex }}>
+        <div ref={ref} className={clsx("relative", containerClass)} style={{ flex }}>
             <Component onClick={handlePolymorphicClick} { ...props }>
                 <button 
                     ref={buttonRef}
@@ -95,4 +95,4 @@ const BrandButton = <T extends React.ElementType = "div">({
     )
 }
 
-export default BrandButton;
+export default React.memo(React.forwardRef(BrandButton) as <T extends React.ElementType = "div", R = HTMLDivElement>(props: BrandButtonProps<T> & React.ComponentPropsWithoutRef<T> & React.RefAttributes<R>) => React.ReactElement | null);

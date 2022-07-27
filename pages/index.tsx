@@ -67,11 +67,11 @@ const Home : NextPageWithLayout<HomeProps> = ({ notificationFlags, testimonials 
           We teach K-12 students around the globe how to code for free.
         </h2>
         <Link href="/about" passHref>
-          <BrandButton 
-            title="Learn More" 
-            label="100% free" 
-            as="a"
-          />
+            <BrandButton 
+              title="Learn More" 
+              label="100% free" 
+              as="a"
+            />
         </Link>
       </header>
       <Animate>

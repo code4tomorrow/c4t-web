@@ -22,7 +22,12 @@ const WatsonAssistantChat : React.FC<{ children: ReactElement, createWebChatInst
           wacInstance.render();
         },
       }
-      window.watsonAssistantChatOptions = watsonAssistantChatOptions; 
+      window.watsonAssistantChatOptions = {
+        integrationID: config.watsonAssistantChat.integrationID,
+        region: config.watsonAssistantChat.region,
+        serviceInstanceID: config.watsonAssistantChat.serviceInstanceID,
+        onLoad: () => { return; }
+      }; 
       createWebChatInstance(watsonAssistantChatOptions);
     }, [ pathname ]);
 
