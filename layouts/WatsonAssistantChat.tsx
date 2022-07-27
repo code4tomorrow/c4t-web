@@ -26,7 +26,9 @@ const WatsonAssistantChat : React.FC<{ children: ReactElement, createWebChatInst
         integrationID: config.watsonAssistantChat.integrationID,
         region: config.watsonAssistantChat.region,
         serviceInstanceID: config.watsonAssistantChat.serviceInstanceID,
-        onLoad: () => { return; }
+        onLoad: (wacInstance:any) => { 
+          wacInstance.destroy() // removes deuplicate 
+        }
       }; 
       createWebChatInstance(watsonAssistantChatOptions);
     }, [ pathname ]);
