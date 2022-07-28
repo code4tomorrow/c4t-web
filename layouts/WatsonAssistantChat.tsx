@@ -20,7 +20,6 @@ const WatsonAssistantChat : React.FC<{ children: ReactElement, createWebChatInst
         serviceInstanceID: config.watsonAssistantChat.serviceInstanceID,
         namespace: `${window.origin}${pathname}`,
         onLoad: (wacInstance:any) => {
-          console.log(wacInstance)
           wacInstance.updateHomeScreenConfig({
             bot_avatar_url: getCloudinaryURL("logo"),
           })
@@ -32,6 +31,7 @@ const WatsonAssistantChat : React.FC<{ children: ReactElement, createWebChatInst
             "SECONDARY-color-text": "#fff",
             'SECONDARY-color': '#7892EE',
             'ACCENT-color-text': "#fff",
+            'ACCENT-color': "#7892EE",
             "ACCENT-color-ghost-text": "#7892EE",
             '$focus': '#7892EE',
             '$active-primary': '#7892EE',
