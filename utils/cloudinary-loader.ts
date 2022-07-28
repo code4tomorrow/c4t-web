@@ -24,7 +24,7 @@ export const cloudinaryTransformLoader = ({ transformations } : {transformations
 
 /**
  * 
- * @param path to image on cloudinary mahitm/
+ * @param path to image on cloudinary web-assets/
  * @param transformations for image
  * @returns Default Cloudinary URL
  */

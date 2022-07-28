@@ -42,7 +42,6 @@ const Home : NextPageWithLayout<HomeProps> = ({ notificationFlags, testimonials 
       className="w-screen flex flex-col min-h-screen bg-dark-grey-primary">
       <Head>
         <title>Home | C4T</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar notificationFlags={notificationFlags}/>
       <header className="flex flex-col space-y-6 justify-center items-center p-3">

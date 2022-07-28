@@ -7,6 +7,7 @@ import Head from 'next/head';
 import NextNProgress from "nextjs-progressbar";
 import { NextSeo } from 'next-seo';
 import { NextPageWithLayout } from 'common/interfaces/nextPageWithLayout';
+import { getCloudinaryURL } from '@utils/cloudinary-loader';
 
 let muiCache: EmotionCache | undefined = undefined;
 
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
           <meta name="theme-color" content="#111111" />
+          <link rel="icon" href={getCloudinaryURL("logo.ico")} />
       </Head>
       <NextSeo
         key={"root"}
