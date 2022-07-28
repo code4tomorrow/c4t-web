@@ -20,7 +20,33 @@ export default function ProgressBar ({
   showOnShallow = true,
   options,
 } : IProgressBarProps) {
-  let timer: NodeJS.Timeout | null = null
+  let timer = React.useRef<NodeJS.Timeout | null>(null);
+
+  const routeChangeStart = React.useCallback((
+    _ : string,
+    {
+      shallow
+    } : { shallow: boolean }
+  ) => {
+    if (!shallow || showOnShallow) {
+      NProgress.set(startPosition)
+      NProgress.start()
+    }
+  }, [ showOnShallow, startPosition ]);
+
+  const routeChangeEnd = React.useCallback((
+    _ : string,
+    {
+      shallow
+    } : { shallow: boolean }
+  ) => {
+    if (!shallow || showOnShallow) {
+      if (timer.current) clearTimeout(timer.current)
+      timer.current = setTimeout(() => {
+        NProgress.done(true)
+      }, stopDelayMs)
+    }
+  }, [ stopDelayMs, showOnShallow ])
 
   React.useEffect(() => {
     if (options) {
@@ -34,33 +60,7 @@ export default function ProgressBar ({
       Router.events.off('routeChangeComplete', routeChangeEnd)
       Router.events.off('routeChangeError', routeChangeEnd)
     }
-  }, [])
-
-  const routeChangeStart = (
-    _ : string,
-    {
-      shallow
-    } : { shallow: boolean }
-  ) => {
-    if (!shallow || showOnShallow) {
-      NProgress.set(startPosition)
-      NProgress.start()
-    }
-  }
-
-  const routeChangeEnd = (
-    _ : string,
-    {
-      shallow
-    } : { shallow: boolean }
-  ) => {
-    if (!shallow || showOnShallow) {
-      if (timer) clearTimeout(timer)
-      timer = setTimeout(() => {
-        NProgress.done(true)
-      }, stopDelayMs)
-    }
-  }
+  }, [ routeChangeStart, routeChangeEnd, options ])
 
   const style = css`
     #nprogress {
