@@ -18,7 +18,7 @@ import config from "config";
 import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
-import Testimonals from "@components/Testimonials";
+import Testimonials from "@components/Testimonials";
 import { ITestimonial } from "common/interfaces/testimonial";
 import WatsonAssistantChat from "layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
@@ -179,7 +179,7 @@ const Home : NextPageWithLayout<HomeProps> = ({ notificationFlags, testimonials 
                         Read what the Parents of graduated students are saying...
                   </Animate.Element>
               </div>
-              <Testimonals testimonials={testimonials} />
+              <Testimonials testimonials={testimonials} />
          </section>
          <section className="flex py-10 flex-col-reverse md:flex-row-reverse md:items-center justify-around w-full max-w-[1250px]">
               <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">

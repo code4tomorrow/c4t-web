@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { useStyles } from "./styles";
 import { ITestimonial } from "common/interfaces/testimonial";
 
-const TestimonalsCard = ({ testimonial, selected } : { testimonial: ITestimonial, selected:boolean }) => {
+const TestimonialsCard = ({ testimonial, selected } : { testimonial: ITestimonial, selected:boolean }) => {
     const { classes } = useStyles();
 
     return (
@@ -35,4 +35,4 @@ const TestimonalsCard = ({ testimonial, selected } : { testimonial: ITestimonial
     )
 }
 
-export default TestimonalsCard;
+export default TestimonialsCard;

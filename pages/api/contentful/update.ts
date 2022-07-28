@@ -39,6 +39,10 @@ export default async function handler(
     try {
         const modelId = req.body?.sys?.contentType?.sys?.id;
 
+        if ([ ContentModelID.TESTIMONIAL ].includes(modelId)) {
+            await attemptRevalidation(res, Pages.INDEX) && pagesRevalidated.push(Pages.INDEX);
+        }
+
         if ([ ContentModelID.COURSE, ContentModelID.PROMOTIONAL_LABEL ].includes(modelId)) {
             await attemptRevalidation(res, Pages.COURSES) && pagesRevalidated.push(Pages.COURSES);
         }
@@ -61,7 +65,6 @@ export default async function handler(
                 validPages.push(...validatedPages);
             }
 
-            console.log(validPages);
             await Promise.all(validPages.map(async (page:Pages) => ( 
                 await attemptRevalidation(res, page) && pagesRevalidated.push(page)
             )))

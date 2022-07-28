@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import TestimonalsCard from "./TestimonialCard";
+import TestimonialsCard from "./TestimonialCard";
 import { ITestimonial } from "common/interfaces/testimonial";
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from "embla-carousel-autoplay";
 import clsx from "clsx";
 import { useStyles } from "./styles";
 
-export const Testimonals = ({ testimonials } : { testimonials: ITestimonial[] }) => {
+export const Testimonials = ({ testimonials } : { testimonials: ITestimonial[] }) => {
     const autoplay = useRef(
         Autoplay({ 
             delay: 5000, 
@@ -54,7 +54,7 @@ export const Testimonals = ({ testimonials } : { testimonials: ITestimonial[] })
                 className={clsx("flex")}>
                 {
                     testimonials.map((testimonial, i) => (
-                        <TestimonalsCard selected={carouselMeta.currentIndex === i} key={i} testimonial={testimonial} />
+                        <TestimonialsCard selected={carouselMeta.currentIndex === i} key={i} testimonial={testimonial} />
                     ))
                 }
             </div>
@@ -76,4 +76,4 @@ export const Testimonals = ({ testimonials } : { testimonials: ITestimonial[] })
     )
 }
 
-export default Testimonals;
+export default Testimonials;

@@ -14,7 +14,8 @@ export enum ContentModelID {
     IMAGE = "image",
     FAQ = "faq",
     NOTIFICATION_FLAG = "notificationFlag",
-    VOLUNTEER_OPPORTUNITY = "volunteerOpportunity"
+    VOLUNTEER_OPPORTUNITY = "volunteerOpportunity",
+    TESTIMONIAL = "testimonial"
 }
 
 export interface IBaseContentModel {
