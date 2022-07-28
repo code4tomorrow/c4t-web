@@ -4,10 +4,10 @@ import type { AppProps } from 'next/app'
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createCache from '@emotion/cache';
 import Head from 'next/head';
-import NextNProgress from "nextjs-progressbar";
 import { NextSeo } from 'next-seo';
 import { NextPageWithLayout } from 'common/interfaces/nextPageWithLayout';
 import { getCloudinaryURL } from '@utils/cloudinary-loader';
+import ProgressBar from '@components/ProgressBar';
 
 let muiCache: EmotionCache | undefined = undefined;
 
@@ -57,10 +57,10 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
         }}
       />
       <React.StrictMode>
-        <NextNProgress
+        <ProgressBar
           options={{ showSpinner: false }}
-            color={"#fff"}
-            height={2}
+          color={"#fff"}
+          height={2}
         />
         { getLayout(<Component {...pageProps} />) }
       </React.StrictMode>
