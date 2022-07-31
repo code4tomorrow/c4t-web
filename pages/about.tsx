@@ -18,15 +18,17 @@ import { cloudinaryLoader } from "@utils/cloudinary-loader";
 import clsx from "clsx";
 import WatsonAssistantChat from "layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
+import JsonQL, { IJsonQLMini } from "@utils/jsonql";
 
 interface AboutProps {
-    directoryEntries: IDirectoryRow[],
+    directoryEntries: IJsonQLMini<IDirectoryRow[]>,
     notificationFlags: INotificationFlag[]
 }
 
 const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notificationFlags }) => {
     const missionRef = useRef<HTMLDivElement | null>(null);
-
+    let directoryEntriesParsed = new JsonQL().hydrate<IDirectoryRow[]>(directoryEntries)
+   
     const [ foundingStoryExpanded, setFoundingStoryExpanded ] = useState(false);
 
     return (
@@ -151,7 +153,7 @@ const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notification
                                     Together, a devoted set of High schoolers embark on making quality coding lessons <b>more accessible</b>.
                                 </Animate.Element>
                             </div>
-                            <Directory directoryEntries={directoryEntries} />
+                            <Directory directoryEntries={directoryEntriesParsed} /> 
                     </section>
                     <svg width={0} height={0} >   
                         <clipPath transform="scale(0.0125, 0.0125)" id="svgPath" clipPathUnits="objectBoundingBox">           
@@ -279,7 +281,7 @@ export async function getStaticProps() {
 
     return {
       props: { 
-        directoryEntries,
+        directoryEntries: new JsonQL().mini(directoryEntries),
         notificationFlags
       },
       // - At most once every 15 minutes

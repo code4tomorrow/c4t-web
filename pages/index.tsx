@@ -13,7 +13,7 @@ import GiftsSVG from "@svg/gifts.svg";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import Link from "next/link";
-import { cloudinaryLoader } from "@utils/cloudinary-loader";
+import { cloudinaryLoader, getCloudinaryURL } from "@utils/cloudinary-loader";
 import config from "config";
 import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
@@ -22,16 +22,14 @@ import Testimonials from "@components/Testimonials";
 import { ITestimonial } from "common/interfaces/testimonial";
 import WatsonAssistantChat from "layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
+import { getPlaiceholder } from "plaiceholder";
+import { InferGetServerSidePropsType } from "next";
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
-interface HomeProps {
-  notificationFlags: INotificationFlag[],
-  testimonials?: ITestimonial[],
-  createWebChatInstance: any
-}
-
-const Home : NextPageWithLayout<HomeProps> = ({ notificationFlags, testimonials = []  }) => {
+const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProps>> = ({ 
+  notificationFlags, testimonials = [], codeBlurDataURL 
+}) => {
   const { classes } = useStyles();
 
   const mainRef = React.useRef<HTMLDivElement | null>(null);
@@ -102,6 +100,8 @@ const Home : NextPageWithLayout<HomeProps> = ({ notificationFlags, testimonials 
                         loading="eager"
                         src="code"
                         priority
+                        placeholder="blur"
+                        blurDataURL={codeBlurDataURL}
                         loader={cloudinaryLoader}
                         quality={100}
                         alt="code-example"
@@ -274,11 +274,14 @@ export async function getStaticProps() {
 
   const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
   const testimonials:ITestimonial[] = response?.testimonialCollection?.items || [];
-  
+
+  const { base64: codeBlurDataURL } = await getPlaiceholder(getCloudinaryURL("code"), { size: 32 });
+
   return {
     props: { 
       notificationFlags,
-      testimonials
+      testimonials,
+      codeBlurDataURL
     },
     // - At most once every 15 minutes
     revalidate: 60 * 15, // In seconds
