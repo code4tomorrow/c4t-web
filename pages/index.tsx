@@ -275,7 +275,7 @@ export async function getStaticProps() {
   const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
   const testimonials:ITestimonial[] = response?.testimonialCollection?.items || [];
 
-  const { base64: codeBlurDataURL } = await getPlaiceholder(getCloudinaryURL("code"), { size: 32 });
+  const { base64: codeBlurDataURL } = await getPlaiceholder(getCloudinaryURL("code"), { size: 64 });
 
   return {
     props: { 
