@@ -9,7 +9,6 @@ class RootDocument extends Document {
         const initialProps = await Document.getInitialProps(ctx)
         return { ...initialProps }
     }
-
     render() {
         return (
             <Html lang="en">
