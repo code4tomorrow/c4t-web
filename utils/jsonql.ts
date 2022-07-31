@@ -27,10 +27,7 @@ export default class JsonQL {
             this.switchArray(object, this.getNextKey.bind(this)) : 
             this.switchObject(object, this.getNextKey.bind(this));
 
-        return {
-            data,
-            registry: this.registry
-        }
+        return { data, registry: this.registry }
     }
 
     public hydrate<T extends object>(object:IJsonQLMini<T>) : T {
@@ -53,7 +50,7 @@ export default class JsonQL {
         for (let key in object) {
             const isArray = Array.isArray(object[key]); 
             const isNull = object[key] === null;
-            
+
             if (typeof object[key] === "object" && !isArray && !isNull) {
                 const subobject = object[key];
                 switchedObject[getKey(key)] = this.switchObject<any>(subobject, getKey);
