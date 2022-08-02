@@ -24,6 +24,10 @@ import WatsonAssistantChat from "layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import { getPlaiceholder } from "plaiceholder";
 import { InferGetServerSidePropsType } from "next";
+import { modalState } from "common/atoms";
+import { useRecoilValue } from "recoil";
+import dynamic from "next/dynamic";
+const MemberSignUps = dynamic(() => import("@components/ModalTypes/MemberSignUps"));
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
@@ -33,6 +37,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
   const { classes } = useStyles();
 
   const mainRef = React.useRef<HTMLDivElement | null>(null);
+  const modalOpen = useRecoilValue(modalState);
 
   return (
     <div 
@@ -42,12 +47,13 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
         <title>Home | C4T</title>
       </Head>
       <Navbar notificationFlags={notificationFlags}/>
+      <MemberSignUps />
       <header className="flex flex-col space-y-6 justify-center items-center p-3">
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)", whiteSpace: "nowrap"}} 
           className="text-white text-5xl font-bold md:text-6xl mt-16 text-center">
             Master Coding&nbsp;<br className="md:hidden block"/>
-            <Typist cursor={<span className={classes.blinkingCursor}>|</span>} loop={true}>
+            <Typist pause={modalOpen} cursor={<span className={classes.blinkingCursor}>|</span>} loop={true}>
                 {
                   CODE_ITEMS.map((item, idx) => (
                     <span key={idx}>

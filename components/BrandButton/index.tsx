@@ -95,4 +95,4 @@ const BrandButton = <T extends React.ElementType = "div">({
     )
 }
 
-export default React.memo(React.forwardRef(BrandButton) as <T extends React.ElementType = "div", R = HTMLDivElement>(props: BrandButtonProps<T> & React.ComponentPropsWithoutRef<T> & React.RefAttributes<R>) => React.ReactElement | null);
+export default React.forwardRef(BrandButton) as <T extends React.ElementType = "div", R = HTMLDivElement>(props: BrandButtonProps<T> & React.ComponentPropsWithoutRef<T> & React.RefAttributes<R>) => React.ReactElement | null

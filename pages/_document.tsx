@@ -2,7 +2,6 @@ import React from 'react';
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import { withEmotionCache } from "tss-react/nextJs";
 import { createMuiCache } from './_app';
-// import { minify } from "html-minifier";
 
 class RootDocument extends Document {
     static async getInitialProps(ctx:DocumentContext) {

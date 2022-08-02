@@ -8,6 +8,7 @@ import { NextSeo } from 'next-seo';
 import { NextPageWithLayout } from 'common/interfaces/nextPageWithLayout';
 import { getCloudinaryURL } from '@utils/cloudinary-loader';
 import ProgressBar from '@components/ProgressBar';
+import { RecoilRoot } from "recoil";
 
 let muiCache: EmotionCache | undefined = undefined;
 
@@ -62,7 +63,11 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
           color={"#fff"}
           height={2}
         />
-        { getLayout(<Component {...pageProps} />) }
+        { getLayout(
+          <RecoilRoot>
+            <Component {...pageProps} />
+          </RecoilRoot>
+        ) }
       </React.StrictMode>
     </CacheProvider>
   )
