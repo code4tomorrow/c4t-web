@@ -1,6 +1,5 @@
 import React, { ReactElement }  from "react";
 import Head from "next/head"
-import BrandButton from "@components/BrandButton";
 import Paper from "@components/Paper";
 import Image from "next/image";
 import { useStyles } from "../styles/styles";
@@ -17,7 +16,6 @@ import config from "config";
 import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
-import Testimonials from "@components/Testimonials";
 import { ITestimonial } from "common/interfaces/testimonial";
 import WatsonAssistantChat from "layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
@@ -28,6 +26,8 @@ import { useRecoilValue } from "recoil";
 import dynamic from "next/dynamic";
 const MemberSignUps = dynamic(() => import("@components/ModalTypes/MemberSignUps"))
 const Navbar = dynamic(() => import("@components/Navbar"));
+const BrandButton = dynamic(() => import("@components/BrandButton"));
+const Testimonials = dynamic(() => import("@components/Testimonials"));
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 

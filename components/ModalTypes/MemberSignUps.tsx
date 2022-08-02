@@ -38,7 +38,7 @@ const MemberSignUps = () => {
 
     return (
         <Modal open={open} setOpen={(state:boolean) => setOpen(state)}>
-            <div className="lg:w-screen overflow-hidden flex text-center relative justify-center items-center flex-col max-w-4xl sm:px-6 py-12">
+            <div className="lg:w-screen overflow-hidden flex text-center relative justify-center items-center flex-col max-w-4xl sm:px-6 pt-12 pb-6">
                 <BinaryParticles />
                 <h1 id={"header-modal"} className="text-4xl md:text-5xl my-1 font-bold text-white">
                     Member Signups Open&nbsp;
@@ -54,9 +54,17 @@ const MemberSignUps = () => {
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     href="https://tally.so/r/mVgJl3"
-                    containerClass="mt-14" 
+                    containerClass="mt-12" 
                     title="Apply Today."
                 />
+                <a 
+                    className="mt-6 text-medium-grey hover:underline"
+                    rel="noopener noreferrer nofollow"
+                    target={"_blank"}
+                    href="mailto:hello@code4tomorrow.org"
+                >
+                    <span>hello@code4tomorrow.org</span>
+                </a>
             </div>
         </Modal>
     )

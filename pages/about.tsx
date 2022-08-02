@@ -1,4 +1,3 @@
-import Directory from "@components/About/Directory";
 import Skill from "@components/About/Skill";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
@@ -20,6 +19,7 @@ import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import JsonQL, { IJsonQLMini } from "@utils/jsonql";
 import dynamic from "next/dynamic";
 const Navbar = dynamic(() => import("@components/Navbar"));
+const Directory = dynamic(() => import("@components/About/Directory"));
 
 interface AboutProps {
     directoryEntries: IJsonQLMini<IDirectoryRow[]>,
