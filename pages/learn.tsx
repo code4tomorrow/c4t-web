@@ -1,15 +1,16 @@
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import FAQSection from "@components/Learn/FAQSection";
-import Navbar from "@components/Navbar";
 import { graphQLClient } from "@utils/contentful";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import config from "config";
 import { gql } from "graphql-request";
 import WatsonAssistantChat from "layouts/WatsonAssistantChat";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { ReactElement } from "react";
+const Navbar = dynamic(() => import("@components/Navbar"));
 
 export interface IFAQ {
     question?: string; 

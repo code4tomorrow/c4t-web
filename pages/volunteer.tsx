@@ -1,5 +1,4 @@
 import Footer from "@components/Footer";
-import Navbar from "@components/Navbar";
 import Head from "next/head";
 import VolunteerCard from "@components/Volunteer";
 import { gql } from "graphql-request";
@@ -11,6 +10,8 @@ import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { ReactElement } from "react";
 import WatsonAssistantChat from "layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
+import dynamic from "next/dynamic";
+const Navbar = dynamic(() => import("@components/Navbar"));
 
 export interface IVolunteerOpportunity extends IBaseContentModel {
     name?: string; 

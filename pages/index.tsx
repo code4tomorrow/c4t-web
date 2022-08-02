@@ -5,7 +5,6 @@ import Paper from "@components/Paper";
 import Image from "next/image";
 import { useStyles } from "../styles/styles";
 import clsx from "clsx";
-import Navbar from "@components/Navbar";
 import Typist from "react-typist-component";
 import LearnSVG from "@svg/learn.svg";
 import TeamSVG from "@svg/team.svg";
@@ -27,7 +26,8 @@ import { InferGetServerSidePropsType } from "next";
 import { modalState } from "common/atoms";
 import { useRecoilValue } from "recoil";
 import dynamic from "next/dynamic";
-const MemberSignUps = dynamic(() => import("@components/ModalTypes/MemberSignUps"));
+const MemberSignUps = dynamic(() => import("@components/ModalTypes/MemberSignUps"))
+const Navbar = dynamic(() => import("@components/Navbar"));
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 

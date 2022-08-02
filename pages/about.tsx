@@ -2,7 +2,6 @@ import Directory from "@components/About/Directory";
 import Skill from "@components/About/Skill";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
-import Navbar from "@components/Navbar";
 import { getDirectory, IDirectoryRow } from "@utils/notion/directory";
 import Head from "next/head";
 import PairCoding from "@svg/pair-coding.svg";
@@ -19,6 +18,8 @@ import clsx from "clsx";
 import WatsonAssistantChat from "layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import JsonQL, { IJsonQLMini } from "@utils/jsonql";
+import dynamic from "next/dynamic";
+const Navbar = dynamic(() => import("@components/Navbar"));
 
 interface AboutProps {
     directoryEntries: IJsonQLMini<IDirectoryRow[]>,

@@ -1,7 +1,6 @@
 import { gql } from "graphql-request";
 import { graphQLClient } from "@utils/contentful";
 import Head from "next/head";
-import Navbar from "@components/Navbar";
 import useEmblaCarousel from 'embla-carousel-react'
 import Course from "@components/Course";
 import Footer from "@components/Footer";
@@ -15,6 +14,8 @@ import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import WatsonAssistantChat from "layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
+import dynamic from "next/dynamic";
+const Navbar = dynamic(() => import("@components/Navbar"));
 
 export interface ICourse {
     title?: string; 
