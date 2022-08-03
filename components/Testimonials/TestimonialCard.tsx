@@ -1,19 +1,25 @@
 import Paper from "@components/Paper";
-import React from "react";
+import React, { useMemo } from "react";
 import QuoteSVG from "@svg/quote.svg";
 import { StarIcon as StarIconSolid } from "@heroicons/react/solid";
 import clsx from "clsx";
 import { useStyles } from "./styles";
 import { ITestimonial } from "common/interfaces/testimonial";
+import { ETestimonialType } from "common/enums/testimonial";
 
 const TestimonialsCard = ({ testimonial, selected } : { testimonial: ITestimonial, selected:boolean }) => {
     const { classes } = useStyles();
 
+    const isStudent = useMemo(() => 
+        testimonial.type && testimonial.type === ETestimonialType.STUDENT, 
+    [ testimonial ]);
+
     return (
         <div>
             <Paper containerClass={clsx(
-                "min-w-[350px] transition-all duration-300 flex mx-8 flex-col p-5 z-10 space-y-3 justify-center items-center min-h-[275px]",
+                "min-w-[350px] !overflow-visible transition-all duration-300 flex mx-8 flex-col p-5 z-10 space-y-3 justify-center items-center min-h-[275px]",
                 classes.cardContainer,
+                isStudent && classes.student,
                 selected && "-translate-y-[25px]"
             )}>
                 <QuoteSVG width={50} fill="#7892EE" />

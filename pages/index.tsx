@@ -265,7 +265,8 @@ export async function getStaticProps() {
         items {
           text,
           rating,
-          attestant
+          attestant,
+          type
         }
       }
     }

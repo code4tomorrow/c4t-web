@@ -1,3 +1,4 @@
+import { getCloudinaryURL } from "@utils/cloudinary-loader";
 import { makeStyles } from "tss-react/mui";
 
 export const useStyles = makeStyles()(() => ({
@@ -22,6 +23,21 @@ export const useStyles = makeStyles()(() => ({
         },
         "&::after": {
             right: 0,
+        }
+    },
+    student: {
+        "&::after": {
+            content: "''",
+            display: "block",
+            backgroundImage: `url(${getCloudinaryURL("graduation-cap")})`,
+            backgroundSize: 85,
+            backgroundRepeat: "no-repeat",
+            width: 85,
+            height: 85,
+            position: "absolute",
+            left: "0%",
+            top: "0%",
+            transform: "translate(-45%, -45%) rotateZ(-35deg)"
         }
     },
     cardContainer: {

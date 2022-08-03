@@ -169,12 +169,12 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             ref={linkHighlightRef}
         />
         <nav ref={navRef} className={clsx(
-            "px-10 py-3 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
+            "px-10 py-5 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
             navHidden ? "-translate-y-full" : "translate-y-0",
             classes.nav,
         )}>
             <Link href="/" passHref>
-                <a className="hover:opacity-80 transition-opacity">
+                <a className="hover:opacity-80 h-4 transition-opacity">
                     {/* <Image 
                         loader={cloudinaryLoader}
                         src={"logo"}
