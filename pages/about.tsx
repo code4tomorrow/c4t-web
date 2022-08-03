@@ -123,7 +123,7 @@ const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notification
                                 <Skill stat={"165+"} label="Teachers">
                                     Over a hundred dedicated high-school teachers passing along their knowledge to k-12 students.
                                 </Skill>
-                                <Skill stat={"15+"} label="Countries">
+                                <Skill stat={"150+"} label="Cities">
                                     Our organization has reached 150+ cities spread across 15+ countries including Kazakhstan, Kenya, Turkey, Malaysia, and Uzbekistan.
                                 </Skill>
                                 <Skill stat={"40,000+"} label="Individuals Impacted">

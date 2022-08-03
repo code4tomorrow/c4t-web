@@ -10,6 +10,8 @@ import { useNavigator } from "hooks/useNavigator";
 import GoArrow from "@components/GoArrow";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import Document from "@components/Document";
+import Image from "next/image";
+import { cloudinaryLoader } from "@utils/cloudinary-loader";
 
 const NavNotification = ({ notificationFlag } : { notificationFlag: INotificationFlag }) => {
     const { classes } = useStyles();
@@ -167,18 +169,22 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             ref={linkHighlightRef}
         />
         <nav ref={navRef} className={clsx(
-            "px-10 py-5 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
+            "px-10 py-3 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
             navHidden ? "-translate-y-full" : "translate-y-0",
             classes.nav,
         )}>
             <Link href="/" passHref>
-                <a>
+                <a className="hover:opacity-80 transition-opacity">
+                    {/* <Image 
+                        loader={cloudinaryLoader}
+                        src={"logo"}
+                        width={41}
+                        height={41}
+                        quality={100}
+                    /> */}
                     <h1 className="text-lg font-bold text-white">C4T</h1>
                 </a>
             </Link>
-            {/* <div className="hidden lg:block">
-                <NavNotification />
-            </div> */}
             <div className={clsx(
                 "flex md:hidden flex-col space-y-1 cursor-pointer", 
                 classes.barsContainer,
@@ -186,9 +192,9 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             )}
                 onClick={() => setMobileNavOpen(!mobileNavOpen)}
             >
-                <span></span>
-                <span></span>
-                <span></span>
+                <span/>
+                <span/>
+                <span/>
             </div>
             <ul 
                 className={

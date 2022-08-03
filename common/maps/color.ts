@@ -1,12 +1,12 @@
 export const notionColorMap = (color: string) => {
     switch (color) {
-        case "green" : return "#25C370";
-        case "yellow" : return "#DBBA2F"
+        case "green" : return "#1D9757";
+        case "yellow" : return "#AC8E12"
         case "blue" : return "#2C50FF"
-        case "red" : return "#FF877E"
-        case "pink" : return "#FF69D4"
+        case "red" : return "#F36F65"
+        case "pink" : return "#DF5EBA"
         case "orange" : return "#E18D22"
-        case "purple" : return "#D73FD0"
+        case "purple" : return "#C633BF"
         default: return color; 
     }
 } 

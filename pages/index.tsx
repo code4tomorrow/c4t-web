@@ -175,14 +175,14 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                       from={{ y: 60, opacity: 0 }}
                       to={{ y: 0, opacity: 1 }}
                       className="text-5xl font-bold text-white text-center">
-                          Parent <span className="text-brand-purple-secondary">Testimonials</span>
+                          Parent & Alumni <span className="text-brand-purple-secondary">Testimonials</span>
                   </Animate.Element>
                   <Animate.Element
                       as="p" 
                       from={{ y: 90,  opacity: 0 }}
                       to={{ y: 0, opacity: 1, delay: 0.15 }}
                       className="text-lg !mt-3 text-medium-grey text-center">
-                        Read what the Parents of graduated students are saying...
+                        Read what the Parents & Graduated Students are saying...
                   </Animate.Element>
               </div>
               <Testimonials testimonials={testimonials} />
@@ -261,7 +261,7 @@ export async function getStaticProps() {
           link
         }
       }
-      testimonialCollection(limit:$testimonialLimit) {
+      testimonialCollection(preview:$preview, limit:$testimonialLimit) {
         items {
           text,
           rating,
@@ -271,7 +271,7 @@ export async function getStaticProps() {
     }
   `, { 
       preview: config.contentful.preview, 
-      testimonialLimit: 5,
+      testimonialLimit: 8,
       where: { 
         isVisible:true, 
         pages_contains_some:["/", "*"]
