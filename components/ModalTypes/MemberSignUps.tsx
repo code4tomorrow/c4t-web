@@ -1,13 +1,13 @@
 import BinaryParticles from "@components/BinaryParticles";
 import BrandButton from "@components/BrandButton";
 import Modal from "@components/Modal";
-import { useAtom } from "@utils/recoil";
+import { createAtom } from "@utils/recoil";
 import gsap from "gsap";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import SplitType from 'split-type'
 
-const viewedMemberSigupModal = useAtom({ key: "viewedMemberSigupModal", default: false });
+const viewedMemberSigupModal = createAtom({ key: "viewedMemberSigupModal", default: false });
 
 const MemberSignUps = () => {
     const [ open, setOpen ] = useState(false);
