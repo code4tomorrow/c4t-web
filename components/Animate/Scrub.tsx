@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import _ from 'lodash';
+import _isEqual from "lodash/isEqual";
+import cloneDeep from "lodash/cloneDeep";
 import React, { ComponentPropsWithoutRef, ElementType, useCallback, useEffect, useRef, useState } from 'react';
 import { useStyles } from './styles';
 import gsap from "gsap";
@@ -32,8 +33,8 @@ const Scrub = <T extends ElementType = "div">({
     }>({ from: undefined, to: undefined});
 
     useEffect(() => {
-        if (!_.isEqual(from, animation.from) || !_.isEqual(to, animation.to)) {
-            setAnimation({ from: _.cloneDeep(from), to: _.cloneDeep(to) });
+        if (!_isEqual(from, animation.from) || !_isEqual(to, animation.to)) {
+            setAnimation({ from: cloneDeep(from), to: cloneDeep(to) });
         }
     }, [ from, to, animation.from, animation.to ]);
 

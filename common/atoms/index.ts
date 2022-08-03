@@ -1,6 +1,3 @@
-import { atom } from "recoil";
+import { useAtom } from "@utils/recoil";
 
-export const modalState = atom({
-    key: "modalState",
-    default: false
-})  
+export const modalState = useAtom({ key: "modalState", default: false });

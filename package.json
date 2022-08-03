@@ -50,7 +50,8 @@
     "sharp": "^0.30.7",
     "split-type": "^0.3.2",
     "tss-react": "^3.7.0",
-    "use-debounce": "^8.0.1"
+    "use-debounce": "^8.0.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@emotion/server": "^11.4.0",
@@ -63,6 +64,7 @@
     "@types/react-table": "^7.7.12",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
     "@types/react-window": "^1.8.5",
+    "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.7",
     "eslint": "8.18.0",
     "eslint-config-next": "12.2.0",

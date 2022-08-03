@@ -1,4 +1,5 @@
-import _ from "lodash";
+import invert from "lodash/invert";
+import cloneDeep from "lodash/cloneDeep";
 
 export interface IJsonQLMini<T extends object> {
     registry: {
@@ -31,7 +32,7 @@ export default class JsonQL {
     }
 
     public hydrate<T extends object>(object:IJsonQLMini<T>) : T {
-        this.registry =_.invert(_.cloneDeep(object.registry));
+        this.registry = invert(cloneDeep(object.registry));
         const data = Array.isArray(object.data) ? 
             this.switchArray(object.data, this.injectKey.bind(this)) : 
             this.switchObject(object.data, this.injectKey.bind(this));

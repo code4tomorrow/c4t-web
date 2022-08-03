@@ -1,7 +1,6 @@
 import React, { ReactElement }  from "react";
 import Head from "next/head"
 import Paper from "@components/Paper";
-import Image from "next/image";
 import { useStyles } from "../styles/styles";
 import clsx from "clsx";
 import Typist from "react-typist-component";
@@ -24,6 +23,7 @@ import { InferGetServerSidePropsType } from "next";
 import { modalState } from "common/atoms";
 import { useRecoilValue } from "recoil";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 const MemberSignUps = dynamic(() => import("@components/ModalTypes/MemberSignUps"))
 const Navbar = dynamic(() => import("@components/Navbar"));
 const BrandButton = dynamic(() => import("@components/BrandButton"));
@@ -110,7 +110,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                         blurDataURL={codeBlurDataURL}
                         loader={cloudinaryLoader}
                         quality={100}
-                        alt="code-example"
+                        alt="code-demo"
                         objectFit="cover"
                         layout="fill"
                     />

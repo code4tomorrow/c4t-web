@@ -32,6 +32,9 @@ export const getDirectory = async () : Promise<IDirectoryRow[]> => {
         data = await notion.databases.query({
           database_id: databaseId,
           start_cursor: undefined,
+          sorts: [{ 
+            property: "Position", direction: "ascending"
+        }]
         });
     } catch (e:any) {
         return [];
@@ -76,5 +79,5 @@ export const getDirectory = async () : Promise<IDirectoryRow[]> => {
         };
     });
   
-    return rows.reverse();
+    return rows;
 }

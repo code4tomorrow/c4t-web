@@ -1,7 +1,7 @@
 export const notionColorMap = (color: string) => {
     switch (color) {
         case "green" : return "#25C370";
-        case "yellow" : return "#E7BF1E"
+        case "yellow" : return "#DBBA2F"
         case "blue" : return "#2C50FF"
         case "red" : return "#FF877E"
         case "pink" : return "#FF69D4"
