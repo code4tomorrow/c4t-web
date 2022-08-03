@@ -1,21 +1,30 @@
 import BinaryParticles from "@components/BinaryParticles";
 import BrandButton from "@components/BrandButton";
 import Modal from "@components/Modal";
+import { useAtom } from "@utils/recoil";
 import gsap from "gsap";
 import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import SplitType from 'split-type'
+
+const viewedMemberSigupModal = useAtom({ key: "viewedMemberSigupModal", default: false });
 
 const MemberSignUps = () => {
     const [ open, setOpen ] = useState(false);
+    const [ viewed, setViewed ] = useRecoilState(viewedMemberSigupModal);
 
     useEffect(() => {
-        setTimeout(() => { setOpen(true) }, 250)
-    }, []);
+        if (viewed) return; 
+        const timeout = setTimeout(() => { 
+            setOpen(true) 
+            setViewed(true);
+        }, 250)
+        return () => { clearTimeout(timeout); }
+    }, [ viewed ]);
 
     useEffect(() => {
         const header = new SplitType(`#header-modal`, {
             types: 'words',
-            absolute: false,
         });
 
         if (header.words && Array.isArray(header.words)) {
@@ -31,7 +40,7 @@ const MemberSignUps = () => {
         gsap.from(header.words, {
             yPercent: 200,
             ease: "power4",
-            stagger: 0.2,
+            stagger: 0.1,
             delay: 0.5
         })
     }, [])

@@ -51,7 +51,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
       <header className="flex flex-col space-y-6 justify-center items-center p-3">
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)", whiteSpace: "nowrap"}} 
-          className="text-white text-5xl font-bold md:text-6xl mt-16 text-center">
+          className="text-white xs:text-5xl md:!text-6xl text-4xl font-bold mt-16 text-center">
             Master Coding&nbsp;<br className="md:hidden block"/>
             <Typist pause={modalOpen} cursor={<span className={classes.blinkingCursor}>|</span>} loop={true}>
                 {

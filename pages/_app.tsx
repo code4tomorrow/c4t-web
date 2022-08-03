@@ -36,21 +36,21 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
       </Head>
       <NextSeo
         key={"root"}
-        title="Code4Tomorrow"
+        title="Code 4 Tomorrow"
         additionalMetaTags={[
           {
             name: "keywords",
-            content: "code4tomorrow,c4t,code,free,non-profit"
+            content: "code 4 tomorrow,c4t,code,free,non-profit"
           }
         ]}
-        description="Code4Tomorrow is entirely student-run, from the official website to merch design and finance management. Fiscally sponsored by Irvine LIGHTS, C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers."
+        description="Code 4 Tomorrow is entirely student-run, from the official website to merch design and finance management. Fiscally sponsored by Irvine LIGHTS, C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers."
         openGraph={{
           url: "https://v2.code4tomorrow.org/",
-          title: "Code4Tomorrow",
-          description: "Code4Tomorrow is entirely student-run, from the official website to merch design and finance management. Fiscally sponsored by Irvine LIGHTS, C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers.",
+          title: "Code 4 Tomorrow",
+          description: "Code 4 Tomorrow is entirely student-run, from the official website to merch design and finance management. Fiscally sponsored by Irvine LIGHTS, C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers.",
           images: [
           ],
-          site_name: "Code4Tomorrow",
+          site_name: "Code 4 Tomorrow",
         }}
         twitter={{
           site: 'https://v2.code4tomorrow.org/',

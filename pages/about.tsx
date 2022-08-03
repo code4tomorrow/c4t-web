@@ -54,8 +54,8 @@ const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notification
                             as="h1" 
                             from={{ y: 60, opacity: 0 }}
                             to={{ y: 0, opacity: 1 }}
-                            className="md:text-6xl text-4xl font-bold text-white text-center">
-                                What is <span className="text-brand-purple-secondary">Code4Tomorrow</span>?
+                            className="md:!text-6xl xs:text-4xl text-3xl font-bold text-white text-center">
+                                What is <span className="text-brand-purple-secondary whitespace-nowrap">Code 4 Tomorrow</span>?
                         </Animate.Element>
                         <Animate.Element
                             resetAfterTriggered={false}
