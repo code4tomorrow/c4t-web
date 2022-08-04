@@ -16,7 +16,7 @@ import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { ITestimonial } from "common/interfaces/testimonial";
-import WatsonAssistantChat from "layouts/WatsonAssistantChat";
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import { getPlaiceholder } from "plaiceholder";
 import { InferGetServerSidePropsType } from "next";
