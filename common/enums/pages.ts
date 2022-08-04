@@ -3,5 +3,6 @@ export enum Pages {
     COURSES = "/courses",
     LEARN = "/learn",
     VOLUNTEER = "/volunteer",
-    ABOUT = "/about"
+    ABOUT = "/about",
+    API_JOB_PREVIEW = "/api/contentful/job/preview"
 }
