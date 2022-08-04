@@ -2,10 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { gql } from "graphql-request";
 import { graphQLClient } from "@utils/contentful";
 
-export const config = {
-    runtime: 'experimental-edge'
-}
-
 const jobPreviewQuery = gql`
     query {
         jobCollection {
