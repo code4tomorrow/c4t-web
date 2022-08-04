@@ -17,7 +17,7 @@ const jobPreviewQuery = gql`
     }
 `
 
-const CACHE_TTL = 60 * 30; 
+const CACHE_TTL = 60 * 10; 
 
 export default async function handler(
     _req: NextApiRequest,

@@ -50,10 +50,6 @@ export default async function handler(
         if ([ ContentModelID.FAQ ].includes(modelId)) {
             await attemptRevalidation(res, Pages.LEARN) && pagesRevalidated.push(Pages.LEARN);
         }
-
-        if ([ ContentModelID.JOB ].includes(modelId)) {
-            await attemptRevalidation(res, Pages.API_JOB_PREVIEW) && pagesRevalidated.push(Pages.API_JOB_PREVIEW);
-        }
         
         if ([ ContentModelID.VOLUNTEER_OPPORTUNITY ].includes(modelId)) {
             await attemptRevalidation(res, Pages.VOLUNTEER) && pagesRevalidated.push(Pages.VOLUNTEER);
