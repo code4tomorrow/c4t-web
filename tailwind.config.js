@@ -18,6 +18,8 @@ module.exports = {
         "dim-grey": "#68656F", // 
         "brand-blue-primary": " #5A4CAD",
         "brand-purple-secondary": "#7892EE",
+        // "brand-blue-primary": "#71DBB6", 
+        // "brand-purple-secondary": "#52A4B1",
       }
     },
   },

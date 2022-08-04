@@ -24,7 +24,7 @@ import { modalState } from "common/atoms";
 import { useRecoilValue } from "recoil";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-const MemberSignUps = dynamic(() => import("@components/ModalTypes/MemberSignUps"))
+import MemberSignUps from "@components/ModalTypes/MemberSignUps";
 const Navbar = dynamic(() => import("@components/Navbar"));
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
@@ -98,7 +98,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 ref={mainRef}
                 resetAfterTriggered={false}
                 start="top bottom"
-                from={{ y: 200 }} to={{ y: 0 }}
+                from={{ y: 0 }} to={{ y: 0 }}
                 className={clsx("w-full h-[80%] z-10", classes.carouselContainer)}>
                 <Paper containerClass={clsx("relative w-full h-full")}>
                     <Image
@@ -106,8 +106,8 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                         loading="eager"
                         src="code"
                         priority
-                        placeholder="blur"
-                        blurDataURL={codeBlurDataURL}
+                        // placeholder="blur"
+                        // blurDataURL={codeBlurDataURL}
                         loader={cloudinaryLoader}
                         quality={100}
                         alt="code-demo"

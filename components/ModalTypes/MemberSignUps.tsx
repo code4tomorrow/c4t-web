@@ -1,11 +1,12 @@
-import BinaryParticles from "@components/BinaryParticles";
 import BrandButton from "@components/BrandButton";
 import Modal from "@components/Modal";
 import { createAtom } from "@utils/recoil";
 import gsap from "gsap";
+import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import SplitType from 'split-type'
+const BinaryParticles = dynamic(() => import("@components/BinaryParticles"));
 
 const viewedMemberSigupModal = createAtom({ key: "viewedMemberSigupModal", default: false });
 
@@ -20,7 +21,7 @@ const MemberSignUps = () => {
             setViewed(true);
         }, 250)
         return () => { clearTimeout(timeout); }
-    }, [ viewed ]);
+    }, [ viewed, setViewed ]);
 
     useEffect(() => {
         const header = new SplitType(`#header-modal`, {
