@@ -106,8 +106,8 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                         loading="eager"
                         src="code"
                         priority
-                        // placeholder="blur"
-                        // blurDataURL={codeBlurDataURL}
+                        //placeholder="blur"
+                        //blurDataURL={codeBlurDataURL}
                         loader={cloudinaryLoader}
                         quality={100}
                         alt="code-demo"

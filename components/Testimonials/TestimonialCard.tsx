@@ -19,7 +19,7 @@ const TestimonialsCard = ({ testimonial, selected } : { testimonial: ITestimonia
             <Paper containerClass={clsx(
                 "min-w-[350px] !overflow-visible transition-all duration-300 flex mx-8 flex-col p-5 z-10 space-y-3 justify-center items-center min-h-[275px]",
                 classes.cardContainer,
-                isStudent && classes.student,
+                // isStudent && classes.student,
                 selected && "-translate-y-[25px]"
             )}>
                 <QuoteSVG width={50} fill="#7892EE" />
