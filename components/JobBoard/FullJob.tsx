@@ -1,6 +1,6 @@
 import Document from "@components/Document";
 import { fetcher } from "@utils/fetcher";
-import { Pages } from "common/enums/pages";
+import { getAPIJobByID } from "common/endpoints/jobs";
 import { IJob, IJobPreview } from "common/interfaces/job";
 import React, { useMemo } from "react";
 import useSWR from "swr";
@@ -10,9 +10,9 @@ interface IFullJobProps {
 }
 
 const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
-    const { data:queriedJob } = useSWR<IJob>(`${Pages.API_JOB}/${preview.sys?.id}`, {
+    const { data:queriedJob } = useSWR<IJob>(getAPIJobByID(preview.sys?.id), {
         fetcher
-    })
+    });
 
     const job:IJob = useMemo(() => ({ ...preview, ...queriedJob }), [ preview, queriedJob ])
 

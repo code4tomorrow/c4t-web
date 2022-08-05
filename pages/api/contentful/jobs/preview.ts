@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { gql } from "graphql-request";
-import { graphQLClient } from "@utils/contentful";
+import { graphQLClient, IPagination } from "@utils/contentful";
+import { IJobPreview } from "common/interfaces/job";
 
 const jobPreviewQuery = gql`
-    query {
-        jobCollection {
+    query($limit: Int!, $skip: Int!) {
+        jobCollection(limit:$limit, skip:$skip) {
             items {
                 sys {
                     id,
@@ -12,7 +13,10 @@ const jobPreviewQuery = gql`
                 title,
                 skills,
                 faction
-            }
+            },
+            total,
+            skip,
+            limit
         }
     }
 `
@@ -20,13 +24,21 @@ const jobPreviewQuery = gql`
 const CACHE_TTL = 60 * 10; 
 
 export default async function handler(
-    _req: NextApiRequest,
-    res: NextApiResponse
+    req: NextApiRequest,
+    res: NextApiResponse<IPagination<IJobPreview>>
   ) {
-    const response = await graphQLClient.request(jobPreviewQuery);
-    const items = response?.jobCollection?.items || [];
+    const limit = parseInt(req.query.limit as string) || 5;
+    const page = parseInt(req.query.page as string) || 0;
+
+    const response = await graphQLClient.request(jobPreviewQuery, { 
+        limit,
+        skip: page * limit
+    });
+
+    const json = { items: [], ...response?.jobCollection }
 
     res.setHeader('Cache-Control', `s-maxage=${CACHE_TTL}, stale-while-revalidate`);
-    res.json(items);
+
+    res.json(json);
 }
 

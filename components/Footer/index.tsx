@@ -43,7 +43,7 @@ const Footer : React.FC<FooterProps> = ({ className, ...props }) => {
             className={clsx("bg-dark-grey-secondary w-full space-y-3 mt-auto flex justify-center items-center flex-col p-4", className)}
             { ...props}
         >
-            <div className="w-full">
+            <div className="w-full flex justify-center">
                 <div className="grid w-full justify-items-center grid-cols-2 md:grid-cols-4 max-w-[1450px]">
                     <ul>
                         <FooterHeader>sitemap</FooterHeader>

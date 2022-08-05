@@ -24,3 +24,10 @@ export interface IBaseContentModel {
         id?: string; 
     }
 }
+
+export interface IPagination<T> {
+    items?: T[];
+    skip?: number; 
+    total?: number;
+    limit?: number; 
+}
