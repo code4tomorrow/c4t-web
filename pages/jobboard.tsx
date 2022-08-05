@@ -23,6 +23,7 @@ import { InferGetStaticPropsType } from "next";
 import Modal from "@components/Modal";
 import useDimensions from "hooks/useDimensions";
 import flatMap from "lodash/flatMap";
+import Loader from "@components/Loader";
 
 const getJobAPIKey = (pageIndex:number) => {
     return getAPIJobsPreview(pageIndex, 5);        
@@ -30,7 +31,7 @@ const getJobAPIKey = (pageIndex:number) => {
   
 
 const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProps>> = ({ notificationFlags }) => {
-    const [ jobId, setJobId ] = useState<string | undefined>();
+    const [ jobId, setJobId ] = useState<string | null | undefined>(undefined);
 
     const { data:jobPages, error, setSize, size } = useSWRInfinite<IPagination<IJobPreview>>(getJobAPIKey, {
         fetcher,
@@ -41,17 +42,19 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
 
     const jobs = useMemo(() => flatMap(jobPages?.map(({ items }) => items || [])), [jobPages]);
 
-    useEffect(() => {
-        if (jobId === undefined && size === 1 && jobs.length > 0) {
-            setJobId(jobs[0].sys?.id);
-        }
-    }, [ size, jobs, jobId ]);
 
-    const loading = useMemo(() => jobs?.length === 0 && !error, [ error, jobs ]);
+    const initialLoading = useMemo(() => jobs?.length === 0 && !error, [ error, jobs ]);
+    const isLoadingMore = size > 0 && jobPages && typeof jobPages[size - 1] === 'undefined'
     const selectedJob = useMemo(() => jobs?.find(job => job.sys?.id === jobId), [ jobId, jobs ]);
 
     const { width } = useDimensions({ enableDebounce: true })
     const isMobile = useMemo(() => width < 768, [ width ]);
+
+    useEffect(() => {
+        if (jobId === undefined && size === 1 && jobs.length > 0 && !isMobile) {
+            setJobId(jobs[0].sys?.id);
+        }
+    }, [ size, jobs, jobId, isMobile ]);
 
     const hasMore = useMemo(() => {
         const lastPage = jobPages?.slice(-1); 
@@ -75,7 +78,7 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
             <Navbar notificationFlags={notificationFlags}/>
             {
                 isMobile && (
-                    <Modal open={!!selectedJob} setOpen={() => { setJobId(undefined) }}>
+                    <Modal open={!!selectedJob} setOpen={() => { setJobId(null) }}>
                         { selectedJob && <FullJob preview={selectedJob} /> }
                     </Modal>
                 )
@@ -130,7 +133,7 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                             ))
                         }
                         {
-                            Array.from({ length: loading ? 5 : 0 }).map((_, i) => (
+                            Array.from({ length: initialLoading ? 5 : 0 }).map((_, i) => (
                                 <JobPreview 
                                     key={i}
                                     selected={false}
@@ -139,15 +142,16 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                                 />
                             ))
                         }
-                        <div>
+                        <div className="flex justify-center items-center">
                             {
                                 hasMore ? (
-                                    <p 
+                                    <div
                                         role="button"
                                         onClick={handleNextPage}
-                                        className="text-brand-purple-secondary hover:opacity-75 transition-opacity cursor-pointer text-center">
-                                            Load More
-                                    </p>
+                                        className="text-brand-purple-secondary space-x-2 flex hover:opacity-75 transition-opacity cursor-pointer text-center">
+                                            { isLoadingMore && <Loader /> }
+                                            <span>Load More</span>
+                                    </div>
                                 ) : (
                                     <p className="text-medium-grey text-center">
                                        <span className="text-brand-purple-secondary">Stay Tuned</span> for more Member Positions.
@@ -164,7 +168,7 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                                         <button 
                                             aria-label="hide job"
                                             name="hide job"
-                                            onClick={() => { setJobId(undefined) }} 
+                                            onClick={() => { setJobId(null) }} 
                                             type="button" 
                                             className="text-gray-400 bg-transparent border-b-4 border-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="small-modal">
                                             <XIcon style={{ width: 22.5 }} />  
