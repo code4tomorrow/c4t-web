@@ -146,8 +146,8 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
               <Paper containerClass="w-[65%] min-h-[25%]"></Paper>
             </Animate.Element>
          </section>
-         <section ref={sessionRef} className="flex py-5 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
-              <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
+         <section className="flex py-5 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
+              <article ref={sessionRef} className="space-y-5 flex flex-col md:max-w-[50%] px-2">
                 <Animate.Element 
                    onDeactivatedClasses="translate-x-[-200px]"
                    onActivatedClasses="translate-x-0"
