@@ -1,5 +1,5 @@
 import { Document } from "@contentful/rich-text-types";
-import { IJobFaction } from "common/enums/job";
+import { EJobFaction } from "common/enums/job";
 
 export interface IJobPreview {
     title?: string; 
@@ -7,7 +7,7 @@ export interface IJobPreview {
     sys?: {
         id?: string; 
     },
-    faction?: IJobFaction; 
+    faction?: EJobFaction; 
 }
 
 export interface IJob extends IJobPreview {

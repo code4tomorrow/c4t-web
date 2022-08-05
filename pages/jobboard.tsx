@@ -37,6 +37,7 @@ const JobBoard : NextPageWithLayout = () => {
                         {
                             jobs?.map((preview) => (
                                 <JobPreview
+                                    selected={jobId === preview.sys?.id}
                                     onClick={(id) => setJobId(id)}
                                     key={preview.sys?.id} 
                                     preview={preview} 
@@ -44,7 +45,7 @@ const JobBoard : NextPageWithLayout = () => {
                             ))
                         }
                     </div>
-                    <div className="none overflow-hidden md:overflow-auto md:w-[60%] h-[500px] md:!sticky top-5">
+                    <div className="hidden md:block overflow-hidden md:overflow-auto md:w-[60%] h-[500px] md:!sticky top-5">
                         {
                             !!selectedJob && (
                                 <Paper containerClass="w-full h-full">

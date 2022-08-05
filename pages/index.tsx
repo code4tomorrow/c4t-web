@@ -37,6 +37,8 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
   const { classes } = useStyles();
 
   const mainRef = React.useRef<HTMLDivElement | null>(null);
+  const sessionRef = React.useRef<HTMLDivElement | null>(null);
+
   const modalOpen = useRecoilValue(modalState);
 
   return (
@@ -144,12 +146,22 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
               <Paper containerClass="w-[65%] min-h-[25%]"></Paper>
             </Animate.Element>
          </section>
-         <section className="flex py-5 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
+         <section ref={sessionRef} className="flex py-5 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
               <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
-                <Animate.Element from={{ x: -200 }} to={{ x: 0}}>
+                <Animate.Element 
+                   onDeactivatedClasses="translate-x-[-200px]"
+                   onActivatedClasses="translate-x-0"
+                   ref={sessionRef}
+                   className="transition-transform duration-500"
+                >
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Fall Session Coming Soon.</h1>
                 </Animate.Element>
-                <Animate.Element from={{ x: -200 }} to={{ x: 0 }}>
+                <Animate.Element
+                  ref={sessionRef}
+                  onDeactivatedClasses="translate-x-[-200px]"
+                  onActivatedClasses="translate-x-0"
+                  className="transition-transform duration-700 delay-75"
+                >
                   <div className="space-y-3 md:max-w-[75%] text-lg">
                     <p className="text-medium-grey">
                         C4T&apos;s summer session is in progress, Fall session coming soon! Learn languages like Python, Java, and more—all for free!&nbsp;
