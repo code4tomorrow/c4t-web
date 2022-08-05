@@ -82,8 +82,9 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
          <section className="w-screen p-3 md:w-[125vw] h-[80vw] md:h-[60vw] max-w-[1950px] max-h-[850px] flex items-center justify-center">
             <Animate.Element 
                 resetAfterTriggered={false}
-                from={{ x: -200 }} to={{ x: 0}}
-                className="hidden w-[25%] h-[100%] space-y-3 p-3 md:flex flex-col items-end justify-center">
+                onDeactivatedClasses="translate-x-[-200px]"
+                onActivatedClasses="translate-x-0"
+                className="hidden w-[25%] h-[100%] transition-all duration-500 space-y-3 p-3 md:flex flex-col items-end justify-center">
                 <Paper containerClass="w-[75%] min-h-[25%]"></Paper>
                 <div className="w-[100%] min-h-[35%] justify-end flex space-x-3">
                   <div className="w-[35%] min-h-[100%] flex flex-col items-end pb-3 space-y-3">
@@ -98,8 +99,9 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 ref={mainRef}
                 resetAfterTriggered={false}
                 start="top bottom"
-                from={{ y: 0 }} to={{ y: 0 }}
-                className={clsx("w-full h-[80%] z-10", classes.carouselContainer)}>
+                onDeactivatedClasses="translate-y-[200px]"
+                onActivatedClasses="translate-y-0"
+                className={clsx("w-full h-[80%] z-10 transition-all duration-500", classes.carouselContainer)}>
                 <Paper containerClass={clsx("relative w-full h-full")}>
                     <Image
                         draggable={false}
@@ -116,7 +118,11 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                     />
                 </Paper>
               </Animate.Element>
-              <Animate.Element resetAfterTriggered={false} from={{ y: 200 }} to={{ y: 0 }} className="h-[20%] flex space-x-3">
+              <Animate.Element 
+                  resetAfterTriggered={false} 
+                  onDeactivatedClasses="translate-y-[200px]"
+                  onActivatedClasses="translate-y-0"
+                  className="h-[20%] flex space-x-3 transition-all duration-500">
                   <Paper containerClass="w-[30%] h-[50%]"></Paper>
                   <Paper containerClass="w-[35%] h-[100%] flex flex-col p-10 justify-center items-center">
                   </Paper>
@@ -125,8 +131,9 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
             </div>
             <Animate.Element 
               resetAfterTriggered={false}
-              from={{ x: 200 }} to={{ x: 0, delay: 0.2 }}
-              className="hidden w-[25%] h-[100%] space-y-3 p-3 md:flex flex-col items-start justify-center">
+              onDeactivatedClasses="translate-x-[200px]"
+              onActivatedClasses="translate-x-0"
+              className="hidden w-[25%] h-[100%] transition-all duration-500 space-y-3 p-3 md:flex flex-col items-start justify-center">
               <div className="w-[100%] min-h-[35%] flex space-x-3">
                 <Paper containerClass="w-[25%] min-h-[100%]"></Paper>
                 <div className="w-[35%] min-h-[100%] flex flex-col pb-3 space-y-3">
