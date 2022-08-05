@@ -40,7 +40,7 @@ const Modal : React.FC<ModalProps> = ({ open, setOpen, children }) => {
             onClick={() => setOpen(false)}
             className={clsx(
                 "flex top-0 scrollbar-hide opacity-0 overflow-hidden transition-all overflow-y-auto fixed h-screen right-0 left-0 z-50 justify-center items-center md:inset-0 h-modal",
-                open ? "opacity-100 pointer-events-auto" : "pointer-events-none" 
+                open ? "!opacity-100 pointer-events-auto" : "pointer-events-none" 
             )}>
             <div className="flex justify-center relative px-4 py-[15px] h-screen w-full">
                 <div 
