@@ -9,7 +9,7 @@ import Paper from "@components/Paper";
 import useSWRInfinite from "swr/infinite";
 import { fetcher } from "@utils/fetcher";
 import { IJobPreview } from "common/interfaces/job";
-import Animate from "@components/Animate";
+import Animate, { AnimateContext } from "@components/Animate";
 import FullJob from "@components/JobBoard/FullJob";
 import { XIcon } from "@heroicons/react/outline";
 import { getAPIJobsPreview } from "common/endpoints/jobs";
@@ -35,9 +35,17 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
     const { data:jobPages, error, setSize, size } = useSWRInfinite<IPagination<IJobPreview>>(getJobAPIKey, {
         fetcher,
         fallbackData: [],
+        errorRetryCount: 2,
+        errorRetryInterval: 1000
     })
 
     const jobs = useMemo(() => flatMap(jobPages?.map(({ items }) => items || [])), [jobPages]);
+
+    useEffect(() => {
+        if (jobId === undefined && size === 1 && jobs.length > 0) {
+            setJobId(jobs[0].sys?.id);
+        }
+    }, [ size, jobs, jobId ]);
 
     const loading = useMemo(() => jobs?.length === 0 && !error, [ error, jobs ]);
     const selectedJob = useMemo(() => jobs?.find(job => job.sys?.id === jobId), [ jobId, jobs ]);
@@ -74,18 +82,31 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
             }
             <Animate>
                 <header className="w-screen flex md:flex-row items-center flex-col max-w-6xl p-3 md:p-6">
-                    <div className="w-[85%] md:max-w-none max-w-[450px] md:w-[40%] p-3 md:p-6 flex flex-col justify-center">
+                    <Animate.Element 
+                        resetAfterTriggered={false}
+                        onDeactivatedClasses="scale-75"
+                        onActivatedClasses="scale-100"
+                        className="w-[85%] md:max-w-none duration-700 transition-transform max-w-[450px] md:w-[40%] p-3 md:p-6 flex flex-col justify-center">
                         <WorkSVG width="100%"/>
-                    </div>
+                    </Animate.Element>
                     <div className="p-3 md:p-6 w-full md:w-[60%] flex space-y-6 flex-col justify-center">
-                        <h1 
-                            style={{ lineHeight: "1.1"}}
-                            className="text-white text-6xl xs:text-7xl font-bold">
+                        <Animate.Element
+                            resetAfterTriggered={false}
+                            onDeactivatedClasses="scale-75"
+                            onActivatedClasses="scale-100"
+                            as="h1" 
+                            style={{ lineHeight: "1.1" }}
+                            className="text-white duration-700 transition-transform text-6xl xs:text-7xl font-bold">
                                 Open Member <span className="text-brand-purple-secondary">Positions</span>.
-                        </h1>
-                        <h2 className="text-medium-grey">
-                            Please understand, if you are interested in learning these things, but don't have experience, you should still apply! We'll teach you what you need to know.
-                        </h2>
+                        </Animate.Element>
+                        <Animate.Element 
+                            resetAfterTriggered={false}
+                            onDeactivatedClasses="scale-75"
+                            onActivatedClasses="scale-100"
+                            as="h2" 
+                            className="text-medium-grey duration-700 transition-transform">
+                            Please understand, if you are interested in learning these things, but don&apos;t have experience, you should still apply! We&apos;ll teach you what you need to know.
+                        </Animate.Element>
                         <BrandButton
                             as="a"
                             style={{ display: "inline-block" }}
