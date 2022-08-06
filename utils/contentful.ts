@@ -15,11 +15,19 @@ export enum ContentModelID {
     FAQ = "faq",
     NOTIFICATION_FLAG = "notificationFlag",
     VOLUNTEER_OPPORTUNITY = "volunteerOpportunity",
-    TESTIMONIAL = "testimonial"
+    TESTIMONIAL = "testimonial",
+    JOB = "job"
 }
 
 export interface IBaseContentModel {
     sys?: {
         id?: string; 
     }
+}
+
+export interface IPagination<T> {
+    items?: T[];
+    skip?: number; 
+    total?: number;
+    limit?: number; 
 }

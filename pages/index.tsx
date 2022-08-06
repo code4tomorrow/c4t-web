@@ -16,7 +16,7 @@ import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { ITestimonial } from "common/interfaces/testimonial";
-import WatsonAssistantChat from "layouts/WatsonAssistantChat";
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import { getPlaiceholder } from "plaiceholder";
 import { InferGetServerSidePropsType } from "next";
@@ -24,7 +24,7 @@ import { modalState } from "common/atoms";
 import { useRecoilValue } from "recoil";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-const MemberSignUps = dynamic(() => import("@components/ModalTypes/MemberSignUps"))
+import MemberSignUps from "@components/ModalTypes/MemberSignUps";
 const Navbar = dynamic(() => import("@components/Navbar"));
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
@@ -37,6 +37,8 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
   const { classes } = useStyles();
 
   const mainRef = React.useRef<HTMLDivElement | null>(null);
+  const sessionRef = React.useRef<HTMLDivElement | null>(null);
+
   const modalOpen = useRecoilValue(modalState);
 
   return (
@@ -82,8 +84,9 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
          <section className="w-screen p-3 md:w-[125vw] h-[80vw] md:h-[60vw] max-w-[1950px] max-h-[850px] flex items-center justify-center">
             <Animate.Element 
                 resetAfterTriggered={false}
-                from={{ x: -200 }} to={{ x: 0}}
-                className="hidden w-[25%] h-[100%] space-y-3 p-3 md:flex flex-col items-end justify-center">
+                onDeactivatedClasses="translate-x-[-200px]"
+                onActivatedClasses="translate-x-0"
+                className="hidden w-[25%] h-[100%] transition-all duration-500 space-y-3 p-3 md:flex flex-col items-end justify-center">
                 <Paper containerClass="w-[75%] min-h-[25%]"></Paper>
                 <div className="w-[100%] min-h-[35%] justify-end flex space-x-3">
                   <div className="w-[35%] min-h-[100%] flex flex-col items-end pb-3 space-y-3">
@@ -98,16 +101,17 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 ref={mainRef}
                 resetAfterTriggered={false}
                 start="top bottom"
-                from={{ y: 200 }} to={{ y: 0 }}
-                className={clsx("w-full h-[80%] z-10", classes.carouselContainer)}>
+                onDeactivatedClasses="translate-y-[200px]"
+                onActivatedClasses="translate-y-0"
+                className={clsx("w-full h-[80%] z-10 transition-all duration-500", classes.carouselContainer)}>
                 <Paper containerClass={clsx("relative w-full h-full")}>
                     <Image
                         draggable={false}
                         loading="eager"
                         src="code"
                         priority
-                        placeholder="blur"
-                        blurDataURL={codeBlurDataURL}
+                        //placeholder="blur"
+                        //blurDataURL={codeBlurDataURL}
                         loader={cloudinaryLoader}
                         quality={100}
                         alt="code-demo"
@@ -116,7 +120,11 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                     />
                 </Paper>
               </Animate.Element>
-              <Animate.Element resetAfterTriggered={false} from={{ y: 200 }} to={{ y: 0 }} className="h-[20%] flex space-x-3">
+              <Animate.Element 
+                  resetAfterTriggered={false} 
+                  onDeactivatedClasses="translate-y-[200px]"
+                  onActivatedClasses="translate-y-0"
+                  className="h-[20%] flex space-x-3 transition-all duration-500">
                   <Paper containerClass="w-[30%] h-[50%]"></Paper>
                   <Paper containerClass="w-[35%] h-[100%] flex flex-col p-10 justify-center items-center">
                   </Paper>
@@ -125,8 +133,9 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
             </div>
             <Animate.Element 
               resetAfterTriggered={false}
-              from={{ x: 200 }} to={{ x: 0, delay: 0.2 }}
-              className="hidden w-[25%] h-[100%] space-y-3 p-3 md:flex flex-col items-start justify-center">
+              onDeactivatedClasses="translate-x-[200px]"
+              onActivatedClasses="translate-x-0"
+              className="hidden w-[25%] h-[100%] transition-all duration-500 space-y-3 p-3 md:flex flex-col items-start justify-center">
               <div className="w-[100%] min-h-[35%] flex space-x-3">
                 <Paper containerClass="w-[25%] min-h-[100%]"></Paper>
                 <div className="w-[35%] min-h-[100%] flex flex-col pb-3 space-y-3">
@@ -138,11 +147,21 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
             </Animate.Element>
          </section>
          <section className="flex py-5 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
-              <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
-                <Animate.Element from={{ x: -200 }} to={{ x: 0}}>
+              <article ref={sessionRef} className="space-y-5 flex flex-col md:max-w-[50%] px-2">
+                <Animate.Element 
+                   onDeactivatedClasses="translate-x-[-200px]"
+                   onActivatedClasses="translate-x-0"
+                   ref={sessionRef}
+                   className="transition-transform duration-500"
+                >
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Fall Session Coming Soon.</h1>
                 </Animate.Element>
-                <Animate.Element from={{ x: -200 }} to={{ x: 0 }}>
+                <Animate.Element
+                  ref={sessionRef}
+                  onDeactivatedClasses="translate-x-[-200px]"
+                  onActivatedClasses="translate-x-0"
+                  className="transition-transform duration-700 delay-75"
+                >
                   <div className="space-y-3 md:max-w-[75%] text-lg">
                     <p className="text-medium-grey">
                         C4T&apos;s summer session is in progress, Fall session coming soon! Learn languages like Python, Java, and more—all for free!&nbsp;
@@ -265,7 +284,8 @@ export async function getStaticProps() {
         items {
           text,
           rating,
-          attestant
+          attestant,
+          type
         }
       }
     }

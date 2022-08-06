@@ -72,7 +72,13 @@ const Element = <T extends ElementType = "div">({
     }, [ from, to, animation.from, animation.to ]);
 
     const animateContainer = useCallback(() => {
-        if (!containerRef.current || !animation.from || !animation.to || triggered === undefined) return;
+        if (
+            !containerRef.current || 
+            !animation.from || 
+            !animation.to || 
+            triggered === undefined ||
+            Object.keys(animation.to).length === 0
+        ) return;
 
         const fromTemp = cloneDeep(animation.from);
         const toTemp = cloneDeep(animation.to);
@@ -96,11 +102,11 @@ const Element = <T extends ElementType = "div">({
 
     return (
         <Component 
-            style={{ 
+            style={ Object.keys(from).length ? { 
                 opacity: from.opacity !== undefined ? from.opacity as number : undefined,
                 transform: `translate3d(${from.x || 0}px, ${from.y || 0}px,0px)`,
                 WebkitTransform: `translate3d(${from.x || 0}px, ${from.y || 0}px,0px)`
-            }}
+            } : {}}
             className={clsx(
                 classes.container, 
                 className, 

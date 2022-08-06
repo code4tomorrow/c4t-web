@@ -14,7 +14,7 @@ import { INotificationFlag } from "common/interfaces/navigationFlag";
 import Image from "next/image";
 import { cloudinaryLoader } from "@utils/cloudinary-loader";
 import clsx from "clsx";
-import WatsonAssistantChat from "layouts/WatsonAssistantChat";
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import JsonQL, { IJsonQLMini } from "@utils/jsonql";
 import dynamic from "next/dynamic";
@@ -169,6 +169,7 @@ const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notification
                         <div className="relative">
                             <Animate.Element
                                 as="h1" 
+                                resetAfterTriggered={false}
                                 from={{ y: 30, opacity: 0 }}
                                 to={{ y: 0, opacity: 1 }}
                                 className="text-5xl font-bold text-white">

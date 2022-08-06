@@ -8,7 +8,7 @@ import VolunteerTeamSVG from "@svg/volunteer-team.svg";
 import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { ReactElement } from "react";
-import WatsonAssistantChat from "layouts/WatsonAssistantChat";
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import dynamic from "next/dynamic";
 const Navbar = dynamic(() => import("@components/Navbar"));

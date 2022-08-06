@@ -12,7 +12,7 @@ import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { useMemo } from "react";
 import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
-import WatsonAssistantChat from "layouts/WatsonAssistantChat";
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import dynamic from "next/dynamic";
 const Navbar = dynamic(() => import("@components/Navbar"));

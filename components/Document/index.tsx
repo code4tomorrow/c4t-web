@@ -26,6 +26,10 @@ const Text : React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return <p>{ children }</p>
 }
 
+const Heading2 : React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    return <h2 className="text-white font-semibold">{ children }</h2>
+}
+
 const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> = ({ node, children }) => {
     const link:string = useMemo(() => node.data.uri || "", [ node ]);
     const origin = useMemo(() => typeof window === "undefined" ? null : window.location.origin, []);
@@ -49,7 +53,12 @@ const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> 
 }
 
 const OrderedList : React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    return <ol className="text-medium-grey space-y-1 list-inside my-3">{ children }</ol>
+    return <ol className="text-medium-grey list-decimal space-y-1 pl-4 my-3">{ children }</ol>
+}
+
+const UnorderedList : React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    return <ul
+        className="text-medium-grey space-y-1 list-disc pl-4">{ children }</ul>
 }
 
 const ListItem : React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -61,7 +70,7 @@ const ListItem : React.FC<{ children: React.ReactNode }> = ({ children }) => {
         }
     }))();
 
-    return <li className={clsx("text-medium-grey list-decimal", classes.li)}>{ children }</li>
+    return <li className={clsx("text-medium-grey", classes.li)}>{ children }</li>
 }
 
 const Document : React.FC<DocumentProps> = ({ document, color, options = {} }) => {
@@ -73,8 +82,10 @@ const Document : React.FC<DocumentProps> = ({ document, color, options = {} }) =
                     const TextWithColor = withBaseStyles(Text, color);
                     return <TextWithColor>{children}</TextWithColor>
                 },
+                [BLOCKS.UL_LIST]: (_node, children) => <UnorderedList>{children}</UnorderedList>,
                 [BLOCKS.OL_LIST]: (_node, children) => <OrderedList>{children}</OrderedList>,
                 [BLOCKS.LIST_ITEM]: (_node, children) => <ListItem>{children}</ListItem>,
+                [BLOCKS.HEADING_2]: (_node, children) => <Heading2>{children}</Heading2>
             },
         }
 

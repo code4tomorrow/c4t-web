@@ -1,7 +1,9 @@
+import { EJobFaction } from "common/enums/job";
+
 export const notionColorMap = (color: string) => {
     switch (color) {
         case "green" : return "#1D9757";
-        case "yellow" : return "#AC8E12"
+        case "yellow" : return "#D3B020"
         case "blue" : return "#2C50FF"
         case "red" : return "#F36F65"
         case "pink" : return "#DF5EBA"
@@ -10,3 +12,13 @@ export const notionColorMap = (color: string) => {
         default: return color; 
     }
 } 
+
+export const jobFactionMap = (faction:string) => {
+    switch (faction) {
+        case EJobFaction.CLASSES: return "#1D9757";
+        case EJobFaction.EVENTS: return "#D3B020";
+        case EJobFaction.INTERNAL_AFFAIRS: return "#F36F65";
+        case EJobFaction.OUTREACH: return "#2C50FF";
+        default: null; 
+    }
+}

@@ -169,17 +169,19 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             ref={linkHighlightRef}
         />
         <nav ref={navRef} className={clsx(
-            "px-10 py-3 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
+            "px-10 py-5 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
             navHidden ? "-translate-y-full" : "translate-y-0",
             classes.nav,
         )}>
             <Link href="/" passHref>
-                <a className="hover:opacity-80 transition-opacity">
+                <a className="hover:opacity-80 -translate-y-1/2 h-4 transition-opacity">
                     {/* <Image 
                         loader={cloudinaryLoader}
                         src={"logo"}
-                        width={41}
-                        height={41}
+                        width={50}
+                        height={50}
+                        priority
+                        loading="eager"
                         quality={100}
                     /> */}
                     <h1 className="text-lg font-bold text-white">C4T</h1>
@@ -200,10 +202,10 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
                 className={
                 clsx(
                     classes.linksContainer,
-                    "list-none scale-50 opacity-0 z-50",
+                    "list-none scale-50 z-50",
                     "absolute top-16 right-8 space-y-0 bg-dark-grey-secondary border-solid border-0 border-t border-[#333333] px-6 py-4 rounded-lg",
                     "md:relative md:!shadow-none md:scale-100 md:!pointer-events-auto md:top-0 md:transition-none md:opacity-100 md:space-y-0 md:rounded-none md:px-0 md:py-0 md:bg-transparent md:border-none md:right-0 md:flex md:space-x-0",
-                    mobileNavOpen ? "scale-100 opacity-100 pointer-events-auto" : "pointer-events-none",
+                    mobileNavOpen ? "scale-100 opacity-100 pointer-events-auto" : "pointer-events-none opacity-0",
                 )
             }>
                 <NavListItem ref={navItemRefs} href="/">

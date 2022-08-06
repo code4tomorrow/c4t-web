@@ -4,7 +4,8 @@
     "paths": {
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
-      "@svg/*": ["public/svg/*"]
+      "@svg/*": ["public/svg/*"],
+      "@layouts/*": ["layouts/*"],
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
 
 interface FooterHeaderProps {
     children: React.ReactNode;
@@ -34,12 +34,16 @@ const FooterItem : React.FC<FooterItemProps> = ({ href = "/", children, ...props
 interface FooterProps extends React.HTMLProps<HTMLDivElement> {}
 
 const Footer : React.FC<FooterProps> = ({ className, ...props }) => {
+    const currentYear = useMemo(() => {
+        return new Date().getFullYear().toString();
+    }, []);
+
     return (
         <footer
             className={clsx("bg-dark-grey-secondary w-full space-y-3 mt-auto flex justify-center items-center flex-col p-4", className)}
             { ...props}
         >
-            <div className="w-full">
+            <div className="w-full flex justify-center">
                 <div className="grid w-full justify-items-center grid-cols-2 md:grid-cols-4 max-w-[1450px]">
                     <ul>
                         <FooterHeader>sitemap</FooterHeader>
@@ -65,11 +69,12 @@ const Footer : React.FC<FooterProps> = ({ className, ...props }) => {
                     </ul>
                     <ul>
                         <FooterHeader>Support Us</FooterHeader>
+                        <FooterItem href="/jobboard">Careers</FooterItem>
                         <FooterItem target="_blank" rel="noopener noreferrer" href="https://www.gofundme.com/f/fundraiser-for-coding-classes-in-code4tomorrow">Donate</FooterItem>
                     </ul>
                 </div>
             </div>
-            <p className="text-medium-grey !mt-8 text-center">©2022 Code4Tomorrow 501(C) Non-Profit.</p>
+            <p className="text-medium-grey !mt-8 text-center">©{currentYear} Code 4 Tomorrow 501(c) Non-Profit.</p>
         </footer>
     )
 }
