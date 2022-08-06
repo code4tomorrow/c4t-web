@@ -32,7 +32,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
     const containerRef = React.useRef<HTMLDivElement | null>(null);
 
     return (
-        <article className="w-full h-full pb-4 space-y-3">
+        <article ref={containerRef} className="w-full h-full pb-4 space-y-3">
             <header className={clsx(
                 "min-h-[6rem] flex py-4 justify-center before:!h-0 md:before:!h-full flex-col items-center border-b-dim-grey border-b",
                 classes.fullJobHeader
