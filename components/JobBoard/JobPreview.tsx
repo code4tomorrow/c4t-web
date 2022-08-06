@@ -29,7 +29,7 @@ const JobPreview : React.FC<IJobPreviewProps> = ({ preview, onClick, selected = 
         <Paper
           onClick={handleClick}
           containerClass={clsx(
-            "w-full space-y-3 min-h-[125px] cursor-pointer p-6 flex flex-col",
+            "w-full space-y-3 min-h-[125px] cursor-pointer py-6 md:px-6 px-4 flex flex-col",
             classes.previewContainer,
             selected && classes.previewContainerSelected
           )}>
@@ -59,7 +59,7 @@ const JobPreview : React.FC<IJobPreviewProps> = ({ preview, onClick, selected = 
                             "rounded p-1 inline-block space-x-1 px-2 relative overflow-hidden",
                             !factionColor && "bg-brand-purple-secondary"
                           )}>
-                            <BriefcaseIcon style={{ display: "inline-block" }} width={15} />
+                            <BriefcaseIcon className="hidden sm:inline-block" width={15} />
                             <span className="capitalize z-50 text-white">
                               Real-Life | { preview.realLifeJobs[0] }
                             </span>
