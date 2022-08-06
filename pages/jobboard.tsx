@@ -86,7 +86,11 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                 {
                     isMobile && (
                         <Modal fullWidth open={!!selectedJob} setOpen={() => { setJobId({ id: null, showContent: false }) }}>
-                            { selectedJob && <FullJob preview={selectedJob} /> }
+                            { selectedJob && (
+                                <div className="pb-16">
+                                    <FullJob preview={selectedJob} />
+                                </div>
+                            )}
                         </Modal>
                     )
                 }
