@@ -172,8 +172,9 @@ const FullJob : React.FC<IFullJobProps> = ({ preview, showContent:_showContent =
                                 className="space-y-3 duration-300 transition-opacity">
                             <div className="[&>*]:mr-2 text-sm font-semibold">
                                     {
-                                        job.realLifeJobs?.map((realLifeJob => (
+                                        job.realLifeJobs?.map(((realLifeJob, i) => (
                                             <span 
+                                                key={i}
                                                 style={{ background: `linear-gradient(to right, ${factionColor}, #7892EE)` }}
                                                 className={clsx(
                                                     "rounded p-1 inline-block space-x-1 px-2 relative overflow-hidden",

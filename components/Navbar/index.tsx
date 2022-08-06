@@ -184,6 +184,7 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
                             src={"logo"}
                             width={50}
                             height={50}
+                            alt="C4T Logo"
                             layout="responsive"
                             priority
                             loading="eager"
