@@ -78,14 +78,14 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                 <title>Job Board | C4T</title>
             </Head>
             <Navbar notificationFlags={notificationFlags}/>
-            {
-                isMobile && (
-                    <Modal fullWidth open={!!selectedJob} setOpen={() => { setJobId(null) }}>
-                        { selectedJob && <FullJob preview={selectedJob} /> }
-                    </Modal>
-                )
-            }
             <Animate>
+                {
+                    isMobile && (
+                        <Modal fullWidth open={!!selectedJob} setOpen={() => { setJobId(null) }}>
+                            { selectedJob && <FullJob preview={selectedJob} /> }
+                        </Modal>
+                    )
+                }
                 <header className="w-screen flex md:flex-row items-center flex-col max-w-6xl p-3 md:p-6">
                     <Animate.Element 
                         resetAfterTriggered={false}
@@ -123,10 +123,11 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                     </div>
                 </header>
                 <main className="flex items-center flex-col my-6 w-full max-w-7xl px-3">
-                    <p className="text-medium-grey h-4 mb-5">
+                    <div className="text-medium-grey h-4 mb-5">
                         {
                             jobs.length ? (
                                 <Animate.Element
+                                    as="p"
                                     resetAfterTriggered={false}
                                     onDeactivatedClasses="opacity-0"
                                     onActivatedClasses="opacity-100"
@@ -136,7 +137,7 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                                 </Animate.Element>
                             ) : <></>
                         }
-                    </p>
+                    </div>
                     <div className="flex space-x-3 w-full">
                         <div className="space-y-3 w-[100%] md:w-[40%]">
                             {
