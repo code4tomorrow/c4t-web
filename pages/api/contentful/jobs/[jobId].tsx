@@ -7,6 +7,10 @@ const jobQuery = gql`
         job(id:$jobId) {
             title,
             faction,
+            realLifeJobs,
+            realLifeJobConnection {
+                json
+            },
             description {
                 json
             }

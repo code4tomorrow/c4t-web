@@ -158,6 +158,9 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [ handleScroll ]);
 
+
+    
+
     return (
         <>
         <div 
@@ -169,22 +172,25 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             ref={linkHighlightRef}
         />
         <nav ref={navRef} className={clsx(
-            "px-10 py-5 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
+            "px-10 md:py-6 py-5 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
             navHidden ? "-translate-y-full" : "translate-y-0",
             classes.nav,
         )}>
             <Link href="/" passHref>
-                <a className="hover:opacity-80 -translate-y-1/2 h-4 transition-opacity">
-                    {/* <Image 
-                        loader={cloudinaryLoader}
-                        src={"logo"}
-                        width={50}
-                        height={50}
-                        priority
-                        loading="eager"
-                        quality={100}
-                    /> */}
-                    <h1 className="text-lg font-bold text-white">C4T</h1>
+                <a className="hover:opacity-80 flex items-center h-4 transition-opacity">
+                    <div className="md:w-12 md:h-12 w-10 h-10">
+                        <Image 
+                            loader={cloudinaryLoader}
+                            src={"logo"}
+                            width={50}
+                            height={50}
+                            layout="responsive"
+                            priority
+                            loading="eager"
+                            quality={100}
+                        />
+                    </div>
+                    {/* <h1 className="text-lg font-bold text-white">C4T</h1> */}
                 </a>
             </Link>
             <div className={clsx(

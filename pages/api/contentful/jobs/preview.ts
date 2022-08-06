@@ -11,7 +11,8 @@ const jobPreviewQuery = gql`
                     id,
                 },
                 title,
-                faction
+                faction,
+                realLifeJobs
             },
             total,
             skip,
