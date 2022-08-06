@@ -29,6 +29,8 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
       preview?.faction? jobFactionMap(preview?.faction) : undefined, 
     [ preview?.faction ])
 
+    const containerRef = React.useRef<HTMLDivElement | null>(null);
+
     return (
         <article className="w-full h-full pb-4 space-y-3">
             <header className={clsx(
@@ -60,6 +62,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
                 {
                     !isLoading ? (
                         <Animate.Element
+                            ref={containerRef}
                             resetAfterTriggered={false}
                             onDeactivatedClasses="opacity-0" 
                             onActivatedClasses="opacity-100" 
@@ -71,6 +74,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
                         </Animate.Element>
                     ) : (
                         <Animate.Element 
+                            ref={containerRef}
                             resetAfterTriggered={false}
                             onDeactivatedClasses="opacity-0" 
                             onActivatedClasses="opacity-100" 
@@ -87,6 +91,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
                 {
                     !isLoading ? (
                         <Animate.Element
+                            ref={containerRef}
                             resetAfterTriggered={false}
                             onDeactivatedClasses="opacity-0" 
                             onActivatedClasses="opacity-100" 
@@ -98,6 +103,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
                         </Animate.Element>
                     ) : (
                         <Animate.Element 
+                            ref={containerRef}
                             resetAfterTriggered={false}
                             onDeactivatedClasses="opacity-0" 
                             onActivatedClasses="opacity-100" 
@@ -114,6 +120,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
                 {
                     !isLoading ? (
                         <Animate.Element
+                            ref={containerRef}
                             resetAfterTriggered={false}
                             onDeactivatedClasses="opacity-0" 
                             onActivatedClasses="opacity-100" 
@@ -125,6 +132,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
                         </Animate.Element>
                     ) : (
                         <Animate.Element 
+                            ref={containerRef}
                             resetAfterTriggered={false}
                             onDeactivatedClasses="opacity-0" 
                             onActivatedClasses="opacity-100" 
