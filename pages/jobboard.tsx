@@ -198,12 +198,12 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                                 ) : (
                                    <>
                                     {
-                                        !isMobile && (
+                                        !isMobile && jobId === null ? (
                                             <Animate.Element 
                                                 onDeactivatedClasses="opacity-0"
                                                 onActivatedClasses="opacity-100"
                                                 resetAfterTriggered={false}
-                                                className="w-full h-full flex justify-center transition-opacity duration-300 items-center">
+                                                className="w-full h-full flex delay-150 justify-center transition-opacity duration-300 items-center">
                                                 <div className="w-[50%] flex flex-col items-center space-y-6">
                                                     <WalkSVG width="100%" height="100%" />
                                                     <p className="text-medium-grey">
@@ -212,7 +212,7 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                                                     </p>
                                                 </div>
                                             </Animate.Element>
-                                        )
+                                        ) : <></>
                                     }
                                    </>
                                 )
