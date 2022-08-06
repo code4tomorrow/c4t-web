@@ -29,7 +29,7 @@ const JobPreview : React.FC<IJobPreviewProps> = ({ preview, onClick, selected = 
         <Paper
           onClick={handleClick}
           containerClass={clsx(
-            "w-full space-y-3 min-h-[125px] cursor-pointer p-6 flex flex-col",
+            "w-full space-y-3 min-h-[125px] cursor-pointer py-6 md:px-6 px-4 flex flex-col",
             classes.previewContainer,
             selected && classes.previewContainerSelected
           )}>

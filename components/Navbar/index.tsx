@@ -178,7 +178,7 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         )}>
             <Link href="/" passHref>
                 <a className="hover:opacity-80 flex items-center h-4 transition-opacity">
-                    <div className="md:w-12 md:h-12 w-10 h-10">
+                    <div className="md:w-12 md:h-12 w-12 h-12">
                         <Image 
                             loader={cloudinaryLoader}
                             src={"logo"}
