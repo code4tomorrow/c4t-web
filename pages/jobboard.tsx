@@ -32,7 +32,10 @@ const getJobAPIKey = (pageIndex:number) => {
   
 
 const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProps>> = ({ notificationFlags }) => {
-    const [ jobId, setJobId ] = useState<string | null | undefined>(undefined);
+    const [ jobId, setJobId ] = useState<{
+        id: string | null | undefined,
+        showContent: boolean
+    }>({ id: undefined, showContent: false });
 
     const { data:jobPages, error, setSize, size } = useSWRInfinite<IPagination<IJobPreview>>(getJobAPIKey, {
         fetcher,
@@ -46,14 +49,14 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
 
     const initialLoading = useMemo(() => jobs?.length === 0 && !error, [ error, jobs ]);
     const isLoadingMore = size > 0 && jobPages && typeof jobPages[size - 1] === 'undefined'
-    const selectedJob = useMemo(() => jobs?.find(job => job.sys?.id === jobId), [ jobId, jobs ]);
+    const selectedJob = useMemo(() => jobs?.find(job => job.sys?.id === jobId.id), [ jobId, jobs ]);
 
     const { width } = useDimensions({ enableDebounce: true })
     const isMobile = useMemo(() => width < 768, [ width ]);
 
     useEffect(() => {
-        if (jobId === undefined && size === 1 && jobs.length > 0 && !isMobile) {
-            setJobId(jobs[0].sys?.id);
+        if (jobId.id === undefined && size === 1 && jobs.length > 0 && !isMobile) {
+            setJobId({ id: jobs[0].sys?.id, showContent: true });
         }
     }, [ size, jobs, jobId, isMobile ]);
 
@@ -82,7 +85,7 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
             <Animate>
                 {
                     isMobile && (
-                        <Modal fullWidth open={!!selectedJob} setOpen={() => { setJobId(null) }}>
+                        <Modal fullWidth open={!!selectedJob} setOpen={() => { setJobId({ id: null, showContent: false }) }}>
                             { selectedJob && <FullJob preview={selectedJob} /> }
                         </Modal>
                     )
@@ -144,8 +147,17 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                             {
                                 jobs?.map((preview) => (
                                     <JobPreview
-                                        selected={jobId === preview.sys?.id}
-                                        onClick={(id) => setJobId(id)}
+                                        selected={jobId.id === preview.sys?.id}
+                                        onClick={(id) => {
+                                            if (id !== jobId.id && !isMobile) {
+                                                setJobId({ id, showContent: false });
+                                                requestAnimationFrame(() => {
+                                                    setJobId({ id, showContent: true });
+                                                });
+                                            } else {
+                                                setJobId({ id, showContent: true });
+                                            }
+                                        }}
                                         key={preview.sys?.id} 
                                         preview={preview} 
                                     />
@@ -156,7 +168,7 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                                     <JobPreview 
                                         key={i}
                                         selected={false}
-                                        onClick={(id) => setJobId(id)}
+                                        onClick={(id) => setJobId({ id, showContent: true })}
                                         preview={undefined}
                                     />
                                 ))
@@ -187,18 +199,18 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                                             <button 
                                                 aria-label="hide job"
                                                 name="hide job"
-                                                onClick={() => { setJobId(null) }} 
+                                                onClick={() => { setJobId({ id: null, showContent: false }) }} 
                                                 type="button" 
                                                 className="text-gray-400 bg-transparent border-b-4 border-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="small-modal">
                                                 <XIcon style={{ width: 22.5 }} />  
                                             </button>
                                         </div>
-                                        <FullJob preview={selectedJob} />
+                                        <FullJob preview={selectedJob} showContent={jobId.showContent} /> 
                                     </Paper>
                                 ) : (
                                    <>
                                     {
-                                        !isMobile && jobId === null ? (
+                                        !isMobile && jobId.id === null ? (
                                             <Animate.Element 
                                                 onDeactivatedClasses="opacity-0"
                                                 onActivatedClasses="opacity-100"

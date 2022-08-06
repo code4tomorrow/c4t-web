@@ -10,12 +10,14 @@ import React, { useMemo } from "react";
 import useSWR from "swr";
 import { useDebounce } from "use-debounce";
 import { useStyles } from "./styles";
+import { BriefcaseIcon } from "@heroicons/react/outline";
 
 interface IFullJobProps {
-    preview: IJobPreview
+    preview: IJobPreview,
+    showContent?: boolean; 
 }
 
-const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
+const FullJob : React.FC<IFullJobProps> = ({ preview, showContent:_showContent = true  }) => {
     const { data:queriedJob, error } = useSWR<IJob>(getAPIJobByID(preview.sys?.id), {
         fetcher
     });
@@ -156,6 +158,57 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
                     )
                 }
             </div>
+            {
+                job.realLifeJobs?.length && (
+                    <div className="px-4 space-y-2">
+                    <h2 className="font-bold text-white text-lg">Real-Life Careers</h2>
+                    {
+                        !isLoadingDebounced ? (
+                            <Animate.Element
+                                ref={containerRef}
+                                resetAfterTriggered={false}
+                                onDeactivatedClasses="opacity-0" 
+                                onActivatedClasses="opacity-100" 
+                                className="space-y-3 duration-300 transition-opacity">
+                            <div className="[&>*]:mr-2 text-sm font-semibold">
+                                    {
+                                        job.realLifeJobs?.map(((realLifeJob, i) => (
+                                            <span 
+                                                key={i}
+                                                style={{ background: `linear-gradient(to right, ${factionColor}, #7892EE)` }}
+                                                className={clsx(
+                                                    "rounded p-1 inline-block space-x-1 px-2 relative overflow-hidden",
+                                                    !factionColor && "bg-brand-purple-secondary"
+                                                )}>
+                                                    <BriefcaseIcon color="#fff" style={{ display: "inline-block" }} width={15} />
+                                                <span className="capitalize z-50 text-white">
+                                                    { realLifeJob }
+                                                </span>
+                                            </span>
+                                        )))
+                                    }
+                            </div>
+                           <div>
+                                { job.realLifeJobConnection?.json &&
+                                    <Document document={job.realLifeJobConnection.json} />
+                                }
+                           </div>
+                            </Animate.Element>
+                        ) : (
+                            <Animate.Element 
+                                ref={containerRef}
+                                resetAfterTriggered={false}
+                                onDeactivatedClasses="opacity-0" 
+                                onActivatedClasses="opacity-100" 
+                                className="space-y-3 duration-300 delay-300 transition-opacity">
+                                <Skeleton className="w-[66%] h-4"/>
+                                <Skeleton className="w-[66%] h-4"/>
+                            </Animate.Element>
+                        )
+                    }
+                </div>
+                ) 
+            }
         </article>
     )
 }

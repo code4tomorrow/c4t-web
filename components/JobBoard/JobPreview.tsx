@@ -6,6 +6,7 @@ import { IJobPreview } from "common/interfaces/job";
 import { jobFactionMap } from "common/maps/color";
 import React, { useMemo } from "react";
 import { useStyles } from "./styles";
+import BriefcaseIcon from "@heroicons/react/outline/BriefcaseIcon";
 
 interface IJobPreviewProps {
     preview?: IJobPreview,
@@ -41,15 +42,30 @@ const JobPreview : React.FC<IJobPreviewProps> = ({ preview, onClick, selected = 
                 className="space-y-3 duration-300 transition-opacity"
               >
                 <h1 className="text-white text-2xl font-bold">{ preview?.title }</h1>
-                <h2 className="text-white text-sm font-semibold">
+                <h2 className="text-white text-sm [&>*]:mr-2 font-semibold">
                     <span 
                       style={{ backgroundColor: factionColor }}
                       className={clsx(
-                        "rounded p-1 px-2 relative overflow-hidden",
+                        "rounded p-1 inline-block px-2 relative overflow-hidden",
                         !factionColor && "bg-brand-purple-secondary"
                       )}>
                         <span className="capitalize z-50 text-white">{preview?.faction}</span>
                     </span>
+                    {
+                      !!preview.realLifeJobs?.length ? (
+                        <span 
+                          style={{ background: `linear-gradient(to right, ${factionColor}, #7892EE)` }}
+                          className={clsx(
+                            "rounded p-1 inline-block space-x-1 px-2 relative overflow-hidden",
+                            !factionColor && "bg-brand-purple-secondary"
+                          )}>
+                            <BriefcaseIcon style={{ display: "inline-block" }} width={15} />
+                            <span className="capitalize z-50 text-white">
+                              Real-Life | { preview.realLifeJobs[0] }
+                            </span>
+                        </span>
+                      ) : <></>
+                    }
                 </h2> 
               </Animate.Element>
             ) : (

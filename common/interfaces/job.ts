@@ -7,10 +7,14 @@ export interface IJobPreview {
         id?: string; 
     },
     faction?: EJobFaction; 
+    realLifeJobs?: string[];
 }
 
 export interface IJob extends IJobPreview {
     description?: {
+        json: Document
+    },
+    realLifeJobConnection?: {
         json: Document
     },
     responsibilities?: {
