@@ -24,6 +24,7 @@ import Modal from "@components/Modal";
 import useDimensions from "hooks/useDimensions";
 import flatMap from "lodash/flatMap";
 import Loader from "@components/Loader";
+import WalkSVG from "@svg/walk.svg";
 
 const getJobAPIKey = (pageIndex:number) => {
     return getAPIJobsPreview(pageIndex, 5);        
@@ -194,7 +195,27 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                                         </div>
                                         <FullJob preview={selectedJob} />
                                     </Paper>
-                                ) : <></>
+                                ) : (
+                                   <>
+                                    {
+                                        !isMobile && (
+                                            <Animate.Element 
+                                                onDeactivatedClasses="opacity-0"
+                                                onActivatedClasses="opacity-100"
+                                                resetAfterTriggered={false}
+                                                className="w-full h-full flex justify-center transition-opacity duration-300 items-center">
+                                                <div className="w-[50%] flex flex-col items-center space-y-6">
+                                                    <WalkSVG width="100%" height="100%" />
+                                                    <p className="text-medium-grey">
+                                                        <span className="text-brand-purple-secondary">Click</span> 
+                                                        &nbsp;a Job to View Details.
+                                                    </p>
+                                                </div>
+                                            </Animate.Element>
+                                        )
+                                    }
+                                   </>
+                                )
                             }
                         </div>
                     </div>

@@ -3,6 +3,7 @@ import Modal from "@components/Modal";
 import { createAtom } from "@utils/recoil";
 import gsap from "gsap";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import SplitType from 'split-type'
@@ -59,14 +60,13 @@ const MemberSignUps = () => {
                 <h2 className="text-xl my-1 text-center font-medium text-medium-grey">
                     Need the Volunteer Hours? Have the Skills?
                 </h2>
-                <BrandButton 
-                    as="a"
-                    target="_blank"
-                    rel="nofollow noreferrer noopener"
-                    href="https://tally.so/r/mVgJl3"
-                    containerClass="mt-12" 
-                    title="Apply Today."
-                />
+                <Link href="/jobboard" passHref>
+                    <BrandButton 
+                        as="a"
+                        containerClass="mt-12" 
+                        title="View Positions."
+                    />
+                </Link>
                 <a 
                     className="mt-6 text-medium-grey hover:underline"
                     rel="noopener noreferrer nofollow"
