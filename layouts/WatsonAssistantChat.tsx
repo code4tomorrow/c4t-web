@@ -66,7 +66,8 @@ const WatsonAssistantChat : React.FC<{ children: ReactElement, createWebChatInst
     return (
         <>
           <BrandButton 
-            title="" 
+            title=""
+            ariaLabel="Chat Assistant"
             ref={chatButtonRef} 
             className="!rounded-[20px] !space-x-0 !px-3"
             containerClass="!fixed z-50 right-6 bottom-6 md:right-9 md:bottom-9"

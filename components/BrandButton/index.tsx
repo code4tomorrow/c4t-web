@@ -15,10 +15,11 @@ interface BrandButtonProps<T extends React.ElementType = "div">  {
     disabled?: boolean; 
     className?: string; 
     as?: T;
+    ariaLabel?: string; 
 } 
 
 const BrandButton = <T extends React.ElementType = "div">({ 
-        as, variant = "gradient", disabled, label, containerClass, title, className, onClick, flex = 0, children, ...props 
+        as, variant = "gradient", disabled, label, ariaLabel, containerClass, title, className, onClick, flex = 0, children, ...props 
     } : BrandButtonProps<T> & React.ComponentPropsWithoutRef<T>, ref:any) => {
     const handleOnClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation();
@@ -55,6 +56,7 @@ const BrandButton = <T extends React.ElementType = "div">({
             <Component onClick={handlePolymorphicClick} { ...props }>
                 <button 
                     ref={buttonRef}
+                    aria-label={ariaLabel || title}
                     onMouseOver={() => setMouseActive(true)}
                     onMouseLeave={() => setMouseActive(false)}
                     onMouseMove={handleMouseMove}
