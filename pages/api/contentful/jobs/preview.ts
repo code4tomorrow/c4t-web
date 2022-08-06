@@ -11,7 +11,6 @@ const jobPreviewQuery = gql`
                     id,
                 },
                 title,
-                skills,
                 faction
             },
             total,
@@ -38,6 +37,7 @@ export default async function handler(
     const json = { items: [], ...response?.jobCollection }
 
     res.setHeader('Cache-Control', `s-maxage=${CACHE_TTL}, stale-while-revalidate`);
+
     res.json(json);
 }
 

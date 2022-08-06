@@ -26,6 +26,10 @@ const Text : React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return <p>{ children }</p>
 }
 
+const Heading2 : React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    return <h2 className="text-white font-semibold">{ children }</h2>
+}
+
 const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> = ({ node, children }) => {
     const link:string = useMemo(() => node.data.uri || "", [ node ]);
     const origin = useMemo(() => typeof window === "undefined" ? null : window.location.origin, []);
@@ -81,6 +85,7 @@ const Document : React.FC<DocumentProps> = ({ document, color, options = {} }) =
                 [BLOCKS.UL_LIST]: (_node, children) => <UnorderedList>{children}</UnorderedList>,
                 [BLOCKS.OL_LIST]: (_node, children) => <OrderedList>{children}</OrderedList>,
                 [BLOCKS.LIST_ITEM]: (_node, children) => <ListItem>{children}</ListItem>,
+                [BLOCKS.HEADING_2]: (_node, children) => <Heading2>{children}</Heading2>
             },
         }
 

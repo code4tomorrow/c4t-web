@@ -3,7 +3,6 @@ import { EJobFaction } from "common/enums/job";
 
 export interface IJobPreview {
     title?: string; 
-    skills?: string[],
     sys?: {
         id?: string; 
     },
@@ -13,5 +12,11 @@ export interface IJobPreview {
 export interface IJob extends IJobPreview {
     description?: {
         json: Document
+    },
+    responsibilities?: {
+        json?: Document
+    },
+    skills?: {
+        json?: Document
     }
 }

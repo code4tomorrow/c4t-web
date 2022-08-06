@@ -68,6 +68,8 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
         setSize(size + 1);
     }
 
+    const total = useMemo(() => jobPages?.slice(-1)[0]?.total || 0, [ jobPages ]);
+
     return (
         <div 
             style={{ width: "100vw" }} 
@@ -78,7 +80,7 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
             <Navbar notificationFlags={notificationFlags}/>
             {
                 isMobile && (
-                    <Modal open={!!selectedJob} setOpen={() => { setJobId(null) }}>
+                    <Modal fullWidth open={!!selectedJob} setOpen={() => { setJobId(null) }}>
                         { selectedJob && <FullJob preview={selectedJob} /> }
                     </Modal>
                 )
@@ -120,64 +122,80 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                         />
                     </div>
                 </header>
-                <main className="flex my-6 space-x-3 w-full max-w-6xl px-3">
-                    <div className="space-y-3 w-[100%] md:w-[40%]">
+                <main className="flex items-center flex-col my-6 w-full max-w-7xl px-3">
+                    <p className="text-medium-grey h-4 mb-5">
                         {
-                            jobs?.map((preview) => (
-                                <JobPreview
-                                    selected={jobId === preview.sys?.id}
-                                    onClick={(id) => setJobId(id)}
-                                    key={preview.sys?.id} 
-                                    preview={preview} 
-                                />
-                            ))
-                        }
-                        {
-                            Array.from({ length: initialLoading ? 5 : 0 }).map((_, i) => (
-                                <JobPreview 
-                                    key={i}
-                                    selected={false}
-                                    onClick={(id) => setJobId(id)}
-                                    preview={undefined}
-                                />
-                            ))
-                        }
-                        <div className="flex justify-center items-center">
-                            {
-                                hasMore ? (
-                                    <div
-                                        role="button"
-                                        onClick={handleNextPage}
-                                        className="text-brand-purple-secondary space-x-2 flex hover:opacity-75 transition-opacity cursor-pointer text-center">
-                                            { isLoadingMore && <Loader /> }
-                                            <span>Load More</span>
-                                    </div>
-                                ) : (
-                                    <p className="text-medium-grey text-center">
-                                       <span className="text-brand-purple-secondary">Stay Tuned</span> for more Member Positions.
-                                    </p>
-                                )
-                            }
-                        </div>
-                    </div>
-                    <div className="hidden md:block overflow-hidden md:overflow-auto md:w-[60%] h-min md:!sticky top-5">
-                        {
-                            !!selectedJob && !isMobile ? (
-                                <Paper containerClass="w-full h-full">
-                                    <div className="flex z-50 justify-between [&>*]:transition-opacity [&>*]:hover:opacity-50 items-center p-3 absolute top-0 right-0">
-                                        <button 
-                                            aria-label="hide job"
-                                            name="hide job"
-                                            onClick={() => { setJobId(null) }} 
-                                            type="button" 
-                                            className="text-gray-400 bg-transparent border-b-4 border-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="small-modal">
-                                            <XIcon style={{ width: 22.5 }} />  
-                                        </button>
-                                    </div>
-                                    <FullJob preview={selectedJob} />
-                                </Paper>
+                            jobs.length ? (
+                                <Animate.Element
+                                    resetAfterTriggered={false}
+                                    onDeactivatedClasses="opacity-0"
+                                    onActivatedClasses="opacity-100"
+                                    className="transition-opacity duration-300"
+                                >
+                                    Showing {jobs.length} of {total} Member Positions
+                                </Animate.Element>
                             ) : <></>
                         }
+                    </p>
+                    <div className="flex space-x-3 w-full">
+                        <div className="space-y-3 w-[100%] md:w-[40%]">
+                            {
+                                jobs?.map((preview) => (
+                                    <JobPreview
+                                        selected={jobId === preview.sys?.id}
+                                        onClick={(id) => setJobId(id)}
+                                        key={preview.sys?.id} 
+                                        preview={preview} 
+                                    />
+                                ))
+                            }
+                            {
+                                Array.from({ length: initialLoading ? 5 : 0 }).map((_, i) => (
+                                    <JobPreview 
+                                        key={i}
+                                        selected={false}
+                                        onClick={(id) => setJobId(id)}
+                                        preview={undefined}
+                                    />
+                                ))
+                            }
+                            <div className="flex justify-center items-center">
+                                {
+                                    hasMore ? (
+                                        <div
+                                            role="button"
+                                            onClick={handleNextPage}
+                                            className="text-brand-purple-secondary space-x-2 flex hover:opacity-75 transition-opacity cursor-pointer text-center">
+                                                { isLoadingMore && <Loader /> }
+                                                <span>Load More</span>
+                                        </div>
+                                    ) : (
+                                        <p className="text-medium-grey text-center">
+                                        <span className="text-brand-purple-secondary">Stay Tuned</span> for more Member Positions.
+                                        </p>
+                                    )
+                                }
+                            </div>
+                        </div>
+                        <div className="hidden md:block overflow-hidden md:overflow-auto md:w-[60%] h-min md:!sticky top-5">
+                            {
+                                !!selectedJob && !isMobile ? (
+                                    <Paper containerClass="w-full h-full">
+                                        <div className="flex z-50 justify-between [&>*]:transition-opacity [&>*]:hover:opacity-50 items-center p-3 absolute top-0 right-0">
+                                            <button 
+                                                aria-label="hide job"
+                                                name="hide job"
+                                                onClick={() => { setJobId(null) }} 
+                                                type="button" 
+                                                className="text-gray-400 bg-transparent border-b-4 border-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="small-modal">
+                                                <XIcon style={{ width: 22.5 }} />  
+                                            </button>
+                                        </div>
+                                        <FullJob preview={selectedJob} />
+                                    </Paper>
+                                ) : <></>
+                            }
+                        </div>
                     </div>
                 </main>
             </Animate>

@@ -10,9 +10,14 @@ const jobQuery = gql`
             description {
                 json
             }
-            skills,
+            skills {
+                json
+            },
             sys {
                 id
+            },
+            responsibilities {
+                json
             }
         }
     }

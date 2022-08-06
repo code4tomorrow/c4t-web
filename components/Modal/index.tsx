@@ -6,11 +6,12 @@ import { useRecoilState } from "recoil";
 
 export interface ModalProps {
     open: boolean,
+    fullWidth?: boolean; 
     setOpen: (e:boolean) => void; 
     children?: ReactElement,
 }
 
-const Modal : React.FC<ModalProps> = ({ open, setOpen, children }) => {
+const Modal : React.FC<ModalProps> = ({ open, setOpen, children, fullWidth = false }) => {
     const [ _modalOpen, setModalOpen ] = useRecoilState(modalState);
 
     useEffect(() => {
@@ -33,9 +34,9 @@ const Modal : React.FC<ModalProps> = ({ open, setOpen, children }) => {
                 WebkitFontSmoothing: "antialiased",
                 WebkitTransformStyle: "preserve-3d",
                 WebkitBackfaceVisibility: "hidden",
-                MozTransition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
-                WebkitTransition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
-                backgroundColor: "rgba(0, 0, 0, 0.5)"
+                MozTransition: "all 150ms cubic-bezier(0.4, 0, 0.2, 1)",
+                WebkitTransition: "all 150ms cubic-bezier(0.4, 0, 0.2, 1)",
+                backgroundColor: "rgba(0, 0, 0, 0.25)"
             }} 
             onClick={() => setOpen(false)}
             className={clsx(
@@ -52,11 +53,17 @@ const Modal : React.FC<ModalProps> = ({ open, setOpen, children }) => {
                         transform: `${open ? "translateY(0)" : "translateY(100px)"} translateZ(0)`,
                         WebkitTransform: `${open ? "translateY(0)" : "translateY(100px)"} translateZ(0)`,
                     }}
-                    className={`transition-transform duration-300 flex items-center overflow-auto relative rounded-lg`}>
+                    className={clsx(
+                        `transition-transform duration-300 justify-center flex items-center overflow-auto relative rounded-lg`,
+                        fullWidth && "w-full"
+                    )}>
                     <div 
                         onClick={(e) => e.stopPropagation()}
                         style={{ borderColor: "rgba(255, 255, 255, 0.1)" }} 
-                        className="h-min p-3 relative bg-dark-grey-primary my-autorounded-lg shadow rounded-md border-[1px] border-solid">
+                        className={clsx(
+                            "h-min p-3 relative bg-dark-grey-primary my-auto rounded-md shadow border-[1px] border-solid",
+                            fullWidth && "w-full"
+                        )}>
                         <div className="flex z-50 justify-between [&>*]:transition-opacity [&>*]:hover:opacity-50 items-center p-3 absolute top-0 right-0">
                             <button 
                                 aria-label="hide modal"
