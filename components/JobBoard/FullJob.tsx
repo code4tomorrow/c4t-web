@@ -8,6 +8,7 @@ import { IJob, IJobPreview } from "common/interfaces/job";
 import { jobFactionMap } from "common/maps/color";
 import React, { useMemo } from "react";
 import useSWR from "swr";
+import { useDebounce } from "use-debounce";
 import { useStyles } from "./styles";
 
 interface IFullJobProps {
@@ -21,6 +22,8 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
 
     const isLoading = useMemo(() => !queriedJob && !error, [ queriedJob, error]);
 
+    const [ isLoadingDebounced ] = useDebounce(isLoading, 300);
+
     const job:IJob = useMemo(() => ({ ...preview, ...queriedJob }), [ preview, queriedJob ])
 
     const { classes } = useStyles();
@@ -31,8 +34,17 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
 
     const containerRef = React.useRef<HTMLDivElement | null>(null);
 
+    // const containerHeightRef = React.useRef(0);
+
+    // React.useEffect(() => {
+    //     requestAnimationFrame(() => {
+    //         if (!containerRef.current) return; 
+    //         containerRef.current.style.maxHeight = `${containerRef.current.scrollHeight}px`; 
+    //     });
+    // }, [ preview, containerRef ]);
+
     return (
-        <article ref={containerRef} className="w-full h-full pb-4 space-y-3">
+        <article ref={containerRef} className="w-full transition-all h-full pb-4 space-y-3">
             <header className={clsx(
                 "min-h-[6rem] flex py-4 justify-center before:!h-0 md:before:!h-full flex-col items-center border-b-dim-grey border-b",
                 classes.fullJobHeader
@@ -60,7 +72,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
             <div className="px-4 space-y-2">
                 <h2 className="font-bold text-white text-lg">Full Job Description</h2>
                 {
-                    !isLoading ? (
+                    !isLoadingDebounced ? (
                         <Animate.Element
                             ref={containerRef}
                             resetAfterTriggered={false}
@@ -89,7 +101,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
             <div className="px-4 space-y-2">
                 <h2 className="font-bold text-white text-lg">Skills</h2>
                 {
-                    !isLoading ? (
+                    !isLoadingDebounced ? (
                         <Animate.Element
                             ref={containerRef}
                             resetAfterTriggered={false}
@@ -118,7 +130,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview }) => {
             <div className="px-4 space-y-2">
                 <h2 className="font-bold text-white text-lg">Responsibilities</h2>
                 {
-                    !isLoading ? (
+                    !isLoadingDebounced ? (
                         <Animate.Element
                             ref={containerRef}
                             resetAfterTriggered={false}
