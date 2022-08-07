@@ -25,7 +25,7 @@ const NavNotification = ({ notificationFlag } : { notificationFlag: INotificatio
             target: "_blank"
         } : {})}
         className={clsx(
-            "flex px-8 justify-center mt-3 items-center",
+            "flex px-8 justify-center mt-8 md:mt-3 items-center",
             !!notificationFlag.link && "[&>span>p]:hover:underline cursor-pointer chevrow-container"
         )}>
             <span className={clsx("hidden md:inline-block flex-shrink-0 w-2 h-2 rounded-full mx-3 bg-brand-purple-secondary before:bg-brand-blue-primary", classes.notificationDot)} />
@@ -172,7 +172,7 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             ref={linkHighlightRef}
         />
         <nav ref={navRef} className={clsx(
-            "px-10 md:py-6 py-5 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
+            "px-10 md:py-6 py-8 flex fixed w-screen top-0 z-50 left-0 justify-between items-center transition-transform duration-300",
             navHidden ? "-translate-y-full" : "translate-y-0",
             classes.nav,
         )}>

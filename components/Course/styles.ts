@@ -3,6 +3,9 @@ import { makeStyles } from "tss-react/mui";
 export const useStyles = makeStyles()(() => ({
     course: {
         position: "relative",
+        "&:hover p[class$=description]::-webkit-scrollbar-thumb": {
+            background: "rgba(255, 255, 255, 0.15)",
+        } 
     },
     description: {
         "&::-webkit-scrollbar": {
@@ -15,8 +18,10 @@ export const useStyles = makeStyles()(() => ({
             width: 3,
             borderRadius: 3,
         },
-        "&:hover::-webkit-scrollbar-thumb": {
-            background: "rgba(255, 255, 255, 0.15)",
+        "@media (max-width: 768px)": {
+            "&::-webkit-scrollbar-thumb": {
+                background: "rgba(255, 255, 255, 0.15)",
+            }
         }
     }
 }))

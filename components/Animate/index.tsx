@@ -6,6 +6,7 @@ import gsap from "gsap";
 import Scrub from "./Scrub";
 import { withAnimateBase } from "./withAnimateBase";
 import isEqual from "react-fast-compare";
+import Router from 'next/router'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,6 +26,21 @@ const Animate : React.FC<AnimateProps> = ({ children }) => {
         setViewportWidth(window.innerWidth);
     }, []);
 
+    const handleResetScrollTrigger = () => {
+        ScrollTrigger.refresh();
+    };
+
+    useEffect(() => {
+        Router.events.on('routeChangeStart', handleResetScrollTrigger)
+        Router.events.on('routeChangeComplete', handleResetScrollTrigger)
+        Router.events.on('routeChangeError', handleResetScrollTrigger)
+        return () => {
+          Router.events.off('routeChangeStart', handleResetScrollTrigger)
+          Router.events.off('routeChangeComplete', handleResetScrollTrigger)
+          Router.events.off('routeChangeError', handleResetScrollTrigger)
+        }
+    }, [ handleResetScrollTrigger ])
+
     useEffect(() => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
@@ -32,8 +48,8 @@ const Animate : React.FC<AnimateProps> = ({ children }) => {
 
     useEffect(() => {
         if (resizedWidth === null) return; 
-        ScrollTrigger.refresh();
-    }, [ resizedWidth ]);
+        handleResetScrollTrigger();
+    }, [ resizedWidth, handleResetScrollTrigger ]);
 
     const childs = useMemo(() => <>{children}</>, [ children ]);
 

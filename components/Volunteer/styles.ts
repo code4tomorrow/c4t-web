@@ -39,7 +39,10 @@ export const useStyles = makeStyles<{ accentColor: string }>()((_, { accentColor
         },
         "&:hover h1[class$=opportunityTitle]": {
             transform: "scale(1.05)"
-        }
+        },
+        "&:hover div[class$=description]::-webkit-scrollbar-thumb": {
+            background: "rgba(255, 255, 255, 0.15)",
+        } 
     },
     flowSetup: {
         "&::before": {
@@ -70,9 +73,21 @@ export const useStyles = makeStyles<{ accentColor: string }>()((_, { accentColor
         },
     },
     description: {
+        position: "relative",
         "&::-webkit-scrollbar": {
-            width: 0,
-            backgroundColor: "transparent"
+            background: "transparent",
+            width: 3,
+        },
+        "&::-webkit-scrollbar-thumb": {
+            transition: "all 100ms ease",
+            background: "rgba(255, 255, 255, 0)",
+            width: 3,
+            borderRadius: 3,
+        },
+        "@media (max-width: 768px)": {
+            "&::-webkit-scrollbar-thumb": {
+                background: "rgba(255, 255, 255, 0.15)",
+            }
         }
     },
     flowMotion: {

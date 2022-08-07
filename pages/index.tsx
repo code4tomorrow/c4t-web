@@ -10,7 +10,7 @@ import GiftsSVG from "@svg/gifts.svg";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import Link from "next/link";
-import { cloudinaryLoader, getCloudinaryURL } from "@utils/cloudinary-loader";
+import { cloudinaryLoader } from "@utils/cloudinary-loader";
 import config from "config";
 import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
@@ -18,7 +18,6 @@ import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { ITestimonial } from "common/interfaces/testimonial";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
-import { getPlaiceholder } from "plaiceholder";
 import { InferGetServerSidePropsType } from "next";
 import { modalState } from "common/atoms";
 import { useRecoilValue } from "recoil";
@@ -32,12 +31,16 @@ const Testimonials = dynamic(() => import("@components/Testimonials"));
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
 const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProps>> = ({ 
-  notificationFlags, testimonials = [], codeBlurDataURL 
+  notificationFlags, testimonials = []  
 }) => {
   const { classes } = useStyles();
 
   const mainRef = React.useRef<HTMLDivElement | null>(null);
+
   const sessionRef = React.useRef<HTMLDivElement | null>(null);
+  const testimonialsRef = React.useRef<HTMLDivElement | null>(null);
+  const donateRef = React.useRef<HTMLDivElement | null>(null);
+  const partnershipRef = React.useRef<HTMLDivElement | null>(null);
 
   const modalOpen = useRecoilValue(modalState);
 
@@ -110,8 +113,6 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                         loading="eager"
                         src="code"
                         priority
-                        //placeholder="blur"
-                        //blurDataURL={codeBlurDataURL}
                         loader={cloudinaryLoader}
                         quality={100}
                         alt="code-demo"
@@ -187,32 +188,45 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] "/>
               </div>
          </section>
-         <section className="w-full flex flex-col items-center">
+         <section ref={testimonialsRef} className="w-full flex flex-col items-center">
               <div className="mb-20 w-full">
                   <Animate.Element
                       as="h1" 
-                      from={{ y: 60, opacity: 0 }}
-                      to={{ y: 0, opacity: 1 }}
-                      className="text-5xl font-bold text-white text-center">
+                      ref={testimonialsRef}
+                      onDeactivatedClasses="opacity-0 translate-y-[60px]"
+                      onActivatedClasses="opacity-100 translate-y-0"
+                      className="text-5xl transition-all duration-500 font-bold text-white text-center">
                           Parent & Alumni <span className="text-brand-purple-secondary">Testimonials</span>
                   </Animate.Element>
                   <Animate.Element
                       as="p" 
-                      from={{ y: 90,  opacity: 0 }}
-                      to={{ y: 0, opacity: 1, delay: 0.15 }}
-                      className="text-lg !mt-3 text-medium-grey text-center">
+                      ref={testimonialsRef}
+                      onDeactivatedClasses="opacity-0 translate-y-[90px]"
+                      onActivatedClasses="opacity-100 translate-y-0"
+                      className="text-lg !mt-3 transition-all duration-700 delay-150 text-medium-grey text-center">
                         Read what the Parents & Graduated Students are saying...
                   </Animate.Element>
               </div>
               <Testimonials testimonials={testimonials} />
          </section>
          <section className="flex py-10 flex-col-reverse md:flex-row-reverse md:items-center justify-around w-full max-w-[1250px]">
-              <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
-                <Animate.Element from={{ x: 200 }} to={{ x: 0}}>
+              <article ref={donateRef} className="space-y-5 flex flex-col md:max-w-[50%] px-2">
+                <Animate.Element 
+                  ref={donateRef}
+                  onDeactivatedClasses="translate-x-[200px]"
+                  onActivatedClasses="translate-x-0"
+                  className="transition-transform duration-500"
+                >
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Consider Supporting a STEM Initiative.</h1>
                 </Animate.Element>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
-                    <Animate.Element as="p" from={{ x: 200 }} to={{ x: 0}} className="text-medium-grey">
+                    <Animate.Element 
+                      as="p" 
+                      ref={donateRef}
+                      onDeactivatedClasses="translate-x-[200px]"
+                      onActivatedClasses="translate-x-0"
+                      className="transition-transform duration-700 delay-75 text-medium-grey"
+                    >
                       If you would like to support our efforts to make STEM education accessible to all, please consider donating.
                     </Animate.Element>
                   </div>
@@ -231,12 +245,23 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
               </div>
          </section>
          <section className="flex py-10 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
-              <article className="space-y-5 flex flex-col md:max-w-[50%] px-2">
-                <Animate.Element from={{ x: -200 }} to={{ x: 0}}>
+              <article ref={partnershipRef} className="space-y-5 flex flex-col md:max-w-[50%] px-2">
+                <Animate.Element 
+                    ref={partnershipRef}
+                    onDeactivatedClasses="translate-x-[-200px]"
+                    onActivatedClasses="translate-x-0"
+                    className="transition-transform duration-500"
+                >
                   <h1 className="text-white text-4xl md:text-5xl font-extrabold">Let&apos;s Build a Partnership.</h1>
                 </Animate.Element>
                   <div className="space-y-3 md:max-w-[75%] text-lg">
-                    <Animate.Element as="p" from={{ x: -200 }} to={{ x: 0}} className="text-medium-grey">
+                    <Animate.Element 
+                      as="p"  
+                      ref={partnershipRef}
+                      onDeactivatedClasses="translate-x-[-200px]"
+                      onActivatedClasses="translate-x-0"
+                      className="text-medium-grey transition-transform duration-700 delay-75"
+                    >
                       At C4T, we believe in the power of partnership. We know it will take a large coalition of change-makers in order to have the greatest impact. This is why we collaborate with other non-profit organizations to bring STEM-related opportunities to students.
                     </Animate.Element>
                   </div>
@@ -301,13 +326,10 @@ export async function getStaticProps() {
   const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
   const testimonials:ITestimonial[] = response?.testimonialCollection?.items || [];
 
-  const { base64: codeBlurDataURL } = await getPlaiceholder(getCloudinaryURL("code"), { size: 64 });
-
   return {
     props: { 
       notificationFlags,
-      testimonials,
-      codeBlurDataURL
+      testimonials
     },
     // - At most once every 15 minutes
     revalidate: 60 * 15, // In seconds
