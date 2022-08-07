@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import clsx from "clsx";
 import { IFAQ } from "pages/learn";
 import Document from "@components/Document";

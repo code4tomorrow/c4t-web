@@ -11,6 +11,7 @@ import ProgressBar from '@components/ProgressBar';
 import { RecoilRoot } from "recoil";
 import ReactGA from 'react-ga4';
 import config from 'config';
+import { Router } from 'next/router';
 
 let muiCache: EmotionCache | undefined = undefined;
 
@@ -29,6 +30,22 @@ type AppPropWithLayout = AppProps & {
 const DEBUG = process.env.NODE_ENV === "development"; 
 
 function MyApp({ Component, pageProps }: AppPropWithLayout) {
+  const handleScrollTop = React.useCallback(() => {
+    const frame = requestAnimationFrame(() => {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  React.useEffect(() => {
+    Router.events.on('routeChangeComplete', handleScrollTop);
+    return () => Router.events.off('routeChangeComplete', handleScrollTop);
+  }, [ handleScrollTop ]);
+  
   React.useEffect(() => {
     ReactGA.initialize(config.ga.measurementId, { 
       testMode: DEBUG
