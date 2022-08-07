@@ -1009,6 +1009,11 @@
   "resolved" "https://registry.npmjs.org/@contentful/rich-text-types/-/rich-text-types-15.12.1.tgz"
   "version" "15.12.1"
 
+"@corex/deepmerge@^4.0.29":
+  "integrity" "sha512-q/yVUnqckA8Do+EvAfpy7RLdumnBy9ZsducMUtZTvpdbJC7azEf1hGtnYYxm0QfphYxjwggv6XtH64prvS1W+A=="
+  "resolved" "https://registry.npmjs.org/@corex/deepmerge/-/deepmerge-4.0.29.tgz"
+  "version" "4.0.29"
+
 "@emotion/babel-plugin@^11.7.1":
   "integrity" "sha512-Pr/7HGH6H6yKgnVFNEj2MVlreu3ADqftqjqwUvDy/OJzKFgxKeTQ+eeUf20FOTuHVkDON2iNa25rAXVYtWJCjw=="
   "resolved" "https://registry.npmjs.org/@emotion/babel-plugin/-/babel-plugin-11.9.2.tgz"
@@ -1285,7 +1290,7 @@
   dependencies:
     "webpack-bundle-analyzer" "4.3.0"
 
-"@next/env@12.2.0":
+"@next/env@*", "@next/env@12.2.0":
   "integrity" "sha512-/FCkDpL/8SodJEXvx/DYNlOD5ijTtkozf4PPulYPtkPOJaMPpBSOkzmsta4fnrnbdH6eZjbwbiXFdr6gSQCV4w=="
   "resolved" "https://registry.npmjs.org/@next/env/-/env-12.2.0.tgz"
   "version" "12.2.0"
@@ -3425,7 +3430,15 @@
   "resolved" "https://registry.npmjs.org/next-seo/-/next-seo-5.4.0.tgz"
   "version" "5.4.0"
 
-"next@^8.1.1-canary.54 || >=9.0.0", "next@>= 10.0.0", "next@12.2.0":
+"next-sitemap@^3.1.16":
+  "integrity" "sha512-kczTKLB1ifqi44mMImv/sLRsqxy/O4DXJ4mx/1l23vyx6QFWqeuHxS0duEL/EsChcVJUMWV4FNg2pIiX31xxmg=="
+  "resolved" "https://registry.npmjs.org/next-sitemap/-/next-sitemap-3.1.16.tgz"
+  "version" "3.1.16"
+  dependencies:
+    "@corex/deepmerge" "^4.0.29"
+    "minimist" "^1.2.6"
+
+"next@*", "next@^8.1.1-canary.54 || >=9.0.0", "next@>= 10.0.0", "next@12.2.0":
   "integrity" "sha512-B4j7D3SHYopLYx6/Ark0fenwIar9tEaZZFAaxmKjgcMMexhVJzB3jt7X+6wcdXPPMeUD6r09weUtnDpjox/vIA=="
   "resolved" "https://registry.npmjs.org/next/-/next-12.2.0.tgz"
   "version" "12.2.0"
@@ -3843,6 +3856,11 @@
   "integrity" "sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA=="
   "resolved" "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.0.tgz"
   "version" "3.2.0"
+
+"react-ga4@^1.4.1":
+  "integrity" "sha512-ioBMEIxd4ePw4YtaloTUgqhQGqz5ebDdC4slEpLgy2sLx1LuZBC9iYCwDymTXzcntw6K1dHX183ulP32nNdG7w=="
+  "resolved" "https://registry.npmjs.org/react-ga4/-/react-ga4-1.4.1.tgz"
+  "version" "1.4.1"
 
 "react-is@^16.13.1", "react-is@^16.7.0":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="

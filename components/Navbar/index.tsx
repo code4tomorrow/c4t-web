@@ -28,7 +28,7 @@ const NavNotification = ({ notificationFlag } : { notificationFlag: INotificatio
             "flex px-8 justify-center mt-8 md:mt-3 items-center",
             !!notificationFlag.link && "[&>span>p]:hover:underline cursor-pointer chevrow-container"
         )}>
-            <span className={clsx("hidden md:inline-block flex-shrink-0 w-2 h-2 rounded-full mx-3 bg-brand-purple-secondary before:bg-brand-blue-primary", classes.notificationDot)} />
+            <span className={clsx("hidden md:inline-block flex-shrink-0 w-2 h-2 rounded-full mx-3 bg-brand-purple-secondary before:bg-brand-purple-primary", classes.notificationDot)} />
             <span className="text-brand-purple-secondary text-center text-sm font-semibold">
                 <Document color="text-brand-purple-secondary" document={notificationFlag.notification?.json}/>
             </span>

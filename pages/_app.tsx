@@ -9,6 +9,8 @@ import { NextPageWithLayout } from 'common/interfaces/nextPageWithLayout';
 import { getCloudinaryURL } from '@utils/cloudinary-loader';
 import ProgressBar from '@components/ProgressBar';
 import { RecoilRoot } from "recoil";
+import ReactGA from 'react-ga4';
+import config from 'config';
 
 let muiCache: EmotionCache | undefined = undefined;
 
@@ -24,7 +26,16 @@ type AppPropWithLayout = AppProps & {
   Component: NextPageWithLayout,
 }
 
+const DEBUG = process.env.NODE_ENV === "development"; 
+
 function MyApp({ Component, pageProps }: AppPropWithLayout) {
+  React.useEffect(() => {
+    ReactGA.initialize(config.ga.measurementId, { 
+      testMode: DEBUG
+    });
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search });
+  }, []);
+
   const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
   return (
     <CacheProvider value={muiCache ?? createMuiCache()}>

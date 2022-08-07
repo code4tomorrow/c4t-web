@@ -1,6 +1,9 @@
 export {};
 
 const config = {
+    ga: {
+        measurementId: "G-QXB15VN08B"
+    },
     contentful: {
         preview: !!process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
     },

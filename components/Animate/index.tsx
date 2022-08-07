@@ -26,9 +26,9 @@ const Animate : React.FC<AnimateProps> = ({ children }) => {
         setViewportWidth(window.innerWidth);
     }, []);
 
-    const handleResetScrollTrigger = () => {
+    const handleResetScrollTrigger = useCallback(() => {
         ScrollTrigger.refresh();
-    };
+    }, []);
 
     useEffect(() => {
         Router.events.on('routeChangeStart', handleResetScrollTrigger)

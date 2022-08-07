@@ -71,7 +71,7 @@ const BrandButton = <T extends React.ElementType = "div">({
                     onClick={handleOnClick}
                     className={clsx(
                         "m-auto",
-                        "bg-gradient-to-b from-brand-blue-primary to-brand-purple-secondary font-medium text-white border-0 rounded-xl py-3 px-6", 
+                        "bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary font-medium text-white border-0 rounded-xl py-3 px-6", 
                         "items-center flex justify-center space-x-2",
                         classes.button,
                         className
