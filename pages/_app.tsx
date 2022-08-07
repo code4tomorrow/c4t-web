@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
         ]}
         description="Code 4 Tomorrow is entirely student-run, from the official website to merch design and finance management. Fiscally sponsored by Irvine LIGHTS, C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers."
         openGraph={{
-          url: "https://v2.code4tomorrow.org/",
+          url: "https://www.code4tomorrow.org/",
           title: "Code 4 Tomorrow",
           description: "Code 4 Tomorrow is entirely student-run, from the official website to merch design and finance management. Fiscally sponsored by Irvine LIGHTS, C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers.",
           images: [
@@ -53,7 +53,7 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
           site_name: "Code 4 Tomorrow",
         }}
         twitter={{
-          site: 'https://v2.code4tomorrow.org/',
+          site: 'https://www.code4tomorrow.org/',
           cardType: 'summary_large_image',
         }}
       />

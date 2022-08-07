@@ -39,12 +39,7 @@ const nextConfig = {
         source: "/jobboard.html",
         destination: "/jobboard",
         permanent: true
-      },
-      // {
-      //   source: "/jobboard",
-      //   destination: "https://v1.code4tomorrow.org/jobboard.html",
-      //   permanent: false
-      // }
+      }
     ]
   },
   webpack(conf) {
