@@ -12,10 +12,11 @@ import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { useMemo } from "react";
 import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
-import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import dynamic from "next/dynamic";
+import { makeStyles } from "tss-react/mui";
 const Navbar = dynamic(() => import("@components/Navbar"));
+const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 export interface ICourse {
     title?: string; 
@@ -113,7 +114,23 @@ const Courses : NextPageWithLayout<CoursesProps> = ({ courses, notificationFlags
 
   const handleSlideChange = (slide:number) => () => {
     emblaAPI?.scrollTo(slide);
-};
+  };
+
+  const { classes } = makeStyles()(() => ({
+      gradientOverlay: {
+        position: "relative",
+        "&::after": {
+          content: "''",
+          bottom: 0,
+          height: "100%",
+          width: "100%",
+          zIndex: 1,
+          position: "absolute",
+          pointerEvents: "none",
+          background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #111111 100%)`
+        }
+      }
+  }))();
 
   return (
         <div style={{ width: "100vw", overflowX: "clip" }}
@@ -137,9 +154,12 @@ const Courses : NextPageWithLayout<CoursesProps> = ({ courses, notificationFlags
                     </Animate.Element>
                     <div 
                         style={{
-                          WebkitMaskImage: "-webkit-gradient(linear, left 75%, left 100%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"
+                           // WebkitMaskImage: `-webkit-gradient(linear, left 75%, left 100%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))`
                         }}
-                        className="!mt-8 hidden w-full relative lg:flex overflow-y-hidden max-h-[750px] justify-center" ref={emblaRef}> 
+                        className={clsx(
+                          "!mt-8 hidden w-full relative lg:flex overflow-y-hidden max-h-[750px] justify-center",
+                          classes.gradientOverlay
+                        )} ref={emblaRef}> 
                         <div className="flex flex-col gap-3">
                             {
                                 coursesPaired.map((coursePaired, i) => (

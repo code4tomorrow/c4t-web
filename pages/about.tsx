@@ -14,12 +14,12 @@ import { INotificationFlag } from "common/interfaces/navigationFlag";
 import Image from "next/image";
 import { cloudinaryLoader } from "@utils/cloudinary-loader";
 import clsx from "clsx";
-import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import JsonQL, { IJsonQLMini } from "@utils/jsonql";
 import dynamic from "next/dynamic";
 const Navbar = dynamic(() => import("@components/Navbar"));
 const Directory = dynamic(() => import("@components/About/Directory"));
+const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 interface AboutProps {
     directoryEntries: IJsonQLMini<IDirectoryRow[]>,

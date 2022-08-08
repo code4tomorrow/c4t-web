@@ -39,7 +39,7 @@ const Element = <T extends ElementType = "div">({
     const [ triggered, setTriggered ] = useState<boolean | undefined>(undefined);
 
     const setTriggerListeners = useCallback(() => {
-        if (!containerRef.current) return;
+        if (!containerRef.current && !ref?.current) return;
 
         const tl = gsap.timeline({
             repeat: 0,

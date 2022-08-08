@@ -16,7 +16,6 @@ import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { ITestimonial } from "common/interfaces/testimonial";
-import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import { InferGetServerSidePropsType } from "next";
 import { modalState } from "common/atoms";
@@ -27,6 +26,7 @@ import MemberSignUps from "@components/ModalTypes/MemberSignUps";
 const Navbar = dynamic(() => import("@components/Navbar"));
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
+const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
@@ -188,8 +188,8 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] "/>
               </div>
          </section>
-         <section ref={testimonialsRef} className="w-full flex flex-col items-center">
-              <div className="mb-20 w-full">
+         <section className="w-full flex flex-col items-center">
+              <div ref={testimonialsRef} className="mb-20 w-full">
                   <Animate.Element
                       as="h1" 
                       ref={testimonialsRef}

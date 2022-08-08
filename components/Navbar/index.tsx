@@ -120,6 +120,7 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             { x, y, width, height }, 
             { x:x2, y:y2, width: width2, height:height2, duration: 0.15 },
         )
+        /* eslint-disable */ 
     }, [ navItemRefs, router.pathname ]);
 
     useEffect(handleRouterChange, [ handleRouterChange ]);
@@ -157,9 +158,6 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [ handleScroll ]);
-
-
-    
 
     return (
         <>

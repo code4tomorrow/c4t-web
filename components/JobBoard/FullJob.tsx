@@ -36,15 +36,6 @@ const FullJob : React.FC<IFullJobProps> = ({ preview, showContent:_showContent =
 
     const containerRef = React.useRef<HTMLDivElement | null>(null);
 
-    // const containerHeightRef = React.useRef(0);
-
-    // React.useEffect(() => {
-    //     requestAnimationFrame(() => {
-    //         if (!containerRef.current) return; 
-    //         containerRef.current.style.maxHeight = `${containerRef.current.scrollHeight}px`; 
-    //     });
-    // }, [ preview, containerRef ]);
-
     return (
         <article ref={containerRef} className="w-full transition-all h-full pb-4 space-y-3">
             <header className={clsx(
@@ -71,6 +62,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview, showContent:_showContent =
                     Apply Now
                 </a>
             </header>
+            <div className="">
             <div className="px-4 space-y-2">
                 <h2 className="font-bold text-white text-lg">Full Job Description</h2>
                 {
@@ -209,6 +201,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview, showContent:_showContent =
                 </div>
                 ) 
             }
+            </div>
         </article>
     )
 }

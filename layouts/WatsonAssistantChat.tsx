@@ -2,7 +2,6 @@ import config from "config";
 import React, { ReactElement, useCallback, useEffect, useMemo, useRef } from "react";
 import { withWebChat } from '@ibm-watson/assistant-web-chat-react';
 import { getCloudinaryURL } from "@utils/cloudinary-loader";
-import ChatIcon from "@heroicons/react/outline/ChatIcon";
 import AnnotationIcon  from "@heroicons/react/outline/AnnotationIcon";
 import BrandButton from "@components/BrandButton";
 

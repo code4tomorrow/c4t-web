@@ -1,7 +1,6 @@
 import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
-import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Head from "next/head";
 import React, { ReactElement, useEffect, useMemo, useState } from "react";
 import JobPreview from "@components/JobBoard/JobPreview";
@@ -25,6 +24,8 @@ import useDimensions from "hooks/useDimensions";
 import flatMap from "lodash/flatMap";
 import Loader from "@components/Loader";
 import WalkSVG from "@svg/walk.svg";
+import dynamic from "next/dynamic";
+const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 const getJobAPIKey = (pageIndex:number) => {
     return getAPIJobsPreview(pageIndex, 5);        

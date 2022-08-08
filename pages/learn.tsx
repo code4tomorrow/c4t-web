@@ -6,11 +6,11 @@ import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import config from "config";
 import { gql } from "graphql-request";
-import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { ReactElement } from "react";
 const Navbar = dynamic(() => import("@components/Navbar"));
+const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 export interface IFAQ {
     question?: string; 
