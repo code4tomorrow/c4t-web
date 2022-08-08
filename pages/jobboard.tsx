@@ -24,8 +24,7 @@ import useDimensions from "hooks/useDimensions";
 import flatMap from "lodash/flatMap";
 import Loader from "@components/Loader";
 import WalkSVG from "@svg/walk.svg";
-import dynamic from "next/dynamic";
-const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 
 const getJobAPIKey = (pageIndex:number) => {
     return getAPIJobsPreview(pageIndex, 5);        

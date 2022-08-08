@@ -10,8 +10,8 @@ import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { ReactElement } from "react";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import dynamic from "next/dynamic";
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 const Navbar = dynamic(() => import("@components/Navbar"));
-const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 export interface IVolunteerOpportunity extends IBaseContentModel {
     name?: string; 

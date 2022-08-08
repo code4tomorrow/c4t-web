@@ -23,10 +23,11 @@ import { useRecoilValue } from "recoil";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import MemberSignUps from "@components/ModalTypes/MemberSignUps";
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 const Navbar = dynamic(() => import("@components/Navbar"));
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
-const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
+// const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 

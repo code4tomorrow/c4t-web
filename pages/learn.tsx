@@ -9,8 +9,8 @@ import { gql } from "graphql-request";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { ReactElement } from "react";
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 const Navbar = dynamic(() => import("@components/Navbar"));
-const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 export interface IFAQ {
     question?: string; 

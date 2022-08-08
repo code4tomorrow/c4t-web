@@ -17,9 +17,9 @@ import clsx from "clsx";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import JsonQL, { IJsonQLMini } from "@utils/jsonql";
 import dynamic from "next/dynamic";
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 const Navbar = dynamic(() => import("@components/Navbar"));
 const Directory = dynamic(() => import("@components/About/Directory"));
-const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 interface AboutProps {
     directoryEntries: IJsonQLMini<IDirectoryRow[]>,

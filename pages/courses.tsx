@@ -15,8 +15,8 @@ import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import dynamic from "next/dynamic";
 import { makeStyles } from "tss-react/mui";
+import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 const Navbar = dynamic(() => import("@components/Navbar"));
-const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 export interface ICourse {
     title?: string; 
