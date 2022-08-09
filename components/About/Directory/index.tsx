@@ -139,18 +139,14 @@ const Directory : React.FC<IDirectoryProps> = ({ directoryEntries }) => {
         [prepareRow, rows, classes.cell ]
       )
 
-    // const [ reachedEnd, setReachedEnd ] = useState(false);
-
-    // const handleNewItemsRendered = (e:ListOnItemsRenderedProps) => {
-    //     if (e.overscanStopIndex === directoryEntries.length - 1) setReachedEnd(true);
-    //     else setReachedEnd(false);
-    // };
-
     return (
         <Paper 
-            containerClass="w-full !p-0 max-w-7xl flex !overflow-x-auto">
+            containerClass={clsx(
+              "w-full !p-0 max-w-7xl flex !overflow-x-auto",
+              classes.container
+            )}>
             <div {...getTableProps()} 
-                className="p-3 w-full pt-0 inline-block relative">
+                className={clsx("p-3 w-full pt-0 inline-block relative", classes.table)}>
                 <div className={clsx("absolute bg-dark-grey-secondary z-10 md:px-9", classes.thead)}>
                     {headerGroups.map((headerGroup, idx) => (
                     <div {...headerGroup.getHeaderGroupProps()} key={idx}>
@@ -170,7 +166,7 @@ const Directory : React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                         className="w-full"
                         itemCount={rows.length}
                         itemSize={40}
-                        width={totalColumnsWidth}
+                        width={totalColumnsWidth + 15}
                         >
                         {RenderVirtualRow}
                     </VirtualList>
