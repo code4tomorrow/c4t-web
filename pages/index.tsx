@@ -24,6 +24,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import MemberSignUps from "@components/ModalTypes/MemberSignUps";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
+import { getSiteMap } from "@utils/notion/getSiteMap";
 const Navbar = dynamic(() => import("@components/Navbar"));
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
@@ -327,6 +328,8 @@ export async function getStaticProps() {
   const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
   const testimonials:ITestimonial[] = response?.testimonialCollection?.items || [];
 
+  await getSiteMap();
+      
   return {
     props: { 
       notificationFlags,

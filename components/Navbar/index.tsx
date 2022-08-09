@@ -176,7 +176,7 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         )}>
             <Link href="/" passHref>
                 <a className="hover:opacity-80 flex items-center h-4 transition-opacity">
-                    <div className="md:w-12 md:h-12 w-12 h-12">
+                    {/* <div className="md:w-12 md:h-12 w-12 h-12">
                         <Image 
                             loader={cloudinaryLoader}
                             src={"logo"}
@@ -188,8 +188,8 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
                             loading="eager"
                             quality={100}
                         />
-                    </div>
-                    {/* <h1 className="text-lg font-bold text-white">C4T</h1> */}
+                    </div> */}
+                    <h1 className="text-lg font-bold text-white">C4T</h1>
                 </a>
             </Link>
             <div className={clsx(

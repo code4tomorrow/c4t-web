@@ -8,6 +8,14 @@ const nextConfig = {
       "res.cloudinary.com"
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: "/jobs",
+        destination: "/jobboard"
+      }
+    ]
+  },
   async redirects() {
     return [
       {
@@ -39,7 +47,7 @@ const nextConfig = {
         source: "/jobboard.html",
         destination: "/jobboard",
         permanent: true
-      }
+      },
     ]
   },
   webpack(conf) {

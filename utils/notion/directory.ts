@@ -1,7 +1,6 @@
-import {Client} from "@notionhq/client";
 import { notionColorMap } from "common/maps/color";
 import config from "config";
-require("dotenv").config();
+import { notion } from "./client";
 
 export interface IDirectoryItem {
     name: string | null; 
@@ -16,11 +15,6 @@ export interface IDirectoryRow {
     state: IDirectoryItem | null,
     country: IDirectoryItem | null
 }
-
-/**
- * Initialize Notion API Client using Notion Integration API Key
- */
-const notion = new Client({auth: process.env.NOTION_API_KEY });
 
 // Team Directory Notion Database UUID
 const databaseId = config.notion.directoryDatabaseId;
