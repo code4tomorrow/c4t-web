@@ -15,21 +15,21 @@ import Image from "next/image";
 import { cloudinaryLoader } from "@utils/cloudinary-loader";
 import clsx from "clsx";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
-import JsonQL, { IJsonQLMini } from "@utils/jsonql";
+import JsonQL, { JsonQLObject } from "@mahitm/jsonql";
 import dynamic from "next/dynamic";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 const Navbar = dynamic(() => import("@components/Navbar"));
 const Directory = dynamic(() => import("@components/About/Directory"));
 
 interface AboutProps {
-    directoryEntries: IJsonQLMini<IDirectoryRow[]>,
+    directoryEntries: JsonQLObject,
     notificationFlags: INotificationFlag[]
 }
 
 const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notificationFlags }) => {
     const missionRef = useRef<HTMLDivElement | null>(null);
-    let directoryEntriesParsed = new JsonQL().hydrate<IDirectoryRow[]>(directoryEntries)
-   
+    let directoryEntriesParsed = new JsonQL().revert<IDirectoryRow[]>(directoryEntries)
+
     const [ foundingStoryExpanded, setFoundingStoryExpanded ] = useState(false);
 
     return (
