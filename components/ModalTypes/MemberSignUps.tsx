@@ -60,7 +60,7 @@ const MemberSignUps = () => {
                 <h2 className="text-xl my-1 text-center font-medium text-medium-grey">
                     Need the Volunteer Hours? Have the Skills?
                 </h2>
-                <Link href="/jobboard" passHref>
+                <Link href="/jobs" passHref>
                     <BrandButton 
                         as="a"
                         containerClass="mt-12" 

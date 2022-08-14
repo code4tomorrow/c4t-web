@@ -267,7 +267,7 @@ export async function getStaticProps() {
         preview: config.contentful.preview,
         where: { 
             isVisible:true, 
-            pages_contains_some:["/jobboard", "*"]
+            pages_contains_some:["/jobboard", "*", "/jobs"]
         }
     });
 

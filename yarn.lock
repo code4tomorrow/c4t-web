@@ -1204,10 +1204,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mahitm/jsonql@^1.0.0":
-  "integrity" "sha512-fYf2J0Ie/Jf/jNYq4QITuKW5jvsvmJcSGOYSGEvW1Jl1e49k44cHrrBYDAPqRUel1M4xQUmyuEQblU2/5Eyg6g=="
-  "resolved" "https://registry.npmjs.org/@mahitm/jsonql/-/jsonql-1.0.0.tgz"
-  "version" "1.0.0"
+"@mahitm/jsonql@^1.1.1":
+  "integrity" "sha512-Vy96qBRnUO2scf5kfIeosr/1ofd88x8eCXjX2A/PHqm7ztwdL5lhyT/yae07NmD0NA5lxmJTpuv6fzr/U/7EDQ=="
+  "resolved" "https://registry.npmjs.org/@mahitm/jsonql/-/jsonql-1.1.1.tgz"
+  "version" "1.1.1"
   dependencies:
     "lodash" "^4.17.21"
 

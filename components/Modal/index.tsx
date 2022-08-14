@@ -18,7 +18,7 @@ const Modal : React.FC<ModalProps> = ({ open, setOpen, children, fullWidth = fal
     useEffect(() => {
         setModalOpen(open);
 
-        if (open) document.body.style.overflow = "hidden";
+        if (open) document.body.style.overflowY = "hidden";
         else document.body.style.overflowY = "auto";
 
         return () => {
@@ -50,7 +50,7 @@ const Modal : React.FC<ModalProps> = ({ open, setOpen, children, fullWidth = fal
                 open ? "!opacity-100 pointer-events-auto" : "pointer-events-none",
                 classes.modal
             )}>
-            <div className="flex justify-center relative px-4 py-[15px] h-screen w-full">
+            <div className="flex justify-center overflow-y-hidden relative px-4 py-[15px] h-screen w-full">
                 <div 
                     style={{
                         WebkitPerspective: 1000,
