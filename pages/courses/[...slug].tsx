@@ -25,6 +25,7 @@ import { ICourse } from ".";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Loader from "@components/Loader";
+import { cloudinaryExternalLoader } from "@utils/cloudinary-loader";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
@@ -95,6 +96,9 @@ const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
                 darkMode={true}
                 disableHeader={false}
                 fullPage={true}
+                mapImageUrl={(url) => {
+                    return process.env.NODE_ENV === "development" ? url : cloudinaryExternalLoader({ src: url, quality: 100 });
+                }}
                 mapPageUrl={(pageId: string) => {
                     const slug = linksMap[pageId] || `/${pageId}`;
                     return `/courses${slug}`
@@ -201,18 +205,16 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         data = await cacheClient.getRedisCache({ 
             params: { key: "notion-sitemap" }
         });
-        console.log(data);
     }
 
     let pageId = parsePageId(context.params.slug[0]);
 
-    console.log('Check 1: ', data && typeof data === "object")
     if (data && typeof data === "object") {
         if (pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD) {
             const slug = data[pageId.replaceAll("-", '')];
             return {
                 redirect: {
-                    destination: slug ? `/courses/${slug}` : `https://code4tomorrow.notion.site/${pageId.replaceAll("-", '')}`,
+                    destination: slug ? `/courses${slug}` : `https://code4tomorrow.notion.site/${pageId.replaceAll("-", '')}`,
                     permanent: true
                 }
             }
@@ -220,11 +222,9 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
 
         const inverseObject = invert(data);
         const blockId = inverseObject[`/${context.params.slug.join('/')}`];
-        console.log("Check 4: ", blockId);
         if(!!blockId) pageId = blockId;
     }
 
-    console.log("Check 2: ", pageId);
     if (!pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD) {
         return {
             redirect: {
