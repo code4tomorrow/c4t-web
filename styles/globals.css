@@ -38,3 +38,19 @@ a {
   stroke-dasharray: 0px;
   stroke-dashoffset: 0px;
 }
+
+.notion-frame{
+  --bg-color: #111111;
+  --bg-color-0: #202124 !important;
+}
+
+.breadcrumb {
+  text-overflow: unset;
+  overflow: hidden;
+}
+
+.breadcrumb .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -22,6 +22,8 @@ export interface ICourse {
     title?: string; 
     description?: string; 
     learnMoreLink?: string; 
+    notionPageId?: string; 
+    notionSlug?: string;
     promotionalLabel?: {
       label: string; 
       color?: string; 
@@ -246,6 +248,8 @@ export async function getStaticProps() {
             title,
             description,
             learnMoreLink,
+            notionSlug,
+            notionPageId,
             promotionalLabel {
               label,
               color
