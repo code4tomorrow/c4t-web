@@ -139,6 +139,13 @@ export async function getStaticPaths() {
     let paths = [];
     let allPaths = [];
 
+    const notionRootCoursePath = {
+        route: ['home'],
+        blockId: '785a612a6b534ec4ba34ca52905fcda9'
+    }
+
+    paths.push(notionRootCoursePath);
+    allPaths.push(notionRootCoursePath);
 
     if (!Object.keys(data).length) {
         for (let i = 0; i < courseIds.length; i++) {
@@ -146,23 +153,28 @@ export async function getStaticPaths() {
             paths.push(...response.slice(0,45));
             allPaths.push(...response);
         }
-
-        const pathMap = allPaths.reduce((a, { blockId, route }) => {
-            return { ...a, [ blockId.replaceAll("-", '') ]: `/${route.join("/")}` }
-        }, {})
-    
-        await staticStaticPropsClient.set({ 
-            params: { key: "notion-sitemap" },
-            data: pathMap
-        });
     } else {
         console.log("Using Cached Notion Sitemap");
-        Object.values(data).forEach((val:any) => {
+        Object.entries(data).forEach((entry) => {
             paths.push({
-                route: val.slice(1).split("/")
+                blockId: entry[0],
+                route: (entry[1] as string).slice(1).split("/")
+            })
+            allPaths.push({
+                blockId: entry[0],
+                route: (entry[1] as string).slice(1).split("/")
             })
         });
     }
+
+    const pathMap = allPaths.reduce((a, { blockId, route }) => {
+        return { ...a, [ blockId.replaceAll("-", '') ]: `/${route.join("/")}` }
+    }, {})
+
+    await staticStaticPropsClient.set({ 
+        params: { key: "notion-sitemap" },
+        data: pathMap
+    });
 
     paths = paths.slice(0, 300);
 
@@ -174,7 +186,7 @@ export async function getStaticPaths() {
     }
 }
 
-export async function getStaticProps(context: { params: { blockId: string, slug:string[] }}) {
+export async function getStaticProps(context: { params: { slug:string[] }}) {
     const notion = new NotionAPI();
 
     const data = await staticStaticPropsClient.get({ 
@@ -184,21 +196,22 @@ export async function getStaticProps(context: { params: { blockId: string, slug:
     let pageId = parsePageId(context.params.slug[0]);
 
     if (data && typeof data === "object") {
-        if (pageId && context.params.slug.length > 1) {
+        if (pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD) {
             const slug = data[pageId.replaceAll("-", '')];
             return {
                 redirect: {
-                    destination: slug ? `courses/${slug}` : `https://code4tomorrow.notion.site/${pageId.replaceAll("-", '')}`,
+                    destination: slug ? `/courses/${slug}` : `https://code4tomorrow.notion.site/${pageId.replaceAll("-", '')}`,
                     permanent: true
                 }
             }
-        }    
+        }
+
         const inverseObject = invert(data);
         const blockId = inverseObject[`/${context.params.slug.join('/')}`];
         if(!!blockId) pageId = blockId;
     }
 
-    if (!pageId) {
+    if (!pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD) {
         return {
             redirect: {
                 destination: `/courses`,
