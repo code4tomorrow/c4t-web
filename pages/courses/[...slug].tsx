@@ -4,6 +4,7 @@ import { NotionRenderer } from "react-notion-x";
 import { InferGetStaticPropsType } from "next";
 import { NotionAPI } from 'notion-client'
 import { parsePageId, getPageTitle } from "notion-utils";
+import { PHASE_PRODUCTION_BUILD } from 'next/constants';
 import { cache as staticStaticPropsClient } from "@utils/cacheStaticProps"; 
 import pRetry from 'p-retry';
 
@@ -136,14 +137,14 @@ export async function getStaticPaths() {
 
     for (let i = 0; i < courseIds.length; i++) {
         const response = await getSiteMap(courseIds[i]); 
-        paths.push(...response.slice(0,35));
+        paths.push(...response.slice(0,45));
         allPaths.push(...response);
     }
 
-    paths = paths.slice(0, 250);
+    paths = paths.slice(0, 300);
 
     const pathMap = allPaths.reduce((a, { blockId, route }) => {
-        return { ...a, [ blockId ]: `/${route.join("/")}` }
+        return { ...a, [ blockId.replaceAll("-", '') ]: `/${route.join("/")}` }
     }, {})
 
     await staticStaticPropsClient.set({ 
@@ -166,9 +167,18 @@ export async function getStaticProps(context: { params: { blockId: string, slug:
         params: { key: "notion-sitemap" }
     });
 
-    let pageId = parsePageId(context.params.slug[0]);; 
+    let pageId = parsePageId(context.params.slug[0]);
 
     if (data && typeof data === "object") {
+        if (pageId && context.params.slug.length > 1) {
+            const slug = data[pageId.replaceAll("-", '')];
+            return {
+                redirect: {
+                    destination: slug ? `courses/${slug}` : `https://code4tomorrow.notion.site/${pageId.replaceAll("-", '')}`,
+                    permanent: true
+                }
+            }
+        }    
         const inverseObject = invert(data);
         const blockId = inverseObject[`/${context.params.slug.join('/')}`];
         if(!!blockId) pageId = blockId;
@@ -183,7 +193,9 @@ export async function getStaticProps(context: { params: { blockId: string, slug:
         }
     } 
 
-    await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 1000)});
+    if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 1000)});
+    }
 
     const recordMap = await pRetry(async () => {
         return await notion.getPage(pageId, { gotOptions: { retry: 3 }}).catch(() => undefined)
@@ -202,7 +214,7 @@ export async function getStaticProps(context: { params: { blockId: string, slug:
         linksMap = Object
             .values(recordMap.block)
             .filter(({ value }) => value?.type === "page")
-            .map(({ value }) => ({ id: value?.id, route: data[value.id] || null }))
+            .map(({ value }) => ({ id: value?.id, route: data[value.id.replaceAll('-', '')] || null }))
             .filter(({ route }) => !!route)
             .reduce((a, b) => ({
                 ...a, [ b.id ] : b.route

@@ -44,6 +44,10 @@ a {
   --bg-color-0: #202124 !important;
 }
 
+.notion-header {
+  z-index: 40 !important;
+}
+
 .breadcrumb {
   text-overflow: unset;
   overflow: hidden;
