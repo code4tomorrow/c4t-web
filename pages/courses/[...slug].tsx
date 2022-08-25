@@ -134,29 +134,37 @@ export async function getStaticPaths() {
         params: { key: "notion-sitemap" }
     });
 
-    console.log(Object.keys(data).length, !!data);
-
     const courseIds = courseIdsRequest?.courseCollection?.items.map((item:ICourse) => item.notionPageId);
 
     let paths = [];
     let allPaths = [];
 
-    for (let i = 0; i < courseIds.length; i++) {
-        const response = await getSiteMap(courseIds[i]); 
-        paths.push(...response.slice(0,45));
-        allPaths.push(...response);
+
+    if (!Object.keys(data).length) {
+        for (let i = 0; i < courseIds.length; i++) {
+            const response = await getSiteMap(courseIds[i]); 
+            paths.push(...response.slice(0,45));
+            allPaths.push(...response);
+        }
+
+        const pathMap = allPaths.reduce((a, { blockId, route }) => {
+            return { ...a, [ blockId.replaceAll("-", '') ]: `/${route.join("/")}` }
+        }, {})
+    
+        await staticStaticPropsClient.set({ 
+            params: { key: "notion-sitemap" },
+            data: pathMap
+        });
+    } else {
+        console.log("Using Cached Notion Sitemap");
+        Object.values(data).forEach((val:any) => {
+            paths.push({
+                route: val.slice(1).split("/")
+            })
+        });
     }
 
     paths = paths.slice(0, 300);
-
-    const pathMap = allPaths.reduce((a, { blockId, route }) => {
-        return { ...a, [ blockId.replaceAll("-", '') ]: `/${route.join("/")}` }
-    }, {})
-
-    await staticStaticPropsClient.set({ 
-        params: { key: "notion-sitemap" },
-        data: pathMap
-    });
 
     return {
       paths: paths.map(({ route }) => ({ params: {
