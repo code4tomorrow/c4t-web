@@ -10,22 +10,30 @@ export const cache = {
         const hash = objectHash(params); 
         if (buildCache) {
           const buildCachePath = path.join(serverRuntimeConfig.PROJECT_ROOT, '.next/cache', `${hash}.json`);
-          await fs.writeFile(buildCachePath, JSON.stringify(data)).catch(e => {
-               console.error('failed writing build cache file', e);
-          });
+          await fs.writeFile(buildCachePath, JSON.stringify(data))
+               .then(() => {
+                    console.log(`saved cache @ ${buildCachePath}`)
+               })
+               .catch(e => {
+                    console.error('failed writing build cache file', e);
+               });
         } 
         if (staticPropsCache) {
           const staticPropsCachePath = path.join(__dirname, `${hash}.json`);
-          await fs.writeFile(staticPropsCachePath, JSON.stringify(data)).catch(e => {
-               console.error('failed writing static props cache file', e);
-          });
+          await fs.writeFile(staticPropsCachePath, JSON.stringify(data))
+               .then(() => {
+                    console.log(`saved cache @ ${staticPropsCachePath}`)
+               })
+               .catch(e => {
+                    console.error('failed writing static props cache file', e);
+               });
         }
      },
      async getBuildCache({ params }: { params: any }) {
           const hash = objectHash(params);
           const buildCachePath = path.join(serverRuntimeConfig.PROJECT_ROOT, '.next/cache', `${hash}.json`);
           const data = await fs.readFile(buildCachePath).catch(_e => {
-               console.log("No Cache Found for Params: ", params);
+               console.log("No Cache Found for Params: ", params, `@ ${buildCachePath}`);
                return null; 
           });
           return data ? JSON.parse(data.toString("utf-8")) : {}; 
@@ -34,8 +42,8 @@ export const cache = {
           const hash = objectHash(params);
           const staticPropsCachePath = path.join(__dirname, `${hash}.json`);
           const data = await fs.readFile(staticPropsCachePath).catch(_e => {
-                    console.log("No Cache Found for Params: ", params);
-                    return null; 
+               console.log("No Cache Found for Params: ", params, `@ ${staticPropsCachePath}`);
+               return null; 
           });
           return data ? JSON.parse(data.toString("utf-8")) : {}; 
      }
