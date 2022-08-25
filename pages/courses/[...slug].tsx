@@ -205,6 +205,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
 
     let pageId = parsePageId(context.params.slug[0]);
 
+    console.log('Check 1: ', data && typeof data === "object")
     if (data && typeof data === "object") {
         if (pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD) {
             const slug = data[pageId.replaceAll("-", '')];
@@ -217,10 +218,13 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         }
 
         const inverseObject = invert(data);
+        console.log("Check 3: ", inverseObject)
         const blockId = inverseObject[`/${context.params.slug.join('/')}`];
+        console.log("Check 4: ", blockId);
         if(!!blockId) pageId = blockId;
     }
 
+    console.log("Check 2: ", pageId);
     if (!pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD) {
         return {
             redirect: {
