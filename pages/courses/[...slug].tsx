@@ -130,6 +130,12 @@ export async function getStaticPaths() {
         }
     })
 
+    const data = await staticStaticPropsClient.get({ 
+        params: { key: "notion-sitemap" }
+    });
+
+    console.log(Object.keys(data).length, !!data);
+
     const courseIds = courseIdsRequest?.courseCollection?.items.map((item:ICourse) => item.notionPageId);
 
     let paths = [];

@@ -50,6 +50,9 @@ const nextConfig = {
       },
     ]
   },
+  serverRuntimeConfig: {
+    PROJECT_ROOT: __dirname
+  },
   webpack(conf) {
     conf.module.rules.push({
       test: /\.svg$/i,
