@@ -5,7 +5,7 @@ import { InferGetStaticPropsType } from "next";
 import { NotionAPI } from 'notion-client'
 import { parsePageId, getPageTitle } from "notion-utils";
 import { PHASE_PRODUCTION_BUILD } from 'next/constants';
-import { cache as staticStaticPropsClient } from "@utils/cacheStaticProps"; 
+import { cache as cacheClient } from "@utils/cacheStaticProps"; 
 import pRetry from 'p-retry';
 
 import 'react-notion-x/src/styles.css'
@@ -130,8 +130,8 @@ export async function getStaticPaths() {
         }
     })
 
-    const data = await staticStaticPropsClient.get({ 
-        params: { key: "notion-sitemap" }
+    const data = await cacheClient.getBuildCache({ 
+        params: { key: "notion-sitemap" },
     });
 
     const courseIds = courseIdsRequest?.courseCollection?.items.map((item:ICourse) => item.notionPageId);
@@ -171,9 +171,11 @@ export async function getStaticPaths() {
         return { ...a, [ blockId.replaceAll("-", '') ]: `/${route.join("/")}` }
     }, {})
 
-    await staticStaticPropsClient.set({ 
+    await cacheClient.set({ 
         params: { key: "notion-sitemap" },
-        data: pathMap
+        data: pathMap,
+        buildCache: true,
+        staticPropsCache: true
     });
 
     paths = paths.slice(0, 300);
@@ -189,7 +191,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: { params: { slug:string[] }}) {
     const notion = new NotionAPI();
 
-    const data = await staticStaticPropsClient.get({ 
+    const data = await cacheClient.getStaticPropsCache({ 
         params: { key: "notion-sitemap" }
     });
 
