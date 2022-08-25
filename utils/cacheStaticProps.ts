@@ -16,7 +16,10 @@ export const cache = {
    async get({ params }: { params: any }) {
         const hash = objectHash(params);
         const cachePath = path.join(serverRuntimeConfig.PROJECT_ROOT, '.next/cache', `${hash}.json`);
-        const data = await fs.readFile(cachePath);
-        return JSON.parse(data.toString("utf-8")); 
+        const data = await fs.readFile(cachePath).catch(_e => {
+               console.log("Not Cache Found for Params: ", params);
+               return null; 
+        });
+        return data ? JSON.parse(data.toString("utf-8")) : null; 
    }
 }
