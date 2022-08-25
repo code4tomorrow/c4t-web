@@ -2,49 +2,55 @@ import objectHash from "object-hash";
 import path from "path";
 import fs from "fs/promises";
 import getConfig from "next/config";
+import Redis from "ioredis";
 
 const { serverRuntimeConfig } = getConfig()
 
+const redisClient = new Redis(process.env.REDIS_URL!);
+
 export const cache = {
-    async set({ params, data, buildCache = false, staticPropsCache = false }: { params: any, data: any, buildCache?: boolean, staticPropsCache?: boolean }) {
-        const hash = objectHash(params); 
-        if (buildCache) {
-          const buildCachePath = path.join(serverRuntimeConfig.PROJECT_ROOT, '.next/cache', `${hash}.json`);
-          await fs.writeFile(buildCachePath, JSON.stringify(data))
-               .then(() => {
-                    console.log(`saved cache @ ${buildCachePath}`)
-               })
-               .catch(e => {
-                    console.error('failed writing build cache file', e);
-               });
-        } 
-        if (staticPropsCache) {
-          const staticPropsCachePath = path.join(__dirname, `${hash}.json`);
-          await fs.writeFile(staticPropsCachePath, JSON.stringify(data))
-               .then(() => {
-                    console.log(`saved cache @ ${staticPropsCachePath}`)
-               })
-               .catch(e => {
-                    console.error('failed writing static props cache file', e);
-               });
-        }
+    async set({ params, data, buildCache, redisCache }: { params: any, data: any, buildCache?: boolean, redisCache?: boolean }) {
+          const hash = objectHash(params); 
+          
+          if (buildCache) {
+               const buildCachePath = path.join(serverRuntimeConfig.PROJECT_ROOT, '.next/cache', `${hash}.json`);
+               await fs.writeFile(buildCachePath, JSON.stringify(data))
+                    .then(() => {
+                         console.log(`saved cache @ ${buildCachePath}`)
+                    })
+                    .catch(e => {
+                         console.error('failed writing build cache file', e);
+                    });
+          }
+
+          if (redisCache) {
+               await redisClient.set(hash, JSON.stringify(data))
+                    .then(() => {  
+                         console.log(`saved redis cache @key:${hash}`);
+                    })
+                    .catch(e => {
+                         console.error('failed writing redis cache', e);
+                    });
+          }
      },
      async getBuildCache({ params }: { params: any }) {
           const hash = objectHash(params);
           const buildCachePath = path.join(serverRuntimeConfig.PROJECT_ROOT, '.next/cache', `${hash}.json`);
           const data = await fs.readFile(buildCachePath).catch(_e => {
-               console.log("No Cache Found for Params: ", params, `@ ${buildCachePath}`);
+               console.log("No Build Cache Found for Params: ", params, `@ ${buildCachePath}`);
                return null; 
           });
           return data ? JSON.parse(data.toString("utf-8")) : {}; 
      },
-     async getStaticPropsCache({ params }: { params: any }) {
+     async getRedisCache({ params }: { params: any }) {    
           const hash = objectHash(params);
-          const staticPropsCachePath = path.join(__dirname, `${hash}.json`);
-          const data = await fs.readFile(staticPropsCachePath).catch(_e => {
-               console.log("No Cache Found for Params: ", params, `@ ${staticPropsCachePath}`);
-               return null; 
-          });
-          return data ? JSON.parse(data.toString("utf-8")) : {}; 
+
+          const data = await redisClient.get(hash)
+               .catch(e => {
+                    console.log(e);
+                    console.log("No Redis Cache Found for Params: ", params, `@key:${hash}`);
+                    return null; 
+               });
+          return data ? JSON.parse(data) : {}; 
      }
 }

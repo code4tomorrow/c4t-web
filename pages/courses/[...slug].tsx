@@ -174,8 +174,8 @@ export async function getStaticPaths() {
     await cacheClient.set({ 
         params: { key: "notion-sitemap" },
         data: pathMap,
-        buildCache: true,
-        staticPropsCache: true
+        redisCache: true,
+        buildCache: true
     });
 
     paths = paths.slice(0, 300);
@@ -191,9 +191,11 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: { params: { slug:string[] }}) {
     const notion = new NotionAPI();
 
-    const data = await cacheClient.getStaticPropsCache({ 
+    const data = await cacheClient.getRedisCache({ 
         params: { key: "notion-sitemap" }
     });
+
+    console.log(Object.keys(data).length);
 
     let pageId = parsePageId(context.params.slug[0]);
 
