@@ -201,6 +201,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         data = await cacheClient.getRedisCache({ 
             params: { key: "notion-sitemap" }
         });
+        console.log(data);
     }
 
     let pageId = parsePageId(context.params.slug[0]);
@@ -218,7 +219,6 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         }
 
         const inverseObject = invert(data);
-        console.log("Check 3: ", inverseObject)
         const blockId = inverseObject[`/${context.params.slug.join('/')}`];
         console.log("Check 4: ", blockId);
         if(!!blockId) pageId = blockId;
