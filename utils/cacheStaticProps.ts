@@ -20,6 +20,6 @@ export const cache = {
                console.log("Not Cache Found for Params: ", params);
                return null; 
         });
-        return data ? JSON.parse(data.toString("utf-8")) : null; 
+        return data ? JSON.parse(data.toString("utf-8")) : {}; 
    }
 }
