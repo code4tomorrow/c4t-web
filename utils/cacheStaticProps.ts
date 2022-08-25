@@ -46,6 +46,9 @@ export const cache = {
           const hash = objectHash(params);
 
           const data = await redisClient.get(hash)
+               .then(() => {
+                    console.log("Redis Cache Found for Params: ", params, `@key:${hash}`);
+               })
                .catch(e => {
                     console.log(e);
                     console.log("No Redis Cache Found for Params: ", params, `@key:${hash}`);
