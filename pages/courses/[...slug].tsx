@@ -96,9 +96,9 @@ const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
                 darkMode={true}
                 disableHeader={false}
                 fullPage={true}
-                mapImageUrl={(url) => {
-                    return process.env.NODE_ENV === "development" ? url : cloudinaryExternalLoader({ src: url, quality: 100 });
-                }}
+                // mapImageUrl={(url) => {
+                //     return process.env.NODE_ENV === "development" ? url : cloudinaryExternalLoader({ src: url, quality: 100 });
+                // }}
                 mapPageUrl={(pageId: string) => {
                     const slug = linksMap[pageId] || `/${pageId}`;
                     return `/courses${slug}`
@@ -197,7 +197,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
 
     let data = {} as { [key:string]: string}; 
 
-    if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+    if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD || process.env.NODE_ENV === "development") {
         data = await cacheClient.getBuildCache({ 
             params: { key: "notion-sitemap" }
         });
