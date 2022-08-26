@@ -25,7 +25,7 @@ import { ICourse } from ".";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Loader from "@components/Loader";
-import { cloudinaryExternalLoader } from "@utils/cloudinary-loader";
+import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
@@ -96,13 +96,11 @@ const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
                 darkMode={true}
                 disableHeader={false}
                 fullPage={true}
-                // mapImageUrl={(url) => {
-                //     return process.env.NODE_ENV === "development" ? url : cloudinaryExternalLoader({ src: url, quality: 100 });
-                // }}
                 mapPageUrl={(pageId: string) => {
                     const slug = linksMap[pageId] || `/${pageId}`;
                     return `/courses${slug}`
                 }}
+                previewImages={true}
                 components={{
                     Collection,
                     Equation,
@@ -154,7 +152,7 @@ export async function getStaticPaths() {
     if (!Object.keys(data).length) {
         for (let i = 0; i < courseIds.length; i++) {
             const response = await getSiteMap(courseIds[i]); 
-            paths.push(...response.slice(0,45));
+            paths.push(...response);
             allPaths.push(...response);
         }
     } else {
@@ -178,11 +176,9 @@ export async function getStaticPaths() {
     await cacheClient.set({ 
         params: { key: "notion-sitemap" },
         data: pathMap,
-        redisCache: true,
+        redisCache: process.env.NODE_ENV === "production",
         buildCache: true
     });
-
-    paths = paths.slice(0, 300);
 
     return {
       paths: paths.map(({ route }) => ({ params: {
@@ -225,7 +221,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         if(!!blockId) pageId = blockId;
     }
 
-    if (!pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD) {
+    if (!pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD && !!Object.keys(data).length) {
         return {
             redirect: {
                 destination: `/courses`,
@@ -243,10 +239,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     }).catch(() => undefined);
 
     if (!recordMap) {
-        console.log(`Failed to Query Page ${pageId}`);
-        return {
-            notFound: true,
-        }
+        throw new Error(`Failed to Query Page ${pageId}`)
     }
 
     let linksMap = {} 
@@ -261,6 +254,9 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
                 ...a, [ b.id ] : b.route
             }), {}) 
     }
+
+    const previewImageMap = await getPreviewImageMap(recordMap);
+    (recordMap as any).preview_images = previewImageMap
 
     return {
         props: {
