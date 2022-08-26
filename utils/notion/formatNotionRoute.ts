@@ -9,7 +9,7 @@ export const formatNotionRoute = (route: string[]) => {
         const replacedMultipleDashes = replaceSymbols.replaceAll(/[-]+/g, '-');
 
         let result:string = replacedMultipleDashes;
-
+        
         if (i === route.length - 1 && result.endsWith("-")) {
             result = result.slice(0, -1);
         }

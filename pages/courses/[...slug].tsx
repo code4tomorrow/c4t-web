@@ -37,7 +37,7 @@ const Pdf = dynamic(
 const Modal = dynamic(
     () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
     {
-      ssr: false
+      ssr: true
     }
   )
 
