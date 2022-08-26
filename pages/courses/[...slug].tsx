@@ -29,7 +29,17 @@ import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
+    {
+        ssr: false
+    }
 )
+
+const Modal = dynamic(
+    () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
+    {
+      ssr: false
+    }
+  )
 
 const Equation = dynamic(() =>
   import('react-notion-x/build/third-party/equation').then((m) => m.Equation as any)
@@ -56,16 +66,16 @@ const Code = dynamic(
         ])
         return m.Code as any
     }),
+    { 
+        ssr: false
+    }
 )
 
 const Collection = dynamic(() =>
-  import('react-notion-x/build/third-party/collection').then(
-    (m) => m.Collection as any
-  )
-)
-
-const Modal = dynamic(
-  () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
+  import('react-notion-x/build/third-party/collection').then((m) => m.Collection as any),
+  {
+    ssr: false
+  }
 )
 
 const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ recordMap, linksMap, pageId }) => {
@@ -93,8 +103,11 @@ const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
                 className="w-full !bg-dark-grey-primary"
                 bodyClassName="bg-dark-grey-primary"
                 recordMap={recordMap}
+                showTableOfContents={true}
+                showCollectionViewDropdown={true}
                 darkMode={true}
                 disableHeader={false}
+                isImageZoomable={true}
                 fullPage={true}
                 mapPageUrl={(pageId: string) => {
                     const slug = linksMap[pageId] || `/${pageId}`;
