@@ -230,7 +230,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         }
 
         const inverseObject = invert(data);
-        const blockId = inverseObject[`/${context.params.slug.join('/')}`];
+        const blockId = inverseObject[encodeURI(`/${context.params.slug.join('/')}`)];
         if(!!blockId) pageId = blockId;
     }
 
@@ -244,7 +244,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     } 
 
     if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
-        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 1000)});
+        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 500)});
     }
 
     const recordMap = await pRetry(async () => {

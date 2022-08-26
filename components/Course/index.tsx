@@ -76,7 +76,7 @@ const Course : React.FC<CourseProps> = ({ course }) => {
                     href={link}
                     disabled={!!!link}
                     containerClass="!mt-auto"
-                    title="Learn More" 
+                    title="View Course" 
                 />
             </div>
         </Paper>
