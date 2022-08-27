@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { HTMLProps, useMemo } from "react";
 import { getSiteMap } from "@utils/notion/getSiteMap";
 import { NotionRenderer } from "react-notion-x";
 import { InferGetStaticPropsType } from "next";
@@ -78,6 +78,14 @@ const Collection = dynamic(() =>
   }
 )
 
+const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) => {
+    return (
+        <Link href={href as string} passHref>
+            <a { ...props} />
+        </Link>
+    )
+}
+
 const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ recordMap, linksMap, pageId }) => {
     const router = useRouter()
 
@@ -120,8 +128,9 @@ const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
                     Pdf,
                     Code,
                     Modal,
+                    PageLink,
                     nextImage: Image,
-                    nextLink: Link
+                    nextLink: Link,
                 }}
             />
             <Footer className="!mt-auto" />
