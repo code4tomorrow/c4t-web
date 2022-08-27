@@ -3,7 +3,7 @@ import Paper from "@components/Paper";
 import { getCloudinaryURL } from "@utils/cloudinary-loader";
 import clsx from "clsx";
 import { ICourse } from "pages/courses";
-import React from "react";
+import React, { useMemo } from "react";
 import { useStyles } from "./styles";
 import CodeLogo from "@svg/code.svg";
 import NextImage from "@components/NextImage";
@@ -14,6 +14,14 @@ interface CourseProps {
 
 const Course : React.FC<CourseProps> = ({ course }) => {
     const { classes } = useStyles();
+
+    const notionLink = useMemo(() => {
+        return process.env.NODE_ENV === "development" ? course.notionPageId : course.notionSlug;
+    }, [ course ])
+
+    const link = useMemo(() => {
+        return notionLink ? `/courses/${notionLink}/` : course.learnMoreLink;
+    }, [ course, notionLink ]);
 
     return (
         <Paper containerClass={clsx("max-w-[300px] md:max-w-none w-full min-h-[300px] rounded-md", classes.course)}>
@@ -62,13 +70,13 @@ const Course : React.FC<CourseProps> = ({ course }) => {
                     { course.description }
                 </p>
                 <BrandButton 
-                    as={!!course.learnMoreLink ? "a" : "div"}
-                    target={!!course.learnMoreLink ? "_blank" : undefined}
-                    rel={!!course.learnMoreLink ? "nofollow noreferrer noopener" : undefined}
-                    href={course.learnMoreLink}
-                    disabled={!!!course.learnMoreLink}
+                    as={!!link ? "a" : "div"}
+                    target={!!link && !notionLink ? "_blank" : undefined}
+                    rel={!!link ? "nofollow noreferrer noopener" : undefined}
+                    href={link}
+                    disabled={!!!link}
                     containerClass="!mt-auto"
-                    title="Learn More" 
+                    title="View Course" 
                 />
             </div>
         </Paper>

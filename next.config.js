@@ -1,12 +1,17 @@
 const { withPlaiceholder } = require("@plaiceholder/next");
 
+const authorizedImageDomains = [
+  "res.cloudinary.com",
+  "images.unsplash.com",
+  "www.notion.so",
+  "s3.us-west-2.amazonaws.com"
+]
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      "res.cloudinary.com"
-    ]
+    domains: authorizedImageDomains
   },
   async rewrites() {
     return [
@@ -49,6 +54,10 @@ const nextConfig = {
         permanent: true
       },
     ]
+  },
+  serverRuntimeConfig: {
+    PROJECT_ROOT: __dirname,
+    authorizedImageDomains
   },
   webpack(conf) {
     conf.module.rules.push({
