@@ -58,3 +58,9 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.notion-table::-webkit-scrollbar {
+  background-color: transparent;
+  height: 0;
+  width: 0;
+}
