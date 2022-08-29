@@ -269,6 +269,17 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     let recordMap: ExtendedRecordMap | undefined; 
 
     recordMap = await pRetry(async () => {
+        const recordMapFromCache = await cacheClient.getBuildCache({ 
+            params: {
+                key: ECacheKey.NOTION_PAGE_RECORD_MAP,
+                pageId
+            }
+        });
+
+        if (!!Object.keys(recordMapFromCache).length) {
+            return recordMapFromCache;
+        }
+
         const map = await notion.getPage(pageId, { gotOptions: { retry: 3 }});
         if (map?.block) {
             for (const block in map.block) {
@@ -280,20 +291,10 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     },  { retries: 3, minTimeout: 1000 }).catch(() => undefined);
 
     if (!recordMap) {
-        const recordMapFromCache = await cacheClient.getRedisCache({ 
-            params: {
-                key: ECacheKey.NOTION_PAGE_RECORD_MAP,
-                pageId
-            }
-        });
-        if (!!Object.keys(recordMapFromCache).length) {
-            console.log(`Retrieved Page from Cache: `, pageId);
-            recordMap = recordMapFromCache;
-        }
-        else throw new Error(`Failed to Query Page ${pageId}`)
+        throw new Error(`Failed to Query Page ${pageId}`)
     } else {
         await cacheClient.set({
-            redisCache: true,
+            buildCache: true,
             data: recordMap,
             params: { key: ECacheKey.NOTION_PAGE_RECORD_MAP, pageId }
         })
