@@ -52,11 +52,11 @@ export const cache = {
 
           const data = await redisClient.get(hash)
                .then((data) => {
-                    console.log("Redis Cache Found for Params: ", params, `@key:${hash}`);
+                    if (!!data) console.log("Redis Cache Found for Params: ", params, `@key:${hash}`);
+                    else throw 'failed to retrieve cache'
                     return data; 
                })
-               .catch(e => {
-                    console.log(e);
+               .catch(_e => {
                     console.log("No Redis Cache Found for Params: ", params, `@key:${hash}`);
                     return null; 
                });
