@@ -27,6 +27,7 @@ import { useRouter } from "next/router";
 import Loader from "@components/Loader";
 import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 import { ECacheKey } from "common/enums/cache";
+import type { ExtendedRecordMap } from "notion-types";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
@@ -259,25 +260,43 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         }
     } 
 
-    // Downtime between page querying to prevent exceeding notion rate limit ( ~500 ms )
+    // Downtime between page querying to prevent exceeding notion rate limit ( ~750 ms )
     if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
-        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 500)}); 
+        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 750)}); 
     }
 
     // Attempt getting page recordMap from valid notion pageId
-    const recordMap = await pRetry(async () => {
+    let recordMap: ExtendedRecordMap | undefined; 
+
+    recordMap = await pRetry(async () => {
         const map = await notion.getPage(pageId, { gotOptions: { retry: 3 }});
         if (map?.block) {
             for (const block in map.block) {
                 const type = map.block[block].value.type as string; 
-                if (type === "factory") delete map.block[block];
+                if (["factory", "link_to_page"].includes(type)) delete map.block[block];
            }
         }
         return map;
     },  { retries: 3, minTimeout: 1000 }).catch(() => undefined);
 
     if (!recordMap) {
-        throw new Error(`Failed to Query Page ${pageId}`)
+        const recordMapFromCache = await cacheClient.getRedisCache({ 
+            params: {
+                key: ECacheKey.NOTION_PAGE_RECORD_MAP,
+                pageId
+            }
+        });
+        if (!!Object.keys(recordMapFromCache).length) {
+            console.log(`Retrieved Page from Cache: `, pageId);
+            recordMap = recordMapFromCache;
+        }
+        else throw new Error(`Failed to Query Page ${pageId}`)
+    } else {
+        await cacheClient.set({
+            redisCache: true,
+            data: recordMap,
+            params: { key: ECacheKey.NOTION_PAGE_RECORD_MAP, pageId }
+        })
     }
 
     // Retrieve notion pageIds for mapping slugs
@@ -295,8 +314,12 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     }
 
     // Get placeholder images 
-    const previewImageMap = await getPreviewImageMap(recordMap);
-    (recordMap as any).preview_images = previewImageMap
+    if (recordMap) {
+        const previewImageMap = await getPreviewImageMap(recordMap);
+        (recordMap as any).preview_images = previewImageMap
+    }
+
+    console.log(`Rendered: `, pageId);
 
     return {
         props: {
