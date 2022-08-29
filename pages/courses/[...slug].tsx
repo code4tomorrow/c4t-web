@@ -27,7 +27,6 @@ import { useRouter } from "next/router";
 import Loader from "@components/Loader";
 import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 import { ECacheKey } from "common/enums/cache";
-import JsonQL from "@mahitm/jsonql";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
@@ -278,8 +277,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     },  { retries: 3, minTimeout: 1000 }).catch(() => undefined);
 
     if (!recordMap) {
-        return { notFound: true }
-      //  throw new Error(`Failed to Query Page ${pageId}`)
+        throw new Error(`Failed to Query Page ${pageId}`)
     }
 
     // Retrieve notion pageIds for mapping slugs
