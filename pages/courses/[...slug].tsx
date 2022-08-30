@@ -260,12 +260,8 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         }
     } 
 
-    // Downtime between page querying to prevent exceeding notion rate limit ( ~750 ms )
-    if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
-        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 750)}); 
-    }
-
     // Attempt getting page recordMap from valid notion pageId
+    let isCache = false; 
     let recordMap: ExtendedRecordMap | undefined; 
 
     recordMap = await pRetry(async () => {
@@ -277,6 +273,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         });
 
         if (!!Object.keys(recordMapFromCache).length) {
+            isCache = true;
             return recordMapFromCache;
         }
 
@@ -292,9 +289,14 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         console.log(e);
     });
 
+    // Downtime between page querying to prevent exceeding notion rate limit ( ~750 ms )
+    if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD && !isCache) {
+        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 750)}); 
+    }
+
     if (!recordMap) {
         throw new Error(`Failed to Query Page ${pageId}`)
-    } else {
+    } else if (!isCache) {
         await cacheClient.set({
             buildCache: true,
             data: recordMap,
