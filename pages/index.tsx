@@ -27,7 +27,6 @@ const Navbar = dynamic(() => import("@components/Navbar"));
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
 const MemberSignUps = dynamic(() => import("@components/ModalTypes/MemberSignUps"));
-// const WatsonAssistantChat: React.ComponentType<{ children: React.ReactElement }> = dynamic(() => import("@layouts/WatsonAssistantChat"));
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 

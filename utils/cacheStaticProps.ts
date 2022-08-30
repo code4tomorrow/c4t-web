@@ -4,12 +4,17 @@ import fs from "fs/promises";
 import getConfig from "next/config";
 import Redis from "ioredis";
 
+interface IParams {
+     key: string; 
+     [ key: string ]: string | number | boolean; 
+}
+
 const { serverRuntimeConfig } = getConfig()
 
 const redisClient = new Redis(process.env.REDIS_URL!);
 
 export const cache = {
-    async set({ params, data, buildCache, redisCache }: { params: any, data: any, buildCache?: boolean, redisCache?: boolean }) {
+    async set({ params, data, buildCache, redisCache }: { params: IParams, data: any, buildCache?: boolean, redisCache?: boolean }) {
           const hash = objectHash(params); 
           
           if (buildCache) {
@@ -33,7 +38,7 @@ export const cache = {
                     });
           }
      },
-     async getBuildCache({ params }: { params: any }) {
+     async getBuildCache({ params }: { params: IParams }) {
           const hash = objectHash(params);
           const buildCachePath = path.join(serverRuntimeConfig.PROJECT_ROOT, '.next/cache', `${hash}.json`);
           const data = await fs.readFile(buildCachePath).catch(_e => {
@@ -47,11 +52,11 @@ export const cache = {
 
           const data = await redisClient.get(hash)
                .then((data) => {
-                    console.log("Redis Cache Found for Params: ", params, `@key:${hash}`);
+                    if (!!data) console.log("Redis Cache Found for Params: ", params, `@key:${hash}`);
+                    else throw 'failed to retrieve cache'
                     return data; 
                })
-               .catch(e => {
-                    console.log(e);
+               .catch(_e => {
                     console.log("No Redis Cache Found for Params: ", params, `@key:${hash}`);
                     return null; 
                });

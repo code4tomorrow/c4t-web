@@ -26,6 +26,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Loader from "@components/Loader";
 import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
+import { ECacheKey } from "common/enums/cache";
+import type { ExtendedRecordMap } from "notion-types";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
@@ -130,7 +132,7 @@ const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
                     Modal,
                     PageLink,
                     nextImage: Image,
-                    nextLink: Link,
+                    nextLink: Link
                 }}
             />
             <Footer className="!mt-auto" />
@@ -165,7 +167,7 @@ export async function getStaticPaths() {
 
     const notionRootCoursePath = {
         route: ['home'],
-        blockId: '785a612a6b534ec4ba34ca52905fcda9'
+        blockId: config.notion.rootCoursesPageId
     }
 
     paths.push(notionRootCoursePath);
@@ -179,14 +181,14 @@ export async function getStaticPaths() {
         }
     } else {
         console.log("Using Cached Notion Sitemap");
-        Object.entries(data).forEach((entry) => {
+        Object.entries(data).forEach(([ blockId, route ]) => {
             paths.push({
-                blockId: entry[0],
-                route: (entry[1] as string).slice(1).split("/")
+                blockId,
+                route: (route as string).slice(1).split("/")
             })
             allPaths.push({
-                blockId: entry[0],
-                route: (entry[1] as string).slice(1).split("/")
+                blockId,
+                route: (route as string).slice(1).split("/")
             })
         });
     }
@@ -196,7 +198,7 @@ export async function getStaticPaths() {
     }, {})
 
     await cacheClient.set({ 
-        params: { key: "notion-sitemap" },
+        params: { key: ECacheKey.NOTION_SITEMAP },
         data: pathMap,
         redisCache: process.env.NODE_ENV === "production",
         buildCache: true
@@ -211,23 +213,27 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: { params: { slug:string[] }}) {
+    // Get Unofficial Notion API
     const notion = new NotionAPI();
 
-    let data = {} as { [key:string]: string}; 
+    // Attempt to get Sitemap from cache
+    let data = {} as { [key:string]: string }; 
 
     if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD || process.env.NODE_ENV === "development") {
         data = await cacheClient.getBuildCache({ 
-            params: { key: "notion-sitemap" }
+            params: { key: ECacheKey.NOTION_SITEMAP }
         });
     } else {
         data = await cacheClient.getRedisCache({ 
-            params: { key: "notion-sitemap" }
+            params: { key: ECacheKey.NOTION_SITEMAP }
         });
     }
 
+    // Attempt to retrieving notion pageId 
     let pageId = parsePageId(context.params.slug[0]);
 
     if (data && typeof data === "object") {
+        // If slug is pageId instead of human readable slug attempt redirect
         if (pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD) {
             const slug = data[pageId.replaceAll("-", '')];
             return {
@@ -238,11 +244,13 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
             }
         }
 
+        // Else if slug is human readable and not pageId, attempt to retrieve pageId from cache
         const inverseObject = invert(data);
         const blockId = inverseObject[encodeURI(`/${context.params.slug.join('/')}`)];
         if(!!blockId) pageId = blockId;
     }
 
+    // If slug is not an identified path from cache or an Id, redirect to course home page
     if (!pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD && !!Object.keys(data).length) {
         return {
             redirect: {
@@ -252,18 +260,49 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         }
     } 
 
+    // Downtime between page querying to prevent exceeding notion rate limit ( ~750 ms )
     if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
-        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 500)});
+        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 750)}); 
     }
 
-    const recordMap = await pRetry(async () => {
-        return await notion.getPage(pageId, { gotOptions: { retry: 3 }}).catch(() => undefined)
-    }).catch(() => undefined);
+    // Attempt getting page recordMap from valid notion pageId
+    let recordMap: ExtendedRecordMap | undefined; 
+
+    recordMap = await pRetry(async () => {
+        const recordMapFromCache = await cacheClient.getBuildCache({ 
+            params: {
+                key: ECacheKey.NOTION_PAGE_RECORD_MAP,
+                pageId
+            }
+        });
+
+        if (!!Object.keys(recordMapFromCache).length) {
+            return recordMapFromCache;
+        }
+
+        const map = await notion.getPage(pageId, { gotOptions: { retry: 3 }});
+        if (map?.block) {
+            for (const block in map.block) {
+                const type = map.block[block]?.value?.type as string; 
+                if (["factory", "link_to_page"].includes(type)) delete map.block[block];
+           }
+        }
+        return map;
+    },  { retries: 3, minTimeout: 1000 }).catch((e) => {
+        console.log(e);
+    });
 
     if (!recordMap) {
         throw new Error(`Failed to Query Page ${pageId}`)
+    } else {
+        await cacheClient.set({
+            buildCache: true,
+            data: recordMap,
+            params: { key: ECacheKey.NOTION_PAGE_RECORD_MAP, pageId }
+        })
     }
 
+    // Retrieve notion pageIds for mapping slugs
     let linksMap = {} 
     
     if (data && typeof data === "object" && recordMap) {
@@ -277,8 +316,13 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
             }), {}) 
     }
 
-    const previewImageMap = await getPreviewImageMap(recordMap);
-    (recordMap as any).preview_images = previewImageMap
+    // Get placeholder images 
+    if (recordMap) {
+        const previewImageMap = await getPreviewImageMap(recordMap);
+        (recordMap as any).preview_images = previewImageMap
+    }
+
+    console.log(`Rendered: `, pageId);
 
     return {
         props: {
@@ -286,7 +330,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
             linksMap,
             pageId,
         },
-        revalidate: 1500
+        revalidate: 15 * 60 // 15 minutes
     }
 }
   
