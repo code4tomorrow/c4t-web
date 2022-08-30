@@ -283,12 +283,14 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         const map = await notion.getPage(pageId, { gotOptions: { retry: 3 }});
         if (map?.block) {
             for (const block in map.block) {
-                const type = map.block[block].value.type as string; 
+                const type = map.block[block]?.value?.type as string; 
                 if (["factory", "link_to_page"].includes(type)) delete map.block[block];
            }
         }
         return map;
-    },  { retries: 3, minTimeout: 1000 }).catch(() => undefined);
+    },  { retries: 3, minTimeout: 1000 }).catch((e) => {
+        console.log(e);
+    });
 
     if (!recordMap) {
         throw new Error(`Failed to Query Page ${pageId}`)
