@@ -23,7 +23,7 @@ import { useRecoilValue } from "recoil";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
-const Navbar = dynamic(() => import("@components/Navbar"));
+import Navbar from "@components/Navbar";
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
 const MemberSignUps = dynamic(() => import("@components/ModalTypes/MemberSignUps"));

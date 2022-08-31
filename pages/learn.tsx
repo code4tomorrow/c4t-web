@@ -6,11 +6,10 @@ import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import config from "config";
 import { gql } from "graphql-request";
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import { ReactElement } from "react";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
-const Navbar = dynamic(() => import("@components/Navbar"));
+import Navbar from "@components/Navbar";
 
 export interface IFAQ {
     question?: string; 

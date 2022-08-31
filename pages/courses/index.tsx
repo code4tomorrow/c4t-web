@@ -13,10 +13,9 @@ import { useMemo } from "react";
 import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
-import dynamic from "next/dynamic";
 import { makeStyles } from "tss-react/mui";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
-const Navbar = dynamic(() => import("@components/Navbar"));
+import Navbar from "@components/Navbar";
 
 export interface ICourse {
     title?: string; 

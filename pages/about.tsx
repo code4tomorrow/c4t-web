@@ -18,7 +18,7 @@ import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import JsonQL, { JsonQLObject } from "@mahitm/jsonql";
 import dynamic from "next/dynamic";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
-const Navbar = dynamic(() => import("@components/Navbar"));
+import Navbar from "@components/Navbar";
 const Directory = dynamic(() => import("@components/About/Directory"));
 
 interface AboutProps {

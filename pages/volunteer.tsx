@@ -9,9 +9,8 @@ import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { ReactElement } from "react";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
-import dynamic from "next/dynamic";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
-const Navbar = dynamic(() => import("@components/Navbar"));
+import Navbar from "@components/Navbar";
 
 export interface IVolunteerOpportunity extends IBaseContentModel {
     name?: string; 
