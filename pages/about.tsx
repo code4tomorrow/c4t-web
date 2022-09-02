@@ -28,7 +28,7 @@ interface AboutProps {
 
 const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notificationFlags }) => {
     const missionRef = useRef<HTMLDivElement | null>(null);
-    let directoryEntriesParsed = new JsonQL().revert<IDirectoryRow[]>(directoryEntries)
+   //let directoryEntriesParsed = new JsonQL().revert<IDirectoryRow[]>(directoryEntries)
 
     const [ foundingStoryExpanded, setFoundingStoryExpanded ] = useState(false);
 
@@ -135,7 +135,7 @@ const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notification
                             </div>
                         </div>
                     </section>
-                    <section className="flex my-32 w-full flex-col items-center">
+                    {/* <section className="flex my-32 w-full flex-col items-center">
                         <div className="my-6 max-w-4xl">
                                 <Animate.Element
                                     resetAfterTriggered={false}
@@ -155,7 +155,7 @@ const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notification
                                 </Animate.Element>
                             </div>
                             <Directory directoryEntries={directoryEntriesParsed} /> 
-                    </section>
+                    </section> */}
                     <svg width={0} height={0} >   
                         <clipPath transform="scale(0.0125, 0.0125)" id="svgPath" clipPathUnits="objectBoundingBox">           
                             <path 
@@ -283,7 +283,7 @@ export async function getStaticProps() {
 
     return {
       props: { 
-        directoryEntries: new JsonQL().mini(directoryEntries),
+        directoryEntries: undefined,// new JsonQL().mini(directoryEntries),
         notificationFlags
       },
       // - At most once every 15 minutes
