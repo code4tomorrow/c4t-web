@@ -283,7 +283,7 @@ export async function getStaticProps() {
 
     return {
       props: { 
-        directoryEntries: undefined,// new JsonQL().mini(directoryEntries),
+        directoryEntries: [],// new JsonQL().mini(directoryEntries),
         notificationFlags
       },
       // - At most once every 15 minutes
