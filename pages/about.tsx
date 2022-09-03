@@ -165,7 +165,7 @@ const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notification
                             </path>    
                         </clipPath>  
                     </svg>
-                    <section className="[&>*]:w-full [&>*]:lg:w-1/2 flex lg:flex-row flex-col-reverse itmes-center lg:space-x-6 mb-16 max-w-7xl justify-center">
+                    <section className="[&>*]:w-full mt-36 [&>*]:lg:w-1/2 flex lg:flex-row flex-col-reverse itmes-center lg:space-x-6 mb-16 max-w-7xl justify-center">
                         <div className="relative">
                             <Animate.Element
                                 as="h1" 
