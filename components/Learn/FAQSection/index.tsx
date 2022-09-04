@@ -35,7 +35,7 @@ const FAQSection : React.FC<FAQSectionProps> = ({ faqsGroupedByType }) => {
                         <div key={idx}>
                             <h2 
                                 className={clsx(
-                                    "z-10 bg-dark-grey-primary uppercase text-medium-grey text-1xl font-bold text-left",
+                                    "z-10 uppercase text-medium-grey text-1xl font-bold text-left",
                                 )}>
                                     { type }
                             </h2>

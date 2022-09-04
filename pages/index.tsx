@@ -188,7 +188,8 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] "/>
               </div>
          </section>
-         <section className="w-full flex flex-col items-center">
+         <section 
+              className="w-full flex flex-col items-center">
               <div ref={testimonialsRef} className="mb-20 w-full">
                   <Animate.Element
                       as="h1" 
@@ -244,7 +245,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 <GiftsSVG className="w-[100%] max-w-[500px]  md:max-w-[500px] md:w-[50vw] "/>
               </div>
          </section>
-         <section className="flex py-10 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
+         <section className="flex py-10 pb-48 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
               <article ref={partnershipRef} className="space-y-5 flex flex-col md:max-w-[50%] px-2">
                 <Animate.Element 
                     ref={partnershipRef}
