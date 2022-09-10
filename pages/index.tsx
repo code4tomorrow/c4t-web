@@ -26,7 +26,7 @@ import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
-const MemberSignUps = dynamic(() => import("@components/ModalTypes/MemberSignUps"));
+const TeacherSignUps = dynamic(() => import("@components/ModalTypes/TeacherSignUps"));
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
@@ -52,7 +52,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
         <title>Home | C4T</title>
       </Head>
       <Navbar notificationFlags={notificationFlags}/>
-      <MemberSignUps />
+      <TeacherSignUps />
       <header className="flex flex-col space-y-6 justify-center items-center p-3">
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)", whiteSpace: "nowrap"}} 
