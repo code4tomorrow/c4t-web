@@ -42,6 +42,10 @@ const Animate : React.FC<AnimateProps> = ({ children }) => {
     }, [ handleResetScrollTrigger ])
 
     useEffect(() => {
+        ScrollTrigger.refresh();
+    }, []);
+
+    useEffect(() => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, [ handleResize ]);

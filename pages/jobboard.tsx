@@ -2,7 +2,7 @@ import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import Head from "next/head";
-import React, { ReactElement, useEffect, useMemo, useState } from "react";
+import React, { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 import JobPreview from "@components/JobBoard/JobPreview";
 import Paper from "@components/Paper";
 import useSWRInfinite from "swr/infinite";
@@ -46,7 +46,6 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
 
     const jobs = useMemo(() => flatMap(jobPages?.map(({ items }) => items || [])), [jobPages]);
 
-
     const initialLoading = useMemo(() => jobs?.length === 0 && !error, [ error, jobs ]);
     const isLoadingMore = size > 0 && jobPages && typeof jobPages[size - 1] === 'undefined'
     const selectedJob = useMemo(() => jobs?.find(job => job.sys?.id === jobId.id), [ jobId, jobs ]);
@@ -73,6 +72,20 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
     }
 
     const total = useMemo(() => jobPages?.slice(-1)[0]?.total || 0, [ jobPages ]);
+
+    const jobsContainerRef = useRef<HTMLDivElement | null>(null);
+    const jobPreviewContainerRef = useRef<HTMLDivElement | null>(null);
+
+    const extraPadding = useMemo(() => {
+        if (!jobPreviewContainerRef.current || !jobsContainerRef.current) return 0; 
+
+        const { height: heightOne } = jobPreviewContainerRef.current.getBoundingClientRect();
+        const { height: heightTwo } = jobsContainerRef.current.getBoundingClientRect();
+
+        return Math.abs(heightOne - heightTwo);
+    }, [ jobPreviewContainerRef, jobsContainerRef, jobId, jobPages ]);
+
+    console.log(extraPadding);
 
     return (
         <div 
@@ -147,55 +160,62 @@ const JobBoard : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProp
                         }
                     </div>
                     <div className="flex space-x-3 w-full">
-                        <div className="space-y-3 w-[100%] md:w-[40%]">
-                            {
-                                jobs?.map((preview) => (
-                                    <JobPreview
-                                        selected={jobId.id === preview.sys?.id}
-                                        onClick={(id) => {
-                                            if (id !== jobId.id && !isMobile) {
-                                                setJobId({ id, showContent: false });
-                                                requestAnimationFrame(() => {
-                                                    setJobId({ id, showContent: true });
-                                                });
-                                            } else {
-                                                setJobId({ id, showContent: true });
-                                            }
-                                        }}
-                                        key={preview.sys?.id} 
-                                        preview={preview} 
-                                    />
-                                ))
-                            }
-                            {
-                                Array.from({ length: initialLoading ? 5 : 0 }).map((_, i) => (
-                                    <JobPreview 
-                                        key={i}
-                                        selected={false}
-                                        onClick={(id) => setJobId({ id, showContent: true })}
-                                        preview={undefined}
-                                    />
-                                ))
-                            }
-                            <div className="flex justify-center items-center">
+                        <div 
+                            className="w-[100%] md:w-[40%]">
+                            <div 
+                                ref={jobsContainerRef}
+                                className="space-y-3">
                                 {
-                                    hasMore ? (
-                                        <div
-                                            role="button"
-                                            onClick={handleNextPage}
-                                            className="text-brand-purple-secondary space-x-2 flex hover:opacity-75 transition-opacity cursor-pointer text-center">
-                                                { isLoadingMore && <Loader /> }
-                                                <span>Load More</span>
-                                        </div>
-                                    ) : (
-                                        <p className="text-medium-grey text-center">
-                                        <span className="text-brand-purple-secondary">Stay Tuned</span> for more Member Positions.
-                                        </p>
-                                    )
+                                    jobs?.map((preview) => (
+                                        <JobPreview
+                                            selected={jobId.id === preview.sys?.id}
+                                            onClick={(id) => {
+                                                if (id !== jobId.id && !isMobile) {
+                                                    setJobId({ id, showContent: false });
+                                                    requestAnimationFrame(() => {
+                                                        setJobId({ id, showContent: true });
+                                                    });
+                                                } else {
+                                                    setJobId({ id, showContent: true });
+                                                }
+                                            }}
+                                            key={preview.sys?.id} 
+                                            preview={preview} 
+                                        />
+                                    ))
                                 }
+                                {
+                                    Array.from({ length: initialLoading ? 5 : 0 }).map((_, i) => (
+                                        <JobPreview 
+                                            key={i}
+                                            selected={false}
+                                            onClick={(id) => setJobId({ id, showContent: true })}
+                                            preview={undefined}
+                                        />
+                                    ))
+                                }
+                                <div className="flex justify-center items-center">
+                                    {
+                                        hasMore ? (
+                                            <div
+                                                role="button"
+                                                onClick={handleNextPage}
+                                                className="text-brand-purple-secondary space-x-2 flex hover:opacity-75 transition-opacity cursor-pointer text-center">
+                                                    { isLoadingMore && <Loader /> }
+                                                    <span>Load More</span>
+                                            </div>
+                                        ) : (
+                                            <p className="text-medium-grey text-center">
+                                            <span className="text-brand-purple-secondary">Stay Tuned</span> for more Member Positions.
+                                            </p>
+                                        )
+                                    }
+                                </div>
                             </div>
                         </div>
-                        <div className="hidden md:block overflow-hidden md:overflow-auto md:w-[60%] h-min md:!sticky top-5">
+                        <div 
+                            ref={jobPreviewContainerRef}
+                            className="hidden md:block overflow-hidden md:overflow-auto md:w-[60%] h-min md:!sticky top-5">
                             {
                                 !!selectedJob && !isMobile ? (
                                     <Paper containerClass="w-full h-full">
