@@ -1,4 +1,4 @@
-import React, { ReactElement }  from "react";
+import React, { ReactElement } from "react";
 import Head from "next/head"
 import Paper from "@components/Paper";
 import { useStyles } from "../styles/styles";

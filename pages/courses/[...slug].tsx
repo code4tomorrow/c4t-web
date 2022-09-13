@@ -93,6 +93,17 @@ const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) =
 const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ recordMap, linksMap, pageId }) => {
     const router = useRouter()
 
+    const pageCoverURL = useMemo(() : string | null => {
+        if (!recordMap) return null; 
+
+        const page =  Object.values((recordMap as any).block).find((block: any) => {
+            return block.value.type === "page";
+        });
+
+        const format = (page as any)?.value?.format; 
+        return format?.page_cover || format?.page_icon || null; 
+    }, [ recordMap ]);
+
     useEffect(() => {
         Prism.highlightAll()
     }, [])
@@ -106,6 +117,8 @@ const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
             className="flex flex-col w-screen min-h-screen items-center bg-dark-grey-primary">
             <Head>
                 <title>{title} | C4T</title>
+                <link rel="canonical" href={`https://www.code4tomorrow.org${router.asPath}`} />
+                { pageCoverURL && <meta property="og:image" content={pageCoverURL} /> }
             </Head>
             <Navbar />
             {
@@ -308,7 +321,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         throw new Error(`Failed to Query Page ${pageId}`)
     } else if (!isCache) {
         await cacheClient.set({
-            redisCache: true,
+            redisCache: process.env.NODE_ENV === "production",
             data: recordMap,
             params: { key: ECacheKey.NOTION_PAGE_RECORD_MAP, pageId }
         })
