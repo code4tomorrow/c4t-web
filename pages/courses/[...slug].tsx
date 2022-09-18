@@ -243,7 +243,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         data = await cacheClient.getBuildCache({ 
             params: { key: ECacheKey.NOTION_SITEMAP }
         });
-    } else if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+    } else {
         data = await cacheClient.getRedisCache({ 
             params: { key: ECacheKey.NOTION_SITEMAP }
         });
