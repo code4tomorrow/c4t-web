@@ -14,7 +14,7 @@ const { serverRuntimeConfig } = getConfig()
 const redisClient = new Redis(process.env.REDIS_URL!);
 
 export const cache = {
-    async set({ params, data, buildCache, redisCache, ttl = -1 }: { params: IParams, data: any, buildCache?: boolean, redisCache?: boolean, ttl?: number }) {
+    async set({ params, data, buildCache, redisCache, ttl }: { params: IParams, data: any, buildCache?: boolean, redisCache?: boolean, ttl?: number }) {
           const hash = objectHash(params); 
           
           if (buildCache) {
@@ -29,7 +29,15 @@ export const cache = {
           }
 
           if (redisCache) {
-               await redisClient.set(hash, JSON.stringify(data), 'EX', ttl)
+               let response; 
+
+               if (!!ttl) {
+                    response = redisClient.set(hash, JSON.stringify(data), "EX", ttl);
+               } else {
+                    response = redisClient.set(hash, JSON.stringify(data))
+               }
+                    
+               response
                     .then(() => {  
                          console.log(`saved redis cache @key:${hash}`);
                     })
