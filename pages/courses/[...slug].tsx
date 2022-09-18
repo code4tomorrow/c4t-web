@@ -323,6 +323,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         await cacheClient.set({
             redisCache: process.env.NODE_ENV === "production",
             data: recordMap,
+            ttl: 60 * 60 * 24 * 30, // 30 days in seconds 
             params: { key: ECacheKey.NOTION_PAGE_RECORD_MAP, pageId }
         })
     }

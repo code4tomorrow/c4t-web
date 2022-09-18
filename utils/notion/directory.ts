@@ -36,8 +36,6 @@ export const getDirectory = async () : Promise<IDirectoryRow[]> => {
   
       // Filters any rows with "Status" field as null
     const filteredResults = data?.results?.filter((row) => {
-        // Temporary hard code for omitting certain C4T member
-        if (row.id === "23e1bcbb-1834-4160-a5f9-260686b3309d") return false; 
         const properties = (row as any).properties;
         return properties?.Status?.[properties?.Status?.type] !== null;
     });
