@@ -27,7 +27,6 @@ export const cache = {
                          console.error('failed writing build cache file', e);
                     });
           }
-
           if (redisCache) {
                let response; 
 

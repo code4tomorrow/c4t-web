@@ -36,6 +36,7 @@ import Loader from "@components/Loader";
 import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 import { ECacheKey } from "common/enums/cache";
 import type { ExtendedRecordMap } from "notion-types";
+import { filterRecordMap } from "@utils/notion/filterRecordMap";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
@@ -242,7 +243,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         data = await cacheClient.getBuildCache({ 
             params: { key: ECacheKey.NOTION_SITEMAP }
         });
-    } else {
+    } else if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
         data = await cacheClient.getRedisCache({ 
             params: { key: ECacheKey.NOTION_SITEMAP }
         });
@@ -320,6 +321,8 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     if (!recordMap) {
         throw new Error(`Failed to Query Page ${pageId}`)
     } else if (!isCache) {
+        recordMap = filterRecordMap(recordMap);
+
         await cacheClient.set({
             redisCache: process.env.NODE_ENV === "production",
             data: recordMap,
@@ -347,8 +350,6 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         const previewImageMap = await getPreviewImageMap(recordMap);
         (recordMap as any).preview_images = previewImageMap
     }
-
-    console.log(`Rendered: `, pageId);
 
     return {
         props: {
