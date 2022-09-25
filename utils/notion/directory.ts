@@ -24,11 +24,30 @@ export const getDirectory = async () : Promise<IDirectoryRow[]> => {
 
     try {
         data = await notion.databases.query({
-          database_id: databaseId,
-          start_cursor: undefined,
-          sorts: [{ 
-            property: "Position", direction: "ascending"
-        }]
+            database_id: databaseId,
+            start_cursor: undefined,
+            sorts: [{ 
+                property: "Position", 
+                direction: "ascending"
+            }],
+            filter: {
+                or: [
+                    {
+                        property: "Status", 
+                        select: {
+                            equals: "Active"
+                        },
+                        type: "select"
+                    },
+                    {
+                        property: "Status", 
+                        select: {
+                            equals: "On Break"
+                        },
+                        type: "select"
+                    }
+                ]
+            }
         });
     } catch (e:any) {
         return [];
@@ -37,7 +56,7 @@ export const getDirectory = async () : Promise<IDirectoryRow[]> => {
       // Filters any rows with "Status" field as null
     const filteredResults = data?.results?.filter((row) => {
         const properties = (row as any).properties;
-        return properties?.Status?.[properties?.Status?.type] !== null;
+        return properties?.Status?.[properties?.Status?.type] !== null && (row as any).archived === false;
     });
   
     // Extracts data from Notion API response and maps fields to reduce unnecessary data
