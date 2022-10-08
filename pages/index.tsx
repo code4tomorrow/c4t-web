@@ -155,7 +155,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                    ref={sessionRef}
                    className="transition-transform duration-500"
                 >
-                  <h1 className="text-white text-4xl md:text-5xl font-extrabold">Fall Session Coming Soon.</h1>
+                  <h1 className="text-white text-4xl md:text-5xl font-extrabold">Next Session Coming Soon.</h1>
                 </Animate.Element>
                 <Animate.Element
                   ref={sessionRef}
@@ -165,11 +165,11 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 >
                   <div className="space-y-3 md:max-w-[75%] text-lg">
                     <p className="text-medium-grey">
-                        C4T&apos;s summer session is in progress, Fall session coming soon! Learn languages like Python, Java, and more—all for free!&nbsp;
+                        C4T is on break currently, but next session is coming soon! Learn languages like Python, Java, and more—all for free!&nbsp;
                         <Link href="/courses"><a className="underline hover:opacity-75 transition-opacity">View Courses.</a></Link>
                     </p>
                     <p className="text-medium-grey">
-                      Fall session start date is to be determined. Stay Tuned for updates.
+                      Next session start date is to be determined. Stay Tuned for updates.
                     </p>
                   </div>
                 </Animate.Element>
