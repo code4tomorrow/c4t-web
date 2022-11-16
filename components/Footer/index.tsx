@@ -70,6 +70,7 @@ const Footer : React.FC<FooterProps> = ({ className, ...props }) => {
                     <ul>
                         <FooterHeader>Support Us</FooterHeader>
                         <FooterItem href="/jobs">Careers</FooterItem>
+                        <FooterItem href="/internships">Internships</FooterItem>
                         <FooterItem target="_blank" rel="noopener noreferrer" href="https://www.gofundme.com/f/fundraiser-for-coding-classes-in-code4tomorrow">Donate</FooterItem>
                     </ul>
                 </div>
