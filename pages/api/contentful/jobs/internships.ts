@@ -50,7 +50,7 @@ export default async function handler(
     const response = await graphQLClient.request(internshipsQuery, { 
         limit,
         skip: page * limit,
-        preview: false,
+        preview: process.env.NODE_ENV !== "production",
     });
 
     const json = { items: [], ...response?.internshipCollection }

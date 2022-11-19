@@ -12,9 +12,10 @@ interface IJobPreviewProps {
     preview?: IJobPreview,
     selected: boolean; 
     onClick: (id:string) => void; 
+    internship?: boolean; 
 }
 
-const JobPreview : React.FC<IJobPreviewProps> = ({ preview, onClick, selected = false }) => {
+const JobPreview : React.FC<IJobPreviewProps> = ({ preview, onClick, selected = false, internship = false  }) => {
     const handleClick = (_e: React.MouseEvent<HTMLElement>) => {
       preview?.sys?.id && onClick(preview?.sys.id);
     };
@@ -43,14 +44,18 @@ const JobPreview : React.FC<IJobPreviewProps> = ({ preview, onClick, selected = 
               >
                 <h1 className="text-white text-2xl font-bold">{ preview?.title }</h1>
                 <h2 className="text-white text-sm [&>*]:mr-2 font-semibold">
-                    <span 
-                      style={{ backgroundColor: factionColor }}
-                      className={clsx(
-                        "rounded p-1 inline-block px-2 relative overflow-hidden",
-                        !factionColor && "bg-brand-purple-secondary"
-                      )}>
-                        <span className="capitalize z-50 text-white">{preview?.faction}</span>
-                    </span>
+                    {
+                      !internship && (
+                        <span 
+                          style={{ backgroundColor: factionColor }}
+                          className={clsx(
+                            "rounded p-1 inline-block px-2 relative overflow-hidden",
+                            !factionColor && "bg-brand-purple-secondary"
+                          )}>
+                            <span className="capitalize z-50 text-white">{preview?.faction}</span>
+                        </span>
+                      )
+                    }
                     {
                       !!preview.realLifeJobs?.length ? (
                         <span 

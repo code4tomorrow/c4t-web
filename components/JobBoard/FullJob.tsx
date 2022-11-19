@@ -15,9 +15,13 @@ import { BriefcaseIcon } from "@heroicons/react/outline";
 interface IFullJobProps {
     preview: IJobPreview,
     showContent?: boolean; 
+    internship?: boolean; 
 }
 
-const FullJob : React.FC<IFullJobProps> = ({ preview, showContent:_showContent = true  }) => {
+const MEMBER_SIGNUP_LINK     = "https://tally.so/r/mVgJl3"; 
+const INTERNSHIP_SIGNUP_LINK = "https://tally.so/r/wobNke"
+
+const FullJob : React.FC<IFullJobProps> = ({ preview, showContent:_showContent = true, internship = false  }) => {
     const { data:queriedJob, error } = useSWR<IJob>(getAPIJobByID(preview.sys?.id), {
         fetcher
     });
@@ -44,19 +48,22 @@ const FullJob : React.FC<IFullJobProps> = ({ preview, showContent:_showContent =
             )}>
                 <h1 className="text-white mt-3 md:mt-0 flex md:flex-row text-center flex-col space-y-2 md:space-y-0 space-x-2 text-2xl items-center z-10 font-bold">
                     <span>{ job.title }</span>
-                    <span 
-                        style={{ backgroundColor: factionColor }}
-                        className={clsx(
-                        "rounded py-1 px-2 h-min relative text-sm font-semibold overflow-hidden",
-                        !factionColor && "bg-brand-purple-secondary"
-                        )}>
-                        <span className="capitalize z-50 text-white">{preview?.faction}</span>
-                    </span>
+                    { 
+                        !internship && (
+                            <span 
+                                style={{ backgroundColor: factionColor }}
+                                className={clsx(
+                                "rounded py-1 px-2 h-min relative text-sm font-semibold overflow-hidden",
+                                !factionColor && "bg-brand-purple-secondary"
+                                )}>
+                                <span className="capitalize z-50 text-white">{preview?.faction}</span>
+                            </span>
+                        )}
                 </h1>
                 <a
                     rel="noopener noreferrer nofollow"
                     target={"_blank"}
-                    href="https://tally.so/r/mVgJl3"
+                    href={internship ? INTERNSHIP_SIGNUP_LINK : MEMBER_SIGNUP_LINK}
                     className="text-brand-purple-secondary text-sm font-semibold hover:underline pt-3 md:pt-1"
                 >
                     Apply Now

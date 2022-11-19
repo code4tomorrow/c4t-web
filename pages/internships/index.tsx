@@ -142,7 +142,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                     onActivatedClasses="opacity-100"
                                     className="transition-opacity duration-300"
                                 >
-                                    Showing {jobs.length} of {total} Member Positions
+                                    Showing {jobs.length} of {total} Internships
                                 </Animate.Element>
                             ) : <></>
                         }
@@ -156,6 +156,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                 {
                                     jobs?.map((preview) => (
                                         <JobPreview
+                                            internship={true}
                                             selected={jobId.id === preview.sys?.id}
                                             onClick={(id) => {
                                                 if (id !== jobId.id && !isMobile) {
@@ -175,6 +176,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                 {
                                     Array.from({ length: initialLoading ? 5 : 0 }).map((_, i) => (
                                         <JobPreview 
+                                            internship={true}
                                             key={i}
                                             selected={false}
                                             onClick={(id) => setJobId({ id, showContent: true })}
@@ -217,7 +219,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                                 <XIcon style={{ width: 22.5 }} />  
                                             </button>
                                         </div>
-                                        <FullJob preview={selectedJob} showContent={jobId.showContent} /> 
+                                        <FullJob internship={true} preview={selectedJob} showContent={jobId.showContent} /> 
                                     </Paper>
                                 ) : (
                                    <>
