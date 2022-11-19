@@ -24,6 +24,7 @@ import flatMap from "lodash/flatMap";
 import Loader from "@components/Loader";
 import WalkSVG from "@svg/walk.svg";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
+import BrandButton from "@components/BrandButton";
 
 const getInternshipURL = (pageIndex:number) => {
     return getAPIInternships(pageIndex, 5);        
@@ -41,8 +42,6 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
         errorRetryCount: 2,
         errorRetryInterval: 1000
     })
-
-    console.log(jobPages, error);
 
     const jobs = useMemo(() => flatMap(jobPages?.map(({ items }) => items || [])), [jobPages]);
 
@@ -96,7 +95,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                         </Modal>
                     )
                 }
-                <header className="w-screen flex md:flex-row items-center flex-col max-w-6xl p-3 md:p-6">
+                <header className="w-screen flex md:flex-row items-center flex-col max-w-7xl p-3 md:p-6">
                     <Animate.Element 
                         resetAfterTriggered={false}
                         onDeactivatedClasses="scale-75"
@@ -111,7 +110,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                             onActivatedClasses="scale-100"
                             as="h1" 
                             style={{ lineHeight: "1.1" }}
-                            className="text-white duration-700 transition-transform text-6xl xs:text-7xl font-bold">
+                            className="text-white duration-700 transition-transform text-5xl sm:text-6xl lg:text-7xl font-bold">
                                 Explore Internship <span className="text-brand-purple-secondary">Opportunites</span>.
                         </Animate.Element>
                         <Animate.Element 
@@ -122,6 +121,14 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                             className="text-medium-grey duration-700 transition-transform">
                             High school students who specialize in specific skill sets by completing a short-term project for the internal organization.
                         </Animate.Element>
+                        <BrandButton
+                            as="a"
+                            style={{ display: "inline-block" }}
+                            rel="noopener noreferrer nofollow"
+                            target={"_blank"}
+                            href="https://tally.so/r/wobNke"
+                            title="Apply Today."
+                        />
                     </div>
                 </header>
                 <main className="flex items-center flex-col my-6 w-full max-w-7xl px-3">
