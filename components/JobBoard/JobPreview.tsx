@@ -23,7 +23,7 @@ const JobPreview : React.FC<IJobPreviewProps> = ({ preview, onClick, selected = 
     const { classes } = useStyles();
 
     const factionColor = useMemo(() => 
-      preview?.faction? jobFactionMap(preview?.faction) : undefined, 
+      preview?.faction? jobFactionMap(preview?.faction) : "#5A4CAD", 
     [ preview?.faction ])
 
     return (

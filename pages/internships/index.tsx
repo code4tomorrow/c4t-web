@@ -25,6 +25,7 @@ import Loader from "@components/Loader";
 import WalkSVG from "@svg/walk.svg";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import BrandButton from "@components/BrandButton";
+import { useStyles } from "styles/internships";
 
 const getInternshipURL = (pageIndex:number) => {
     return getAPIInternships(pageIndex, 5);        
@@ -75,6 +76,8 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
     const jobsContainerRef = useRef<HTMLDivElement | null>(null);
     const jobPreviewContainerRef = useRef<HTMLDivElement | null>(null);
 
+    const { classes } = useStyles();
+
     return (
         <div 
             style={{ width: "100vw" }} 
@@ -96,6 +99,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                     )
                 }
                 <header className="w-screen flex md:flex-row items-center flex-col max-w-7xl p-3 md:p-6">
+                    <div className={classes.gradientBubble}></div>
                     <Animate.Element 
                         resetAfterTriggered={false}
                         onDeactivatedClasses="scale-75"

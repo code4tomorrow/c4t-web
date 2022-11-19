@@ -35,7 +35,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview, showContent:_showContent =
     const { classes } = useStyles();
 
     const factionColor = useMemo(() => 
-      preview?.faction? jobFactionMap(preview?.faction) : undefined, 
+      preview?.faction? jobFactionMap(preview?.faction) : "#5A4CAD", 
     [ preview?.faction ])
 
     const containerRef = React.useRef<HTMLDivElement | null>(null);
