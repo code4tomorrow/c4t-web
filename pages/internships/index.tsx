@@ -92,7 +92,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                         <Modal fullWidth open={!!selectedJob} setOpen={() => { setJobId({ id: null, showContent: false }) }}>
                             { selectedJob && (
                                 <div className="pb-16">
-                                    <FullJob preview={selectedJob} />
+                                    <FullJob internship={true} preview={selectedJob} />
                                 </div>
                             )}
                         </Modal>
