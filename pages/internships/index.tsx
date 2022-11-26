@@ -9,7 +9,6 @@ import useSWRInfinite from "swr/infinite";
 import { fetcher } from "@utils/fetcher";
 import { IJobPreview } from "common/interfaces/job";
 import Animate from "@components/Animate";
-import FullJob from "@components/JobBoard/FullJob";
 import { XIcon } from "@heroicons/react/outline";
 import { getAPIInternships } from "common/endpoints/jobs";
 import InternSVG from "@svg/internship.svg";
@@ -26,6 +25,8 @@ import WalkSVG from "@svg/walk.svg";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import BrandButton from "@components/BrandButton";
 import { useStyles } from "styles/internships";
+import InternshipPreview from "@components/JobBoard/InternshipPreview";
+import FullInternship from "@components/JobBoard/FullInternship";
 
 const getInternshipURL = (pageIndex:number) => {
     return getAPIInternships(pageIndex, 5);        
@@ -92,7 +93,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                         <Modal fullWidth open={!!selectedJob} setOpen={() => { setJobId({ id: null, showContent: false }) }}>
                             { selectedJob && (
                                 <div className="pb-16">
-                                    <FullJob internship={true} preview={selectedJob} />
+                                    <FullInternship internship={selectedJob} />
                                 </div>
                             )}
                         </Modal>
@@ -159,8 +160,8 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                 className="space-y-3">
                                 {
                                     jobs?.map((preview) => (
-                                        <JobPreview
-                                            internship={true}
+                                        <InternshipPreview
+                                            internship={preview}
                                             selected={jobId.id === preview.sys?.id}
                                             onClick={(id) => {
                                                 if (id !== jobId.id && !isMobile) {
@@ -173,7 +174,6 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                                 }
                                             }}
                                             key={preview.sys?.id} 
-                                            preview={preview} 
                                         />
                                     ))
                                 }
@@ -223,7 +223,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                                 <XIcon style={{ width: 22.5 }} />  
                                             </button>
                                         </div>
-                                        <FullJob internship={true} preview={selectedJob} showContent={jobId.showContent} /> 
+                                        <FullInternship internship={selectedJob} showContent={jobId.showContent} /> 
                                     </Paper>
                                 ) : (
                                    <>

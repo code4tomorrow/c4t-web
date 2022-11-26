@@ -24,3 +24,10 @@ export interface IJob extends IJobPreview {
         json?: Document
     }
 }
+export interface IInternship extends Omit<IJob, "faction"> {
+    timeCommitment?: {
+        json: Document
+    },
+    startDate?: string; 
+    endDate?: string;
+}

@@ -12,6 +12,6 @@ export function middleware(_request: NextRequest) {
 }
 
 export const config = {
-    matcher: "/internships",
+    //matcher: "/internships",
     runtime: 'experimental-edge'
 }

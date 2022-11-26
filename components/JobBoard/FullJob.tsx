@@ -70,7 +70,7 @@ const FullJob : React.FC<IFullJobProps> = ({ preview, showContent:_showContent =
                 </a>
             </header>
             <div className="">
-            <div className="px-4 space-y-2">
+            <div className="px-4 space-y-2 mb-4">
                 <h2 className="font-bold text-white text-lg">Full Job Description</h2>
                 {
                     !isLoadingDebounced ? (
