@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useStyles } from "./styles";
 import { HomeIcon, LightBulbIcon, HandIcon, CodeIcon, BookOpenIcon } from "@heroicons/react/outline";
 import { useRef } from "react";
@@ -10,8 +10,6 @@ import { useNavigator } from "hooks/useNavigator";
 import GoArrow from "@components/GoArrow";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import Document from "@components/Document";
-import Image from "next/image";
-import { cloudinaryLoader } from "@utils/cloudinary-loader";
 
 const NavNotification = ({ notificationFlag } : { notificationFlag: INotificationFlag }) => {
     const { classes } = useStyles();
@@ -57,6 +55,10 @@ const NavListItem = React.forwardRef<ILink[], NavListItemProps>(({ children, hre
         router.push(href, { pathname: href });
     };
 
+    const { classes } = useStyles();
+    
+    const isActive = useMemo(() => href === router.pathname, [ href ]);
+
     return (
         <Link href={{ pathname: href }}>
             <li onClick={handleRouteChange} ref={(el) => {
@@ -65,9 +67,17 @@ const NavListItem = React.forwardRef<ILink[], NavListItemProps>(({ children, hre
                 (ref as any).current = [ ...((ref as any).current || []), { el, route: href }]
                 }
             }} className={clsx(
-                "text-white cursor-pointer hover:opacity-75 transition-opacity text-base font-medium"
+                "text-white cursor-pointer bg-transparent md:hover:opacity-75 text-base font-medium",
+                classes.linkContainer
             )}>
-                <a href={href} className="flex md:px-2 space-x-2 md:space-x-0 py-[5px] md:py-1" { ...props }>
+                <a 
+                    href={href} 
+                    className={clsx(
+                        "flex md:px-2 space-x-2 md:space-x-0 py-[3px] md:py-1", 
+                        classes.link,
+                        isActive && classes.linkActive
+                    )}
+                    { ...props }>
                     { children }
                 </a>
             </li>
@@ -176,19 +186,6 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         )}>
             <Link href="/" passHref>
                 <a className="hover:opacity-80 flex items-center h-4 transition-opacity">
-                    {/* <div className="md:w-12 md:h-12 w-12 h-12">
-                        <Image 
-                            loader={cloudinaryLoader}
-                            src={"logo"}
-                            width={50}
-                            height={50}
-                            alt="C4T Logo"
-                            layout="responsive"
-                            priority
-                            loading="eager"
-                            quality={100}
-                        />
-                    </div> */}
                     <h1 className="text-lg font-bold text-white">C4T</h1>
                 </a>
             </Link>
@@ -208,7 +205,7 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
                 clsx(
                     classes.linksContainer,
                     "list-none scale-50 z-50",
-                    "absolute top-16 right-8 space-y-0 bg-dark-grey-secondary border-solid border-0 border-t border-[#333333] px-6 py-4 rounded-lg",
+                    "absolute top-16 right-8 space-y-0 bg-dark-grey-secondary border-solid border-0 border-t border-[#333333] px-4 md:px-6 py-4 rounded-lg",
                     "md:relative md:!shadow-none md:scale-100 md:!pointer-events-auto md:top-0 md:transition-none md:opacity-100 md:space-y-0 md:rounded-none md:px-0 md:py-0 md:bg-transparent md:border-none md:right-0 md:flex md:space-x-0",
                     mobileNavOpen ? "!scale-100 opacity-100 pointer-events-auto" : "pointer-events-none opacity-0",
                 )

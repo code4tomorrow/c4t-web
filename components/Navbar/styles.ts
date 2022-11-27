@@ -5,7 +5,32 @@ export const useStyles = makeStyles()(() => ({
     linksContainer: {
         boxShadow: "0px 0px 0px 1px #000000",
         transition: `150ms transform ease, 
-                    150ms opacity ease`
+                    150ms opacity ease`,
+        "@media (max-width: 500px)": {
+            width: "calc(100% - 30px)",
+            right: 15,
+            left: 15
+        }
+    },
+    linkContainer: {
+        transition: "150ms ease opacity"
+    },
+    link: {
+        transition: "150ms ease background",
+        "@media (max-width: 767px)": {
+            borderRadius: 5,
+            paddingLeft: 10,
+            marginBottom: 5,
+            paddingRight: 10,
+            "&:hover": {
+                background: "rgba(255,255,255,0.075)",
+            }
+        }
+    },
+    linkActive: {
+        "@media (max-width: 767px)": {
+            background: "rgba(255,255,255,0.075)",
+        }
     },
     barsContainer: {
         "&:hover > span": {
