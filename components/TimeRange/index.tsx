@@ -13,7 +13,7 @@ const TimeRange : React.FC<ITimeRange> = ({ startDate, endDate }) => {
     const getFormattedDate = useCallback((dateToFormat?:string) => {
         if (!dateToFormat) return "";
         const date = new Date(dateToFormat);
-        const day = date.getDay();
+        const day = date.getDate();
         const monthIdx = date.getMonth();
         return `${MONTHS[monthIdx]} ${day}`;  
     }, []);
