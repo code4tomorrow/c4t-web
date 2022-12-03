@@ -38,18 +38,17 @@ const HyperLink : React.FC<{ node: Block | Inline, children: React.ReactNode }> 
     ), [ link, origin ]);
     
     return (
-        <Link 
+        (<Link
             href={link}
-            passHref>
-                <a
-                   className="text-brand-purple-secondary hover:underline cursor-pointer" 
-                   target={currentPage ? "_self" : "_blank"} 
-                   rel="noopener nofollow noreferrer"
-                >
-                    { children }
-                </a>
-        </Link>
-    )
+            passHref
+            className="text-brand-purple-secondary hover:underline cursor-pointer"
+            target={currentPage ? "_self" : "_blank"}
+            rel="noopener nofollow noreferrer">
+
+            { children }
+
+        </Link>)
+    );
 }
 
 const OrderedList : React.FC<{ children: React.ReactNode }> = ({ children }) => {

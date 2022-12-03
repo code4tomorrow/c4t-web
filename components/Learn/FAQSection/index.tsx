@@ -53,13 +53,16 @@ const FAQSection : React.FC<FAQSectionProps> = ({ faqsGroupedByType }) => {
             <Paper containerClass="p-2 flex justify-center items-center">
                 <p className="text-medium-grey max-w-4xl text-center">
                     If your questions haven&apos;t been answered by the FAQs above, first check out our summary on the&nbsp;
-                    <Link href={"/about"} passHref><a className="text-brand-purple-secondary hover:underline">about page</a></Link>. 
+                    <Link
+                        href={"/about"}
+                        passHref
+                        className="text-brand-purple-secondary hover:underline">about page</Link>. 
                     If your question still hasn&apos;t been answered, ask your question in the <b>#questions</b> channel on the C4T Classes Discord server or email us at&nbsp;
                     <a className="text-brand-purple-secondary hover:underline" href="mailto:classes@code4tomorrow.org">classes@code4tomorrow.org</a>.
                 </p>
             </Paper>
         </div>
-    )
+    );
 }
 
 export default FAQSection;

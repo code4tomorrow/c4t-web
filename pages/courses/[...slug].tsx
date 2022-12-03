@@ -85,10 +85,10 @@ const Collection = dynamic(() =>
 
 const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) => {
     return (
-        <Link href={href as string} passHref>
-            <a { ...props} />
-        </Link>
-    )
+        (<Link href={href as string} passHref { ...props}>
+
+        </Link>)
+    );
 }
 
 const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ recordMap, linksMap, pageId }) => {
