@@ -1,3 +1,4 @@
 {
-    "pros.showInstallOnStartup": false
+    "pros.showInstallOnStartup": false,
+    "editor.fontSize": 14
 }
