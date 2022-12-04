@@ -26,10 +26,14 @@ const FooterItem : React.FC<FooterItemProps> = ({ href = "/", children, ...props
                 href={href}
                 passHref
                 scroll={false}
-                className="flex whitespace-nowrap items-center"
-                { ...props }>
-
-                { children }
+                legacyBehavior
+                >
+                <a
+                    className="flex whitespace-nowrap items-center"
+                    { ...props }
+                >
+                    { children }
+                </a>
 
             </Link>
         </li>
