@@ -85,13 +85,13 @@ const Collection = dynamic(() =>
 
 const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) => {
     return (
-        <Link href={href as string} passHref>
+        (<Link href={href as string} legacyBehavior passHref>
             <a { ...props} />
-        </Link>
-    )
+        </Link>)
+    );
 }
 
-const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ recordMap, linksMap, pageId }) => {
+const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ recordMap, linksMap }) => {
     const router = useRouter()
 
     const pageCoverURL = useMemo(() : string | null => {
@@ -332,7 +332,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     }
 
     // Retrieve notion pageIds for mapping slugs
-    let linksMap = {} 
+    let linksMap: { [ key: string ] : string } = {} 
     
     if (data && typeof data === "object" && recordMap) {
         linksMap = Object

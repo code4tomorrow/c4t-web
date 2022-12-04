@@ -15,5 +15,5 @@ export const formatNotionRoute = (route: string[]) => {
         }
 
         return encodeURIComponent(result);
-    })
+    });
 }

@@ -74,7 +74,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
         <h2 className="text-xl font-medium text-medium-grey text-center">
           We teach K-12 students around the globe how to code for free.
         </h2>
-        <Link href="/about" passHref>
+        <Link href="/about" passHref legacyBehavior>
             <BrandButton 
               title="Learn More" 
               label="100% free" 
@@ -166,7 +166,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                   <div className="space-y-3 md:max-w-[75%] text-lg">
                     <p className="text-medium-grey">
                         C4T is on break currently, but next session is coming soon! Learn languages like Python, Java, and more—all for free!&nbsp;
-                        <Link href="/courses"><a className="underline hover:opacity-75 transition-opacity">View Courses.</a></Link>
+                        <Link href="/courses" className="underline hover:opacity-75 transition-opacity">View Courses.</Link>
                     </p>
                     <p className="text-medium-grey">
                       Next session start date is to be determined. Stay Tuned for updates.
@@ -283,7 +283,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
       </Animate>
       <Footer />
     </div>
-  )
+  );
 }
 
 Home.getLayout = (page: ReactElement ) => {

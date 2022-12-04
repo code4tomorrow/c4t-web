@@ -22,13 +22,22 @@ interface FooterItemProps extends React.HTMLProps<HTMLAnchorElement> {
 const FooterItem : React.FC<FooterItemProps> = ({ href = "/", children, ...props }) => {
     return (
         <li className={clsx("list-none w-min hover:bg-black transition-all rounded-md px-2 hover:bg-opacity-10 p-1 text-medium-grey my-2 font-medium")}>
-            <Link href={href} passHref scroll={false}>
-                <a className="flex whitespace-nowrap items-center" { ...props }>
+            <Link
+                href={href}
+                passHref
+                scroll={false}
+                legacyBehavior
+                >
+                <a
+                    className="flex whitespace-nowrap items-center"
+                    { ...props }
+                >
                     { children }
                 </a>
+
             </Link>
         </li>
-    )
+    );
 }
 
 interface FooterProps extends React.HTMLProps<HTMLDivElement> {}

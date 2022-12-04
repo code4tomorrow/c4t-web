@@ -60,7 +60,7 @@ const MemberSignUps = () => {
                 <h2 className="text-xl my-1 text-center font-medium text-medium-grey">
                     Need the Volunteer Hours? Have the Skills?
                 </h2>
-                <Link href="/jobs" passHref>
+                <Link href="/jobs" passHref legacyBehavior>
                     <BrandButton 
                         as="a"
                         containerClass="mt-12" 
@@ -77,7 +77,7 @@ const MemberSignUps = () => {
                 </a>
             </div>
         </Modal>
-    )
+    );
 }
 
 export default MemberSignUps;

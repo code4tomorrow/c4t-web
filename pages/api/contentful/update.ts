@@ -40,19 +40,19 @@ export default async function handler(
         const modelId = req.body?.sys?.contentType?.sys?.id;
 
         if ([ ContentModelID.TESTIMONIAL ].includes(modelId)) {
-            await attemptRevalidation(res, Pages.INDEX) && pagesRevalidated.push(Pages.INDEX);
+            (await attemptRevalidation(res, Pages.INDEX)) && pagesRevalidated.push(Pages.INDEX);
         }
 
         if ([ ContentModelID.COURSE, ContentModelID.PROMOTIONAL_LABEL ].includes(modelId)) {
-            await attemptRevalidation(res, Pages.COURSES) && pagesRevalidated.push(Pages.COURSES);
+            (await attemptRevalidation(res, Pages.COURSES)) && pagesRevalidated.push(Pages.COURSES);
         }
 
         if ([ ContentModelID.FAQ ].includes(modelId)) {
-            await attemptRevalidation(res, Pages.LEARN) && pagesRevalidated.push(Pages.LEARN);
+            (await attemptRevalidation(res, Pages.LEARN)) && pagesRevalidated.push(Pages.LEARN);
         }
         
         if ([ ContentModelID.VOLUNTEER_OPPORTUNITY ].includes(modelId)) {
-            await attemptRevalidation(res, Pages.VOLUNTEER) && pagesRevalidated.push(Pages.VOLUNTEER);
+            (await attemptRevalidation(res, Pages.VOLUNTEER)) && pagesRevalidated.push(Pages.VOLUNTEER);
         }
 
         if ([ ContentModelID.NOTIFICATION_FLAG].includes(modelId)) {
@@ -66,7 +66,7 @@ export default async function handler(
             }
 
             await Promise.all(validPages.map(async (page:Pages) => ( 
-                await attemptRevalidation(res, page) && pagesRevalidated.push(page)
+                (await attemptRevalidation(res, page)) && pagesRevalidated.push(page)
             )))
         }
 
