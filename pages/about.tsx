@@ -11,7 +11,7 @@ import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
 import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { cloudinaryLoader } from "@utils/cloudinary-loader";
 import clsx from "clsx";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
