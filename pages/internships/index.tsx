@@ -27,6 +27,7 @@ import BrandButton from "@components/BrandButton";
 import { useStyles } from "styles/internships";
 import InternshipPreview from "@components/JobBoard/InternshipPreview";
 import FullInternship from "@components/JobBoard/FullInternship";
+import clsx from "clsx";
 
 const getInternshipURL = (pageIndex:number) => {
     return getAPIInternships(pageIndex, 5);        
@@ -38,11 +39,11 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
         showContent: boolean
     }>({ id: undefined, showContent: false });
 
-    const { data:jobPages, error, setSize, size } = useSWRInfinite<IPagination<IJobPreview>>(getInternshipURL, {
+    const { data:jobPages, error, setSize, size, isValidating } = useSWRInfinite<IPagination<IJobPreview>>(getInternshipURL, {
         fetcher,
         fallbackData: [],
         errorRetryCount: 2,
-        errorRetryInterval: 1000
+        errorRetryInterval: 1000, 
     })
 
     const jobs = useMemo(() => flatMap(jobPages?.map(({ items }) => items || [])), [jobPages]);
@@ -59,6 +60,17 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
             setJobId({ id: jobs[0].sys?.id, showContent: true });
         }
     }, [ size, jobs, jobId, isMobile ]);
+
+    const [ noJobs, setNoJobs ] = useState(false);
+
+    useEffect(() => {
+
+        if (isValidating || !jobPages || jobPages?.length === 0) return; 
+        
+        if (jobPages[0].items?.length === 0 && jobPages[0].skip === 0) {
+            setNoJobs(true);
+        };
+    }, [ isValidating, jobPages ]);
 
     const hasMore = useMemo(() => {
         const lastPage = jobPages?.slice(-1); 
@@ -178,7 +190,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                     ))
                                 }
                                 {
-                                    Array.from({ length: initialLoading ? 5 : 0 }).map((_, i) => (
+                                    Array.from({ length: initialLoading && noJobs ? 5 : 0 }).map((_, i) => (
                                         <JobPreview 
                                             internship={true}
                                             key={i}
@@ -199,8 +211,8 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                                     <span>Load More</span>
                                             </div>
                                         ) : (
-                                            <p className="text-medium-grey text-center">
-                                            <span className="text-brand-purple-secondary">Stay Tuned</span> for more Internship Positions.
+                                            <p className={clsx("text-medium-grey text-center", noJobs && "opacity-0")}>
+                                                <span className="text-brand-purple-secondary">Stay Tuned</span> for more Internship Positions.
                                             </p>
                                         )
                                     }
@@ -248,6 +260,12 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                 )
                             }
                         </div>
+                    </div>
+                    <div className="text-medium-grey">
+                        <p className={clsx(noJobs ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none")}>
+                            <span className="text-brand-purple-secondary">No</span> 
+                            &nbsp;Internships Available Currently.
+                        </p>
                     </div>
                 </main>
             </Animate>

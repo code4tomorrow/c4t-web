@@ -64,3 +64,17 @@ a {
   height: 0;
   width: 0;
 }
+
+.WACWidget.WACWidget--rounded {
+  border-radius: 7px !important;
+}
+
+.WACHomeScreenHeader .WACHeader{
+  border-top-left-radius: 7px !important;
+  border-top-right-radius: 7px !important;
+}
+
+.WACWidget.WACWidget--rounded .WACWidget__animationContainer  {
+  border-top-left-radius: 7px !important;
+  border-top-right-radius: 7px !important;
+}
