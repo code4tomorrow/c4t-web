@@ -190,7 +190,7 @@ const Internships : NextPageWithLayout<InferGetStaticPropsType<typeof getStaticP
                                     ))
                                 }
                                 {
-                                    Array.from({ length: initialLoading && noJobs ? 5 : 0 }).map((_, i) => (
+                                    Array.from({ length: initialLoading && !noJobs ? 5 : 0 }).map((_, i) => (
                                         <JobPreview 
                                             internship={true}
                                             key={i}
