@@ -272,7 +272,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                   as="a"
                   rel="noopener noreferrer"
                   target={"_blank"}
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSdkN5FLmWXJSUSAZCgpLGdQ4uyfokO0QjAg05ZDtYdIka6ASg/viewform"
+                  href="https://tally.so/r/w7XY42"
                 />
               </article>
               <div className="md:my-0 my-8">
