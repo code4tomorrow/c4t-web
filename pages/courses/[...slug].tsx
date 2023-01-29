@@ -94,7 +94,7 @@ const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) =
 
 const CloudinaryImage : React.FC<ImageProps> = ({ ...props }) => {
     return (
-        process.env.NODE_ENV === "production" ? (
+        process.env.NODE_ENV === "production" && !props.src.toString().startsWith("https://www.notion.so/image") ? (
             <Image loader={cloudinaryExternalLoader} { ...props }/>
         ) : <Image { ...props }/>
     )
