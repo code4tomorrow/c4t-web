@@ -4,7 +4,7 @@ import config from "../config";
 
 export const cloudinaryExternalLoader = ({ src, quality } : Omit<ImageLoaderProps, "width">) : string => {
     return `${config.cloudinary.url}/image/fetch/q_${
-        quality || 75
+        quality || 75 
     },fl_sanitize/${src}`;
 };
 

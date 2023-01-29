@@ -22,7 +22,7 @@ import 'prismjs/components/prism-markup.js'
 
 import dynamic from 'next/dynamic'
 import Link from "next/link";
-import Image from "next/image";
+import Image, { ImageProps } from "next/legacy/image";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import invert from "lodash/invert";
@@ -37,6 +37,7 @@ import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 import { ECacheKey } from "common/enums/cache";
 import type { ExtendedRecordMap } from "notion-types";
 import { filterRecordMap } from "@utils/notion/filterRecordMap";
+import { cloudinaryExternalLoader } from "@utils/cloudinary-loader";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
@@ -89,6 +90,14 @@ const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) =
             <a { ...props} />
         </Link>)
     );
+}
+
+const CloudinaryImage : React.FC<ImageProps> = ({ ...props }) => {
+    return (
+        process.env.NODE_ENV === "production" ? (
+            <Image loader={cloudinaryExternalLoader} { ...props }/>
+        ) : <Image { ...props }/>
+    )
 }
 
 const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ recordMap, linksMap }) => {
@@ -151,7 +160,7 @@ const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
                     Code,
                     Modal,
                     PageLink,
-                    nextImage: Image,
+                    nextImage: CloudinaryImage,
                     nextLink: Link
                 }}
             />
