@@ -92,13 +92,13 @@ const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) =
     );
 }
 
-const CloudinaryImage : React.FC<ImageProps> = ({ ...props }) => {
-    return (
-        process.env.NODE_ENV === "production" && props.src.toString().startsWith("https://images.unsplash.com") ? (
-            <Image loader={cloudinaryExternalLoader} { ...props }/>
-        ) : <Image { ...props }/>
-    )
-}
+// const CloudinaryImage : React.FC<ImageProps> = ({ ...props }) => {
+//     return (
+//         process.env.NODE_ENV === "production" && props.src.toString().startsWith("https://images.unsplash.com") ? (
+//             <Image loader={cloudinaryExternalLoader} { ...props }/>
+//         ) : <Image { ...props }/>
+//     )
+// }
 
 const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ recordMap, linksMap }) => {
     const router = useRouter()
@@ -160,7 +160,7 @@ const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
                     Code,
                     Modal,
                     PageLink,
-                    nextImage: CloudinaryImage,
+                    nextImage: Image,
                     nextLink: Link
                 }}
             />
