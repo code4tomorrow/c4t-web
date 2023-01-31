@@ -63,7 +63,7 @@ const About : NextPageWithLayout<AboutProps> = ({ directoryEntries, notification
                             from={{ y: 90,  opacity: 0 }}
                             to={{ y: 0, opacity: 1, delay: 0.15 }}
                             className="text-lg !mt-3 text-medium-grey text-center max-w-4xl">
-                            Code 4 Tomorrow&apos;s uniqueness lies in the fact that we are entirely student-run, from the official website to merch design and finance management. Fiscally sponsored by Irvine LIGHTS, C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers.
+                            Code 4 Tomorrow&apos;s uniqueness lies in the fact that we are entirely student-run, from the official website to merch design and finance management. C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers.
                         </Animate.Element>
                     </section>
                     <section ref={missionRef} className="md:[&>div]:w-1/2 mt-32 md:space-x-6 w-screen flex md:flex-row flex-col-reverse p-3 sm:p-20 max-w-7xl justify-items-center">
