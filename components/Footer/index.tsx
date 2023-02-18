@@ -1,6 +1,9 @@
+import { PaperAirplaneIcon } from "@heroicons/react/outline";
+import { useTheme } from "@mui/system";
 import clsx from "clsx";
 import Link from "next/link";
 import React, { useMemo } from "react";
+import { makeStyles } from "tss-react/mui";
 
 interface FooterHeaderProps {
     children: React.ReactNode;
@@ -20,8 +23,21 @@ interface FooterItemProps extends React.HTMLProps<HTMLAnchorElement> {
 }
 
 const FooterItem : React.FC<FooterItemProps> = ({ href = "/", children, ...props }) => {
+    const { classes } = makeStyles()(() => ({
+        footerItem: {
+            "&:hover": {
+                boxShadow: "0px 0px 0px 2px rgba(255,255,255,0.2)"
+            }
+        }
+    }))();
+
+
     return (
-        <li className={clsx("list-none w-min hover:bg-black transition-all rounded-md px-2 hover:bg-opacity-10 p-1 text-medium-grey my-2 font-medium")}>
+        <li 
+            className={clsx(
+                "list-none w-min hover:bg-black transition-all rounded-md px-2 hover:bg-opacity-10 p-1 text-medium-grey my-2 font-medium",
+                classes.footerItem
+            )}>
             <Link
                 href={href}
                 passHref
@@ -64,9 +80,14 @@ const Footer : React.FC<FooterProps> = ({ className, ...props }) => {
                     </ul>
                     <ul>
                         <FooterHeader>Resources</FooterHeader>
+                        <FooterItem
+                            href="/contact">
+                            <PaperAirplaneIcon className="rotate-45 text-brand-purple-secondary -translate-y-[2px]" width={20} />
+                            <span>Contact Us</span>
+                        </FooterItem>
+                        <FooterItem href="/learn#faqs">FAQs</FooterItem>
                         <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://www.notion.so/code4tomorrow">Notion</FooterItem>
                         <FooterItem target="_blank" rel="noopener nofollow noreferrer" href="https://discord.code4tomorrow.org/">Discord Guide</FooterItem>
-                        <FooterItem href="/learn#faqs">FAQs</FooterItem>
                     </ul>
                     <ul>
                         <FooterHeader>Socials</FooterHeader>
