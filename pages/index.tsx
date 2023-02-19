@@ -165,7 +165,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 >
                   <div className="space-y-3 md:max-w-[75%] text-lg">
                     <p className="text-medium-grey">
-                        C4T's spring session registration is now open! Learn languages like Python, Java, and more—all for free!&nbsp;
+                        C4T&apos;s spring session registration is now open! Learn languages like Python, Java, and more—all for free!&nbsp;
                         <Link href="/courses" className="underline hover:opacity-75 transition-opacity">View Courses.</Link>
                     </p>
                     <p className="text-medium-grey">
