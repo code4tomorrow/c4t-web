@@ -155,7 +155,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                    ref={sessionRef}
                    className="transition-transform duration-500"
                 >
-                  <h1 className="text-white text-4xl md:text-5xl font-extrabold">C4T's Spring Registration is Now Open</h1>
+                  <h1 className="text-white text-4xl md:text-5xl font-extrabold">C4T&apos;s Spring Registration is Now Open</h1>
                 </Animate.Element>
                 <Animate.Element
                   ref={sessionRef}
