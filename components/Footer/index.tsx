@@ -1,5 +1,4 @@
 import { PaperAirplaneIcon } from "@heroicons/react/outline";
-import { useTheme } from "@mui/system";
 import clsx from "clsx";
 import Link from "next/link";
 import React, { useMemo } from "react";
