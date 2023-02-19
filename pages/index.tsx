@@ -176,7 +176,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 <BrandButton 
                   containerClass="mr-auto" 
                   title="Sign Up" 
-                  label="It's Quick & Free" 
+                  label="It&apos;s Quick & Free" 
                   href="https://docs.google.com/forms/d/e/1FAIpQLSeg0ph_2y7CC1QE1htGh8R_lfqF2B_m6JroDbVm8mw9NcfcNw/viewform"
                   as="a"
                   target={"_blank"}
