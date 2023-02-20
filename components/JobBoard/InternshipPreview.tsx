@@ -1,9 +1,9 @@
+import React from "react";
 import Animate from "@components/Animate";
 import Paper from "@components/Paper";
 import Skeleton from "@components/Skeleton";
 import clsx from "clsx";
 import { IInternship } from "common/interfaces/job";
-import React, { useMemo } from "react";
 import { useStyles } from "./styles";
 import BriefcaseIcon from "@heroicons/react/outline/BriefcaseIcon";
 import TimeRange from "@components/TimeRange";

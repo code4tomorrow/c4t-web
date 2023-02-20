@@ -4,6 +4,7 @@ import { MailIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import { makeStyles } from "tss-react/mui";
 import { IDepartmentContact } from "common/interfaces/departmentContact";
+import Copy from "@components/Copy";
 
 interface DepartmentContactProps {
     selected?: boolean;
@@ -31,6 +32,7 @@ const DepartmentContact : React.FC<DepartmentContactProps> = ({ selected = false
             <div className="flex space-x-2 items-center">
                 <MailIcon className="text-medium-grey w-5" />
                 <p className="text-medium-grey ">{ contact.email }</p>
+                <Copy content={ contact.email } />
             </div>
         </Paper>
     )
