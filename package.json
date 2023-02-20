@@ -25,6 +25,7 @@
     "@next/bundle-analyzer": "^12.2.3",
     "@notionhq/client": "^1.0.4",
     "@plaiceholder/next": "^2.4.0",
+    "@sendgrid/mail": "^7.7.0",
     "@svgr/webpack": "^6.2.1",
     "axios": "^0.27.2",
     "cloudinary-build-url": "^0.2.4",
