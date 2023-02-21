@@ -18,6 +18,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { SEND_EMAIL } from "common/endpoints";
 import Loader from "@components/Loader";
 import { ISendEmailBody } from "./api/sendEmail";
+import { useStyles } from "styles/contact";
 
 interface ContactProps {
     notificationFlags: INotificationFlag[],
@@ -82,6 +83,8 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
       
     }, []);
 
+    const { classes:contactStyles  } = useStyles();
+
     return (
         <div style={{ width: "100vw", overflowX: "hidden" }} 
         className="flex flex-col w-screen min-h-screen items-center bg-dark-grey-primary">
@@ -89,7 +92,9 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                 <title>Contact | C4T</title>
             </Head>
             <Navbar notificationFlags={notificationFlags} />
-            <main className="flex flex-col items-center my-5 w-full px-3">
+            <div className={contactStyles.gradientBubble}></div>
+            <div className={contactStyles.gradientBubbleBottom}></div>
+            <main className="flex flex-col items-center z-10 my-5 w-full px-3">
                 <h1 
                     style={{
                        textShadow: "5px 5px #5A4CAD"
@@ -158,7 +163,7 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                   </BrandButton>
                 </form>
             </main>
-            <Footer />
+            <Footer className="z-10 mt-auto" />
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import Paper from "@components/Paper";
-import { MailIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import { makeStyles } from "tss-react/mui";
 import { IDepartmentContact } from "common/interfaces/departmentContact";

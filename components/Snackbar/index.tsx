@@ -64,7 +64,7 @@ const Snackbar = () => {
     const snacks = useRecoilValue(snackBarState);
 
     return (
-        <div data-component="Snackbar" className="fixed w-full bottom-[7.5%] left-1/2 -translate-x-1/2">
+        <div data-component="Snackbar" className="z-50 fixed w-full bottom-[7.5%] left-1/2 -translate-x-1/2">
             {
                 snacks.map(({ key, content }, index) => (
                     <Snack id={key} i={snacks.length - index - 1} key={key} >{ content }</Snack>
