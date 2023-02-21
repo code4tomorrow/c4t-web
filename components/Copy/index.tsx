@@ -1,6 +1,9 @@
-import { CheckIcon, DocumentDuplicateIcon } from "@heroicons/react/outline";
+import { snackBarState } from "@components/Snackbar";
+import { CheckIcon, DuplicateIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import React, { useRef, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { v1 } from "uuid";
 
 interface CopyProps {
     content: string; 
@@ -8,6 +11,7 @@ interface CopyProps {
 
 const Copy : React.FC<CopyProps> = ({ content }) => {
     const [ checked, setChecked ] = useState(false);
+    const setSnackbar = useSetRecoilState(snackBarState);
 
     const checkTimeout = useRef<number>(-1);
 
@@ -17,6 +21,16 @@ const Copy : React.FC<CopyProps> = ({ content }) => {
 
             if (checkTimeout.current !== -1) {
                 clearTimeout(checkTimeout.current);
+            } 
+
+            if (!checked) {
+                setSnackbar((oldSnacks) => [
+                    ...oldSnacks,
+                    {
+                      key: v1(),
+                      content
+                    },
+                ]);
             }
 
             checkTimeout.current = setTimeout(() => {
@@ -31,7 +45,7 @@ const Copy : React.FC<CopyProps> = ({ content }) => {
                 "translate-y-0 transition-transform duration-150 ease-in-out",
                 checked && "-translate-y-1/2"
             )}>
-                <DocumentDuplicateIcon
+                <DuplicateIcon
                     width={20}
                     className="text-medium-grey hover:text-white transition-colors"/>
                 <CheckIcon

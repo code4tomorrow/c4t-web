@@ -96,9 +96,9 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
         { getLayout(
           <RecoilRoot>
             <Component {...pageProps} />
+            <Snackbar />
           </RecoilRoot>
         ) }
-        {/* <Snackbar /> */}
       </React.StrictMode>
     </CacheProvider>
   )

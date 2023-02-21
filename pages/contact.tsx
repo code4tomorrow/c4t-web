@@ -76,7 +76,11 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
       return false; 
     }, [ message, email, fullName, departmentId ]);
 
-    const [emblaRef, _emblaAPI ] = useEmblaCarousel({ }, []);
+    const [emblaRef, emblaAPI ] = useEmblaCarousel({ startIndex: Math.floor(departmentContacts.length / 2) }, []);
+
+    useEffect(() => {
+      
+    }, []);
 
     return (
         <div style={{ width: "100vw", overflowX: "hidden" }} 

@@ -30,9 +30,9 @@ const DepartmentContact : React.FC<DepartmentContactProps> = ({ selected = false
         )}>
             <h1 className="text-brand-purple-secondary font-bold ">{ contact.name }</h1>
             <div className="flex space-x-2 items-center">
-                <MailIcon className="text-medium-grey w-5" />
+                {/* <MailIcon className="text-medium-grey w-5" /> */}
                 <p className="text-medium-grey ">{ contact.email }</p>
-                <Copy content={ contact.email } />
+                <Copy content={`Copied C4T ${ contact.name } Email`} />
             </div>
         </Paper>
     )
