@@ -27,7 +27,9 @@ interface ContactProps {
 
 
 const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, departmentContacts }) => {
-    const [ departmentId, setDepartmentId ] = useState<string | undefined>();
+    const [ departmentId, setDepartmentId ] = useState<string | undefined>(
+      departmentContacts[Math.floor(departmentContacts.length / 2)].sys.id
+    );
 
     const [ fullName, setFullName] = useState<string>("");
     const [ email, setEmail] = useState<string>("");
@@ -77,9 +79,24 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
       return false; 
     }, [ message, email, fullName, departmentId ]);
 
-    const [emblaRef, _emblaAPI ] = useEmblaCarousel({ startIndex: Math.floor(departmentContacts.length / 2) }, []);
+    const [emblaRef, emblaAPI ] = useEmblaCarousel({ startIndex: Math.floor(departmentContacts.length / 2) }, []);
 
     const { classes:contactStyles  } = useStyles();
+
+    useEffect(() => {
+      emblaAPI?.on("select", () => {
+        setDepartmentId(departmentContacts[emblaAPI.selectedScrollSnap()].sys.id);
+      });
+      emblaAPI?.on("settle", () => {
+        setDepartmentId(departmentContacts[emblaAPI.selectedScrollSnap()].sys.id);
+      });
+    }, [ emblaAPI ]);
+
+    const handleContactClick = (index:number) => (id:string) => {
+      setDepartmentId(id);
+     
+      if (emblaAPI?.clickAllowed()) emblaAPI?.scrollTo(index);
+    }
 
     return (
         <div style={{ width: "100vw", overflowX: "hidden" }} 
@@ -103,10 +120,10 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                 <section className="py-4 mt-5" ref={emblaRef}>
                     <div className="flex space-x-3">
                       {
-                          departmentContacts.map((contact) => (
+                          departmentContacts.map((contact, index) => (
                               <DepartmentContact 
                                   contact={contact}
-                                  onClick={(id) => setDepartmentId(id)}
+                                  onClick={handleContactClick(index)}
                                   selected={contact.sys.id === departmentId}
                                   key={contact.sys.id} 
                               />

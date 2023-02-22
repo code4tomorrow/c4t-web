@@ -6,10 +6,11 @@ import { useSetRecoilState } from "recoil";
 import { v1 } from "uuid";
 
 interface CopyProps {
-    content: string; 
+    content: string;
+    snackLabel?: string;  
 }
 
-const Copy : React.FC<CopyProps> = ({ content }) => {
+const Copy : React.FC<CopyProps> = ({ content, snackLabel = "Copied!" }) => {
     const [ checked, setChecked ] = useState(false);
     const setSnackbar = useSetRecoilState(snackBarState);
 
@@ -28,7 +29,7 @@ const Copy : React.FC<CopyProps> = ({ content }) => {
                     ...oldSnacks,
                     {
                       key: v1(),
-                      content
+                      content: snackLabel
                     },
                 ]);
             }

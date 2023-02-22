@@ -31,7 +31,7 @@ const DepartmentContact : React.FC<DepartmentContactProps> = ({ selected = false
             <div className="flex space-x-2 items-center">
                 {/* <MailIcon className="text-medium-grey w-5" /> */}
                 <p className="text-medium-grey ">{ contact.email }</p>
-                <Copy content={`Copied C4T ${ contact.name } Email`} />
+                <Copy content={contact.email} snackLabel={`Copied C4T ${ contact.name } Email`} />
             </div>
         </Paper>
     )
