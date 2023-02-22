@@ -77,11 +77,7 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
       return false; 
     }, [ message, email, fullName, departmentId ]);
 
-    const [emblaRef, emblaAPI ] = useEmblaCarousel({ startIndex: Math.floor(departmentContacts.length / 2) }, []);
-
-    useEffect(() => {
-      
-    }, []);
+    const [emblaRef, _emblaAPI ] = useEmblaCarousel({ startIndex: Math.floor(departmentContacts.length / 2) }, []);
 
     const { classes:contactStyles  } = useStyles();
 
@@ -92,14 +88,13 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                 <title>Contact | C4T</title>
             </Head>
             <Navbar notificationFlags={notificationFlags} />
-            <div className={contactStyles.gradientBubble}></div>
-            <div className={contactStyles.gradientBubbleBottom}></div>
-            <main className="flex flex-col items-center z-10 my-5 w-full px-3">
+            <main className="flex relative flex-col items-center my-5 w-full px-3">
+                <div className={contactStyles.gradientBubble}></div>
                 <h1 
                     style={{
                        textShadow: "5px 5px #5A4CAD"
                     }}
-                    className="text-7xl md:text-8xl text-brand-purple-secondary text-center space-x-6 flex md:flex-row flex-col font-semibold">
+                    className="z-10 text-7xl md:text-8xl text-brand-purple-secondary text-center space-x-6 flex md:flex-row flex-col font-semibold">
                         <span>Contact</span>
                         <span className="text-white">C4T</span>
                 </h1>
@@ -119,7 +114,7 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                       }
                     </div>
                 </section>
-                <form onSubmit={handleSubmit} className="w-full max-w-screen-2xl my-5 flex flex-col items-center space-y-3">
+                <form onSubmit={handleSubmit} className="z-10 w-full max-w-screen-2xl my-5 flex flex-col items-center space-y-3">
                   <input 
                     value={fullName}
                     required
@@ -162,6 +157,7 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                     { sending && <Loader className="h-0" /> }
                   </BrandButton>
                 </form>
+                <div className={contactStyles.gradientBubbleBottom}></div>
             </main>
             <Footer className="z-10 mt-auto" />
         </div>
