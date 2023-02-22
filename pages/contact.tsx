@@ -19,6 +19,9 @@ import { SEND_EMAIL } from "common/endpoints";
 import Loader from "@components/Loader";
 import { ISendEmailBody } from "./api/sendEmail";
 import { useStyles } from "styles/contact";
+import { useSetRecoilState } from "recoil";
+import { snackBarState } from "@components/Snackbar";
+import { v1 } from "uuid";
 
 interface ContactProps {
     notificationFlags: INotificationFlag[],
@@ -30,6 +33,7 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
     const [ departmentId, setDepartmentId ] = useState<string | undefined>(
       departmentContacts[Math.floor(departmentContacts.length / 2)].sys.id
     );
+    const setSnackbar = useSetRecoilState(snackBarState);
 
     const [ fullName, setFullName] = useState<string>("");
     const [ email, setEmail] = useState<string>("");
@@ -51,6 +55,8 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
     const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
+      if (sending) return; 
+
       setSending(true);
 
       fetch(SEND_EMAIL, {
@@ -66,10 +72,26 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
         method: "POST"
       })
         .then(() => {
+          setSnackbar((oldSnacks) => [
+            ...oldSnacks,
+            {
+              key: v1(),
+              content: "Sent Message Successfully!"
+            },
+        ]);
           setMessage("");
           setEmail("");
           setFullName("");
           setDepartmentId(undefined);
+        })
+        .catch(() => {
+          setSnackbar((oldSnacks) => [
+            ...oldSnacks,
+            {
+              key: v1(),
+              content: "Failed to Send Message!"
+            },
+        ]);
         })
         .finally(() => setSending(false));
     }
@@ -105,7 +127,7 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                 <title>Contact | C4T</title>
             </Head>
             <Navbar notificationFlags={notificationFlags} />
-            <main className="flex relative flex-col items-center my-5 w-full px-3">
+            <main className="flex-1 flex relative flex-col items-center my-5 w-full px-3">
                 <div className={contactStyles.gradientBubble}></div>
                 <h1 
                     style={{
@@ -115,8 +137,6 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                         <span>Contact</span>
                         <span className="text-white">C4T</span>
                 </h1>
-                {/* <h2
-                    className="text-7xl mt-5 text-white font-semibold">Code4Tomorrow.org</h2> */}
                 <section className="py-4 mt-5" ref={emblaRef}>
                     <div className="flex space-x-3">
                       {
@@ -171,12 +191,12 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                     title="Send Message"
                   >
                     <PaperAirplaneIcon color="#fff" className="rotate-45 -translate-y-[1px]" width={20} />
-                    { sending && <Loader className="h-0" /> }
+                    { sending && <Loader className="!h-0" /> }
                   </BrandButton>
                 </form>
                 <div className={contactStyles.gradientBubbleBottom}></div>
             </main>
-            <Footer className="z-10 mt-auto" />
+            <Footer className="z-10" />
         </div>
     )
 }
