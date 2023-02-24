@@ -12,6 +12,7 @@ import { RecoilRoot } from "recoil";
 import ReactGA from 'react-ga4';
 import config from 'config';
 import { Router } from 'next/router';
+import Snackbar from '@components/Snackbar';
 
 let muiCache: EmotionCache | undefined = undefined;
 
@@ -95,6 +96,7 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
         { getLayout(
           <RecoilRoot>
             <Component {...pageProps} />
+            <Snackbar />
           </RecoilRoot>
         ) }
       </React.StrictMode>

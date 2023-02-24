@@ -37,7 +37,6 @@ import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 import { ECacheKey } from "common/enums/cache";
 import type { ExtendedRecordMap } from "notion-types";
 import { filterRecordMap } from "@utils/notion/filterRecordMap";
-import { cloudinaryExternalLoader } from "@utils/cloudinary-loader";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
@@ -100,6 +99,14 @@ const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) =
 //     )
 // }
 
+const CustomImage : React.FC<ImageProps> = ({ ...props }) => {
+    return (
+        process.env.NODE_ENV === "production" && props.src.toString().includes("amazonaws.com") ? (
+            <Image { ...props } unoptimized />
+        ) : <Image { ...props } priority/>
+    )
+}
+
 const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ recordMap, linksMap }) => {
     const router = useRouter()
 
@@ -160,7 +167,7 @@ const NotionCourse : React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
                     Code,
                     Modal,
                     PageLink,
-                    nextImage: Image,
+                    nextImage: CustomImage,
                     nextLink: Link
                 }}
             />
