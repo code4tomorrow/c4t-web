@@ -102,8 +102,8 @@ const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) =
 const CustomImage : React.FC<ImageProps> = ({ ...props }) => {
     return (
         process.env.NODE_ENV === "production" && props.src.toString().includes("amazonaws.com") ? (
-            <Image { ...props } unoptimized/>
-        ) : <Image { ...props }/>
+            <Image { ...props } unoptimized />
+        ) : <Image { ...props } priority/>
     )
 }
 
