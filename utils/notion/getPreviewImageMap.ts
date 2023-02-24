@@ -15,7 +15,7 @@ export async function getPreviewImageMap(
 ): Promise<PreviewImageMap> {
   const urls: string[] = getPageImageUrls(recordMap, {
     mapImageUrl: defaultMapImageUrl
-  })
+  }).filter(url => !url.includes("amazonaws.com"))
 
   const previewImagesMap = Object.fromEntries(
     await pMap(urls, async (url) => [url, await getPreviewImage(url)], {
