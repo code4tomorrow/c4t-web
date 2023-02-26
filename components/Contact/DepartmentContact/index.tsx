@@ -24,15 +24,18 @@ const DepartmentContact : React.FC<DepartmentContactProps> = ({ selected = false
         <Paper 
             onClick={handleClick}
             containerClass={clsx(
-            "h-[100px] cursor-pointer flex-col transition-all flex justify-center items-center p-4",
+            "min-h-[100px] cursor-pointer flex-col transition-all flex justify-center items-center p-4",
             selected && classes.selected
         )}>
             <h1 className="text-brand-purple-secondary font-bold ">{ contact.name }</h1>
             <div className="flex space-x-2 items-center">
                 {/* <MailIcon className="text-medium-grey w-5" /> */}
-                <p className="text-medium-grey ">{ contact.email }</p>
+                <p className="text-medium-grey whitespace-nowrap font-medium">{ contact.email }</p>
                 <Copy content={contact.email} snackLabel={`Copied C4T ${ contact.name } Email`} />
             </div>
+           { contact.description && (
+             <p className="text-medium-grey text-center mt-1">{ contact.description }</p>
+           )}
         </Paper>
     )
 }
