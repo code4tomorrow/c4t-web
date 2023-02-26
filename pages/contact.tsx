@@ -143,12 +143,11 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                     <div className="flex space-x-3">
                       {
                           departmentContacts.map((contact, index) => (
-                              <div>
+                              <div key={contact.sys.id} >
                                 <DepartmentContact 
                                     contact={contact}
                                     onClick={handleContactClick(index)}
                                     selected={contact.sys.id === departmentId}
-                                    key={contact.sys.id} 
                                 />
                               </div>
                           ))
