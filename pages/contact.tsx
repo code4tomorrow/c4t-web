@@ -47,6 +47,8 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
         "&:focus": {
           boxShadow: "0px 0px 0px 3px #8C8796"
         }
+      },
+      gradientOverlay: {
       }
     }))();
 
@@ -137,21 +139,23 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                         <span>Contact</span>
                         <span className="text-white">C4T</span>
                 </h1>
-                <section className="py-4 mt-5" ref={emblaRef}>
+                <section className={clsx("py-4 mt-5", classes.gradientOverlay)} ref={emblaRef}>
                     <div className="flex space-x-3">
                       {
                           departmentContacts.map((contact, index) => (
-                              <DepartmentContact 
-                                  contact={contact}
-                                  onClick={handleContactClick(index)}
-                                  selected={contact.sys.id === departmentId}
-                                  key={contact.sys.id} 
-                              />
+                              <div>
+                                <DepartmentContact 
+                                    contact={contact}
+                                    onClick={handleContactClick(index)}
+                                    selected={contact.sys.id === departmentId}
+                                    key={contact.sys.id} 
+                                />
+                              </div>
                           ))
                       }
                     </div>
                 </section>
-                <form onSubmit={handleSubmit} className="z-10 w-full max-w-screen-2xl my-5 flex flex-col items-center space-y-3">
+                <form onSubmit={handleSubmit} className="z-10 w-full max-w-screen-2xl mb-5 mt-3 flex flex-col items-center space-y-3">
                   <input 
                     value={fullName}
                     required
