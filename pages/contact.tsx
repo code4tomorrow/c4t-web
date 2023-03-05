@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { ChangeEvent, FormEvent, ReactElement, startTransition, useCallback, useEffect, useMemo, useState } from "react";
+import React, { FormEvent, ReactElement, useEffect, useMemo, useState } from "react";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Footer from "@components/Footer";
@@ -13,7 +13,7 @@ import { IDepartmentContact } from "common/interfaces/departmentContact";
 import { makeStyles } from "tss-react/mui";
 import clsx from "clsx";
 import BrandButton from "@components/BrandButton";
-import { PaperAirplaneIcon } from "@heroicons/react/outline";
+import { ChevronLeftIcon, ChevronRightIcon, PaperAirplaneIcon } from "@heroicons/react/outline";
 import useEmblaCarousel from "embla-carousel-react";
 import { SEND_EMAIL } from "common/endpoints";
 import Loader from "@components/Loader";
@@ -139,7 +139,25 @@ const ContactPage : NextPageWithLayout<ContactProps> = ({ notificationFlags, dep
                         <span>Contact</span>
                         <span className="text-white">C4T</span>
                 </h1>
-                <section className={clsx("py-4 mt-5", classes.gradientOverlay)} ref={emblaRef}>
+                <section className="flex items-center mt-5">
+                  <ChevronLeftIcon onClick={() => { emblaAPI?.scrollPrev() }} width={25} color={"#fff"} className="cursor-pointer opacity-75 transition-opacity hover:opacity-100" />
+                  <div className="space-x-1 flex justify-center items-center">
+                      {
+                        departmentContacts.map(({ sys }, i) => (
+                          <span 
+                              onClick={() => { handleContactClick(i)(sys.id) }}
+                              className={clsx(
+                              "w-3 h-1 block cursor-pointer rounded-full transition-all",
+                                departmentId === sys.id ? "bg-brand-purple-secondary" : "bg-dim-grey"
+                              )}
+                              key={i} 
+                          />
+                          ))
+                      }
+                  </div>
+                  <ChevronRightIcon onClick={() => { emblaAPI?.scrollNext() }} width={25} color={"#fff"} className="cursor-pointer opacity-75 transition-opacity hover:opacity-100" />
+                </section>
+                <section className={clsx("py-4 mt-1", classes.gradientOverlay)} ref={emblaRef}>
                     <div className="flex space-x-3">
                       {
                           departmentContacts.map((contact, index) => (
