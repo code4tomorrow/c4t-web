@@ -9,6 +9,7 @@ const authorizedImageDomains = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  staticPageGenerationTimeout: 900,
   reactStrictMode: true,
   images: {
     domains: authorizedImageDomains

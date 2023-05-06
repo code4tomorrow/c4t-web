@@ -7,7 +7,7 @@ const getPageIDFromBlockChildren = async (blockId: string, pages: Set<string>, r
         return await notion.blocks.children.list({
             block_id: blockId,
             page_size: undefined
-        }); 
+        })
     }, { retries: 3, minTimeout: 3000 });
 
     const page = await pRetry(async () => {
