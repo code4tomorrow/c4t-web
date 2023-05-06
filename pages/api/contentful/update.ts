@@ -55,6 +55,10 @@ export default async function handler(
             (await attemptRevalidation(res, Pages.VOLUNTEER)) && pagesRevalidated.push(Pages.VOLUNTEER);
         }
 
+        if ([ ContentModelID.CONTACT ].includes(modelId)) {
+            (await attemptRevalidation(res, Pages.CONTACT)) && pagesRevalidated.push(Pages.CONTACT);
+        }
+
         if ([ ContentModelID.NOTIFICATION_FLAG].includes(modelId)) {
             const pageLocales = req.body.fields.pages;
             

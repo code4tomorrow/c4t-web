@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useStyles } from "./styles";
-import { HomeIcon, LightBulbIcon, HandIcon, CodeIcon, BookOpenIcon } from "@heroicons/react/outline";
+import { HomeIcon, LightBulbIcon, HandIcon, CodeIcon, BookOpenIcon, PaperAirplaneIcon } from "@heroicons/react/outline";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useThrottledCallback } from "use-debounce";
@@ -231,6 +231,10 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             <NavListItem ref={navItemRefs} href="/learn">
                 <LightBulbIcon className="md:hidden" width={15} />
                 <span>Learn</span>
+            </NavListItem>
+            <NavListItem ref={navItemRefs} href="/contact">
+                <PaperAirplaneIcon className="md:hidden rotate-45" width={15} />
+                <span>Contact</span>
             </NavListItem>
         </ul>
     </nav>
