@@ -42,3 +42,7 @@ export default async function handler(
     res.json(json);
 }
 
+export const config = {
+    runtime: 'edge',
+};
+  

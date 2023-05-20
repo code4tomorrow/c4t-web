@@ -238,7 +238,7 @@ const Navbar : React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             </NavListItem>
         </ul>
     </nav>
-    <div className="w-screen z-10 lg:none flex justify-center items-center mt-16">
+    <div className="w-screen md:z-50 lg:none flex justify-center items-center mt-16">
         { !!notificationFlags?.length && <NavNotification notificationFlag={notificationFlags[0]} /> }
     </div>
     </>;
