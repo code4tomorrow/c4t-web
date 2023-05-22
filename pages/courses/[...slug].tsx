@@ -37,6 +37,7 @@ import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 import { ECacheKey } from "common/enums/cache";
 import type { ExtendedRecordMap } from "notion-types";
 import { filterRecordMap } from "@utils/notion/filterRecordMap";
+import { validateUUID } from "@utils/common";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
@@ -84,10 +85,14 @@ const Collection = dynamic(() =>
 )
 
 const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) => {
+    const immediatePathname = href?.split("/").pop(); 
+
     return (
-        (<Link href={href as string} legacyBehavior passHref>
-            <a { ...props} />
-        </Link>)
+        immediatePathname && validateUUID(immediatePathname) ? 
+            <a href={href} { ...props } /> :
+            <Link href={href as string} legacyBehavior passHref>
+                <a { ...props} />
+            </Link>
     );
 }
 
