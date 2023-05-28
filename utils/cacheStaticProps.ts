@@ -66,7 +66,7 @@ export const cache = {
                     return data; 
                })
                .catch(_e => {
-                    console.log("No Redis Cache Found for Params: ", params, `@key:${hash}`);
+                    if (logs) console.log("No Redis Cache Found for Params: ", params, `@key:${hash}`);
                     return null; 
                });
           return data ? JSON.parse(data) : {}; 

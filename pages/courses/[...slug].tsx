@@ -306,7 +306,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     let recordMap: ExtendedRecordMap | undefined; 
 
     recordMap = await pRetry(async () => {
-        // Only use cache during production build, not during ISR
+        // Only use cache during production build, not during ISR (Incremental Static Regeneration)
         if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
             const recordMapFromCache = await cacheClient.getRedisCache({ 
                 params: {
