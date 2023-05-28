@@ -3,7 +3,7 @@ import { getSiteMap } from "@utils/notion/getSiteMap";
 import { NotionRenderer } from "react-notion-x";
 import { InferGetStaticPropsType } from "next";
 import { NotionAPI } from 'notion-client'
-import { parsePageId, getPageTitle } from "notion-utils";
+import { parsePageId, getPageTitle, getPageBreadcrumbs } from "notion-utils";
 import { PHASE_PRODUCTION_BUILD } from 'next/constants';
 import { cache as cacheClient } from "@utils/cacheStaticProps"; 
 import pRetry from 'p-retry';
@@ -38,6 +38,7 @@ import { ECacheKey } from "common/enums/cache";
 import type { ExtendedRecordMap } from "notion-types";
 import { filterRecordMap } from "@utils/notion/filterRecordMap";
 import { validateUUID } from "@utils/common";
+import { formatNotionRoute } from "@utils/notion/formatNotionRoute";
 
 const Pdf = dynamic(
     () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf as any),
@@ -197,9 +198,16 @@ export async function getStaticPaths() {
         }
     })
 
-    const data = await cacheClient.getBuildCache({ 
+    let data = await cacheClient.getBuildCache({ 
         params: { key: "notion-sitemap" },
     });
+
+    // Get Sitemap from Redis cache if build cache doesn't have it already
+    if (!Object.keys(data).length && process.env.NODE_ENV === "development") {
+        data = await cacheClient.getRedisCache({ 
+            params: { key: ECacheKey.NOTION_SITEMAP }
+        });
+    }
 
     const courseIds = courseIdsRequest?.courseCollection?.items.map((item:ICourse) => item.notionPageId);
 
@@ -270,17 +278,45 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         });
     }
 
+    // Get Sitemap from Redis cache if build cache doesn't have it already
+    if (!Object.keys(data).length && process.env.NODE_ENV === "development") {
+        data = await cacheClient.getRedisCache({ 
+            params: { key: ECacheKey.NOTION_SITEMAP }
+        });
+    }
+
     // Attempt to retrieving notion pageId 
     let pageId = parsePageId(context.params.slug[0]);
+
+    // Attempt getting page recordMap from valid notion pageId
+    let isCache = false; 
+    let recordMap: ExtendedRecordMap | undefined; 
 
     if (data && typeof data === "object") {
         // If slug is pageId instead of human readable slug attempt redirect
         if (pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD) {
             const slug = data[pageId.replaceAll("-", '')];
-            return {
-                redirect: {
-                    destination: slug ? `/courses${slug}` : `https://code4tomorrow.notion.site/${pageId.replaceAll("-", '')}`,
-                    permanent: true
+
+            // attempt to generate a new human readable slug and page based on provided pageId
+            if (!slug) {
+                const newPageRecordMap = await notion.getPage(pageId).catch(_ => undefined);
+                if (newPageRecordMap) {
+                    const crumbs = getPageBreadcrumbs(newPageRecordMap, pageId) || []; 
+                    // const routeChunks = formatNotionRoute((crumbs).map(crumb => crumb.title.toLowerCase()));
+                    if (crumbs[0]?.pageId?.replaceAll("-", "") === config.notion.rootCoursesPageId) {
+                        // const pathname = `/${routeChunks.slice(1).join("/")}`; 
+                        recordMap = newPageRecordMap; 
+                    }
+                }
+            }
+
+            // No new page found and created
+            if (!recordMap) {
+                return {
+                    redirect: {
+                        destination: slug ? `/courses${slug}` : `https://code4tomorrow.notion.site/${pageId.replaceAll("-", '')}`,
+                        permanent: true
+                    }
                 }
             }
         }
@@ -301,10 +337,6 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         }
     } 
 
-    // Attempt getting page recordMap from valid notion pageId
-    let isCache = false; 
-    let recordMap: ExtendedRecordMap | undefined; 
-
     recordMap = await pRetry(async () => {
         // Only use cache during production build, not during ISR (Incremental Static Regeneration)
         if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
@@ -323,16 +355,18 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         } 
 
         const map = await notion.getPage(pageId, { gotOptions: { retry: 3 }});
-        if (map?.block) {
-            for (const block in map.block) {
-                const type = map.block[block]?.value?.type as string; 
-                if (["factory", "link_to_page"].includes(type)) delete map.block[block];
-           }
-        }
+    
         return map;
     },  { retries: 3, minTimeout: 1000 }).catch((e) => {
         console.log(e);
     });
+
+    if (recordMap?.block) {
+        for (const block in recordMap.block) {
+            const type = recordMap.block[block]?.value?.type as string; 
+            if (["factory", "link_to_page"].includes(type)) delete recordMap.block[block];
+       }
+    }
 
     // Downtime between page querying to prevent exceeding notion rate limit ( ~750 ms )
     if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD && !isCache) {
@@ -347,6 +381,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         await cacheClient.set({
             redisCache: process.env.NODE_ENV === "production",
             data: recordMap,
+            logs: process.env.NODE_ENV === "development",
             ttl: 60 * 60 * 24 * 30, // 30 days in seconds 
             params: { key: ECacheKey.NOTION_PAGE_RECORD_MAP, pageId }
         })
