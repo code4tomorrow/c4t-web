@@ -24,6 +24,8 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
+import { get } from '@vercel/edge-config';
+
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
 const TeacherSignUps = dynamic(() => import("@components/ModalTypes/TeacherSignUps"));
@@ -326,10 +328,18 @@ export async function getStaticProps() {
   const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
   const testimonials:ITestimonial[] = response?.testimonialCollection?.items || [];
       
+  const links = await get("links").catch((err) => {
+    console.warn("Failed to get Edge Config", err);
+    return [];
+  });
+
   return {
     props: { 
       notificationFlags,
-      testimonials
+      testimonials,
+      edgeConfig: {
+        links
+      }
     },
     // - At most once every 15 minutes
     revalidate: 60 * 15, // In seconds
