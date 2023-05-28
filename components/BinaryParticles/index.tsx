@@ -1,22 +1,29 @@
-import React, { useId } from "react";
+import React, { useCallback, useId } from "react";
+import { loadFull } from "tsparticles";
 import Particles from "react-tsparticles";
+import type { Engine } from "tsparticles-engine";
 
 const BinaryParticles = () => {
     const id = useId();
     
+    const particlesInit = useCallback(async (engine: Engine) => {
+       await loadFull(engine);
+    }, []);
+
     return (
         <Particles 
             id={`${id}-binary-particles`}
             className="z-0"
+            init={particlesInit}
+            style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+            }}
             options={{
                 fullScreen: {
                     enable: false,
                     zIndex: 0
-                },
-                style: {
-                    position: "absolute",
-                    left: "0px",
-                    top: "0px",
                 },
                 autoPlay: true,
                 fpsLimit: 60,

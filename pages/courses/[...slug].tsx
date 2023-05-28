@@ -288,36 +288,38 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     // Attempt to retrieving notion pageId 
     let pageId = parsePageId(context.params.slug[0]);
 
-    // Attempt getting page recordMap from valid notion pageId
-    let isCache = false; 
-    let recordMap: ExtendedRecordMap | undefined; 
-
     if (data && typeof data === "object") {
         // If slug is pageId instead of human readable slug attempt redirect
         if (pageId && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD) {
-            const slug = data[pageId.replaceAll("-", '')];
+            let slug = data[pageId.replaceAll("-", '')];
 
             // attempt to generate a new human readable slug and page based on provided pageId
             if (!slug) {
                 const newPageRecordMap = await notion.getPage(pageId).catch(_ => undefined);
                 if (newPageRecordMap) {
                     const crumbs = getPageBreadcrumbs(newPageRecordMap, pageId) || []; 
-                    // const routeChunks = formatNotionRoute((crumbs).map(crumb => crumb.title.toLowerCase()));
+                    const routeChunks = formatNotionRoute((crumbs).map(crumb => crumb.title.toLowerCase()));
                     if (crumbs[0]?.pageId?.replaceAll("-", "") === config.notion.rootCoursesPageId) {
-                        // const pathname = `/${routeChunks.slice(1).join("/")}`; 
-                        recordMap = newPageRecordMap; 
+                        slug = `/${routeChunks.slice(1).join("/")}`; 
+                        
+                        data[pageId.replaceAll("-", '')] = slug; 
+
+                        // update cached site map in redis
+                        await cacheClient.set({ 
+                            params: { key: ECacheKey.NOTION_SITEMAP },
+                            data,
+                            redisCache: process.env.NODE_ENV === "production",
+                            buildCache: process.env.NODE_ENV === "development"
+                        });
                     }
                 }
             }
 
-            // No new page found and created
-            if (!recordMap) {
-                return {
+            return {
                     redirect: {
                         destination: slug ? `/courses${slug}` : `https://code4tomorrow.notion.site/${pageId.replaceAll("-", '')}`,
-                        permanent: true
+                        permanent: !!slug // only permanent if human readable path is known for notion id
                     }
-                }
             }
         }
 
@@ -336,6 +338,10 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
             }
         }
     } 
+
+    // Attempt getting page recordMap from valid notion pageId
+    let isCache = false; 
+    let recordMap: ExtendedRecordMap | undefined; 
 
     recordMap = await pRetry(async () => {
         // Only use cache during production build, not during ISR (Incremental Static Regeneration)

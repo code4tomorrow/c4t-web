@@ -24,6 +24,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
+
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
 const TeacherSignUps = dynamic(() => import("@components/ModalTypes/TeacherSignUps"));
@@ -325,11 +326,11 @@ export async function getStaticProps() {
 
   const notificationFlags:INotificationFlag[] = response?.notificationFlagCollection?.items || [];
   const testimonials:ITestimonial[] = response?.testimonialCollection?.items || [];
-      
+
   return {
     props: { 
       notificationFlags,
-      testimonials
+      testimonials,
     },
     // - At most once every 15 minutes
     revalidate: 60 * 15, // In seconds
