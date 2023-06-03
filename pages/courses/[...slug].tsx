@@ -8,7 +8,7 @@ import { PHASE_PRODUCTION_BUILD } from 'next/constants';
 import { cache as cacheClient } from "@utils/cacheStaticProps"; 
 import pRetry from 'p-retry';
 import Prism from "prismjs"
-
+import { notion as notionAPI } from "@utils/notion/client";
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
@@ -37,7 +37,7 @@ import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 import { ECacheKey } from "common/enums/cache";
 import type { ExtendedRecordMap } from "notion-types";
 import { filterRecordMap } from "@utils/notion/filterRecordMap";
-import { validateUUID } from "@utils/common";
+import { addDashesToUUID, validateUUID } from "@utils/common";
 import { formatNotionRoute } from "@utils/notion/formatNotionRoute";
 
 const Pdf = dynamic(
@@ -202,6 +202,14 @@ export async function getStaticPaths() {
         params: { key: "notion-sitemap" },
     });
 
+    // If build cache exists, then replace with latest redis cache if available
+    if (!!Object.keys(data).length && process.env.NODE_ENV === "production") {
+        const redisSitemap = await cacheClient.getRedisCache({ 
+            params: { key: ECacheKey.NOTION_SITEMAP }
+        });
+        if (!!Object.keys(redisSitemap).length) data = redisSitemap; 
+    }
+
     // Get Sitemap from Redis cache if build cache doesn't have it already
     if (!Object.keys(data).length && process.env.NODE_ENV === "development") {
         data = await cacheClient.getRedisCache({ 
@@ -249,7 +257,7 @@ export async function getStaticPaths() {
     await cacheClient.set({ 
         params: { key: ECacheKey.NOTION_SITEMAP },
         data: pathMap,
-        redisCache: process.env.NODE_ENV === "production",
+        redisCache: process.env.NODE_ENV === "production" && process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD,
         buildCache: true
     });
 
@@ -364,7 +372,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     
         return map;
     },  { retries: 3, minTimeout: 1000 }).catch((e) => {
-        console.log(e);
+        console.log("Query Page Error: ", e.code);
     });
 
     if (recordMap?.block) {
@@ -374,12 +382,21 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
        }
     }
 
-    // Downtime between page querying to prevent exceeding notion rate limit ( ~750 ms )
+    // Downtime between page querying to prevent exceeding notion rate limit ( ~250 ms )
     if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD && !isCache) {
-        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 750)}); 
+        await new Promise((resolve) => { setTimeout(() => { resolve(true) }, 250)}); 
     }
 
+    // TODO: If a deleted page is restored, then cached 404 not found page will continue to display even though it shouldn't  
     if (!recordMap) {
+        if (await notionAPI.pages.retrieve({ page_id: addDashesToUUID(pageId) }).then(() => false).catch(err => {
+            return err.code === "object_not_found" || err.code === "validation_error";
+        })) {
+            return { 
+                notFound: true
+            };
+        }
+        
         throw new Error(`Failed to Query Page ${pageId}`)
     } else if (!isCache) {
         recordMap = filterRecordMap(recordMap);
