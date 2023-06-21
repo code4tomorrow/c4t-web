@@ -36,4 +36,7 @@ export const useStyles = makeStyles()(() => ({
             transform: "translate(calc(-50% + var(--x)), calc(-50% + var(--y)))"
         }
     },
+    outline: {
+        boxShadow: "inset 0px 0px 0px 2px rgba(255,255,255,0.35)"
+    }
 }))

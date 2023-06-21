@@ -27,7 +27,7 @@ import Navbar from "@components/Navbar";
 
 const BrandButton = dynamic(() => import("@components/BrandButton"));
 const Testimonials = dynamic(() => import("@components/Testimonials"));
-const TeacherSignUps = dynamic(() => import("@components/ModalTypes/TeacherSignUps"));
+// const TeacherSignUps = dynamic(() => import("@components/ModalTypes/TeacherSignUps"));
 
 const CODE_ITEMS = [ "Today.", "Websites.", "Games.", "iOS Apps." ];
 
@@ -53,7 +53,6 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
         <title>Home | C4T</title>
       </Head>
       <Navbar notificationFlags={notificationFlags}/>
-      <TeacherSignUps />
       <header className="flex flex-col space-y-6 justify-center items-center p-3">
         <h1 
           style={{ textShadow: "0px 0px 15px rgba(255,255,255,0.45)", whiteSpace: "nowrap"}} 
@@ -75,13 +74,25 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
         <h2 className="text-xl font-medium text-medium-grey text-center">
           We teach K-12 students around the globe how to code for free.
         </h2>
-        <Link href="/about" passHref legacyBehavior>
-            <BrandButton 
-              title="Learn More" 
-              label="100% free" 
+        <div className="flex space-x-3">
+          <BrandButton 
+              className="w-[130px]"
+              title="Sign Up" 
+              href={config.links.studentRegistrationLink}
               as="a"
-            />
-        </Link>
+              target={"_blank"}
+              rel="noopener noreferrer"
+              label="100% free" 
+          />
+          <Link href="/about" passHref legacyBehavior>
+              <BrandButton 
+                variant="default"
+                className={clsx("w-[130px]")}
+                title="Learn More" 
+                as="a"
+              />
+          </Link>
+        </div>
       </header>
       <Animate>
       <main ref={mainRef} className="p-3 mt-10 space-y-32 flex flex-col items-center">
@@ -156,7 +167,7 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                    ref={sessionRef}
                    className="transition-transform duration-500"
                 >
-                  <h1 className="text-white text-4xl md:text-5xl font-extrabold">C4T&apos;s Summer Registration Opening Soon</h1>
+                  <h1 className="text-white text-4xl md:text-5xl font-extrabold">C4T&apos;s Summer Registration is Open Now!</h1>
                 </Animate.Element>
                 <Animate.Element
                   ref={sessionRef}
@@ -166,20 +177,19 @@ const Home : NextPageWithLayout<InferGetServerSidePropsType<typeof getStaticProp
                 >
                   <div className="space-y-3 md:max-w-[75%] text-lg">
                     <p className="text-medium-grey">
-                        C4T&apos;s summer session registration is almost here! Learn languages like Python, Java, and more—all for free!&nbsp;
+                        C4T&apos;s summer session registration is here! Learn languages like Python, Java, and more—all for free!&nbsp;
                         <Link href="/courses" className="underline hover:opacity-75 transition-opacity">View Courses.</Link>
                     </p>
                     <p className="text-medium-grey">
-                       Visit frequently to know when signs ups open.
+                       Sign up quickly while spots are available.
                     </p>
                   </div>
                 </Animate.Element>
                 <BrandButton 
                   containerClass="mr-auto" 
                   title="Sign Up" 
-                  disabled
-                  label="Coming Soon!" 
-                  href="/"
+                  label="100% free" 
+                  href={config.links.studentRegistrationLink}
                   as="a"
                   target={"_blank"}
                   rel="noopener noreferrer"
