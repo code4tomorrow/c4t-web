@@ -37,7 +37,7 @@ import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 import { ECacheKey } from "common/enums/cache";
 import type { ExtendedRecordMap } from "notion-types";
 import { filterRecordMap } from "@utils/notion/filterRecordMap";
-import { addDashesToUUID, validateUUID } from "@utils/common";
+import { addDashesToUUID, convertUUIDToBase64Compressed, validateUUID } from "@utils/common";
 import { formatNotionRoute } from "@utils/notion/formatNotionRoute";
 
 const Pdf = dynamic(
@@ -309,6 +309,10 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
                     const routeChunks = formatNotionRoute((crumbs).map(crumb => crumb.title.toLowerCase()));
                     if (crumbs[0]?.pageId?.replaceAll("-", "") === config.notion.rootCoursesPageId) {
                         slug = `/${routeChunks.slice(1).join("/")}`; 
+                        
+                        // if human-readable slug already exists for some other page, begin slug with a compressed UUID to make the slug unique 
+                        const inverseObject = invert(data);
+                        if (!!inverseObject[slug]) slug = `/${convertUUIDToBase64Compressed(pageId)}${slug}`;
                         
                         data[pageId.replaceAll("-", '')] = slug; 
 

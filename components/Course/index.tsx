@@ -16,7 +16,9 @@ const Course : React.FC<CourseProps> = ({ course }) => {
     const { classes } = useStyles();
 
     const notionLink = useMemo(() => {
-        return process.env.NODE_ENV === "development" ? course.notionPageId : course.notionSlug;
+        return process.env.NODE_ENV === "development" ? 
+            course.notionPageId!
+            : course.notionSlug;
     }, [ course ])
 
     const link = useMemo(() => {
