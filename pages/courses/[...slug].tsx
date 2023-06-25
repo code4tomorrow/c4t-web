@@ -97,14 +97,6 @@ const PageLink : React.FC<HTMLProps<HTMLAnchorElement>> = ({ href, ...props }) =
     );
 }
 
-// const CloudinaryImage : React.FC<ImageProps> = ({ ...props }) => {
-//     return (
-//         process.env.NODE_ENV === "production" && props.src.toString().startsWith("https://images.unsplash.com") ? (
-//             <Image loader={cloudinaryExternalLoader} { ...props }/>
-//         ) : <Image { ...props }/>
-//     )
-// }
-
 const CustomImage : React.FC<ImageProps> = ({ ...props }) => {
     return (
         process.env.NODE_ENV === "production" && props.src.toString().includes("amazonaws.com") ? (
