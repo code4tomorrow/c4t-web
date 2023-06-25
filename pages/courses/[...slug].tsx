@@ -329,7 +329,9 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
 
         // Else if slug is human readable and not pageId, attempt to retrieve pageId from cache
         const inverseObject = invert(data);
-        const blockId = inverseObject[encodeURI(`/${context.params.slug.join('/')}`)];
+        const slug = `/${context.params.slug.join('/')}`; 
+        const encodedURI = decodeURIComponent(slug) === slug ? encodeURI(slug) : slug; 
+        const blockId = inverseObject[encodedURI];
         if(!!blockId) pageId = blockId;
     }
 
