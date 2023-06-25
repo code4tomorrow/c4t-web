@@ -71,7 +71,8 @@
     "tsparticles": "^2.9.3",
     "tss-react": "^3.7.0",
     "use-debounce": "^8.0.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "uuid-base64": "^1.0.0"
   },
   "devDependencies": {
     "@emotion/server": "^11.4.0",
