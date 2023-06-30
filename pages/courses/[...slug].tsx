@@ -37,7 +37,7 @@ import { getPreviewImageMap } from "@utils/notion/getPreviewImageMap";
 import { ECacheKey } from "common/enums/cache";
 import type { ExtendedRecordMap } from "notion-types";
 import { filterRecordMap } from "@utils/notion/filterRecordMap";
-import { addDashesToUUID, convertUUIDToBase64Compressed, validateUUID } from "@utils/common";
+import { addDashesToUUID, convertCompressedBase64ToUUID, convertUUIDToBase64Compressed, validateUUID } from "@utils/common";
 import { formatNotionRoute } from "@utils/notion/formatNotionRoute";
 
 const Pdf = dynamic(
@@ -286,7 +286,8 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     }
 
     // Attempt to retrieving notion pageId 
-    let pageId = parsePageId(context.params.slug[0]);
+    let pageId : string | null = parsePageId(context.params.slug[0]);
+    if (!pageId) pageId = convertCompressedBase64ToUUID(context.params.slug[0]);
 
     if (data && typeof data === "object") {
         // If slug is pageId instead of human readable slug attempt redirect
@@ -330,7 +331,15 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
         // Else if slug is human readable and not pageId, attempt to retrieve pageId from cache
         const inverseObject = invert(data);
         const slug = `/${context.params.slug.join('/')}`; 
-        const encodedURI = decodeURIComponent(slug) === slug ? encodeURI(slug) : slug; 
+   
+        let encodedURI; 
+
+        try {
+            encodedURI = decodeURIComponent(slug) === slug ? encodeURI(slug) : slug; 
+        } catch {
+            encodedURI = encodeURI(slug);
+        }
+
         const blockId = inverseObject[encodedURI];
         if(!!blockId) pageId = blockId;
     }
@@ -366,7 +375,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
     
         } 
 
-        const map = await notion.getPage(pageId, { gotOptions: { retry: 3 }});
+        const map = await notion.getPage(pageId!, { gotOptions: { retry: 3 }});
     
         return map;
     },  { retries: 3, minTimeout: 1000 }).catch((e) => {
@@ -387,7 +396,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
 
     // TODO: If a deleted page is restored, then cached 404 not found page will continue to display even though it shouldn't  
     if (!recordMap) {
-        if (await notionAPI.pages.retrieve({ page_id: addDashesToUUID(pageId) }).then(() => false).catch(err => {
+        if (await notionAPI.pages.retrieve({ page_id: addDashesToUUID(pageId!) }).then(() => false).catch(err => {
             return err.code === "object_not_found" || err.code === "validation_error";
         })) {
             return { 
@@ -404,7 +413,7 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
             data: recordMap,
             logs: process.env.NODE_ENV === "development",
             ttl: 60 * 60 * 24 * 30, // 30 days in seconds 
-            params: { key: ECacheKey.NOTION_PAGE_RECORD_MAP, pageId }
+            params: { key: ECacheKey.NOTION_PAGE_RECORD_MAP, pageId: pageId! }
         })
     }
 

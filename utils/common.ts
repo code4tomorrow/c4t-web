@@ -1,3 +1,4 @@
+import { parsePageId } from "notion-utils";
 import base64 from "uuid-base64";
 
 export const validateUUID = (value: string): boolean => {
@@ -11,3 +12,10 @@ export const addDashesToUUID = (i: string): string => {
 export const convertUUIDToBase64Compressed = (i : string) : string => {
     return base64.encode(i).replaceAll(".", "-");
 }
+
+export const convertCompressedBase64ToUUID = (i : string) : string | null => {
+    i = i.replaceAll("-", ".");
+    i = base64.decode(i);
+    i = parsePageId(i);
+    return i;  
+}   
