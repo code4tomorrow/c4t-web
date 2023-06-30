@@ -14,6 +14,6 @@ export const formatNotionRoute = (route: string[]) => {
             result = result.slice(0, -1);
         }
 
-        return result ? encodeURIComponent(result) : encodeURI(directory);
+        return result ? encodeURIComponent(result) : encodeURI(directory.replaceAll(/\//g, 'slash'));
     });
 }
