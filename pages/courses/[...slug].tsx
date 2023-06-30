@@ -422,10 +422,18 @@ export async function getStaticProps(context: { params: { slug:string[] }}) {
             }), {}) 
     }
 
-    // Get placeholder images 
     if (recordMap) {
+        // Get placeholder images 
         const previewImageMap = await getPreviewImageMap(recordMap);
         (recordMap as any).preview_images = previewImageMap
+
+        // manually overrides replaces C# with csharp to fix code highlighting bug 
+        for (const blockId in recordMap.block) {
+            if (recordMap.block[blockId]?.value?.type != "code") continue;
+            const language = recordMap.block[blockId].value.properties?.language?.[0]?.[0]
+           
+            if (language === "C#") recordMap.block[blockId].value.properties.language[0][0] = "csharp";
+        }
     }
 
     return {
