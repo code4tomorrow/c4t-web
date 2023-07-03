@@ -1,1 +1,1 @@
-declare module 'prismjs/components/prism-swift.js'
+declare module "prismjs/components/prism-swift.js";

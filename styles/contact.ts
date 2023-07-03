@@ -11,7 +11,7 @@ export const useStyles = makeStyles()(() => ({
         transform: "rotate(180deg) translateZ(0) translateY(100%)",
         borderRadius: "40%",
         minHeight: 200,
-        backgroundImage: "linear-gradient( 90deg, #5A4CAD 25%,  #0B6455 75% )"
+        backgroundImage: "linear-gradient( 90deg, #5A4CAD 25%,  #0B6455 75% )",
     },
     gradientBubbleBottom: {
         position: "absolute",
@@ -24,6 +24,6 @@ export const useStyles = makeStyles()(() => ({
         transform: "translate3d(0, 100%, 0)",
         borderRadius: "40%",
         minHeight: 200,
-        backgroundImage: "linear-gradient( 90deg, #5A4CAD 25%,  #0B6455 75% )"
-    }
-}))
+        backgroundImage: "linear-gradient( 90deg, #5A4CAD 25%,  #0B6455 75% )",
+    },
+}));

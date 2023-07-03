@@ -2,32 +2,32 @@ import { Document } from "@contentful/rich-text-types";
 import { EJobFaction } from "common/enums/job";
 
 export interface IJobPreview {
-    title?: string; 
+    title?: string;
     sys?: {
-        id?: string; 
-    },
-    faction?: EJobFaction; 
+        id?: string;
+    };
+    faction?: EJobFaction;
     realLifeJobs?: string[];
 }
 
 export interface IJob extends IJobPreview {
     description?: {
-        json: Document
-    },
+        json: Document;
+    };
     realLifeJobConnection?: {
-        json: Document
-    },
+        json: Document;
+    };
     responsibilities?: {
-        json?: Document
-    },
+        json?: Document;
+    };
     skills?: {
-        json?: Document
-    }
+        json?: Document;
+    };
 }
 export interface IInternship extends Omit<IJob, "faction"> {
     timeCommitment?: {
-        json: Document
-    },
-    startDate?: string; 
+        json: Document;
+    };
+    startDate?: string;
     endDate?: string;
 }

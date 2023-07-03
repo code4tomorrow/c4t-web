@@ -14,7 +14,7 @@ export const useStyles = makeStyles()(() => ({
             height: "100%",
             top: 0,
             width: "0%",
-            backgroundColor: 'transparent',
+            backgroundColor: "transparent",
             position: "absolute",
             pointerEvents: "none",
         },
@@ -23,7 +23,7 @@ export const useStyles = makeStyles()(() => ({
         },
         "&::after": {
             right: 0,
-        }
+        },
     },
     student: {
         "&::after": {
@@ -37,8 +37,8 @@ export const useStyles = makeStyles()(() => ({
             position: "absolute",
             left: "0%",
             top: "0%",
-            transform: "translate(-45%, -45%) rotateZ(-35deg)"
-        }
+            transform: "translate(-45%, -45%) rotateZ(-35deg)",
+        },
     },
     cardContainer: {
         position: "relative",
@@ -56,6 +56,6 @@ export const useStyles = makeStyles()(() => ({
             backgroundSize: "500px",
             right: 0,
             backgroundColor: "rgba(0,0,0,0.25)",
-        }
-    }
+        },
+    },
 }));

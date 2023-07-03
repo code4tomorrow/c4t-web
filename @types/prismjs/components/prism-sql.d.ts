@@ -1,1 +1,1 @@
-declare module 'prismjs/components/prism-sql.js'
+declare module "prismjs/components/prism-sql.js";

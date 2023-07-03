@@ -5,5 +5,5 @@ export enum Pages {
     VOLUNTEER = "/volunteer",
     ABOUT = "/about",
     JOBBOARD = "/jobs",
-    CONTACT = "/contact"
+    CONTACT = "/contact",
 }

@@ -1,1 +1,1 @@
-declare module 'prismjs/components/prism-objectivec.js'
+declare module "prismjs/components/prism-objectivec.js";

@@ -1,34 +1,44 @@
+import React from "react";
 import Paper from "@components/Paper";
-import React, { useMemo } from "react";
 import QuoteSVG from "@svg/quote.svg";
 import { StarIcon as StarIconSolid } from "@heroicons/react/solid";
 import clsx from "clsx";
 import { useStyles } from "./styles";
 import { ITestimonial } from "common/interfaces/testimonial";
-import { ETestimonialType } from "common/enums/testimonial";
 
-const TestimonialsCard = ({ testimonial, selected } : { testimonial: ITestimonial, selected:boolean }) => {
+const TestimonialsCard = ({
+    testimonial,
+    selected,
+}: {
+    testimonial: ITestimonial;
+    selected: boolean;
+}) => {
     const { classes } = useStyles();
 
-    const isStudent = useMemo(() => 
-        testimonial.type && testimonial.type === ETestimonialType.STUDENT, 
-    [ testimonial ]);
+    // const isStudent = useMemo(
+    //   () => testimonial.type && testimonial.type === ETestimonialType.STUDENT,
+    //   [testimonial]
+    // );
 
     return (
         <div>
-            <Paper containerClass={clsx(
-                "min-w-[350px] !overflow-visible transition-all duration-300 flex mx-8 flex-col p-5 z-10 space-y-3 justify-center items-center min-h-[275px]",
-                classes.cardContainer,
-                // isStudent && classes.student,
-                selected && "-translate-y-[25px]"
-            )}>
+            <Paper
+                containerClass={clsx(
+                    "min-w-[350px] !overflow-visible transition-all duration-300 flex mx-8 flex-col p-5 z-10 space-y-3 justify-center items-center min-h-[275px]",
+                    classes.cardContainer,
+                    // isStudent && classes.student,
+                    selected && "-translate-y-[25px]"
+                )}
+            >
                 <QuoteSVG width={50} fill="#7892EE" />
                 <div className="flex">
-                    {
-                        new Array(testimonial.rating).fill(0).map((_, i) => (
-                            <StarIconSolid key={i} className="text-yellow-500" width={20} />
-                        ))
-                    }
+                    {new Array(testimonial.rating).fill(0).map((_, i) => (
+                        <StarIconSolid
+                            key={i}
+                            className="text-yellow-500"
+                            width={20}
+                        />
+                    ))}
                 </div>
                 <blockquote className="text-medium-grey !mb-3 text-center text-lg">
                     &quot;{testimonial.text}&quot;
@@ -38,7 +48,7 @@ const TestimonialsCard = ({ testimonial, selected } : { testimonial: ITestimonia
                 </p>
             </Paper>
         </div>
-    )
-}
+    );
+};
 
 export default TestimonialsCard;
