@@ -106,20 +106,6 @@ const JobBoard: NextPageWithLayout<
     const jobsContainerRef = useRef<HTMLDivElement | null>(null);
     const jobPreviewContainerRef = useRef<HTMLDivElement | null>(null);
 
-    const extraPadding = useMemo(() => {
-        if (!jobPreviewContainerRef.current || !jobsContainerRef.current)
-            return 0;
-
-        const { height: heightOne } =
-            jobPreviewContainerRef.current.getBoundingClientRect();
-        const { height: heightTwo } =
-            jobsContainerRef.current.getBoundingClientRect();
-
-        return Math.abs(heightOne - heightTwo);
-    }, [jobPreviewContainerRef, jobsContainerRef, jobId, jobPages]);
-
-    console.log(extraPadding);
-
     return (
         <div
             style={{ width: "100vw" }}

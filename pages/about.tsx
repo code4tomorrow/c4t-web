@@ -336,6 +336,16 @@ const About: NextPageWithLayout<AboutProps> = ({
                         >
                             <div className="w-full">
                                 <Image
+                                    draggable={false}
+                                    quality={100}
+                                    priority={true}
+                                    loader={cloudinaryLoader}
+                                    objectFit={"cover"}
+                                    alt="Graduated Kids"
+                                    src={"graduated-kids"}
+                                    loading="eager"
+                                    width={800}
+                                    height={800}
                                     style={{
                                         clipPath: `url(#svgPath)`,
                                         WebkitClipPath: `url(#svgPath)`,
@@ -344,19 +354,9 @@ const About: NextPageWithLayout<AboutProps> = ({
                                         WebkitUserSelect: "none",
                                         backfaceVisibility: "hidden",
                                         WebkitBackfaceVisibility: "hidden",
-                                    }}
-                                    draggable={false}
-                                    quality={100}
-                                    priority={true}
-                                    loader={cloudinaryLoader}
-                                    objectFit={"cover"}
-                                    alt="Graduated Kids"
-                                    src={"graduated-kids"}
-                                    layout="intrinsic"
-                                    loading="eager"
-                                    width={800}
-                                    height={800}
-                                />
+                                        maxWidth: "100%",
+                                        height: "auto"
+                                    }} />
                             </div>
                         </Animate.Scrub>
                     </section>

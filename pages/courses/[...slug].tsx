@@ -116,9 +116,23 @@ const PageLink: React.FC<HTMLProps<HTMLAnchorElement>> = ({
 const CustomImage: React.FC<ImageProps> = ({ ...props }) => {
     return process.env.NODE_ENV === "production" &&
         props.src.toString().includes("amazonaws.com") ? (
-        <Image {...props} unoptimized />
+        <Image
+            {...props}
+            unoptimized
+            style={{
+                maxWidth: "100%",
+                height: "auto",
+            }}
+        />
     ) : (
-        <Image {...props} priority />
+        <Image
+            {...props}
+            priority
+            style={{
+                maxWidth: "100%",
+                height: "auto",
+            }}
+        />
     );
 };
 
@@ -154,7 +168,7 @@ const NotionCourse: React.FC<
             className="flex flex-col w-screen min-h-screen items-center bg-dark-grey-primary"
         >
             <Head>
-                <title>{title} | C4T</title>
+                <title>{`${title} | C4T`}</title>
                 <link
                     rel="canonical"
                     href={`https://www.code4tomorrow.org${router.asPath}`}

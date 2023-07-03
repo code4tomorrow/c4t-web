@@ -133,7 +133,7 @@ const ContactPage: NextPageWithLayout<ContactProps> = ({
                 departmentContacts[emblaAPI.selectedScrollSnap()].sys.id
             );
         });
-    }, [emblaAPI]);
+    }, [emblaAPI, departmentContacts]);
 
     const handleContactClick = (index: number) => (id: string) => {
         setDepartmentId(id);

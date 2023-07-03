@@ -14,6 +14,7 @@
                 "caughtErrorsIgnorePattern": "^_"
             }
         ],
-        "@typescript-eslint/no-var-requires": "warn"
+        "@typescript-eslint/no-var-requires": "warn",
+        "@typescript-eslint/no-non-null-assertion": "off"
     }
 }
