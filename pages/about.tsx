@@ -355,8 +355,9 @@ const About: NextPageWithLayout<AboutProps> = ({
                                         backfaceVisibility: "hidden",
                                         WebkitBackfaceVisibility: "hidden",
                                         maxWidth: "100%",
-                                        height: "auto"
-                                    }} />
+                                        height: "auto",
+                                    }}
+                                />
                             </div>
                         </Animate.Scrub>
                     </section>

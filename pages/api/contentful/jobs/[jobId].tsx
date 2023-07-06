@@ -28,7 +28,7 @@ const jobQuery = gql`
     }
 `;
 
-const CACHE_TTL = 60 * 10;
+const CACHE_TTL = 60 * 1; // 60 seconds
 
 export default async function handler(req: NextRequest, _ctx: NextFetchEvent) {
     const jobId = req.nextUrl.searchParams.get("jobId");
