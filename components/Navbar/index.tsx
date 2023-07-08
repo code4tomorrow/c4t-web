@@ -84,7 +84,10 @@ const NavListItem = React.forwardRef<ILink[], NavListItemProps>(
 
         const { classes } = useStyles();
 
-        const isActive = useMemo(() => href === router.pathname, [href, router.pathname]);
+        const isActive = useMemo(
+            () => href === router.pathname,
+            [href, router.pathname]
+        );
 
         return (
             <Link href={{ pathname: href }} legacyBehavior>
@@ -222,7 +225,6 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
     }, []);
 
     useEffect(() => {
-        console.log("remounting");
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [handleScroll]);
@@ -230,9 +232,9 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
     return (
         <>
             <div
-                style={{ 
+                style={{
                     transition: "opacity 200ms ease",
-                    backdropFilter: "blur(10px)"
+                    backdropFilter: "blur(10px)",
                 }}
                 className={clsx(
                     "fixed z-50 top-0 border-[rgba(255,255,255,0.1)] border-[1px] border-solid cursor-pointer hidden pointer-events-none md:poinster-events-auto md:block rounded-md bg-white bg-opacity-5 left-0 right-0",
