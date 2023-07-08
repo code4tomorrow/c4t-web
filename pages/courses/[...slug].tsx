@@ -113,25 +113,27 @@ const PageLink: React.FC<HTMLProps<HTMLAnchorElement>> = ({
     );
 };
 
-const CustomImage: React.FC<ImageProps> = ({ ...props }) => {
+const CustomImage: React.FC<ImageProps> = ({ alt, ...props }) => {
     return process.env.NODE_ENV === "production" &&
         props.src.toString().includes("amazonaws.com") ? (
         <Image
-            {...props}
+            alt={alt}
             unoptimized
             style={{
                 maxWidth: "100%",
                 height: "auto",
             }}
+            {...props}
         />
     ) : (
         <Image
-            {...props}
+            alt={alt}
             priority
             style={{
                 maxWidth: "100%",
                 height: "auto",
             }}
+            {...props}
         />
     );
 };

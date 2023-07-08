@@ -20,7 +20,7 @@ const jobPreviewQuery = gql`
     }
 `;
 
-const CACHE_TTL = 60 * 10;
+const CACHE_TTL = 60 * 1; // 60 seconds
 
 export default async function handler(req: NextRequest, _ctx: NextFetchEvent) {
     const limit = parseInt(req.nextUrl.searchParams.get("limit") || "5");

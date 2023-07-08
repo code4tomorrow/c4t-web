@@ -26,6 +26,8 @@ const Animate: React.FC<AnimateProps> = ({ children }) => {
         setViewportWidth(window.innerWidth);
     }, []);
 
+    const [hasScrolled, setHasScrolled] = useState(false);
+
     const handleResetScrollTrigger = useCallback(() => {
         ScrollTrigger.refresh();
     }, []);
@@ -44,6 +46,21 @@ const Animate: React.FC<AnimateProps> = ({ children }) => {
     useEffect(() => {
         ScrollTrigger.refresh();
     }, []);
+
+    const handleResetScrollTriggerOnScroll = useCallback(() => {
+        ScrollTrigger.refresh();
+        setHasScrolled(true);
+    }, []);
+
+    useEffect(() => {
+        if (!hasScrolled)
+            window.addEventListener("scroll", handleResetScrollTriggerOnScroll);
+        return () =>
+            window.removeEventListener(
+                "scroll",
+                handleResetScrollTriggerOnScroll
+            );
+    }, [handleResetScrollTriggerOnScroll, hasScrolled]);
 
     useEffect(() => {
         window.addEventListener("resize", handleResize);

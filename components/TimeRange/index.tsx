@@ -32,11 +32,11 @@ const TimeRange: React.FC<ITimeRange> = ({ startDate, endDate }) => {
 
     const startDateFormatted = useMemo(
         () => getFormattedDate(startDate),
-        [startDate]
+        [startDate, getFormattedDate]
     );
     const endDateFormatted = useMemo(
         () => getFormattedDate(endDate),
-        [endDate]
+        [endDate, getFormattedDate]
     );
 
     return (

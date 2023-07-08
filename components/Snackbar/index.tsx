@@ -66,7 +66,7 @@ const Snack: React.FC<{ children: ReactNode; i: number; id: string }> = ({
         return () => {
             tl.kill();
         };
-    }, [id]);
+    }, [id, setSnackbar]);
 
     return (
         <div

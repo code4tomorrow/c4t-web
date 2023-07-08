@@ -37,7 +37,7 @@ const internshipsQuery = gql`
     }
 `;
 
-const CACHE_TTL = 60 * 1 // 60 seconds;
+const CACHE_TTL = 60 * 1; // 60 seconds;
 
 export default async function handler(
     req: NextApiRequest,
