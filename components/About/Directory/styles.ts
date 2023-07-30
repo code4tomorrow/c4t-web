@@ -5,14 +5,14 @@ export const useStyles = makeStyles()(() => ({
         "&::-webkit-scrollbar": {
             width: 0,
             height: 3,
-            backgroundColor: "transparent"
+            backgroundColor: "transparent",
         },
         "@media (max-width: 1280px)": {
             "&::-webkit-scrollbar-thumb": {
                 backgroundColor: "rgba(255,255,255,0.25)",
-                borderRadius: 3
-            }
-        }
+                borderRadius: 3,
+            },
+        },
     },
     thead: {
         boxShadow: "0px 5px 7.5px 3px #202124",
@@ -21,8 +21,8 @@ export const useStyles = makeStyles()(() => ({
         "& *::-webkit-scrollbar": {
             width: 0,
             height: 0,
-            backgroundColor: "transparent"
-        }
+            backgroundColor: "transparent",
+        },
     },
     cell: {
         overflow: "auto",
@@ -39,7 +39,7 @@ export const useStyles = makeStyles()(() => ({
         "&::-webkit-scrollbar": {
             width: 0,
             height: 0,
-            backgroundColor: "transparent"
-        }
-    }
-}))
+            backgroundColor: "transparent",
+        },
+    },
+}));

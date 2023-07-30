@@ -20,6 +20,6 @@ export const useStyles = makeStyles()(() => ({
             transition: "100ms ease",
             strokeDasharray: 0,
             strokeDashoffset: 0,
-        }
+        },
     },
 }));

@@ -20,7 +20,7 @@ export const useStyles = makeStyles()(() => ({
             right: 0,
             height: 2,
             background: "rgba(0,0,0,0.25)",
-            borderRadius: "5px"
+            borderRadius: "5px",
         },
         "&::after": {
             content: "''",
@@ -29,11 +29,16 @@ export const useStyles = makeStyles()(() => ({
             top: 0,
             width: "var(--size)",
             height: "var(--size)",
-            background: "radial-gradient(circle closest-side, rgba(255,255,255,0.2), transparent)",
+            background:
+                "radial-gradient(circle closest-side, rgba(255,255,255,0.2), transparent)",
             transition: "height 200ms ease",
             borderRadius: "50%",
             position: "absolute",
-            transform: "translate(calc(-50% + var(--x)), calc(-50% + var(--y)))"
-        }
+            transform:
+                "translate(calc(-50% + var(--x)), calc(-50% + var(--y)))",
+        },
     },
-}))
+    outline: {
+        boxShadow: "inset 0px 0px 0px 2px rgba(255,255,255,0.35)",
+    },
+}));

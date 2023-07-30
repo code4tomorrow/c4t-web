@@ -13,7 +13,7 @@ export const useStyles = makeStyles()(() => ({
             position: "absolute",
             boxShadow: `-50px -25px 175px 0px rgba(94, 158, 255, 0.35),    
                         50px -25px 175px 0px rgba(227, 146, 255, 0.35)`,
-        }
+        },
     },
     blinkingCursor: {
         opacity: 0,
@@ -28,6 +28,6 @@ export const useStyles = makeStyles()(() => ({
             "100%": {
                 opacity: 1,
             },
-        } 
-    }
-}))
+        },
+    },
+}));

@@ -1,1 +1,1 @@
-declare module "@ibm-watson/assistant-web-chat-react"
+declare module "@ibm-watson/assistant-web-chat-react";

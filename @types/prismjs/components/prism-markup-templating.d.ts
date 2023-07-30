@@ -1,1 +1,1 @@
-declare module 'prismjs/components/prism-markup-templating.js'
+declare module "prismjs/components/prism-markup-templating.js";

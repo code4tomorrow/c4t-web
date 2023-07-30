@@ -4,39 +4,46 @@ import { useStyles } from "./styles";
 import clsx from "clsx";
 
 interface NextImageProps extends ImageProps {
-    fallbackSrc?: string; 
+    fallbackSrc?: string;
     transitionBlur?: boolean;
 }
 
-const NextImage : React.FC<NextImageProps> = ({ 
-    src, 
-    alt, 
-    fallbackSrc, 
-    transitionBlur = false, className, ...props 
+const NextImage: React.FC<NextImageProps> = ({
+    src,
+    alt,
+    fallbackSrc,
+    transitionBlur = false,
+    className,
+    ...props
 }) => {
-    const [ currentSrc, setCurrentSrc ] = useState(src);
+    const [currentSrc, setCurrentSrc] = useState(src);
     const [loaded, setLoaded] = useState(false);
 
-    useEffect(() => { setCurrentSrc(src)}, [ src ]);
+    useEffect(() => {
+        setCurrentSrc(src);
+    }, [src]);
 
     const { classes } = useStyles();
 
     return (
-        <Image 
+        <Image
             alt={alt}
             src={currentSrc}
             className={clsx(
                 className,
-                loaded && transitionBlur ? classes.unblur : '',
+                loaded && transitionBlur ? classes.unblur : ""
             )}
             onLoadingComplete={() => setLoaded(true)}
             onError={() => {
-                console.error(`%cImage Resource Not Found: ${src}`, "color:red");
+                console.error(
+                    `%cImage Resource Not Found: ${src}`,
+                    "color:red"
+                );
                 if (fallbackSrc) setCurrentSrc(fallbackSrc);
             }}
-            { ...props }
+            {...props}
         />
-    )
-}
+    );
+};
 
-export default NextImage; 
+export default NextImage;

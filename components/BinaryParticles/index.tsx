@@ -5,13 +5,13 @@ import type { Engine } from "tsparticles-engine";
 
 const BinaryParticles = () => {
     const id = useId();
-    
+
     const particlesInit = useCallback(async (engine: Engine) => {
-       await loadFull(engine);
+        await loadFull(engine);
     }, []);
 
     return (
-        <Particles 
+        <Particles
             id={`${id}-binary-particles`}
             className="z-0"
             init={particlesInit}
@@ -23,7 +23,7 @@ const BinaryParticles = () => {
             options={{
                 fullScreen: {
                     enable: false,
-                    zIndex: 0
+                    zIndex: 0,
                 },
                 autoPlay: true,
                 fpsLimit: 60,
@@ -37,44 +37,52 @@ const BinaryParticles = () => {
                         out_mode: "out",
                         random: false,
                         speed: 1,
-                        straight: true
+                        straight: true,
                     },
-                    number: { density: { enable: true, area: 800 }, value: 100 },
+                    number: {
+                        density: { enable: true, area: 800 },
+                        value: 100,
+                    },
                     opacity: {
-                    animation: { enable: true, minimumValue: 0.5, speed: 1, sync: false },
-                    random: false,
-                    value: 1
+                        animation: {
+                            enable: true,
+                            minimumValue: 0.5,
+                            speed: 1,
+                            sync: false,
+                        },
+                        random: false,
+                        value: 1,
                     },
                     shape: {
-                    character: [
-                        {
-                        fill: true,
-                        font: "Verdana",
-                        style: "",
-                        value: "0".split(""),
-                        weight: "400"
-                        },
-                        {
-                        fill: true,
-                        font: "Verdana",
-                        style: "",
-                        value: "1".split(""),
-                        weight: "400"
-                        }
-                    ],
-                    polygon: { nb_sides: 5 },
-                    stroke: { color: "random", width: 1 },
-                    type: "char"
+                        character: [
+                            {
+                                fill: true,
+                                font: "Verdana",
+                                style: "",
+                                value: "0".split(""),
+                                weight: "400",
+                            },
+                            {
+                                fill: true,
+                                font: "Verdana",
+                                style: "",
+                                value: "1".split(""),
+                                weight: "400",
+                            },
+                        ],
+                        polygon: { nb_sides: 5 },
+                        stroke: { color: "random", width: 1 },
+                        type: "char",
                     },
                     size: {
                         random: { minimumValue: 6, enable: true },
-                        value: 12
-                    }
+                        value: 12,
+                    },
                 },
-                detectRetina: true
+                detectRetina: true,
             }}
         />
-    )
-}
+    );
+};
 
 export default BinaryParticles;

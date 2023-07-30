@@ -1,1 +1,1 @@
-declare module 'prismjs/components/prism-c.js'
+declare module "prismjs/components/prism-c.js";
