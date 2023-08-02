@@ -1,8 +1,8 @@
 import { ETestimonialType } from "common/enums/testimonial";
 
 export interface ITestimonial {
-    text?: string; 
+    text?: string;
     rating?: number;
-    attestant?: string; 
-    type?: ETestimonialType; 
+    attestant?: string;
+    type?: ETestimonialType;
 }

@@ -1,7 +1,7 @@
 export interface INotificationFlag {
-    type: string; 
+    type: string;
     notification?: {
-        json?: any
-    },
-    link?: string 
+        json?: any;
+    };
+    link?: string;
 }

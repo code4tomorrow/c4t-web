@@ -1,1 +1,1 @@
-declare module 'prismjs/components/prism-markdown.js'
+declare module "prismjs/components/prism-markdown.js";

@@ -9,11 +9,11 @@ export const useStyles = makeStyles()(() => ({
         "@media (max-width: 500px)": {
             width: "calc(100% - 30px)",
             right: 15,
-            left: 15
-        }
+            left: 15,
+        },
     },
     linkContainer: {
-        transition: "150ms ease opacity"
+        transition: "150ms ease opacity",
     },
     link: {
         transition: "150ms ease background",
@@ -24,19 +24,19 @@ export const useStyles = makeStyles()(() => ({
             paddingRight: 10,
             "&:hover": {
                 background: "rgba(255,255,255,0.075)",
-            }
-        }
+            },
+        },
     },
     linkActive: {
         "@media (max-width: 767px)": {
             background: "rgba(255,255,255,0.075)",
-        }
+        },
     },
     barsContainer: {
         "&:hover > span": {
             opacity: 0.85,
         },
-        "span": {
+        span: {
             transformOrigin: "center right",
             transition: "all 250ms ease",
             display: "block",
@@ -44,7 +44,7 @@ export const useStyles = makeStyles()(() => ({
             height: 2,
             width: 17,
             borderRadius: 5,
-        }
+        },
     },
     mobileNavOpen: {
         "span:nth-of-type(1)": {
@@ -57,10 +57,10 @@ export const useStyles = makeStyles()(() => ({
         "span:nth-of-type(3)": {
             transformOrigin: "center right",
             transform: "rotate(45deg)",
-        }
+        },
     },
     notificationDot: {
-        position: 'relative',
+        position: "relative",
         "&::before": {
             content: "''",
             width: "100%",
@@ -81,8 +81,8 @@ export const useStyles = makeStyles()(() => ({
                 transform: "scale(2.5)",
             },
             "100%": {
-                backgroundColor: "rgba(0,0,0,0)"
-            }
-        }
+                backgroundColor: "rgba(0,0,0,0)",
+            },
+        },
     },
-}))
+}));

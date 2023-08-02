@@ -17,6 +17,6 @@ export const useStyles = makeStyles()(() => ({
             backgroundSize: "400px",
             right: 0,
             backgroundColor: "rgba(0,0,0,0.25)",
-        }
-    }
+        },
+    },
 }));

@@ -3,10 +3,10 @@ import { makeStyles } from "tss-react/mui";
 export const useStyles = makeStyles({ name: "job" })(() => ({
     previewContainer: {
         transition: "box-shadow 250ms ease",
-        boxShadow: "none"
+        boxShadow: "none",
     },
     previewContainerSelected: {
-        boxShadow: `0px 0px 0px 2px #7892EE !important`
+        boxShadow: `0px 0px 0px 2px #7892EE !important`,
     },
     fullJobHeader: {
         position: "relative",
@@ -27,5 +27,5 @@ export const useStyles = makeStyles({ name: "job" })(() => ({
         //     right: 0,
         //     backgroundColor: "rgba(0,0,0,0.25)",
         // }
-    }
-}));    
+    },
+}));

@@ -1,58 +1,70 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
+import type { NextFetchEvent, NextRequest } from "next/server";
 import { gql } from "graphql-request";
-import { graphQLClient } from "@utils/contentful";
+import { graphQLHTTPRequest } from "@utils/contentful";
 
 const jobQuery = gql`
-    query($jobId:String!) {
-        job(id:$jobId) {
-            title,
-            faction,
-            realLifeJobs,
+    query ($jobId: String!) {
+        job(id: $jobId) {
+            title
+            faction
+            realLifeJobs
             realLifeJobConnection {
                 json
-            },
+            }
             description {
                 json
             }
             skills {
                 json
-            },
+            }
             sys {
                 id
-            },
+            }
             responsibilities {
                 json
             }
         }
     }
-`
+`;
 
-const CACHE_TTL = 60 * 10; 
+const CACHE_TTL = 60 * 1; // 60 seconds
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse
-  ) {
-    const jobId = req.query.jobId;
-
+export default async function handler(req: NextRequest, _ctx: NextFetchEvent) {
+    const jobId = req.nextUrl.searchParams.get("jobId");
     if (!jobId) {
-        res.status(400).send("Job ID not found.");
-        return; 
+        return NextResponse.next({
+            status: 400,
+            statusText: "Job ID not found.",
+        });
     }
 
-    const response = await graphQLClient.request(jobQuery, { jobId }).catch(_e => null);
-    if (response === null) {
-        res.status(500).json(null);
-        return; 
+    const contentfulResponse = await graphQLHTTPRequest(jobQuery, { jobId });
+    if (!contentfulResponse) {
+        return NextResponse.next({
+            status: 500,
+            statusText:
+                "Internal Server Error. Failed to fetch job information.",
+        });
     }
-    const job = response.job; 
+    const job = contentfulResponse.data.job;
 
     if (!job) {
-        res.status(400).send("Job ID not found.");
-        return; 
+        return NextResponse.next({
+            status: 400,
+            statusText: "Job ID not found.",
+        });
     }
 
-    res.setHeader('Cache-Control', `s-maxage=${CACHE_TTL}, stale-while-revalidate`);
-    res.json(job);
+    const response = NextResponse.json(job);
+    response.headers.set(
+        "Cache-Control",
+        `s-maxage=${CACHE_TTL}, stale-while-revalidate`
+    );
+
+    return response;
 }
 
+export const config = {
+    runtime: "edge",
+};

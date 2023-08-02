@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
 import { UrlObject } from "url";
 
 export type Url = UrlObject | string;
@@ -14,24 +14,28 @@ interface TransitionOptions {
     unstable_skipClientCache?: boolean;
 }
 
-let previousRouteCache:IRouteCache = {
-    route: typeof window !== "undefined" ? window.location.pathname : undefined
+const previousRouteCache: IRouteCache = {
+    route: typeof window !== "undefined" ? window.location.pathname : undefined,
 };
 
 export const useNavigator = () => {
     const router = useRouter();
 
-    function previousRoute() : Url | undefined {
-        let route = previousRouteCache.route; 
-        return route; 
+    function previousRoute(): Url | undefined {
+        const route = previousRouteCache.route;
+        return route;
     }
 
-    async function push(url: Url, as?: Url | undefined, options?: TransitionOptions | undefined) : Promise<boolean> {
+    async function push(
+        url: Url,
+        as?: Url | undefined,
+        options?: TransitionOptions | undefined
+    ): Promise<boolean> {
         return await router.push(url, as, options).then((e) => {
-            previousRouteCache.route = url; 
+            previousRouteCache.route = url;
             return e;
-        })
+        });
     }
 
     return { ...router, push, previousRoute };
-}
+};
