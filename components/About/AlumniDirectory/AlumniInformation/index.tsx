@@ -27,7 +27,7 @@ export default function AlumniInformation({alumniInfo, onExit} : AlumniInformati
             className="transition-all duration-500"
         >
             
-            <div className="w-[500px] py-5 h-fit rounded-md bg-dark-grey-primary text-white border-dim-grey border-[1px]">
+            <div className="w-[300px] sm:w-[500px] py-5 h-fit rounded-md bg-dark-grey-primary text-white border-dim-grey border-[1px]">
                 <div className="flex justify-center items-center h-fit flex-col mx-2 gap-3">
                     <button onClick={onExit} className="absolute top-4 right-4 hover:text-gray-500">✕</button>
                     <h1 className="font-bold text-xl">{alumniInfo.name}<span className="font-thin">, {alumniInfo.graduation_year}</span></h1>

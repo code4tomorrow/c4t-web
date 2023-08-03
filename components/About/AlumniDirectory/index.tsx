@@ -1,11 +1,12 @@
 import Paper from "@components/Paper";
 import { IAlumniDirectoryRow } from "@utils/notion/alumniDirectory";
 import clsx from "clsx";
-import React, {useState } from "react";
+import React, {useMemo, useState } from "react";
 import { useStyles } from "../Directory/styles";
 import { FixedSizeList as VirtualList } from "react-window";
 import { useTable, useBlockLayout, Column } from "react-table";
 import AlumniInformation from "./AlumniInformation";
+import useDimensions from "hooks/useDimensions";
 
 interface IAlumniDirectoryProps {
     directoryEntries: IAlumniDirectoryRow[];
@@ -13,6 +14,9 @@ interface IAlumniDirectoryProps {
 
 const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
     const { classes } = useStyles();
+
+    const { width } = useDimensions({ enableDebounce: true });
+    const isMobile = useMemo(() => width < 768, [width]);
     
     const [ displayAlumni, setDisplayAlumni ] = useState<IAlumniDirectoryRow>();
     const [clickedPosition, setClickedPosition] = useState<{ top: number; left: number }>();
@@ -179,22 +183,23 @@ const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
 
 
     return (
-        <div id={"alumniContainer"}>
+        <>
         
-        <div className="flex w-[500px] items-center absolute justify-center z-50" 
-            style={{
-                marginTop:(clickedPosition?.top ?? 0) - 30,
-                marginLeft: (clickedPosition?.left ?? 0) + 132,
-            }}
-        >
-                <AlumniInformation key={clickedPosition?.top} alumniInfo={displayAlumni} onExit={() => clearAlumniDisplay()}/>
-        </div>
         <Paper
             containerClass={clsx(
                 "w-full !p-0 max-w-7xl flex !overflow-x-auto",
                 classes.container
             )}
+            id={"alumniContainer"}
         >
+            <div className="flex w-[300px] sm:w-[500px] absolute z-50" 
+            style={{
+                marginTop: (!isMobile) ? (clickedPosition?.top ?? 0) - 30 : 0,
+                marginLeft: (!isMobile) ? (clickedPosition?.left ?? 0) + 132 : 0,
+            }}
+        >
+                <AlumniInformation key={clickedPosition?.top} alumniInfo={displayAlumni} onExit={() => clearAlumniDisplay()}/>
+        </div>
             
             <div
                 {...getTableProps()}
@@ -239,7 +244,7 @@ const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
                 
             </div>
         </Paper>
-        </div>
+        </>
     );
 };
 
