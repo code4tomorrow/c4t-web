@@ -2,7 +2,6 @@ import { IAlumniDirectoryRow } from "@utils/notion/alumniDirectory";
 import { useStyles } from "../../Directory/styles";
 import clsx from "clsx";
 import Animate from "@components/Animate";
-import NotionRichText from "@components/NotionRichText";
 import NotionBlocks from "notion-block-renderer";
 
 
@@ -62,6 +61,7 @@ export default function AlumniInformation({alumniInfo, onExit} : AlumniInformati
                         </div>
 
                     {
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     //@ts-ignore
                     alumniInfo.page_children && <NotionBlocks blocks={alumniInfo.page_children.results}/>
                     }

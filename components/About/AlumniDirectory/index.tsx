@@ -1,7 +1,7 @@
 import Paper from "@components/Paper";
 import { IAlumniDirectoryRow } from "@utils/notion/alumniDirectory";
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { useStyles } from "../Directory/styles";
 import { FixedSizeList as VirtualList } from "react-window";
 import { useTable, useBlockLayout, Column } from "react-table";
