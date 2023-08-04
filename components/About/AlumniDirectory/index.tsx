@@ -37,7 +37,6 @@ const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
         setDisplayAlumni(undefined)
     }
 
-    
 
     const columns: Column<IAlumniDirectoryRow>[] = React.useMemo(
         () =>
@@ -46,9 +45,14 @@ const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
                     Header: "Name",
                     accessor: (e) => (
                         <div className="text-medium-grey">
-                            <span className="cursor-pointer hover:text-brand-purple-primary" onClick={
-                                (event) => updateAlumniShow(e, event)}>
-                            {e.name}</span>
+                            {
+                                (e.page_children !== null && JSON.stringify(e.page_children?.results) != "[]") ? 
+                                <span className="cursor-pointer text-brand-purple-primary hover:text-brand-purple-secondary" onClick={
+                                    (event) => updateAlumniShow(e, event)}>
+                                {e.name}</span> :
+                                <span>{e.name}</span>
+                            }
+                            
                         </div>
                     ),
                 },
@@ -183,7 +187,7 @@ const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
 
 
     return (
-        <>
+        
         
         <Paper
             containerClass={clsx(
@@ -194,7 +198,7 @@ const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
         >
             <div className="flex w-[300px] sm:w-[500px] absolute z-50" 
             style={{
-                marginTop: (!isMobile) ? (clickedPosition?.top ?? 0) - 30 : 0,
+                marginTop: (clickedPosition?.top ?? 0) - 30,
                 marginLeft: (!isMobile) ? (clickedPosition?.left ?? 0) + 132 : 0,
             }}
         >
@@ -244,7 +248,7 @@ const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
                 
             </div>
         </Paper>
-        </>
+        
     );
 };
 

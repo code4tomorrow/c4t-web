@@ -242,7 +242,7 @@ const About: NextPageWithLayout<AboutProps> = ({
                             >
                                 Meet Our{" "}
                                 <span className="text-brand-purple-secondary">
-                                    Alumnis
+                                    Alumni
                                 </span>
                             </Animate.Element>
                             <Animate.Element
@@ -252,8 +252,8 @@ const About: NextPageWithLayout<AboutProps> = ({
                                 to={{ y: 0, opacity: 1, delay: 0.15 }}
                                 className="text-lg !mt-3 text-medium-grey text-center"
                             >
-                                Former members and teachers who made C4T what it is today.{" "}
-                                <b>Click on their name</b> to learn more.
+                                Former members and teachers who made C4T what it is{" "}
+                                <b>today</b>.
                             </Animate.Element>
 
                         </div>
