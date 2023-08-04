@@ -74,7 +74,7 @@ export default function AlumniInformation({memberInfo, onExit} : MemberInformati
                     {
                     memberInfo.page_children &&
                     <div className={clsx(classes.root, "flex flex-col items-start justify-start w-full px-5 ")}>
-                        {// eslint-disable-next-line @typescript-eslint/ban-ts-comment}
+                        {// eslint-disable-next-line @typescript-eslint/ban-ts-comment
                         //@ts-ignore
                         <NotionBlocks blocks={memberInfo.page_children.results}/>
                         }
