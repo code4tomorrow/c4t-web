@@ -1,11 +1,11 @@
 import { useStyles } from "../../AlumniDirectory/AlumniInformation/styles";
 import clsx from "clsx";
 import Animate from "@components/Animate";
-import NotionBlocks from "notion-block-renderer";
 import { IDirectoryRow } from "@utils/notion/directory";
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 
-
+const NotionBlocks = dynamic(() => import("notion-block-renderer"));
 
 
 interface MemberInformationProps{
