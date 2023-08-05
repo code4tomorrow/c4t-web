@@ -153,7 +153,10 @@ const Footer: React.FC<FooterProps> = ({ className, ...props }) => {
                 </div>
             </div>
             <p className="text-medium-grey !mt-8 text-center">
-                ©{currentYear} Code 4 Tomorrow 501(c)(3) Non-Profit.
+                ©{currentYear} Code 4 Tomorrow 501(c)(3) Non-Profit 
+                <span className="italic">
+                {" (EIN: 92-0635065)"}
+                </span>
             </p>
         </footer>
     );

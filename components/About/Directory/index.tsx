@@ -45,7 +45,7 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                         <div className="text-medium-grey">
                             {
                                 (e.page_children !== null && JSON.stringify(e.page_children?.results) != "[]") ? 
-                                <span className="cursor-pointer text-brand-purple-primary hover:text-brand-purple-secondary" onClick={
+                                <span className="cursor-pointer underline hover:text-brand-purple-secondary" onClick={
                                     (event) => updateAlumniShow(e, event)}>
                                 {e.name}</span> :
                                 <span>{e.name}</span>
