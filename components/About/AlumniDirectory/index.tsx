@@ -199,7 +199,7 @@ const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
             <div className="flex w-[300px] sm:w-[500px] absolute z-50" 
             style={{
                 marginTop: (clickedPosition?.top ?? 0) - 30,
-                marginLeft: (!isMobile) ? (clickedPosition?.left ?? 0) + 132 : 0,
+                marginLeft: (!isMobile) ? (clickedPosition?.left ?? 0) + 175 : 0,
             }}
         >
                 <AlumniInformation key={clickedPosition?.top} alumniInfo={displayAlumni} onExit={() => clearAlumniDisplay()}/>

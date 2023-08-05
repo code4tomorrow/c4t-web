@@ -36,7 +36,7 @@ export default function AlumniInformation({memberInfo, onExit} : MemberInformati
             resetAfterTriggered={false}
             onDeactivatedClasses="-translate-x-36 opacity-0"
             onActivatedClasses="opacity-100"
-            className="transition-all duration-500"
+            className="transition-all duration-300"
         >
             
             <div className="w-[300px] sm:w-[500px] py-5 h-fit rounded-md bg-dark-grey-primary text-white border-dim-grey border-[1px] shadow-md shadow-dark-grey-primary">
@@ -73,7 +73,7 @@ export default function AlumniInformation({memberInfo, onExit} : MemberInformati
 
                     {
                     memberInfo.page_children &&
-                    <div className={clsx(classes.root, "flex flex-col items-start justify-start w-full px-5 ")}>
+                    <div className={clsx(classes.root, classes.scrollbar, "flex flex-col items-start justify-start w-full px-5 max-h-96 overflow-y-scroll overflow-x-clip")}>
                         {// eslint-disable-next-line @typescript-eslint/ban-ts-comment
                         //@ts-ignore
                         <NotionBlocks blocks={memberInfo.page_children.results}/>

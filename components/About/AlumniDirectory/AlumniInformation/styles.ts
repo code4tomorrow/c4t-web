@@ -63,6 +63,22 @@ export const useStyles = makeStyles()(() => ({
         ".nbr-blocks":{
             width:"100%"
         }
+    },
+    scrollbar:{
+        // background
+        "::-webkit-scrollbar":{
+            width: "2px",
+            height: 3,
+            backgroundColor: "transparent",
+        },
+        
+        
+        // handle
+        "::-webkit-scrollbar-thumb":{
+            backgroundColor: "rgba(255,255,255,0.25)",
+            borderRadius: 3,
+        },
+
     }
     
 }));
