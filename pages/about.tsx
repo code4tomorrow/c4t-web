@@ -19,20 +19,28 @@ import JsonQL, { JsonQLObject } from "@mahitm/jsonql";
 import dynamic from "next/dynamic";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
+import { getAlumniDirectory, IAlumniDirectoryRow } from "@utils/notion/alumniDirectory";
 const Directory = dynamic(() => import("@components/About/Directory"));
+const AlumniDirectory = dynamic(() => import("@components/About/AlumniDirectory"));
 
 interface AboutProps {
     directoryEntries: JsonQLObject;
+    alumniDirectoryEntries: JsonQLObject;
     notificationFlags: INotificationFlag[];
 }
 
 const About: NextPageWithLayout<AboutProps> = ({
     directoryEntries,
+    alumniDirectoryEntries,
     notificationFlags,
 }) => {
     const missionRef = useRef<HTMLDivElement | null>(null);
     const directoryEntriesParsed = new JsonQL().revert<IDirectoryRow[]>(
         directoryEntries
+    );
+
+    const alumniDirectoryEntriesParsed = new JsonQL().revert<IAlumniDirectoryRow[]>(
+        alumniDirectoryEntries
     );
 
     const [foundingStoryExpanded, setFoundingStoryExpanded] = useState(false);
@@ -194,7 +202,7 @@ const About: NextPageWithLayout<AboutProps> = ({
                             </div>
                         </div>
                     </section>
-                    <section className="flex my-32 w-full flex-col items-center">
+                    <section className="flex mt-32 mb-16 w-full flex-col items-center">
                         <div className="my-6 max-w-4xl">
                             <Animate.Element
                                 resetAfterTriggered={false}
@@ -222,6 +230,34 @@ const About: NextPageWithLayout<AboutProps> = ({
                             </Animate.Element>
                         </div>
                         <Directory directoryEntries={directoryEntriesParsed} />
+                    </section>
+                    <section className="flex mt-16 mb-32 w-full flex-col items-center">
+                        <div className="my-6 max-w-4xl">
+                            <Animate.Element
+                                resetAfterTriggered={false}
+                                as="h1"
+                                from={{ y: 60, opacity: 0 }}
+                                to={{ y: 0, opacity: 1 }}
+                                className="text-5xl font-bold text-white text-center"
+                            >
+                                Meet Our{" "}
+                                <span className="text-brand-purple-secondary">
+                                    Alumni
+                                </span>
+                            </Animate.Element>
+                            <Animate.Element
+                                resetAfterTriggered={false}
+                                as="p"
+                                from={{ y: 90, opacity: 0 }}
+                                to={{ y: 0, opacity: 1, delay: 0.15 }}
+                                className="text-lg !mt-3 text-medium-grey text-center"
+                            >
+                                Former members and teachers who made C4T what it is{" "}
+                                <b>today</b>.
+                            </Animate.Element>
+
+                        </div>
+                        <AlumniDirectory directoryEntries={alumniDirectoryEntriesParsed} />
                     </section>
                     <svg width={0} height={0}>
                         <clipPath
@@ -376,6 +412,7 @@ export default About;
 
 export async function getStaticProps() {
     const directoryEntries = await getDirectory();
+    const alumniDirectoryEntries = await getAlumniDirectory();
 
     const response = await graphQLClient.request(
         gql`
@@ -406,6 +443,7 @@ export async function getStaticProps() {
     return {
         props: {
             directoryEntries: new JsonQL().mini(directoryEntries),
+            alumniDirectoryEntries: new JsonQL().mini(alumniDirectoryEntries),
             notificationFlags,
         },
         // - At most once every 15 minutes

@@ -1,33 +1,34 @@
 import Paper from "@components/Paper";
-import { IDirectoryRow } from "@utils/notion/directory";
+import { IAlumniDirectoryRow } from "@utils/notion/alumniDirectory";
 import clsx from "clsx";
-import React, { useMemo, useState } from "react";
-import { useStyles } from "./styles";
+import React, {useMemo, useState } from "react";
+import { useStyles } from "../Directory/styles";
 import { FixedSizeList as VirtualList } from "react-window";
 import { useTable, useBlockLayout, Column } from "react-table";
+import AlumniInformation from "./AlumniInformation";
 import useDimensions from "hooks/useDimensions";
-import MemberInformation from "./MemberInformation";
 
-interface IDirectoryProps {
-    directoryEntries: IDirectoryRow[];
+interface IAlumniDirectoryProps {
+    directoryEntries: IAlumniDirectoryRow[];
 }
 
-const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
+const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
     const { classes } = useStyles();
 
     const { width } = useDimensions({ enableDebounce: true });
     const isMobile = useMemo(() => width < 768, [width]);
     
-    const [ displayAlumni, setDisplayAlumni ] = useState<IDirectoryRow>();
+    const [ displayAlumni, setDisplayAlumni ] = useState<IAlumniDirectoryRow>();
     const [clickedPosition, setClickedPosition] = useState<{ top: number; left: number }>();
 
-    const updateAlumniShow = (props:IDirectoryRow, event: React.MouseEvent) => {
+
+    const updateAlumniShow = (props:IAlumniDirectoryRow, event: React.MouseEvent) => {
         setDisplayAlumni(props)
 
         const elementClicked = event.currentTarget as HTMLElement
 
-        const top = elementClicked.getBoundingClientRect().top - (document.getElementById("memberContainer")?.getBoundingClientRect().top ?? 0);
-        const left = elementClicked.getBoundingClientRect().left - (document.getElementById("memberContainer")?.getBoundingClientRect().left ?? 0);;
+        const top = elementClicked.getBoundingClientRect().top - (document.getElementById("alumniContainer")?.getBoundingClientRect().top ?? 0);
+        const left = elementClicked.getBoundingClientRect().left - (document.getElementById("alumniContainer")?.getBoundingClientRect().left ?? 0);;
 
         setClickedPosition({top, left});
     }
@@ -36,7 +37,8 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
         setDisplayAlumni(undefined)
     }
 
-    const columns: Column<IDirectoryRow>[] = React.useMemo(
+
+    const columns: Column<IAlumniDirectoryRow>[] = React.useMemo(
         () =>
             [
                 {
@@ -55,25 +57,33 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                     ),
                 },
                 {
-                    Header: "Position",
+                    Header: "C4T Graduation Year",
+                    accessor: (e) => (
+                        <div className="text-medium-grey">
+                            <span>{e.graduation_year}</span>
+                        </div>
+                    ),
+                },
+                {
+                    Header: "Former Position",
                     accessor: (e) => (
                         <div>
                             <span
                                 style={{
-                                    background: e.position?.color || undefined,
+                                    background: e.former_position?.color || undefined,
                                 }}
                                 data-tag
                             >
-                                {e?.position?.name}
+                                {e?.former_position?.name}
                             </span>
                         </div>
                     ),
                 },
                 {
-                    Header: "Department",
+                    Header: "Former Projects",
                     accessor: (e) => (
                         <div>
-                            {e?.department?.map((d, idx) => (
+                            {e?.former_projects?.map((d, idx) => (
                                 <span
                                     key={idx}
                                     data-tag
@@ -85,33 +95,18 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                         </div>
                     ),
                 },
+                
                 {
-                    Header: "Projects",
-                    accessor: (e) => (
-                        <div>
-                            {e?.projects?.map((d, idx) => (
-                                <span
-                                    key={idx}
-                                    data-tag
-                                    style={{ background: d.color || undefined }}
-                                >
-                                    {d.name}
-                                </span>
-                            ))}
-                        </div>
-                    ),
-                },
-                {
-                    Header: "State/Province",
+                    Header: "College",
                     accessor: (e) => (
                         <div>
                             <span
                                 style={{
-                                    background: e.state?.color || undefined,
+                                    background: e.college?.color || undefined,
                                 }}
                                 data-tag
                             >
-                                {e?.state?.name}
+                                {e?.college?.name}
                             </span>
                         </div>
                     ),
@@ -131,9 +126,11 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                         </div>
                     ),
                 },
-            ] as Column<IDirectoryRow>[],
+                
+            ] as Column<IAlumniDirectoryRow>[],
         []
     );
+
 
     const defaultColumn = React.useMemo(
         () => ({
@@ -188,13 +185,16 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
         [prepareRow, rows, classes.cell]
     );
 
+
     return (
+        
+        
         <Paper
             containerClass={clsx(
                 "w-full !p-0 max-w-7xl flex !overflow-x-auto",
                 classes.container
             )}
-            id={"memberContainer"}
+            id={"alumniContainer"}
         >
             <div className="flex w-[300px] sm:w-[500px] absolute z-50" 
             style={{
@@ -202,8 +202,9 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                 marginLeft: (!isMobile) ? (clickedPosition?.left ?? 0) + 175 : 0,
             }}
         >
-                <MemberInformation key={clickedPosition?.top} memberInfo={displayAlumni} onExit={() => clearAlumniDisplay()}/>
-        </div>            
+                <AlumniInformation key={clickedPosition?.top} alumniInfo={displayAlumni} onExit={() => clearAlumniDisplay()}/>
+        </div>
+            
             <div
                 {...getTableProps()}
                 className={clsx(
@@ -234,7 +235,7 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                 <div {...getTableBodyProps()} className="w-full md:px-9">
                     <VirtualList
                         // onItemsRendered={handleNewItemsRendered}
-                        height={Math.min(780, 40 * rows.length)}
+                        height={Math.min(780, 40 * rows.length + 80)}
                         className="w-full"
                         itemCount={rows.length}
                         itemSize={40}
@@ -243,8 +244,11 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                         {RenderVirtualRow}
                     </VirtualList>
                 </div>
+                
+                
             </div>
         </Paper>
+        
     );
 };
 

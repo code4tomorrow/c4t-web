@@ -1,6 +1,7 @@
 import { notionColorMap } from "common/maps/color";
 import config from "config";
 import { notion } from "./client";
+import { ListBlockChildrenResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export interface IDirectoryItem {
     name: string | null;
@@ -14,6 +15,8 @@ export interface IDirectoryRow {
     projects: IDirectoryItem[] | null;
     state: IDirectoryItem | null;
     country: IDirectoryItem | null;
+    page_children: ListBlockChildrenResponse | null;
+
 }
 
 // Team Directory Notion Database UUID
@@ -65,7 +68,7 @@ export const getDirectory = async (): Promise<IDirectoryRow[]> => {
     });
 
     // Extracts data from Notion API response and maps fields to reduce unnecessary data
-    const rows = filteredResults?.map((row) => {
+    const rows = filteredResults?.map(async (row) => {
         const properties = (row as any).properties;
 
         const country = properties?.Country?.[properties?.Country?.type];
@@ -77,6 +80,16 @@ export const getDirectory = async (): Promise<IDirectoryRow[]> => {
         const department =
             properties?.Department?.[properties?.Department?.type] || [];
         const projects = properties?.Projects?.[properties?.Projects?.type];
+
+        let pageContents : ListBlockChildrenResponse;
+        try{
+            pageContents = await notion.blocks.children.list({
+                block_id: row.id
+            });
+        }catch (e: any) {
+            return [];
+        }
+
 
         return {
             name: properties?.Name?.title[0]?.text.content || null,
@@ -104,8 +117,11 @@ export const getDirectory = async (): Promise<IDirectoryRow[]> => {
                 name: country?.name || null,
                 color: country?.color ? notionColorMap(country.color) : null,
             },
+            page_children: await pageContents || null,
         };
     });
 
-    return rows;
+    const resolvedRows = await Promise.all(rows);
+
+    return resolvedRows.filter(Boolean) as IDirectoryRow[];
 };
