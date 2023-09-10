@@ -206,7 +206,7 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                        C4T&apos;s classes will return in the Winter! You'll be able to Learn languages such as Python,
+                                        C4T&apos;s classes will return in the Winter! You&apos;ll be able to Learn languages such as Python,
                                         Java, and more by competent teachers — all for free!&nbsp;
                                     </p>
                                 </div>
