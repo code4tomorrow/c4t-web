@@ -91,6 +91,7 @@ const BrandButton = <T extends React.ElementType = "div">(
                         } as React.CSSProperties
                     }
                     disabled={disabled}
+                    aria-disabled={disabled}
                     onClick={handleOnClick}
                     className={clsx(
                         "m-auto",

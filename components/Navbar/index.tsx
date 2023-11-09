@@ -11,6 +11,7 @@ import {
     CodeIcon,
     BookOpenIcon,
     PaperAirplaneIcon,
+    SparklesIcon,
 } from "@heroicons/react/outline";
 import { useRef } from "react";
 import gsap from "gsap";
@@ -156,6 +157,7 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         if (!currentLink?.el) return;
   
         let { x, y, width, height } = linkHighlightRef.current.getBoundingClientRect();
+        let originalOpacity = 1; 
 
         const {
             x: x2,
@@ -169,12 +171,13 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             y = y2; 
             width = width2;; 
             height = height2;
+            originalOpacity = 0; 
         }
 
         gsap.fromTo(
             linkHighlightRef.current,
-            { x, y, width, height },
-            { x: x2, y: y2, width: width2, height: height2, duration: 0.15 }
+            { x, y, width, height, opacity: originalOpacity },
+            { x: x2, y: y2, width: width2, height: height2, opacity: 1, duration: 0.15 }
         );
         
     }, [navItemRefs, pathname]);
@@ -207,6 +210,12 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, [handleResize, linkHighlightRef, navItemRefs]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            handleResize();
+        }, 500);
+    }, [ handleResize ]);
 
     const handleScroll = useCallback(() => {
         if (window.scrollY >= scrollOffset.current && window.scrollY !== 0)
@@ -304,6 +313,13 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
                             width={15}
                         />
                         <span>Contact</span>
+                    </NavListItem>
+                    <NavListItem ref={navItemRefs} href="/news">
+                        <SparklesIcon
+                            className="text-brand-purple-secondary rotate-45"
+                            width={15}
+                        />
+                        <span>News</span>
                     </NavListItem>
                 </ul>
             </nav>

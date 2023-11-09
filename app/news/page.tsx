@@ -9,6 +9,10 @@ import NewsletterContent from "./NewsletterContent";
 import Footer from "@components/Footer";
 import { getNewsletterPlaceholder } from "@utils/getNewsletterPlaceholder";
 
+export interface ISubscribeState {
+    success: boolean | null;
+}
+
 const Newsletter = async () => {
     const response = await graphQLHTTPRequest<{
         newsletterCollection: {
@@ -61,10 +65,39 @@ const Newsletter = async () => {
         return { ...newsletter, placeholderDataURL: dataURL };
     }))
 
+    const subscribe = async (_prevState: ISubscribeState, formData: FormData) : Promise<ISubscribeState> => {
+        "use server";
+
+        const response = await fetch(config.sender.apiBaseURL, {
+            body: JSON.stringify({
+                email: formData.get("email"),
+                groups: [ config.sender.groups.c4tWeb ]
+            }),
+            headers: {
+                "Authorization": `Bearer ${process.env.SENDER_NET_API_TOKEN}`,
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            method: "POST"
+        })
+        .then(res => res.json())
+        .catch(err => {
+            console.error(err);
+            return null; 
+        });
+        
+        return { 
+            success: !!response?.success
+        };
+    };
+
     return (
         <>
             <Navbar notificationFlags={response?.data.notificationFlagCollection.items || []} />
-            <NewsletterContent newsletters={newsletters} />
+            <NewsletterContent 
+                newsletters={newsletters} 
+                subscribe={subscribe}
+            />
             <br />
             <Footer />
         </>

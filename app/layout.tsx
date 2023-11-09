@@ -1,7 +1,9 @@
 import "../styles/globals.css";
 import ProgressBar from "@components/ProgressBar"
+import Snackbar from "@components/Snackbar";
 import { raleway } from "common/fonts/raleway";
 import { Metadata } from "next"
+import RecoilContextProvider from "./recoilContextProvider";
 
 export const metadata : Metadata = {
   title: 'C4T',
@@ -16,12 +18,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={raleway.className}>
       <body className={`${raleway.className} dark`}>
-        <ProgressBar
-          options={{ showSpinner: false }}
-          color={"#fff"}
-          height={2}
-        />
-        {children}
+        <RecoilContextProvider>
+          <ProgressBar
+            options={{ showSpinner: false }}
+            color={"#fff"}
+            height={2}
+          />
+          {children}
+          <Snackbar />
+        </RecoilContextProvider>
       </body>
     </html>
   )

@@ -41,7 +41,7 @@ const NewsletterMini : React.FC<INewsletterMiniProps> = ({ newsletter, selectedN
                 position: "absolute",
                 backgroundImage: "linear-gradient(90deg, #7892EE 0%, #5A4CAD 40%, #7892EE 60%)",
                 display: 'block',
-                animation: "shineMini 1s linear infinite",
+                animation: "shineMini 3s linear infinite",
                 
             },
             "@keyframes shineMini": {
@@ -58,7 +58,7 @@ const NewsletterMini : React.FC<INewsletterMiniProps> = ({ newsletter, selectedN
                         backgroundPosition: "0px",
                     },
                     "100%": {
-                        backgroundPosition: "260px",
+                        backgroundPosition: "290px",
                     },
                 }
             }
@@ -78,7 +78,7 @@ const NewsletterMini : React.FC<INewsletterMiniProps> = ({ newsletter, selectedN
             }}
             className="flex flex-col mx-3 cursor-pointer my-3 items-center"
         >
-            <div className={`relative w-[160px] h-[220px] lg:w-[250px] transition-all lg:h-[340px] hover:opacity-70 ${classes.border} ${isSelected && classes.shimmer}`}>
+            <div className={`relative w-[160px] h-[220px] lg:w-[280px] transition-all lg:h-[370px] hover:opacity-70 ${classes.border} ${isSelected && classes.shimmer}`}>
                 <Image 
                     src={newsletter.graphic.url} 
                     priority

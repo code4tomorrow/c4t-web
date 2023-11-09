@@ -1,3 +1,5 @@
+"use client";
+
 import { createAtom } from "@utils/recoil";
 import React, { ReactNode, useEffect, useRef } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";

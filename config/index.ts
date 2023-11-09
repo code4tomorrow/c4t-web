@@ -22,6 +22,12 @@ const config = extend(
         links: {
             studentRegistrationLink: "https://forms.gle/wbb8UdWDo7MDXvkR7",
         },
+        sender: {
+            groups: {
+                c4tWeb: "b49Amg",
+            },
+            apiBaseURL: "https://api.sender.net/v2/subscribers",
+        }
     },
     dynamicConfig
 );
