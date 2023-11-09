@@ -78,11 +78,13 @@ const NewsletterMini : React.FC<INewsletterMiniProps> = ({ newsletter, selectedN
             }}
             className="flex flex-col mx-3 cursor-pointer my-3 items-center"
         >
-            <div className={`relative w-[160px] h-[220px] lg:w-[250px] transition-all lg:h-[340px] hover:opacity-50 ${classes.border} ${isSelected && classes.shimmer}`}>
+            <div className={`relative w-[160px] h-[220px] lg:w-[250px] transition-all lg:h-[340px] hover:opacity-70 ${classes.border} ${isSelected && classes.shimmer}`}>
                 <Image 
                     src={newsletter.graphic.url} 
                     priority
                     fill
+                    placeholder="blur"
+                    blurDataURL={newsletter.placeholderDataURL || `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>`}
                     objectFit="cover"
                     alt={"newsletter"}
                 />

@@ -9,4 +9,5 @@ export interface INewsletter {
     };
     date: string;
     title: string; 
+    placeholderDataURL?: string | null;
 }

@@ -7,7 +7,7 @@ import { gql } from "graphql-request";
 import React from "react";
 import NewsletterContent from "./NewsletterContent";
 import Footer from "@components/Footer";
-
+import { getNewsletterPlaceholder } from "@utils/getNewsletterPlaceholder";
 
 const Newsletter = async () => {
     const response = await graphQLHTTPRequest<{
@@ -56,10 +56,15 @@ const Newsletter = async () => {
         tags: ["newsletters"]
     });
 
+    const newsletters = await Promise.all((response?.data.newsletterCollection.items || []).map(async (newsletter) => {
+        const dataURL = await getNewsletterPlaceholder(newsletter.graphic.url);
+        return { ...newsletter, placeholderDataURL: dataURL };
+    }))
+
     return (
         <>
             <Navbar notificationFlags={response?.data.notificationFlagCollection.items || []} />
-            <NewsletterContent newsletters={response?.data.newsletterCollection.items || []} />
+            <NewsletterContent newsletters={newsletters} />
             <br />
             <Footer />
         </>

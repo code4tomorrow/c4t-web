@@ -39,7 +39,6 @@ import type { ExtendedRecordMap } from "notion-types";
 import { filterRecordMap } from "@utils/notion/filterRecordMap";
 import {
     addDashesToUUID,
-    convertCompressedBase64ToUUID,
     convertUUIDToBase64Compressed,
     validateUUID,
 } from "@utils/common";
@@ -341,7 +340,6 @@ export async function getStaticProps(context: { params: { slug: string[] } }) {
 
     // Attempt to retrieving notion pageId
     let pageId: string | null = parsePageId(context.params.slug[0]);
-    if (!pageId) pageId = convertCompressedBase64ToUUID(context.params.slug[0]);
 
     if (data && typeof data === "object") {
         // If slug is pageId instead of human readable slug attempt redirect
