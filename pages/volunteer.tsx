@@ -28,8 +28,7 @@ interface VolunteerProps {
 }
 
 const Volunteer: NextPageWithLayout<VolunteerProps> = ({
-    volunteerOpportunities,
-    notificationFlags,
+    volunteerOpportunities
 }) => {
     return (
         <div
@@ -39,7 +38,6 @@ const Volunteer: NextPageWithLayout<VolunteerProps> = ({
             <Head>
                 <title>Volunteer | C4T</title>
             </Head>
-            <Navbar notificationFlags={notificationFlags} />
             <Animate>
                 <main className="pt-4 px-6 w-full my-12 flex flex-col items-center">
                     <Animate.Element
@@ -89,8 +87,11 @@ const Volunteer: NextPageWithLayout<VolunteerProps> = ({
     );
 };
 
-Volunteer.getLayout = (page: ReactElement) => {
-    return <WatsonAssistantChat>{page}</WatsonAssistantChat>;
+Volunteer.getLayout = (page: ReactElement, props) => {
+    return <>
+      <Navbar notificationFlags={props?.notificationFlags || []} />
+      <WatsonAssistantChat>{page}</WatsonAssistantChat>
+    </>
 };
 
 export default Volunteer;

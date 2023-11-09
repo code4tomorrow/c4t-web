@@ -29,9 +29,8 @@ interface LearnProps {
 }
 
 const Learn: NextPageWithLayout<LearnProps> = ({
-    faqsGroupedByType,
-    notificationFlags,
-}) => {
+    faqsGroupedByType
+}) => {    
     return (
         <div
             style={{ width: "100vw", overflowX: "clip" }}
@@ -40,7 +39,6 @@ const Learn: NextPageWithLayout<LearnProps> = ({
             <Head>
                 <title>Learn | C4T</title>
             </Head>
-            <Navbar notificationFlags={notificationFlags} />
             <Animate>
                 <main className="w-full mt-3 p-4 px-8 flex flex-col items-center">
                     <FAQSection faqsGroupedByType={faqsGroupedByType} />
@@ -51,8 +49,11 @@ const Learn: NextPageWithLayout<LearnProps> = ({
     );
 };
 
-Learn.getLayout = (page: ReactElement) => {
-    return <WatsonAssistantChat>{page}</WatsonAssistantChat>;
+Learn.getLayout = (page: ReactElement, props) => {
+    return <>
+      <Navbar notificationFlags={props?.notificationFlags || []} />
+      <WatsonAssistantChat>{page}</WatsonAssistantChat>
+    </>
 };
 
 export async function getStaticProps() {

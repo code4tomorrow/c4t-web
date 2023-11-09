@@ -78,12 +78,11 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
                         content: "code 4 tomorrow,c4t,code,free,non-profit",
                     },
                 ]}
-                description="Code 4 Tomorrow is entirely student-run, from the official website to merch design and finance management. C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers."
+                description={config.meta.description}
                 openGraph={{
                     url: "https://www.code4tomorrow.org/",
                     title: "Code 4 Tomorrow",
-                    description:
-                        "Code 4 Tomorrow is entirely student-run, from the official website to merch design and finance management. C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers.",
+                    description: config.meta.description,
                     images: [],
                     site_name: "Code 4 Tomorrow",
                 }}
@@ -102,7 +101,8 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
                     <RecoilRoot>
                         <Component {...pageProps} />
                         <Snackbar />
-                    </RecoilRoot>
+                    </RecoilRoot>,
+                    pageProps
                 )}
             </React.StrictMode>
         </CacheProvider>

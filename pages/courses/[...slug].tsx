@@ -341,7 +341,6 @@ export async function getStaticProps(context: { params: { slug: string[] } }) {
 
     // Attempt to retrieving notion pageId
     let pageId: string | null = parsePageId(context.params.slug[0]);
-    if (!pageId) pageId = convertCompressedBase64ToUUID(context.params.slug[0]);
 
     if (data && typeof data === "object") {
         // If slug is pageId instead of human readable slug attempt redirect
@@ -413,6 +412,8 @@ export async function getStaticProps(context: { params: { slug: string[] } }) {
 
         const blockId = inverseObject[encodedURI];
         if (!!blockId) pageId = blockId;
+
+        if (!pageId) pageId = convertCompressedBase64ToUUID(context.params.slug[0]);
     }
 
     // If slug is not an identified path from cache or an Id, redirect to course home page

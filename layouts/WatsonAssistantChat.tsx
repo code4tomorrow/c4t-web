@@ -19,7 +19,7 @@ const WatsonAssistantChat: React.FC<{
 }> = ({ children, createWebChatInstance }) => {
     const pathname = useMemo(
         () => (SSR ? undefined : window.location.pathname),
-        [SSR]
+        []
     );
     const currentInjectedPath = useRef<string | undefined>(undefined);
     const chatButtonRef = useRef<HTMLDivElement | null>(null);
@@ -73,7 +73,7 @@ const WatsonAssistantChat: React.FC<{
             },
         };
         createWebChatInstance(watsonAssistantChatOptions);
-    }, [pathname, chatButtonRef]);
+    }, [pathname, createWebChatInstance]);
 
     useEffect(injectChatBot, [injectChatBot]);
 

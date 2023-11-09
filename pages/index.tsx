@@ -33,7 +33,7 @@ const CODE_ITEMS = ["Today.", "Websites.", "Games.", "iOS Apps."];
 
 const Home: NextPageWithLayout<
     InferGetServerSidePropsType<typeof getStaticProps>
-> = ({ notificationFlags, testimonials = [] }) => {
+> = ({ testimonials = [] }) => {
     const { classes } = useStyles();
 
     const mainRef = React.useRef<HTMLDivElement | null>(null);
@@ -53,7 +53,7 @@ const Home: NextPageWithLayout<
             <Head>
                 <title>Home | C4T</title>
             </Head>
-            <Navbar notificationFlags={notificationFlags} />
+            
             <header className="flex flex-col space-y-6 justify-center items-center p-3">
                 <h1
                     style={{
@@ -195,7 +195,7 @@ const Home: NextPageWithLayout<
                                 className="transition-transform duration-500"
                             >
                                 <h1 className="text-white text-4xl md:text-5xl font-extrabold">
-                                    C4T&apos;s Summer Registration is Open Now!
+                                    C4T&apos;s Registration is Closed Currently.
                                 </h1>
                             </Animate.Element>
                             <Animate.Element
@@ -206,31 +206,18 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                        C4T&apos;s summer session registration
-                                        is here! Learn languages like Python,
-                                        Java, and more—all for free!&nbsp;
-                                        <Link
-                                            href="/courses"
-                                            className="underline hover:opacity-75 transition-opacity"
-                                        >
-                                            View Courses.
-                                        </Link>
-                                    </p>
-                                    <p className="text-medium-grey">
-                                        Sign up quickly while spots are
-                                        available.
+                                        C4T&apos;s classes will return in the Winter! You&apos;ll be able to Learn languages such as Python,
+                                        Java, and more by competent teachers — all for free!&nbsp;
                                     </p>
                                 </div>
                             </Animate.Element>
-                            <BrandButton
-                                containerClass="mr-auto"
-                                title="Sign Up"
-                                label="100% free"
-                                href={config.links.studentRegistrationLink}
-                                as="a"
-                                target={"_blank"}
-                                rel="noopener noreferrer"
-                            />
+                            <Link href="/courses" passHref legacyBehavior>
+                                <BrandButton
+                                    containerClass="mr-auto"
+                                    title="View Courses"
+                                    as="a"
+                                />
+                            </Link>
                         </article>
                         <div className={"md:my-0 my-8"}>
                             <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] " />
@@ -357,8 +344,11 @@ const Home: NextPageWithLayout<
     );
 };
 
-Home.getLayout = (page: ReactElement) => {
-    return <WatsonAssistantChat>{page}</WatsonAssistantChat>;
+Home.getLayout = (page: ReactElement, props) => {
+    return <>
+      <Navbar notificationFlags={props?.notificationFlags || []} />
+      <WatsonAssistantChat>{page}</WatsonAssistantChat>
+    </>
 };
 
 export async function getStaticProps() {
