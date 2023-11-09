@@ -39,6 +39,7 @@ import type { ExtendedRecordMap } from "notion-types";
 import { filterRecordMap } from "@utils/notion/filterRecordMap";
 import {
     addDashesToUUID,
+    convertCompressedBase64ToUUID,
     convertUUIDToBase64Compressed,
     validateUUID,
 } from "@utils/common";
@@ -411,6 +412,8 @@ export async function getStaticProps(context: { params: { slug: string[] } }) {
 
         const blockId = inverseObject[encodedURI];
         if (!!blockId) pageId = blockId;
+
+        if (!pageId) pageId = convertCompressedBase64ToUUID(context.params.slug[0]);
     }
 
     // If slug is not an identified path from cache or an Id, redirect to course home page
