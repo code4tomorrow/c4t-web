@@ -41,7 +41,7 @@ const getInternshipURL = (pageIndex: number) => {
 
 const Internships: NextPageWithLayout<
     InferGetStaticPropsType<typeof getStaticProps>
-> = ({ notificationFlags }) => {
+> = () => {
     const [jobId, setJobId] = useState<{
         id: string | null | undefined;
         showContent: boolean;
@@ -130,7 +130,6 @@ const Internships: NextPageWithLayout<
             <Head>
                 <title>Internships | C4T</title>
             </Head>
-            <Navbar notificationFlags={notificationFlags} />
             <Animate>
                 {isMobile && (
                     <Modal
@@ -357,7 +356,12 @@ const Internships: NextPageWithLayout<
 };
 
 Internships.getLayout = (page: ReactElement) => {
-    return <WatsonAssistantChat>{page}</WatsonAssistantChat>;
+    return (
+        <>
+            <Navbar/>
+            <WatsonAssistantChat>{page}</WatsonAssistantChat>
+        </>
+    )
 };
 
 export async function getStaticProps() {

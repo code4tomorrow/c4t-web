@@ -7,7 +7,10 @@ const dynamicConfig =
 
 const config = extend(
     {
-        name: "C4T Website",
+        meta: {
+            name: "Code 4 Tomorrow",
+            description: "Code 4 Tomorrow is entirely student-run, from the official website to merch design and finance management. C4T is a 501(c)(3) non-profit organization that offers free coding classes to students around the globe, as well as community service opportunities to our members and teachers.",
+        },
         notion: {
             directoryDatabaseId: "13e7749c64aa473faea32711b39e5c9a",
             rootCoursesPageId: "785a612a6b534ec4ba34ca52905fcda9",

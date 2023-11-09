@@ -1,3 +1,5 @@
+"use client";
+
 import { PaperAirplaneIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import Link from "next/link";
@@ -70,6 +72,7 @@ const Footer: React.FC<FooterProps> = ({ className, ...props }) => {
                     <ul>
                         <FooterHeader>sitemap</FooterHeader>
                         <FooterItem>Home</FooterItem>
+                        <FooterItem href="/news">Newsletter</FooterItem>
                         <FooterItem href="/about">About</FooterItem>
                         <FooterItem href="/courses">Courses</FooterItem>
                         <FooterItem href="/volunteer">Volunteer</FooterItem>

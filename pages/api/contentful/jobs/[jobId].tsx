@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextFetchEvent, NextRequest } from "next/server";
 import { gql } from "graphql-request";
 import { graphQLHTTPRequest } from "@utils/contentful";
+import { IJob } from "common/interfaces/job";
 
 const jobQuery = gql`
     query ($jobId: String!) {
@@ -39,7 +40,9 @@ export default async function handler(req: NextRequest, _ctx: NextFetchEvent) {
         });
     }
 
-    const contentfulResponse = await graphQLHTTPRequest(jobQuery, { jobId });
+    const contentfulResponse = await graphQLHTTPRequest<{
+        job: IJob;
+    }>(jobQuery, { jobId });
     if (!contentfulResponse) {
         return NextResponse.next({
             status: 500,

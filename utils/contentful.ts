@@ -4,7 +4,7 @@ const ACCESS_TOKEN =
     process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN ||
     process.env.CONTENTFUL_ACCESS_TOKEN;
 
-const CONTENTFUL_GRAPHQL_ENDPOINT = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`;
+export const CONTENTFUL_GRAPHQL_ENDPOINT = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`;
 
 export const graphQLClient = new GraphQLClient(CONTENTFUL_GRAPHQL_ENDPOINT, {
     headers: {
@@ -12,7 +12,7 @@ export const graphQLClient = new GraphQLClient(CONTENTFUL_GRAPHQL_ENDPOINT, {
     },
 });
 
-export async function graphQLHTTPRequest(query: string, variables: object) {
+export async function graphQLHTTPRequest<T>(query: string, variables: object, next?: NextFetchRequestConfig) : Promise<{ data: T } | null> {
     const response = await fetch(CONTENTFUL_GRAPHQL_ENDPOINT, {
         method: "POST",
         headers: {
@@ -23,6 +23,7 @@ export async function graphQLHTTPRequest(query: string, variables: object) {
             query,
             variables,
         }),
+        next
     }).catch((e) => {
         console.error("Contentful GraphQL Query Error: ", e);
         return null;
@@ -34,6 +35,7 @@ export async function graphQLHTTPRequest(query: string, variables: object) {
 }
 
 export enum ContentModelID {
+    NEWSLETTER = "newsletter",
     COURSE = "course",
     PROMOTIONAL_LABEL = "promotionalLabel",
     IMAGE = "image",
