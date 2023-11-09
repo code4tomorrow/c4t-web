@@ -8,9 +8,56 @@ import React from "react";
 import NewsletterContent from "./NewsletterContent";
 import Footer from "@components/Footer";
 import { getNewsletterPlaceholder } from "@utils/getNewsletterPlaceholder";
+import { Metadata } from "next";
+import Head from "next/head";
 
 export interface ISubscribeState {
     success: boolean | null;
+}
+
+export async function generateMetadata() : Promise<Metadata> {
+    const response = await graphQLHTTPRequest<{
+        newsletterCollection: {
+            items: INewsletter[]
+        }
+    }>(gql`
+        query ($preview: Boolean, $order: [NewsletterOrder], $limit: Int) {
+            newsletterCollection(preview: $preview, order: $order, limit: $limit) {
+                items {
+                    date,
+                    title,
+                    graphic {
+                        url,
+                        width,
+                        height
+                    },
+                }
+            }
+        }
+    `, {
+        preview: config.contentful.preview,
+        order: ["date_DESC"],
+        limit: 1
+    });
+
+    const latestNewsletter = response?.data.newsletterCollection.items[0];
+    const images = [];
+
+    if (latestNewsletter) {
+        images.push({
+            url: latestNewsletter.graphic.url,
+            width: latestNewsletter.graphic.width,
+            height: latestNewsletter.graphic.height,
+            alt: latestNewsletter.title
+        });
+    };
+
+    return {
+        title: 'News | C4T',
+        openGraph: {
+            images
+        }
+    }
 }
 
 const Newsletter = async () => {
@@ -93,6 +140,9 @@ const Newsletter = async () => {
 
     return (
         <>
+            <Head>
+                
+            </Head>
             <Navbar notificationFlags={response?.data.notificationFlagCollection.items || []} />
             <NewsletterContent 
                 newsletters={newsletters} 

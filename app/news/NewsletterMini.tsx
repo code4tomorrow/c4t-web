@@ -85,7 +85,7 @@ const NewsletterMini : React.FC<INewsletterMiniProps> = ({ newsletter, selectedN
                     fill
                     placeholder="blur"
                     blurDataURL={newsletter.placeholderDataURL || `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>`}
-                    objectFit="cover"
+                    className="object-cover"
                     alt={"newsletter"}
                 />
             </div>
