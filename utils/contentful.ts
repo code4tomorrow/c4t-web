@@ -35,6 +35,7 @@ export async function graphQLHTTPRequest<T>(query: string, variables: object, ne
 }
 
 export enum ContentModelID {
+    NEWSLETTER = "newsletter",
     COURSE = "course",
     PROMOTIONAL_LABEL = "promotionalLabel",
     IMAGE = "image",

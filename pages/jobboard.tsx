@@ -31,7 +31,6 @@ import flatMap from "lodash/flatMap";
 import Loader from "@components/Loader";
 import WalkSVG from "@svg/walk.svg";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
-import { useRecoilState } from "recoil";
 
 const getJobAPIKey = (pageIndex: number) => {
     return getAPIJobsPreview(pageIndex, 5);

@@ -347,7 +347,7 @@ const Home: NextPageWithLayout<
 Home.getLayout = (page: ReactElement, props) => {
     return <>
       <Navbar notificationFlags={props?.notificationFlags || []} />
-      <WatsonAssistantChat>{page}</WatsonAssistantChat>
+      <WatsonAssistantChat>{page}</WatsonAssistantChat>;
     </>
 };
 

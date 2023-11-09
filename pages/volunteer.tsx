@@ -11,7 +11,6 @@ import { ReactElement } from "react";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
-import { useRecoilState } from "recoil";
 
 export interface IVolunteerOpportunity extends IBaseContentModel {
     name?: string;

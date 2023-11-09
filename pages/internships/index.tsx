@@ -1,5 +1,5 @@
 import Footer from "@components/Footer";
-import Navbar, { notificationFlagsAtom } from "@components/Navbar";
+import Navbar from "@components/Navbar";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import Head from "next/head";
 import React, {
@@ -34,7 +34,6 @@ import { useStyles } from "styles/internships";
 import InternshipPreview from "@components/JobBoard/InternshipPreview";
 import FullInternship from "@components/JobBoard/FullInternship";
 import clsx from "clsx";
-import { useRecoilState } from "recoil";
 
 const getInternshipURL = (pageIndex: number) => {
     return getAPIInternships(pageIndex, 5);
@@ -42,7 +41,7 @@ const getInternshipURL = (pageIndex: number) => {
 
 const Internships: NextPageWithLayout<
     InferGetStaticPropsType<typeof getStaticProps>
-> = ({ notificationFlags }) => {
+> = () => {
     const [jobId, setJobId] = useState<{
         id: string | null | undefined;
         showContent: boolean;
@@ -60,9 +59,6 @@ const Internships: NextPageWithLayout<
         errorRetryCount: 2,
         errorRetryInterval: 1000,
     });
-
-    const [ _, setNotificationFlags ] = useRecoilState(notificationFlagsAtom);
-    setNotificationFlags(notificationFlags);
 
     const jobs = useMemo(
         () => flatMap(jobPages?.map(({ items }) => items || [])),

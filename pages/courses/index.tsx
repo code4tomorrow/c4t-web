@@ -16,7 +16,6 @@ import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import { makeStyles } from "tss-react/mui";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
-import { useRecoilState } from "recoil";
 
 export interface ICourse {
     title?: string;

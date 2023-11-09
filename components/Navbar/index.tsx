@@ -153,7 +153,7 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             (link) => link.route === pathname
         );
 
-        if (!currentLink) return;
+        if (!currentLink?.el) return;
   
         let { x, y, width, height } = linkHighlightRef.current.getBoundingClientRect();
 
@@ -176,7 +176,7 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             { x, y, width, height },
             { x: x2, y: y2, width: width2, height: height2, duration: 0.15 }
         );
-        /* eslint-disable */
+        
     }, [navItemRefs, pathname]);
 
     useEffect(handleRouterChange, [handleRouterChange]);
@@ -191,7 +191,7 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         const currentLink = navItemRefs.current.find(
             (link) => link.route === pathname
         );
-        if (!currentLink) return;
+        if (!currentLink?.el) return;
         const { x, width, height, y } = currentLink.el.getBoundingClientRect();
         gsap.to(linkHighlightRef.current, {
             opacity: 1,

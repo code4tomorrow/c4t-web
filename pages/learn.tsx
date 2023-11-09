@@ -10,7 +10,6 @@ import Head from "next/head";
 import { ReactElement } from "react";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
-import { useRecoilState } from "recoil";
 
 export interface IFAQ {
     question?: string;

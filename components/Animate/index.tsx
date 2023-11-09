@@ -1,5 +1,3 @@
-"use client"
-
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";

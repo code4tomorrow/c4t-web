@@ -1,6 +1,7 @@
 import { ContentModelID } from "@utils/contentful";
 import { Pages } from "common/enums/pages";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { revalidateTag } from "next/cache";
 require("dotenv").config();
 
 type Data = {
@@ -77,6 +78,11 @@ export default async function handler(
         if ([ContentModelID.CONTACT].includes(modelId)) {
             (await attemptRevalidation(res, Pages.CONTACT)) &&
                 pagesRevalidated.push(Pages.CONTACT);
+        }
+
+        if ([ContentModelID.NEWSLETTER].includes(modelId)) {
+            revalidateTag("newsletter");
+            pagesRevalidated.push(Pages.NEWSLETTER);
         }
 
         if ([ContentModelID.NOTIFICATION_FLAG].includes(modelId)) {
