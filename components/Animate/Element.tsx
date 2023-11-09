@@ -1,3 +1,5 @@
+"use client"
+
 import React, { ComponentPropsWithoutRef, ElementType, useState } from "react";
 import gsap from "gsap";
 import { useRef } from "react";

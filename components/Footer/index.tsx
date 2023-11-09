@@ -1,3 +1,5 @@
+"use client";
+
 import { PaperAirplaneIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import Link from "next/link";

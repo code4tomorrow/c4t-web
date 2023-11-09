@@ -1,5 +1,5 @@
 import Footer from "@components/Footer";
-import Navbar from "@components/Navbar";
+import Navbar, { notificationFlagsAtom } from "@components/Navbar";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import Head from "next/head";
 import React, {
@@ -34,6 +34,7 @@ import { useStyles } from "styles/internships";
 import InternshipPreview from "@components/JobBoard/InternshipPreview";
 import FullInternship from "@components/JobBoard/FullInternship";
 import clsx from "clsx";
+import { useRecoilState } from "recoil";
 
 const getInternshipURL = (pageIndex: number) => {
     return getAPIInternships(pageIndex, 5);
@@ -59,6 +60,9 @@ const Internships: NextPageWithLayout<
         errorRetryCount: 2,
         errorRetryInterval: 1000,
     });
+
+    const [ _, setNotificationFlags ] = useRecoilState(notificationFlagsAtom);
+    setNotificationFlags(notificationFlags);
 
     const jobs = useMemo(
         () => flatMap(jobPages?.map(({ items }) => items || [])),
@@ -130,7 +134,6 @@ const Internships: NextPageWithLayout<
             <Head>
                 <title>Internships | C4T</title>
             </Head>
-            <Navbar notificationFlags={notificationFlags} />
             <Animate>
                 {isMobile && (
                     <Modal
@@ -357,7 +360,12 @@ const Internships: NextPageWithLayout<
 };
 
 Internships.getLayout = (page: ReactElement) => {
-    return <WatsonAssistantChat>{page}</WatsonAssistantChat>;
+    return (
+        <>
+            <Navbar/>
+            <WatsonAssistantChat>{page}</WatsonAssistantChat>
+        </>
+    )
 };
 
 export async function getStaticProps() {

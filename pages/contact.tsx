@@ -39,8 +39,7 @@ interface ContactProps {
 }
 
 const ContactPage: NextPageWithLayout<ContactProps> = ({
-    notificationFlags,
-    departmentContacts,
+    departmentContacts
 }) => {
     const [departmentId, setDepartmentId] = useState<string | undefined>(
         departmentContacts[Math.floor(departmentContacts.length / 2)].sys.id
@@ -143,13 +142,12 @@ const ContactPage: NextPageWithLayout<ContactProps> = ({
 
     return (
         <div
-            style={{ width: "100vw", overflowX: "hidden" }}
+            style={{ width: "100vw" }}
             className="flex flex-col w-screen min-h-screen items-center bg-dark-grey-primary"
         >
             <Head>
                 <title>Contact | C4T</title>
             </Head>
-            <Navbar notificationFlags={notificationFlags} />
             <main className="flex-1 flex relative flex-col items-center my-5 w-full px-3">
                 <div className={contactStyles.gradientBubble}></div>
                 <h1
@@ -267,8 +265,11 @@ const ContactPage: NextPageWithLayout<ContactProps> = ({
     );
 };
 
-ContactPage.getLayout = (page: ReactElement) => {
-    return <WatsonAssistantChat>{page}</WatsonAssistantChat>;
+ContactPage.getLayout = (page: ReactElement, props) => {
+    return <>
+      <Navbar notificationFlags={props?.notificationFlags || []} />
+      <WatsonAssistantChat>{page}</WatsonAssistantChat>
+    </>
 };
 
 export async function getStaticProps() {

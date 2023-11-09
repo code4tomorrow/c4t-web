@@ -31,6 +31,7 @@ import flatMap from "lodash/flatMap";
 import Loader from "@components/Loader";
 import WalkSVG from "@svg/walk.svg";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
+import { useRecoilState } from "recoil";
 
 const getJobAPIKey = (pageIndex: number) => {
     return getAPIJobsPreview(pageIndex, 5);
@@ -38,7 +39,7 @@ const getJobAPIKey = (pageIndex: number) => {
 
 const JobBoard: NextPageWithLayout<
     InferGetStaticPropsType<typeof getStaticProps>
-> = ({ notificationFlags }) => {
+> = () => {
     const [jobId, setJobId] = useState<{
         id: string | null | undefined;
         showContent: boolean;
@@ -114,7 +115,6 @@ const JobBoard: NextPageWithLayout<
             <Head>
                 <title>Job Board | C4T</title>
             </Head>
-            <Navbar notificationFlags={notificationFlags} />
             <Animate>
                 {isMobile && (
                     <Modal
@@ -320,8 +320,11 @@ const JobBoard: NextPageWithLayout<
     );
 };
 
-JobBoard.getLayout = (page: ReactElement) => {
-    return <WatsonAssistantChat>{page}</WatsonAssistantChat>;
+JobBoard.getLayout = (page: ReactElement, props) => {
+    return <>
+      <Navbar notificationFlags={props?.notificationFlags || []} />
+      <WatsonAssistantChat>{page}</WatsonAssistantChat>
+    </>
 };
 
 export async function getStaticProps() {

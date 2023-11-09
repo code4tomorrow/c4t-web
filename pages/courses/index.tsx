@@ -16,6 +16,7 @@ import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import { makeStyles } from "tss-react/mui";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
+import { useRecoilState } from "recoil";
 
 export interface ICourse {
     title?: string;
@@ -52,8 +53,7 @@ function* pair<T>(iterable: Iterable<T>): Iterable<Iterable<T>> {
 }
 
 const Courses: NextPageWithLayout<CoursesProps> = ({
-    courses,
-    notificationFlags,
+    courses
 }) => {
     const [emblaRef, emblaAPI] = useEmblaCarousel({
         axis: "y",
@@ -144,7 +144,6 @@ const Courses: NextPageWithLayout<CoursesProps> = ({
             <Head>
                 <title>Courses | C4T</title>
             </Head>
-            <Navbar notificationFlags={notificationFlags} />
             <Animate>
                 <main
                     className={clsx(
@@ -261,8 +260,11 @@ const Courses: NextPageWithLayout<CoursesProps> = ({
     );
 };
 
-Courses.getLayout = (page: ReactElement) => {
-    return <WatsonAssistantChat>{page}</WatsonAssistantChat>;
+Courses.getLayout = (page: ReactElement, props) => {
+    return <>
+      <Navbar notificationFlags={props?.notificationFlags || []} />
+      <WatsonAssistantChat>{page}</WatsonAssistantChat>
+    </>
 };
 
 export async function getStaticProps() {

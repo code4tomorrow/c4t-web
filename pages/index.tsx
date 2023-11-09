@@ -33,7 +33,7 @@ const CODE_ITEMS = ["Today.", "Websites.", "Games.", "iOS Apps."];
 
 const Home: NextPageWithLayout<
     InferGetServerSidePropsType<typeof getStaticProps>
-> = ({ notificationFlags, testimonials = [] }) => {
+> = ({ testimonials = [] }) => {
     const { classes } = useStyles();
 
     const mainRef = React.useRef<HTMLDivElement | null>(null);
@@ -53,7 +53,7 @@ const Home: NextPageWithLayout<
             <Head>
                 <title>Home | C4T</title>
             </Head>
-            <Navbar notificationFlags={notificationFlags} />
+            
             <header className="flex flex-col space-y-6 justify-center items-center p-3">
                 <h1
                     style={{
@@ -344,8 +344,11 @@ const Home: NextPageWithLayout<
     );
 };
 
-Home.getLayout = (page: ReactElement) => {
-    return <WatsonAssistantChat>{page}</WatsonAssistantChat>;
+Home.getLayout = (page: ReactElement, props) => {
+    return <>
+      <Navbar notificationFlags={props?.notificationFlags || []} />
+      <WatsonAssistantChat>{page}</WatsonAssistantChat>
+    </>
 };
 
 export async function getStaticProps() {

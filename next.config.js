@@ -5,6 +5,7 @@ const authorizedImageDomains = [
     "images.unsplash.com",
     "www.notion.so",
     "s3.us-west-2.amazonaws.com",
+    "images.ctfassets.net"
 ];
 
 /** @type {import('next').NextConfig} */

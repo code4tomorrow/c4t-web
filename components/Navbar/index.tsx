@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx";
 import Link from "next/link";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
@@ -13,10 +15,10 @@ import {
 import { useRef } from "react";
 import gsap from "gsap";
 import { useThrottledCallback } from "use-debounce";
-import { useNavigator } from "hooks/useNavigator";
 import GoArrow from "@components/GoArrow";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import Document from "@components/Document";
+import { usePathname, useRouter } from "next/navigation";
 
 const NavNotification = ({
     notificationFlag,
@@ -24,7 +26,6 @@ const NavNotification = ({
     notificationFlag: INotificationFlag;
 }) => {
     const { classes } = useStyles();
-
     const Component = !!notificationFlag.link ? "a" : "div";
 
     return (
@@ -74,19 +75,20 @@ const NavListItem = React.forwardRef<ILink[], NavListItemProps>(
     ({ children, href = "/", ...props }, ref) => {
         const containerRef = useRef<HTMLLIElement | null>(null);
 
-        const router = useNavigator();
+        const pathname = usePathname();
+        const router = useRouter();
 
         const handleRouteChange = (e: React.MouseEvent) => {
             e.preventDefault();
             e.stopPropagation();
-            router.push(href, { pathname: href });
+            router.push(href);
         };
 
         const { classes } = useStyles();
 
         const isActive = useMemo(
-            () => href === router.pathname,
-            [href, router.pathname]
+            () => href === pathname,
+            [href, pathname]
         );
 
         return (
@@ -127,7 +129,7 @@ const NavListItem = React.forwardRef<ILink[], NavListItemProps>(
 NavListItem.displayName = "NavListItem";
 
 interface NavbarProps {
-    notificationFlags?: INotificationFlag[];
+    notificationFlags?: INotificationFlag[]
 }
 
 const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
@@ -141,31 +143,20 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
 
     const linkHighlightRef = useRef<HTMLDivElement | null>(null);
 
-    const router = useNavigator();
-
+    const pathname = usePathname();
     const scrollOffset = useRef(0);
 
     const handleRouterChange = useCallback(() => {
         if (!linkHighlightRef.current || !navItemRefs.current) return;
 
         const currentLink = navItemRefs.current.find(
-            (link) => link.route === router.pathname
+            (link) => link.route === pathname
         );
 
         if (!currentLink) return;
+  
+        let { x, y, width, height } = linkHighlightRef.current.getBoundingClientRect();
 
-        const ref = router.previousRoute()?.toString();
-
-        let prevLink: ILink | undefined;
-
-        if (ref) {
-            prevLink = navItemRefs.current.find(
-                (item) => item.route === encodeURI(ref)
-            );
-        }
-        if (!prevLink) prevLink = currentLink;
-
-        const { x, y, width, height } = prevLink.el.getBoundingClientRect();
         const {
             x: x2,
             y: y2,
@@ -173,13 +164,20 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             height: height2,
         } = currentLink.el.getBoundingClientRect();
 
+        if (x == 0 && y == 0) {
+            x = x2; 
+            y = y2; 
+            width = width2;; 
+            height = height2;
+        }
+
         gsap.fromTo(
             linkHighlightRef.current,
             { x, y, width, height },
             { x: x2, y: y2, width: width2, height: height2, duration: 0.15 }
         );
         /* eslint-disable */
-    }, [navItemRefs, router.pathname]);
+    }, [navItemRefs, pathname]);
 
     useEffect(handleRouterChange, [handleRouterChange]);
 
@@ -191,7 +189,7 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         )
             return;
         const currentLink = navItemRefs.current.find(
-            (link) => link.route === router.pathname
+            (link) => link.route === pathname
         );
         if (!currentLink) return;
         const { x, width, height, y } = currentLink.el.getBoundingClientRect();
@@ -309,7 +307,7 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
                     </NavListItem>
                 </ul>
             </nav>
-            <div className="w-screen md:z-50 lg:none flex justify-center items-center mt-16">
+            <div className="w-screen md:z-50 lg:none flex relative justify-center items-center mt-16">
                 {!!notificationFlags?.length && (
                     <NavNotification notificationFlag={notificationFlags[0]} />
                 )}

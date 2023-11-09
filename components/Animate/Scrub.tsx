@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx";
 import _isEqual from "lodash/isEqual";
 import cloneDeep from "lodash/cloneDeep";

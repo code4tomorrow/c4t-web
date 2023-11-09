@@ -20,6 +20,7 @@ import dynamic from "next/dynamic";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
 import { getAlumniDirectory, IAlumniDirectoryRow } from "@utils/notion/alumniDirectory";
+
 const Directory = dynamic(() => import("@components/About/Directory"));
 const AlumniDirectory = dynamic(() => import("@components/About/AlumniDirectory"));
 
@@ -32,7 +33,6 @@ interface AboutProps {
 const About: NextPageWithLayout<AboutProps> = ({
     directoryEntries,
     alumniDirectoryEntries,
-    notificationFlags,
 }) => {
     const missionRef = useRef<HTMLDivElement | null>(null);
     const directoryEntriesParsed = new JsonQL().revert<IDirectoryRow[]>(
@@ -53,7 +53,7 @@ const About: NextPageWithLayout<AboutProps> = ({
             <Head>
                 <title>About | C4T</title>
             </Head>
-            <Navbar notificationFlags={notificationFlags} />
+          
             <Animate>
                 <main className="pt-4 md:px-6 px-4 w-full my-8 flex flex-col items-center">
                     <section className="my-6 flex flex-col items-center">
@@ -404,8 +404,11 @@ const About: NextPageWithLayout<AboutProps> = ({
     );
 };
 
-About.getLayout = (page: ReactElement) => {
-    return <WatsonAssistantChat>{page}</WatsonAssistantChat>;
+About.getLayout = (page: ReactElement, props) => {
+    return <>
+      <Navbar notificationFlags={props?.notificationFlags || []} />
+      <WatsonAssistantChat>{page}</WatsonAssistantChat>
+    </>
 };
 
 export default About;
