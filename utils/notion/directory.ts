@@ -16,7 +16,6 @@ export interface IDirectoryRow {
     state: IDirectoryItem | null;
     country: IDirectoryItem | null;
     page_children: ListBlockChildrenResponse | null;
-
 }
 
 // Team Directory Notion Database UUID
@@ -81,15 +80,14 @@ export const getDirectory = async (): Promise<IDirectoryRow[]> => {
             properties?.Department?.[properties?.Department?.type] || [];
         const projects = properties?.Projects?.[properties?.Projects?.type];
 
-        let pageContents : ListBlockChildrenResponse;
-        try{
+        let pageContents: ListBlockChildrenResponse;
+        try {
             pageContents = await notion.blocks.children.list({
-                block_id: row.id
+                block_id: row.id,
             });
-        }catch (e: any) {
+        } catch (e: any) {
             return [];
         }
-
 
         return {
             name: properties?.Name?.title[0]?.text.content || null,
@@ -117,7 +115,7 @@ export const getDirectory = async (): Promise<IDirectoryRow[]> => {
                 name: country?.name || null,
                 color: country?.color ? notionColorMap(country.color) : null,
             },
-            page_children: await pageContents || null,
+            page_children: (await pageContents) || null,
         };
     });
 

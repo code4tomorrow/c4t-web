@@ -28,9 +28,7 @@ interface LearnProps {
     notificationFlags: INotificationFlag[];
 }
 
-const Learn: NextPageWithLayout<LearnProps> = ({
-    faqsGroupedByType
-}) => {    
+const Learn: NextPageWithLayout<LearnProps> = ({ faqsGroupedByType }) => {
     return (
         <div
             style={{ width: "100vw", overflowX: "clip" }}
@@ -50,10 +48,12 @@ const Learn: NextPageWithLayout<LearnProps> = ({
 };
 
 Learn.getLayout = (page: ReactElement, props) => {
-    return <>
-      <Navbar notificationFlags={props?.notificationFlags || []} />
-      <WatsonAssistantChat>{page}</WatsonAssistantChat>
-    </>
+    return (
+        <>
+            <Navbar notificationFlags={props?.notificationFlags || []} />
+            <WatsonAssistantChat>{page}</WatsonAssistantChat>
+        </>
+    );
 };
 
 export async function getStaticProps() {

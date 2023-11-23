@@ -320,10 +320,12 @@ const JobBoard: NextPageWithLayout<
 };
 
 JobBoard.getLayout = (page: ReactElement, props) => {
-    return <>
-      <Navbar notificationFlags={props?.notificationFlags || []} />
-      <WatsonAssistantChat>{page}</WatsonAssistantChat>
-    </>
+    return (
+        <>
+            <Navbar notificationFlags={props?.notificationFlags || []} />
+            <WatsonAssistantChat>{page}</WatsonAssistantChat>
+        </>
+    );
 };
 
 export async function getStaticProps() {

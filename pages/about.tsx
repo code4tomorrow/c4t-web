@@ -19,10 +19,15 @@ import JsonQL, { JsonQLObject } from "@mahitm/jsonql";
 import dynamic from "next/dynamic";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
-import { getAlumniDirectory, IAlumniDirectoryRow } from "@utils/notion/alumniDirectory";
+import {
+    getAlumniDirectory,
+    IAlumniDirectoryRow,
+} from "@utils/notion/alumniDirectory";
 
 const Directory = dynamic(() => import("@components/About/Directory"));
-const AlumniDirectory = dynamic(() => import("@components/About/AlumniDirectory"));
+const AlumniDirectory = dynamic(
+    () => import("@components/About/AlumniDirectory")
+);
 
 interface AboutProps {
     directoryEntries: JsonQLObject;
@@ -39,9 +44,9 @@ const About: NextPageWithLayout<AboutProps> = ({
         directoryEntries
     );
 
-    const alumniDirectoryEntriesParsed = new JsonQL().revert<IAlumniDirectoryRow[]>(
-        alumniDirectoryEntries
-    );
+    const alumniDirectoryEntriesParsed = new JsonQL().revert<
+        IAlumniDirectoryRow[]
+    >(alumniDirectoryEntries);
 
     const [foundingStoryExpanded, setFoundingStoryExpanded] = useState(false);
 
@@ -53,7 +58,7 @@ const About: NextPageWithLayout<AboutProps> = ({
             <Head>
                 <title>About | C4T</title>
             </Head>
-          
+
             <Animate>
                 <main className="pt-4 md:px-6 px-4 w-full my-8 flex flex-col items-center">
                     <section className="my-6 flex flex-col items-center">
@@ -252,12 +257,13 @@ const About: NextPageWithLayout<AboutProps> = ({
                                 to={{ y: 0, opacity: 1, delay: 0.15 }}
                                 className="text-lg !mt-3 text-medium-grey text-center"
                             >
-                                Former members and teachers who made C4T what it is{" "}
-                                <b>today</b>.
+                                Former members and teachers who made C4T what it
+                                is <b>today</b>.
                             </Animate.Element>
-
                         </div>
-                        <AlumniDirectory directoryEntries={alumniDirectoryEntriesParsed} />
+                        <AlumniDirectory
+                            directoryEntries={alumniDirectoryEntriesParsed}
+                        />
                     </section>
                     <svg width={0} height={0}>
                         <clipPath
@@ -405,10 +411,12 @@ const About: NextPageWithLayout<AboutProps> = ({
 };
 
 About.getLayout = (page: ReactElement, props) => {
-    return <>
-      <Navbar notificationFlags={props?.notificationFlags || []} />
-      <WatsonAssistantChat>{page}</WatsonAssistantChat>
-    </>
+    return (
+        <>
+            <Navbar notificationFlags={props?.notificationFlags || []} />
+            <WatsonAssistantChat>{page}</WatsonAssistantChat>
+        </>
+    );
 };
 
 export default About;

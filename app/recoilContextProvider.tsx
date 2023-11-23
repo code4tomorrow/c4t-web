@@ -6,8 +6,8 @@ interface IRecoilContextProviderProps {
     children: React.ReactNode;
 }
 
-export const RecoilContextProvider : React.FC<IRecoilContextProviderProps> = ({ children }) => (
-    <RecoilRoot>{ children }</RecoilRoot>
-)
+export const RecoilContextProvider: React.FC<IRecoilContextProviderProps> = ({
+    children,
+}) => <RecoilRoot>{children}</RecoilRoot>;
 
 export default RecoilContextProvider;

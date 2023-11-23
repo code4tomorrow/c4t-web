@@ -5,15 +5,17 @@ import React from "react";
 import { useFormStatus } from "react-dom";
 
 const NewsletterSubscribeButton = () => {
-    const { pending } = useFormStatus()
-    
+    const { pending } = useFormStatus();
+
     return (
-        <BrandButton 
+        <BrandButton
             disabled={pending}
             title={pending ? "Subscribing" : "Subscribe"}
             className="ml-2 rounded-[6px]"
         >
-            {pending ? <Loader className="!h-0" /> : (
+            {pending ? (
+                <Loader className="!h-0" />
+            ) : (
                 <BellIcon
                     color="#fff"
                     className="-translate-y-[1px]"
@@ -21,7 +23,7 @@ const NewsletterSubscribeButton = () => {
                 />
             )}
         </BrandButton>
-    )
-}   
+    );
+};
 
 export default NewsletterSubscribeButton;

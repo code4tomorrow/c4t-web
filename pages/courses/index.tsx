@@ -51,9 +51,7 @@ function* pair<T>(iterable: Iterable<T>): Iterable<Iterable<T>> {
     }
 }
 
-const Courses: NextPageWithLayout<CoursesProps> = ({
-    courses
-}) => {
+const Courses: NextPageWithLayout<CoursesProps> = ({ courses }) => {
     const [emblaRef, emblaAPI] = useEmblaCarousel({
         axis: "y",
         skipSnaps: false,
@@ -260,10 +258,12 @@ const Courses: NextPageWithLayout<CoursesProps> = ({
 };
 
 Courses.getLayout = (page: ReactElement, props) => {
-    return <>
-      <Navbar notificationFlags={props?.notificationFlags || []} />
-      <WatsonAssistantChat>{page}</WatsonAssistantChat>
-    </>
+    return (
+        <>
+            <Navbar notificationFlags={props?.notificationFlags || []} />
+            <WatsonAssistantChat>{page}</WatsonAssistantChat>
+        </>
+    );
 };
 
 export async function getStaticProps() {

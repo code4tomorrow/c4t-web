@@ -28,7 +28,7 @@ interface VolunteerProps {
 }
 
 const Volunteer: NextPageWithLayout<VolunteerProps> = ({
-    volunteerOpportunities
+    volunteerOpportunities,
 }) => {
     return (
         <div
@@ -88,10 +88,12 @@ const Volunteer: NextPageWithLayout<VolunteerProps> = ({
 };
 
 Volunteer.getLayout = (page: ReactElement, props) => {
-    return <>
-      <Navbar notificationFlags={props?.notificationFlags || []} />
-      <WatsonAssistantChat>{page}</WatsonAssistantChat>
-    </>
+    return (
+        <>
+            <Navbar notificationFlags={props?.notificationFlags || []} />
+            <WatsonAssistantChat>{page}</WatsonAssistantChat>
+        </>
+    );
 };
 
 export default Volunteer;

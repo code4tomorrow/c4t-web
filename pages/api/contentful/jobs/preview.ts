@@ -28,7 +28,7 @@ export default async function handler(req: NextRequest, _ctx: NextFetchEvent) {
     const page = parseInt(req.nextUrl.searchParams.get("page") || "0");
 
     const contentfulResponse = await graphQLHTTPRequest<{
-        jobCollection: IJob[]   
+        jobCollection: IJob[];
     }>(jobPreviewQuery, {
         limit,
         skip: page * limit,

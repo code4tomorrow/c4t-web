@@ -81,7 +81,7 @@ export default async function handler(
         }
 
         if ([ContentModelID.NEWSLETTER].includes(modelId)) {
-            revalidateTag("newsletter");
+            revalidateTag("newsletters");
             pagesRevalidated.push(Pages.NEWSLETTER);
         }
 
