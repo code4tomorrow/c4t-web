@@ -91,7 +91,10 @@ export default function AlumniInformation({
                                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                                 // @ts-ignore
                                 <NotionBlocks
-                                    blocks={alumniInfo.page_children.results}
+                                    blocks={
+                                        alumniInfo.page_children
+                                            .results as unknown as any
+                                    }
                                 />
                             }
                         </div>
