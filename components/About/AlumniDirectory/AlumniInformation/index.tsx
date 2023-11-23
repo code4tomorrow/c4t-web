@@ -89,7 +89,7 @@ export default function AlumniInformation({
                         >
                             {
                                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                                //@ts-ignore
+                                // @ts-ignore
                                 <NotionBlocks
                                     blocks={alumniInfo.page_children.results}
                                 />
