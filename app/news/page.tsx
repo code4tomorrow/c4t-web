@@ -9,7 +9,6 @@ import NewsletterContent from "./NewsletterContent";
 import Footer from "@components/Footer";
 import { getNewsletterPlaceholder } from "@utils/getNewsletterPlaceholder";
 import { Metadata } from "next";
-import Head from "next/head";
 
 export interface ISubscribeState {
     success: boolean | null;
@@ -169,7 +168,6 @@ const Newsletter = async () => {
 
     return (
         <>
-            <Head></Head>
             <Navbar
                 notificationFlags={
                     response?.data.notificationFlagCollection.items || []
