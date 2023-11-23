@@ -66,8 +66,11 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
                     content="width=device-width, initial-scale=1, maximum-scale=5"
                 />
                 <meta name="theme-color" content="#111111" />
-                <link rel="apple-touch-icon" href={getCloudinaryURL("logo")} />
-                <link rel="icon" href={getCloudinaryURL("logo")} />
+                <link
+                    rel="apple-touch-icon"
+                    href={getCloudinaryURL("logo-v2")}
+                />
+                <link rel="icon" href={getCloudinaryURL("logo-v2")} />
             </Head>
             <NextSeo
                 key={"root"}

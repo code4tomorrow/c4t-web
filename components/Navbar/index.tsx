@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import clsx from "clsx";
 import Link from "next/link";
@@ -20,6 +20,8 @@ import GoArrow from "@components/GoArrow";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import Document from "@components/Document";
 import { usePathname, useRouter } from "next/navigation";
+import { getCloudinaryURL } from "@utils/cloudinary-loader";
+import Image from "next/image";
 
 const NavNotification = ({
     notificationFlag,
@@ -87,10 +89,7 @@ const NavListItem = React.forwardRef<ILink[], NavListItemProps>(
 
         const { classes } = useStyles();
 
-        const isActive = useMemo(
-            () => href === pathname,
-            [href, pathname]
-        );
+        const isActive = useMemo(() => href === pathname, [href, pathname]);
 
         return (
             <Link href={{ pathname: href }} legacyBehavior>
@@ -130,7 +129,7 @@ const NavListItem = React.forwardRef<ILink[], NavListItemProps>(
 NavListItem.displayName = "NavListItem";
 
 interface NavbarProps {
-    notificationFlags?: INotificationFlag[]
+    notificationFlags?: INotificationFlag[];
 }
 
 const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
@@ -155,9 +154,10 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         );
 
         if (!currentLink?.el) return;
-  
-        let { x, y, width, height } = linkHighlightRef.current.getBoundingClientRect();
-        let originalOpacity = 1; 
+
+        let { x, y, width, height } =
+            linkHighlightRef.current.getBoundingClientRect();
+        let originalOpacity = 1;
 
         const {
             x: x2,
@@ -167,19 +167,25 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         } = currentLink.el.getBoundingClientRect();
 
         if (x == 0 && y == 0) {
-            x = x2; 
-            y = y2; 
-            width = width2;; 
+            x = x2;
+            y = y2;
+            width = width2;
             height = height2;
-            originalOpacity = 0; 
+            originalOpacity = 0;
         }
 
         gsap.fromTo(
             linkHighlightRef.current,
             { x, y, width, height, opacity: originalOpacity },
-            { x: x2, y: y2, width: width2, height: height2, opacity: 1, duration: 0.15 }
+            {
+                x: x2,
+                y: y2,
+                width: width2,
+                height: height2,
+                opacity: 1,
+                duration: 0.15,
+            }
         );
-        
     }, [navItemRefs, pathname]);
 
     useEffect(handleRouterChange, [handleRouterChange]);
@@ -215,7 +221,7 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         setTimeout(() => {
             handleResize();
         }, 500);
-    }, [ handleResize ]);
+    }, [handleResize]);
 
     const handleScroll = useCallback(() => {
         if (window.scrollY >= scrollOffset.current && window.scrollY !== 0)
@@ -262,7 +268,16 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
                     passHref
                     className="hover:opacity-80 flex items-center h-4 transition-opacity"
                 >
-                    <h1 className="text-lg font-bold text-white">C4T</h1>
+                    <Image
+                        src={getCloudinaryURL("logo-v2")}
+                        alt="C4T Logo"
+                        width={40}
+                        height={40}
+                        className="mr-2"
+                    />
+                    <h1 className="text-lg font-bold text-white hidden md:inline-block">
+                        C4T
+                    </h1>
                 </Link>
                 <div
                     className={clsx(

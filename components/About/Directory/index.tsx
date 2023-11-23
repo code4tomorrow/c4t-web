@@ -17,24 +17,36 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
 
     const { width } = useDimensions({ enableDebounce: true });
     const isMobile = useMemo(() => width < 768, [width]);
-    
-    const [ displayAlumni, setDisplayAlumni ] = useState<IDirectoryRow>();
-    const [clickedPosition, setClickedPosition] = useState<{ top: number; left: number }>();
 
-    const updateAlumniShow = (props:IDirectoryRow, event: React.MouseEvent) => {
-        setDisplayAlumni(props)
+    const [displayAlumni, setDisplayAlumni] = useState<IDirectoryRow>();
+    const [clickedPosition, setClickedPosition] = useState<{
+        top: number;
+        left: number;
+    }>();
 
-        const elementClicked = event.currentTarget as HTMLElement
+    const updateAlumniShow = (
+        props: IDirectoryRow,
+        event: React.MouseEvent
+    ) => {
+        setDisplayAlumni(props);
 
-        const top = elementClicked.getBoundingClientRect().top - (document.getElementById("memberContainer")?.getBoundingClientRect().top ?? 0);
-        const left = elementClicked.getBoundingClientRect().left - (document.getElementById("memberContainer")?.getBoundingClientRect().left ?? 0);;
+        const elementClicked = event.currentTarget as HTMLElement;
 
-        setClickedPosition({top, left});
-    }
+        const top =
+            elementClicked.getBoundingClientRect().top -
+            (document.getElementById("memberContainer")?.getBoundingClientRect()
+                .top ?? 0);
+        const left =
+            elementClicked.getBoundingClientRect().left -
+            (document.getElementById("memberContainer")?.getBoundingClientRect()
+                .left ?? 0);
+
+        setClickedPosition({ top, left });
+    };
 
     const clearAlumniDisplay = () => {
-        setDisplayAlumni(undefined)
-    }
+        setDisplayAlumni(undefined);
+    };
 
     const columns: Column<IDirectoryRow>[] = React.useMemo(
         () =>
@@ -43,14 +55,19 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
                     Header: "Name",
                     accessor: (e) => (
                         <div className="text-medium-grey">
-                            {
-                                (e.page_children !== null && JSON.stringify(e.page_children?.results) != "[]") ? 
-                                <span className="cursor-pointer underline hover:text-brand-purple-secondary" onClick={
-                                    (event) => updateAlumniShow(e, event)}>
-                                {e.name}</span> :
+                            {e.page_children !== null &&
+                            JSON.stringify(e.page_children?.results) != "[]" ? (
+                                <span
+                                    className="cursor-pointer underline hover:text-brand-purple-secondary"
+                                    onClick={(event) =>
+                                        updateAlumniShow(e, event)
+                                    }
+                                >
+                                    {e.name}
+                                </span>
+                            ) : (
                                 <span>{e.name}</span>
-                            }
-                            
+                            )}
                         </div>
                     ),
                 },
@@ -196,14 +213,21 @@ const Directory: React.FC<IDirectoryProps> = ({ directoryEntries }) => {
             )}
             id={"memberContainer"}
         >
-            <div className="flex w-[300px] sm:w-[500px] absolute z-50" 
-            style={{
-                marginTop: (clickedPosition?.top ?? 0) - 30,
-                marginLeft: (!isMobile) ? (clickedPosition?.left ?? 0) + 175 : 0,
-            }}
-        >
-                <MemberInformation key={clickedPosition?.top} memberInfo={displayAlumni} onExit={() => clearAlumniDisplay()}/>
-        </div>            
+            <div
+                className="flex w-[300px] sm:w-[500px] absolute z-50"
+                style={{
+                    marginTop: (clickedPosition?.top ?? 0) - 30,
+                    marginLeft: !isMobile
+                        ? (clickedPosition?.left ?? 0) + 175
+                        : 0,
+                }}
+            >
+                <MemberInformation
+                    key={clickedPosition?.top}
+                    memberInfo={displayAlumni}
+                    onExit={() => clearAlumniDisplay()}
+                />
+            </div>
             <div
                 {...getTableProps()}
                 className={clsx(

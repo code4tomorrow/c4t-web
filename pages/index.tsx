@@ -53,7 +53,7 @@ const Home: NextPageWithLayout<
             <Head>
                 <title>Home | C4T</title>
             </Head>
-            
+
             <header className="flex flex-col space-y-6 justify-center items-center p-3">
                 <h1
                     style={{
@@ -206,8 +206,11 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                        C4T&apos;s classes will return in the Winter! You&apos;ll be able to Learn languages such as Python,
-                                        Java, and more by competent teachers — all for free!&nbsp;
+                                        C4T&apos;s classes will return in the
+                                        Winter! You&apos;ll be able to Learn
+                                        languages such as Python, Java, and more
+                                        by competent teachers — all for
+                                        free!&nbsp;
                                     </p>
                                 </div>
                             </Animate.Element>
@@ -345,10 +348,12 @@ const Home: NextPageWithLayout<
 };
 
 Home.getLayout = (page: ReactElement, props) => {
-    return <>
-      <Navbar notificationFlags={props?.notificationFlags || []} />
-      <WatsonAssistantChat>{page}</WatsonAssistantChat>
-    </>
+    return (
+        <>
+            <Navbar notificationFlags={props?.notificationFlags || []} />
+            <WatsonAssistantChat>{page}</WatsonAssistantChat>
+        </>
+    );
 };
 
 export async function getStaticProps() {

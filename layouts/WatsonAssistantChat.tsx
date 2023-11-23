@@ -35,7 +35,7 @@ const WatsonAssistantChat: React.FC<{
             showLauncher: false,
             onLoad: (wacInstance: any) => {
                 wacInstance.updateHomeScreenConfig({
-                    bot_avatar_url: getCloudinaryURL("logo"),
+                    bot_avatar_url: getCloudinaryURL("logo-v2-bg"),
                 });
                 wacInstance.updateCSSVariables({
                     "BASE-font-family": '"Raleway"',

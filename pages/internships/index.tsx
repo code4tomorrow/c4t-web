@@ -358,10 +358,10 @@ const Internships: NextPageWithLayout<
 Internships.getLayout = (page: ReactElement) => {
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <WatsonAssistantChat>{page}</WatsonAssistantChat>
         </>
-    )
+    );
 };
 
 export async function getStaticProps() {

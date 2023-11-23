@@ -413,7 +413,8 @@ export async function getStaticProps(context: { params: { slug: string[] } }) {
         const blockId = inverseObject[encodedURI];
         if (!!blockId) pageId = blockId;
 
-        if (!pageId) pageId = convertCompressedBase64ToUUID(context.params.slug[0]);
+        if (!pageId)
+            pageId = convertCompressedBase64ToUUID(context.params.slug[0]);
     }
 
     // If slug is not an identified path from cache or an Id, redirect to course home page

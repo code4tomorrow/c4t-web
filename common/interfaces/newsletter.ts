@@ -1,13 +1,13 @@
 export interface INewsletter {
     sys: {
-        id: string; 
-    }; 
+        id: string;
+    };
     graphic: {
-        url: string; 
-        width: number; 
+        url: string;
+        width: number;
         height: number;
     };
     date: string;
-    title: string; 
+    title: string;
     placeholderDataURL?: string | null;
 }

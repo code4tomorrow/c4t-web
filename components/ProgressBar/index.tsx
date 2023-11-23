@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Router from "next/router";
 import NProgress, { NProgressOptions } from "nprogress";

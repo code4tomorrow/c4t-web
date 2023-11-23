@@ -39,7 +39,7 @@ interface ContactProps {
 }
 
 const ContactPage: NextPageWithLayout<ContactProps> = ({
-    departmentContacts
+    departmentContacts,
 }) => {
     const [departmentId, setDepartmentId] = useState<string | undefined>(
         departmentContacts[Math.floor(departmentContacts.length / 2)].sys.id
@@ -266,10 +266,12 @@ const ContactPage: NextPageWithLayout<ContactProps> = ({
 };
 
 ContactPage.getLayout = (page: ReactElement, props) => {
-    return <>
-      <Navbar notificationFlags={props?.notificationFlags || []} />
-      <WatsonAssistantChat>{page}</WatsonAssistantChat>
-    </>
+    return (
+        <>
+            <Navbar notificationFlags={props?.notificationFlags || []} />
+            <WatsonAssistantChat>{page}</WatsonAssistantChat>
+        </>
+    );
 };
 
 export async function getStaticProps() {

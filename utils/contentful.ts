@@ -12,7 +12,11 @@ export const graphQLClient = new GraphQLClient(CONTENTFUL_GRAPHQL_ENDPOINT, {
     },
 });
 
-export async function graphQLHTTPRequest<T>(query: string, variables: object, next?: NextFetchRequestConfig) : Promise<{ data: T } | null> {
+export async function graphQLHTTPRequest<T>(
+    query: string,
+    variables: object,
+    next?: NextFetchRequestConfig
+): Promise<{ data: T } | null> {
     const response = await fetch(CONTENTFUL_GRAPHQL_ENDPOINT, {
         method: "POST",
         headers: {
@@ -23,7 +27,7 @@ export async function graphQLHTTPRequest<T>(query: string, variables: object, ne
             query,
             variables,
         }),
-        next
+        next,
     }).catch((e) => {
         console.error("Contentful GraphQL Query Error: ", e);
         return null;

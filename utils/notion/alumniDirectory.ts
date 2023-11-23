@@ -33,14 +33,11 @@ export const getAlumniDirectory = async (): Promise<IAlumniDirectoryRow[]> => {
                     property: "C4T Graduating Year",
                     direction: "descending",
                 },
-            ]
+            ],
         });
     } catch (e: any) {
         return [];
     }
-
-
-    
 
     // Filters any rows with "Status" field as null
     const filteredResults = data?.results?.filter((row) => {
@@ -56,27 +53,34 @@ export const getAlumniDirectory = async (): Promise<IAlumniDirectoryRow[]> => {
         const properties = (row as any).properties;
 
         const country = properties?.Country?.[properties?.Country?.type];
-        const former_position = properties?.["Former Position"]?.[properties?.["Former Position"]?.type];
-        const college = properties?.College?.[properties?.College?.type]
-        const former_projects = properties?.["Former Projects"]?.[properties?.["Former Projects"]?.type] || [];
+        const former_position =
+            properties?.["Former Position"]?.[
+                properties?.["Former Position"]?.type
+            ];
+        const college = properties?.College?.[properties?.College?.type];
+        const former_projects =
+            properties?.["Former Projects"]?.[
+                properties?.["Former Projects"]?.type
+            ] || [];
 
-        let pageContents : ListBlockChildrenResponse;
-        try{
+        let pageContents: ListBlockChildrenResponse;
+        try {
             pageContents = await notion.blocks.children.list({
-                block_id: row.id
+                block_id: row.id,
             });
-        }catch (e: any) {
+        } catch (e: any) {
             return [];
         }
 
-        
-
         return {
             name: properties?.Name?.title[0]?.text.content || null,
-            graduation_year: properties?.["C4T Graduating Year"]?.number || null,
+            graduation_year:
+                properties?.["C4T Graduating Year"]?.number || null,
             former_position: {
                 name: former_position?.name || null,
-                color: former_position?.color ? notionColorMap(former_position.color) : null,
+                color: former_position?.color
+                    ? notionColorMap(former_position.color)
+                    : null,
             },
             former_projects: former_projects.map(
                 ({ name = null, color = null }: IAlumniDirectoryItem) => ({
@@ -92,7 +96,7 @@ export const getAlumniDirectory = async (): Promise<IAlumniDirectoryRow[]> => {
                 name: country?.name || null,
                 color: country?.color ? notionColorMap(country.color) : null,
             },
-            page_children: await pageContents || null,
+            page_children: (await pageContents) || null,
         };
     });
 
