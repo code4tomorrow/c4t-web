@@ -21,7 +21,8 @@ const config = extend(
             defaultTemplateId: "d-f8cf0a4781c14b1ebdda5dc69da9e1c5",
         },
         links: {
-            studentRegistrationLink: "https://forms.gle/wbb8UdWDo7MDXvkR7",
+            studentRegistrationLink:
+                "https://docs.google.com/forms/d/e/1FAIpQLSePiXiC0IImqdNIvLZJXF1YNlsYPWk4LH5J0HDy7CfCyXQP8g/viewform?pli=1",
         },
         sender: {
             groups: {

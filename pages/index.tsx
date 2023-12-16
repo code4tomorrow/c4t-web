@@ -195,7 +195,8 @@ const Home: NextPageWithLayout<
                                 className="transition-transform duration-500"
                             >
                                 <h1 className="text-white text-4xl md:text-5xl font-extrabold">
-                                    C4T&apos;s Registration is Closed Currently.
+                                    C4T&apos;s Winter Session Registration is
+                                    Now Open!
                                 </h1>
                             </Animate.Element>
                             <Animate.Element
@@ -206,21 +207,25 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                        C4T&apos;s classes will return in the
-                                        Winter! You&apos;ll be able to Learn
-                                        languages such as Python, Java, and more
-                                        by competent teachers — all for
-                                        free!&nbsp;
+                                        C4T&apos;s coding classes are back with
+                                        more options than ever! You&apos;ll be
+                                        able to Learn languages such as Python,
+                                        Java, and more by competent teachers —
+                                        all for free!&nbsp;
                                     </p>
                                 </div>
                             </Animate.Element>
-                            <Link href="/courses" passHref legacyBehavior>
+                            <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mr-auto"
+                                href={config.links.studentRegistrationLink}
+                            >
                                 <BrandButton
-                                    containerClass="mr-auto"
-                                    title="View Courses"
-                                    as="a"
+                                    title="Register Now!"
+                                    label="Sign Up While Spots Last"
                                 />
-                            </Link>
+                            </a>
                         </article>
                         <div className={"md:my-0 my-8"}>
                             <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] " />
