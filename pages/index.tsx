@@ -195,8 +195,8 @@ const Home: NextPageWithLayout<
                                 className="transition-transform duration-500"
                             >
                                 <h1 className="text-white text-4xl md:text-5xl font-extrabold">
-                                    C4T&apos;s Winter Session Registration is
-                                    Now Open!
+                                    Stay Tuned for C4T&apos;s
+                                    Rapidly-Approaching Summer Session!
                                 </h1>
                             </Animate.Element>
                             <Animate.Element
@@ -207,11 +207,22 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                        C4T&apos;s coding classes are back with
-                                        more options than ever! You&apos;ll be
-                                        able to Learn languages such as Python,
-                                        Java, and more by competent teachers —
-                                        all for free!&nbsp;
+                                        C4T&apos;s coding classes are coming
+                                        back with more options than ever!
+                                        You&apos;ll be able to Learn languages
+                                        such as Python, Java, and more by
+                                        competent teachers — all for free!&nbsp;{" "}
+                                        <Link
+                                            className="underline"
+                                            href="/courses"
+                                        >
+                                            Check out
+                                        </Link>{" "}
+                                        our{" "}
+                                        <span className="text-brand-purple-secondary">
+                                            700+
+                                        </span>{" "}
+                                        pages of course material now.
                                     </p>
                                 </div>
                             </Animate.Element>
@@ -222,8 +233,9 @@ const Home: NextPageWithLayout<
                                 href={config.links.studentRegistrationLink}
                             >
                                 <BrandButton
+                                    disabled
                                     title="Register Now!"
-                                    label="Sign Up While Spots Last"
+                                    label="Coming Soon"
                                 />
                             </a>
                         </article>
