@@ -18,7 +18,7 @@ interface IFullJobProps {
     internship?: boolean;
 }
 
-const MEMBER_SIGNUP_LINK = "https://tally.so/r/mVgJl3";
+const MEMBER_SIGNUP_LINK = "https://tally.so/r/wQrGRG";
 const INTERNSHIP_SIGNUP_LINK = "https://tally.so/r/wobNke";
 
 const FullJob: React.FC<IFullJobProps> = ({ preview, internship = false }) => {
