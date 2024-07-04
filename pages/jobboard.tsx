@@ -171,7 +171,7 @@ const JobBoard: NextPageWithLayout<
                             style={{ display: "inline-block" }}
                             rel="noopener noreferrer nofollow"
                             target={"_blank"}
-                            href="https://tally.so/r/mVgJl3"
+                            href="https://tally.so/r/wQrGRG"
                             title="Apply Today."
                         />
                     </div>
