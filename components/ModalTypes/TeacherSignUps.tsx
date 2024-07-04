@@ -71,7 +71,7 @@ const TeacherSignUps = () => {
                     target={"_blank"}
                     href="https://forms.gle/JLreuhm8c8ULCiV7A"
                     containerClass="mt-12"
-                    title="View Teacher Positions."
+                    title="Coming Soon!"
                 />
                 <a
                     className="mt-6 text-medium-grey hover:underline"
