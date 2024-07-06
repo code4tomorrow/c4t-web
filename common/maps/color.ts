@@ -31,6 +31,8 @@ export const jobFactionMap = (faction: string) => {
             return "#F36F65";
         case EJobFaction.OUTREACH:
             return "#2C50FF";
+        case EJobFaction.OPERATIONS:
+            return "#1D9757";
         default:
             null;
     }
