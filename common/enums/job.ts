@@ -3,4 +3,5 @@ export enum EJobFaction {
     CLASSES = "classes",
     INTERNAL_AFFAIRS = "internal affairs",
     EVENTS = "events",
+    OPERATIONS = "operations",
 }
