@@ -89,7 +89,8 @@ const Home: NextPageWithLayout<
                     <BrandButton
                         className="w-[130px]"
                         title="Sign Up"
-                        href={config.links.studentRegistrationLink}
+                        // href={config.links.studentRegistrationLink} //
+                        href={'https://tally.so/r/wQrGRG'}
                         as="a"
                         target={"_blank"}
                         rel="noopener noreferrer"
