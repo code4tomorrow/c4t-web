@@ -227,7 +227,7 @@ const ContactPage: NextPageWithLayout<ContactProps> = ({
                         value={email}
                         required
                         type={"email"}
-                        placeholder="Email"
+                        placeholder=" Your Email"
                         onChange={(e) => setEmail(e.target.value)}
                         className={clsx(
                             "bg-dark-grey-secondary transition-all outline-none rounded-md text-white p-3 w-full md:w-1/2",
