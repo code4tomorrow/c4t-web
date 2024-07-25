@@ -178,11 +178,11 @@ const About: NextPageWithLayout<AboutProps> = ({
                                 style={{ gridTemplateColumns: "1fr 1fr" }}
                                 className="grid md:pt-0 pt-12 sm:gap-6 gap-3 justify-center items-center"
                             >
-                                <Skill stat={"4500+"} label="Students Educated">
+                                <Skill stat={"4600+"} label="Students Educated">
                                     In just 6 weeks, students are taught
                                     priceless skills by qualified teachers.
                                 </Skill>
-                                <Skill stat={"400+"} label="Teachers">
+                                <Skill stat={"430+"} label="Teachers">
                                     Over a hundred dedicated high-school
                                     teachers passing along their knowledge to
                                     k-12 students.
@@ -194,8 +194,8 @@ const About: NextPageWithLayout<AboutProps> = ({
                                     Uzbekistan.
                                 </Skill>
                                 <Skill
-                                    stat={"55,000+"}
-                                    label="Individuals Impacted"
+                                    stat={"55.500+"}
+                                    label="Hours Taught"
                                 >
                                     Through our non-profit, STEM initiative we
                                     have globally reached this milestone by our
