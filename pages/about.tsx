@@ -188,7 +188,7 @@ const About: NextPageWithLayout<AboutProps> = ({
                                     k-12 students.
                                 </Skill>
                                 <Skill stat={"165+"} label="Cities">
-                                    Our organization has reached 150+ cities
+                                    Our organization has reached 165+ cities
                                     spread across 15+ countries including
                                     Kazakhstan, Kenya, Turkey, Malaysia, and
                                     Uzbekistan.
