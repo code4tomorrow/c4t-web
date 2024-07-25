@@ -194,7 +194,7 @@ const About: NextPageWithLayout<AboutProps> = ({
                                     Uzbekistan.
                                 </Skill>
                                 <Skill
-                                    stat={"55.500+"}
+                                    stat={"55,500+"}
                                     label="Hours Taught"
                                 >
                                     Through our non-profit, STEM initiative we
