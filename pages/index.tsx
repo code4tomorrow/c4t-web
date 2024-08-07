@@ -234,6 +234,7 @@ const Home: NextPageWithLayout<
                                 href={config.links.studentRegistrationLink}
                             >
                                 <BrandButton
+                                    disabled
                                     title="Register Now!"
                                     label="Coming Soon"
                                 />
