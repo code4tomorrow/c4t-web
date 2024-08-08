@@ -197,7 +197,7 @@ const Home: NextPageWithLayout<
                             >
                                 <h1 className="text-white text-4xl md:text-5xl font-extrabold">
                                     Stay Tuned for C4T&apos;s
-                                    Rapidly-Approaching Summer Session!
+                                    Rapidly-Approaching Workshops!
                                 </h1>
                             </Animate.Element>
                             <Animate.Element
@@ -208,11 +208,14 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                        C4T&apos;s coding classes are coming
-                                        back with more options than ever!
-                                        You&apos;ll be able to Learn languages
-                                        such as Python, Java, and more by
-                                        competent teachers — all for free!&nbsp;{" "}
+                                        C4T is excited to introduce their new
+                                        workshops where students of all
+                                        ages can learn about topics that can 
+                                        pave the way for their future career.
+                                        From learning new programming languages
+                                        to understanding advanced technologies,
+                                        we offer a workshop for everyone.
+                                        back with more options than ever!&nbsp;{" "}
                                         <Link
                                             className="underline"
                                             href="/courses"
