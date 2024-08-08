@@ -22,7 +22,7 @@ const config = extend(
         },
         links: {
             studentRegistrationLink:
-                "https://docs.google.com/forms/d/e/1FAIpQLSePiXiC0IImqdNIvLZJXF1YNlsYPWk4LH5J0HDy7CfCyXQP8g/viewform?pli=1",
+                "https://tally.so/r/wooeGP",
         },
         sender: {
             groups: {
