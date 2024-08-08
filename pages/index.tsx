@@ -90,7 +90,7 @@ const Home: NextPageWithLayout<
                         className="w-[130px]"
                         title="Sign Up"
                         // href={config.links.studentRegistrationLink} //
-                        href={'https://tally.so/r/wQrGRG'}
+                        href={'https://tally.so/r/wooeGP'}
                         as="a"
                         target={"_blank"}
                         rel="noopener noreferrer"
@@ -196,8 +196,8 @@ const Home: NextPageWithLayout<
                                 className="transition-transform duration-500"
                             >
                                 <h1 className="text-white text-4xl md:text-5xl font-extrabold">
-                                    Stay Tuned for C4T&apos;s
-                                    Rapidly-Approaching Workshops!
+                                    Signup Now for C4T&apos;s
+                                    Workshops!
                                 </h1>
                             </Animate.Element>
                             <Animate.Element
