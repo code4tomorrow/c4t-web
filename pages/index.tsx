@@ -216,17 +216,7 @@ const Home: NextPageWithLayout<
                                         we invite you to share your knowledge with students of all 
                                         ages and help shape their future careers. Sign up to be 
                                         teacher today and make a difference!&nbsp;{" "}
-                                        <Link
-                                            className="underline"
-                                            href="/courses"
-                                        >
-                                            Check out
-                                        </Link>{" "}
-                                        our{" "}
-                                        <span className="text-brand-purple-secondary">
-                                            700+
-                                        </span>{" "}
-                                        pages of course material now.
+                                        
                                     </p>
                                 </div>
                             </Animate.Element>
