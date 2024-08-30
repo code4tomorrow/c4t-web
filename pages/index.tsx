@@ -196,8 +196,9 @@ const Home: NextPageWithLayout<
                                 className="transition-transform duration-500"
                             >
                                 <h1 className="text-white text-4xl md:text-5xl font-extrabold">
-                                    Signup Now for C4T&apos;s
-                                    Workshops!
+                                    Signup Now for to be a 
+                                    C4T Teacher!
+                                    
                                 </h1>
                             </Animate.Element>
                             <Animate.Element
@@ -208,14 +209,13 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                        C4T is excited to introduce their new
-                                        workshops where students of all
-                                        ages can learn about topics that can 
-                                        pave the way for their future career.
-                                        From learning new programming languages
-                                        to understanding advanced technologies,
-                                        we offer a workshop for everyone.
-                                        back with more options than ever!&nbsp;{" "}
+                                        C4T is excited to announce we are now
+                                        offering opputunities for dedicated teacher
+                                        to join our team! Whether you're an expert in programming 
+                                        languages, advanced technologies, or any other field, 
+                                        we invite you to share your knowledge with students of all 
+                                        ages and help shape their future careers. Sign up to be 
+                                        teacher today and make a difference!&nbsp;{" "}
                                         <Link
                                             className="underline"
                                             href="/courses"
@@ -238,7 +238,7 @@ const Home: NextPageWithLayout<
                             >
                                 <BrandButton
                                     title="Register Now!"
-                                    label="Coming Soon"
+                                    //label="Coming Soon"
                                 />
                             </a>
                         </article>

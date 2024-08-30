@@ -22,7 +22,7 @@ const config = extend(
         },
         links: {
             studentRegistrationLink:
-                "https://tally.so/r/wooeGP",
+                "https://tally.so/r/3qOMR7",
         },
         sender: {
             groups: {
