@@ -193,10 +193,7 @@ const About: NextPageWithLayout<AboutProps> = ({
                                     Kazakhstan, Kenya, Turkey, Malaysia, and
                                     Uzbekistan.
                                 </Skill>
-                                <Skill
-                                    stat={"55,500+"}
-                                    label="Hours Taught"
-                                >
+                                <Skill stat={"55,500+"} label="Hours Taught">
                                     Through our non-profit, STEM initiative we
                                     have globally reached this milestone by our
                                     numerous programs.

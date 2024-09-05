@@ -21,8 +21,7 @@ const config = extend(
             defaultTemplateId: "d-f8cf0a4781c14b1ebdda5dc69da9e1c5",
         },
         links: {
-            studentRegistrationLink:
-                "https://tally.so/r/3qOMR7",
+            studentRegistrationLink: "https://tally.so/r/3qOMR7",
         },
         sender: {
             groups: {

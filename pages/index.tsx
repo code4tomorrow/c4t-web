@@ -90,7 +90,7 @@ const Home: NextPageWithLayout<
                         className="w-[130px]"
                         title="Sign Up"
                         // href={config.links.studentRegistrationLink} //
-                        href={'https://tally.so/r/wooeGP'}
+                        href={"https://tally.so/r/wooeGP"}
                         as="a"
                         target={"_blank"}
                         rel="noopener noreferrer"
@@ -196,9 +196,7 @@ const Home: NextPageWithLayout<
                                 className="transition-transform duration-500"
                             >
                                 <h1 className="text-white text-4xl md:text-5xl font-extrabold">
-                                    Signup Now for to be a 
-                                    C4T Teacher!
-                                    
+                                    Signup Now for to be a C4T Teacher!
                                 </h1>
                             </Animate.Element>
                             <Animate.Element
@@ -210,13 +208,15 @@ const Home: NextPageWithLayout<
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
                                         C4T is excited to announce we are now
-                                        offering opputunities for dedicated teacher
-                                        to join our team! Whether you're an expert in programming 
-                                        languages, advanced technologies, or any other field, 
-                                        we invite you to share your knowledge with students of all 
-                                        ages and help shape their future careers. Sign up to be 
-                                        teacher today and make a difference!&nbsp;{" "}
-                                        
+                                        offering opputunities for dedicated
+                                        teacher to join our team! Whether
+                                        you&apos;re an expert in programming
+                                        languages, advanced technologies, or any
+                                        other field, we invite you to share your
+                                        knowledge with students of all ages and
+                                        help shape their future careers. Sign up
+                                        to be teacher today and make a
+                                        difference!&nbsp;{" "}
                                     </p>
                                 </div>
                             </Animate.Element>
