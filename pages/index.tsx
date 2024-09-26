@@ -209,7 +209,7 @@ const Home: NextPageWithLayout<
                                     <p className="text-medium-grey">
                                         Sign up for Code 4 Tomorrow's free computer science classes!
                                         We offer courses in Java, Python, Scratch, Web Development,
-                                        Machine Learning, JavaScript, and C for beginner to advanced students.{" "}
+                                        Machine Learning, JavaScript, and C for beginner to advanced students.
                                     </p>
                                 </div>
                             </Animate.Element>
