@@ -217,7 +217,7 @@ const Home: NextPageWithLayout<
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="mr-auto"
-                                href={config.links.studentRegistrationLink}
+                                href={"https://tally.so/r/n9vQbQ"}
                             >
                                 <BrandButton
                                     title="Register Now!"
