@@ -90,7 +90,7 @@ const Home: NextPageWithLayout<
                         className="w-[130px]"
                         title="Sign Up"
                         // href={config.links.studentRegistrationLink} //
-                        href={"https://tally.so/r/wooeGP"}
+                        href={"https://tally.so/r/n9vQbQ"}
                         as="a"
                         target={"_blank"}
                         rel="noopener noreferrer"
