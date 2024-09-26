@@ -207,9 +207,9 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                    Sign up for Code 4 Tomorrow&apos;s free computer science classes!
-                                    We offer courses in Java, Python, Scratch, Web Development,
-                                    Machine Learning, JavaScript, and C for beginner to advanced students.{" "}
+                                        Sign up for Code 4 Tomorrow&apos;s free computer science classes!
+                                        We offer courses in Java, Python, Scratch, Web Development,
+                                        Machine Learning, JavaScript, and C for beginner to advanced students.{" "}
                                     </p>
                                 </div>
                             </Animate.Element>
