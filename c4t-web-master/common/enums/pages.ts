@@ -1,0 +1,10 @@
+export enum Pages {
+    INDEX = "/",
+    COURSES = "/courses",
+    LEARN = "/learn",
+    VOLUNTEER = "/volunteer",
+    ABOUT = "/about",
+    JOBBOARD = "/jobs",
+    CONTACT = "/contact",
+    NEWSLETTER = "/news",
+}

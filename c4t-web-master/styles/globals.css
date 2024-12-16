@@ -1,0 +1,82 @@
+@tailwind components;
+@tailwind utilities;
+@tailwind base;
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Raleway", -apple-system, "roboto", BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #111111;
+    overflow-x: hidden;
+}
+
+html,
+body {
+    overscroll-behavior: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.chevrow-container:hover svg[data-go-arrow] {
+    transform: translateX(0px);
+}
+
+.chevrow-container:hover svg[data-go-arrow] .octicon-chevrow-stem {
+    stroke-dasharray: 0px;
+    stroke-dashoffset: 0px;
+}
+
+.notion-frame {
+    --bg-color: #111111;
+    --bg-color-0: #202124 !important;
+}
+
+.notion-header {
+    z-index: 40 !important;
+}
+
+.breadcrumb {
+    text-overflow: unset;
+    overflow: hidden;
+}
+
+.breadcrumb .title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notion-table::-webkit-scrollbar {
+    background-color: transparent;
+    height: 0;
+    width: 0;
+}
+
+.WACWidget.WACWidget--rounded {
+    border-radius: 7px !important;
+}
+
+.WACHomeScreenHeader .WACHeader {
+    border-top-left-radius: 7px !important;
+    border-top-right-radius: 7px !important;
+}
+
+.WACWidget.WACWidget--rounded .WACWidget__animationContainer {
+    border-top-left-radius: 7px !important;
+    border-top-right-radius: 7px !important;
+}
