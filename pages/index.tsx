@@ -237,45 +237,6 @@ const Home: NextPageWithLayout<
                             <img src="images/citrotalks2024/citrotalks2024.png" />
                         </div>
                     </section>
-    
-        
-                         
-
-/*
-      <h4>Past Events</h4>
-      <div class="grid-container">
-        <a href="/citrohacks/2021/index.html" class="event-holder blue">
-          <div>
-            <h4>How to Get Started in Coding</h4>
-            <h5>Zion Asemota</h5>
-            <img src="images/citro_hacks_1.png" />
-          </div>
-        </a>
-        <a href="/citrohacks/2021/index.html" class="event-holder pink">
-          <div>
-            <h4>Careers In Tech</h4>
-            <h5>Victoria Chen and Brian Kao</h5>
-            <img src="images/citro_hacks_1.png" />
-          </div>
-        </a>
-        <a href="/citrohacks/2021/index.html" class="event-holder yellow">
-          <div>
-            <h4>Citro Hacks</h4>
-            <h5>Hackathon</h5>
-            <img src="images/citro_hacks_1.png" />
-          </div>
-        </a>
-        <a href="/citrohacks/index.html" class="event-holder green">
-          <div>
-            <h4>Citro Hacks 2.0</h4>
-            <h5>Hackathon</h5>
-            <img src="" />
-          </div>
-        </a>
-      </div>
-    </section>
-
-*/
 
                     
                     
