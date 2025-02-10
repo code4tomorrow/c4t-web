@@ -234,8 +234,13 @@ const Home: NextPageWithLayout<
                     <section id="events">
                         <h3>Events</h3>
                         <h4>Upcoming Event</h4>
-                        <div class="grid-container-upcoming" id = "grid-container-img">
-                            <img src="/Users/nachiketbidarkundi/c4t-web/Recycle 4 Tomorrow-1.png" />
+                        <div className="grid-container-upcoming" id="grid-container-img">
+                            <Image 
+                                src="/Users/nachiketbidarkundi/c4t-web/Recycle 4 Tomorrow-1.png" 
+                                alt="Description of image"
+                                width={500} 
+                                height={300} 
+                            />
                         </div>
                     </section>
                     
