@@ -207,9 +207,9 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                        Sign up for Code 4 Tomorrow&apos;s free computer science classes!
-                                        We offer courses in Java, Python, Scratch, Web Development,
-                                        Machine Learning, JavaScript, and C for beginner to advanced students. Final day to Sign up is October 6th!{" "}
+                                    Sign up for Code 4 Tomorrow&apos;s free computer science classes!
+                                    We offer courses in Java, Python, Scratch, Web Development,
+                                    Machine Learning, JavaScript, and C for beginner to advanced students.{" "}
                                     </p>
                                 </div>
                             </Animate.Element>
@@ -217,7 +217,7 @@ const Home: NextPageWithLayout<
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="mr-auto"
-                                href={"https://tally.so/r/n9vQbQ"}
+                                href={config.links.studentRegistrationLink}
                             >
                                 <BrandButton
                                     title="Register Now!"
@@ -229,6 +229,62 @@ const Home: NextPageWithLayout<
                             <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] " />
                         </div>
                     </section>
+                    
+                    <section id="events">
+                        <h3>Events</h3>
+                        <h4>Upcoming Event</h4>
+                        <div class="grid-container-upcoming" id = "/Users/nachiketbidarkundi/c4t-web/Recycle 4 Tomorrow-1.png">
+                            <img src="images/citrotalks2024/citrotalks2024.png" />
+                        </div>
+                    </section>
+    
+        
+                         
+
+/*
+      <h4>Past Events</h4>
+      <div class="grid-container">
+        <a href="/citrohacks/2021/index.html" class="event-holder blue">
+          <div>
+            <h4>How to Get Started in Coding</h4>
+            <h5>Zion Asemota</h5>
+            <img src="images/citro_hacks_1.png" />
+          </div>
+        </a>
+        <a href="/citrohacks/2021/index.html" class="event-holder pink">
+          <div>
+            <h4>Careers In Tech</h4>
+            <h5>Victoria Chen and Brian Kao</h5>
+            <img src="images/citro_hacks_1.png" />
+          </div>
+        </a>
+        <a href="/citrohacks/2021/index.html" class="event-holder yellow">
+          <div>
+            <h4>Citro Hacks</h4>
+            <h5>Hackathon</h5>
+            <img src="images/citro_hacks_1.png" />
+          </div>
+        </a>
+        <a href="/citrohacks/index.html" class="event-holder green">
+          <div>
+            <h4>Citro Hacks 2.0</h4>
+            <h5>Hackathon</h5>
+            <img src="" />
+          </div>
+        </a>
+      </div>
+    </section>
+
+*/
+
+                    
+                    
+
+
+
+
+
+
                     <section className="w-full flex flex-col items-center">
                         <div ref={testimonialsRef} className="mb-20 w-full">
                             <Animate.Element
