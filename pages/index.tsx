@@ -230,18 +230,9 @@ const Home: NextPageWithLayout<
                         </div>
                     </section>
                     
-                    <section id="events">
-                        <h3>Events</h3>
-                        <h4>Upcoming Event</h4>
-                        <div class="grid-container-upcoming" id = "/Users/nachiketbidarkundi/c4t-web/Recycle 4 Tomorrow-1.png">
-                            <img src="images/citrotalks2024/citrotalks2024.png" />
-                        </div>
-                    </section>
 
                     
                     
-
-
 
 
 
