@@ -236,8 +236,8 @@ const Home: NextPageWithLayout<
                         <h4>Upcoming Event</h4>
                         <div className="grid-container-upcoming" id="grid-container-img">
                             <Image 
-                                src="/Users/nachiketbidarkundi/c4t-web/Recycle 4 Tomorrow-1.png" 
-                                alt="Description of image"
+                                src="/Recycle 4 Tomorrow-1.png" 
+                                alt="Upcoming Events"
                                 width={500} 
                                 height={300} 
                             />
