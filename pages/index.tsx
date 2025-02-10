@@ -232,8 +232,9 @@ const Home: NextPageWithLayout<
                     
                     
                     <section id="events">
-                        <h3>Events</h3>
-                        <h4>Upcoming Event</h4>
+                        <h1 className="text-white text-4xl md:text-5xl font-extrabold">
+                            Upcoming Events!
+                        </h1>
                         <div className="grid-container-upcoming" id="grid-container-img">
                             <Image 
                                 src="/Recycle 4 Tomorrow-1.png" 
