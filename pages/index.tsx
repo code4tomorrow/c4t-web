@@ -231,7 +231,7 @@ const Home: NextPageWithLayout<
                     </section>
                     
                     
-                    <section id="events">
+                    {/* <section id="events">
                         <h1 className="text-white text-4xl md:text-5xl font-extrabold">
                             Upcoming Events!
                         </h1>
@@ -243,7 +243,7 @@ const Home: NextPageWithLayout<
                                 height={300} 
                             />
                         </div>
-                    </section>
+                    </section> */}
                     
 
 
