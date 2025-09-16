@@ -207,9 +207,9 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                        Sign up for Code 4 Tomorrow&apos;s free computer science classes!
-                                        We offer courses in Java, Python, Scratch, Web Development,
-                                        Machine Learning, JavaScript, and C for beginner to advanced students. Final day to Sign up is October 6th!{" "}
+                                    Sign up for Code 4 Tomorrow&apos;s free computer science classes!
+                                    We offer courses in Java, Python, Scratch, Web Development,
+                                    Machine Learning, JavaScript, and C for beginner to advanced students.{" "}
                                     </p>
                                 </div>
                             </Animate.Element>
@@ -217,7 +217,7 @@ const Home: NextPageWithLayout<
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="mr-auto"
-                                href={"https://tally.so/r/n9vQbQ"}
+                                href={config.links.studentRegistrationLink}
                             >
                                 <BrandButton
                                     title="Register Now!"
@@ -229,6 +229,26 @@ const Home: NextPageWithLayout<
                             <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] " />
                         </div>
                     </section>
+                    
+                    
+                    {/* <section id="events">
+                        <h1 className="text-white text-4xl md:text-5xl font-extrabold">
+                            Upcoming Events!
+                        </h1>
+                        <div className="grid-container-upcoming" id="grid-container-img">
+                            <Image 
+                                src="/Recycle 4 Tomorrow-1.png" 
+                                alt="Upcoming Events"
+                                width={500} 
+                                height={300} 
+                            />
+                        </div>
+                    </section> */}
+                    
+
+
+
+
                     <section className="w-full flex flex-col items-center">
                         <div ref={testimonialsRef} className="mb-20 w-full">
                             <Animate.Element
