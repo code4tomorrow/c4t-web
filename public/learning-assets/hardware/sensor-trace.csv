@@ -1,0 +1,10 @@
+timestamp_s,device_id,button_a,accel_x_g,accel_y_g,compass_deg,temperature_c,soil_moisture_pct,distance_cm,left_motor_pct,right_motor_pct,radio_group,radio_payload,edge_prediction,edge_confidence
+0,sim-rover-01,0,0.01,0.98,90,21.4,47,120,35,35,7,"state=clear;temp=21.4",clear,0.82
+1,sim-rover-01,1,0.04,1.02,92,21.5,46,96,40,40,7,"button=A;distance=96",clear,0.79
+2,sim-rover-01,0,0.12,0.95,95,21.5,45,70,40,40,7,"state=clear;distance=70",clear,0.73
+3,sim-rover-01,0,0.18,0.91,101,21.6,44,42,30,30,7,"state=watch;distance=42",obstacle,0.66
+4,sim-rover-01,0,0.25,0.88,108,21.6,43,24,0,0,7,"state=stop;distance=24",obstacle,0.91
+5,sim-rover-01,0,-0.31,0.84,132,21.7,43,25,-30,30,7,"state=turn;heading=132",obstacle,0.89
+6,sim-rover-01,0,-0.08,0.97,168,21.7,42,55,35,35,7,"state=clear;distance=55",clear,0.71
+7,sim-rover-01,0,0.03,1.01,172,21.8,41,88,40,40,7,"state=clear;moisture=41",clear,0.84
+8,sim-rover-01,1,0.02,0.99,174,21.8,40,110,0,0,7,"button=A;state=finish",clear,0.87

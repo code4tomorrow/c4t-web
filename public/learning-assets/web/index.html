@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Community equipment starter</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="app.js" defer></script>
+    </head>
+    <body>
+        <a class="skip-link" href="#main-content">Skip to main content</a>
+        <header class="site-header">
+            <p class="eyebrow">Code4Tomorrow starter</p>
+            <h1>Community equipment list</h1>
+            <p>
+                Filter fixed fictional records. This page does not contact a
+                server or reserve real equipment.
+            </p>
+        </header>
+
+        <main id="main-content">
+            <form id="filter-form" class="filter-panel">
+                <label for="status-filter">Show equipment with status</label>
+                <select id="status-filter" name="status">
+                    <option value="all">All statuses</option>
+                    <option value="available">Available</option>
+                    <option value="checked-out">Checked out</option>
+                    <option value="maintenance">Maintenance</option>
+                </select>
+                <button type="submit">Apply filter</button>
+            </form>
+
+            <p id="result-status" role="status" aria-live="polite"></p>
+
+            <div
+                class="table-scroll"
+                tabindex="0"
+                aria-label="Scrollable equipment results"
+            >
+                <table>
+                    <caption>
+                        Fictional equipment records; no inventory action is
+                        performed.
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="equipment-rows"></tbody>
+                </table>
+            </div>
+
+            <noscript>
+                JavaScript is disabled. The exercise’s fixed records are also
+                available in ../api/community-lab-api.json.
+            </noscript>
+        </main>
+    </body>
+</html>

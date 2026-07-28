@@ -23,3 +23,13 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Online Learning
+
+The repository includes a 25-course online curriculum with free setup modules,
+browser-based hardware and compute simulators, local learner progress,
+assignments, achievements, and certificates. No account, paid API, cloud
+credit, GPU, or physical hardware is required for the learner pathway.
+
+See [ONLINE_LEARNING.md](./ONLINE_LEARNING.md) for the architecture, routes,
+content workflow, validation commands, privacy model, and current limitations.

@@ -1,0 +1,13 @@
+observation_id,day,plot_zone,plant_type,temperature_c,soil_moisture_pct,light_lux,water_added_l,plant_height_cm,health_label
+obs-001,2026-04-01,north,basil,20.8,46,16400,0.0,7.4,healthy
+obs-002,2026-04-01,south,tomato,22.1,38,20100,0.4,11.8,watch
+obs-003,2026-04-02,north,basil,21.3,43,17800,0.2,7.9,healthy
+obs-004,2026-04-02,south,tomato,23.4,34,21900,0.6,12.5,watch
+obs-005,2026-04-03,east,lettuce,19.7,58,13200,0.0,6.1,healthy
+obs-006,2026-04-03,west,pepper,24.2,29,22600,0.7,9.2,stressed
+obs-007,2026-04-04,east,lettuce,20.2,54,14500,0.1,6.6,healthy
+obs-008,2026-04-04,west,pepper,25.1,,23800,0.8,9.5,stressed
+obs-009,2026-04-05,north,basil,22.0,41,18700,0.2,8.6,healthy
+obs-010,2026-04-05,south,tomato,24.7,31,23100,0.7,13.4,stressed
+obs-011,2026-04-06,east,lettuce,21.0,50,15100,0.1,7.0,healthy
+obs-012,2026-04-06,west,pepper,23.8,36,20800,0.5,10.1,watch

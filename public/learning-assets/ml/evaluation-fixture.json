@@ -1,0 +1,154 @@
+{
+    "license": "CC0-1.0",
+    "fixture_version": "1.0",
+    "accessible_description": "Fixed synthetic values for practicing classification metrics, retrieval grounding, research comparison, drift review, and deployment monitoring without training or calling a model.",
+    "limitations": [
+        "No model was trained or executed to produce this fixture.",
+        "The sample is intentionally tiny and cannot establish real performance, fairness, safety, or statistical significance.",
+        "Probabilities, latency values, documents, and monitoring windows are invented for instruction."
+    ],
+    "classification": {
+        "task": "Predict whether a fictional garden observation needs attention.",
+        "model_version": "teaching-classifier-2",
+        "labels": ["healthy", "stressed"],
+        "decision_rule": "Predict stressed when score_stressed is at least 0.50.",
+        "samples": [
+            {
+                "id": "eval-01",
+                "zone": "north",
+                "expected": "healthy",
+                "predicted": "healthy",
+                "score_stressed": 0.12,
+                "latency_ms": 8
+            },
+            {
+                "id": "eval-02",
+                "zone": "south",
+                "expected": "healthy",
+                "predicted": "healthy",
+                "score_stressed": 0.28,
+                "latency_ms": 9
+            },
+            {
+                "id": "eval-03",
+                "zone": "north",
+                "expected": "stressed",
+                "predicted": "stressed",
+                "score_stressed": 0.81,
+                "latency_ms": 8
+            },
+            {
+                "id": "eval-04",
+                "zone": "south",
+                "expected": "stressed",
+                "predicted": "healthy",
+                "score_stressed": 0.44,
+                "latency_ms": 10
+            },
+            {
+                "id": "eval-05",
+                "zone": "north",
+                "expected": "healthy",
+                "predicted": "stressed",
+                "score_stressed": 0.67,
+                "latency_ms": 11
+            },
+            {
+                "id": "eval-06",
+                "zone": "south",
+                "expected": "stressed",
+                "predicted": "stressed",
+                "score_stressed": 0.74,
+                "latency_ms": 9
+            },
+            {
+                "id": "eval-07",
+                "zone": "north",
+                "expected": "healthy",
+                "predicted": "healthy",
+                "score_stressed": 0.21,
+                "latency_ms": 8
+            },
+            {
+                "id": "eval-08",
+                "zone": "south",
+                "expected": "stressed",
+                "predicted": "stressed",
+                "score_stressed": 0.91,
+                "latency_ms": 12
+            }
+        ]
+    },
+    "retrieval": {
+        "query": "When does the fictional watering guide recommend checking soil moisture?",
+        "documents": [
+            {
+                "id": "doc-a",
+                "text": "Check the synthetic moisture reading before watering and record the decision.",
+                "source_title": "Fictional garden guide, section 1"
+            },
+            {
+                "id": "doc-b",
+                "text": "The practice dashboard uses a blue heading and a compact table.",
+                "source_title": "Fictional interface note"
+            },
+            {
+                "id": "doc-c",
+                "text": "If a reading is missing, inspect the sensor trace before choosing an imputation method.",
+                "source_title": "Fictional data-quality note"
+            }
+        ],
+        "ranked_results": [
+            {
+                "document_id": "doc-a",
+                "score": 0.92,
+                "rank": 1
+            },
+            {
+                "document_id": "doc-c",
+                "score": 0.63,
+                "rank": 2
+            },
+            {
+                "document_id": "doc-b",
+                "score": 0.18,
+                "rank": 3
+            }
+        ],
+        "expected_relevant_document_ids": ["doc-a"],
+        "grounded_answer_fixture": {
+            "answer": "The guide recommends checking the synthetic moisture reading before watering.",
+            "citation_ids": ["doc-a"]
+        }
+    },
+    "research_comparison": {
+        "random_seed": 42,
+        "evaluation_rows": 8,
+        "baseline_correct": 5,
+        "candidate_correct": 6,
+        "required_interpretation": "Report the observed difference, but do not claim superiority from this tiny fixture."
+    },
+    "deployment_windows": [
+        {
+            "window": "synthetic-day-1",
+            "requests": 100,
+            "average_latency_ms": 10.2,
+            "errors": 1,
+            "average_soil_moisture_pct": 45.0
+        },
+        {
+            "window": "synthetic-day-2",
+            "requests": 100,
+            "average_latency_ms": 10.8,
+            "errors": 2,
+            "average_soil_moisture_pct": 40.5
+        },
+        {
+            "window": "synthetic-day-3",
+            "requests": 100,
+            "average_latency_ms": 18.7,
+            "errors": 9,
+            "average_soil_moisture_pct": 31.2
+        }
+    ]
+}

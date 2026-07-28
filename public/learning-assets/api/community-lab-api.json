@@ -1,0 +1,143 @@
+{
+    "license": "CC0-1.0",
+    "fixture_version": "1.0",
+    "accessible_description": "Five fixed HTTP examples for a fictional community equipment API. Each example names the request, status, headers, and response body in text.",
+    "notice": "This file is static teaching data, not a live API and not proof that a server request was executed.",
+    "base_path": "/api/practice",
+    "examples": [
+        {
+            "id": "list-items",
+            "description": "List available equipment.",
+            "request": {
+                "method": "GET",
+                "path": "/items?status=available",
+                "headers": {
+                    "Accept": "application/json"
+                },
+                "body": null
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "items": [
+                        {
+                            "id": "item-101",
+                            "name": "Sensor kit",
+                            "status": "available"
+                        },
+                        {
+                            "id": "item-102",
+                            "name": "USB cable",
+                            "status": "available"
+                        }
+                    ],
+                    "count": 2
+                }
+            }
+        },
+        {
+            "id": "create-item",
+            "description": "Create a valid equipment record.",
+            "request": {
+                "method": "POST",
+                "path": "/items",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "name": "Practice breadboard",
+                    "category": "electronics"
+                }
+            },
+            "response": {
+                "status": 201,
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Location": "/api/practice/items/item-103"
+                },
+                "body": {
+                    "id": "item-103",
+                    "name": "Practice breadboard",
+                    "category": "electronics",
+                    "status": "available"
+                }
+            }
+        },
+        {
+            "id": "reject-invalid-item",
+            "description": "Reject an item whose required name is blank.",
+            "request": {
+                "method": "POST",
+                "path": "/items",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "name": "",
+                    "category": "electronics"
+                }
+            },
+            "response": {
+                "status": 400,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "error": "validation_error",
+                    "fields": {
+                        "name": "Enter a name with at least one visible character."
+                    }
+                }
+            }
+        },
+        {
+            "id": "missing-item",
+            "description": "Return a not-found response for an unknown identifier.",
+            "request": {
+                "method": "GET",
+                "path": "/items/item-999",
+                "headers": {
+                    "Accept": "application/json"
+                },
+                "body": null
+            },
+            "response": {
+                "status": 404,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "error": "not_found",
+                    "message": "No item has the identifier item-999."
+                }
+            }
+        },
+        {
+            "id": "protected-update",
+            "description": "Reject a protected update when no authenticated practice session is present.",
+            "request": {
+                "method": "PATCH",
+                "path": "/items/item-101",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "status": "checked-out"
+                }
+            },
+            "response": {
+                "status": 401,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "error": "authentication_required",
+                    "message": "Sign in to update equipment status."
+                }
+            }
+        }
+    ]
+}

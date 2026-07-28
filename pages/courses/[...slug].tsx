@@ -44,6 +44,7 @@ import {
     validateUUID,
 } from "@utils/common";
 import { formatNotionRoute } from "@utils/notion/formatNotionRoute";
+import CourseAttribution from "@components/Learning/CourseAttribution";
 
 const Pdf = dynamic(
     () =>
@@ -211,6 +212,7 @@ const NotionCourse: React.FC<
                     nextLink: Link,
                 }}
             />
+            <CourseAttribution />
             <Footer className="!mt-auto" />
         </div>
     );
