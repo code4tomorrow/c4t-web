@@ -20,6 +20,7 @@ import type {
     PacingTemplate,
 } from "learning/course-models";
 import { courseRegistry, getCourseBySlug } from "learning/course-registry";
+import { getPathsForCourse } from "learning/learning-paths";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -70,6 +71,15 @@ type CourseOverview = Pick<
     pacing: Array<
         Pick<PacingTemplate, "id" | "type" | "suggestedWeeks" | "weeklyHours">
     >;
+    recommendedPriorCourses: Array<{ slug: string; title: string }>;
+    paths: Array<{
+        slug: string;
+        title: string;
+        summary: string;
+        icon: string;
+        position: number;
+        courseCount: number;
+    }>;
 };
 
 interface CoursePageProps {
@@ -356,6 +366,19 @@ const toCourseOverview = (course: Course): CourseOverview => ({
         suggestedWeeks: pacing.suggestedWeeks,
         weeklyHours: pacing.weeklyHours,
     })),
+    recommendedPriorCourses: course.recommendedPriorCourses
+        .map((courseId) => courseRegistry.find((item) => item.id === courseId))
+        .filter((item): item is Course => Boolean(item))
+        .map((item) => ({ slug: item.slug, title: item.title })),
+    paths: getPathsForCourse(course.id).map((path) => ({
+        slug: path.slug,
+        title: path.title,
+        summary: path.summary,
+        icon: path.icon,
+        position:
+            path.courses.findIndex((item) => item.course.id === course.id) + 1,
+        courseCount: path.courses.length,
+    })),
 });
 
 const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
@@ -641,7 +664,7 @@ const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
                             <div className="mt-5 grid gap-5 md:grid-cols-2">
                                 <div>
                                     <h3 className="font-bold text-white">
-                                        Before this course
+                                        Skills assumed
                                     </h3>
                                     <ul className="mt-3 space-y-2 text-sm leading-6 text-[#C7C3CE]">
                                         {course.prerequisites.map(
@@ -658,6 +681,39 @@ const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
                                             )
                                         )}
                                     </ul>
+
+                                    <h3 className="mt-5 font-bold text-white">
+                                        Recommended prior courses
+                                    </h3>
+                                    {course.recommendedPriorCourses.length ===
+                                    0 ? (
+                                        <p className="mt-3 text-sm leading-6 text-[#C7C3CE]">
+                                            None — this course is a starting
+                                            point.
+                                        </p>
+                                    ) : (
+                                        <>
+                                            <ul className="mt-3 space-y-2 text-sm leading-6">
+                                                {course.recommendedPriorCourses.map(
+                                                    (prior) => (
+                                                        <li key={prior.slug}>
+                                                            <Link
+                                                                href={`/courses/${prior.slug}`}
+                                                                className="text-brand-purple-secondary underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                                            >
+                                                                {prior.title}
+                                                            </Link>
+                                                        </li>
+                                                    )
+                                                )}
+                                            </ul>
+                                            <p className="mt-3 text-xs leading-5 text-medium-grey">
+                                                These are advisory, not locks.
+                                                If you already have the skills
+                                                listed above, enroll directly.
+                                            </p>
+                                        </>
+                                    )}
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-white">
@@ -681,6 +737,40 @@ const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
                                     </ul>
                                 </div>
                             </div>
+
+                            {course.paths.length > 0 && (
+                                <div className="mt-6 border-t border-white/10 pt-5">
+                                    <h3 className="font-bold text-white">
+                                        Part of{" "}
+                                        {course.paths.length === 1
+                                            ? "this learning path"
+                                            : "these learning paths"}
+                                    </h3>
+                                    <ul className="mt-3 space-y-3">
+                                        {course.paths.map((path) => (
+                                            <li
+                                                key={path.slug}
+                                                className="text-sm leading-6"
+                                            >
+                                                <Link
+                                                    href="/learn/paths"
+                                                    className="font-bold text-brand-purple-secondary underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                                >
+                                                    {path.icon} {path.title}
+                                                </Link>
+                                                <span className="text-medium-grey">
+                                                    {" "}
+                                                    · step {path.position} of{" "}
+                                                    {path.courseCount}
+                                                </span>
+                                                <p className="text-[#C7C3CE]">
+                                                    {path.summary}
+                                                </p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </section>
                     </div>
 

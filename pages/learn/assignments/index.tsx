@@ -1,9 +1,8 @@
 "use client";
 
 import CourseBadge from "@components/Learning/CourseBadge";
-import LearnerShell, {
-    LearnerNavigationItem,
-} from "@components/Learning/LearnerShell";
+import LearnerShell from "@components/Learning/LearnerShell";
+import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
 import { useLearningProgress } from "hooks/useLearningProgress";
 import type { RubricCriterion } from "learning/course-models";
 import { courseRegistry } from "learning/course-registry";
@@ -192,42 +191,11 @@ export const AssignmentsPage: React.FC<AssignmentsPageProps> = ({
         return statusLabel(attempts).filter === "pending";
     }).length;
 
-    const navigation: LearnerNavigationItem[] = [
-        {
-            id: "dashboard",
-            label: "Dashboard",
-            href: "/learn/dashboard",
-            icon: "⌂",
-        },
-        { id: "courses", label: "Courses", href: "/courses", icon: "⌘" },
-        {
-            id: "assignments",
-            label: "Assignments",
-            href: "/learn/assignments",
-            icon: "✓",
-            badge: pendingCount || undefined,
-        },
-        {
-            id: "progress",
-            label: "Progress",
-            href: "/learn/progress",
-            icon: "↗",
-        },
-        {
-            id: "achievements",
-            label: "Achievements",
-            href: "/learn/achievements",
-            icon: "★",
-            badge: summary.badgeCount || undefined,
-        },
-        {
-            id: "certificates",
-            label: "Certificates",
-            href: "/learn/certificates",
-            icon: "◇",
-            badge: Object.keys(state.certificates).length || undefined,
-        },
-    ];
+    const navigation = buildLearnerNavigation({
+        pendingAssignments: pendingCount,
+        badges: summary.badgeCount,
+        certificates: Object.keys(state.certificates).length,
+    });
 
     const recordSubmission = (project: ProjectWork) => {
         actions.recordAssignmentAttempt({
@@ -536,6 +504,12 @@ export const AssignmentsPage: React.FC<AssignmentsPageProps> = ({
                                                     >
                                                         Record passing review
                                                     </button>
+                                                    <Link
+                                                        href={`/learn/assignments/${project.id}`}
+                                                        className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold text-[#D6D3DC] outline-none hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                                    >
+                                                        Full report
+                                                    </Link>
                                                     <Link
                                                         href={`/courses/${project.courseSlug}`}
                                                         className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold text-[#D6D3DC] outline-none hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"

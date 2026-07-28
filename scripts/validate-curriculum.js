@@ -2,6 +2,7 @@
 
 const sourceCurriculum = require("../learning/source-curriculum");
 const courseBlueprints = require("../learning/course-blueprints");
+const learningPathDefinitions = require("../learning/learning-path-definitions");
 const {
     courseRegistry,
     curriculumCoverage,
@@ -377,6 +378,76 @@ if (internalToolPaths.size !== 24) {
     );
 }
 
+// --- Learning paths -------------------------------------------------------
+const registryCourseIds = new Set(courseRegistry.map((course) => course.id));
+const pathSlugs = new Set();
+const coursesInAnyPath = new Set();
+
+if (!Array.isArray(learningPathDefinitions) || !learningPathDefinitions.length) {
+    fail("No learning paths are defined.");
+}
+
+learningPathDefinitions.forEach((path) => {
+    const prefix = `Learning path "${path.slug || path.id}"`;
+
+    requireText(path.title, `${prefix} title`, 5);
+    requireText(path.summary, `${prefix} summary`, 40);
+    requireText(path.outcome, `${prefix} outcome`, 40);
+
+    if (!path.icon) fail(`${prefix} is missing an icon.`);
+    if (!/^#[0-9a-f]{6}$/i.test(path.accent || "")) {
+        fail(`${prefix} needs a six-digit hex accent colour.`);
+    }
+    if (!Array.isArray(path.skills) || path.skills.length < 3) {
+        fail(`${prefix} must list at least three skills.`);
+    }
+
+    if (pathSlugs.has(path.slug)) {
+        fail(`${prefix} has a duplicate slug.`);
+    }
+    pathSlugs.add(path.slug);
+
+    if (!Array.isArray(path.steps) || !path.steps.length) {
+        fail(`${prefix} has no courses.`);
+        return;
+    }
+
+    const seenInPath = new Set();
+    let coreCount = 0;
+
+    path.steps.forEach((step) => {
+        if (!registryCourseIds.has(step.courseId)) {
+            fail(`${prefix} references unknown course "${step.courseId}".`);
+            return;
+        }
+        if (seenInPath.has(step.courseId)) {
+            fail(`${prefix} lists course "${step.courseId}" more than once.`);
+        }
+        seenInPath.add(step.courseId);
+        coursesInAnyPath.add(step.courseId);
+
+        if (step.role !== "core" && step.role !== "foundation") {
+            fail(
+                `${prefix} course "${step.courseId}" has invalid role "${step.role}".`
+            );
+        }
+        if (step.role === "core") coreCount += 1;
+    });
+
+    if (!coreCount) {
+        fail(`${prefix} has no required (core) course, so it can never finish.`);
+    }
+});
+
+// A course that belongs to no path is unreachable from the guided experience.
+courseRegistry.forEach((course) => {
+    if (!coursesInAnyPath.has(course.id)) {
+        fail(
+            `Course "${course.slug}" is not part of any learning path. Add it to a path or create one.`
+        );
+    }
+});
+
 if (errors.length) {
     console.error(
         `Curriculum validation failed with ${errors.length} error(s):`
@@ -398,5 +469,5 @@ const lessonCount = courseRegistry.reduce(
 );
 
 console.log(
-    `Curriculum validation passed: ${courseRegistry.length} courses, ${lessonCount} lessons, ${curriculumCoverage.topicCount} mapped topics, ${internalToolPaths.size} internal free labs.`
+    `Curriculum validation passed: ${courseRegistry.length} courses, ${lessonCount} lessons, ${curriculumCoverage.topicCount} mapped topics, ${internalToolPaths.size} internal free labs, ${learningPathDefinitions.length} learning paths.`
 );

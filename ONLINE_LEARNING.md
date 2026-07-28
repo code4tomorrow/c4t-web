@@ -40,6 +40,15 @@ on individual page authors to remember them.
     assessments, requirements, pacing, certificate rules, and coverage records.
 -   `learning/curriculum-coverage.ts` exposes the machine-readable mapping from
     each source topic to its lesson and activity.
+-   `learning/learning-path-definitions.js` defines the seven ordered learning
+    paths through the catalog (CommonJS so the Node validator can check them).
+-   `learning/learning-paths.ts` wraps those definitions with typed helpers that
+    resolve course ids, total hours, capstones, and per-course path membership.
+
+Paths mark each course as `core` (counts toward finishing the path) or
+`foundation` (a recommended on-ramp). Prerequisites are advisory throughout —
+`recommendedPriorCourses` links to earlier courses but never blocks enrollment,
+so an experienced learner can start anywhere.
 
 Each course has eight modules: free setup, six connected core modules, and a
 capstone/reflection module. Every module has three substantive lessons, guided
@@ -49,9 +58,13 @@ self-paced and weekly pacing templates, and configurable certificate rules.
 
 ### Learner application
 
--   `/courses` — searchable and filterable 25-course catalog.
+-   `/courses` — searchable and filterable 25-course catalog, the learning-path
+    overview, and a link section for the instructor-led Notion course library.
 -   `/courses/[courseSlug]` — course overview, free setup walkthrough,
-    prerequisites, outcomes, projects, certificate rules, and full outline.
+    prerequisites, recommended prior courses, learning-path membership,
+    outcomes, projects, certificate rules, and full outline.
+-   `/learn/paths` — the seven learning paths with per-course status, path
+    completion, and a recommended next course.
 -   `/learn/courses/[courseSlug]/lessons/[lessonSlug]` — interactive lesson
     player with scenario, explanation, worked example, simulator, practice,
     feedback, checkpoint, progress, and resume behavior.
@@ -62,6 +75,8 @@ self-paced and weekly pacing templates, and configurable certificate rules.
 -   `/learn/assignments` — checkpoints, project rubrics, submissions, scores, and
     attempt history.
 -   `/learn/assignments/completed` — completed-assignment review.
+-   `/learn/assignments/[assignmentId]` — per-assignment report: best score,
+    attempts used, full attempt history, rubric, and lessons to revisit.
 -   `/learn/progress` — progress, learning time, streaks, and course summaries.
 -   `/learn/achievements` — points and earned badges.
 -   `/learn/certificates` — eligibility and printable local certificates.
@@ -109,6 +124,25 @@ The repository's existing public pages still require the Contentful and Notion
 variables documented in `env.template`. The local curriculum and learner
 experience do not require those credentials.
 
+## Deployment
+
+`npm run build` prerenders every course, lesson, and assignment page from the
+local registry — none of that needs credentials. Two things still do:
+
+-   `/courses/[...slug]` (the instructor-led Notion library) calls Contentful in
+    `getStaticPaths` and **fails the build** when `CONTENTFUL_SPACE_ID` and
+    `CONTENTFUL_ACCESS_TOKEN` are missing or invalid. Set them, or remove that
+    page if the Notion library is being retired.
+-   The instructor-led library section on `/courses` uses the same credentials
+    but is wrapped in a try/catch: without them it logs a warning and hides the
+    section rather than failing the build.
+
+`REDIS_URL` is optional. Without it the Notion sitemap cache falls back to the
+build cache and `ioredis` logs connection errors that do not stop the build.
+
+Because learner progress lives in `localStorage`, the learning platform itself
+needs no database, no session secret, and no OAuth application to deploy.
+
 ## Content-authoring rules
 
 When editing or adding a course:
@@ -127,7 +161,9 @@ When editing or adding a course:
 
 The validator rejects missing topics, courses, modules, lessons, assessments,
 free alternatives, simulators, pacing, certificate rules, safety guidance, or
-creator attribution. The learning-state validator rejects malformed or
+creator attribution. It also rejects a learning path with a duplicate slug, an
+unknown or repeated course, an invalid role, or no `core` course, and fails when
+any course is missing from every path. The learning-state validator rejects malformed or
 oversized progress backups and checks interaction-gated lesson completion,
 course-specific checkpoint thresholds, and course-completion status.
 

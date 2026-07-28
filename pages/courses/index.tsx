@@ -1,9 +1,13 @@
 import CourseBadge, { CourseChipList } from "@components/Learning/CourseBadge";
 import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
+import { graphQLClient } from "@utils/contentful";
 import clsx from "clsx";
+import config from "config";
+import { gql } from "graphql-request";
 import type { CourseLevel } from "learning/course-models";
 import { courseRegistry } from "learning/course-registry";
+import { learningPaths } from "learning/learning-paths";
 import Head from "next/head";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
@@ -47,8 +51,25 @@ interface CourseSummary {
     freeCompletionPromise: string;
 }
 
+interface PathSummary {
+    slug: string;
+    title: string;
+    summary: string;
+    icon: string;
+    accent: string;
+    courseCount: number;
+    totalHours: number;
+}
+
+interface LegacyCourseLink {
+    title: string;
+    href: string;
+}
+
 interface CoursesProps {
     courses: CourseSummary[];
+    paths: PathSummary[];
+    legacyCourses: LegacyCourseLink[];
 }
 
 const levelLabels: Record<CourseLevel, string> = {
@@ -179,7 +200,11 @@ const CourseCatalogCard: React.FC<{ course: CourseSummary }> = ({ course }) => {
     );
 };
 
-const Courses: React.FC<CoursesProps> = ({ courses }) => {
+const Courses: React.FC<CoursesProps> = ({
+    courses,
+    paths,
+    legacyCourses,
+}) => {
     const [query, setQuery] = useState("");
     const [level, setLevel] = useState<"all" | CourseLevel>("all");
     const [access, setAccess] = useState<"all" | "simulator" | "hardware">(
@@ -379,11 +404,156 @@ const Courses: React.FC<CoursesProps> = ({ courses }) => {
                         </div>
                     )}
                 </section>
+
+                <section
+                    aria-labelledby="paths-title"
+                    className="mt-14 rounded-3xl border border-white/10 bg-dark-grey-secondary px-5 py-8 sm:px-8"
+                >
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-purple-secondary">
+                        Not sure where to start?
+                    </p>
+                    <h2
+                        id="paths-title"
+                        className="mt-2 text-3xl font-bold text-white"
+                    >
+                        Follow a learning path
+                    </h2>
+                    <p className="mt-2 max-w-3xl text-sm leading-6 text-[#C7C3CE]">
+                        Each path is an ordered route through the catalog, from
+                        the first course to a capstone project. Recommended
+                        prior courses are advisory — you can always jump
+                        straight in.
+                    </p>
+
+                    <ul className="mt-6 grid list-none gap-4 pl-0 sm:grid-cols-2 xl:grid-cols-3">
+                        {paths.map((path) => (
+                            <li key={path.slug}>
+                                <Link
+                                    href="/learn/paths"
+                                    className="group flex h-full flex-col rounded-2xl border border-white/10 bg-dark-grey-primary/40 p-5 outline-none transition hover:border-white/25 focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                >
+                                    <span
+                                        aria-hidden="true"
+                                        className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-xl"
+                                        style={{
+                                            backgroundColor: `${path.accent}26`,
+                                        }}
+                                    >
+                                        {path.icon}
+                                    </span>
+                                    <span className="mt-3 text-lg font-bold text-white">
+                                        {path.title}
+                                    </span>
+                                    <span className="mt-2 text-sm leading-6 text-[#C7C3CE]">
+                                        {path.summary}
+                                    </span>
+                                    <span className="mt-auto pt-4 text-xs text-medium-grey">
+                                        {path.courseCount} courses · ~
+                                        {path.totalHours} hours
+                                    </span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+
+                {legacyCourses.length > 0 && (
+                    <section
+                        aria-labelledby="library-title"
+                        className="mt-14 rounded-3xl border border-white/10 bg-dark-grey-secondary px-5 py-8 sm:px-8"
+                    >
+                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-purple-secondary">
+                            Also available
+                        </p>
+                        <h2
+                            id="library-title"
+                            className="mt-2 text-3xl font-bold text-white"
+                        >
+                            C4T course library
+                        </h2>
+                        <p className="mt-2 max-w-3xl text-sm leading-6 text-[#C7C3CE]">
+                            Reference material and curriculum notes from Code 4
+                            Tomorrow&apos;s instructor-led classes. These
+                            complement the self-paced courses above.
+                        </p>
+
+                        <ul className="mt-6 grid list-none gap-3 pl-0 sm:grid-cols-2 xl:grid-cols-3">
+                            {legacyCourses.map((course) => (
+                                <li key={course.href}>
+                                    <Link
+                                        href={course.href}
+                                        className="flex min-h-[44px] items-center gap-3 rounded-xl border border-white/10 bg-dark-grey-primary/40 px-4 py-3 text-sm font-semibold text-white outline-none transition hover:border-white/25 focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                    >
+                                        <span
+                                            aria-hidden="true"
+                                            className="text-medium-grey"
+                                        >
+                                            ↗
+                                        </span>
+                                        {course.title}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
             </main>
             <Footer />
         </div>
     );
 };
+
+/**
+ * The instructor-led library lives in Contentful/Notion. It is fetched
+ * defensively so a credential or upstream outage degrades to hiding the
+ * section rather than failing the whole catalog build.
+ */
+async function getLegacyCourseLinks(): Promise<LegacyCourseLink[]> {
+    try {
+        const response = await graphQLClient.request(
+            gql`
+                query ($preview: Boolean) {
+                    courseCollection(preview: $preview) {
+                        items {
+                            title
+                            learnMoreLink
+                            notionSlug
+                            notionPageId
+                        }
+                    }
+                }
+            `,
+            { preview: config.contentful.preview }
+        );
+
+        const items: ICourse[] = response?.courseCollection?.items || [];
+
+        return items
+            .map((course) => {
+                // Mirrors <Course />: the human-readable Notion slug is only
+                // resolvable from the built sitemap, so development falls back
+                // to the raw page id.
+                const notionLink =
+                    process.env.NODE_ENV === "development"
+                        ? course.notionPageId
+                        : course.notionSlug;
+                const href = notionLink
+                    ? `/courses/${notionLink}/`
+                    : course.learnMoreLink;
+
+                return href && course.title
+                    ? { title: course.title, href }
+                    : null;
+            })
+            .filter((link): link is LegacyCourseLink => Boolean(link));
+    } catch (error) {
+        console.warn(
+            "Skipping the instructor-led course library on /courses:",
+            error instanceof Error ? error.message : error
+        );
+        return [];
+    }
+}
 
 export async function getStaticProps() {
     const courses: CourseSummary[] = courseRegistry
@@ -413,10 +583,24 @@ export async function getStaticProps() {
         }))
         .sort((a, b) => a.order - b.order);
 
+    const paths: PathSummary[] = learningPaths.map((path) => ({
+        slug: path.slug,
+        title: path.title,
+        summary: path.summary,
+        icon: path.icon,
+        accent: path.accent,
+        courseCount: path.courses.length,
+        totalHours: path.totalHours,
+    }));
+
     return {
         props: {
             courses,
+            paths,
+            legacyCourses: await getLegacyCourseLinks(),
         },
+        // Refresh the instructor-led library without a redeploy.
+        revalidate: 60 * 15,
     };
 }
 

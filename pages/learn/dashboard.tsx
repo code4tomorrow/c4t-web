@@ -3,9 +3,8 @@
 import DashboardSummary, {
     DashboardCourse,
 } from "@components/Learning/DashboardSummary";
-import LearnerShell, {
-    LearnerNavigationItem,
-} from "@components/Learning/LearnerShell";
+import LearnerShell from "@components/Learning/LearnerShell";
+import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
 import { useLearningProgress } from "hooks/useLearningProgress";
 import type { Course } from "learning/course-models";
 import { toCourseCompletionPolicy } from "learning/course-policies";
@@ -97,42 +96,11 @@ const DashboardPage: React.FC = () => {
         [state.badges, state.pointEvents]
     );
 
-    const navigation: LearnerNavigationItem[] = [
-        {
-            id: "dashboard",
-            label: "Dashboard",
-            href: "/learn/dashboard",
-            icon: "⌂",
-        },
-        { id: "courses", label: "Courses", href: "/courses", icon: "⌘" },
-        {
-            id: "assignments",
-            label: "Assignments",
-            href: "/learn/assignments",
-            icon: "✓",
-            badge: pendingAssignments || undefined,
-        },
-        {
-            id: "progress",
-            label: "Progress",
-            href: "/learn/progress",
-            icon: "↗",
-        },
-        {
-            id: "achievements",
-            label: "Achievements",
-            href: "/learn/achievements",
-            icon: "★",
-            badge: summary.badgeCount || undefined,
-        },
-        {
-            id: "certificates",
-            label: "Certificates",
-            href: "/learn/certificates",
-            icon: "◇",
-            badge: Object.keys(state.certificates).length || undefined,
-        },
-    ];
+    const navigation = buildLearnerNavigation({
+        pendingAssignments: pendingAssignments,
+        badges: summary.badgeCount,
+        certificates: Object.keys(state.certificates).length,
+    });
 
     return (
         <>
