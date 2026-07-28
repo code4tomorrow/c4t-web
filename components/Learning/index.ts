@@ -1,27 +1,11 @@
-export { default as AchievementsPanel } from "./AchievementsPanel";
-export type {
-    AchievementDefinition,
-    AchievementsPanelProps,
-} from "./AchievementsPanel";
+export { default as AdminShell } from "./AdminShell";
+export type { AdminShellProps } from "./AdminShell";
 
-export { default as CertificatePanel } from "./CertificatePanel";
-export { createCertificateDownload } from "./CertificatePanel";
-export type { CertificatePanelProps } from "./CertificatePanel";
-
-export { default as DashboardSummary } from "./DashboardSummary";
-export type {
-    DashboardCourse,
-    DashboardSummaryProps,
-} from "./DashboardSummary";
+export { default as EnrollButton } from "./EnrollButton";
+export type { EnrollButtonProps } from "./EnrollButton";
 
 export { default as LearnerShell } from "./LearnerShell";
 export type { LearnerNavigationItem, LearnerShellProps } from "./LearnerShell";
-
-export { default as LocalProgressNotice } from "./LocalProgressNotice";
-export type { LocalProgressNoticeProps } from "./LocalProgressNotice";
-
-export { default as ProgressDataControls } from "./ProgressDataControls";
-export type { ProgressDataControlsProps } from "./ProgressDataControls";
 
 export { default as CourseAttribution } from "./CourseAttribution";
 export type { CourseAttributionProps } from "./CourseAttribution";

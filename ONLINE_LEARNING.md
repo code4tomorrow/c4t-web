@@ -1,10 +1,12 @@
 # C4T Online Learning Platform
 
-This repository now contains a version-controlled, always-free online learning
-path for the 25-course Code 4 Tomorrow curriculum. The public website's
-Contentful and Notion integrations remain available for legacy content, while
-the new curriculum, lesson structure, simulators, validation, and local learner
-progress live in the repository.
+A full learning platform for the 25-course Code 4 Tomorrow curriculum:
+accounts, enrollment, server-verified progress, instructor grading, and
+verifiable PDF certificates. Course content lives in version control; learner
+data lives in Postgres. The website's existing Contentful and Notion
+integrations are untouched.
+
+**Setting this up for the first time? Start with [SETUP.md](SETUP.md).**
 
 ## Free-access guarantee
 
@@ -70,8 +72,8 @@ self-paced and weekly pacing templates, and configurable certificate rules.
     feedback, checkpoint, progress, and resume behavior.
 -   `/learn/tools/[toolSlug]` — standalone free browser labs and hardware/compute
     simulations.
--   `/learn/dashboard` — active courses, real local learning activity, milestones,
-    and resume links.
+-   `/learn/dashboard` — active courses, real learning activity, pacing status,
+    milestones, and cross-device resume links.
 -   `/learn/assignments` — checkpoints, project rubrics, submissions, scores, and
     attempt history.
 -   `/learn/assignments/completed` — completed-assignment review.
@@ -79,50 +81,90 @@ self-paced and weekly pacing templates, and configurable certificate rules.
     attempts used, full attempt history, rubric, and lessons to revisit.
 -   `/learn/progress` — progress, learning time, streaks, and course summaries.
 -   `/learn/achievements` — points and earned badges.
--   `/learn/certificates` — eligibility and printable local certificates.
+-   `/learn/certificates` — per-requirement eligibility, certificate issuance,
+    and PDF download.
+-   `/learn/onboarding`, `/login`, `/login/check-email` — account setup.
+-   `/certificate/verify/[certificateId]` — public verification (no sign-in).
+-   `/admin`, `/admin/courses`, `/admin/users`, `/admin/audit` — staff tools.
 
-### Progress and privacy
+### Accounts, progress, and privacy
 
-The always-free path does not require an account. Enrollments, lesson
-completion, interactions, quiz and assignment attempts, active learning time,
-resume positions, points, badges, safety acknowledgements, and certificates are
-stored in browser `localStorage` under `c4t:learning-progress:v1`.
+Learners sign in with **GitHub OAuth** or an **emailed magic link** (NextAuth,
+database sessions). There are no passwords to leak. Enrollments, lesson
+progress, submissions, grades, activity time, points, badges, and certificates
+live in **Postgres via Prisma**, so progress follows a learner across devices.
 
-Activity time counts only while the page is visible, focused, and recently
-interactive. The learner can export, import, or reset their local data, and
-cross-tab changes are synchronized.
+Course _content_ stays in version control under `learning/` — it is reviewed,
+diffed, and validated in CI. The database only ever stores data about people,
+referencing content by the stable ids the registry emits. Re-authoring a lesson
+never orphans a learner's progress.
 
-This storage is deliberately private and free, but it is device-local rather
-than cross-device. Clearing browser storage removes it unless the learner first
-exports a backup. A server account/sync provider can be added later without
-removing this guest pathway.
+**Everything that matters is decided on the server.** A client may report which
+interaction it finished; it may never report a completion percentage, a score,
+or a pass. Specifically:
+
+-   A lesson completes only when its required interaction is recorded
+    (`lib/progress.ts`), and the completion timestamp is set once, server-side.
+-   Module checkpoints, applied assignments, and the final assessment are all
+    **reviewed by an instructor**. `/api/admin/grade` is the only route that can
+    set a score or approve work, and it requires an `INSTRUCTOR` or `ADMIN`
+    role. A learner cannot approve their own work — this is what makes the
+    certificate mean something.
+-   Certificates are issued only after `lib/certificates.ts` re-verifies every
+    requirement. Issuance is idempotent via a unique `(userId, courseId)` index.
+-   Points use an `(userId, idempotencyKey)` unique index, so a replayed request
+    is a no-op rather than free points.
+-   Active learning time is capped per flush (30 min) and per day (12 h), and
+    only accrues while the tab is visible and recently interacted with.
+
+Personal data is kept minimal: a display name (not necessarily a legal name), an
+optional experience level, interests, weekly goal, time zone, and accessibility
+preferences. The public certificate-verification page shows the display name,
+course, and date — never an email address or any coursework.
+
+### Authentication and roles
+
+| Role             | Capabilities                                          |
+| ---------------- | ----------------------------------------------------- |
+| `LEARNER`        | Enroll, learn, submit work, earn certificates         |
+| `INSTRUCTOR`     | Grade submissions at `/admin`                         |
+| `CONTENT_EDITOR` | Publish/unpublish courses at `/admin/courses`         |
+| `ADMIN`          | Manage roles, revoke certificates, read the audit log |
+
+Roles are enforced on the server in `lib/guards.ts` (pages) and `lib/api.ts`
+(API routes). Client-side checks are only ever cosmetic.
 
 ## Development
 
-Install dependencies:
+**New here? Follow [SETUP.md](SETUP.md)** — it walks through creating a free
+Neon database, GitHub OAuth, and email sign-in step by step.
 
 ```bash
-npm ci
+npm install
+cp .env.example .env      # then fill it in — see SETUP.md
+npm run db:migrate
+npm run db:seed
+npm run dev
 ```
 
 Run the curriculum validator:
 
 ```bash
 npm run validate:curriculum
-npm run validate:learning
 ```
 
-Run type checking, linting, and the development server:
+Run the checks:
 
 ```bash
 npx tsc --noEmit
-npx next lint
-npm run dev
+npm run lint
+npm test
 ```
 
-The repository's existing public pages still require the Contentful and Notion
-variables documented in `env.template`. The local curriculum and learner
-experience do not require those credentials.
+Required environment variables are documented in `.env.example`. The learning
+platform needs `DATABASE_URL`, `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, and at least
+one sign-in provider. Contentful and Notion credentials are only needed by the
+pre-existing marketing pages and the legacy course library.
 
 ## Deployment
 
@@ -163,15 +205,25 @@ The validator rejects missing topics, courses, modules, lessons, assessments,
 free alternatives, simulators, pacing, certificate rules, safety guidance, or
 creator attribution. It also rejects a learning path with a duplicate slug, an
 unknown or repeated course, an invalid role, or no `core` course, and fails when
-any course is missing from every path. The learning-state validator rejects malformed or
-oversized progress backups and checks interaction-gated lesson completion,
-course-specific checkpoint thresholds, and course-completion status.
+any course is missing from every path. Progress, completion, eligibility, pacing, and
+streak logic live in `lib/progress.ts` and are covered by `npm test`.
 
-## Current limitation
+## Known limitations
 
-The included certificate is a learner-controlled, device-local record suitable
-for the free self-paced pathway. It is not an identity-verified credential and
-does not claim instructor review. A future authenticated backend can add
-cross-device synchronization, instructor grading, and public certificate
-verification while keeping all course content and simulations freely
-accessible.
+-   **Graded work needs a human.** The authored curriculum assesses with
+    open-ended rubric prompts rather than multiple-choice answer keys, so
+    checkpoints and projects are instructor-reviewed. A learner working entirely
+    alone can complete every lesson but cannot reach a certificate until someone
+    with an `INSTRUCTOR` role grades their submissions. Auto-graded question
+    banks would need answer keys that the current content does not have.
+-   **Rate limiting is per-instance.** `lib/rate-limit.ts` is in-memory, so on a
+    serverless host each warm instance keeps its own counters. It stops runaway
+    clients; it is not a distributed guarantee. The real protection against
+    replay is the set of unique constraints and idempotency keys in the schema.
+-   **Email sign-in needs SMTP.** Without `EMAIL_SERVER_*` configured, only
+    GitHub sign-in is offered. The login page adapts automatically.
+-   **The pre-existing marketing pages still need Contentful.** `/`, `/about`,
+    `/contact`, `/volunteer`, `/news`, `/internships`, `/jobboard`, `/learn`,
+    and `/courses/[...slug]` fetch from Contentful at build time and fail the
+    production build without valid credentials. This predates the learning
+    platform, which builds cleanly on its own. See SETUP.md step 7.

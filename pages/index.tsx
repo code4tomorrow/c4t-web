@@ -207,9 +207,12 @@ const Home: NextPageWithLayout<
                             >
                                 <div className="space-y-3 md:max-w-[75%] text-lg">
                                     <p className="text-medium-grey">
-                                    Sign up for Code 4 Tomorrow&apos;s free computer science classes!
-                                    We offer courses in Java, Python, Scratch, Web Development,
-                                    Machine Learning, JavaScript, and C for beginner to advanced students.{" "}
+                                        Sign up for Code 4 Tomorrow&apos;s free
+                                        computer science classes! We offer
+                                        courses in Java, Python, Scratch, Web
+                                        Development, Machine Learning,
+                                        JavaScript, and C for beginner to
+                                        advanced students.{" "}
                                     </p>
                                 </div>
                             </Animate.Element>
@@ -229,8 +232,7 @@ const Home: NextPageWithLayout<
                             <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] " />
                         </div>
                     </section>
-                    
-                    
+
                     {/* <section id="events">
                         <h1 className="text-white text-4xl md:text-5xl font-extrabold">
                             Upcoming Events!
@@ -244,10 +246,6 @@ const Home: NextPageWithLayout<
                             />
                         </div>
                     </section> */}
-                    
-
-
-
 
                     <section className="w-full flex flex-col items-center">
                         <div ref={testimonialsRef} className="mb-20 w-full">

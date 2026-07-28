@@ -200,11 +200,7 @@ const CourseCatalogCard: React.FC<{ course: CourseSummary }> = ({ course }) => {
     );
 };
 
-const Courses: React.FC<CoursesProps> = ({
-    courses,
-    paths,
-    legacyCourses,
-}) => {
+const Courses: React.FC<CoursesProps> = ({ courses, paths, legacyCourses }) => {
     const [query, setQuery] = useState("");
     const [level, setLevel] = useState<"all" | CourseLevel>("all");
     const [access, setAccess] = useState<"all" | "simulator" | "hardware">(

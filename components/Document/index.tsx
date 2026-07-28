@@ -1,11 +1,7 @@
 import React, { useMemo } from "react";
-import {
-    Block,
-    BLOCKS,
-    Document,
-    Inline,
-    INLINES,
-} from "@contentful/rich-text-types";
+import { Block, BLOCKS, Inline, INLINES } from "@contentful/rich-text-types";
+// Type-only: the local component below shadows this name.
+import type { Document as RichTextDocument } from "@contentful/rich-text-types";
 import {
     documentToReactComponents,
     Options as DocumentOptions,
@@ -15,7 +11,7 @@ import clsx from "clsx";
 import Link from "next/link";
 
 interface DocumentProps {
-    document: Document;
+    document: RichTextDocument;
     options?: DocumentOptions;
     color?: string;
 }

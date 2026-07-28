@@ -1,8 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
 import React from "react";
-import LocalProgressNotice from "./LocalProgressNotice";
-import ProgressDataControls from "./ProgressDataControls";
 
 export interface LearnerNavigationItem {
     id: string;
@@ -22,8 +20,6 @@ export interface LearnerShellProps {
     actions?: React.ReactNode;
     className?: string;
     returnHref?: string;
-    showDataControls?: boolean;
-    showLocalProgressNotice?: boolean;
 }
 
 const LearnerNav: React.FC<{
@@ -79,8 +75,6 @@ const LearnerShell: React.FC<LearnerShellProps> = ({
     actions,
     className,
     returnHref = "/",
-    showDataControls = true,
-    showLocalProgressNotice = true,
 }) => (
     <div
         className={clsx(
@@ -143,10 +137,6 @@ const LearnerShell: React.FC<LearnerShellProps> = ({
                                 activeItemId={activeItemId}
                             />
                         </nav>
-                        {showLocalProgressNotice && (
-                            <LocalProgressNotice compact />
-                        )}
-                        {showDataControls && <ProgressDataControls compact />}
                     </div>
                 </aside>
 
@@ -161,12 +151,6 @@ const LearnerShell: React.FC<LearnerShellProps> = ({
                             </p>
                         )}
                     </div>
-                    {showLocalProgressNotice && (
-                        <LocalProgressNotice className="mb-6 lg:hidden" />
-                    )}
-                    {showDataControls && (
-                        <ProgressDataControls className="mb-6 lg:hidden" />
-                    )}
                     {children}
                 </main>
             </div>

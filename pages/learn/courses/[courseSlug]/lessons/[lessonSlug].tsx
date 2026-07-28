@@ -6,26 +6,16 @@ import type {
     FreeLabMode,
     ModuleOutlineItem,
 } from "@components/Learning/types";
-import useActiveLearningTime from "hooks/useActiveLearningTime";
+import { useActiveTime, useServerProgress } from "hooks/useServerProgress";
 import type { Course, CourseModule, Lesson } from "learning/course-models";
-import { courseRegistry, getCourseBySlug } from "learning/course-registry";
-import type { GetStaticPaths, GetStaticProps } from "next";
+import { getCourseBySlug } from "learning/course-registry";
+
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, {
-    useEffect,
-    useMemo,
-    useState,
-    useSyncExternalStore,
-} from "react";
-import {
-    getLearningServerSnapshot,
-    getLearningStoreSnapshot,
-    learningStoreActions,
-    subscribeToLearningStore,
-} from "utils/learning/store";
-import { learningItemKey } from "utils/learning/state";
+import React, { useEffect, useMemo, useState } from "react";
+import { requireAuth } from "lib/guards";
+import { getCourseSnapshot } from "lib/learner";
 
 type LessonOutlineRecord = Pick<
     Lesson,
@@ -49,6 +39,10 @@ interface LessonPageProps {
     course: LessonCourse;
     moduleId: string;
     lesson: Lesson;
+    /** lessonId -> interaction ids the server has recorded as finished. */
+    completedByLesson: Record<string, string[]>;
+    completedLessonIds: string[];
+    enrolled: boolean;
 }
 
 const getLabMode = (course: LessonCourse): FreeLabMode => {
@@ -134,18 +128,29 @@ const toLessonCourse = (course: Course): LessonCourse => ({
 
 const LessonPage: React.FC<LessonPageProps> = ({
     course,
-    moduleId,
     lesson,
+    completedByLesson,
+    completedLessonIds,
 }) => {
     const router = useRouter();
     const lessonId = lesson.id;
-    const snapshot = useSyncExternalStore(
-        subscribeToLearningStore,
-        getLearningStoreSnapshot,
-        getLearningServerSnapshot
-    );
-    const [practiceComplete, setPracticeComplete] = useState(false);
     const [reflection, setReflection] = useState("");
+
+    const {
+        state: progress,
+        saving,
+        error: progressError,
+        completeInteraction: saveInteraction,
+    } = useServerProgress({
+        courseId: course.id,
+        lessonId,
+        initial: {
+            completedInteractionIds: completedByLesson[lessonId] ?? [],
+            completedAt: completedLessonIds.includes(lessonId)
+                ? new Date().toISOString()
+                : null,
+        },
+    });
 
     const flatLessons = useMemo(() => getFlatLessons(course), [course]);
     const currentIndex = flatLessons.findIndex(
@@ -155,47 +160,33 @@ const LessonPage: React.FC<LessonPageProps> = ({
     const currentModule = current?.module;
     const previous = flatLessons[currentIndex - 1];
     const next = flatLessons[currentIndex + 1];
-    const progressKey = learningItemKey(course.id, lessonId);
-    const lessonProgress = snapshot.state.lessonProgress[progressKey];
-    const lessonComplete = Boolean(lessonProgress?.completedAt);
-    const interactionComplete =
-        practiceComplete ||
-        Boolean(
-            lessonProgress?.completedInteractionIds.includes(
-                lesson.interaction.id
-            )
-        );
+    // Completion is whatever the server last told us.
+    const lessonComplete = Boolean(progress.completedAt);
+    const interactionComplete = progress.completedInteractionIds.includes(
+        lesson.interaction.id
+    );
     const canCompleteLesson = lessonComplete || interactionComplete;
-    const completedLessons = flatLessons.filter(({ lesson: item }) =>
-        Boolean(
-            snapshot.state.lessonProgress[learningItemKey(course.id, item.id)]
-                ?.completedAt &&
-                snapshot.state.lessonProgress[
-                    learningItemKey(course.id, item.id)
-                ]?.completedInteractionIds.includes(item.interactionId)
-        )
+
+    const completedSet = useMemo(
+        () => new Set(completedLessonIds),
+        [completedLessonIds]
+    );
+    const completedLessons = flatLessons.filter(
+        ({ lesson: item }) =>
+            completedSet.has(item.id) ||
+            (item.id === lessonId && lessonComplete)
     ).length;
     const progressPercent = flatLessons.length
         ? (completedLessons / flatLessons.length) * 100
         : 0;
 
-    useActiveLearningTime({
+    useActiveTime({
         courseId: course.id,
         lessonId,
         enabled: Boolean(currentModule),
     });
 
     useEffect(() => {
-        learningStoreActions.enroll({ courseId: course.id });
-        learningStoreActions.setResumePosition({
-            courseId: course.id,
-            moduleId,
-            lessonId,
-        });
-    }, [course.id, lessonId, moduleId]);
-
-    useEffect(() => {
-        setPracticeComplete(false);
         setReflection("");
     }, [lessonId]);
 
@@ -208,49 +199,32 @@ const LessonPage: React.FC<LessonPageProps> = ({
         title: module.title,
         description: module.overview,
         initiallyExpanded: module.id === currentModule.id,
-        lessons: module.lessons.map((item) => {
-            const itemProgress =
-                snapshot.state.lessonProgress[
-                    learningItemKey(course.id, item.id)
-                ];
-            return {
-                id: item.id,
-                title: item.title,
-                estimatedMinutes: item.estimatedMinutes,
-                required: item.required,
-                status:
-                    itemProgress?.completedAt &&
-                    itemProgress.completedInteractionIds.includes(
-                        item.interactionId
-                    )
-                        ? ("complete" as const)
-                        : item.id === lesson.id
-                        ? ("in-progress" as const)
-                        : ("not-started" as const),
-                href: `/learn/courses/${course.slug}/lessons/${item.slug}`,
-            };
-        }),
+        lessons: module.lessons.map((item) => ({
+            id: item.id,
+            title: item.title,
+            estimatedMinutes: item.estimatedMinutes,
+            required: item.required,
+            status:
+                completedSet.has(item.id) ||
+                (item.id === lessonId && lessonComplete)
+                    ? ("complete" as const)
+                    : item.id === lesson.id
+                    ? ("in-progress" as const)
+                    : ("not-started" as const),
+            href: `/learn/courses/${course.slug}/lessons/${item.slug}`,
+        })),
     }));
 
     const completeInteraction = () => {
-        setPracticeComplete(true);
-        learningStoreActions.completeInteraction({
-            courseId: course.id,
-            moduleId,
-            lessonId,
-            interactionId: lesson.interaction.id,
-        });
+        // The server records the interaction and decides whether that
+        // completes the lesson; we render whatever it returns.
+        void saveInteraction(lesson.interaction.id);
     };
 
     const completeLesson = async () => {
         if (!canCompleteLesson) return;
-        learningStoreActions.setLessonCompletion({
-            courseId: course.id,
-            moduleId,
-            lessonId,
-            completed: true,
-        });
-        if (next) {
+        const saved = await saveInteraction(lesson.interaction.id);
+        if (saved && next) {
             await router.push(
                 `/learn/courses/${course.slug}/lessons/${next.lesson.slug}`
             );
@@ -445,11 +419,24 @@ const LessonPage: React.FC<LessonPageProps> = ({
                                 className="mt-4 min-h-[24px] text-sm"
                                 aria-live="polite"
                             >
-                                {interactionComplete && (
-                                    <p className="text-emerald-200">
-                                        {lesson.interaction.successFeedback}
+                                {saving && (
+                                    <p className="text-medium-grey">
+                                        Saving your progress…
                                     </p>
                                 )}
+                                {!saving && progressError && (
+                                    <p className="text-red-300" role="alert">
+                                        {progressError} Your work is safe —
+                                        finish the lab again to retry.
+                                    </p>
+                                )}
+                                {!saving &&
+                                    !progressError &&
+                                    interactionComplete && (
+                                        <p className="text-emerald-200">
+                                            {lesson.interaction.successFeedback}
+                                        </p>
+                                    )}
                             </div>
                         </section>
 
@@ -576,10 +563,12 @@ const LessonPage: React.FC<LessonPageProps> = ({
                             <button
                                 type="button"
                                 onClick={completeLesson}
-                                disabled={!canCompleteLesson}
+                                disabled={!canCompleteLesson || saving}
                                 className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-5 py-3 text-sm font-bold outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:brightness-100"
                             >
-                                {!canCompleteLesson
+                                {saving
+                                    ? "Saving…"
+                                    : !canCompleteLesson
                                     ? "Complete the lab to continue"
                                     : lessonComplete
                                     ? next
@@ -606,44 +595,55 @@ const LessonPage: React.FC<LessonPageProps> = ({
     );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => ({
-    paths: courseRegistry.flatMap((course) =>
-        course.modules.flatMap((module) =>
-            module.lessons.map((lesson) => ({
-                params: {
-                    courseSlug: course.slug,
-                    lessonSlug: lesson.slug,
+export const getServerSideProps = requireAuth<LessonPageProps>(
+    async ({ params, userId, resolvedUrl }) => {
+        const course = getCourseBySlug(String(params?.courseSlug || ""));
+        const lessonSlug = String(params?.lessonSlug || "");
+        const match = course
+            ? course.modules
+                  .flatMap((module) =>
+                      module.lessons.map((lesson) => ({ module, lesson }))
+                  )
+                  .find(({ lesson }) => lesson.slug === lessonSlug)
+            : undefined;
+
+        if (!course || !match) {
+            return { notFound: true };
+        }
+
+        const snapshot = await getCourseSnapshot(userId, course.id);
+
+        // Lessons are only reachable once enrolled, so the enrollment page is
+        // the natural place to send someone who arrived by direct link.
+        if (!snapshot?.enrollment) {
+            return {
+                redirect: {
+                    destination: `/courses/${
+                        course.slug
+                    }?enroll=1&next=${encodeURIComponent(resolvedUrl)}`,
+                    permanent: false,
                 },
-            }))
-        )
-    ),
-    fallback: false,
-});
+            };
+        }
 
-export const getStaticProps: GetStaticProps<LessonPageProps> = async ({
-    params,
-}) => {
-    const course = getCourseBySlug(String(params?.courseSlug || ""));
-    const lessonSlug = String(params?.lessonSlug || "");
-    const match = course
-        ? course.modules
-              .flatMap((module) =>
-                  module.lessons.map((lesson) => ({ module, lesson }))
-              )
-              .find(({ lesson }) => lesson.slug === lessonSlug)
-        : undefined;
+        const completedByLesson: Record<string, string[]> = {};
+        const completedLessonIds: string[] = [];
+        snapshot.lessonProgress.forEach((row) => {
+            completedByLesson[row.lessonId] = row.completedInteractionIds;
+            if (row.completedAt) completedLessonIds.push(row.lessonId);
+        });
 
-    if (!course || !match) {
-        return { notFound: true };
+        return {
+            props: {
+                course: toLessonCourse(course),
+                moduleId: match.module.id,
+                lesson: match.lesson,
+                completedByLesson,
+                completedLessonIds,
+                enrolled: true,
+            },
+        };
     }
-
-    return {
-        props: {
-            course: toLessonCourse(course),
-            moduleId: match.module.id,
-            lesson: match.lesson,
-        },
-    };
-};
+);
 
 export default LessonPage;

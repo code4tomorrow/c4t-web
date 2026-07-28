@@ -1,0 +1,537 @@
+// Code 4 Tomorrow learning platform.
+//
+// Course *content* (courses, modules, lessons, questions, rubrics) stays in
+// version control under learning/ — it is reviewed, diffed, and validated in CI.
+// This database stores everything about *people*: accounts, enrollments,
+// progress, attempts, grades, certificates, and audit records.
+//
+// Content is referenced by the stable string ids the registry emits
+// (for example "course-03", "course-03-module-2-...", "course-03-final-assessment"),
+// so re-authoring a lesson never orphans a learner's progress.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------- roles ----
+
+enum Role {
+  LEARNER
+  INSTRUCTOR
+  CONTENT_EDITOR
+  ADMIN
+}
+
+// ------------------------------------------------- NextAuth core models ----
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(LEARNER)
+
+  // Shown on certificates and any public surface. Never the legal name by
+  // default — learners choose what appears.
+  displayName String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accounts               Account[]
+  sessions               Session[]
+  profile                UserProfile?
+  notificationPreference NotificationPreference?
+  enrollments            Enrollment[]
+  lessonProgress         LessonProgress[]
+  activitySessions       ActivitySession[]
+  dailyActivity          DailyActivity[]
+  assignmentSubmissions  AssignmentSubmission[]
+  certificates           Certificate[]
+  badges                 UserBadge[]
+  pointTransactions      PointTransaction[]
+  notifications          Notification[]
+  safetyAcknowledgements SafetyAcknowledgement[]
+  cohortMemberships      CohortMembership[]
+  auditLogs              AuditLog[]              @relation("AuditActor")
+  feedbackGiven          InstructorFeedback[]    @relation("FeedbackAuthor")
+
+  @@index([role])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ------------------------------------------------------------- profile ----
+
+enum ExperienceLevel {
+  NEW_TO_CODING
+  SOME_BASICS
+  COMFORTABLE
+  EXPERIENCED
+}
+
+model UserProfile {
+  userId String @id
+
+  experienceLevel ExperienceLevel @default(NEW_TO_CODING)
+  interests       String[]        @default([])
+  weeklyGoalHours Int?
+  timeZone        String          @default("UTC")
+
+  // Accessibility and wellbeing preferences, honoured by the learner UI.
+  reduceMotion       Boolean @default(false)
+  reduceGamification Boolean @default(false)
+  highContrast       Boolean @default(false)
+
+  onboardedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model NotificationPreference {
+  userId String @id
+
+  emailAssignmentDue  Boolean @default(true)
+  emailModuleReleased Boolean @default(true)
+  emailFeedback       Boolean @default(true)
+  emailCertificate    Boolean @default(true)
+
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ------------------------------------------- admin-configurable course ----
+
+enum CourseStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+/// Admin-editable settings layered over the version-controlled course content.
+/// A missing row means the course uses the defaults compiled into the registry.
+model CourseSettings {
+  courseId String       @id
+  status   CourseStatus @default(REVIEW)
+
+  /// When false, recommended prior courses are advisory only (the default).
+  enforcePrerequisites Boolean @default(false)
+
+  minimumQuizAverage   Int?
+  capstonePassingScore Int?
+  certificatesEnabled  Boolean @default(true)
+
+  updatedAt   DateTime @updatedAt
+  updatedById String?
+
+  @@index([status])
+}
+
+// ------------------------------------------------ cohorts and pacing ----
+
+enum PacingType {
+  SELF_PACED
+  WEEKLY
+  COHORT
+}
+
+model Cohort {
+  id       String @id @default(cuid())
+  courseId String
+  name     String
+  slug     String @unique
+
+  startsAt           DateTime
+  endsAt             DateTime
+  enrollmentOpensAt  DateTime?
+  enrollmentClosesAt DateTime?
+  capacity           Int?
+  liveSessionUrl     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  memberships    CohortMembership[]
+  enrollments    Enrollment[]
+  announcements  Announcement[]
+  moduleReleases ModuleRelease[]
+
+  @@index([courseId])
+}
+
+model CohortMembership {
+  id           String   @id @default(cuid())
+  cohortId     String
+  userId       String
+  isInstructor Boolean  @default(false)
+  joinedAt     DateTime @default(now())
+
+  cohort Cohort @relation(fields: [cohortId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([cohortId, userId])
+  @@index([userId])
+}
+
+model Announcement {
+  id       String   @id @default(cuid())
+  cohortId String
+  title    String
+  body     String   @db.Text
+  postedAt DateTime @default(now())
+
+  cohort Cohort @relation(fields: [cohortId], references: [id], onDelete: Cascade)
+
+  @@index([cohortId])
+}
+
+model ModuleRelease {
+  id         String   @id @default(cuid())
+  cohortId   String
+  moduleId   String
+  releasesAt DateTime
+
+  cohort Cohort @relation(fields: [cohortId], references: [id], onDelete: Cascade)
+
+  @@unique([cohortId, moduleId])
+}
+
+// ---------------------------------------------------------- enrollment ----
+
+enum EnrollmentStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  WITHDRAWN
+}
+
+model Enrollment {
+  id       String @id @default(cuid())
+  userId   String
+  courseId String
+
+  status EnrollmentStatus @default(ACTIVE)
+  pacing PacingType       @default(SELF_PACED)
+
+  cohortId String?
+
+  startedAt   DateTime  @default(now())
+  targetDate  DateTime?
+  completedAt DateTime?
+
+  weeklyHoursGoal Int?
+
+  // Resume position, so "continue learning" works on any device.
+  resumeLessonId  String?
+  resumeUpdatedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user       User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cohort     Cohort?               @relation(fields: [cohortId], references: [id])
+  extensions EnrollmentExtension[]
+
+  @@unique([userId, courseId])
+  @@index([courseId])
+  @@index([userId, status])
+}
+
+model EnrollmentExtension {
+  id           String   @id @default(cuid())
+  enrollmentId String
+  assignmentId String
+  newDueDate   DateTime
+  reason       String?
+  grantedById  String
+  grantedAt    DateTime @default(now())
+
+  enrollment Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+
+  @@unique([enrollmentId, assignmentId])
+}
+
+// ------------------------------------------------------------ progress ----
+
+model LessonProgress {
+  id       String @id @default(cuid())
+  userId   String
+  courseId String
+  moduleId String
+  lessonId String
+
+  startedAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  /// Interaction ids the learner has actually finished. A lesson is only
+  /// complete when its required interaction appears here — the server checks
+  /// this, never a client-supplied percentage.
+  completedInteractionIds String[] @default([])
+
+  checkpointPassed Boolean @default(false)
+  activeSeconds    Int     @default(0)
+
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId, courseId])
+}
+
+model ActivitySession {
+  id       String  @id @default(cuid())
+  userId   String
+  courseId String?
+  lessonId String?
+
+  seconds   Int
+  startedAt DateTime
+  endedAt   DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, startedAt])
+  @@index([userId, courseId])
+}
+
+/// Pre-aggregated per-day totals. Streaks and weekly charts read this instead
+/// of scanning every raw session.
+model DailyActivity {
+  id      String @id @default(cuid())
+  userId  String
+  /// Local calendar date, stored as YYYY-MM-DD in the learner's time zone.
+  date    String
+  seconds Int    @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@index([userId])
+}
+
+// ---------------------------------------------------------- assessment ----
+
+enum SubmissionStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  NEEDS_REVISION
+  APPROVED
+  REJECTED
+}
+
+model AssignmentSubmission {
+  id           String @id @default(cuid())
+  userId       String
+  courseId     String
+  assignmentId String
+
+  attemptNumber Int
+  status        SubmissionStatus @default(DRAFT)
+
+  /// Learner-authored write-up.
+  responseText  String? @db.Text
+  /// Validated https URL to a repo, pull request, or commit.
+  repositoryUrl String?
+
+  /// Automatically graded portion, when the assignment defines tests.
+  autoScore Int?
+  /// Final score after any instructor review.
+  score     Int?
+  maxScore  Int     @default(100)
+  passed    Boolean @default(false)
+
+  submittedAt DateTime?
+  gradedAt    DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user     User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  feedback InstructorFeedback[]
+
+  @@unique([userId, assignmentId, attemptNumber])
+  @@index([userId, courseId])
+  @@index([courseId, status])
+}
+
+model InstructorFeedback {
+  id           String @id @default(cuid())
+  submissionId String
+  authorId     String
+
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+
+  submission AssignmentSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  author     User                 @relation("FeedbackAuthor", fields: [authorId], references: [id])
+
+  @@index([submissionId])
+}
+
+model SafetyAcknowledgement {
+  id             String   @id @default(cuid())
+  userId         String
+  courseId       String
+  acknowledgedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+}
+
+// -------------------------------------------------------- gamification ----
+
+model PointTransaction {
+  id     String @id @default(cuid())
+  userId String
+
+  points         Int
+  reason         String
+  /// Stable key for one-time awards, so replaying a request cannot farm points.
+  idempotencyKey String
+
+  courseId  String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, idempotencyKey])
+  @@index([userId, createdAt])
+}
+
+model UserBadge {
+  id       String  @id @default(cuid())
+  userId   String
+  badgeId  String
+  courseId String?
+
+  title       String
+  description String
+
+  awardedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeId, courseId])
+  @@index([userId])
+}
+
+// -------------------------------------------------------- certificates ----
+
+model Certificate {
+  /// Public, unguessable id used in the verification URL.
+  id       String @id
+  userId   String
+  courseId String
+
+  /// Denormalised so a certificate stays truthful even if the learner later
+  /// changes their display name or the course is re-titled.
+  learnerName   String
+  courseTitle   String
+  learningHours Int
+
+  issuedAt      DateTime  @default(now())
+  revokedAt     DateTime?
+  revokedReason String?
+  revokedById   String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+  @@index([courseId])
+}
+
+// ------------------------------------------- notifications and audit ----
+
+enum NotificationType {
+  MODULE_RELEASED
+  ASSIGNMENT_DUE
+  ASSIGNMENT_GRADED
+  FEEDBACK_RECEIVED
+  BADGE_EARNED
+  COURSE_COMPLETED
+  CERTIFICATE_AVAILABLE
+  COHORT_ANNOUNCEMENT
+}
+
+model Notification {
+  id     String           @id @default(cuid())
+  userId String
+  type   NotificationType
+
+  title String
+  body  String  @db.Text
+  href  String?
+
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt])
+}
+
+model AuditLog {
+  id      String  @id @default(cuid())
+  actorId String?
+
+  action     String
+  targetType String
+  targetId   String
+  metadata   Json?
+
+  createdAt DateTime @default(now())
+
+  actor User? @relation("AuditActor", fields: [actorId], references: [id])
+
+  @@index([targetType, targetId])
+  @@index([createdAt])
+}

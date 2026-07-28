@@ -1,24 +1,14 @@
-"use client";
-
 import CourseBadge from "@components/Learning/CourseBadge";
 import LearnerShell from "@components/Learning/LearnerShell";
 import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
 import { LearningProgressBar } from "@components/Learning/LearningProgress";
-import { useLearningProgress } from "hooks/useLearningProgress";
-import { toCourseCompletionPolicy } from "learning/course-policies";
 import type { LearningPath } from "learning/learning-paths";
 import { learningPaths } from "learning/learning-paths";
 import Head from "next/head";
 import Link from "next/link";
 import React, { useMemo } from "react";
-import { calculateCourseProgress } from "@utils/learning/state";
-import type { CourseCompletionPolicy, LearningState } from "@utils/learning/types";
-
-const policiesByCourseId = new Map<string, CourseCompletionPolicy>(
-    learningPaths
-        .flatMap((path) => path.courses.map((item) => item.course))
-        .map((course) => [course.id, toCourseCompletionPolicy(course)])
-);
+import { requireAuth } from "lib/guards";
+import { getLearnerSnapshot, type LearnerSnapshot } from "lib/learner";
 
 type CourseStatus = "completed" | "in-progress" | "not-started";
 
@@ -51,15 +41,21 @@ const statusMeta: Record<
     "not-started": { label: "Not started", tone: "grey", mark: "○" },
 };
 
-const buildPathView = (path: LearningPath, state: LearningState): PathView => {
+const buildPathView = (
+    path: LearningPath,
+    snapshot: LearnerSnapshot
+): PathView => {
+    const byCourseId = new Map(
+        snapshot.courses.map((entry) => [entry.courseId, entry])
+    );
+
     const courses: PathCourseView[] = path.courses.map(({ course, role }) => {
-        const policy = policiesByCourseId.get(course.id)!;
-        const progress = calculateCourseProgress(state, policy);
-        const enrollment = state.enrollments[course.id];
+        const entry = byCourseId.get(course.id);
+        const percentage = entry?.progress.percentage ?? 0;
         const status: CourseStatus =
-            enrollment?.status === "completed" || progress.percentage >= 100
+            entry?.enrollment.status === "COMPLETED"
                 ? "completed"
-                : enrollment || progress.percentage > 0
+                : entry
                 ? "in-progress"
                 : "not-started";
 
@@ -71,7 +67,7 @@ const buildPathView = (path: LearningPath, state: LearningState): PathView => {
             role,
             hours: course.estimatedTotalHours,
             status,
-            percentage: progress.percentage,
+            percentage,
             capstone: course.finalAssessment.title,
         };
     });
@@ -163,10 +159,7 @@ const PathCourseRow: React.FC<{
     );
 };
 
-const PathCard: React.FC<{ view: PathView; hydrated: boolean }> = ({
-    view,
-    hydrated,
-}) => {
+const PathCard: React.FC<{ view: PathView }> = ({ view }) => {
     const { path } = view;
 
     return (
@@ -217,7 +210,9 @@ const PathCard: React.FC<{ view: PathView; hydrated: boolean }> = ({
             </div>
 
             <p className="mt-4 rounded-xl border border-white/10 bg-dark-grey-accent px-4 py-3 text-sm leading-6 text-[#D6D3DC]">
-                <span className="font-bold text-white">You will finish able to:</span>{" "}
+                <span className="font-bold text-white">
+                    You will finish able to:
+                </span>{" "}
                 {path.outcome}
             </p>
 
@@ -227,16 +222,14 @@ const PathCard: React.FC<{ view: PathView; hydrated: boolean }> = ({
                 </h3>
                 <div className="mt-2 max-w-md">
                     <LearningProgressBar
-                        value={hydrated ? view.percentage : 0}
+                        value={view.percentage}
                         label={`${path.title} path progress`}
                     />
                 </div>
                 <p className="mt-2 text-sm text-medium-grey">
-                    {hydrated
-                        ? `${view.completedCoreCount} of ${path.coreCourseCount} required courses complete.`
-                        : "Loading your saved progress…"}
+                    {`${view.completedCoreCount} of ${path.coreCourseCount} required courses complete.`}
                 </p>
-                {hydrated && view.nextCourse && (
+                {view.nextCourse && (
                     <p className="mt-3 text-sm text-[#D6D3DC]">
                         <span className="font-bold text-white">
                             Recommended next:
@@ -249,7 +242,7 @@ const PathCard: React.FC<{ view: PathView; hydrated: boolean }> = ({
                         </Link>
                     </p>
                 )}
-                {hydrated && !view.nextCourse && (
+                {!view.nextCourse && (
                     <p className="mt-3 text-sm font-bold text-emerald-300">
                         🎉 You have completed every course in this path.
                     </p>
@@ -288,25 +281,23 @@ const PathCard: React.FC<{ view: PathView; hydrated: boolean }> = ({
     );
 };
 
-const LearningPathsPage: React.FC = () => {
-    const { state, summary, hydrated } = useLearningProgress();
+interface PathsProps {
+    snapshot: LearnerSnapshot;
+}
 
+const LearningPathsPage: React.FC<PathsProps> = ({ snapshot }) => {
     const views = useMemo(
-        () => learningPaths.map((path) => buildPathView(path, state)),
-        [state]
+        () => learningPaths.map((path) => buildPathView(path, snapshot)),
+        [snapshot]
     );
 
-    const activeCourseCount = useMemo(
-        () =>
-            Object.values(state.enrollments).filter(
-                (enrollment) => enrollment.status !== "completed"
-            ).length,
-        [state.enrollments]
-    );
+    const activeCourseCount = snapshot.courses.filter(
+        (course) => course.enrollment.status === "ACTIVE"
+    ).length;
 
     const navigation = buildLearnerNavigation({
-        badges: summary.badgeCount,
-        certificates: Object.keys(state.certificates).length,
+        badges: snapshot.summary.badgeCount,
+        certificates: snapshot.certificates.length,
     });
 
     return (
@@ -326,25 +317,32 @@ const LearningPathsPage: React.FC = () => {
                 activeItemId="paths"
             >
                 <p className="mb-6 text-sm text-medium-grey">
-                    {hydrated
-                        ? `You are enrolled in ${activeCourseCount} active ${
-                              activeCourseCount === 1 ? "course" : "courses"
-                          }. Every course below is free to complete end to end.`
-                        : "Every course below is free to complete end to end."}
+                    {`You are enrolled in ${activeCourseCount} active ${
+                        activeCourseCount === 1 ? "course" : "courses"
+                    }. Every course below is free to complete end to end.`}
                 </p>
 
                 <div className="space-y-6">
                     {views.map((view) => (
-                        <PathCard
-                            key={view.path.id}
-                            view={view}
-                            hydrated={hydrated}
-                        />
+                        <PathCard key={view.path.id} view={view} />
                     ))}
                 </div>
             </LearnerShell>
         </>
     );
 };
+
+export const getServerSideProps = requireAuth<PathsProps>(
+    async ({ userId }) => {
+        const snapshot = await getLearnerSnapshot(userId);
+        return {
+            props: {
+                snapshot: JSON.parse(
+                    JSON.stringify(snapshot)
+                ) as LearnerSnapshot,
+            },
+        };
+    }
+);
 
 export default LearningPathsPage;

@@ -24,14 +24,8 @@ import { getPathsForCourse } from "learning/learning-paths";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useSyncExternalStore } from "react";
-import { learningItemKey } from "utils/learning/state";
-import {
-    getLearningServerSnapshot,
-    getLearningStoreSnapshot,
-    subscribeToLearningStore,
-} from "utils/learning/store";
-import type { LessonProgressRecord } from "utils/learning/types";
+import React from "react";
+import EnrollButton from "@components/Learning/EnrollButton";
 
 type CourseOverviewLesson = Pick<
     Lesson,
@@ -289,11 +283,7 @@ const buildFreeSetupPath = (course: CourseOverview): FreeSetupPath => {
     };
 };
 
-const buildOutline = (
-    course: CourseOverview,
-    lessonProgress: Record<string, LessonProgressRecord>,
-    currentLessonId?: string
-): ModuleOutlineItem[] =>
+const buildOutline = (course: CourseOverview): ModuleOutlineItem[] =>
     course.modules.map((module, moduleIndex) => ({
         id: module.id,
         title: module.title,
@@ -305,16 +295,7 @@ const buildOutline = (
             description: lesson.objective,
             estimatedMinutes: lesson.estimatedMinutes,
             required: lesson.required,
-            status:
-                lessonProgress[learningItemKey(course.id, lesson.id)]
-                    ?.completedAt &&
-                lessonProgress[
-                    learningItemKey(course.id, lesson.id)
-                ]?.completedInteractionIds.includes(lesson.interactionId)
-                    ? "complete"
-                    : lesson.id === currentLessonId
-                    ? "in-progress"
-                    : "not-started",
+            status: "not-started",
             href: `/learn/courses/${course.slug}/lessons/${lesson.slug}`,
         })),
     }));
@@ -382,11 +363,6 @@ const toCourseOverview = (course: Course): CourseOverview => ({
 });
 
 const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
-    const learningSnapshot = useSyncExternalStore(
-        subscribeToLearningStore,
-        getLearningStoreSnapshot,
-        getLearningServerSnapshot
-    );
     const software = course.requirements
         .filter((requirement) =>
             ["browser", "software", "compute", "dataset"].includes(
@@ -406,13 +382,9 @@ const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
         (total, module) => total + module.lessons.length,
         0
     );
-    const currentLessonId =
-        learningSnapshot.state.resumePositions[course.id]?.lessonId;
-    const outline = buildOutline(
-        course,
-        learningSnapshot.state.lessonProgress,
-        currentLessonId
-    );
+    // Public page: the outline shows structure only. Per-learner status lives
+    // behind the sign-in wall on the lesson player and dashboard.
+    const outline = buildOutline(course);
 
     return (
         <div className="flex min-h-screen w-full flex-col overflow-x-hidden bg-dark-grey-primary">
@@ -526,15 +498,15 @@ const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
                                     </dd>
                                 </div>
                             </dl>
-                            <Link
-                                href={firstLessonHref}
-                                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-4 py-3 text-center text-sm font-bold text-white outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white"
-                            >
-                                Start course for free
-                            </Link>
+                            <EnrollButton
+                                courseId={course.id}
+                                courseSlug={course.slug}
+                                firstLessonHref={firstLessonHref}
+                                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-4 py-3 text-center text-sm font-bold text-white outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white disabled:opacity-60"
+                            />
                             <p className="mt-3 text-center text-xs leading-5 text-medium-grey">
-                                No account or payment method required. Progress
-                                is saved on this device.
+                                Always free — no payment method, ever. A free
+                                account saves your progress across devices.
                             </p>
                         </aside>
                     </div>
@@ -760,8 +732,9 @@ const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
                                                 </Link>
                                                 <span className="text-medium-grey">
                                                     {" "}
-                                                    · step {path.position} of{" "}
-                                                    {path.courseCount}
+                                                    · step {
+                                                        path.position
+                                                    } of {path.courseCount}
                                                 </span>
                                                 <p className="text-[#C7C3CE]">
                                                     {path.summary}

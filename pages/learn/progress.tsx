@@ -1,16 +1,16 @@
-"use client";
-
 import CourseBadge from "@components/Learning/CourseBadge";
 import LearnerShell from "@components/Learning/LearnerShell";
 import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
 import { LearningProgressBar } from "@components/Learning/LearningProgress";
-import { useLearningProgress } from "hooks/useLearningProgress";
-import { toCourseCompletionPolicy } from "learning/course-policies";
-import { courseRegistry } from "learning/course-registry";
+import { requireAuth } from "lib/guards";
+import { getLearnerSnapshot, type LearnerSnapshot } from "lib/learner";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useMemo } from "react";
-import { calculateCourseProgress, localDateKey } from "@utils/learning/state";
+import React from "react";
+
+interface ProgressProps {
+    snapshot: LearnerSnapshot;
+}
 
 const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -20,426 +20,241 @@ const formatTime = (seconds: number) => {
     return remainder ? `${hours}h ${remainder}m` : `${hours}h`;
 };
 
-const formatDate = (value?: string) => {
-    if (!value) return "Not started";
-    const timestamp = Date.parse(value);
-    if (Number.isNaN(timestamp)) return "Recently";
-    return new Intl.DateTimeFormat(undefined, {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-    }).format(new Date(timestamp));
-};
+const paceTone = {
+    ahead: "green",
+    "on-track": "blue",
+    behind: "amber",
+    "not-started": "grey",
+} as const;
 
-const lastSevenDays = () =>
-    Array.from({ length: 7 }, (_, index) => {
-        const date = new Date();
-        date.setHours(12, 0, 0, 0);
-        date.setDate(date.getDate() - (6 - index));
-        return {
-            key: localDateKey(date),
-            label: new Intl.DateTimeFormat(undefined, {
-                weekday: "short",
-            }).format(date),
-            fullLabel: new Intl.DateTimeFormat(undefined, {
-                weekday: "long",
-                month: "long",
-                day: "numeric",
-            }).format(date),
-        };
-    });
-
-const ProgressPage: React.FC = () => {
-    const { state, summary, hydrated } = useLearningProgress();
-    const courseProgress = useMemo(
-        () =>
-            courseRegistry
-                .filter(
-                    (course) =>
-                        Boolean(state.enrollments[course.id]) ||
-                        Boolean(state.activity.byCourse[course.id])
-                )
-                .map((course) => ({
-                    course,
-                    progress: calculateCourseProgress(
-                        state,
-                        toCourseCompletionPolicy(course)
-                    ),
-                }))
-                .sort(
-                    (left, right) =>
-                        Date.parse(
-                            right.progress.lastActivityAt ||
-                                "1970-01-01T00:00:00.000Z"
-                        ) -
-                        Date.parse(
-                            left.progress.lastActivityAt ||
-                                "1970-01-01T00:00:00.000Z"
-                        )
-                ),
-        [state]
-    );
-    const week = useMemo(
-        () =>
-            lastSevenDays().map((day) => ({
-                ...day,
-                seconds: state.activity.byDate[day.key] || 0,
-            })),
-        [state.activity.byDate]
-    );
-    const maxDailySeconds = Math.max(1, ...week.map((day) => day.seconds));
-    const weeklySeconds = week.reduce((total, day) => total + day.seconds, 0);
-    const attemptedQuizScores = Object.values(state.quizAttempts)
-        .flat()
-        .filter((attempt) => attempt.maxScore > 0)
-        .map((attempt) => (attempt.score / attempt.maxScore) * 100);
-    const averageQuizScore = attemptedQuizScores.length
-        ? Math.round(
-              attemptedQuizScores.reduce((total, score) => total + score, 0) /
-                  attemptedQuizScores.length
-          )
-        : null;
+const ProgressPage: React.FC<ProgressProps> = ({ snapshot }) => {
+    const { courses, summary, weeklyActivity } = snapshot;
 
     const navigation = buildLearnerNavigation({
         badges: summary.badgeCount,
-        certificates: Object.keys(state.certificates).length,
+        certificates: snapshot.certificates.length,
     });
+
+    const recent = weeklyActivity.slice(-14);
+    const peak = Math.max(1, ...recent.map((day) => day.seconds));
+    const totalRecent = recent.reduce((sum, day) => sum + day.seconds, 0);
 
     return (
         <>
             <Head>
-                <title>Learning Progress | C4T</title>
-                <meta
-                    name="description"
-                    content="Review course progress, learning time, quiz performance, streaks, and milestones saved on this device."
-                />
+                <title>Progress | C4T Learning</title>
                 <meta name="robots" content="noindex" />
             </Head>
             <LearnerShell
-                title="Learning progress"
-                description="A clear, private view of meaningful work completed on this device."
+                title="Progress"
+                description="Every number here comes from work you actually completed and time you were actively engaged."
                 activeItemId="progress"
                 navigation={navigation}
             >
-                {!hydrated ? (
-                    <div
-                        role="status"
-                        className="rounded-2xl border border-white/10 bg-dark-grey-secondary p-6 text-medium-grey"
-                    >
-                        Loading progress saved in this browser…
-                    </div>
-                ) : (
-                    <>
-                        <section
-                            aria-label="Learning statistics"
-                            className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+                <div className="space-y-8">
+                    <section aria-labelledby="totals-title">
+                        <h2
+                            id="totals-title"
+                            className="text-xl font-bold text-white"
                         >
+                            Totals
+                        </h2>
+                        <dl className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                             {[
-                                {
-                                    label: "Active learning",
-                                    value: formatTime(summary.activeSeconds),
-                                    detail: `${formatTime(
-                                        weeklySeconds
-                                    )} in the last 7 days`,
-                                },
-                                {
-                                    label: "Lessons complete",
-                                    value: String(summary.completedLessonCount),
-                                    detail: `${courseProgress.length} course${
-                                        courseProgress.length === 1 ? "" : "s"
-                                    } started`,
-                                },
-                                {
-                                    label: "Quiz average",
-                                    value:
-                                        averageQuizScore === null
-                                            ? "—"
-                                            : `${averageQuizScore}%`,
-                                    detail: attemptedQuizScores.length
-                                        ? `${
-                                              attemptedQuizScores.length
-                                          } recorded attempt${
-                                              attemptedQuizScores.length === 1
-                                                  ? ""
-                                                  : "s"
-                                          }`
-                                        : "No scored attempts yet",
-                                },
-                                {
-                                    label: "Learning streak",
-                                    value: `${summary.streak.currentDays} day${
-                                        summary.streak.currentDays === 1
-                                            ? ""
-                                            : "s"
-                                    }`,
-                                    detail: `Longest: ${
-                                        summary.streak.longestDays
-                                    } day${
-                                        summary.streak.longestDays === 1
-                                            ? ""
-                                            : "s"
-                                    }`,
-                                },
-                            ].map((stat) => (
-                                <article
-                                    key={stat.label}
-                                    className="rounded-2xl border border-white/10 bg-dark-grey-secondary p-4"
+                                [
+                                    "Active learning time",
+                                    formatTime(summary.activeSeconds),
+                                ],
+                                [
+                                    "Lessons completed",
+                                    `${summary.completedLessons}`,
+                                ],
+                                [
+                                    "Courses completed",
+                                    `${summary.completedCourses}`,
+                                ],
+                                ["Points", `${summary.points}`],
+                                [
+                                    "Current streak",
+                                    `${summary.currentStreak} days`,
+                                ],
+                                [
+                                    "Longest streak",
+                                    `${summary.longestStreak} days`,
+                                ],
+                                ["Badges", `${summary.badgeCount}`],
+                                [
+                                    "Certificates",
+                                    `${snapshot.certificates.length}`,
+                                ],
+                            ].map(([label, value]) => (
+                                <div
+                                    key={label}
+                                    className="rounded-xl border border-white/10 bg-dark-grey-secondary p-4"
                                 >
-                                    <p className="text-sm text-medium-grey">
-                                        {stat.label}
-                                    </p>
-                                    <p className="mt-1 text-2xl font-bold text-white">
-                                        {stat.value}
-                                    </p>
-                                    <p className="mt-2 text-xs leading-5 text-medium-grey">
-                                        {stat.detail}
-                                    </p>
-                                </article>
+                                    <dt className="text-xs uppercase tracking-wider text-medium-grey">
+                                        {label}
+                                    </dt>
+                                    <dd className="mt-1 text-2xl font-bold text-white">
+                                        {value}
+                                    </dd>
+                                </div>
                             ))}
-                        </section>
+                        </dl>
+                    </section>
 
-                        <section className="mt-8 rounded-2xl border border-white/10 bg-dark-grey-secondary p-5">
-                            <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
-                                <div>
-                                    <h2 className="text-xl font-bold text-white">
-                                        Last 7 days
-                                    </h2>
-                                    <p className="mt-1 text-sm text-medium-grey">
-                                        Only active learning interactions are
-                                        counted.
-                                    </p>
-                                </div>
-                                <CourseBadge tone="blue">
-                                    {formatTime(weeklySeconds)} total
-                                </CourseBadge>
-                            </div>
-                            <div
-                                className="mt-6 grid h-48 grid-cols-7 items-end gap-2"
-                                role="img"
-                                aria-label={`Seven-day learning activity. ${week
-                                    .map(
-                                        (day) =>
-                                            `${day.fullLabel}: ${formatTime(
-                                                day.seconds
-                                            )}`
-                                    )
-                                    .join("; ")}`}
-                            >
-                                {week.map((day) => {
-                                    const height =
-                                        day.seconds > 0
-                                            ? Math.max(
-                                                  8,
-                                                  (day.seconds /
-                                                      maxDailySeconds) *
-                                                      100
-                                              )
-                                            : 3;
-                                    return (
-                                        <div
-                                            key={day.key}
-                                            className="flex h-full min-w-0 flex-col justify-end"
-                                        >
-                                            <div className="flex flex-1 items-end">
-                                                <div
-                                                    className="w-full rounded-t-md bg-gradient-to-t from-brand-purple-primary to-brand-purple-secondary motion-safe:transition-[height] motion-reduce:transition-none"
-                                                    style={{
-                                                        height: `${height}%`,
-                                                    }}
-                                                    title={`${
-                                                        day.fullLabel
-                                                    }: ${formatTime(
-                                                        day.seconds
-                                                    )}`}
-                                                />
-                                            </div>
-                                            <span className="mt-2 truncate text-center text-[11px] text-medium-grey">
-                                                {day.label}
-                                            </span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </section>
+                    <section aria-labelledby="activity-title">
+                        <h2
+                            id="activity-title"
+                            className="text-xl font-bold text-white"
+                        >
+                            Last two weeks
+                        </h2>
+                        {/* Text equivalent, so the chart is never the only source. */}
+                        <p className="mt-2 text-sm text-medium-grey">
+                            {recent.length
+                                ? `${formatTime(
+                                      totalRecent
+                                  )} of active learning across ${
+                                      recent.filter((day) => day.seconds > 0)
+                                          .length
+                                  } active days.`
+                                : "No activity recorded yet."}
+                        </p>
+                        {recent.length > 0 && (
+                            <ul className="mt-4 flex h-32 list-none items-end gap-1.5 pl-0">
+                                {recent.map((day) => (
+                                    <li
+                                        key={day.date}
+                                        className="flex flex-1 flex-col items-center justify-end"
+                                    >
+                                        <span
+                                            aria-hidden="true"
+                                            className="w-full rounded-t bg-brand-purple-secondary/70"
+                                            style={{
+                                                height: `${Math.max(
+                                                    2,
+                                                    (day.seconds / peak) * 100
+                                                )}%`,
+                                            }}
+                                        />
+                                        <span className="sr-only">
+                                            {day.date}:{" "}
+                                            {formatTime(day.seconds)}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </section>
 
-                        <section className="mt-8">
-                            <div className="flex items-end justify-between gap-4">
-                                <div>
-                                    <h2 className="text-2xl font-bold text-white">
-                                        Course progress
-                                    </h2>
-                                    <p className="mt-1 text-sm text-medium-grey">
-                                        Requirements, activity, and resume
-                                        positions come from the local learning
-                                        record.
-                                    </p>
-                                </div>
+                    <section aria-labelledby="courses-title">
+                        <h2
+                            id="courses-title"
+                            className="text-xl font-bold text-white"
+                        >
+                            By course
+                        </h2>
+                        {courses.length === 0 ? (
+                            <p className="mt-3 rounded-2xl border border-dashed border-white/20 bg-white/[0.03] p-6 text-sm text-medium-grey">
+                                Enroll in a course to start building progress.{" "}
                                 <Link
                                     href="/courses"
-                                    className="shrink-0 text-sm font-semibold text-brand-purple-secondary outline-none hover:text-white focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                    className="text-brand-purple-secondary underline-offset-4 hover:underline"
                                 >
                                     Browse courses
                                 </Link>
-                            </div>
-
-                            {courseProgress.length ? (
-                                <div className="mt-4 grid gap-4 xl:grid-cols-2">
-                                    {courseProgress.map(
-                                        ({ course, progress }) => {
-                                            const resumeLesson = progress.resume
-                                                ? course.modules
-                                                      .flatMap(
-                                                          (module) =>
-                                                              module.lessons
-                                                      )
-                                                      .find(
-                                                          (lesson) =>
-                                                              lesson.id ===
-                                                              progress.resume
-                                                                  ?.lessonId
-                                                      )
-                                                : undefined;
-                                            const firstLesson =
-                                                course.modules[0]?.lessons[0];
-                                            const continueLesson =
-                                                resumeLesson || firstLesson;
-                                            return (
-                                                <article
-                                                    key={course.id}
-                                                    className="rounded-2xl border border-white/10 bg-dark-grey-secondary p-5"
-                                                >
-                                                    <div className="flex items-start justify-between gap-4">
-                                                        <div>
-                                                            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-purple-secondary">
-                                                                {state
-                                                                    .enrollments[
-                                                                    course.id
-                                                                ]?.pacing ||
-                                                                    "self-paced"}
-                                                            </p>
-                                                            <h3 className="mt-1 text-lg font-bold text-white">
-                                                                {course.title}
-                                                            </h3>
-                                                        </div>
-                                                        <CourseBadge
-                                                            tone={
-                                                                progress.percentage ===
-                                                                100
-                                                                    ? "green"
-                                                                    : "purple"
-                                                            }
-                                                        >
-                                                            {
-                                                                progress.percentage
-                                                            }
-                                                            %
-                                                        </CourseBadge>
-                                                    </div>
-                                                    <div className="mt-5">
-                                                        <LearningProgressBar
-                                                            value={
-                                                                progress.percentage
-                                                            }
-                                                            label={`${course.title} requirements`}
-                                                        />
-                                                    </div>
-                                                    <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                                                        <div className="rounded-xl bg-dark-grey-primary/40 p-3">
-                                                            <dt className="text-xs text-medium-grey">
-                                                                Lessons
-                                                            </dt>
-                                                            <dd className="mt-1 font-bold text-white">
-                                                                {
-                                                                    progress.completedLessons
-                                                                }
-                                                                /
-                                                                {
-                                                                    progress.totalLessons
-                                                                }
-                                                            </dd>
-                                                        </div>
-                                                        <div className="rounded-xl bg-dark-grey-primary/40 p-3">
-                                                            <dt className="text-xs text-medium-grey">
-                                                                Assignments
-                                                            </dt>
-                                                            <dd className="mt-1 font-bold text-white">
-                                                                {
-                                                                    progress.submittedAssignments
-                                                                }
-                                                                /
-                                                                {
-                                                                    progress.totalAssignments
-                                                                }
-                                                            </dd>
-                                                        </div>
-                                                        <div className="rounded-xl bg-dark-grey-primary/40 p-3">
-                                                            <dt className="text-xs text-medium-grey">
-                                                                Active time
-                                                            </dt>
-                                                            <dd className="mt-1 font-bold text-white">
-                                                                {formatTime(
-                                                                    progress.activeSeconds
-                                                                )}
-                                                            </dd>
-                                                        </div>
-                                                        <div className="rounded-xl bg-dark-grey-primary/40 p-3">
-                                                            <dt className="text-xs text-medium-grey">
-                                                                Last activity
-                                                            </dt>
-                                                            <dd className="mt-1 font-bold text-white">
-                                                                {formatDate(
-                                                                    progress.lastActivityAt
-                                                                )}
-                                                            </dd>
-                                                        </div>
-                                                    </dl>
-                                                    <div className="mt-5 flex flex-wrap gap-2">
-                                                        {continueLesson && (
-                                                            <Link
-                                                                href={`/learn/courses/${course.slug}/lessons/${continueLesson.slug}`}
-                                                                className="inline-flex min-h-[44px] items-center rounded-xl bg-brand-purple-primary px-4 py-2 text-sm font-semibold text-white outline-none hover:bg-brand-purple-secondary focus-visible:ring-2 focus-visible:ring-white"
-                                                            >
-                                                                {resumeLesson
-                                                                    ? "Resume lesson"
-                                                                    : "Start course"}
-                                                            </Link>
-                                                        )}
-                                                        <Link
-                                                            href={`/courses/${course.slug}`}
-                                                            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold text-[#D6D3DC] outline-none hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
-                                                        >
-                                                            Course overview
-                                                        </Link>
-                                                    </div>
-                                                </article>
-                                            );
-                                        }
-                                    )}
-                                </div>
-                            ) : (
-                                <div className="mt-4 rounded-2xl border border-dashed border-white/20 bg-white/[0.03] p-8 text-center">
-                                    <h3 className="font-bold text-white">
-                                        No course progress yet
-                                    </h3>
-                                    <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-medium-grey">
-                                        Start any free course and complete a
-                                        lesson. Your progress will appear here
-                                        automatically on this device.
-                                    </p>
-                                    <Link
-                                        href="/courses"
-                                        className="mt-4 inline-flex min-h-[44px] items-center rounded-xl bg-brand-purple-primary px-5 py-2 text-sm font-semibold text-white outline-none focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                .
+                            </p>
+                        ) : (
+                            <div className="mt-3 space-y-3">
+                                {courses.map((course) => (
+                                    <article
+                                        key={course.courseId}
+                                        className="rounded-2xl border border-white/10 bg-dark-grey-secondary p-5"
                                     >
-                                        Find a free course
-                                    </Link>
-                                </div>
-                            )}
-                        </section>
-                    </>
-                )}
+                                        <div className="flex flex-wrap items-center justify-between gap-2">
+                                            <h3 className="font-bold text-white">
+                                                <Link
+                                                    href={`/courses/${course.slug}`}
+                                                    className="underline-offset-4 hover:underline"
+                                                >
+                                                    {course.title}
+                                                </Link>
+                                            </h3>
+                                            <CourseBadge
+                                                tone={
+                                                    paceTone[
+                                                        course.pacing.status
+                                                    ]
+                                                }
+                                            >
+                                                {course.pacing.label}
+                                            </CourseBadge>
+                                        </div>
+                                        <div className="mt-3 max-w-md">
+                                            <LearningProgressBar
+                                                value={
+                                                    course.progress.percentage
+                                                }
+                                                label="Overall progress"
+                                            />
+                                        </div>
+                                        <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-4">
+                                            {[
+                                                [
+                                                    "Lessons",
+                                                    `${course.progress.completedLessons}/${course.progress.totalLessons}`,
+                                                ],
+                                                [
+                                                    "Checkpoints",
+                                                    `${course.progress.passedCheckpoints}/${course.progress.totalCheckpoints}`,
+                                                ],
+                                                [
+                                                    "Projects approved",
+                                                    `${course.progress.approvedAssignments}/${course.progress.totalAssignments}`,
+                                                ],
+                                                [
+                                                    "Checkpoint average",
+                                                    course.progress
+                                                        .checkpointAverage ===
+                                                    null
+                                                        ? "—"
+                                                        : `${course.progress.checkpointAverage}%`,
+                                                ],
+                                            ].map(([label, value]) => (
+                                                <div key={label}>
+                                                    <dt className="text-xs uppercase tracking-wider text-medium-grey">
+                                                        {label}
+                                                    </dt>
+                                                    <dd className="mt-0.5 font-bold text-white">
+                                                        {value}
+                                                    </dd>
+                                                </div>
+                                            ))}
+                                        </dl>
+                                    </article>
+                                ))}
+                            </div>
+                        )}
+                    </section>
+                </div>
             </LearnerShell>
         </>
     );
 };
+
+export const getServerSideProps = requireAuth<ProgressProps>(
+    async ({ userId }) => {
+        const snapshot = await getLearnerSnapshot(userId);
+        return {
+            props: {
+                snapshot: JSON.parse(
+                    JSON.stringify(snapshot)
+                ) as LearnerSnapshot,
+            },
+        };
+    }
+);
 
 export default ProgressPage;

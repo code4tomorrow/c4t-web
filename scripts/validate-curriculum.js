@@ -383,7 +383,10 @@ const registryCourseIds = new Set(courseRegistry.map((course) => course.id));
 const pathSlugs = new Set();
 const coursesInAnyPath = new Set();
 
-if (!Array.isArray(learningPathDefinitions) || !learningPathDefinitions.length) {
+if (
+    !Array.isArray(learningPathDefinitions) ||
+    !learningPathDefinitions.length
+) {
     fail("No learning paths are defined.");
 }
 
@@ -435,7 +438,9 @@ learningPathDefinitions.forEach((path) => {
     });
 
     if (!coreCount) {
-        fail(`${prefix} has no required (core) course, so it can never finish.`);
+        fail(
+            `${prefix} has no required (core) course, so it can never finish.`
+        );
     }
 });
 

@@ -13,6 +13,8 @@ import ReactGA from "react-ga4";
 import config from "config";
 import { Router } from "next/router";
 import Snackbar from "@components/Snackbar";
+import { SessionProvider } from "next-auth/react";
+import type { Session } from "next-auth";
 
 let muiCache: EmotionCache | undefined = undefined;
 
@@ -23,7 +25,7 @@ export const createMuiCache = () =>
         speedy: true,
     }));
 
-type AppPropWithLayout = AppProps & {
+type AppPropWithLayout = AppProps<{ session?: Session | null }> & {
     Component: NextPageWithLayout;
 };
 
@@ -94,20 +96,27 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
                     cardType: "summary_large_image",
                 }}
             />
-            <React.StrictMode>
-                <ProgressBar
-                    options={{ showSpinner: false }}
-                    color={"#fff"}
-                    height={2}
-                />
-                {getLayout(
-                    <RecoilRoot>
-                        <Component {...pageProps} />
-                        <Snackbar />
-                    </RecoilRoot>,
-                    pageProps
-                )}
-            </React.StrictMode>
+            <SessionProvider
+                session={pageProps.session}
+                // Learner pages read the session from getServerSideProps, so the
+                // client does not need to poll for it.
+                refetchInterval={0}
+            >
+                <React.StrictMode>
+                    <ProgressBar
+                        options={{ showSpinner: false }}
+                        color={"#fff"}
+                        height={2}
+                    />
+                    {getLayout(
+                        <RecoilRoot>
+                            <Component {...pageProps} />
+                            <Snackbar />
+                        </RecoilRoot>,
+                        pageProps
+                    )}
+                </React.StrictMode>
+            </SessionProvider>
         </CacheProvider>
     );
 }
