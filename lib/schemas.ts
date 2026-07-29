@@ -87,6 +87,16 @@ export const safetySchema = z.object({
     courseId: courseIdSchema,
 });
 
+export const credentialsSchema = z.object({
+    email: z.email().max(200),
+    // 10+ characters, following NIST guidance: length over character classes.
+    password: z.string().min(10, "must be at least 10 characters").max(200),
+});
+
+export const registerSchema = credentialsSchema.extend({
+    displayName: z.string().trim().min(2).max(60),
+});
+
 export const onboardingSchema = z.object({
     displayName: z.string().trim().min(2).max(60),
     experienceLevel: z.enum([

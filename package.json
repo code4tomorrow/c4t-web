@@ -41,6 +41,7 @@
         "@svgr/webpack": "^6.2.1",
         "@vercel/edge-config": "^0.2.0",
         "axios": "^0.27.2",
+        "bcryptjs": "^3.0.3",
         "cloudinary-build-url": "^0.2.4",
         "clsx": "^1.1.1",
         "cross-env": "^7.0.3",
@@ -97,6 +98,7 @@
     },
     "devDependencies": {
         "@emotion/server": "^11.4.0",
+        "@types/bcryptjs": "^2.4.6",
         "@types/html-minifier": "^4.0.2",
         "@types/lodash": "^4.14.182",
         "@types/lqip-modern": "^1.1.2",

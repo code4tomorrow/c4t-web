@@ -1,6 +1,12 @@
+/*
+ * Order matters. Tailwind's preflight (base) resets `[type='button']` to a
+ * transparent background with the same specificity as a `bg-*` utility, so
+ * emitting base last made it win the tie and blanked out solid buttons until
+ * they were hovered. base -> components -> utilities is the required order.
+ */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind base;
 
 *,
 *::before,

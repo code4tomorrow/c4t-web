@@ -89,8 +89,19 @@ self-paced and weekly pacing templates, and configurable certificate rules.
 
 ### Accounts, progress, and privacy
 
-Learners sign in with **GitHub OAuth** or an **emailed magic link** (NextAuth,
-database sessions). There are no passwords to leak. Enrollments, lesson
+Learners sign in with **email + password** or **GitHub OAuth**; passwordless
+magic links are available when SMTP is configured. All three use NextAuth
+database sessions, so a session can be revoked server-side at any time.
+
+Passwords are bcrypt hashed (cost 12) in `User.passwordHash`, which stays null
+for OAuth-only accounts. `lib/password-auth.ts` compares against a dummy hash
+when an account is missing, so a failed lookup takes the same time as a wrong
+password, and sign-in returns one identical message either way — the form
+cannot enumerate accounts. Registration necessarily reports that an address is
+taken, which is unavoidable for a usable sign-up. Both routes are rate limited,
+by source address and by the email being targeted.
+
+Enrollments, lesson
 progress, submissions, grades, activity time, points, badges, and certificates
 live in **Postgres via Prisma**, so progress follows a learner across devices.
 

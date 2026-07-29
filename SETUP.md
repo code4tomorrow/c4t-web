@@ -8,7 +8,7 @@ You need three things:
 | What               | Why                                     | Service we use                           | Cost              |
 | ------------------ | --------------------------------------- | ---------------------------------------- | ----------------- |
 | A database         | Stores accounts, progress, certificates | **Neon** (Postgres)                      | Free forever tier |
-| A sign-in method   | So learners can log in                  | **GitHub OAuth** and/or **Resend** email | Free              |
+| A sign-in method   | So learners can log in                  | **Email + password** (built in) and/or **GitHub OAuth** | Free |
 | A place to host it | To put it on the internet               | **Vercel**                               | Free Hobby tier   |
 
 You can do steps 1–5 and run everything on your own laptop first. Step 7
@@ -74,23 +74,25 @@ This lets people click "Continue with GitHub" instead of making a password.
 
 ---
 
-## Step 4 — Set up email sign-in (optional but recommended)
+## Step 4 — Email sign-in (already works, nothing to set up)
 
-This sends people a "magic link" — they click it and they're signed in. No
-passwords to reset, ever.
+Learners can create an account with an **email and password**. This needs no
+email service, no SMTP, and no API key — it works the moment the database is
+connected.
 
-**If you skip this, GitHub sign-in still works.** The login page automatically
-hides whichever method isn't configured.
+Passwords are hashed with bcrypt (cost 12) and never stored in readable form.
+Sign-in failures return one identical message whether the address exists or
+not, so the form cannot be used to discover who has an account.
 
-1. Go to **https://resend.com** and sign up (free: 3,000 emails/month).
-2. Go to **API Keys** → **Create API Key**. Name it `c4t-learning`, give it
-   **Sending access**, and copy the key (starts with `re_`).
-3. For the `EMAIL_FROM` address you have two options:
-    - **Quickest:** use `onboarding@resend.dev` — works immediately, but only
-      sends to _your own_ signup email. Fine for testing.
-    - **For real learners:** go to **Domains** → **Add Domain**, enter your
-      domain, and add the DNS records Resend shows you. Then use something like
-      `learning@yourdomain.com`.
+**Optional:** if you later want passwordless "magic link" sign-in instead, set
+the `EMAIL_SERVER_*` variables in `.env` (Resend's free tier works well). The
+login page shows whichever methods are configured, so leaving them blank is
+fine.
+
+> There is no "forgot password" flow yet, because that genuinely does require
+> sending email. Until you configure SMTP, an admin can reset someone by
+> deleting their `passwordHash` in the database and asking them to sign up
+> again, or the learner can use GitHub instead.
 
 ---
 
@@ -118,12 +120,16 @@ NEXTAUTH_SECRET="paste-the-generated-string-here"
 GITHUB_ID="Ov23li..."
 GITHUB_SECRET="abc123..."
 
-# From step 4 (delete these five lines if you skipped step 4)
-EMAIL_SERVER_HOST="smtp.resend.com"
-EMAIL_SERVER_PORT="587"
-EMAIL_SERVER_USER="resend"
-EMAIL_SERVER_PASSWORD="re_your_api_key_here"
-EMAIL_FROM="onboarding@resend.dev"
+# Optional — only for passwordless magic links. Email + password works
+# without any of this.
+# EMAIL_SERVER_HOST="smtp.resend.com"
+# EMAIL_SERVER_PORT="587"
+# EMAIL_SERVER_USER="resend"
+# EMAIL_SERVER_PASSWORD="re_your_api_key_here"
+# EMAIL_FROM="onboarding@resend.dev"
+
+# Promoted to ADMIN on sign-in
+INITIAL_ADMIN_EMAILS="you@example.com"
 ```
 
 To generate the secret, run this in Terminal and paste the output:
