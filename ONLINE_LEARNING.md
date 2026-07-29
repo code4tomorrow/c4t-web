@@ -134,6 +134,35 @@ course, and date — never an email address or any coursework.
 Roles are enforced on the server in `lib/guards.ts` (pages) and `lib/api.ts`
 (API routes). Client-side checks are only ever cosmetic.
 
+The first administrator on a fresh database is bootstrapped with
+`INITIAL_ADMIN_EMAILS` (comma-separated), applied on sign-in. After that, roles
+are managed at `/admin/users` or with `npm run db:make-admin`.
+
+### Role preview ("view as")
+
+An administrator can preview the site as a learner, instructor, or content
+editor from the bar at the top of `/admin`. While previewing, an amber banner is
+pinned to every page with the way out.
+
+The preview is **enforced, not cosmetic**: `resolveEffectiveRole` in
+`lib/view-as.ts` feeds both the page guards and the API handler, so an admin
+previewing as a learner is genuinely refused by `/admin` and `/api/admin/*`.
+
+It can only ever *narrow* access, which is why the preview cookie needs no
+signing:
+
+-   The cookie is honoured only when the account's real role — read from the
+    database-backed session, never from the cookie — is `ADMIN`.
+-   `ADMIN` is not a previewable target, so the cookie cannot restore or grant
+    privilege.
+-   A learner who forges the cookie gains nothing.
+-   Ending a preview is authorised against the *real* role, so an admin
+    previewing as a learner can always switch back.
+
+Previewing does not touch data: the admin's own enrollments, progress, and
+submissions are their own, which is what makes it useful for walking the learner
+flow end to end.
+
 ## Development
 
 **New here? Follow [SETUP.md](SETUP.md)** — it walks through creating a free

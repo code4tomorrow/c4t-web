@@ -14,6 +14,7 @@ import config from "config";
 import { Router } from "next/router";
 import Snackbar from "@components/Snackbar";
 import { SessionProvider } from "next-auth/react";
+import ViewAsBanner from "@components/Learning/ViewAsBanner";
 import type { Session } from "next-auth";
 
 let muiCache: EmotionCache | undefined = undefined;
@@ -102,6 +103,7 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
                 // client does not need to poll for it.
                 refetchInterval={0}
             >
+                <ViewAsBanner />
                 <React.StrictMode>
                     <ProgressBar
                         options={{ showSpinner: false }}

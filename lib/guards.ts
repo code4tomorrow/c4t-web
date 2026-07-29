@@ -1,13 +1,19 @@
 import type { Role } from "@prisma/client";
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import type { Session } from "next-auth";
-import { getSession } from "./auth";
 import { STAFF_ROLES } from "./api";
+import { getSession } from "./auth";
+import { resolveEffectiveRole } from "./view-as";
 
 export interface AuthedContext extends GetServerSidePropsContext {
     session: Session;
     userId: string;
+    /** The role this request is evaluated against (respects admin preview). */
     role: Role;
+    /** The account's actual role. */
+    realRole: Role;
+    /** Set while an administrator is previewing another role. */
+    previewRole: Role | null;
 }
 
 /**
@@ -37,7 +43,12 @@ export const requireAuth =
             };
         }
 
-        if (options.roles && !options.roles.includes(session.user.role)) {
+        const { effectiveRole, realRole, previewRole } = resolveEffectiveRole(
+            session.user.role,
+            context.req
+        );
+
+        if (options.roles && !options.roles.includes(effectiveRole)) {
             return { notFound: true };
         }
 
@@ -48,7 +59,9 @@ export const requireAuth =
             ...context,
             session,
             userId: session.user.id,
-            role: session.user.role,
+            role: effectiveRole,
+            realRole,
+            previewRole,
         });
     };
 

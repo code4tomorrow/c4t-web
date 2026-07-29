@@ -25,6 +25,18 @@ const emailConfigured = Boolean(
         process.env.EMAIL_FROM
 );
 
+/**
+ * Emails promoted to ADMIN on sign-in. This is the bootstrap for a fresh
+ * database, where nobody can reach /admin/users yet to grant the first role.
+ * Everything after that is managed in the admin UI or via `npm run db:make-admin`.
+ */
+const initialAdminEmails = new Set(
+    (process.env.INITIAL_ADMIN_EMAILS || "")
+        .split(",")
+        .map((email) => email.trim().toLowerCase())
+        .filter(Boolean)
+);
+
 export const authProviderStatus = {
     github: githubConfigured,
     email: emailConfigured,
@@ -111,6 +123,30 @@ export const authOptions: NextAuthOptions = {
                     data: { userId: user.id },
                 }),
             ]);
+        },
+        async signIn({ user }) {
+            const email = user.email?.toLowerCase();
+            if (!email || !initialAdminEmails.has(email)) return;
+
+            const current = await prisma.user.findUnique({
+                where: { id: user.id },
+                select: { role: true },
+            });
+            if (!current || current.role === "ADMIN") return;
+
+            await prisma.user.update({
+                where: { id: user.id },
+                data: { role: "ADMIN" },
+            });
+            await prisma.auditLog.create({
+                data: {
+                    actorId: user.id,
+                    action: "user.role_bootstrapped",
+                    targetType: "User",
+                    targetId: user.id,
+                    metadata: { from: current.role, to: "ADMIN" },
+                },
+            });
         },
     },
     secret: process.env.NEXTAUTH_SECRET,

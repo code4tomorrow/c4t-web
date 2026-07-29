@@ -150,16 +150,29 @@ Open **http://localhost:3000/courses** — you should see the catalog.
 
 ### Make yourself an admin
 
-1. Go to **http://localhost:3000/login** and sign in (GitHub or email).
-2. Complete the short onboarding form.
-3. Stop the dev server (`Ctrl+C`) and run, using the email you signed in with:
+Add your email to `.env`:
 
-    ```bash
-    npm run db:make-admin -- you@example.com
-    ```
+```bash
+INITIAL_ADMIN_EMAILS="you@example.com"
+```
 
-4. Start the server again (`npm run dev`). You can now open
-   **http://localhost:3000/admin**.
+Then sign in at **http://localhost:3000/login** — you are promoted to admin
+automatically, and **/admin** is open. Grant everyone else their roles from
+**/admin/users**.
+
+(If you would rather not use the env var, sign in first and then run
+`npm run db:make-admin -- you@example.com`.)
+
+### Preview the site as a student or teacher
+
+At the top of **/admin** there's a **"Preview the site as"** bar. Pick Learner,
+Instructor, or Content editor and the whole site behaves as that role — an amber
+banner stays pinned to every page with an **Exit preview** button.
+
+This is a real permission change, not a UI trick: while previewing as a learner
+you genuinely cannot reach `/admin` or grade anything. Your own progress and
+submissions are untouched, so it's the easiest way to walk the full student
+flow yourself.
 
 ### Try the whole flow
 

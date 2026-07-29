@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { Session } from "next-auth";
 import type { ZodType } from "zod";
 import { getSession } from "./auth";
+import { resolveEffectiveRole } from "./view-as";
 
 export class ApiError extends Error {
     constructor(
@@ -52,7 +53,10 @@ type AuthedHandler = (context: {
     res: NextApiResponse;
     session: Session;
     userId: string;
+    /** Role the request is evaluated against (respects admin preview). */
     role: Role;
+    /** The account's actual role, ignoring any preview. */
+    realRole: Role;
 }) => Promise<unknown>;
 
 const send = (res: NextApiResponse, status: number, body: unknown) => {
@@ -108,8 +112,15 @@ export const authedRoute = (
 
         if (!session?.user?.id) throw unauthorized();
 
-        const role = session.user.role;
-        if (requiredRoles && !requiredRoles.includes(role)) {
+        // An administrator previewing another role is held to that role here
+        // too, so the preview reflects real permissions rather than only
+        // hiding UI.
+        const { effectiveRole, realRole } = resolveEffectiveRole(
+            session.user.role,
+            req
+        );
+
+        if (requiredRoles && !requiredRoles.includes(effectiveRole)) {
             throw forbidden();
         }
 
@@ -118,7 +129,8 @@ export const authedRoute = (
             res,
             session,
             userId: session.user.id,
-            role,
+            role: effectiveRole,
+            realRole,
         });
     });
 };
