@@ -169,6 +169,11 @@ signing:
 -   A learner who forges the cookie gains nothing.
 -   Ending a preview is authorised against the *real* role, so an admin
     previewing as a learner can always switch back.
+-   Opening an admin-only page while previewing redirects to
+    `/learn/preview-blocked`, which explains the situation and offers a
+    one-click exit. A bare 404 there would strand the admin with no navigation.
+    Someone whose real role genuinely lacks access still gets a plain 404, so
+    the interstitial never reveals which pages exist.
 
 Previewing does not touch data: the admin's own enrollments, progress, and
 submissions are their own, which is what makes it useful for walking the learner

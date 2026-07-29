@@ -49,6 +49,20 @@ export const requireAuth =
         );
 
         if (options.roles && !options.roles.includes(effectiveRole)) {
+            // Someone whose real role *would* pass is only here because they
+            // are previewing a lower role. A bare 404 strands them with no
+            // navigation and no way back, so send them to a page that explains
+            // what happened and offers a one-click exit.
+            if (previewRole && options.roles.includes(realRole)) {
+                return {
+                    redirect: {
+                        destination: `/learn/preview-blocked?next=${encodeURIComponent(
+                            context.resolvedUrl
+                        )}`,
+                        permanent: false,
+                    },
+                };
+            }
             return { notFound: true };
         }
 
