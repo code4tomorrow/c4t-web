@@ -1,3 +1,4 @@
+import type { Role } from "@prisma/client";
 import CourseBadge from "@components/Learning/CourseBadge";
 import LearnerShell from "@components/Learning/LearnerShell";
 import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
@@ -22,6 +23,7 @@ interface AttemptView {
 }
 
 interface ReportProps {
+    role: Role;
     assignment: {
         id: string;
         title: string;
@@ -57,6 +59,7 @@ const tone = (status: string) =>
         : ("grey" as const);
 
 const AssignmentReportPage: React.FC<ReportProps> = ({
+    role,
     assignment,
     course,
     attempts,
@@ -71,6 +74,7 @@ const AssignmentReportPage: React.FC<ReportProps> = ({
     const best = scores.length ? Math.max(...scores) : null;
 
     const navigation = buildLearnerNavigation({
+        role,
         badges: badgeCount,
         certificates: certificateCount,
     });
@@ -301,7 +305,7 @@ const AssignmentReportPage: React.FC<ReportProps> = ({
 };
 
 export const getServerSideProps = requireAuth<ReportProps>(
-    async ({ params, userId }) => {
+    async ({ params, userId, role }) => {
         const assignmentId = String(params?.assignmentId || "");
         const location = findAssessment(assignmentId);
 
@@ -348,6 +352,7 @@ export const getServerSideProps = requireAuth<ReportProps>(
 
         return {
             props: {
+                role,
                 assignment: {
                     id: assignmentId,
                     title: source.title,

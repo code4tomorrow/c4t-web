@@ -1,3 +1,4 @@
+import type { Role } from "@prisma/client";
 import CourseBadge from "@components/Learning/CourseBadge";
 import LearnerShell from "@components/Learning/LearnerShell";
 import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
@@ -10,6 +11,7 @@ import Link from "next/link";
 import React from "react";
 
 interface DashboardProps {
+    role: Role;
     snapshot: LearnerSnapshot;
     displayName: string;
     /** lessonId -> href, resolved on the server from the course registry. */
@@ -30,6 +32,7 @@ const formatHours = (seconds: number) => {
 };
 
 const DashboardPage: React.FC<DashboardProps> = ({
+    role,
     snapshot,
     displayName,
     resumeHrefs,
@@ -58,6 +61,7 @@ const DashboardPage: React.FC<DashboardProps> = ({
     );
 
     const navigation = buildLearnerNavigation({
+        role,
         pendingAssignments: pendingReview || undefined,
         badges: summary.badgeCount,
         certificates: snapshot.certificates.length,
@@ -339,7 +343,7 @@ const DashboardPage: React.FC<DashboardProps> = ({
 };
 
 export const getServerSideProps = requireAuth<DashboardProps>(
-    async ({ session, userId }) => {
+    async ({ session, userId, role }) => {
         const snapshot = await getLearnerSnapshot(userId);
 
         // Resolve resume links here so the client never has to load the whole
@@ -361,6 +365,7 @@ export const getServerSideProps = requireAuth<DashboardProps>(
 
         return {
             props: {
+                role,
                 // Dates must be serialisable for the props payload.
                 snapshot: JSON.parse(
                     JSON.stringify(snapshot)

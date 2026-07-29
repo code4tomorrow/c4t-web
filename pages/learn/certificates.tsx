@@ -1,3 +1,4 @@
+import type { Role } from "@prisma/client";
 import CourseBadge from "@components/Learning/CourseBadge";
 import LearnerShell from "@components/Learning/LearnerShell";
 import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
@@ -11,11 +12,13 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 interface CertificatesProps {
+    role: Role;
     snapshot: LearnerSnapshot;
     baseUrl: string;
 }
 
 const CertificatesPage: React.FC<CertificatesProps> = ({
+    role,
     snapshot,
     baseUrl,
 }) => {
@@ -38,6 +41,7 @@ const CertificatesPage: React.FC<CertificatesProps> = ({
     );
 
     const navigation = buildLearnerNavigation({
+        role,
         badges: snapshot.summary.badgeCount,
         certificates: earned.length,
     });
@@ -313,10 +317,11 @@ const CertificatesPage: React.FC<CertificatesProps> = ({
 };
 
 export const getServerSideProps = requireAuth<CertificatesProps>(
-    async ({ userId }) => {
+    async ({ userId, role }) => {
         const snapshot = await getLearnerSnapshot(userId);
         return {
             props: {
+                role,
                 snapshot: JSON.parse(
                     JSON.stringify(snapshot)
                 ) as LearnerSnapshot,

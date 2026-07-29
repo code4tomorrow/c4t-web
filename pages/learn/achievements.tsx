@@ -1,3 +1,4 @@
+import type { Role } from "@prisma/client";
 import CourseBadge from "@components/Learning/CourseBadge";
 import LearnerShell from "@components/Learning/LearnerShell";
 import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
@@ -9,6 +10,7 @@ import Link from "next/link";
 import React from "react";
 
 interface AchievementsProps {
+    role: Role;
     snapshot: LearnerSnapshot;
     recentPoints: Array<{
         id: string;
@@ -27,6 +29,7 @@ const formatDate = (value: string) =>
     }).format(new Date(value));
 
 const AchievementsPage: React.FC<AchievementsProps> = ({
+    role,
     snapshot,
     recentPoints,
     reduceGamification,
@@ -34,6 +37,7 @@ const AchievementsPage: React.FC<AchievementsProps> = ({
     const { summary, badges } = snapshot;
 
     const navigation = buildLearnerNavigation({
+        role,
         badges: summary.badgeCount,
         certificates: snapshot.certificates.length,
     });
@@ -196,7 +200,7 @@ const AchievementsPage: React.FC<AchievementsProps> = ({
 };
 
 export const getServerSideProps = requireAuth<AchievementsProps>(
-    async ({ userId }) => {
+    async ({ userId, role }) => {
         const [snapshot, points] = await Promise.all([
             getLearnerSnapshot(userId),
             prisma.pointTransaction.findMany({
@@ -208,6 +212,7 @@ export const getServerSideProps = requireAuth<AchievementsProps>(
 
         return {
             props: {
+                role,
                 snapshot: JSON.parse(
                     JSON.stringify(snapshot)
                 ) as LearnerSnapshot,

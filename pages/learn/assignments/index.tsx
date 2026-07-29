@@ -1,3 +1,4 @@
+import type { Role } from "@prisma/client";
 import CourseBadge from "@components/Learning/CourseBadge";
 import LearnerShell from "@components/Learning/LearnerShell";
 import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
@@ -29,6 +30,7 @@ export interface WorkItem {
 }
 
 interface AssignmentsProps {
+    role: Role;
     items: WorkItem[];
     badgeCount: number;
     certificateCount: number;
@@ -173,6 +175,7 @@ const SubmitForm: React.FC<{
 };
 
 export const AssignmentsPage: React.FC<AssignmentsProps> = ({
+    role,
     items,
     badgeCount,
     certificateCount,
@@ -197,6 +200,7 @@ export const AssignmentsPage: React.FC<AssignmentsProps> = ({
     ).length;
 
     const navigation = buildLearnerNavigation({
+        role,
         pendingAssignments: pending || undefined,
         badges: badgeCount,
         certificates: certificateCount,
@@ -496,12 +500,13 @@ export const loadWorkItems = async (userId: string) => {
 };
 
 export const getServerSideProps = requireAuth<AssignmentsProps>(
-    async ({ userId }) => {
+    async ({ userId, role }) => {
         const { items, badgeCount, certificateCount } = await loadWorkItems(
             userId
         );
         return {
             props: {
+                role,
                 items,
                 badgeCount,
                 certificateCount,

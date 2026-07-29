@@ -1,3 +1,4 @@
+import type { Role } from "@prisma/client";
 import CourseBadge from "@components/Learning/CourseBadge";
 import LearnerShell from "@components/Learning/LearnerShell";
 import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
@@ -9,6 +10,7 @@ import Link from "next/link";
 import React from "react";
 
 interface ProgressProps {
+    role: Role;
     snapshot: LearnerSnapshot;
 }
 
@@ -27,10 +29,12 @@ const paceTone = {
     "not-started": "grey",
 } as const;
 
-const ProgressPage: React.FC<ProgressProps> = ({ snapshot }) => {
+const ProgressPage: React.FC<ProgressProps> = ({
+    role, snapshot }) => {
     const { courses, summary, weeklyActivity } = snapshot;
 
     const navigation = buildLearnerNavigation({
+        role,
         badges: summary.badgeCount,
         certificates: snapshot.certificates.length,
     });
@@ -245,10 +249,11 @@ const ProgressPage: React.FC<ProgressProps> = ({ snapshot }) => {
 };
 
 export const getServerSideProps = requireAuth<ProgressProps>(
-    async ({ userId }) => {
+    async ({ userId, role }) => {
         const snapshot = await getLearnerSnapshot(userId);
         return {
             props: {
+                role,
                 snapshot: JSON.parse(
                     JSON.stringify(snapshot)
                 ) as LearnerSnapshot,

@@ -1,3 +1,4 @@
+import type { Role } from "@prisma/client";
 import CourseBadge from "@components/Learning/CourseBadge";
 import LearnerShell from "@components/Learning/LearnerShell";
 import { buildLearnerNavigation } from "@components/Learning/learnerNavigation";
@@ -282,10 +283,12 @@ const PathCard: React.FC<{ view: PathView }> = ({ view }) => {
 };
 
 interface PathsProps {
+    role: Role;
     snapshot: LearnerSnapshot;
 }
 
-const LearningPathsPage: React.FC<PathsProps> = ({ snapshot }) => {
+const LearningPathsPage: React.FC<PathsProps> = ({
+    role, snapshot }) => {
     const views = useMemo(
         () => learningPaths.map((path) => buildPathView(path, snapshot)),
         [snapshot]
@@ -296,6 +299,7 @@ const LearningPathsPage: React.FC<PathsProps> = ({ snapshot }) => {
     ).length;
 
     const navigation = buildLearnerNavigation({
+        role,
         badges: snapshot.summary.badgeCount,
         certificates: snapshot.certificates.length,
     });
@@ -333,10 +337,11 @@ const LearningPathsPage: React.FC<PathsProps> = ({ snapshot }) => {
 };
 
 export const getServerSideProps = requireAuth<PathsProps>(
-    async ({ userId }) => {
+    async ({ userId, role }) => {
         const snapshot = await getLearnerSnapshot(userId);
         return {
             props: {
+                role,
                 snapshot: JSON.parse(
                     JSON.stringify(snapshot)
                 ) as LearnerSnapshot,
