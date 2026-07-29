@@ -78,6 +78,8 @@ type CourseOverview = Pick<
 
 interface CoursePageProps {
     course: CourseOverview;
+    /** False when an administrator has not published this course yet. */
+    enrollable: boolean;
 }
 
 const levelLabels: Record<CourseLevel, string> = {
@@ -362,7 +364,7 @@ const toCourseOverview = (course: Course): CourseOverview => ({
     })),
 });
 
-const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
+const CoursePage: React.FC<CoursePageProps> = ({ course, enrollable }) => {
     const software = course.requirements
         .filter((requirement) =>
             ["browser", "software", "compute", "dataset"].includes(
@@ -498,16 +500,31 @@ const CoursePage: React.FC<CoursePageProps> = ({ course }) => {
                                     </dd>
                                 </div>
                             </dl>
-                            <EnrollButton
-                                courseId={course.id}
-                                courseSlug={course.slug}
-                                firstLessonHref={firstLessonHref}
-                                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-4 py-3 text-center text-sm font-bold text-white outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white disabled:opacity-60"
-                            />
-                            <p className="mt-3 text-center text-xs leading-5 text-medium-grey">
-                                Always free — no payment method, ever. A free
-                                account saves your progress across devices.
-                            </p>
+                            {enrollable ? (
+                                <>
+                                    <EnrollButton
+                                        courseId={course.id}
+                                        courseSlug={course.slug}
+                                        firstLessonHref={firstLessonHref}
+                                        className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-4 py-3 text-center text-sm font-bold text-white outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white disabled:opacity-60"
+                                    />
+                                    <p className="mt-3 text-center text-xs leading-5 text-medium-grey">
+                                        Always free — no payment method, ever. A
+                                        free account saves your progress across
+                                        devices.
+                                    </p>
+                                </>
+                            ) : (
+                                <div className="mt-6 rounded-xl border border-amber-500/40 bg-amber-500/[0.07] p-4 text-center">
+                                    <p className="text-sm font-bold text-amber-100">
+                                        Not open for enrollment yet
+                                    </p>
+                                    <p className="mt-1 text-xs leading-5 text-amber-100/80">
+                                        The full syllabus is below. This course
+                                        opens once C4T staff publish it.
+                                    </p>
+                                </div>
+                            )}
                         </aside>
                     </div>
                 </section>
@@ -807,10 +824,29 @@ export const getStaticProps: GetStaticProps<CoursePageProps> = async ({
         return { notFound: true };
     }
 
+    // Publication status lives in the database so staff can change it without a
+    // redeploy. Read it here and revalidate, rather than showing an enroll
+    // button that the API would only reject.
+    let enrollable = true;
+    try {
+        const { getCourseSettings } = await import("lib/learner");
+        const settings = await getCourseSettings(course.id);
+        enrollable = (settings?.status ?? "REVIEW") === "PUBLISHED";
+    } catch (error) {
+        // No database at build time: stay optimistic. Enrolment is still
+        // authorised server-side, so the worst case is a clear error on click.
+        console.warn(
+            `Could not read publish status for ${course.id}:`,
+            error instanceof Error ? error.message : error
+        );
+    }
+
     return {
         props: {
             course: toCourseOverview(course),
+            enrollable,
         },
+        revalidate: 60,
     };
 };
 

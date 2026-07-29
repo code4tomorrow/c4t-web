@@ -12,14 +12,13 @@ import { courseRegistry } from "../learning/build-course-registry";
 
 const prisma = new PrismaClient();
 
-/** Courses published by default. The rest stay in REVIEW for staff to release. */
-const PUBLISH_ON_SEED = [
-    "course-01",
-    "course-02",
-    "course-03",
-    "course-06",
-    "course-14",
-];
+/**
+ * Every course ships fully authored and passes `npm run validate:curriculum`,
+ * so all of them are published by default — a catalog that lists 25 courses but
+ * only lets you enroll in 5 is just a wall of dead buttons. Unpublish any you
+ * are not ready for at /admin/courses.
+ */
+const PUBLISH_ON_SEED = courseRegistry.map((course) => course.id);
 
 const isProduction = process.env.NODE_ENV === "production";
 
