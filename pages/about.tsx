@@ -1,7 +1,7 @@
 import Skill from "@components/About/Skill";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
-import { getDirectory, IDirectoryRow } from "@utils/notion/directory";
+import { getAlumniDirectory, getDirectory } from "@utils/directory";
 import Head from "next/head";
 import PairCoding from "@svg/pair-coding.svg";
 import MissionImage from "@svg/mission.svg";
@@ -15,14 +15,13 @@ import Image from "next/legacy/image";
 import { cloudinaryLoader } from "@utils/cloudinary-loader";
 import clsx from "clsx";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
-import JsonQL, { JsonQLObject } from "@mahitm/jsonql";
 import dynamic from "next/dynamic";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
 import Navbar from "@components/Navbar";
-import {
-    getAlumniDirectory,
+import type {
     IAlumniDirectoryRow,
-} from "@utils/notion/alumniDirectory";
+    IDirectoryRow,
+} from "common/interfaces/directory";
 
 const Directory = dynamic(() => import("@components/About/Directory"));
 const AlumniDirectory = dynamic(
@@ -30,23 +29,16 @@ const AlumniDirectory = dynamic(
 );
 
 interface AboutProps {
-    directoryEntries: JsonQLObject;
-    alumniDirectoryEntries: JsonQLObject;
+    directoryEntries: IDirectoryRow[];
+    alumniDirectoryEntries: IAlumniDirectoryRow[];
     notificationFlags: INotificationFlag[];
 }
 
 const About: NextPageWithLayout<AboutProps> = ({
-    directoryEntries,
-    alumniDirectoryEntries,
+    directoryEntries: directoryEntriesParsed,
+    alumniDirectoryEntries: alumniDirectoryEntriesParsed,
 }) => {
     const missionRef = useRef<HTMLDivElement | null>(null);
-    const directoryEntriesParsed = new JsonQL().revert<IDirectoryRow[]>(
-        directoryEntries
-    );
-
-    const alumniDirectoryEntriesParsed = new JsonQL().revert<
-        IAlumniDirectoryRow[]
-    >(alumniDirectoryEntries);
 
     const [foundingStoryExpanded, setFoundingStoryExpanded] = useState(false);
 
@@ -418,41 +410,56 @@ About.getLayout = (page: ReactElement, props) => {
 
 export default About;
 
-export async function getStaticProps() {
-    const directoryEntries = await getDirectory();
-    const alumniDirectoryEntries = await getAlumniDirectory();
-
-    const response = await graphQLClient.request(
-        gql`
-            query ($preview: Boolean, $where: NotificationFlagFilter) {
-                notificationFlagCollection(preview: $preview, where: $where) {
-                    items {
-                        notification {
-                            json
+/**
+ * Notification banners live in Contentful. Fetched defensively so an upstream
+ * outage hides a banner instead of failing the whole page build.
+ */
+async function getNotificationFlags(): Promise<INotificationFlag[]> {
+    try {
+        const response = await graphQLClient.request(
+            gql`
+                query ($preview: Boolean, $where: NotificationFlagFilter) {
+                    notificationFlagCollection(
+                        preview: $preview
+                        where: $where
+                    ) {
+                        items {
+                            notification {
+                                json
+                            }
+                            type
+                            link
                         }
-                        type
-                        link
                     }
                 }
+            `,
+            {
+                preview: config.contentful.preview,
+                where: {
+                    isVisible: true,
+                    pages_contains_some: ["/about", "*"],
+                },
             }
-        `,
-        {
-            preview: config.contentful.preview,
-            where: {
-                isVisible: true,
-                pages_contains_some: ["/about", "*"],
-            },
-        }
-    );
+        );
 
-    const notificationFlags: INotificationFlag[] =
-        response?.notificationFlagCollection?.items || [];
+        return response?.notificationFlagCollection?.items || [];
+    } catch (error) {
+        console.warn(
+            "Skipping notification flags on /about:",
+            error instanceof Error ? error.message : error
+        );
+        return [];
+    }
+}
 
+export async function getStaticProps() {
     return {
         props: {
-            directoryEntries: new JsonQL().mini(directoryEntries),
-            alumniDirectoryEntries: new JsonQL().mini(alumniDirectoryEntries),
-            notificationFlags,
+            // Read from a checked-in snapshot, so this page no longer depends
+            // on the Notion API being reachable at build time.
+            directoryEntries: getDirectory(),
+            alumniDirectoryEntries: getAlumniDirectory(),
+            notificationFlags: await getNotificationFlags(),
         },
         // - At most once every 15 minutes
         revalidate: 60 * 15, // In seconds

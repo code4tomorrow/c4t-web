@@ -1,18 +1,13 @@
 "use client";
 
-import { createAtom } from "@utils/recoil";
 import React, { ReactNode, useEffect, useRef } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { gsap } from "gsap";
+import { snackBarState } from "./state";
 
 const SNACK_MARGIN = 5;
 const BOTTOM_MARGIN = 35;
 const RESET_DELAY_MS = 2000;
-
-export const snackBarState = createAtom<{ content: string; key: string }[]>({
-    key: "snacks",
-    default: [],
-});
 
 const Snack: React.FC<{ children: ReactNode; i: number; id: string }> = ({
     children,

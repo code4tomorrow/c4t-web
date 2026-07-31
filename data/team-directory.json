@@ -1,0 +1,1483 @@
+{
+  "generatedAt": "2026-07-31T01:18:16.808Z",
+  "rows": [
+    {
+      "name": "Sana Dhingra",
+      "position": {
+        "name": "President",
+        "color": "#F36F65"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        },
+        {
+          "name": "Volunteer Management",
+          "color": "#F36F65"
+        },
+        {
+          "name": "Documentations",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Tsz Fei Wang",
+      "position": {
+        "name": "Vice President",
+        "color": "#DF5EBA"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Web Development",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Machine Learning",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Enoch",
+          "color": "#E18D22"
+        },
+        {
+          "name": "C",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Unity",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "Ontario",
+        "color": "default"
+      },
+      "country": {
+        "name": "Canada",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Krishnan Tholkappian ",
+      "position": {
+        "name": "Chief Financial Officer",
+        "color": "#E18D22"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": [
+        {
+          "type": "heading",
+          "spans": [
+            {
+              "text": "Positions Held:",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Beginner Scratch, Beginner Java, and Intermediate Java Teacher (Summer 2020, Fall 2020, Spring 2021)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "HR Member (August 2020 - October 2020)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Director of Outreach (October 2020 - March 2021)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Vice President (March 2021 - July 2022)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "President (July 2022 - July 2023)"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "spans": [
+            {
+              "text": "Accomplishments:",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Created Notion workspace from scratch, combined functions of Google Drive and Trello (Feb 2021)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Conceptualized Outreach Week idea, enforced marketing guidelines (March 2021)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Led an outreach campaign that got the highest number of signups (~500) for a spring classes session (Spring 2021)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Led outreach campaigns that got the highest number of signups (~750) for a classes session in C4T history (Summer 2021)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Created new member recruitment process/application from the ground up with Tally + Notion (March 2022)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Improved accountability with new attendance and strike system (April 2022)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Implemented paid, targeted advertising for the first time, which resulted in the most diverse classes session (Summer 2022)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Organized, promoted, and hosted the Peter Wieben x C4T event in August 2022 ("
+            },
+            {
+              "text": "https://youtu.be/ZkRd4IxIPkA",
+              "href": "https://youtu.be/ZkRd4IxIPkA"
+            },
+            {
+              "text": ")"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Conceived C4T's first internship program (November 2022)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Filed all necessary documents with California and the IRS to obtain independent 501(c)(3) status, created an organization bank account (November 2022 - April 2023)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Created Google Meet + Google Classroom setup for C4T classes as a fail safe (April 2023)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Led initiative to create mega documents on Notion for all possible procedures/situations at C4T (June 2023)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Updated Mentor position guidelines (July 2023)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Eesha Allipuram",
+      "position": {
+        "name": "Director",
+        "color": "#2C50FF"
+      },
+      "department": [
+        {
+          "name": "Internal Affairs",
+          "color": "#F36F65"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Volunteer Management",
+          "color": "#F36F65"
+        },
+        {
+          "name": "Documentations",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Nachiket Bidarkundi",
+      "position": {
+        "name": "Director",
+        "color": "#2C50FF"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Website Design",
+          "color": "#2C50FF"
+        },
+        {
+          "name": "Public Relations",
+          "color": "#2C50FF"
+        },
+        {
+          "name": "Social Media",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Anvith Konda",
+      "position": {
+        "name": "Director",
+        "color": "#2C50FF"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Unity",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Management/Planning",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Ovi Sandesh Telavane",
+      "position": {
+        "name": "Director",
+        "color": "#2C50FF"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Social Media",
+          "color": "#2C50FF"
+        },
+        {
+          "name": "Public Relations",
+          "color": "#2C50FF"
+        },
+        {
+          "name": "Website Design",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Steffia George",
+      "position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Website Design",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Parthiv Bhonagiri",
+      "position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "department": [
+        {
+          "name": "Internal Affairs",
+          "color": "#F36F65"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Documentations",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "Ohio",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Zafir Shamsi",
+      "position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Management/Planning",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Soham Jani",
+      "position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Public Relations",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Saee Nemade",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Website Design",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Varun Chirravuri",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Website Design",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Shivam Takyar",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Curriculum Dev - Web Development",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Ram Viswanathan",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Curriculum Dev - Python",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Ananya Arun",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Curriculum Dev - Machine Learning + AI",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Srivatsan Manikandan",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Curriculum Dev - Python",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "North Carolina",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Krati Maheshwari",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Curriculum Dev - Java",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "Texas",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Henry Walter",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Internal Affairs",
+          "color": "#F36F65"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Documentations",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "Westminster",
+        "color": "#C633BF"
+      },
+      "country": {
+        "name": "England",
+        "color": "brown"
+      },
+      "bio": []
+    },
+    {
+      "name": null,
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Internal Affairs",
+          "color": "#F36F65"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Documentations",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "Westminster",
+        "color": "#C633BF"
+      },
+      "country": {
+        "name": "England",
+        "color": "brown"
+      },
+      "bio": []
+    },
+    {
+      "name": "Rayan Hossain",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Curriculum Dev - Java",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Ishan Seeri",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Public Relations",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Ayush Kohli",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Internal Affairs",
+          "color": "#F36F65"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Volunteer Management",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Vivek Banker",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Public Relations",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Parasme ",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Public Relations",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Robin Jeshua Deepak",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Internal Affairs",
+          "color": "#F36F65"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Documentations",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Haripranav Yandrapu",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Management/Planning",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Aadhya Raghunanthan",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Social Media",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Mohammed Gezzaz",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Social Media",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Aadi Tiwari",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Internal Affairs",
+          "color": "#F36F65"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Volunteer Management",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Rahil Ali",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Social Media",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Omar Aleem",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Internal Affairs",
+          "color": "#F36F65"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Volunteer Management",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "Pennsylvania",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Ishanya Malik",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Social Media",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Nisha Ganesh",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Web Development",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Michael Liu",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Kunaal Purohit",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Aairah Koujalgi",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Anunithaa Rajakumaresan",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Jyoti Rani",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Rebecca Dang",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Ansh Nagwekar",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Mohammad Sadiq",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Saranya Nethikunta",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Sneha Mulpuri",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Josh Joseph",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    }
+  ]
+}

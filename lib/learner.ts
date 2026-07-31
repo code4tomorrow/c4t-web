@@ -1,9 +1,4 @@
-import type {
-    CourseSettings,
-    EnrollmentStatus,
-    PacingType,
-    Prisma,
-} from "@prisma/client";
+import type { EnrollmentStatus, PacingType, Prisma } from "@prisma/client";
 import { allCourses, getCourseById } from "./courses";
 import prisma from "./prisma";
 import {
@@ -31,13 +26,17 @@ export const localDateKey = (date: Date = new Date(), timeZone = "UTC") => {
     }
 };
 
-const settingsCache = new Map<string, CourseSettings | null>();
-
-export const getCourseSettings = async (courseId: string) => {
-    if (settingsCache.has(courseId)) return settingsCache.get(courseId) ?? null;
-    const row = await prisma.courseSettings.findUnique({ where: { courseId } });
-    return row;
-};
+/**
+ * Publication status and threshold overrides for one course.
+ *
+ * Deliberately uncached: this is a single indexed lookup, and staff expect a
+ * publish/unpublish from /admin/courses to take effect immediately. (A
+ * module-scope cache used to sit here, but nothing ever wrote to it — and
+ * making it write would have pinned stale statuses for the life of the server
+ * process.)
+ */
+export const getCourseSettings = async (courseId: string) =>
+    prisma.courseSettings.findUnique({ where: { courseId } });
 
 export const getAllCourseSettings = async () => {
     const rows = await prisma.courseSettings.findMany();

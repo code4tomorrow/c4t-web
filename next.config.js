@@ -1,19 +1,59 @@
 const { withPlaiceholder } = require("@plaiceholder/next");
 
+// Every host the Image component is allowed to optimize from. Notion's own
+// domain and its S3 file store were dropped along with the Notion renderer —
+// an unused entry here is just extra surface for someone else's images.
 const authorizedImageDomains = [
     "res.cloudinary.com",
     "images.unsplash.com",
-    "www.notion.so",
-    "s3.us-west-2.amazonaws.com",
     "images.ctfassets.net",
+];
+
+/**
+ * Sent on every response. Deliberately excludes a full Content-Security-Policy:
+ * the site loads Watson Assistant, Google Analytics and Cloudinary, so a CSP
+ * needs its own testing pass rather than being switched on blind.
+ */
+const securityHeaders = [
+    // Nothing here is meant to be framed; this blocks clickjacking.
+    { key: "X-Frame-Options", value: "DENY" },
+    { key: "X-Content-Type-Options", value: "nosniff" },
+    { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+    {
+        key: "Permissions-Policy",
+        value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+    },
+    {
+        key: "Strict-Transport-Security",
+        value: "max-age=63072000; includeSubDomains; preload",
+    },
 ];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     staticPageGenerationTimeout: 900,
     reactStrictMode: true,
+    // Nothing gains from advertising the framework version.
+    poweredByHeader: false,
     images: {
         domains: authorizedImageDomains,
+        // Serve modern formats to browsers that accept them.
+        formats: ["image/avif", "image/webp"],
+    },
+    async headers() {
+        return [
+            { source: "/:path*", headers: securityHeaders },
+            {
+                // Fingerprinted build assets never change under the same URL.
+                source: "/_next/static/:path*",
+                headers: [
+                    {
+                        key: "Cache-Control",
+                        value: "public, max-age=31536000, immutable",
+                    },
+                ],
+            },
+        ];
     },
     async rewrites() {
         return [
@@ -25,6 +65,15 @@ const nextConfig = {
     },
     async redirects() {
         return [
+            // The Notion-backed course library is retired. Its root lived at
+            // /courses/home; deeper paths are handled by the [...slug]
+            // tombstone route, but a single segment would 404 in
+            // [courseSlug].tsx before reaching it, so it is redirected here.
+            {
+                source: "/courses/home",
+                destination: "/courses",
+                permanent: true,
+            },
             {
                 source: "/index.html",
                 destination: "/",

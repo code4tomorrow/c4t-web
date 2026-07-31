@@ -1,5 +1,5 @@
 import Paper from "@components/Paper";
-import { IAlumniDirectoryRow } from "@utils/notion/alumniDirectory";
+import type { IAlumniDirectoryRow } from "common/interfaces/directory";
 import clsx from "clsx";
 import React, { useMemo, useState } from "react";
 import { useStyles } from "../Directory/styles";
@@ -55,8 +55,7 @@ const Directory: React.FC<IAlumniDirectoryProps> = ({ directoryEntries }) => {
                     Header: "Name",
                     accessor: (e) => (
                         <div className="text-medium-grey">
-                            {e.page_children !== null &&
-                            JSON.stringify(e.page_children?.results) != "[]" ? (
+                            {e.bio?.length ? (
                                 <span
                                     className="cursor-pointer underline hover:text-brand-purple-secondary"
                                     onClick={(event) =>

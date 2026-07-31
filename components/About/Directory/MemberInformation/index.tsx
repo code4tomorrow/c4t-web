@@ -1,11 +1,8 @@
 import { useStyles } from "../../AlumniDirectory/AlumniInformation/styles";
 import clsx from "clsx";
 import Animate from "@components/Animate";
-import { IDirectoryRow } from "@utils/notion/directory";
-import { useEffect } from "react";
-import dynamic from "next/dynamic";
-
-const NotionBlocks = dynamic(() => import("notion-block-renderer"));
+import Bio from "@components/About/Bio";
+import type { IDirectoryRow } from "common/interfaces/directory";
 
 interface MemberInformationProps {
     memberInfo?: IDirectoryRow;
@@ -17,15 +14,6 @@ export default function AlumniInformation({
     onExit,
 }: MemberInformationProps) {
     const { classes } = useStyles();
-
-    useEffect(() => {
-        const links = document.querySelectorAll("a.nbr-link ");
-
-        // Set the target attribute to "_blank" for each anchor tag with the class name "nbr-link " - a notion link
-        links.forEach((link) => {
-            link.setAttribute("target", "_blank");
-        });
-    }, []);
 
     if (memberInfo === null || memberInfo === undefined) {
         return <></>;
@@ -75,24 +63,14 @@ export default function AlumniInformation({
                         ))}
                     </div>
 
-                    {memberInfo.page_children && (
+                    {memberInfo.bio?.length > 0 && (
                         <div
                             className={clsx(
-                                classes.root,
                                 classes.scrollbar,
-                                "flex flex-col items-start justify-start w-full px-5 max-h-96 overflow-y-scroll overflow-x-clip"
+                                "flex max-h-96 w-full flex-col items-start justify-start overflow-x-clip overflow-y-auto px-5"
                             )}
                         >
-                            {
-                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                                // @ts-ignore
-                                <NotionBlocks
-                                    blocks={
-                                        memberInfo.page_children
-                                            .results as unknown as any
-                                    }
-                                />
-                            }
+                            <Bio blocks={memberInfo.bio} />
                         </div>
                     )}
                 </div>

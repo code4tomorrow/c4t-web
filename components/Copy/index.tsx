@@ -1,4 +1,4 @@
-import { snackBarState } from "@components/Snackbar";
+import { snackBarState } from "@components/Snackbar/state";
 import { CheckIcon, DuplicateIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import React, { useRef, useState } from "react";

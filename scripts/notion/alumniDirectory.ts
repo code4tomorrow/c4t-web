@@ -1,6 +1,6 @@
-import { notionColorMap } from "common/maps/color";
 import config from "config";
 import { notion } from "./client";
+import { notionColorMap } from "./colors";
 import { ListBlockChildrenResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export interface IAlumniDirectoryItem {

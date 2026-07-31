@@ -217,10 +217,13 @@ flow yourself.
 ### One thing that will block the build
 
 This was already true before the learning platform existed: the site's original
-marketing pages (`/`, `/about`, `/contact`, `/volunteer`, `/news`,
-`/internships`, `/jobboard`, `/learn`) and the Notion course library
-(`/courses/[...slug]`) all fetch from **Contentful** at build time. Without
-valid Contentful and Notion keys, `npm run build` fails on those pages.
+marketing pages (`/`, `/contact`, `/volunteer`, `/news`, `/internships`,
+`/jobboard`, `/learn`) fetch from **Contentful** at build time. Without valid
+Contentful keys, `npm run build` fails on those pages.
+
+(`/about` is no longer one of them — the team and alumni directories now come
+from a checked-in snapshot in `data/`, refreshed with
+`npm run snapshot:directory`.)
 
 Everything in the learning platform builds fine without them — all 25 courses,
 `/login`, the dashboard, assignments, admin, and certificates.
@@ -229,11 +232,11 @@ So for a working deploy you need to either:
 
 -   **Add the existing keys** (recommended if you're keeping the current site):
     `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ACCESS_TOKEN`,
-    `CONTENTFUL_PREVIEW_ACCESS_TOKEN`, and `NOTION_API_KEY`. Ask whoever
-    currently runs code4tomorrow.org for these — they are the same values the
-    live site already uses.
+    and `CONTENTFUL_PREVIEW_ACCESS_TOKEN`. Ask whoever currently runs
+    code4tomorrow.org for these — they are the same values the live site
+    already uses.
 -   **Or remove the pages you no longer want.** The learning platform itself
-    never touches Contentful or Notion.
+    never touches Contentful.
 
 ---
 

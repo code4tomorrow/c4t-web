@@ -1,0 +1,622 @@
+{
+  "generatedAt": "2026-07-31T01:18:16.906Z",
+  "rows": [
+    {
+      "name": "Kunaal Purohit",
+      "graduation_year": 2025,
+      "former_position": {
+        "name": "Director",
+        "color": "#2C50FF"
+      },
+      "former_projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "college": {
+        "name": "Princeton University",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Nidhi Mudholker",
+      "graduation_year": 2025,
+      "former_position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "former_projects": [
+        {
+          "name": "Documentations",
+          "color": "#F36F65"
+        }
+      ],
+      "college": {
+        "name": "Rutgers University",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Yathaarth Singh",
+      "graduation_year": 2025,
+      "former_position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "former_projects": [
+        {
+          "name": "Unity",
+          "color": "#E18D22"
+        }
+      ],
+      "college": {
+        "name": "University of Illinois Urbana-Champaign",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Srivathsan Prasanna",
+      "graduation_year": 2025,
+      "former_position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "former_projects": [
+        {
+          "name": "Management/Planning",
+          "color": "#D3B020"
+        }
+      ],
+      "college": {
+        "name": "Western University",
+        "color": "gray"
+      },
+      "country": {
+        "name": "Canada",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Kairav Parikh",
+      "graduation_year": 2025,
+      "former_position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "former_projects": [
+        {
+          "name": "Unity",
+          "color": "#E18D22"
+        }
+      ],
+      "college": {
+        "name": "Georgia Institute of Technology",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Michael Liu",
+      "graduation_year": 2025,
+      "former_position": {
+        "name": "President",
+        "color": "#F36F65"
+      },
+      "former_projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "college": {
+        "name": "University of Illinois Urbana-Champaign",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Sana Khan",
+      "graduation_year": 2025,
+      "former_position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "former_projects": [
+        {
+          "name": "Management/Planning",
+          "color": "#D3B020"
+        }
+      ],
+      "college": {
+        "name": "Binghamton University",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Dhikshika Cherivirala",
+      "graduation_year": 2025,
+      "former_position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "former_projects": [
+        {
+          "name": "Social Media",
+          "color": "#2C50FF"
+        },
+        {
+          "name": "Public Relations",
+          "color": "#2C50FF"
+        }
+      ],
+      "college": {
+        "name": "Cornell University",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Lillian Wang",
+      "graduation_year": 2024,
+      "former_position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "former_projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "college": {
+        "name": null,
+        "color": null
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Mahit Mehta",
+      "graduation_year": 2024,
+      "former_position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "former_projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "college": {
+        "name": null,
+        "color": null
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Alveera Munshi",
+      "graduation_year": 2023,
+      "former_position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "former_projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "college": {
+        "name": "Rutgers University",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Ben Nguyen",
+      "graduation_year": 2023,
+      "former_position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "former_projects": [
+        {
+          "name": "Enoch",
+          "color": "#E18D22"
+        }
+      ],
+      "college": {
+        "name": "N/A",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Sarai Castaneda",
+      "graduation_year": 2023,
+      "former_position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "former_projects": [
+        {
+          "name": "Social Media",
+          "color": "#2C50FF"
+        }
+      ],
+      "college": {
+        "name": "University of California - Berkeley",
+        "color": "gray"
+      },
+      "country": {
+        "name": null,
+        "color": null
+      },
+      "bio": []
+    },
+    {
+      "name": "Ria Purohit",
+      "graduation_year": 2023,
+      "former_position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "former_projects": [
+        {
+          "name": "Documentations",
+          "color": "#F36F65"
+        }
+      ],
+      "college": {
+        "name": "N/A",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Jordan C. Delos Reyes",
+      "graduation_year": 2023,
+      "former_position": {
+        "name": "Director",
+        "color": "#2C50FF"
+      },
+      "former_projects": [
+        {
+          "name": "Python",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Web Development",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Machine Learning",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Enoch",
+          "color": "#E18D22"
+        },
+        {
+          "name": "C",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Unity",
+          "color": "#E18D22"
+        }
+      ],
+      "college": {
+        "name": "San Jose State University",
+        "color": "gray"
+      },
+      "country": {
+        "name": null,
+        "color": null
+      },
+      "bio": []
+    },
+    {
+      "name": "Jerry Wang",
+      "graduation_year": 2023,
+      "former_position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "former_projects": [
+        {
+          "name": "Web Development",
+          "color": "#E18D22"
+        }
+      ],
+      "college": {
+        "name": "N/A",
+        "color": "gray"
+      },
+      "country": {
+        "name": "Canada",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Christopher Eliot Hall",
+      "graduation_year": 2023,
+      "former_position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "former_projects": [
+        {
+          "name": "Python",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Enoch",
+          "color": "#E18D22"
+        }
+      ],
+      "college": {
+        "name": "San Jose State University",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "April Chou",
+      "graduation_year": 2023,
+      "former_position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "former_projects": [
+        {
+          "name": "Website Design",
+          "color": "#2C50FF"
+        }
+      ],
+      "college": {
+        "name": "Carnegie Mellon University",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Yash Nishikant",
+      "graduation_year": 2023,
+      "former_position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "former_projects": [
+        {
+          "name": "Unity",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Public Relations",
+          "color": "#2C50FF"
+        }
+      ],
+      "college": {
+        "name": "Rutgers University",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": [
+        {
+          "type": "heading",
+          "spans": [
+            {
+              "text": "Positions",
+              "bold": true
+            },
+            {
+              "text": ":",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Summer 2021 Teacher"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Summer 2022 Teacher"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "July 2022 - Member (Outreach)"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "March 2023 - Member (Classes)"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "spans": [
+            {
+              "text": "Accomplishments:",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Summer 2021 - Taught Java and Python to many students"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "Summer 2022 - Tutored a student in Java"
+            }
+          ]
+        },
+        {
+          "type": "bullet",
+          "spans": [
+            {
+              "text": "2023 - Got started working on the new Unity Course"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Atij Mahesh",
+      "graduation_year": 2022,
+      "former_position": {
+        "name": "President",
+        "color": "#F36F65"
+      },
+      "former_projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "college": {
+        "name": "University of California - Los Angeles",
+        "color": "gray"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Shruthik Musukula",
+      "graduation_year": null,
+      "former_position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "former_projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "college": {
+        "name": null,
+        "color": null
+      },
+      "country": {
+        "name": null,
+        "color": null
+      },
+      "bio": []
+    },
+    {
+      "name": "Keerthana Vinay",
+      "graduation_year": null,
+      "former_position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "former_projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "college": {
+        "name": null,
+        "color": null
+      },
+      "country": {
+        "name": null,
+        "color": null
+      },
+      "bio": []
+    }
+  ]
+}

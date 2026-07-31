@@ -3,8 +3,9 @@
 A full learning platform for the 25-course Code 4 Tomorrow curriculum:
 accounts, enrollment, server-verified progress, instructor grading, and
 verifiable PDF certificates. Course content lives in version control; learner
-data lives in Postgres. The website's existing Contentful and Notion
-integrations are untouched.
+data lives in Postgres. The website's existing Contentful integration is
+untouched; the Notion integration has been retired (see
+"Retiring Notion" below).
 
 **Setting this up for the first time? Start with [SETUP.md](SETUP.md).**
 
@@ -60,8 +61,8 @@ self-paced and weekly pacing templates, and configurable certificate rules.
 
 ### Learner application
 
--   `/courses` — searchable and filterable 25-course catalog, the learning-path
-    overview, and a link section for the instructor-led Notion course library.
+-   `/courses` — searchable and filterable 25-course catalog and the
+    learning-path overview. Fully static: no external calls at build time.
 -   `/courses/[courseSlug]` — course overview, free setup walkthrough,
     prerequisites, recommended prior courses, learning-path membership,
     outcomes, projects, certificate rules, and full outline.
@@ -208,27 +209,38 @@ npm test
 
 Required environment variables are documented in `.env.example`. The learning
 platform needs `DATABASE_URL`, `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, and at least
-one sign-in provider. Contentful and Notion credentials are only needed by the
-pre-existing marketing pages and the legacy course library.
+one sign-in provider. Contentful credentials are only needed by the
+pre-existing marketing pages.
 
 ## Deployment
 
 `npm run build` prerenders every course, lesson, and assignment page from the
-local registry — none of that needs credentials. Two things still do:
+local registry — none of that needs credentials. The remaining Contentful-backed
+pages are `/news`, `/jobboard`, `/internships` and the notification banners.
 
--   `/courses/[...slug]` (the instructor-led Notion library) calls Contentful in
-    `getStaticPaths` and **fails the build** when `CONTENTFUL_SPACE_ID` and
-    `CONTENTFUL_ACCESS_TOKEN` are missing or invalid. Set them, or remove that
-    page if the Notion library is being retired.
--   The instructor-led library section on `/courses` uses the same credentials
-    but is wrapped in a try/catch: without them it logs a warning and hides the
-    section rather than failing the build.
+Deploying the learning platform requires `DATABASE_URL`, `NEXTAUTH_SECRET`,
+`NEXTAUTH_URL`, and at least one sign-in provider. Progress, certificates and
+grading are all server-authoritative, so the database is not optional.
 
-`REDIS_URL` is optional. Without it the Notion sitemap cache falls back to the
-build cache and `ioredis` logs connection errors that do not stop the build.
+## Retiring Notion
 
-Because learner progress lives in `localStorage`, the learning platform itself
-needs no database, no session secret, and no OAuth application to deploy.
+The Notion-backed course library (`/courses/home` and everything beneath it) has
+been removed. It rendered with `react-notion-x`, which crashed on the live
+content, and its `getStaticPaths` crawled ~847 Notion pages on every build.
+
+What replaced it:
+
+-   **Old URLs still resolve.** `/courses/home` and any deeper `/courses/**`
+    path permanently redirect to `/courses`.
+-   **The team and alumni directories on `/about`** now come from
+    `data/team-directory.json` and `data/alumni-directory.json`, checked into
+    the repo. Refresh them with `npm run snapshot:directory` (the only code
+    that still talks to Notion, and it never runs during a build or request).
+-   **`NOTION_API_KEY` is developer tooling only.** It does not belong in your
+    hosting provider's environment variables.
+
+Removing it dropped 127 npm packages, including `react-notion-x`,
+`notion-client`, `prismjs` and `ioredis`.
 
 ## Content-authoring rules
 

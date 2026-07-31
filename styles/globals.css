@@ -19,9 +19,12 @@
 
 body {
     margin: 0;
-    font-family: "Raleway", -apple-system, "roboto", BlinkMacSystemFont,
-        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-        "Droid Sans", "Helvetica Neue", sans-serif;
+    /* --font-raleway is set by next/font in _app.tsx, which self-hosts the
+       font. The literal "Raleway" stays as a fallback for the brief moment
+       before the custom property resolves. */
+    font-family: var(--font-raleway), "Raleway", -apple-system, "roboto",
+        BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+        "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #111111;

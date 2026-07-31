@@ -1,11 +1,8 @@
-import { IAlumniDirectoryRow } from "@utils/notion/alumniDirectory";
+import Bio from "@components/About/Bio";
+import type { IAlumniDirectoryRow } from "common/interfaces/directory";
 import { useStyles } from "./styles";
 import clsx from "clsx";
 import Animate from "@components/Animate";
-import { useEffect } from "react";
-import dynamic from "next/dynamic";
-
-const NotionBlocks = dynamic(() => import("notion-block-renderer"));
 
 interface AlumniInformationProps {
     alumniInfo?: IAlumniDirectoryRow;
@@ -17,15 +14,6 @@ export default function AlumniInformation({
     onExit,
 }: AlumniInformationProps) {
     const { classes } = useStyles();
-
-    useEffect(() => {
-        const links = document.querySelectorAll("a.nbr-link ");
-
-        // Set the target attribute to "_blank" for each anchor tag with the class name "nbr-link " - a notion link
-        links.forEach((link) => {
-            link.setAttribute("target", "_blank");
-        });
-    }, []);
 
     if (alumniInfo === null || alumniInfo === undefined) {
         return <></>;
@@ -79,24 +67,14 @@ export default function AlumniInformation({
                         ))}
                     </div>
 
-                    {alumniInfo.page_children && (
+                    {alumniInfo.bio?.length > 0 && (
                         <div
                             className={clsx(
-                                classes.root,
                                 classes.scrollbar,
-                                "flex flex-col items-start justify-start w-full px-5 max-h-72 overflow-y-scroll overflow-x-clip"
+                                "flex max-h-72 w-full flex-col items-start justify-start overflow-x-clip overflow-y-auto px-5"
                             )}
                         >
-                            {
-                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                                // @ts-ignore
-                                <NotionBlocks
-                                    blocks={
-                                        alumniInfo.page_children
-                                            .results as unknown as any
-                                    }
-                                />
-                            }
+                            <Bio blocks={alumniInfo.bio} />
                         </div>
                     )}
                 </div>

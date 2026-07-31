@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import React, { ReactElement } from "react";
 import type { AppProps } from "next/app";
+import { Raleway } from "next/font/google";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createCache from "@emotion/cache";
 import Head from "next/head";
@@ -12,10 +13,44 @@ import { RecoilRoot } from "recoil";
 import ReactGA from "react-ga4";
 import config from "config";
 import { Router } from "next/router";
-import Snackbar from "@components/Snackbar";
 import { SessionProvider } from "next-auth/react";
-import ViewAsBanner from "@components/Learning/ViewAsBanner";
+import dynamic from "next/dynamic";
 import type { Session } from "next-auth";
+
+/**
+ * The toast container drags in gsap, and the preview banner only ever renders
+ * for an administrator who has switched roles. Neither is needed for the first
+ * paint of any page, so both are split out of the shared bundle.
+ */
+const Snackbar = dynamic(() => import("@components/Snackbar"), { ssr: false });
+const ViewAsBanner = dynamic(
+    () => import("@components/Learning/ViewAsBanner"),
+    { ssr: false }
+);
+
+/**
+ * Raleway, self-hosted at build time.
+ *
+ * This used to be a render-blocking <link> to fonts.googleapis.com requesting
+ * eleven static weights, which cost a DNS lookup, a TLS handshake and a
+ * stylesheet round-trip before the first paint. Raleway is a variable font, so
+ * omitting `weight` fetches one file covering the whole 100-900 range instead —
+ * fewer bytes and fewer requests than the five weights the site actually uses.
+ */
+const raleway = Raleway({
+    subsets: ["latin"],
+    style: ["normal", "italic"],
+    display: "swap",
+    variable: "--font-raleway",
+    fallback: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica Neue",
+        "sans-serif",
+    ],
+});
 
 let muiCache: EmotionCache | undefined = undefined;
 
@@ -62,6 +97,14 @@ function MyApp({ Component, pageProps }: AppPropWithLayout) {
     const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
     return (
         <CacheProvider value={muiCache ?? createMuiCache()}>
+            {/* next/font can only be initialised in _app on the Pages Router,
+                so the generated family is published as a custom property that
+                globals.css consumes on <body>. */}
+            <style jsx global>{`
+                :root {
+                    --font-raleway: ${raleway.style.fontFamily};
+                }
+            `}</style>
             <Head>
                 <meta charSet="utf-8" />
                 <meta

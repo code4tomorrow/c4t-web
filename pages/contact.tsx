@@ -30,7 +30,7 @@ import Loader from "@components/Loader";
 import { ISendEmailBody } from "./api/sendEmail";
 import { useStyles } from "styles/contact";
 import { useSetRecoilState } from "recoil";
-import { snackBarState } from "@components/Snackbar";
+import { snackBarState } from "@components/Snackbar/state";
 import { v1 } from "uuid";
 
 interface ContactProps {

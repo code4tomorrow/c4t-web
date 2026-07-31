@@ -815,6 +815,42 @@ export const getStaticPaths: GetStaticPaths = async () => ({
     fallback: false,
 });
 
+/**
+ * Publication status for every course, in one query.
+ *
+ * getStaticProps runs once per course, so reading each course's row separately
+ * meant 25 sequential round-trips to a remote database on every build — the
+ * slowest part of the build by far. The promise is cached at module scope, so
+ * the whole set is fetched once and every page awaits the same result.
+ *
+ * The cache is intentionally per-process and unbounded in time: during a build
+ * that is exactly one fetch, and at runtime each ISR regeneration gets a fresh
+ * process. `revalidate` below is what makes status changes show up.
+ */
+let publishedCourseIds: Promise<Set<string> | null> | null = null;
+
+const getPublishedCourseIds = () => {
+    if (!publishedCourseIds) {
+        publishedCourseIds = (async () => {
+            try {
+                const { listPublishedCourseIds } = await import("lib/learner");
+                return await listPublishedCourseIds();
+            } catch (error) {
+                // No database reachable (e.g. a preview build without
+                // DATABASE_URL). Returning null means "unknown", and callers
+                // stay optimistic — enrolment is still authorised server-side,
+                // so the worst case is a clear error on click.
+                console.warn(
+                    "Could not read course publish status:",
+                    error instanceof Error ? error.message : error
+                );
+                return null;
+            }
+        })();
+    }
+    return publishedCourseIds;
+};
+
 export const getStaticProps: GetStaticProps<CoursePageProps> = async ({
     params,
 }) => {
@@ -824,27 +860,12 @@ export const getStaticProps: GetStaticProps<CoursePageProps> = async ({
         return { notFound: true };
     }
 
-    // Publication status lives in the database so staff can change it without a
-    // redeploy. Read it here and revalidate, rather than showing an enroll
-    // button that the API would only reject.
-    let enrollable = true;
-    try {
-        const { getCourseSettings } = await import("lib/learner");
-        const settings = await getCourseSettings(course.id);
-        enrollable = (settings?.status ?? "REVIEW") === "PUBLISHED";
-    } catch (error) {
-        // No database at build time: stay optimistic. Enrolment is still
-        // authorised server-side, so the worst case is a clear error on click.
-        console.warn(
-            `Could not read publish status for ${course.id}:`,
-            error instanceof Error ? error.message : error
-        );
-    }
+    const published = await getPublishedCourseIds();
 
     return {
         props: {
             course: toCourseOverview(course),
-            enrollable,
+            enrollable: published ? published.has(course.id) : true,
         },
         revalidate: 60,
     };

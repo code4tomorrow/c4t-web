@@ -17,22 +17,10 @@ class RootDocument extends Document {
     render() {
         return (
             <Html lang="en">
-                <Head key="document">
-                    <link
-                        rel="preconnect"
-                        href="https://fonts.googleapis.com"
-                    />
-                    <link
-                        rel="preconnect"
-                        href="https://fonts.gstatic.com"
-                        crossOrigin="anonymous"
-                    />
-                    {/* eslint-disable */}
-                    <link
-                        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap"
-                        rel="stylesheet"
-                    />
-                </Head>
+                {/* Raleway is self-hosted by next/font in _app.tsx. The old
+                    render-blocking fonts.googleapis.com stylesheet (and its
+                    two preconnects) is deliberately gone. */}
+                <Head key="document" />
                 <body className="dark">
                     <Main />
                     <NextScript />
