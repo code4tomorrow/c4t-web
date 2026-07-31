@@ -32,9 +32,16 @@ whatever hosts the live site.
 
 ---
 
-## 2. Open the pull request
+## 2. Get the branch onto master
 
-You have 9 commits on `online-modules` that aren't on `master`:
+You have 9 commits on `online-modules` that aren't on `master`.
+
+**You are allowed to push straight to `master`.** You're one of eight
+admins on `code4tomorrow/c4t-web`. The branch requires one approving
+review, but `enforce_admins` is off, so that rule does not apply to you.
+
+A PR is still the better move here — nine commits, a retired feature,
+seven other admins, and no CI in the repo to catch anything:
 
 ```bash
 git push -u origin online-modules
@@ -42,11 +49,19 @@ gh pr create --base master --head online-modules \
   --title "Free online learning platform + retire Notion"
 ```
 
-You almost certainly can't push to `master` on
-`github.com/code4tomorrow/c4t-web` directly — this needs review from
-whoever maintains the site. Point them at [ONLINE_LEARNING.md](ONLINE_LEARNING.md)
-for the architecture and at the "Retiring Notion" section for the part
-that changes existing behaviour.
+Point reviewers at [ONLINE_LEARNING.md](ONLINE_LEARNING.md) for the
+architecture, and at its "Retiring Notion" section for the part that
+changes existing behaviour.
+
+If you'd rather just ship it:
+
+```bash
+git push origin online-modules:master
+```
+
+Be aware that if the site deploys from `master` via Vercel's GitHub
+integration, this goes live immediately — there is no staging step and
+no test run between the push and production.
 
 ---
 
