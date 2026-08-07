@@ -79,16 +79,16 @@ no test run between the push and production.
 | `GITHUB_SECRET`        | From that same new OAuth app                              |
 | `INITIAL_ADMIN_EMAILS` | `shamsizafir@gmail.com` (comma-separate to add others)    |
 
-### Keep these (the existing marketing pages need them)
+### Already set — leave them alone
 
 `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ACCESS_TOKEN`,
-`CONTENTFUL_PREVIEW_ACCESS_TOKEN`, `C4T_FORCE_REVALIDATE_TOKEN`, and
-**`SENDGRID_API_KEY`**.
+`CONTENTFUL_PREVIEW_ACCESS_TOKEN`, `C4T_FORCE_REVALIDATE_TOKEN` and
+`SENDGRID_API_KEY` are already in the live Vercel project. Deploying new
+code to the same project keeps them, so there is nothing to do.
 
-⚠️ `SENDGRID_API_KEY` is easy to forget because it isn't in your local
-`.env` — the contact form is already broken locally for that reason. If
-you deploy to a new host without it, `/contact` stops working. Copy it
-from wherever the current site is deployed.
+(`SENDGRID_API_KEY` is missing from your *local* `.env`, which is why the
+contact form 503s on localhost. Production is unaffected. You would only
+need to copy these across if someone created a brand-new Vercel project.)
 
 ### Delete these if they're set 🗑️
 
@@ -100,17 +100,32 @@ from wherever the current site is deployed.
 
 ---
 
-## 4. Create a production GitHub OAuth app
+## 4. Point GitHub OAuth at production
 
-The existing app's callback points at localhost. Make a second one at
-**github.com/settings/developers → New OAuth App**:
+This one is unavoidable, and it is worth being clear about why: sign-in
+has **never** run on the live site. `/login`, `/signup` and `/admin` all
+return 404 on code4tomorrow.org today, so there is no working production
+config to inherit — unlike Contentful and SendGrid, which are already set.
 
--   **Homepage URL:** `https://www.code4tomorrow.org`
--   **Authorization callback URL:**
-    `https://www.code4tomorrow.org/api/auth/callback/github`
+A GitHub **OAuth App has exactly one** "Authorization callback URL", and
+GitHub requires the request host to match it. Yours is registered against
+`localhost:3000`, so a sign-in from `www.code4tomorrow.org` is rejected.
 
-Use its Client ID and secret for `GITHUB_ID` / `GITHUB_SECRET` above.
-Keep the localhost app for local development.
+Pick one, at **github.com/settings/developers**:
+
+-   **Create a second OAuth App** (recommended) — production and local
+    development both keep working.
+-   **Or edit the existing app's callback URL** — one less app to manage,
+    but local sign-in stops working until you change it back.
+
+Either way, the callback URL is:
+
+```
+https://www.code4tomorrow.org/api/auth/callback/github
+```
+
+Homepage URL: `https://www.code4tomorrow.org`. Put the resulting Client ID
+and secret in `GITHUB_ID` / `GITHUB_SECRET` above.
 
 ---
 
