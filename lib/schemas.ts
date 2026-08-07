@@ -33,7 +33,6 @@ export const lessonProgressSchema = z.object({
      * "complete" flag or a percentage.
      */
     completedInteractionIds: z.array(contentIdSchema).max(50).default([]),
-    checkpointPassed: z.boolean().optional(),
 });
 
 export const resumeSchema = z.object({

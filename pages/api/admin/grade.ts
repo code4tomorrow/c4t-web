@@ -1,4 +1,10 @@
-import { authedRoute, badRequest, notFound, parseBody } from "lib/api";
+import {
+    authedRoute,
+    badRequest,
+    forbidden,
+    notFound,
+    parseBody,
+} from "lib/api";
 import { findAssessment } from "lib/courses";
 import { audit } from "lib/learner";
 import { gradeRateLimit } from "lib/limits";
@@ -24,6 +30,14 @@ export default authedRoute(
             where: { id: input.submissionId },
         });
         if (!submission) throw notFound("Submission not found.");
+
+        // Certificates are issued off these scores, so nobody signs off on
+        // their own work — not even an admin.
+        if (submission.userId === userId) {
+            throw forbidden(
+                "You cannot grade your own submission. Ask another instructor to review it."
+            );
+        }
 
         if (input.status === "APPROVED" && typeof input.score !== "number") {
             throw badRequest(

@@ -1,6 +1,5 @@
 import { ApiError, parseBody, route } from "lib/api";
 import {
-    applyAdminBootstrap,
     createSessionForUser,
     verifyPassword,
 } from "lib/password-auth";
@@ -52,7 +51,7 @@ export default route(["POST"], async ({ req, res }) => {
 
     if (!user || !ok) throw invalid();
 
-    await applyAdminBootstrap(user);
+    // No admin bootstrap here either — see the note in register.ts.
     await createSessionForUser(user.id, res);
 
     const profile = await prisma.userProfile.findUnique({

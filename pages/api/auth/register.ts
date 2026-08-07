@@ -1,10 +1,6 @@
 import { badRequest, conflict, parseBody, route } from "lib/api";
 import { audit } from "lib/learner";
-import {
-    applyAdminBootstrap,
-    createSessionForUser,
-    hashPassword,
-} from "lib/password-auth";
+import { createSessionForUser, hashPassword } from "lib/password-auth";
 import prisma from "lib/prisma";
 import { enforceRateLimit } from "lib/rate-limit";
 import { registerSchema } from "lib/schemas";
@@ -69,7 +65,10 @@ export default route(["POST"], async ({ req, res }) => {
         select: { id: true, email: true },
     });
 
-    await applyAdminBootstrap(user);
+    // Deliberately no INITIAL_ADMIN_EMAILS bootstrap here. Password signup does
+    // not verify that the person owns the address, so honouring the allowlist
+    // would let anyone who guessed an admin email claim it by registering first.
+    // The allowlist is applied only on provider-verified sign-in (lib/auth.ts).
     await createSessionForUser(user.id, res);
     await audit(user.id, "user.registered", "User", user.id, {
         method: "password",

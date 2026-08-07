@@ -59,9 +59,6 @@ export default authedRoute(["POST"], async ({ req, userId }) => {
         new Set([...(existing?.completedInteractionIds ?? []), ...accepted])
     );
 
-    const checkpointPassed =
-        input.checkpointPassed ?? existing?.checkpointPassed ?? false;
-
     const requiredInteractions =
         requirements.requiredInteractions[lesson.id] ?? [];
     const satisfiesRule = requiredInteractions.every((id) =>
@@ -81,12 +78,10 @@ export default authedRoute(["POST"], async ({ req, userId }) => {
             moduleId: module.id,
             lessonId: lesson.id,
             completedInteractionIds: mergedInteractions,
-            checkpointPassed,
             completedAt,
         },
         update: {
             completedInteractionIds: mergedInteractions,
-            checkpointPassed,
             completedAt,
         },
     });

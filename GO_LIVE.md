@@ -82,7 +82,13 @@ no test run between the push and production.
 ### Keep these (the existing marketing pages need them)
 
 `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ACCESS_TOKEN`,
-`CONTENTFUL_PREVIEW_ACCESS_TOKEN`, `C4T_FORCE_REVALIDATE_TOKEN`.
+`CONTENTFUL_PREVIEW_ACCESS_TOKEN`, `C4T_FORCE_REVALIDATE_TOKEN`, and
+**`SENDGRID_API_KEY`**.
+
+⚠️ `SENDGRID_API_KEY` is easy to forget because it isn't in your local
+`.env` — the contact form is already broken locally for that reason. If
+you deploy to a new host without it, `/contact` stops working. Copy it
+from wherever the current site is deployed.
 
 ### Delete these if they're set 🗑️
 
@@ -122,8 +128,28 @@ published and never overwrites a status an admin has already changed, so
 it is safe to re-run. It skips creating demo accounts when
 `NODE_ENV=production`.
 
-You become an ADMIN automatically the first time you sign in, because
-your email is in `INITIAL_ADMIN_EMAILS`.
+You become an ADMIN automatically the first time you sign in **with
+GitHub**, because your email is in `INITIAL_ADMIN_EMAILS`.
+
+That allowlist is deliberately **not** honoured by email + password
+signup: password accounts are not email-verified, so otherwise anyone who
+guessed an admin address could register it first and be handed the role.
+If you ever need to promote someone without OAuth, use
+`npm run db:make-admin` or the /admin/users page.
+
+### Delete the demo accounts
+
+`db:seed` skips them when `NODE_ENV=production`, but if you seeded this
+database from your laptop they already exist:
+
+```
+demo.learner@example.invalid
+demo.instructor@example.invalid
+```
+
+Neither can be signed into (no password, no linked OAuth account), so
+they are clutter rather than a risk — but remove them from /admin/users
+so your user list is real.
 
 ---
 

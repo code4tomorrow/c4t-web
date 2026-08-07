@@ -1,5 +1,4 @@
 import { randomBytes } from "crypto";
-import type { User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import type { NextApiResponse } from "next";
 import prisma from "./prisma";
@@ -65,37 +64,4 @@ export const createSessionForUser = async (
 
     res.setHeader("Set-Cookie", cookie);
     return { sessionToken, expires };
-};
-
-/** Applies INITIAL_ADMIN_EMAILS to a freshly created or signing-in account. */
-export const applyAdminBootstrap = async (user: Pick<User, "id" | "email">) => {
-    const allowlist = new Set(
-        (process.env.INITIAL_ADMIN_EMAILS || "")
-            .split(",")
-            .map((entry) => entry.trim().toLowerCase())
-            .filter(Boolean)
-    );
-
-    const email = user.email?.toLowerCase();
-    if (!email || !allowlist.has(email)) return;
-
-    const current = await prisma.user.findUnique({
-        where: { id: user.id },
-        select: { role: true },
-    });
-    if (!current || current.role === "ADMIN") return;
-
-    await prisma.user.update({
-        where: { id: user.id },
-        data: { role: "ADMIN" },
-    });
-    await prisma.auditLog.create({
-        data: {
-            actorId: user.id,
-            action: "user.role_bootstrapped",
-            targetType: "User",
-            targetId: user.id,
-            metadata: { from: current.role, to: "ADMIN" },
-        },
-    });
 };

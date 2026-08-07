@@ -319,6 +319,10 @@ model LessonProgress {
   /// this, never a client-supplied percentage.
   completedInteractionIds String[] @default([])
 
+  /// Deprecated and never read. It used to be settable by the client, which
+  /// contradicted the rule above; checkpoint passing is derived from graded
+  /// AssignmentSubmission scores in lib/progress.ts. Kept only so removing it
+  /// does not require a destructive migration.
   checkpointPassed Boolean @default(false)
   activeSeconds    Int     @default(0)
 
