@@ -1,17 +1,16 @@
+import { withSiteAnnouncements } from "@utils/announcements";
 import Skill from "@components/About/Skill";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import { getAlumniDirectory, getDirectory } from "@utils/directory";
 import Head from "next/head";
-import PairCoding from "@svg/pair-coding.svg";
-import MissionImage from "@svg/mission.svg";
-import Book from "@svg/book.svg";
 import { ReactElement, useRef, useState } from "react";
 import { graphQLClient } from "@utils/contentful";
 import { gql } from "graphql-request";
 import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import Image from "next/legacy/image";
+import StaticImage from "next/image";
 import { cloudinaryLoader } from "@utils/cloudinary-loader";
 import clsx from "clsx";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
@@ -54,33 +53,33 @@ const About: NextPageWithLayout<AboutProps> = ({
             <Animate>
                 <main className="pt-4 md:px-6 px-4 w-full my-8 flex flex-col items-center">
                     <section className="my-6 flex flex-col items-center">
-                        <Animate.Element
-                            resetAfterTriggered={false}
-                            from={{ y: 30, opacity: 0 }}
-                            to={{ y: 0, opacity: 1 }}
-                            className="w-full max-w-md mb-16"
-                        >
-                            <Book className="w-full" />
-                        </Animate.Element>
-                        <Animate.Element
-                            resetAfterTriggered={false}
-                            as="h1"
-                            from={{ y: 60, opacity: 0 }}
-                            to={{ y: 0, opacity: 1 }}
-                            className="md:!text-6xl xs:text-4xl text-3xl font-bold text-white text-center"
+                        {/* The hero fades in with CSS rather than the scroll
+                            animator, so it paints with the HTML instead of
+                            staying invisible until JavaScript has loaded. */}
+                        <div className="fade-up w-full max-w-md mb-16">
+                            <StaticImage
+                                src="/svg/book.svg"
+                                alt=""
+                                width={251}
+                                height={189}
+                                priority
+                                unoptimized
+                                className="h-auto w-full"
+                            />
+                        </div>
+                        <h1
+                            style={{ animationDelay: "60ms" }}
+                            className="fade-up md:!text-6xl xs:text-4xl text-3xl font-bold text-white text-center"
                         >
                             What is{" "}
                             <span className="text-brand-purple-secondary whitespace-nowrap">
                                 Code 4 Tomorrow
                             </span>
                             ?
-                        </Animate.Element>
-                        <Animate.Element
-                            resetAfterTriggered={false}
-                            as="p"
-                            from={{ y: 90, opacity: 0 }}
-                            to={{ y: 0, opacity: 1, delay: 0.15 }}
-                            className="text-lg !mt-3 text-medium-grey text-center max-w-4xl"
+                        </h1>
+                        <p
+                            style={{ animationDelay: "150ms" }}
+                            className="fade-up text-lg !mt-3 text-medium-grey text-center max-w-4xl"
                         >
                             Code 4 Tomorrow&apos;s uniqueness lies in the fact
                             that we are entirely student-run, from the official
@@ -89,7 +88,7 @@ const About: NextPageWithLayout<AboutProps> = ({
                             free coding classes to students around the globe, as
                             well as community service opportunities to our
                             members and teachers.
-                        </Animate.Element>
+                        </p>
                     </section>
                     <section
                         ref={missionRef}
@@ -134,7 +133,14 @@ const About: NextPageWithLayout<AboutProps> = ({
                             to={{ y: 0 }}
                             className="flex flex-col justify-center"
                         >
-                            <MissionImage className="w-full" />
+                            <StaticImage
+                                src="/svg/mission.svg"
+                                alt=""
+                                width={536}
+                                height={370}
+                                unoptimized
+                                className="h-auto w-full"
+                            />
                         </Animate.Scrub>
                     </section>
                     <section className="flex mt-32 flex-col items-center">
@@ -170,29 +176,39 @@ const About: NextPageWithLayout<AboutProps> = ({
                                 style={{ gridTemplateColumns: "1fr 1fr" }}
                                 className="grid md:pt-0 pt-12 sm:gap-6 gap-3 justify-center items-center"
                             >
-                                <Skill stat={"4650+"} label="Students Educated">
+                                <Skill
+                                    stat={"14,050+"}
+                                    label="Students Educated"
+                                >
                                     In just 6 weeks, students are taught
                                     priceless skills by qualified teachers.
                                 </Skill>
-                                <Skill stat={"430+"} label="Teachers">
-                                    Over a hundred dedicated high-school
-                                    teachers passing along their knowledge to
-                                    k-12 students.
+                                <Skill stat={"700+"} label="Teachers">
+                                    Hundreds of dedicated high-school teachers
+                                    passing along their knowledge to k-12
+                                    students.
                                 </Skill>
-                                <Skill stat={"165+"} label="Cities">
-                                    Our organization has reached 165+ cities
+                                <Skill stat={"215+"} label="Cities">
+                                    Our organization has reached 215+ cities
                                     spread across 15+ countries including
                                     Kazakhstan, Kenya, Turkey, Malaysia, and
                                     Uzbekistan.
                                 </Skill>
-                                <Skill stat={"55,775+"} label="Hours Taught">
+                                <Skill stat={"70,775+"} label="Hours Taught">
                                     Through our non-profit, STEM initiative we
                                     have globally reached this milestone by our
                                     numerous programs.
                                 </Skill>
                             </div>
                             <div className="flex flex-col justify-center">
-                                <PairCoding className="w-full" />
+                                <StaticImage
+                                    src="/svg/pair-coding.svg"
+                                    alt=""
+                                    width={776}
+                                    height={508}
+                                    unoptimized
+                                    className="h-auto w-full"
+                                />
                             </div>
                         </div>
                     </section>
@@ -368,13 +384,10 @@ const About: NextPageWithLayout<AboutProps> = ({
                             <div className="w-full">
                                 <Image
                                     draggable={false}
-                                    quality={100}
-                                    priority={true}
                                     loader={cloudinaryLoader}
                                     objectFit={"cover"}
                                     alt="Graduated Kids"
                                     src={"graduated-kids"}
-                                    loading="eager"
                                     width={800}
                                     height={800}
                                     style={{
@@ -442,7 +455,10 @@ async function getNotificationFlags(): Promise<INotificationFlag[]> {
             }
         );
 
-        return response?.notificationFlagCollection?.items || [];
+        return withSiteAnnouncements(
+            response?.notificationFlagCollection?.items || [],
+            { page: "/about" }
+        );
     } catch (error) {
         console.warn(
             "Skipping notification flags on /about:",
@@ -455,10 +471,10 @@ async function getNotificationFlags(): Promise<INotificationFlag[]> {
 export async function getStaticProps() {
     return {
         props: {
-            // Read from a checked-in snapshot, so this page no longer depends
-            // on the Notion API being reachable at build time.
-            directoryEntries: getDirectory(),
-            alumniDirectoryEntries: getAlumniDirectory(),
+            // Live from Notion, falling back to the checked-in snapshot if
+            // Notion is unreachable, so roles edited there show up here.
+            directoryEntries: await getDirectory(),
+            alumniDirectoryEntries: await getAlumniDirectory(),
             notificationFlags: await getNotificationFlags(),
         },
         // - At most once every 15 minutes

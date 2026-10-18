@@ -1,4 +1,4 @@
-import { createAtom } from "@utils/recoil";
+import { createAtom } from "@utils/store";
 
 /**
  * Queue of toast messages.

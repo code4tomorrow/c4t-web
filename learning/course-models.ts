@@ -203,6 +203,32 @@ export interface SourceTopicCoverage {
     completionStatus: "complete";
 }
 
+/** A free tool students use in a live class, shown on the course page. */
+export interface LiveClassTool {
+    name: string;
+    /** External download/editor link, or a /learn/tools/ concept simulator. */
+    url: string;
+    note: string;
+}
+
+/**
+ * Schedule for an instructor-led class. Present only on live courses, which
+ * appear under their term's tab on /courses instead of the self-paced catalog.
+ */
+export interface LiveSession {
+    /** Stable key used to group courses into a term tab, e.g. "fall-2026". */
+    term: string;
+    termLabel: string;
+    format: string;
+    meets: string;
+    starts: string;
+    weeks: number;
+    minutesPerClass: number;
+    /** Self-paced course to take after the class ends. */
+    continueWith: string;
+    classTools: LiveClassTool[];
+}
+
 export interface Course {
     id: string;
     order: number;
@@ -229,6 +255,8 @@ export interface Course {
     requirements: CourseRequirement[];
     simulators: SimulatorDefinition[];
     freeCompletionPromise: string;
+    /** null for self-paced courses. */
+    liveSession: LiveSession | null;
     modules: CourseModule[];
     assignments: AppliedAssignment[];
     finalAssessment: Assessment;

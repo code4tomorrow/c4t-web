@@ -80,13 +80,15 @@ export const getDirectory = async (): Promise<IDirectoryRow[]> => {
             properties?.Department?.[properties?.Department?.type] || [];
         const projects = properties?.Projects?.[properties?.Projects?.type];
 
-        let pageContents: ListBlockChildrenResponse;
+        let pageContents: ListBlockChildrenResponse | null;
         try {
             pageContents = await notion.blocks.children.list({
                 block_id: row.id,
             });
         } catch (e: any) {
-            return [];
+            // A row whose page cannot be read still belongs in the directory;
+            // it just has no bio.
+            pageContents = null;
         }
 
         return {
@@ -115,7 +117,7 @@ export const getDirectory = async (): Promise<IDirectoryRow[]> => {
                 name: country?.name || null,
                 color: country?.color ? notionColorMap(country.color) : null,
             },
-            page_children: (await pageContents) || null,
+            page_children: pageContents,
         };
     });
 

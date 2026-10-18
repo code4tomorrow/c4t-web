@@ -1,8 +1,36 @@
 {
-  "generatedAt": "2026-07-31T01:18:16.808Z",
+  "generatedAt": "2026-10-17T15:19:46.086Z",
   "rows": [
     {
-      "name": "Sana Dhingra",
+      "name": "Ishanya Malik",
+      "position": {
+        "name": "President",
+        "color": "#F36F65"
+      },
+      "department": [
+        {
+          "name": "Outreach",
+          "color": "#2C50FF"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Social Media",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Zafir Shamsi",
       "position": {
         "name": "President",
         "color": "#F36F65"
@@ -17,66 +45,14 @@
         {
           "name": "All",
           "color": "#1D9757"
-        },
-        {
-          "name": "Volunteer Management",
-          "color": "#F36F65"
-        },
-        {
-          "name": "Documentations",
-          "color": "#F36F65"
         }
       ],
       "state": {
-        "name": "California",
+        "name": "New Jersey",
         "color": "default"
       },
       "country": {
         "name": "United States",
-        "color": "default"
-      },
-      "bio": []
-    },
-    {
-      "name": "Tsz Fei Wang",
-      "position": {
-        "name": "Vice President",
-        "color": "#DF5EBA"
-      },
-      "department": [
-        {
-          "name": "All",
-          "color": "#1D9757"
-        }
-      ],
-      "projects": [
-        {
-          "name": "Web Development",
-          "color": "#E18D22"
-        },
-        {
-          "name": "Machine Learning",
-          "color": "#E18D22"
-        },
-        {
-          "name": "Enoch",
-          "color": "#E18D22"
-        },
-        {
-          "name": "C",
-          "color": "#E18D22"
-        },
-        {
-          "name": "Unity",
-          "color": "#E18D22"
-        }
-      ],
-      "state": {
-        "name": "Ontario",
-        "color": "default"
-      },
-      "country": {
-        "name": "Canada",
         "color": "default"
       },
       "bio": []
@@ -280,25 +256,21 @@
       ]
     },
     {
-      "name": "Eesha Allipuram",
+      "name": "Shivam Takyar",
       "position": {
         "name": "Director",
         "color": "#2C50FF"
       },
       "department": [
         {
-          "name": "Internal Affairs",
-          "color": "#F36F65"
+          "name": "Operations",
+          "color": "#E18D22"
         }
       ],
       "projects": [
         {
-          "name": "Volunteer Management",
-          "color": "#F36F65"
-        },
-        {
-          "name": "Documentations",
-          "color": "#F36F65"
+          "name": "Curriculum Dev - Web Development",
+          "color": "#E18D22"
         }
       ],
       "state": {
@@ -312,43 +284,7 @@
       "bio": []
     },
     {
-      "name": "Nachiket Bidarkundi",
-      "position": {
-        "name": "Director",
-        "color": "#2C50FF"
-      },
-      "department": [
-        {
-          "name": "Outreach",
-          "color": "#2C50FF"
-        }
-      ],
-      "projects": [
-        {
-          "name": "Website Design",
-          "color": "#2C50FF"
-        },
-        {
-          "name": "Public Relations",
-          "color": "#2C50FF"
-        },
-        {
-          "name": "Social Media",
-          "color": "#2C50FF"
-        }
-      ],
-      "state": {
-        "name": "California",
-        "color": "default"
-      },
-      "country": {
-        "name": "United States",
-        "color": "default"
-      },
-      "bio": []
-    },
-    {
-      "name": "Anvith Konda",
+      "name": "Ram Viswanathan",
       "position": {
         "name": "Director",
         "color": "#2C50FF"
@@ -361,16 +297,12 @@
       ],
       "projects": [
         {
-          "name": "Unity",
-          "color": "#E18D22"
-        },
-        {
-          "name": "Management/Planning",
+          "name": "Curriculum Dev - Python",
           "color": "#E18D22"
         }
       ],
       "state": {
-        "name": "California",
+        "name": "New Jersey",
         "color": "default"
       },
       "country": {
@@ -399,6 +331,38 @@
         {
           "name": "Public Relations",
           "color": "#2C50FF"
+        },
+        {
+          "name": "Website Design",
+          "color": "#2C50FF"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Haripranav Yandrapu",
+      "position": {
+        "name": "Project Lead",
+        "color": "#1D9757"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Management/Planning",
+          "color": "#E18D22"
         },
         {
           "name": "Website Design",
@@ -463,34 +427,6 @@
       ],
       "state": {
         "name": "Ohio",
-        "color": "default"
-      },
-      "country": {
-        "name": "United States",
-        "color": "default"
-      },
-      "bio": []
-    },
-    {
-      "name": "Zafir Shamsi",
-      "position": {
-        "name": "Project Lead",
-        "color": "#1D9757"
-      },
-      "department": [
-        {
-          "name": "Operations",
-          "color": "#E18D22"
-        }
-      ],
-      "projects": [
-        {
-          "name": "Management/Planning",
-          "color": "#E18D22"
-        }
-      ],
-      "state": {
-        "name": "New Jersey",
         "color": "default"
       },
       "country": {
@@ -571,62 +507,6 @@
         {
           "name": "Website Design",
           "color": "#2C50FF"
-        }
-      ],
-      "state": {
-        "name": "New Jersey",
-        "color": "default"
-      },
-      "country": {
-        "name": "United States",
-        "color": "default"
-      },
-      "bio": []
-    },
-    {
-      "name": "Shivam Takyar",
-      "position": {
-        "name": "Member",
-        "color": "#D3B020"
-      },
-      "department": [
-        {
-          "name": "Operations",
-          "color": "#E18D22"
-        }
-      ],
-      "projects": [
-        {
-          "name": "Curriculum Dev - Web Development",
-          "color": "#E18D22"
-        }
-      ],
-      "state": {
-        "name": "New Jersey",
-        "color": "default"
-      },
-      "country": {
-        "name": "United States",
-        "color": "default"
-      },
-      "bio": []
-    },
-    {
-      "name": "Ram Viswanathan",
-      "position": {
-        "name": "Member",
-        "color": "#D3B020"
-      },
-      "department": [
-        {
-          "name": "Operations",
-          "color": "#E18D22"
-        }
-      ],
-      "projects": [
-        {
-          "name": "Curriculum Dev - Python",
-          "color": "#E18D22"
         }
       ],
       "state": {
@@ -948,34 +828,6 @@
       "bio": []
     },
     {
-      "name": "Haripranav Yandrapu",
-      "position": {
-        "name": "Member",
-        "color": "#D3B020"
-      },
-      "department": [
-        {
-          "name": "Operations",
-          "color": "#E18D22"
-        }
-      ],
-      "projects": [
-        {
-          "name": "Management/Planning",
-          "color": "#E18D22"
-        }
-      ],
-      "state": {
-        "name": "New Jersey",
-        "color": "default"
-      },
-      "country": {
-        "name": "United States",
-        "color": "default"
-      },
-      "bio": []
-    },
-    {
       "name": "Aadhya Raghunanthan",
       "position": {
         "name": "Member",
@@ -1116,7 +968,39 @@
       "bio": []
     },
     {
-      "name": "Ishanya Malik",
+      "name": "Eesha Allipuram",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Internal Affairs",
+          "color": "#F36F65"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Volunteer Management",
+          "color": "#F36F65"
+        },
+        {
+          "name": "Documentations",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "New Jersey",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Nachiket Bidarkundi",
       "position": {
         "name": "Member",
         "color": "#D3B020"
@@ -1129,12 +1013,52 @@
       ],
       "projects": [
         {
+          "name": "Website Design",
+          "color": "#2C50FF"
+        },
+        {
+          "name": "Public Relations",
+          "color": "#2C50FF"
+        },
+        {
           "name": "Social Media",
           "color": "#2C50FF"
         }
       ],
       "state": {
-        "name": "New Jersey",
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Anvith Konda",
+      "position": {
+        "name": "Member",
+        "color": "#D3B020"
+      },
+      "department": [
+        {
+          "name": "Operations",
+          "color": "#E18D22"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Unity",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Management/Planning",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "California",
         "color": "default"
       },
       "country": {
@@ -1284,6 +1208,42 @@
       "bio": []
     },
     {
+      "name": "Sana Dhingra",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        },
+        {
+          "name": "Volunteer Management",
+          "color": "#F36F65"
+        },
+        {
+          "name": "Documentations",
+          "color": "#F36F65"
+        }
+      ],
+      "state": {
+        "name": "California",
+        "color": "default"
+      },
+      "country": {
+        "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
       "name": "Jyoti Rani",
       "position": {
         "name": "Mentor",
@@ -1391,6 +1351,50 @@
       },
       "country": {
         "name": "United States",
+        "color": "default"
+      },
+      "bio": []
+    },
+    {
+      "name": "Tsz Fei Wang",
+      "position": {
+        "name": "Mentor",
+        "color": "#C633BF"
+      },
+      "department": [
+        {
+          "name": "All",
+          "color": "#1D9757"
+        }
+      ],
+      "projects": [
+        {
+          "name": "Web Development",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Machine Learning",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Enoch",
+          "color": "#E18D22"
+        },
+        {
+          "name": "C",
+          "color": "#E18D22"
+        },
+        {
+          "name": "Unity",
+          "color": "#E18D22"
+        }
+      ],
+      "state": {
+        "name": "Ontario",
+        "color": "default"
+      },
+      "country": {
+        "name": "Canada",
         "color": "default"
       },
       "bio": []

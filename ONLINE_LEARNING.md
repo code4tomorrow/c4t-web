@@ -1,6 +1,7 @@
 # C4T Online Learning Platform
 
-A full learning platform for the 25-course Code 4 Tomorrow curriculum:
+A full learning platform for the 25-course Code 4 Tomorrow self-paced
+curriculum and its live classes (see "Live classes" below):
 accounts, enrollment, server-verified progress, instructor grading, and
 verifiable PDF certificates. Course content lives in version control; learner
 data lives in Postgres. The website's existing Contentful integration is
@@ -61,8 +62,10 @@ self-paced and weekly pacing templates, and configurable certificate rules.
 
 ### Learner application
 
--   `/courses` — searchable and filterable 25-course catalog and the
-    learning-path overview. Fully static: no external calls at build time.
+-   `/courses` — a "Self-paced courses" tab (searchable, filterable catalog and
+    learning paths) and one tab per live-class term, e.g. "Fall 2026 live
+    classes" (`/courses?tab=fall-2026`). Fully static: no external calls at
+    build time.
 -   `/courses/[courseSlug]` — course overview, free setup walkthrough,
     prerequisites, recommended prior courses, learning-path membership,
     outcomes, projects, certificate rules, and full outline.
@@ -147,7 +150,10 @@ Roles are enforced on the server in `lib/guards.ts` (pages) and `lib/api.ts`
 (API routes). Client-side checks are only ever cosmetic.
 
 The first administrator on a fresh database is bootstrapped with
-`INITIAL_ADMIN_EMAILS` (comma-separated), applied on sign-in. After that, roles
+`INITIAL_ADMIN_EMAILS` (comma-separated), applied on a verified sign-in
+(GitHub or an emailed link — not email + password, which is unverified).
+These founding admins cannot be demoted from `/admin/users`, so no other admin
+can lock them out. After that, roles
 are managed at `/admin/users` or with `npm run db:make-admin`.
 
 ### Role preview ("view as")
@@ -219,8 +225,39 @@ local registry — none of that needs credentials. The remaining Contentful-back
 pages are `/news`, `/jobboard`, `/internships` and the notification banners.
 
 Deploying the learning platform requires `DATABASE_URL`, `NEXTAUTH_SECRET`,
-`NEXTAUTH_URL`, and at least one sign-in provider. Progress, certificates and
+`NEXTAUTH_URL`, and at least one sign-in provider. Without `DATABASE_URL` (or,
+in production, `NEXTAUTH_SECRET`), the site still deploys and runs:
+`lib/platform.ts` switches accounts off: lessons become open to read
+(nothing is saved), course pages show "Start reading" instead of Enroll,
+other account pages redirect to `/learn/unavailable`, and account APIs
+return 503. Progress, certificates and
 grading are all server-authoritative, so the database is not optional.
+
+## Live classes
+
+Instructor-led classes, such as the Fall 2026 session, are ordinary courses
+with a `liveSession` in their blueprint (`learning/course-blueprints.js`). That
+one field is what makes a course a live class:
+
+-   It is listed under its term's tab on `/courses` instead of the self-paced
+    catalog, and is kept out of the learning paths.
+-   Its course page shows the class schedule, a register button (the
+    `studentRegistrationLink` in `config/index.ts`), the free tools used in
+    class, a week-by-week plan, and the self-paced course to take next.
+-   Each of its six core modules is one week. A module's three lessons add up
+    to the class length (25 + 35 + 30 = 90 minutes), and `weeklyHours` is the
+    class length in hours. The validator enforces all of this.
+
+The Fall 2026 classes are `course-26` to `course-29`. To add a new term (for
+example Winter 2027):
+
+1. Add each class's topics to `learning/source-curriculum.js`, in week order.
+2. Add its blueprint with `liveSession.term` set to the new term, e.g.
+   `"winter-2027"`. A new tab appears automatically.
+3. Run `npm run validate:curriculum` and `npm test`.
+4. Run `npm run db:seed` against each database so the new courses are
+   published. Until a course has a published status it shows "Not open for
+   enrollment yet".
 
 ## Retiring Notion
 
@@ -232,12 +269,11 @@ What replaced it:
 
 -   **Old URLs still resolve.** `/courses/home` and any deeper `/courses/**`
     path permanently redirect to `/courses`.
--   **The team and alumni directories on `/about`** now come from
-    `data/team-directory.json` and `data/alumni-directory.json`, checked into
-    the repo. Refresh them with `npm run snapshot:directory` (the only code
-    that still talks to Notion, and it never runs during a build or request).
--   **`NOTION_API_KEY` is developer tooling only.** It does not belong in your
-    hosting provider's environment variables.
+-   **The team and alumni directories on `/about` still come from Notion**,
+    read on each 15-minute revalidation so role changes there reach the site.
+    If `NOTION_API_KEY` is unset or Notion fails, the page serves the copy
+    checked into `data/team-directory.json` and `data/alumni-directory.json`.
+    Refresh that copy with `npm run snapshot:directory`.
 
 Removing it dropped 127 npm packages, including `react-notion-x`,
 `notion-client`, `prismjs` and `ioredis`.

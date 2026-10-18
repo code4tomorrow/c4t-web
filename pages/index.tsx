@@ -1,12 +1,17 @@
+import {
+    FALL_2026,
+    getTermPhase,
+    isRegistrationOpen,
+    type TermPhase,
+} from "@utils/sessionSchedule";
+import { useTermPhase } from "hooks/useTermPhase";
+import { withSiteAnnouncements } from "@utils/announcements";
 import React, { ReactElement } from "react";
 import Head from "next/head";
 import Paper from "@components/Paper";
 import { useStyles } from "../styles/styles";
 import clsx from "clsx";
 import Typist from "react-typist-component";
-import LearnSVG from "@svg/learn.svg";
-import TeamSVG from "@svg/team.svg";
-import GiftsSVG from "@svg/gifts.svg";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import Link from "next/link";
@@ -19,7 +24,7 @@ import { ITestimonial } from "common/interfaces/testimonial";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
 import { InferGetServerSidePropsType } from "next";
 import { modalState } from "common/atoms";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "@utils/store";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
@@ -31,19 +36,68 @@ const Testimonials = dynamic(() => import("@components/Testimonials"));
 
 const CODE_ITEMS = ["Today.", "Websites.", "Games.", "iOS Apps."];
 
+const RegisterButton = () => (
+    <BrandButton
+        href={config.links.studentRegistrationLink}
+        containerClass="mr-auto shrink-0 whitespace-nowrap"
+        title="Register Now!"
+        as="a"
+        target={"_blank"}
+        rel="noopener noreferrer"
+    />
+);
+
+/** The Fall 2026 card for each point in the schedule; null once it's over. */
+const fallCardCopy = (phase: TermPhase) => {
+    const classes =
+        "One 1.5-hour class each week for 6 weeks, completely free.";
+    switch (phase) {
+        case "early":
+            return {
+                tag: "Fall 2026 · Online",
+                heading: "Starts the first week of November",
+                body: `${classes} Sign up by ${FALL_2026.earlyDeadlineLabel} to save your spot.`,
+            };
+        case "open":
+            return {
+                tag: "Fall 2026 · Online",
+                heading: "Starts the first week of November",
+                body: `${classes} Registration is open until ${FALL_2026.registrationClosesLabel}.`,
+            };
+        case "started":
+            return {
+                tag: "Fall 2026 · Online",
+                heading: "Classes started the first week of November",
+                body: `${classes} There's still time to join: registration is open until ${FALL_2026.registrationClosesLabel}.`,
+            };
+        case "closed":
+            return {
+                tag: "Fall 2026 · Online · In session",
+                heading: "Classes are in session",
+                body: `Registration for the fall session has closed. Classes run through ${FALL_2026.lastClassLabel}.`,
+            };
+        default:
+            return null;
+    }
+};
+
 const Home: NextPageWithLayout<
     InferGetServerSidePropsType<typeof getStaticProps>
-> = ({ testimonials = [] }) => {
+> = ({ testimonials = [], fallPhase = "early" }) => {
+    const phase = useTermPhase(FALL_2026.term, fallPhase);
+    const fallCopy = fallCardCopy(phase);
+    const fallRegistrationOpen = isRegistrationOpen(phase);
     const { classes } = useStyles();
 
     const mainRef = React.useRef<HTMLDivElement | null>(null);
 
     const sessionRef = React.useRef<HTMLDivElement | null>(null);
+    const sessionsRef = React.useRef<HTMLDivElement | null>(null);
     const testimonialsRef = React.useRef<HTMLDivElement | null>(null);
     const donateRef = React.useRef<HTMLDivElement | null>(null);
     const partnershipRef = React.useRef<HTMLDivElement | null>(null);
 
-    const modalOpen = useRecoilValue(modalState);
+    const modalOpen = useAtomValue(modalState);
 
     return (
         <div
@@ -89,8 +143,7 @@ const Home: NextPageWithLayout<
                     <BrandButton
                         className="w-[130px]"
                         title="Sign Up"
-                        // href={config.links.studentRegistrationLink} //
-                        href={"https://tally.so/r/n9vQbQ"}
+                        href={config.links.studentRegistrationLink}
                         as="a"
                         target={"_blank"}
                         rel="noopener noreferrer"
@@ -146,14 +199,16 @@ const Home: NextPageWithLayout<
                                 >
                                     <Image
                                         draggable={false}
-                                        loading="eager"
                                         src="code"
                                         priority
                                         loader={cloudinaryLoader}
-                                        quality={100}
+                                        // Sharp enough for code text without
+                                        // the weight of quality 100.
+                                        quality={85}
                                         alt="code-demo"
-                                        objectFit="cover"
-                                        layout="fill"
+                                        fill
+                                        sizes="(min-width: 1560px) 1365px, (min-width: 768px) 88vw, 100vw"
+                                        style={{ objectFit: "cover" }}
                                     />
                                 </Paper>
                             </Animate.Element>
@@ -229,23 +284,140 @@ const Home: NextPageWithLayout<
                             </a>
                         </article>
                         <div className={"md:my-0 my-8"}>
-                            <LearnSVG className="w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw] " />
+                            <Image
+                                src="/svg/learn.svg"
+                                alt=""
+                                width={252}
+                                height={252}
+                                unoptimized
+                                className="h-auto w-[100%] max-w-[500px] md:max-w-[400px] md:w-[40vw]"
+                            />
                         </div>
                     </section>
 
-                    {/* <section id="events">
-                        <h1 className="text-white text-4xl md:text-5xl font-extrabold">
-                            Upcoming Events!
-                        </h1>
-                        <div className="grid-container-upcoming" id="grid-container-img">
-                            <Image 
-                                src="/Recycle 4 Tomorrow-1.png" 
-                                alt="Upcoming Events"
-                                width={500} 
-                                height={300} 
-                            />
-                        </div>
-                    </section> */}
+                    <section
+                        id="sessions"
+                        ref={sessionsRef}
+                        className="flex py-5 flex-col md:flex-row md:items-center md:space-x-12 justify-around w-full max-w-[1250px]"
+                    >
+                        <article className="space-y-5 flex flex-col md:max-w-[55%] px-2">
+                            <Animate.Element
+                                ref={sessionsRef}
+                                onDeactivatedClasses="translate-x-[-200px]"
+                                onActivatedClasses="translate-x-0"
+                                className="transition-transform duration-500"
+                            >
+                                <h1 className="text-white text-4xl md:text-5xl font-extrabold">
+                                    Upcoming{" "}
+                                    <span className="text-brand-purple-secondary">
+                                        Sessions
+                                    </span>
+                                </h1>
+                            </Animate.Element>
+                            <Animate.Element
+                                ref={sessionsRef}
+                                onDeactivatedClasses="translate-x-[-200px]"
+                                onActivatedClasses="translate-x-0"
+                                className="transition-transform duration-700 delay-75 space-y-4"
+                            >
+                                {fallCopy && (
+                                    <Paper containerClass="p-6 space-y-3 flex flex-col">
+                                        <p className="text-sm font-semibold uppercase tracking-wider text-brand-purple-secondary">
+                                            {fallCopy.tag}
+                                        </p>
+                                        <h2 className="text-white text-2xl font-bold">
+                                            {fallCopy.heading}
+                                        </h2>
+                                        <p className="text-medium-grey text-lg">
+                                            {fallCopy.body}
+                                        </p>
+                                        <div className="!mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+                                            {fallRegistrationOpen && (
+                                                <RegisterButton />
+                                            )}
+                                            <Link
+                                                href="/courses?tab=fall-2026"
+                                                className="text-brand-purple-secondary underline underline-offset-4 hover:text-white"
+                                            >
+                                                See what each class covers
+                                            </Link>
+                                        </div>
+                                    </Paper>
+                                )}
+                                <Paper containerClass="p-6 space-y-3 flex flex-col">
+                                    <p className="text-sm font-semibold uppercase tracking-wider text-brand-purple-secondary">
+                                        Winter 2027 &middot; Online &amp; In
+                                        Person
+                                    </p>
+                                    <h2 className="text-white text-2xl font-bold">
+                                        Starts February 2027
+                                    </h2>
+                                    <p className="text-medium-grey text-lg">
+                                        Exact dates are coming soon. Along with
+                                        our online classes, Winter 2027 will
+                                        include{" "}
+                                        <b className="text-white whitespace-nowrap">
+                                            in-person classes
+                                        </b>
+                                        .
+                                    </p>
+                                    {/* Once fall sign-ups close, the sign-up
+                                        link moves here. */}
+                                    {!fallRegistrationOpen && (
+                                        <div className="!mt-5 flex">
+                                            <RegisterButton />
+                                        </div>
+                                    )}
+                                </Paper>
+                            </Animate.Element>
+                            <Animate.Element
+                                as="p"
+                                ref={sessionsRef}
+                                onDeactivatedClasses="translate-x-[-200px]"
+                                onActivatedClasses="translate-x-0"
+                                className="transition-transform duration-700 delay-150 text-medium-grey text-lg"
+                            >
+                                <b className="text-white">
+                                    Have a space we could teach in?
+                                </b>{" "}
+                                If your school, library, or community center can
+                                host a class, we&apos;d love to hear from you.{" "}
+                                <Link
+                                    href="/contact"
+                                    className="text-brand-purple-secondary underline underline-offset-4 hover:text-white"
+                                >
+                                    Reach out to us
+                                </Link>
+                                .
+                            </Animate.Element>
+                        </article>
+                        {/* The flyer advertises fall sign-ups, so it comes
+                            down when fall registration closes. */}
+                        {fallRegistrationOpen && (
+                            <Animate.Element
+                                ref={sessionsRef}
+                                onDeactivatedClasses="translate-x-[200px] opacity-0"
+                                onActivatedClasses="translate-x-0 opacity-100"
+                                className="transition-all duration-700 md:my-0 my-10 px-2 w-full md:w-[40%] max-w-[460px] self-center"
+                            >
+                                <a
+                                    href="/fall-2026-flyer.png"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="block"
+                                >
+                                    <Image
+                                        src="/fall-2026-flyer.png"
+                                        alt="Fall 2026 flyer: free online coding classes. Intro to Python on Mondays 7:30–9:00 PM EST, Android Studio app development on Wednesdays 8:00–9:30 PM EST, programming with Scratch on Saturdays 5:00–6:30 PM EST, and intermediate ML and model evaluation on Sundays. Sign up at code4tomorrow.org before October 25."
+                                        width={1545}
+                                        height={1999}
+                                        sizes="(min-width: 768px) 460px, 90vw"
+                                        className="w-full h-auto rounded-md shadow-2xl"
+                                    />
+                                </a>
+                            </Animate.Element>
+                        )}
+                    </section>
 
                     <section className="w-full flex flex-col items-center">
                         <div ref={testimonialsRef} className="mb-20 w-full">
@@ -313,7 +485,14 @@ const Home: NextPageWithLayout<
                             />
                         </article>
                         <div className="md:my-0 my-8">
-                            <GiftsSVG className="w-[100%] max-w-[500px]  md:max-w-[500px] md:w-[50vw] " />
+                            <Image
+                                src="/svg/gifts.svg"
+                                alt=""
+                                width={325}
+                                height={203}
+                                unoptimized
+                                className="h-auto w-[100%] max-w-[500px] md:max-w-[500px] md:w-[50vw]"
+                            />
                         </div>
                     </section>
                     <section className="flex py-10 pb-48 flex-col-reverse md:flex-row md:items-center justify-around w-full max-w-[1250px]">
@@ -358,7 +537,14 @@ const Home: NextPageWithLayout<
                             />
                         </article>
                         <div className="md:my-0 my-8">
-                            <TeamSVG className="w-[100%] max-w-[500px]  md:max-w-[500px] md:w-[50vw] " />
+                            <Image
+                                src="/svg/team.svg"
+                                alt=""
+                                width={344}
+                                height={217}
+                                unoptimized
+                                className="h-auto w-[100%] max-w-[500px] md:max-w-[500px] md:w-[50vw]"
+                            />
                         </div>
                     </section>
                 </main>
@@ -417,8 +603,10 @@ export async function getStaticProps() {
         }
     );
 
-    const notificationFlags: INotificationFlag[] =
-        response?.notificationFlagCollection?.items || [];
+    const notificationFlags: INotificationFlag[] = withSiteAnnouncements(
+        response?.notificationFlagCollection?.items || [],
+        { page: "/" }
+    );
     const testimonials: ITestimonial[] =
         response?.testimonialCollection?.items || [];
 
@@ -426,6 +614,7 @@ export async function getStaticProps() {
         props: {
             notificationFlags,
             testimonials,
+            fallPhase: getTermPhase(FALL_2026.term),
         },
         // - At most once every 15 minutes
         revalidate: 60 * 15, // In seconds

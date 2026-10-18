@@ -1,3 +1,4 @@
+import { withSiteAnnouncements } from "@utils/announcements";
 import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
 import { NextPageWithLayout } from "common/interfaces/nextPageWithLayout";
@@ -27,7 +28,6 @@ import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { InferGetStaticPropsType } from "next";
 import Modal from "@components/Modal";
 import useDimensions from "hooks/useDimensions";
-import flatMap from "lodash/flatMap";
 import Loader from "@components/Loader";
 import WalkSVG from "@svg/walk.svg";
 import WatsonAssistantChat from "@layouts/WatsonAssistantChat";
@@ -57,7 +57,7 @@ const JobBoard: NextPageWithLayout<
     });
 
     const jobs = useMemo(
-        () => flatMap(jobPages?.map(({ items }) => items || [])),
+        () => (jobPages?.map(({ items }) => items || []) ?? []).flat(),
         [jobPages]
     );
 
@@ -352,8 +352,10 @@ export async function getStaticProps() {
         }
     );
 
-    const notificationFlags: INotificationFlag[] =
-        response?.notificationFlagCollection?.items || [];
+    const notificationFlags: INotificationFlag[] = withSiteAnnouncements(
+        response?.notificationFlagCollection?.items || [],
+        { page: "/jobboard" }
+    );
 
     return {
         props: {

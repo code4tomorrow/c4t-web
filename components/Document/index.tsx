@@ -6,7 +6,7 @@ import {
     documentToReactComponents,
     Options as DocumentOptions,
 } from "@contentful/rich-text-react-renderer";
-import { makeStyles } from "tss-react/mui";
+import { makeStyles } from "@utils/tss";
 import clsx from "clsx";
 import Link from "next/link";
 

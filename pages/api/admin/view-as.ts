@@ -33,9 +33,15 @@ export default authedRoute(["POST"], async ({ req, res, userId, realRole }) => {
         buildViewAsCookie(role, process.env.NODE_ENV === "production")
     );
 
-    await audit(userId, role ? "admin.preview_started" : "admin.preview_ended", "User", userId, {
-        role,
-    });
+    await audit(
+        userId,
+        role ? "admin.preview_started" : "admin.preview_ended",
+        "User",
+        userId,
+        {
+            role,
+        }
+    );
 
     return { previewRole: role };
 });

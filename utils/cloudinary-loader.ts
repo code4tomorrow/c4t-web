@@ -1,5 +1,4 @@
 import { ImageLoader, ImageLoaderProps } from "next/image";
-import { buildUrl } from "cloudinary-build-url";
 import config from "../config";
 
 export const cloudinaryExternalLoader = ({
@@ -40,18 +39,9 @@ export const cloudinaryTransformLoader = ({
 };
 
 /**
- *
- * @param path to image on cloudinary web-assets/
- * @param transformations for image
- * @returns Default Cloudinary URL
+ * Default Cloudinary URL for an image under web-assets/, with automatic
+ * quality and format. A template string rather than cloudinary-build-url, which
+ * added a URL-builder library to every page for this one fixed pattern.
  */
-export const getCloudinaryURL = (path: string, transformations?: object) => {
-    return buildUrl(`web-assets/${path}`, {
-        cloud: {
-            cloudName: config.cloudinary.cloudName,
-        },
-        transformations: {
-            ...(transformations || {}),
-        },
-    });
-};
+export const getCloudinaryURL = (path: string) =>
+    `${config.cloudinary.url}/image/upload/q_auto,f_auto/web-assets/${path}`;

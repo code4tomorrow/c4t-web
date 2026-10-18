@@ -89,3 +89,23 @@ a {
     border-top-left-radius: 7px !important;
     border-top-right-radius: 7px !important;
 }
+
+/* Above-the-fold entrance: runs on first paint, no JavaScript required. */
+@keyframes c4t-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+.fade-up {
+    animation: c4t-fade-up 0.6s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+    .fade-up {
+        animation: none;
+    }
+}

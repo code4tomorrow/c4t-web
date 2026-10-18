@@ -88,6 +88,8 @@ export interface ModuleOutlineItem {
 
 export type FreeLabMode =
     | "logic-code"
+    | "android"
+    | "ml-evaluation"
     | "web"
     | "git"
     | "hardware"

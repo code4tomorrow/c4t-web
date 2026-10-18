@@ -1,13 +1,13 @@
-import { ApiError, parseBody, route } from "lib/api";
-import {
-    createSessionForUser,
-    verifyPassword,
-} from "lib/password-auth";
+import { ApiError, assertAccountsEnabled, parseBody, route } from "lib/api";
+import { createSessionForUser, verifyPassword } from "lib/password-auth";
 import prisma from "lib/prisma";
 import { enforceRateLimit } from "lib/rate-limit";
 import { credentialsSchema } from "lib/schemas";
 
-const clientKey = (req: { headers: Record<string, unknown>; socket?: unknown }) => {
+const clientKey = (req: {
+    headers: Record<string, unknown>;
+    socket?: unknown;
+}) => {
     const forwarded = req.headers["x-forwarded-for"];
     const first = Array.isArray(forwarded) ? forwarded[0] : forwarded;
     return (
@@ -22,6 +22,7 @@ const invalid = () =>
     new ApiError(401, "Email or password is incorrect.", "invalid_credentials");
 
 export default route(["POST"], async ({ req, res }) => {
+    assertAccountsEnabled();
     const ip = clientKey(req);
     const input = parseBody(credentialsSchema, req.body);
     const email = input.email.trim().toLowerCase();

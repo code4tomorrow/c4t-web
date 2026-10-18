@@ -1,5 +1,6 @@
 /**
- * Ordered learning paths through the 25-course catalog.
+ * Ordered learning paths through the 25-course self-paced catalog. Live
+ * classes (courses with a liveSession) are deliberately not part of any path.
  *
  * Kept as CommonJS (like source-curriculum.js and course-blueprints.js) so the
  * Node curriculum validator can enforce path invariants without a TypeScript

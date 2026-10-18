@@ -1,5 +1,6 @@
 import CourseAttribution from "@components/Learning/CourseAttribution";
 import FreeLabSimulator from "@components/Learning/FreeLabSimulator";
+import { labModeForCourse } from "@components/Learning/labMode";
 import { LearningProgressBar } from "@components/Learning/LearningProgress";
 import ModuleLessonOutline from "@components/Learning/ModuleLessonOutline";
 import type {
@@ -10,12 +11,14 @@ import { useActiveTime, useServerProgress } from "hooks/useServerProgress";
 import type { Course, CourseModule, Lesson } from "learning/course-models";
 import { getCourseBySlug } from "learning/course-registry";
 
+import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
 import { requireAuth } from "lib/guards";
 import { getCourseSnapshot } from "lib/learner";
+import { accountsEnabled } from "lib/platform";
 
 type LessonOutlineRecord = Pick<
     Lesson,
@@ -32,6 +35,7 @@ type LessonOutlineModule = Pick<
 };
 
 type LessonCourse = Pick<Course, "id" | "slug" | "title" | "tags"> & {
+    labMode: FreeLabMode;
     modules: LessonOutlineModule[];
 };
 
@@ -43,59 +47,12 @@ interface LessonPageProps {
     completedByLesson: Record<string, string[]>;
     completedLessonIds: string[];
     enrolled: boolean;
+    /**
+     * True while student accounts are switched off (lib/platform.ts): the
+     * lesson is open to everyone to read, and nothing is saved.
+     */
+    readOnly: boolean;
 }
-
-const getLabMode = (course: LessonCourse): FreeLabMode => {
-    const searchable = `${course.slug} ${course.tags.join(" ")}`.toLowerCase();
-
-    if (searchable.includes("micro:bit") || searchable.includes("microbit")) {
-        return "microbit";
-    }
-    if (searchable.includes("raspberry") || searchable.includes("iot")) {
-        return "gpio-iot";
-    }
-    if (searchable.includes("tinyml") || searchable.includes("edge ai")) {
-        return "tinyml";
-    }
-    if (
-        searchable.includes("electronics") ||
-        searchable.includes("robotics") ||
-        searchable.includes("hardware")
-    ) {
-        return "circuits";
-    }
-    if (searchable.includes("unity") || searchable.includes("game")) {
-        return "unity-physics";
-    }
-    if (
-        searchable.includes("agent") ||
-        searchable.includes("mcp") ||
-        searchable.includes("multi-agent")
-    ) {
-        return "agent-tools";
-    }
-    if (searchable.includes("git") || searchable.includes("github")) {
-        return "git";
-    }
-    if (
-        searchable.includes("machine learning") ||
-        searchable.includes("data") ||
-        searchable.includes("deep learning") ||
-        searchable.includes("artificial intelligence") ||
-        searchable.includes("nlp")
-    ) {
-        return "data-ml";
-    }
-    if (
-        searchable.includes("html") ||
-        searchable.includes("css") ||
-        searchable.includes("javascript") ||
-        searchable.includes("web")
-    ) {
-        return "web";
-    }
-    return "logic-code";
-};
 
 const getFlatLessons = (course: LessonCourse) =>
     course.modules.flatMap((module) =>
@@ -110,6 +67,7 @@ const toLessonCourse = (course: Course): LessonCourse => ({
     slug: course.slug,
     title: course.title,
     tags: course.tags,
+    labMode: labModeForCourse(course.requirements),
     modules: course.modules.map((module) => ({
         id: module.id,
         order: module.order,
@@ -131,6 +89,7 @@ const LessonPage: React.FC<LessonPageProps> = ({
     lesson,
     completedByLesson,
     completedLessonIds,
+    readOnly,
 }) => {
     const router = useRouter();
     const lessonId = lesson.id;
@@ -183,7 +142,7 @@ const LessonPage: React.FC<LessonPageProps> = ({
     useActiveTime({
         courseId: course.id,
         lessonId,
-        enabled: Boolean(currentModule),
+        enabled: Boolean(currentModule) && !readOnly,
     });
 
     useEffect(() => {
@@ -216,6 +175,8 @@ const LessonPage: React.FC<LessonPageProps> = ({
     }));
 
     const completeInteraction = () => {
+        // Read-only lessons have no account to save to.
+        if (readOnly) return;
         // The server records the interaction and decides whether that
         // completes the lesson; we render whatever it returns.
         void saveInteraction(lesson.interaction.id);
@@ -231,7 +192,7 @@ const LessonPage: React.FC<LessonPageProps> = ({
         }
     };
 
-    const labMode = getLabMode(course);
+    const { labMode } = course;
 
     return (
         <div className="min-h-screen w-full bg-dark-grey-primary text-white">
@@ -256,19 +217,27 @@ const LessonPage: React.FC<LessonPageProps> = ({
                         <p className="truncate text-xs font-semibold text-medium-grey">
                             {course.title}
                         </p>
-                        <LearningProgressBar
-                            value={progressPercent}
-                            label="Course progress"
-                            showValue
-                            compact
-                        />
+                        {!readOnly && (
+                            <LearningProgressBar
+                                value={progressPercent}
+                                label="Course progress"
+                                showValue
+                                compact
+                            />
+                        )}
                     </div>
-                    <Link
-                        href="/learn/dashboard"
-                        className="hidden min-h-[40px] shrink-0 items-center rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold text-[#D6D3DC] outline-none hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-brand-purple-secondary sm:inline-flex"
-                    >
-                        Dashboard
-                    </Link>
+                    {readOnly ? (
+                        <span className="hidden shrink-0 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1.5 text-xs font-bold text-amber-100 sm:inline-flex">
+                            Account access coming soon
+                        </span>
+                    ) : (
+                        <Link
+                            href="/learn/dashboard"
+                            className="hidden min-h-[40px] shrink-0 items-center rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold text-[#D6D3DC] outline-none hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-brand-purple-secondary sm:inline-flex"
+                        >
+                            Dashboard
+                        </Link>
+                    )}
                 </div>
             </header>
 
@@ -282,14 +251,29 @@ const LessonPage: React.FC<LessonPageProps> = ({
                             title="Course lessons"
                         />
                         <p className="mt-3 px-2 text-xs leading-5 text-medium-grey">
-                            Progress is stored locally on this device. You can
-                            learn without creating an account.
+                            {readOnly
+                                ? "Account access is coming soon. Until then every lesson is open to read, but progress isn't saved."
+                                : "Your progress is saved to your account, so you can pick up on any device."}
                         </p>
                     </div>
                 </aside>
 
                 <main className="min-w-0 px-4 py-8 sm:px-7 lg:px-10 lg:py-10">
                     <article className="mx-auto max-w-4xl">
+                        {readOnly && (
+                            <div
+                                role="note"
+                                className="mb-7 rounded-2xl border border-amber-400/40 bg-amber-400/[0.08] p-4 text-sm leading-6 text-amber-50 sm:p-5"
+                            >
+                                <strong className="text-amber-100">
+                                    Account access coming soon.
+                                </strong>{" "}
+                                You can read every lesson and use the labs now.
+                                Once accounts open, you&apos;ll be able to save
+                                your progress, submit assignments, and earn a
+                                certificate.
+                            </div>
+                        )}
                         <header className="border-b border-white/10 pb-7">
                             <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-purple-secondary">
                                 Module {currentModule.order} · Lesson{" "}
@@ -304,12 +288,16 @@ const LessonPage: React.FC<LessonPageProps> = ({
                             <div className="mt-4 flex flex-wrap gap-3 text-xs font-semibold text-medium-grey">
                                 <span>{lesson.estimatedMinutes} minutes</span>
                                 <span aria-hidden="true">·</span>
-                                <span>
-                                    {lessonComplete
-                                        ? "Completed"
-                                        : "In progress"}
-                                </span>
-                                <span aria-hidden="true">·</span>
+                                {!readOnly && (
+                                    <>
+                                        <span>
+                                            {lessonComplete
+                                                ? "Completed"
+                                                : "In progress"}
+                                        </span>
+                                        <span aria-hidden="true">·</span>
+                                    </>
+                                )}
                                 <span>$0 tools required</span>
                             </div>
                         </header>
@@ -560,26 +548,41 @@ const LessonPage: React.FC<LessonPageProps> = ({
                                     ← Course overview
                                 </Link>
                             )}
-                            <button
-                                type="button"
-                                onClick={completeLesson}
-                                disabled={!canCompleteLesson || saving}
-                                className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-5 py-3 text-sm font-bold outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:brightness-100"
-                            >
-                                {saving
-                                    ? "Saving…"
-                                    : !canCompleteLesson
-                                    ? "Complete the lab to continue"
-                                    : lessonComplete
-                                    ? next
-                                        ? "Continue to next lesson →"
-                                        : "Course lessons complete ✓"
-                                    : next
-                                    ? "Complete & continue →"
-                                    : "Complete final lesson ✓"}
-                            </button>
+                            {readOnly ? (
+                                <Link
+                                    href={
+                                        next
+                                            ? `/learn/courses/${course.slug}/lessons/${next.lesson.slug}`
+                                            : `/courses/${course.slug}`
+                                    }
+                                    className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-5 py-3 text-sm font-bold outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white"
+                                >
+                                    {next
+                                        ? "Next lesson →"
+                                        : "Back to the course overview"}
+                                </Link>
+                            ) : (
+                                <button
+                                    type="button"
+                                    onClick={completeLesson}
+                                    disabled={!canCompleteLesson || saving}
+                                    className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-5 py-3 text-sm font-bold outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:brightness-100"
+                                >
+                                    {saving
+                                        ? "Saving…"
+                                        : !canCompleteLesson
+                                        ? "Complete the lab to continue"
+                                        : lessonComplete
+                                        ? next
+                                            ? "Continue to next lesson →"
+                                            : "Course lessons complete ✓"
+                                        : next
+                                        ? "Complete & continue →"
+                                        : "Complete final lesson ✓"}
+                                </button>
+                            )}
                         </div>
-                        {!canCompleteLesson && (
+                        {!readOnly && !canCompleteLesson && (
                             <p className="mt-3 text-right text-xs leading-5 text-amber-200">
                                 Run the guided concept lab above once to unlock
                                 lesson completion. No account, payment, or
@@ -595,17 +598,22 @@ const LessonPage: React.FC<LessonPageProps> = ({
     );
 };
 
-export const getServerSideProps = requireAuth<LessonPageProps>(
+const findLesson = (params: Record<string, unknown> | undefined) => {
+    const course = getCourseBySlug(String(params?.courseSlug || ""));
+    const lessonSlug = String(params?.lessonSlug || "");
+    const match = course
+        ? course.modules
+              .flatMap((module) =>
+                  module.lessons.map((lesson) => ({ module, lesson }))
+              )
+              .find(({ lesson }) => lesson.slug === lessonSlug)
+        : undefined;
+    return { course, match };
+};
+
+const signedInLesson = requireAuth<LessonPageProps>(
     async ({ params, userId, resolvedUrl }) => {
-        const course = getCourseBySlug(String(params?.courseSlug || ""));
-        const lessonSlug = String(params?.lessonSlug || "");
-        const match = course
-            ? course.modules
-                  .flatMap((module) =>
-                      module.lessons.map((lesson) => ({ module, lesson }))
-                  )
-                  .find(({ lesson }) => lesson.slug === lessonSlug)
-            : undefined;
+        const { course, match } = findLesson(params);
 
         if (!course || !match) {
             return { notFound: true };
@@ -641,9 +649,41 @@ export const getServerSideProps = requireAuth<LessonPageProps>(
                 completedByLesson,
                 completedLessonIds,
                 enrolled: true,
+                readOnly: false,
             },
         };
     }
 );
+
+/**
+ * With accounts on, a lesson needs a signed-in, enrolled learner. With
+ * accounts off (no database on this deployment), every lesson is open to
+ * read instead of redirecting everyone away from the course content.
+ */
+export const getServerSideProps: GetServerSideProps<LessonPageProps> = async (
+    context
+) => {
+    if (accountsEnabled()) return signedInLesson(context);
+
+    const { course, match } = findLesson(context.params);
+    if (!course || !match) return { notFound: true };
+
+    // Identical for every visitor, so it can be cached briefly.
+    context.res.setHeader(
+        "Cache-Control",
+        "public, s-maxage=300, stale-while-revalidate=3600"
+    );
+    return {
+        props: {
+            course: toLessonCourse(course),
+            moduleId: match.module.id,
+            lesson: match.lesson,
+            completedByLesson: {},
+            completedLessonIds: [],
+            enrolled: false,
+            readOnly: true,
+        },
+    };
+};
 
 export default LessonPage;

@@ -1,3 +1,4 @@
+import { withSiteAnnouncements } from "@utils/announcements";
 import Animate from "@components/Animate";
 import Footer from "@components/Footer";
 import FAQSection from "@components/Learn/FAQSection";
@@ -90,8 +91,10 @@ export async function getStaticProps() {
     );
 
     const faqs: IFAQ[] = response?.faqCollection?.items || [];
-    const notificationFlags: INotificationFlag[] =
-        response?.notificationFlagCollection?.items || [];
+    const notificationFlags: INotificationFlag[] = withSiteAnnouncements(
+        response?.notificationFlagCollection?.items || [],
+        { page: "/learn" }
+    );
 
     const faqsGroupedByType = faqs.reduce((a, b) => {
         return { ...a, [b.type]: [...(a[b.type] || []), b] };

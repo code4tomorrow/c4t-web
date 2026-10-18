@@ -20,6 +20,7 @@ const privateRoutes = [
     "/learn/assignments/*",
     "/learn/onboarding",
     "/learn/preview-blocked",
+    "/learn/unavailable",
     "/learn/courses/*",
     "/login/check-email",
     "/certificate/verify/*",

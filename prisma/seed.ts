@@ -1,7 +1,7 @@
 /**
  * Development seed.
  *
- * Creates course settings for all 25 courses, publishes a starter set, and —
+ * Creates course settings for every course, publishes them, and —
  * only outside production — creates demo accounts so the full learner →
  * instructor → certificate flow can be exercised locally.
  *
@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
 
 /**
  * Every course ships fully authored and passes `npm run validate:curriculum`,
- * so all of them are published by default — a catalog that lists 25 courses but
+ * so all of them are published by default — a catalog that lists every course but
  * only lets you enroll in 5 is just a wall of dead buttons. Unpublish any you
  * are not ready for at /admin/courses.
  */

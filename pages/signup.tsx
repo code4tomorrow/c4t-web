@@ -2,6 +2,7 @@ import Footer from "@components/Footer";
 import CredentialsForm from "@components/Learning/CredentialsForm";
 import Navbar from "@components/Navbar";
 import { authProviderStatus, getSession } from "lib/auth";
+import { ACCOUNTS_UNAVAILABLE_PATH, accountsEnabled } from "lib/platform";
 import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -47,7 +48,9 @@ const SignupPage: React.FC<SignupProps> = ({ providers, callbackUrl }) => (
             <p className="mt-6 text-sm text-[#C7C3CE]">
                 Already have an account?{" "}
                 <Link
-                    href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+                    href={`/login?callbackUrl=${encodeURIComponent(
+                        callbackUrl
+                    )}`}
                     className="font-semibold text-brand-purple-secondary underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
                 >
                     Sign in
@@ -55,8 +58,8 @@ const SignupPage: React.FC<SignupProps> = ({ providers, callbackUrl }) => (
             </p>
 
             <p className="mt-6 text-xs leading-5 text-medium-grey">
-                We only ask for a name to put on your certificate and an email to
-                sign you in. By creating an account you agree to our{" "}
+                We only ask for a name to put on your certificate and an email
+                to sign you in. By creating an account you agree to our{" "}
                 <Link
                     href="/terms"
                     className="text-brand-purple-secondary underline-offset-4 hover:underline"
@@ -80,6 +83,15 @@ const SignupPage: React.FC<SignupProps> = ({ providers, callbackUrl }) => (
 export const getServerSideProps: GetServerSideProps<SignupProps> = async (
     context
 ) => {
+    if (!accountsEnabled()) {
+        return {
+            redirect: {
+                destination: ACCOUNTS_UNAVAILABLE_PATH,
+                permanent: false,
+            },
+        };
+    }
+
     const session = await getSession(context.req, context.res);
     const callbackUrl = safeCallbackUrl(context.query.callbackUrl);
 

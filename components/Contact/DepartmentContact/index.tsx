@@ -1,7 +1,7 @@
 import React from "react";
 import Paper from "@components/Paper";
 import clsx from "clsx";
-import { makeStyles } from "tss-react/mui";
+import { makeStyles } from "@utils/tss";
 import { IDepartmentContact } from "common/interfaces/departmentContact";
 import Copy from "@components/Copy";
 

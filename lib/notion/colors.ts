@@ -1,8 +1,4 @@
-/**
- * Notion's named swatches -> the hex values the directory tags render with.
- * Lives beside the snapshot script because Notion colors are only ever
- * resolved when regenerating data/*.json — never at build or request time.
- */
+/** Notion's named swatches -> the hex values the directory tags render with. */
 export const notionColorMap = (color: string) => {
     switch (color) {
         case "green":

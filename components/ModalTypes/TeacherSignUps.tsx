@@ -1,10 +1,10 @@
 import BrandButton from "@components/BrandButton";
 import Modal from "@components/Modal";
-import { createAtom } from "@utils/recoil";
+import { createAtom } from "@utils/store";
 import gsap from "gsap";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useAtom } from "@utils/store";
 import SplitType from "split-type";
 const BinaryParticles = dynamic(() => import("@components/BinaryParticles"));
 
@@ -15,7 +15,7 @@ const viewedTeacherSigupModal = createAtom({
 
 const TeacherSignUps = () => {
     const [open, setOpen] = useState(false);
-    const [viewed, setViewed] = useRecoilState(viewedTeacherSigupModal);
+    const [viewed, setViewed] = useAtom(viewedTeacherSigupModal);
 
     useEffect(() => {
         if (viewed) return;

@@ -14,21 +14,36 @@ import {
     SparklesIcon,
 } from "@heroicons/react/outline";
 import { useRef } from "react";
-import gsap from "gsap";
 import { useThrottledCallback } from "use-debounce";
 import GoArrow from "@components/GoArrow";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import Document from "@components/Document";
 import { usePathname, useRouter } from "next/navigation";
-import { getCloudinaryURL } from "@utils/cloudinary-loader";
+import { cloudinaryLoader } from "@utils/cloudinary-loader";
 import Image from "next/image";
+import { buildRegistrationFlag } from "@utils/announcements";
+import { FALL_2026 } from "@utils/sessionSchedule";
+import { useTermPhase } from "hooks/useTermPhase";
+
+/**
+ * A scheduled banner (student registration) re-checks its phase in the
+ * browser, so cached HTML from before a deadline still flips on time.
+ */
+const useLiveFlag = (flag: INotificationFlag): INotificationFlag => {
+    const phase = useTermPhase(
+        flag.schedule?.term ?? FALL_2026.term,
+        flag.schedule?.phase ?? "open"
+    );
+    return flag.schedule ? buildRegistrationFlag(phase) : flag;
+};
 
 const NavNotification = ({
-    notificationFlag,
+    notificationFlag: renderedFlag,
 }: {
     notificationFlag: INotificationFlag;
 }) => {
     const { classes } = useStyles();
+    const notificationFlag = useLiveFlag(renderedFlag);
     const Component = !!notificationFlag.link ? "a" : "div";
 
     return (
@@ -132,6 +147,40 @@ interface NavbarProps {
     notificationFlags?: INotificationFlag[];
 }
 
+interface HighlightBox {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+}
+
+const highlightFrame = (box: HighlightBox, opacity: number) => ({
+    transform: `translate(${box.x}px, ${box.y}px)`,
+    width: `${box.width}px`,
+    height: `${box.height}px`,
+    opacity: String(opacity),
+});
+
+/**
+ * Slides the active-link highlight (a fixed element at 0,0) onto a link with
+ * the Web Animations API. This used to be gsap, which shipped ~25 KB of
+ * animation library on every page for this one 150 ms tween.
+ */
+const moveHighlight = (
+    element: HTMLElement,
+    from: HighlightBox & { opacity: number },
+    to: HighlightBox
+) => {
+    const end = highlightFrame(to, 1);
+    Object.assign(element.style, end);
+    if (typeof element.animate === "function") {
+        element.animate([highlightFrame(from, from.opacity), end], {
+            duration: 150,
+            easing: "ease-out",
+        });
+    }
+};
+
 const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
     const { classes } = useStyles();
 
@@ -174,17 +223,10 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
             originalOpacity = 0;
         }
 
-        gsap.fromTo(
+        moveHighlight(
             linkHighlightRef.current,
             { x, y, width, height, opacity: originalOpacity },
-            {
-                x: x2,
-                y: y2,
-                width: width2,
-                height: height2,
-                opacity: 1,
-                duration: 0.15,
-            }
+            { x: x2, y: y2, width: width2, height: height2 }
         );
     }, [navItemRefs, pathname]);
 
@@ -202,14 +244,20 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
         );
         if (!currentLink?.el) return;
         const { x, width, height, y } = currentLink.el.getBoundingClientRect();
-        gsap.to(linkHighlightRef.current, {
-            opacity: 1,
-            x,
-            y,
-            width,
-            height,
-            duration: 0.15,
-        });
+        const current = linkHighlightRef.current.getBoundingClientRect();
+        moveHighlight(
+            linkHighlightRef.current,
+            {
+                x: current.x,
+                y: current.y,
+                width: current.width,
+                height: current.height,
+                opacity: Number(
+                    getComputedStyle(linkHighlightRef.current).opacity
+                ),
+            },
+            { x, y, width, height }
+        );
     }, 350);
 
     useEffect(() => {
@@ -269,7 +317,8 @@ const Navbar: React.FC<NavbarProps> = ({ notificationFlags = [] }) => {
                     className="hover:opacity-80 flex items-center h-4 transition-opacity"
                 >
                     <Image
-                        src={getCloudinaryURL("logo-v2")}
+                        src="logo-v2"
+                        loader={cloudinaryLoader}
                         alt="C4T Logo"
                         width={40}
                         height={40}

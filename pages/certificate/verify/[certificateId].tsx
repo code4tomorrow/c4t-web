@@ -1,3 +1,4 @@
+import { accountsEnabled } from "lib/platform";
 import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
 import prisma from "lib/prisma";
@@ -162,6 +163,9 @@ export const getServerSideProps: GetServerSideProps<VerifyProps> = async ({
 
     // Verification pages are public but must never be cached with learner data.
     res.setHeader("Cache-Control", "no-store");
+
+    // No database means no certificates have been issued here yet.
+    if (!accountsEnabled()) return { notFound: true };
 
     const certificate = await prisma.certificate.findUnique({
         where: { id: certificateId },

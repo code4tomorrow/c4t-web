@@ -11,7 +11,10 @@ const SESSION_DAYS = 30;
  * account does not exist. Without this, a failed lookup returns noticeably
  * faster than a wrong password and leaks which emails are registered.
  */
-const DUMMY_HASH = bcrypt.hashSync(randomBytes(16).toString("hex"), BCRYPT_ROUNDS);
+const DUMMY_HASH = bcrypt.hashSync(
+    randomBytes(16).toString("hex"),
+    BCRYPT_ROUNDS
+);
 
 export const hashPassword = (password: string) =>
     bcrypt.hash(password, BCRYPT_ROUNDS);

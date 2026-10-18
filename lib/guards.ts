@@ -3,6 +3,7 @@ import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import type { Session } from "next-auth";
 import { STAFF_ROLES } from "./api";
 import { getSession } from "./auth";
+import { ACCOUNTS_UNAVAILABLE_PATH, accountsEnabled } from "./platform";
 import { resolveEffectiveRole } from "./view-as";
 
 export interface AuthedContext extends GetServerSidePropsContext {
@@ -30,6 +31,15 @@ export const requireAuth =
     async (
         context: GetServerSidePropsContext
     ): Promise<GetServerSidePropsResult<P>> => {
+        if (!accountsEnabled()) {
+            return {
+                redirect: {
+                    destination: ACCOUNTS_UNAVAILABLE_PATH,
+                    permanent: false,
+                },
+            };
+        }
+
         const session = await getSession(context.req, context.res);
 
         if (!session?.user?.id) {

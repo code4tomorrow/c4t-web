@@ -2,6 +2,7 @@ import Footer from "@components/Footer";
 import CredentialsForm from "@components/Learning/CredentialsForm";
 import Navbar from "@components/Navbar";
 import { authProviderStatus, getSession } from "lib/auth";
+import { ACCOUNTS_UNAVAILABLE_PATH, accountsEnabled } from "lib/platform";
 import type { GetServerSideProps } from "next";
 import { signIn } from "next-auth/react";
 import Head from "next/head";
@@ -109,7 +110,9 @@ const LoginPage: React.FC<LoginProps> = ({ providers, callbackUrl }) => {
                 <p className="mt-6 text-sm text-[#C7C3CE]">
                     New to C4T?{" "}
                     <Link
-                        href={`/signup?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+                        href={`/signup?callbackUrl=${encodeURIComponent(
+                            callbackUrl
+                        )}`}
                         className="font-semibold text-brand-purple-secondary underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
                     >
                         Create an account
@@ -150,6 +153,15 @@ export const safeCallbackUrl = (value: unknown) => {
 export const getServerSideProps: GetServerSideProps<LoginProps> = async (
     context
 ) => {
+    if (!accountsEnabled()) {
+        return {
+            redirect: {
+                destination: ACCOUNTS_UNAVAILABLE_PATH,
+                permanent: false,
+            },
+        };
+    }
+
     const session = await getSession(context.req, context.res);
     const callbackUrl = safeCallbackUrl(context.query.callbackUrl);
 

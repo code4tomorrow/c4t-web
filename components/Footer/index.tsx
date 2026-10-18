@@ -4,7 +4,7 @@ import { PaperAirplaneIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import Link from "next/link";
 import React, { useMemo } from "react";
-import { makeStyles } from "tss-react/mui";
+import { makeStyles } from "@utils/tss";
 
 interface FooterHeaderProps {
     children: React.ReactNode;

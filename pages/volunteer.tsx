@@ -1,10 +1,11 @@
+import { withSiteAnnouncements } from "@utils/announcements";
 import Footer from "@components/Footer";
 import Head from "next/head";
 import VolunteerCard from "@components/Volunteer";
 import { gql } from "graphql-request";
 import { graphQLClient, IBaseContentModel } from "@utils/contentful";
 import Animate from "@components/Animate";
-import VolunteerTeamSVG from "@svg/volunteer-team.svg";
+import Image from "next/image";
 import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { ReactElement } from "react";
@@ -40,33 +41,31 @@ const Volunteer: NextPageWithLayout<VolunteerProps> = ({
             </Head>
             <Animate>
                 <main className="pt-4 px-6 w-full my-12 flex flex-col items-center">
-                    <Animate.Element
-                        resetAfterTriggered={false}
-                        from={{ y: 30, opacity: 0 }}
-                        to={{ y: 0, opacity: 1, delay: 0 }}
-                        className="w-full flex justify-center items-center relative h-[200px] mb-8"
-                    >
-                        <VolunteerTeamSVG width={"100%"} height={"100%"} />
-                    </Animate.Element>
-                    <Animate.Element
-                        resetAfterTriggered={false}
-                        as="h1"
-                        from={{ y: 60, opacity: 0 }}
-                        to={{ y: 0, opacity: 1, delay: 0.15 }}
-                        className="text-5xl font-bold text-white text-center"
+                    {/* CSS entrance, so the hero paints before JavaScript. */}
+                    <div className="fade-up w-full flex justify-center items-center relative h-[200px] mb-8">
+                        <Image
+                            src="/svg/volunteer-team.svg"
+                            alt=""
+                            width={454}
+                            height={232}
+                            priority
+                            unoptimized
+                            className="h-full w-auto"
+                        />
+                    </div>
+                    <h1
+                        style={{ animationDelay: "150ms" }}
+                        className="fade-up text-5xl font-bold text-white text-center"
                     >
                         Volunteer Opportunities
-                    </Animate.Element>
-                    <Animate.Element
-                        resetAfterTriggered={false}
-                        as="p"
-                        from={{ y: 90, opacity: 0 }}
-                        to={{ y: 0, opacity: 1, delay: 0.3 }}
-                        className="text-lg !mt-3 text-medium-grey text-center"
+                    </h1>
+                    <p
+                        style={{ animationDelay: "300ms" }}
+                        className="fade-up text-lg !mt-3 text-medium-grey text-center"
                     >
                         Apply today for an opportunity to hone your skills and
                         help others, all while gaining <b>volunteer hours</b>.
-                    </Animate.Element>
+                    </p>
                     <div
                         style={{
                             gridTemplateColumns: "repeat(auto-fit, 300px)",
@@ -138,8 +137,10 @@ export async function getStaticProps() {
 
     const volunteerOpportunities: IVolunteerOpportunity[] =
         response?.volunteerOpportunityCollection?.items || [];
-    const notificationFlags: INotificationFlag[] =
-        response?.notificationFlagCollection?.items || [];
+    const notificationFlags: INotificationFlag[] = withSiteAnnouncements(
+        response?.notificationFlagCollection?.items || [],
+        { page: "/volunteer" }
+    );
 
     return {
         props: {

@@ -12,6 +12,9 @@ export default defineConfig({
             learning: path.resolve(__dirname, "learning"),
             "@utils": path.resolve(__dirname, "utils"),
             "@components": path.resolve(__dirname, "components"),
+            config: path.resolve(__dirname, "config"),
+            common: path.resolve(__dirname, "common"),
+            hooks: path.resolve(__dirname, "hooks"),
         },
     },
 });

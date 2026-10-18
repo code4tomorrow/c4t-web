@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode, useEffect, useRef } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useAtomValue, useSetAtom } from "@utils/store";
 import { gsap } from "gsap";
 import { snackBarState } from "./state";
 
@@ -15,7 +15,7 @@ const Snack: React.FC<{ children: ReactNode; i: number; id: string }> = ({
     id,
 }) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const setSnackbar = useSetRecoilState(snackBarState);
+    const setSnackbar = useSetAtom(snackBarState);
     const isUnmounting = useRef<boolean>(false);
 
     useEffect(() => {
@@ -77,7 +77,7 @@ const Snack: React.FC<{ children: ReactNode; i: number; id: string }> = ({
 };
 
 const Snackbar = () => {
-    const snacks = useRecoilValue(snackBarState);
+    const snacks = useAtomValue(snackBarState);
 
     return (
         <div

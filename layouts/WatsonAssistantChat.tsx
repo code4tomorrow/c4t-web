@@ -1,37 +1,35 @@
 import config from "config";
-import React, {
-    ReactElement,
-    useCallback,
-    useEffect,
-    useMemo,
-    useRef,
-} from "react";
+import React, { ReactElement, useCallback, useEffect, useRef } from "react";
 import { withWebChat } from "@ibm-watson/assistant-web-chat-react";
 import { getCloudinaryURL } from "@utils/cloudinary-loader";
 import AnnotationIcon from "@heroicons/react/outline/AnnotationIcon";
 import BrandButton from "@components/BrandButton";
 
-const SSR = typeof window === "undefined";
-
+/**
+ * The floating chat button and the IBM Watson Assistant behind it.
+ *
+ * Watson's web chat is several hundred kilobytes of third-party script, so it
+ * is no longer loaded on page load. It starts loading when someone shows
+ * intent — hovering, focusing, or touching the button — and opens as soon as
+ * it is ready if they clicked.
+ */
 const WatsonAssistantChat: React.FC<{
     children: ReactElement;
     createWebChatInstance: (o: object) => void;
 }> = ({ children, createWebChatInstance }) => {
-    const pathname = useMemo(
-        () => (SSR ? undefined : window.location.pathname),
-        []
-    );
-    const currentInjectedPath = useRef<string | undefined>(undefined);
     const chatButtonRef = useRef<HTMLDivElement | null>(null);
+    const instanceRef = useRef<any>(null);
+    const requestedRef = useRef(false);
+    const openWhenReadyRef = useRef(false);
 
-    const injectChatBot = useCallback(() => {
-        if (currentInjectedPath.current === pathname) return;
-        currentInjectedPath.current = pathname;
-        const watsonAssistantChatOptions = {
+    const loadChat = useCallback(() => {
+        if (requestedRef.current) return;
+        requestedRef.current = true;
+        createWebChatInstance({
             integrationID: config.watsonAssistantChat.integrationID,
             region: config.watsonAssistantChat.region,
             serviceInstanceID: config.watsonAssistantChat.serviceInstanceID,
-            namespace: `${window.origin}${pathname}`,
+            namespace: `${window.origin}${window.location.pathname}`,
             showLauncher: false,
             onLoad: (wacInstance: any) => {
                 wacInstance.updateHomeScreenConfig({
@@ -58,24 +56,38 @@ const WatsonAssistantChat: React.FC<{
                     "$interactive-03": "#7892EE",
                     "$inverse-support-04": "#7892EE",
                 });
-                chatButtonRef.current?.addEventListener("click", () =>
-                    wacInstance.openWindow()
-                );
-                wacInstance.render();
+                instanceRef.current = wacInstance;
+                Promise.resolve(wacInstance.render()).then(() => {
+                    if (openWhenReadyRef.current) wacInstance.openWindow();
+                });
             },
-        };
-        window.watsonAssistantChatOptions = {
-            integrationID: config.watsonAssistantChat.integrationID,
-            region: config.watsonAssistantChat.region,
-            serviceInstanceID: config.watsonAssistantChat.serviceInstanceID,
-            onLoad: (wacInstance: any) => {
-                wacInstance.destroy(); // removes deuplicate
-            },
-        };
-        createWebChatInstance(watsonAssistantChatOptions);
-    }, [pathname, createWebChatInstance]);
+        });
+    }, [createWebChatInstance]);
 
-    useEffect(injectChatBot, [injectChatBot]);
+    useEffect(() => {
+        const button = chatButtonRef.current;
+        if (!button) return;
+
+        const handleClick = () => {
+            if (instanceRef.current) {
+                instanceRef.current.openWindow();
+                return;
+            }
+            openWhenReadyRef.current = true;
+            loadChat();
+        };
+
+        button.addEventListener("click", handleClick);
+        button.addEventListener("pointerenter", loadChat);
+        button.addEventListener("focusin", loadChat);
+        button.addEventListener("touchstart", loadChat, { passive: true });
+        return () => {
+            button.removeEventListener("click", handleClick);
+            button.removeEventListener("pointerenter", loadChat);
+            button.removeEventListener("focusin", loadChat);
+            button.removeEventListener("touchstart", loadChat);
+        };
+    }, [loadChat]);
 
     return (
         <>

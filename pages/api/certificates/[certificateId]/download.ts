@@ -1,6 +1,6 @@
 import { buildCertificatePdf } from "lib/certificate-pdf";
 import { verificationUrlFor } from "lib/certificates";
-import { forbidden, notFound, route } from "lib/api";
+import { assertAccountsEnabled, forbidden, notFound, route } from "lib/api";
 import { getSession } from "lib/auth";
 import { isStaff } from "lib/api";
 import prisma from "lib/prisma";
@@ -12,6 +12,7 @@ import prisma from "lib/prisma";
  * validity without exposing the file or the learner's account details.
  */
 export default route(["GET"], async ({ req, res }) => {
+    assertAccountsEnabled();
     const certificateId = String(req.query.certificateId || "");
 
     const certificate = await prisma.certificate.findUnique({

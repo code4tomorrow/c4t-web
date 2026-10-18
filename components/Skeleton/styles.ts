@@ -1,4 +1,4 @@
-import { makeStyles } from "tss-react/mui";
+import { makeStyles } from "@utils/tss";
 
 export interface IStyleParams {
     primary?: string;

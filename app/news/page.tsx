@@ -1,3 +1,4 @@
+import { withSiteAnnouncements } from "@utils/announcements";
 import Navbar from "@components/Navbar";
 import { graphQLHTTPRequest } from "@utils/contentful";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
@@ -169,9 +170,10 @@ const Newsletter = async () => {
     return (
         <>
             <Navbar
-                notificationFlags={
-                    response?.data.notificationFlagCollection.items || []
-                }
+                notificationFlags={withSiteAnnouncements(
+                    response?.data.notificationFlagCollection.items || [],
+                    { page: "/news" }
+                )}
             />
             <NewsletterContent
                 newsletters={newsletters}

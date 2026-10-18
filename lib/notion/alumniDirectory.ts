@@ -63,13 +63,15 @@ export const getAlumniDirectory = async (): Promise<IAlumniDirectoryRow[]> => {
                 properties?.["Former Projects"]?.type
             ] || [];
 
-        let pageContents: ListBlockChildrenResponse;
+        let pageContents: ListBlockChildrenResponse | null;
         try {
             pageContents = await notion.blocks.children.list({
                 block_id: row.id,
             });
         } catch (e: any) {
-            return [];
+            // A row whose page cannot be read still belongs in the directory;
+            // it just has no bio.
+            pageContents = null;
         }
 
         return {
@@ -96,7 +98,7 @@ export const getAlumniDirectory = async (): Promise<IAlumniDirectoryRow[]> => {
                 name: country?.name || null,
                 color: country?.color ? notionColorMap(country.color) : null,
             },
-            page_children: (await pageContents) || null,
+            page_children: pageContents,
         };
     });
 

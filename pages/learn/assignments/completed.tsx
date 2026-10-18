@@ -1,13 +1,20 @@
 import { requireAuth } from "lib/guards";
-import { AssignmentsPage, loadWorkItems } from ".";
+import { loadWorkItems } from "lib/work-items";
+import { AssignmentsPage } from ".";
 
 /** Same view as /learn/assignments, filtered to approved work by default. */
 const CompletedWorkPage = AssignmentsPage;
 
-export const getServerSideProps = requireAuth(async ({ userId }) => {
+export const getServerSideProps = requireAuth(async ({ userId, role }) => {
     const { items, badgeCount, certificateCount } = await loadWorkItems(userId);
     return {
-        props: { items, badgeCount, certificateCount, completedView: true },
+        props: {
+            role,
+            items,
+            badgeCount,
+            certificateCount,
+            completedView: true,
+        },
     };
 });
 

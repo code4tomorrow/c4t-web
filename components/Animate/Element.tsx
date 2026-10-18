@@ -5,9 +5,8 @@ import { useCallback } from "react";
 import { useEffect } from "react";
 import clsx from "clsx";
 import { useStyles } from "./styles";
-import _isEqual from "lodash/isEqual";
-import cloneDeep from "lodash/cloneDeep";
 import isEqual from "react-fast-compare";
+import { cloneVars } from "./cloneVars";
 
 interface ElementProps<T extends ElementType = "div"> {
     as?: T;
@@ -70,8 +69,8 @@ const Element = <T extends ElementType = "div">(
     }>({ from: undefined, to: undefined });
 
     useEffect(() => {
-        if (!_isEqual(from, animation.from) || !_isEqual(to, animation.to)) {
-            setAnimation({ from: cloneDeep(from), to: cloneDeep(to) });
+        if (!isEqual(from, animation.from) || !isEqual(to, animation.to)) {
+            setAnimation({ from: cloneVars(from), to: cloneVars(to) });
         }
     }, [from, to, animation.from, animation.to]);
 
@@ -85,8 +84,8 @@ const Element = <T extends ElementType = "div">(
         )
             return;
 
-        const fromTemp = cloneDeep(animation.from);
-        const toTemp = cloneDeep(animation.to);
+        const fromTemp = cloneVars(animation.from);
+        const toTemp = cloneVars(animation.to);
 
         if (triggered) {
             gsap.fromTo(containerRef.current, fromTemp, toTemp);

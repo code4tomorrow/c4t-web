@@ -1,5 +1,6 @@
 import CourseBadge from "@components/Learning/CourseBadge";
 import FreeLabSimulator from "@components/Learning/FreeLabSimulator";
+import { labModeForToolSlug } from "@components/Learning/labMode";
 import type { FreeLabMode } from "@components/Learning/types";
 import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
@@ -22,73 +23,6 @@ interface ToolPageProps {
     mode: FreeLabMode;
     courses: ToolCourse[];
 }
-
-const toolMode = (slug: string): FreeLabMode => {
-    if (slug.includes("microbit")) {
-        return "microbit";
-    }
-    if (slug.includes("tinyml") || slug.includes("edge")) {
-        return "tinyml";
-    }
-    if (
-        slug.includes("robot") ||
-        slug.includes("circuit") ||
-        slug.includes("electronics")
-    ) {
-        return "circuits";
-    }
-    if (
-        slug.includes("gpio") ||
-        slug.includes("iot") ||
-        slug.includes("raspberry")
-    ) {
-        return "gpio-iot";
-    }
-    if (slug.includes("git") || slug.includes("collaboration")) {
-        return "git";
-    }
-    if (
-        slug.includes("unity") ||
-        slug.includes("game") ||
-        slug.includes("physics")
-    ) {
-        return "unity-physics";
-    }
-    if (
-        slug.includes("agent") ||
-        slug.includes("mcp") ||
-        slug.includes("harness") ||
-        slug.includes("tool")
-    ) {
-        return "agent-tools";
-    }
-    if (
-        slug.includes("data") ||
-        slug.includes("model") ||
-        slug.includes("ml") ||
-        slug.includes("mlops") ||
-        slug.includes("ai-") ||
-        slug.startsWith("ai") ||
-        slug.includes("deep-learning") ||
-        slug.includes("nlp") ||
-        slug.includes("retrieval") ||
-        slug.includes("vision") ||
-        slug.includes("language") ||
-        slug.includes("research")
-    ) {
-        return "data-ml";
-    }
-    if (
-        slug.includes("web") ||
-        slug.includes("javascript") ||
-        slug.includes("html") ||
-        slug.includes("backend") ||
-        slug.includes("api")
-    ) {
-        return "web";
-    }
-    return "logic-code";
-};
 
 const humanize = (slug: string) =>
     slug
@@ -256,7 +190,7 @@ const getToolEntries = () => {
                     humanize(slug),
                 description:
                     simulator?.purpose || requirement.freePath.description,
-                mode: toolMode(slug),
+                mode: labModeForToolSlug(slug),
                 courses: [courseSummary],
             });
         });

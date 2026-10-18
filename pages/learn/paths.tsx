@@ -7,7 +7,7 @@ import type { LearningPath } from "learning/learning-paths";
 import { learningPaths } from "learning/learning-paths";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useMemo } from "react";
+import React from "react";
 import { requireAuth } from "lib/guards";
 import { getLearnerSnapshot, type LearnerSnapshot } from "lib/learner";
 
@@ -25,12 +25,28 @@ interface PathCourseView {
     capstone: string;
 }
 
+/** The path fields the page renders; full course objects stay on the server. */
+type PathSummary = Pick<
+    LearningPath,
+    | "id"
+    | "slug"
+    | "title"
+    | "summary"
+    | "outcome"
+    | "icon"
+    | "accent"
+    | "skills"
+    | "coreCourseCount"
+    | "foundationCourseCount"
+    | "totalHours"
+>;
+
 interface PathView {
-    path: LearningPath;
+    path: PathSummary;
     courses: PathCourseView[];
     completedCoreCount: number;
     percentage: number;
-    nextCourse?: PathCourseView;
+    nextCourse: PathCourseView | null;
 }
 
 const statusMeta: Record<
@@ -79,7 +95,19 @@ const buildPathView = (
     ).length;
 
     return {
-        path,
+        path: {
+            id: path.id,
+            slug: path.slug,
+            title: path.title,
+            summary: path.summary,
+            outcome: path.outcome,
+            icon: path.icon,
+            accent: path.accent,
+            skills: path.skills,
+            coreCourseCount: path.coreCourseCount,
+            foundationCourseCount: path.foundationCourseCount,
+            totalHours: path.totalHours,
+        },
         courses,
         completedCoreCount,
         percentage: coreCourses.length
@@ -90,7 +118,8 @@ const buildPathView = (
         // they are midway through.
         nextCourse:
             courses.find((course) => course.status === "in-progress") ||
-            courses.find((course) => course.status === "not-started"),
+            courses.find((course) => course.status === "not-started") ||
+            null,
     };
 };
 
@@ -265,7 +294,7 @@ const PathCard: React.FC<{ view: PathView }> = ({ view }) => {
 
             <details className="group mt-6 rounded-xl border border-white/10 bg-dark-grey-accent p-4">
                 <summary className="cursor-pointer text-sm font-bold text-white outline-none focus-visible:ring-2 focus-visible:ring-brand-purple-secondary">
-                    Course sequence ({path.courses.length} courses)
+                    Course sequence ({view.courses.length} courses)
                 </summary>
                 <ol className="mt-4 list-none pl-0">
                     {view.courses.map((course, index) => (
@@ -284,24 +313,23 @@ const PathCard: React.FC<{ view: PathView }> = ({ view }) => {
 
 interface PathsProps {
     role: Role;
-    snapshot: LearnerSnapshot;
+    views: PathView[];
+    activeCourseCount: number;
+    badgeCount: number;
+    certificateCount: number;
 }
 
 const LearningPathsPage: React.FC<PathsProps> = ({
-    role, snapshot }) => {
-    const views = useMemo(
-        () => learningPaths.map((path) => buildPathView(path, snapshot)),
-        [snapshot]
-    );
-
-    const activeCourseCount = snapshot.courses.filter(
-        (course) => course.enrollment.status === "ACTIVE"
-    ).length;
-
+    role,
+    views,
+    activeCourseCount,
+    badgeCount,
+    certificateCount,
+}) => {
     const navigation = buildLearnerNavigation({
         role,
-        badges: snapshot.summary.badgeCount,
-        certificates: snapshot.certificates.length,
+        badges: badgeCount,
+        certificates: certificateCount,
     });
 
     return (
@@ -339,12 +367,19 @@ const LearningPathsPage: React.FC<PathsProps> = ({
 export const getServerSideProps = requireAuth<PathsProps>(
     async ({ userId, role }) => {
         const snapshot = await getLearnerSnapshot(userId);
+        // Paths are built here so the course registry never ships to the
+        // browser; the page receives only what it renders.
         return {
             props: {
                 role,
-                snapshot: JSON.parse(
-                    JSON.stringify(snapshot)
-                ) as LearnerSnapshot,
+                views: learningPaths.map((path) =>
+                    buildPathView(path, snapshot)
+                ),
+                activeCourseCount: snapshot.courses.filter(
+                    (course) => course.enrollment.status === "ACTIVE"
+                ).length,
+                badgeCount: snapshot.summary.badgeCount,
+                certificateCount: snapshot.certificates.length,
             },
         };
     }

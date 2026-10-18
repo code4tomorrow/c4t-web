@@ -1,11 +1,20 @@
-import { badRequest, conflict, parseBody, route } from "lib/api";
+import {
+    assertAccountsEnabled,
+    badRequest,
+    conflict,
+    parseBody,
+    route,
+} from "lib/api";
 import { audit } from "lib/learner";
 import { createSessionForUser, hashPassword } from "lib/password-auth";
 import prisma from "lib/prisma";
 import { enforceRateLimit } from "lib/rate-limit";
 import { registerSchema } from "lib/schemas";
 
-const clientKey = (req: { headers: Record<string, unknown>; socket?: unknown }) => {
+const clientKey = (req: {
+    headers: Record<string, unknown>;
+    socket?: unknown;
+}) => {
     const forwarded = req.headers["x-forwarded-for"];
     const first = Array.isArray(forwarded) ? forwarded[0] : forwarded;
     return (
@@ -17,6 +26,7 @@ const clientKey = (req: { headers: Record<string, unknown>; socket?: unknown }) 
 
 /** Creates an email + password account and signs the person straight in. */
 export default route(["POST"], async ({ req, res }) => {
+    assertAccountsEnabled();
     enforceRateLimit({
         key: `register:${clientKey(req)}`,
         limit: 10,

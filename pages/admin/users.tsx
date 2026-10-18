@@ -1,5 +1,6 @@
 import AdminShell from "@components/Learning/AdminShell";
 import type { Role } from "@prisma/client";
+import { isInitialAdminEmail } from "lib/auth";
 import { requireAdmin } from "lib/guards";
 import prisma from "lib/prisma";
 import Head from "next/head";
@@ -14,13 +15,20 @@ interface PersonRow {
     enrollments: number;
     certificates: number;
     joinedAt: string;
+    /** Listed in INITIAL_ADMIN_EMAILS; their admin role cannot be removed. */
+    foundingAdmin: boolean;
 }
 
 interface UsersProps {
     people: PersonRow[];
     role: Role;
     currentUserId: string;
+    query: string;
+    /** Accounts matching the search (or all accounts), before the page cap. */
+    matchCount: number;
 }
+
+const PAGE_SIZE = 200;
 
 const ROLES: Role[] = ["LEARNER", "INSTRUCTOR", "CONTENT_EDITOR", "ADMIN"];
 
@@ -28,12 +36,26 @@ const AdminUsersPage: React.FC<UsersProps> = ({
     people,
     role,
     currentUserId,
+    query,
+    matchCount,
 }) => {
     const router = useRouter();
     const [busy, setBusy] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [search, setSearch] = useState(query);
 
-    const changeRole = async (userId: string, nextRole: Role) => {
+    const changeRole = async (person: PersonRow, nextRole: Role) => {
+        const userId = person.id;
+        // Admin is the one role that can grant itself to others, so make it a
+        // deliberate choice rather than a mis-click in a dropdown.
+        if (
+            nextRole === "ADMIN" &&
+            !window.confirm(
+                `Make ${person.displayName} (${person.email}) an admin? Admins can change anyone's role, including granting admin.`
+            )
+        ) {
+            return;
+        }
         setBusy(userId);
         setError(null);
         try {
@@ -68,6 +90,49 @@ const AdminUsersPage: React.FC<UsersProps> = ({
                 active="users"
                 role={role}
             >
+                <form
+                    role="search"
+                    className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end"
+                    onSubmit={(event) => {
+                        event.preventDefault();
+                        const q = search.trim();
+                        router.push({
+                            pathname: router.pathname,
+                            query: q ? { q } : {},
+                        });
+                    }}
+                >
+                    <label className="flex-1 text-sm font-semibold text-[#D6D3DC]">
+                        <span className="mb-1.5 block">
+                            Find someone by email or name
+                        </span>
+                        <input
+                            type="search"
+                            value={search}
+                            onChange={(event) => setSearch(event.target.value)}
+                            placeholder="name@example.com"
+                            className="min-h-[44px] w-full rounded-xl border border-white/15 bg-dark-grey-secondary px-3 py-2 text-white outline-none placeholder:text-dim-grey focus:border-brand-purple-secondary focus:ring-2 focus:ring-brand-purple-secondary/40"
+                        />
+                    </label>
+                    <button
+                        type="submit"
+                        className="min-h-[44px] rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-5 py-2 text-sm font-bold text-white outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white"
+                    >
+                        Search
+                    </button>
+                </form>
+                <p className="mb-4 text-sm text-medium-grey" aria-live="polite">
+                    {query
+                        ? `${matchCount} ${
+                              matchCount === 1 ? "match" : "matches"
+                          } for “${query}”`
+                        : `${matchCount} ${
+                              matchCount === 1 ? "person" : "people"
+                          }`}
+                    {matchCount > people.length &&
+                        ` · showing the newest ${people.length}. Search to find anyone else.`}
+                </p>
+
                 {error && (
                     <p
                         role="alert"
@@ -131,11 +196,12 @@ const AdminUsersPage: React.FC<UsersProps> = ({
                                             value={person.role}
                                             disabled={
                                                 busy === person.id ||
-                                                person.id === currentUserId
+                                                person.id === currentUserId ||
+                                                person.foundingAdmin
                                             }
                                             onChange={(event) =>
                                                 changeRole(
-                                                    person.id,
+                                                    person,
                                                     event.target.value as Role
                                                 )
                                             }
@@ -157,6 +223,11 @@ const AdminUsersPage: React.FC<UsersProps> = ({
                                                 (you)
                                             </span>
                                         )}
+                                        {person.foundingAdmin && (
+                                            <span className="ml-2 text-xs text-medium-grey">
+                                                founding admin
+                                            </span>
+                                        )}
                                     </td>
                                 </tr>
                             ))}
@@ -169,27 +240,59 @@ const AdminUsersPage: React.FC<UsersProps> = ({
 };
 
 export const getServerSideProps = requireAdmin<UsersProps>(
-    async ({ role, userId }) => {
-        const users = await prisma.user.findMany({
-            orderBy: { createdAt: "desc" },
-            take: 200,
-            select: {
-                id: true,
-                email: true,
-                name: true,
-                displayName: true,
-                role: true,
-                createdAt: true,
-                _count: {
-                    select: { enrollments: true, certificates: true },
+    async ({ role, userId, query: params }) => {
+        const query =
+            typeof params.q === "string" ? params.q.trim().slice(0, 120) : "";
+        const where = query
+            ? {
+                  OR: [
+                      {
+                          email: {
+                              contains: query,
+                              mode: "insensitive" as const,
+                          },
+                      },
+                      {
+                          displayName: {
+                              contains: query,
+                              mode: "insensitive" as const,
+                          },
+                      },
+                      {
+                          name: {
+                              contains: query,
+                              mode: "insensitive" as const,
+                          },
+                      },
+                  ],
+              }
+            : {};
+        const [matchCount, users] = await Promise.all([
+            prisma.user.count({ where }),
+            prisma.user.findMany({
+                where,
+                orderBy: { createdAt: "desc" },
+                take: PAGE_SIZE,
+                select: {
+                    id: true,
+                    email: true,
+                    name: true,
+                    displayName: true,
+                    role: true,
+                    createdAt: true,
+                    _count: {
+                        select: { enrollments: true, certificates: true },
+                    },
                 },
-            },
-        });
+            }),
+        ]);
 
         return {
             props: {
                 role,
                 currentUserId: userId,
+                query,
+                matchCount,
                 people: users.map((user) => ({
                     id: user.id,
                     displayName: user.displayName || user.name || "Learner",
@@ -198,6 +301,9 @@ export const getServerSideProps = requireAdmin<UsersProps>(
                     enrollments: user._count.enrollments,
                     certificates: user._count.certificates,
                     joinedAt: user.createdAt.toISOString(),
+                    foundingAdmin:
+                        user.role === "ADMIN" &&
+                        isInitialAdminEmail(user.email),
                 })),
             },
         };

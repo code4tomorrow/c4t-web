@@ -21,6 +21,9 @@ import type {
 } from "learning/course-models";
 import { courseRegistry, getCourseBySlug } from "learning/course-registry";
 import { getPathsForCourse } from "learning/learning-paths";
+import TermRegistration from "@components/Learning/TermRegistration";
+import { accountsEnabled } from "lib/platform";
+import { getTermPhase, type TermPhase } from "@utils/sessionSchedule";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -66,6 +69,21 @@ type CourseOverview = Pick<
         Pick<PacingTemplate, "id" | "type" | "suggestedWeeks" | "weeklyHours">
     >;
     recommendedPriorCourses: Array<{ slug: string; title: string }>;
+    /** null for self-paced courses. */
+    live: {
+        term: string;
+        termLabel: string;
+        format: string;
+        meets: string;
+        starts: string;
+        weeks: number;
+        minutesPerClass: number;
+        /** Registration phase when the page was built; the client re-checks. */
+        phase: TermPhase;
+        classTools: Array<{ name: string; url: string; note: string }>;
+        weeklyPlan: Array<{ week: number; title: string; topics: string[] }>;
+        continueWith: { slug: string; title: string } | null;
+    } | null;
     paths: Array<{
         slug: string;
         title: string;
@@ -80,6 +98,8 @@ interface CoursePageProps {
     course: CourseOverview;
     /** False when an administrator has not published this course yet. */
     enrollable: boolean;
+    /** False on a deployment without a database (see lib/platform). */
+    accountsOn: boolean;
 }
 
 const levelLabels: Record<CourseLevel, string> = {
@@ -110,6 +130,7 @@ const iconGlyphs: Record<string, string> = {
     microchip: "📟",
     network: "🕸️",
     nodes: "🔗",
+    phone: "📱",
     puzzle: "🧩",
     robot: "🤖",
     sliders: "🎛️",
@@ -129,73 +150,101 @@ const getFirstLessonHref = (course: CourseOverview) => {
         : `/courses/${course.slug}`;
 };
 
-const getStarterAssets = (course: CourseOverview) => {
-    const assets = [
-        {
-            href: "/learning-assets/README.md",
-            label: "Starter pack guide & licenses",
-            description:
-                "See what each original synthetic dataset, fixture, and starter file contains.",
-        },
-    ];
+/** Which courses each downloadable starter file belongs to. */
+const STARTER_ASSETS: Array<{
+    href: string;
+    label: string;
+    description: string;
+    courseIds: string[];
+}> = [
+    {
+        href: "/learning-assets/python/garden_report.py",
+        label: "Python project starter",
+        description:
+            "A small standard-library CSV application with clearly marked extension tasks.",
+        courseIds: ["course-03", "course-04", "course-05"],
+    },
+    {
+        href: "/learning-assets/web/index.html",
+        label: "Accessible web starter",
+        description:
+            "A responsive HTML, CSS, and JavaScript project using fixed local data.",
+        courseIds: ["course-06", "course-07"],
+    },
+    {
+        href: "/learning-assets/sql/community-lab.sql",
+        label: "SQLite practice database",
+        description:
+            "Original schema, synthetic seed rows, constraints, and review queries.",
+        courseIds: [
+            "course-11",
+            "course-13",
+            "course-17",
+            "course-22",
+            "course-23",
+        ],
+    },
+    {
+        href: "/learning-assets/hardware/sensor-trace.csv",
+        label: "Simulated hardware sensor trace",
+        description:
+            "Synthetic device readings for no-hardware analysis and replay.",
+        courseIds: ["course-09", "course-10", "course-17", "course-18"],
+    },
+    {
+        href: "/learning-assets/ml/evaluation-fixture.json",
+        label: "ML evaluation fixture",
+        description:
+            "Fixed, synthetic classification, retrieval, research, and deployment values.",
+        courseIds: [
+            "course-13",
+            "course-14",
+            "course-15",
+            "course-16",
+            "course-17",
+            "course-18",
+            "course-19",
+            "course-20",
+            "course-21",
+            "course-22",
+            "course-23",
+            "course-29",
+        ],
+    },
+    {
+        href: "/learning-assets/datasets/community-garden-observations.csv",
+        label: "Synthetic classification dataset",
+        description:
+            "Invented garden observations with a health label, for practicing splits, pipelines, and metrics.",
+        courseIds: ["course-29"],
+    },
+    {
+        href: "/learning-assets/agents/evaluation-task.json",
+        label: "Bounded agent evaluation task",
+        description:
+            "A fictional repository task with deterministic checks and no credentials.",
+        courseIds: ["course-24", "course-25"],
+    },
+    {
+        href: "/learning-assets/agents/evaluation-trace.json",
+        label: "Recorded safe agent trace",
+        description:
+            "A simulated multi-agent trace that blocks an unsafe action.",
+        courseIds: ["course-24", "course-25"],
+    },
+];
 
-    if ([3, 4, 5].includes(course.order)) {
-        assets.push({
-            href: "/learning-assets/python/garden_report.py",
-            label: "Python project starter",
-            description:
-                "A small standard-library CSV application with clearly marked extension tasks.",
-        });
-    }
-    if ([6, 7].includes(course.order)) {
-        assets.push({
-            href: "/learning-assets/web/index.html",
-            label: "Accessible web starter",
-            description:
-                "A responsive HTML, CSS, and JavaScript project using fixed local data.",
-        });
-    }
-    if ([11, 13, 17, 22, 23].includes(course.order)) {
-        assets.push({
-            href: "/learning-assets/sql/community-lab.sql",
-            label: "SQLite practice database",
-            description:
-                "Original schema, synthetic seed rows, constraints, and review queries.",
-        });
-    }
-    if ([9, 10, 17, 18].includes(course.order)) {
-        assets.push({
-            href: "/learning-assets/hardware/sensor-trace.csv",
-            label: "Simulated hardware sensor trace",
-            description:
-                "Synthetic device readings for no-hardware analysis and replay.",
-        });
-    }
-    if (course.order >= 13 && course.order <= 23) {
-        assets.push({
-            href: "/learning-assets/ml/evaluation-fixture.json",
-            label: "ML evaluation fixture",
-            description:
-                "Fixed, synthetic classification, retrieval, research, and deployment values.",
-        });
-    }
-    if (course.order >= 24) {
-        assets.push({
-            href: "/learning-assets/agents/evaluation-task.json",
-            label: "Bounded agent evaluation task",
-            description:
-                "A fictional repository task with deterministic checks and no credentials.",
-        });
-        assets.push({
-            href: "/learning-assets/agents/evaluation-trace.json",
-            label: "Recorded safe agent trace",
-            description:
-                "A simulated multi-agent trace that blocks an unsafe action.",
-        });
-    }
-
-    return assets;
-};
+const getStarterAssets = (course: CourseOverview) => [
+    {
+        href: "/learning-assets/README.md",
+        label: "Starter pack guide & licenses",
+        description:
+            "See what each original synthetic dataset, fixture, and starter file contains.",
+    },
+    ...STARTER_ASSETS.filter((asset) =>
+        asset.courseIds.includes(course.id)
+    ).map(({ href, label, description }) => ({ href, label, description })),
+];
 
 const toSetupRequirement = (
     requirement: CourseRequirement,
@@ -353,6 +402,32 @@ const toCourseOverview = (course: Course): CourseOverview => ({
         .map((courseId) => courseRegistry.find((item) => item.id === courseId))
         .filter((item): item is Course => Boolean(item))
         .map((item) => ({ slug: item.slug, title: item.title })),
+    live: course.liveSession
+        ? {
+              term: course.liveSession.term,
+              termLabel: course.liveSession.termLabel,
+              format: course.liveSession.format,
+              meets: course.liveSession.meets,
+              starts: course.liveSession.starts,
+              weeks: course.liveSession.weeks,
+              minutesPerClass: course.liveSession.minutesPerClass,
+              phase: getTermPhase(course.liveSession.term),
+              classTools: course.liveSession.classTools,
+              weeklyPlan: course.modules
+                  .filter((module) => module.kind === "core")
+                  .map((module, index) => ({
+                      week: index + 1,
+                      title: module.title,
+                      topics: module.lessons[0].sourceTopics,
+                  })),
+              continueWith: (() => {
+                  const next = courseRegistry.find(
+                      (item) => item.id === course.liveSession?.continueWith
+                  );
+                  return next ? { slug: next.slug, title: next.title } : null;
+              })(),
+          }
+        : null,
     paths: getPathsForCourse(course.id).map((path) => ({
         slug: path.slug,
         title: path.title,
@@ -364,7 +439,148 @@ const toCourseOverview = (course: Course): CourseOverview => ({
     })),
 });
 
-const CoursePage: React.FC<CoursePageProps> = ({ course, enrollable }) => {
+const LiveClassDetails: React.FC<{ course: CourseOverview }> = ({ course }) => {
+    const live = course.live;
+    if (!live) return null;
+
+    return (
+        <section
+            aria-labelledby="live-class-title"
+            className="rounded-2xl border border-brand-purple-secondary/40 bg-brand-purple-secondary/[0.06] p-5 sm:p-7"
+        >
+            <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+                <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-purple-secondary">
+                        {live.termLabel} · {live.format}
+                    </p>
+                    <h2
+                        id="live-class-title"
+                        className="mt-2 text-2xl font-bold text-white"
+                    >
+                        Class schedule
+                    </h2>
+                    <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
+                        <div>
+                            <dt className="text-medium-grey">Meets</dt>
+                            <dd className="mt-1 font-bold text-white">
+                                {live.meets}
+                            </dd>
+                        </div>
+                        <div>
+                            <dt className="text-medium-grey">Length</dt>
+                            <dd className="mt-1 font-bold text-white">
+                                {live.weeks} weeks · {live.minutesPerClass / 60}{" "}
+                                hours per class
+                            </dd>
+                        </div>
+                        <div>
+                            <dt className="text-medium-grey">Starts</dt>
+                            <dd className="mt-1 font-bold text-white">
+                                {live.starts}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+                <TermRegistration
+                    term={live.term}
+                    termLabel={live.termLabel}
+                    initialPhase={live.phase}
+                    label="Register for this class"
+                />
+            </div>
+
+            <h3 className="mt-7 font-bold text-white">Week by week</h3>
+            <ol className="mt-3 grid gap-3 md:grid-cols-2">
+                {live.weeklyPlan.map((week) => (
+                    <li
+                        key={week.week}
+                        className="rounded-xl border border-white/10 bg-dark-grey-primary/40 p-4"
+                    >
+                        <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-purple-secondary">
+                            Week {week.week}
+                        </p>
+                        <p className="mt-1 font-bold text-white">
+                            {week.title}
+                        </p>
+                        <ul className="mt-2 space-y-1 text-sm leading-6 text-[#C7C3CE]">
+                            {week.topics.map((topic) => (
+                                <li key={topic} className="flex gap-2">
+                                    <span aria-hidden="true">•</span>
+                                    {topic}
+                                </li>
+                            ))}
+                        </ul>
+                    </li>
+                ))}
+            </ol>
+            <p className="mt-3 text-sm leading-6 text-[#C7C3CE]">
+                Before the first class, finish the free setup module. After the
+                last class, you&apos;ll complete and present the capstone
+                project.
+            </p>
+
+            <h3 className="mt-7 font-bold text-white">
+                Free tools you&apos;ll use in class
+            </h3>
+            <ul className="mt-3 grid gap-3 md:grid-cols-2">
+                {live.classTools.map((item) => {
+                    const external = item.url.startsWith("http");
+                    return (
+                        <li
+                            key={item.name}
+                            className="rounded-xl border border-white/10 bg-dark-grey-primary/40 p-4"
+                        >
+                            {external ? (
+                                <a
+                                    href={item.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="font-bold text-brand-purple-secondary underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                >
+                                    {item.name}
+                                    <span className="sr-only">
+                                        {" "}
+                                        (opens in a new tab)
+                                    </span>
+                                </a>
+                            ) : (
+                                <Link
+                                    href={item.url}
+                                    className="font-bold text-brand-purple-secondary underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                >
+                                    {item.name}
+                                </Link>
+                            )}
+                            <p className="mt-1 text-sm leading-6 text-[#C7C3CE]">
+                                {item.note}
+                            </p>
+                        </li>
+                    );
+                })}
+            </ul>
+
+            {live.continueWith && (
+                <p className="mt-6 text-sm leading-6 text-[#D6D3DC]">
+                    <strong className="text-white">After the class:</strong>{" "}
+                    keep going at your own pace with{" "}
+                    <Link
+                        href={`/courses/${live.continueWith.slug}`}
+                        className="font-bold text-brand-purple-secondary underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                    >
+                        {live.continueWith.title}
+                    </Link>
+                    .
+                </p>
+            )}
+        </section>
+    );
+};
+
+const CoursePage: React.FC<CoursePageProps> = ({
+    course,
+    enrollable,
+    accountsOn,
+}) => {
     const software = course.requirements
         .filter((requirement) =>
             ["browser", "software", "compute", "dataset"].includes(
@@ -412,6 +628,19 @@ const CoursePage: React.FC<CoursePageProps> = ({ course, enrollable }) => {
                             </Link>
                         </li>
                         <li aria-hidden="true">/</li>
+                        {course.live && (
+                            <>
+                                <li>
+                                    <Link
+                                        href={`/courses?tab=${course.live.term}`}
+                                        className="rounded outline-none hover:text-white focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                    >
+                                        {course.live.termLabel} live classes
+                                    </Link>
+                                </li>
+                                <li aria-hidden="true">/</li>
+                            </>
+                        )}
                         <li aria-current="page" className="text-[#D6D3DC]">
                             {course.title}
                         </li>
@@ -435,6 +664,12 @@ const CoursePage: React.FC<CoursePageProps> = ({ course, enrollable }) => {
                                 <CourseBadge tone="blue">
                                     {levelLabels[course.level]}
                                 </CourseBadge>
+                                {course.live && (
+                                    <CourseBadge tone="amber">
+                                        {course.live.termLabel} ·{" "}
+                                        {course.live.format}
+                                    </CourseBadge>
+                                )}
                                 {course.simulators.length > 0 && (
                                     <CourseBadge tone="purple">
                                         Browser simulator included
@@ -450,7 +685,9 @@ const CoursePage: React.FC<CoursePageProps> = ({ course, enrollable }) => {
                                 </span>
                                 <div>
                                     <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-purple-secondary">
-                                        Course {course.order}
+                                        {course.live
+                                            ? `${course.live.termLabel} live class`
+                                            : `Course ${course.order}`}
                                     </p>
                                     <h1 className="mt-1 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
                                         {course.title}
@@ -500,7 +737,32 @@ const CoursePage: React.FC<CoursePageProps> = ({ course, enrollable }) => {
                                     </dd>
                                 </div>
                             </dl>
-                            {enrollable ? (
+                            {!accountsOn ? (
+                                <>
+                                    <Link
+                                        href={firstLessonHref}
+                                        className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-4 py-3 text-center text-sm font-bold text-white outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white"
+                                    >
+                                        Start reading
+                                        <span
+                                            aria-hidden="true"
+                                            className="ml-2"
+                                        >
+                                            →
+                                        </span>
+                                    </Link>
+                                    <p className="mt-3 text-center text-xs leading-5 text-medium-grey">
+                                        <strong className="text-amber-100">
+                                            Account access coming soon.
+                                        </strong>{" "}
+                                        Every lesson is open to read now. Saved
+                                        progress and certificates start once
+                                        accounts open.
+                                        {course.live &&
+                                            " To join the live class, use Register in the schedule below."}
+                                    </p>
+                                </>
+                            ) : enrollable ? (
                                 <>
                                     <EnrollButton
                                         courseId={course.id}
@@ -531,6 +793,8 @@ const CoursePage: React.FC<CoursePageProps> = ({ course, enrollable }) => {
 
                 <div className="mt-8 grid gap-8 xl:grid-cols-[minmax(0,1fr)_420px]">
                     <div className="space-y-8">
+                        {course.live && <LiveClassDetails course={course} />}
+
                         <RequirementsSetup
                             courseTitle={course.title}
                             freePath={buildFreeSetupPath(course)}
@@ -819,36 +1083,48 @@ export const getStaticPaths: GetStaticPaths = async () => ({
  * Publication status for every course, in one query.
  *
  * getStaticProps runs once per course, so reading each course's row separately
- * meant 25 sequential round-trips to a remote database on every build — the
- * slowest part of the build by far. The promise is cached at module scope, so
- * the whole set is fetched once and every page awaits the same result.
+ * meant one round-trip to a remote database per course on every build — the
+ * slowest part of the build by far. The promise is shared for a short window,
+ * so a build fetches the set once and every page awaits the same result.
  *
- * The cache is intentionally per-process and unbounded in time: during a build
- * that is exactly one fetch, and at runtime each ISR regeneration gets a fresh
- * process. `revalidate` below is what makes status changes show up.
+ * The window must stay short: on a warm serverless instance this module
+ * outlives many ISR regenerations, and a cache that never expired would pin
+ * the first status it read, hiding publish/unpublish changes from /admin.
  */
-let publishedCourseIds: Promise<Set<string> | null> | null = null;
+const PUBLISH_STATUS_TTL_MS = 30_000;
+let publishedCourseIds: {
+    fetchedAt: number;
+    value: Promise<Set<string> | null>;
+} | null = null;
 
 const getPublishedCourseIds = () => {
-    if (!publishedCourseIds) {
-        publishedCourseIds = (async () => {
-            try {
-                const { listPublishedCourseIds } = await import("lib/learner");
-                return await listPublishedCourseIds();
-            } catch (error) {
-                // No database reachable (e.g. a preview build without
-                // DATABASE_URL). Returning null means "unknown", and callers
-                // stay optimistic — enrolment is still authorised server-side,
-                // so the worst case is a clear error on click.
-                console.warn(
-                    "Could not read course publish status:",
-                    error instanceof Error ? error.message : error
-                );
-                return null;
-            }
-        })();
+    if (
+        !publishedCourseIds ||
+        Date.now() - publishedCourseIds.fetchedAt > PUBLISH_STATUS_TTL_MS
+    ) {
+        publishedCourseIds = {
+            fetchedAt: Date.now(),
+            value: (async () => {
+                try {
+                    const { listPublishedCourseIds } = await import(
+                        "lib/learner"
+                    );
+                    return await listPublishedCourseIds();
+                } catch (error) {
+                    // No database reachable (e.g. a preview build without
+                    // DATABASE_URL). Returning null means "unknown", and
+                    // callers stay optimistic — enrolment is still authorised
+                    // server-side, so the worst case is a clear error on click.
+                    console.warn(
+                        "Could not read course publish status:",
+                        error instanceof Error ? error.message : error
+                    );
+                    return null;
+                }
+            })(),
+        };
     }
-    return publishedCourseIds;
+    return publishedCourseIds.value;
 };
 
 export const getStaticProps: GetStaticProps<CoursePageProps> = async ({
@@ -860,12 +1136,14 @@ export const getStaticProps: GetStaticProps<CoursePageProps> = async ({
         return { notFound: true };
     }
 
-    const published = await getPublishedCourseIds();
+    const accountsOn = accountsEnabled();
+    const published = accountsOn ? await getPublishedCourseIds() : null;
 
     return {
         props: {
             course: toCourseOverview(course),
             enrollable: published ? published.has(course.id) : true,
+            accountsOn,
         },
         revalidate: 60,
     };

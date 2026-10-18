@@ -23,14 +23,19 @@ const requireText = (value, label, minimum = 20) => {
     }
 };
 
-if (sourceCurriculum.length !== 25) {
-    fail(`Expected 25 source courses; found ${sourceCurriculum.length}.`);
+// The canonical source inventory sets the course count; every other layer
+// must agree with it exactly.
+const expectedCourseCount = sourceCurriculum.length;
+if (!expectedCourseCount) fail("The source curriculum has no courses.");
+if (courseBlueprints.length !== expectedCourseCount) {
+    fail(
+        `Expected ${expectedCourseCount} authored blueprints; found ${courseBlueprints.length}.`
+    );
 }
-if (courseBlueprints.length !== 25) {
-    fail(`Expected 25 authored blueprints; found ${courseBlueprints.length}.`);
-}
-if (courseRegistry.length !== 25) {
-    fail(`Expected 25 built courses; found ${courseRegistry.length}.`);
+if (courseRegistry.length !== expectedCourseCount) {
+    fail(
+        `Expected ${expectedCourseCount} built courses; found ${courseRegistry.length}.`
+    );
 }
 
 const sourceIds = new Set(sourceCurriculum.map((course) => course.id));
@@ -312,6 +317,75 @@ courseRegistry.forEach((course, courseIndex) => {
         }
     });
 
+    if (course.liveSession) {
+        const live = course.liveSession;
+        const livePrefix = `${prefix} live session`;
+        ["term", "termLabel", "format", "meets", "starts"].forEach((field) =>
+            requireText(live[field], `${livePrefix} ${field}`, 4)
+        );
+        if (!/^[a-z]+-\d{4}$/.test(live.term)) {
+            fail(`${livePrefix} term must look like "fall-2026".`);
+        }
+        const coreCount = course.modules.filter(
+            (module) => module.kind === "core"
+        ).length;
+        if (live.weeks !== coreCount || live.weeks !== course.suggestedWeeks) {
+            fail(
+                `${livePrefix} runs ${live.weeks} weeks but has ${coreCount} core modules and suggests ${course.suggestedWeeks} weeks; each week is one core module.`
+            );
+        }
+        course.modules
+            .filter((module) => module.kind === "core")
+            .forEach((module) => {
+                const minutes = module.lessons.reduce(
+                    (total, lesson) => total + lesson.estimatedMinutes,
+                    0
+                );
+                if (minutes !== live.minutesPerClass) {
+                    fail(
+                        `${livePrefix}: "${module.title}" lessons total ${minutes} minutes, not the ${live.minutesPerClass}-minute class length.`
+                    );
+                }
+            });
+        if (course.weeklyCommitmentHours * 60 !== live.minutesPerClass) {
+            fail(
+                `${livePrefix} weekly hours (${course.weeklyCommitmentHours}) must equal the class length.`
+            );
+        }
+        if (!sourceIds.has(live.continueWith)) {
+            fail(`${livePrefix} continueWith "${live.continueWith}" is unknown.`);
+        } else {
+            const next = courseRegistry.find(
+                (item) => item.id === live.continueWith
+            );
+            if (next?.liveSession) {
+                fail(`${livePrefix} must continue with a self-paced course.`);
+            }
+        }
+        if (!live.classTools.length) {
+            fail(`${livePrefix} lists no class tools.`);
+        }
+        live.classTools.forEach((item) => {
+            requireText(item.name, `${livePrefix} tool name`, 3);
+            requireText(item.note, `${livePrefix} tool "${item.name}" note`, 30);
+            if (!/^(https:\/\/|\/learn\/tools\/)/.test(item.url || "")) {
+                fail(
+                    `${livePrefix} tool "${item.name}" needs an https:// or /learn/tools/ link.`
+                );
+            }
+            if (
+                item.url.startsWith("/learn/tools/") &&
+                !course.requirements.some(
+                    (requirement) => requirement.freePath.url === item.url
+                )
+            ) {
+                fail(
+                    `${livePrefix} tool "${item.name}" links a lab that this course does not provide.`
+                );
+            }
+        });
+    }
+
     const sourceTopics = new Set(source.topics);
     const mappedTopics = new Set(
         course.sourceTopicCoverage.map((item) => item.sourceTopic)
@@ -360,8 +434,8 @@ courseRegistry.forEach((course, courseIndex) => {
     });
 });
 
-if (curriculumCoverage.courseCount !== 25) {
-    fail("Coverage report does not contain 25 courses.");
+if (curriculumCoverage.courseCount !== expectedCourseCount) {
+    fail(`Coverage report does not contain ${expectedCourseCount} courses.`);
 }
 const canonicalTopicCount = sourceCurriculum.reduce(
     (total, course) => total + course.topics.length,
@@ -372,9 +446,14 @@ if (curriculumCoverage.topicCount !== canonicalTopicCount) {
         `Coverage report contains ${curriculumCoverage.topicCount}/${canonicalTopicCount} topics.`
     );
 }
-if (internalToolPaths.size !== 24) {
+// Every course except those built in the external Scratch editor has its own
+// internal concept lab.
+const expectedInternalTools = courseRegistry.filter((course) =>
+    course.requirements[0]?.freePath.url?.startsWith("/learn/tools/")
+).length;
+if (internalToolPaths.size !== expectedInternalTools) {
     fail(
-        `Expected 24 unique internal free-tool paths plus Scratch; found ${internalToolPaths.size}.`
+        `Expected ${expectedInternalTools} unique internal free-tool paths; found ${internalToolPaths.size}.`
     );
 }
 
@@ -445,7 +524,17 @@ learningPathDefinitions.forEach((path) => {
 });
 
 // A course that belongs to no path is unreachable from the guided experience.
+// Live classes are the exception: they are reached from their term's tab on
+// /courses, and are deliberately kept out of the self-paced paths.
 courseRegistry.forEach((course) => {
+    if (course.liveSession) {
+        if (coursesInAnyPath.has(course.id)) {
+            fail(
+                `Live course "${course.slug}" is in a learning path; paths are self-paced only.`
+            );
+        }
+        return;
+    }
     if (!coursesInAnyPath.has(course.id)) {
         fail(
             `Course "${course.slug}" is not part of any learning path. Add it to a path or create one.`

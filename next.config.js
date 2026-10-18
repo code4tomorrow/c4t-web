@@ -29,12 +29,30 @@ const securityHeaders = [
     },
 ];
 
+// Mirrors lib/platform.ts so static pages know at build time whether student
+// accounts exist on this deployment (hiding Enroll and dashboard links if not).
+const accountsEnabled =
+    Boolean(process.env.DATABASE_URL) &&
+    (process.env.NODE_ENV !== "production" ||
+        Boolean(process.env.NEXTAUTH_SECRET));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    env: {
+        NEXT_PUBLIC_ACCOUNTS_ENABLED: accountsEnabled ? "true" : "false",
+    },
     staticPageGenerationTimeout: 900,
     reactStrictMode: true,
     // Nothing gains from advertising the framework version.
     poweredByHeader: false,
+    compiler: {
+        // Debug logging is dead weight in production bundles; real problems
+        // still surface through console.error and console.warn.
+        removeConsole:
+            process.env.NODE_ENV === "production"
+                ? { exclude: ["error", "warn"] }
+                : false,
+    },
     images: {
         domains: authorizedImageDomains,
         // Serve modern formats to browsers that accept them.
@@ -53,6 +71,18 @@ const nextConfig = {
                     },
                 ],
             },
+            // Illustrations and the session flyer are not fingerprinted, so
+            // they get a day of caching (served stale while a fresh copy is
+            // fetched) instead of a revalidation on every visit.
+            ...["/svg/:path*", "/fall-2026-flyer.png"].map((source) => ({
+                source,
+                headers: [
+                    {
+                        key: "Cache-Control",
+                        value: "public, max-age=86400, stale-while-revalidate=604800",
+                    },
+                ],
+            })),
         ];
     },
     async rewrites() {

@@ -37,6 +37,14 @@ const initialAdminEmails = new Set(
         .filter(Boolean)
 );
 
+/**
+ * True for the founding administrators in INITIAL_ADMIN_EMAILS. Their admin
+ * role cannot be removed from /admin/users, so no other admin can lock them
+ * out; take an email off the list to make it an ordinary account again.
+ */
+export const isInitialAdminEmail = (email: string | null | undefined) =>
+    Boolean(email && initialAdminEmails.has(email.trim().toLowerCase()));
+
 export const authProviderStatus = {
     github: githubConfigured,
     email: emailConfigured,

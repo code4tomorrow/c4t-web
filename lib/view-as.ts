@@ -86,7 +86,7 @@ export const buildViewAsCookie = (role: Role | null, secure: boolean) => {
     if (!role) {
         return `${base}; Max-Age=0; ${flags.join("; ")}`;
     }
-    return `${base}${encodeURIComponent(role)}; Max-Age=${60 * 60 * 4}; ${flags.join(
-        "; "
-    )}`;
+    return `${base}${encodeURIComponent(role)}; Max-Age=${
+        60 * 60 * 4
+    }; ${flags.join("; ")}`;
 };

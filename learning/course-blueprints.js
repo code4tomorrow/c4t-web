@@ -3509,6 +3509,611 @@ const blueprints = [
             ]
         ),
     },
+    // --- Fall 2026 live classes ----------------------------------------------
+    // Each core module is one week of a six-week class. A module's three
+    // lessons (25 + 35 + 30 minutes) match one 1.5-hour live class, so
+    // weeklyHours is the class length. liveSession drives the schedule shown on
+    // the course page and the week-by-week pacing plan.
+    {
+        id: "course-26",
+        slug: "intro-to-python",
+        level: "beginner",
+        weeks: 6,
+        weeklyHours: 1.5,
+        liveSession: {
+            term: "fall-2026",
+            termLabel: "Fall 2026",
+            format: "Live online class",
+            meets: "Mondays, 7:30–9:00 PM ET",
+            starts: "First week of November 2026",
+            weeks: 6,
+            minutesPerClass: 90,
+            continueWith: "course-04",
+            classTools: [
+                {
+                    name: "Python 3 with IDLE",
+                    url: "https://www.python.org/downloads/",
+                    note: "The free official installer for Windows and macOS includes IDLE, the editor used in class. On a Chromebook, turn on the Linux development environment and install python3 and idle3.",
+                },
+                {
+                    name: "C4T Intro Python concept simulator",
+                    url: "/learn/tools/intro-python-lab",
+                    note: "Practice tracing programs on any device, including tablets. It explains programs step by step; it does not run Python.",
+                },
+            ],
+        },
+        summary:
+            "A six-week live class for first-time programmers: write real Python programs with variables, input, decisions, loops, lists, and functions, then build a small project of your own.",
+        description:
+            "Intro to Python is a live online class that meets once a week for 1.5 hours over six weeks. Each class introduces one idea, practices it together, and ends with a short program students build themselves. Students write and run their programs in Python's free IDLE editor; the C4T concept simulator on this site helps them trace what a program will do, but it does not run code. By week six, students combine everything into a small text game, quiz, or calculator.",
+        audience:
+            "Middle and high school students who have never written typed code, or who have only used block-based tools like Scratch.",
+        prerequisites: ["No coding experience needed"],
+        recommendedPriorCourses: [],
+        outcomes: [
+            "Write, run, and save Python programs, and explain what each line does.",
+            "Store and convert values with variables, input, and the core data types.",
+            "Control a program with conditions, for loops, and while loops.",
+            "Organize a small project with lists and functions, and fix bugs using error messages.",
+        ],
+        tags: ["python", "programming", "beginner", "live-class", "fall-2026"],
+        icon: "terminal",
+        accent: "#FFD43B",
+        primaryTool: tool(
+            "C4T Intro Python Lab",
+            "software",
+            "A guided Python concept simulator for predicting and tracing beginner programs.",
+            [
+                "Open the lab and read the starting program.",
+                "Predict the output, then step through the trace.",
+                "Change one value and predict again.",
+            ],
+            "Predict the output of a short program and explain it from the trace.",
+            "/learn/tools/intro-python-lab"
+        ),
+        simulators: [
+            simulator(
+                "intro-python-lab",
+                "Intro Python Lab",
+                "Trace variables, branches, and loops one step at a time.",
+                ["Variable table", "Branch tracing", "Loop stepping"],
+                ["Covers the beginner subset taught in class."]
+            ),
+        ],
+        freeCompletionPromise:
+            "Everything in this class is free. Students write and run programs in Python's free IDLE editor and practice tracing on any device with the C4T concept simulator, which explains programs but does not execute them. No paid software or account is needed.",
+        coreModules: [
+            moduleBlueprint(
+                "Write and run your first programs",
+                3,
+                "A school club wants a welcome screen that greets visitors and explains what the club does, and the first version prints the lines in the wrong order.",
+                "Write a three-line program with print(), run it, add comments, and predict the exact output before each run.",
+                "Create a personal welcome program that prints a short, formatted introduction and uses comments to explain each part.",
+                "code-editor"
+            ),
+            moduleBlueprint(
+                "Store values with variables and input",
+                3,
+                "A birthday calculator asks for an age but crashes with a TypeError when it tries to add 1 to the answer.",
+                "Trace variable values line by line, identify each value's type, and convert text input to numbers with int() and float().",
+                "Build a program that asks two questions, converts the answers to the right types, and prints a sentence using both.",
+                "code-trace"
+            ),
+            moduleBlueprint(
+                "Make decisions with conditions",
+                3,
+                "A movie ticket program charges every visitor the adult price, even children and seniors.",
+                "Combine comparison operators with if, elif, and else, and test boundary values such as exactly 12 or exactly 65.",
+                "Write a pricing program with at least three rules and a table of test inputs showing the expected price for each.",
+                "prediction"
+            ),
+            moduleBlueprint(
+                "Repeat work with loops",
+                2,
+                "A times-table quiz prints only one question, and a password checker never stops asking.",
+                "Trace for loops over range() and while loops, find each loop's stopping condition, and fix an infinite loop.",
+                "Build a quiz that asks five questions with a for loop and keeps asking for a valid answer with a while loop.",
+                "visualizer"
+            ),
+            moduleBlueprint(
+                "Organize data with lists",
+                2,
+                "A class roster program stores each name in its own variable, so adding a new student means rewriting the code.",
+                "Create lists, read items by index, check len(), and loop over a list to add, update, or count items.",
+                "Write a to-do or high-score list program that adds items, prints them in order, and reports how many there are.",
+                "code-editor"
+            ),
+            moduleBlueprint(
+                "Build with functions and debug your code",
+                3,
+                "A mini game repeats the same scoring code in four places, and a typo in one copy causes a crash only on the last level.",
+                "Move repeated code into functions with parameters and return values, then read a traceback to find and fix the failing line.",
+                "Refactor a program into at least three functions and record one bug you found from an error message and how you fixed it.",
+                "debugging"
+            ),
+        ],
+        assignments: [
+            assignment(
+                "Personal calculator",
+                "Build a calculator for something you care about, such as a sports score, allowance, or game stat, using input, type conversion, and at least three if/elif/else rules.",
+                [2, 3]
+            ),
+            assignment(
+                "List-powered quiz",
+                "Create a quiz that stores its questions in lists, loops through them, keeps score, and uses at least one function.",
+                [4, 5]
+            ),
+        ],
+        capstone: capstone(
+            "Text game, quiz, or tool of your choice",
+            "Plan and build a complete Python program of your choice that uses variables, input, conditions, a loop, a list, and at least two functions, then present it to the class.",
+            [
+                "A Python file that runs without errors",
+                "Variables, input, conditions, a loop, a list, and two or more functions",
+                "A test table with normal and unusual inputs",
+                "One bug you found and how you fixed it",
+                "A short demo or written walkthrough",
+            ]
+        ),
+    },
+    {
+        id: "course-27",
+        slug: "android-studio-app-development",
+        level: "beginner-intermediate",
+        weeks: 6,
+        weeklyHours: 1.5,
+        liveSession: {
+            term: "fall-2026",
+            termLabel: "Fall 2026",
+            format: "Live online class",
+            meets: "Wednesdays, 8:00–9:30 PM ET",
+            starts: "First week of November 2026",
+            weeks: 6,
+            minutesPerClass: 90,
+            continueWith: "course-11",
+            classTools: [
+                {
+                    name: "Android Studio",
+                    url: "https://developer.android.com/studio",
+                    note: "Google's free development tool for Windows, macOS, Linux, and supported Chromebooks. Check the system requirements on the download page before the first class; the built-in emulator needs a fairly powerful computer.",
+                },
+                {
+                    name: "An Android phone (optional)",
+                    url: "https://developer.android.com/studio/run/device",
+                    note: "Run your app on a real phone over USB or Wi-Fi after turning on developer options. The emulator works just as well for every assignment.",
+                },
+                {
+                    name: "C4T Android App concept simulator",
+                    url: "/learn/tools/android-app-lab",
+                    note: "Explore the Activity lifecycle and screen-rotation state on any device. It models how Android behaves; it does not build or run apps.",
+                },
+            ],
+        },
+        summary:
+            "A six-week live class on building Android apps in Android Studio with Kotlin and Jetpack Compose: screens, buttons, state, lists, navigation, and an app you can install on a phone.",
+        description:
+            "Android Studio App Development is a live online class that meets once a week for 1.5 hours over six weeks. Students build real apps in Android Studio, Google's free development tool, using Kotlin and Jetpack Compose, the toolkit Android Studio uses for new projects. Each week adds one layer: the project and emulator, Kotlin basics, layouts, state and input, lists and navigation, and finally saving data and sharing an APK. The C4T concept simulator on this site models the Activity lifecycle; it does not build or run apps.",
+        audience:
+            "Students who have written some code in any language and want to build apps that run on Android phones.",
+        prerequisites: [
+            "Some programming experience in any language: variables, if statements, and loops",
+            "A computer that can run Android Studio (Windows, macOS, Linux, or a supported Chromebook)",
+        ],
+        recommendedPriorCourses: ["course-03"],
+        outcomes: [
+            "Create, run, and debug an Android Studio project on the emulator or a phone.",
+            "Write Kotlin with variables, functions, conditions, loops, and null safety.",
+            "Build screens with Jetpack Compose layouts, state, user input, lists, and navigation.",
+            "Save simple data on the device and share a working APK.",
+        ],
+        tags: [
+            "android",
+            "kotlin",
+            "jetpack-compose",
+            "mobile-apps",
+            "live-class",
+            "fall-2026",
+        ],
+        icon: "phone",
+        accent: "#3DDC84",
+        primaryTool: tool(
+            "C4T Android App Lab",
+            "software",
+            "A guided concept simulator for the Activity lifecycle and Compose state.",
+            [
+                "Open the lab and read the counter scenario.",
+                "Predict what happens to the counter when the phone rotates.",
+                "Try each state holder and compare the results.",
+            ],
+            "Explain why remember loses its value on rotation and rememberSaveable does not.",
+            "/learn/tools/android-app-lab"
+        ),
+        simulators: [
+            simulator(
+                "android-app-lab",
+                "Android App Lab",
+                "Model lifecycle callbacks and state across configuration changes.",
+                ["Lifecycle trace", "Rotation", "State holders"],
+                ["Does not build or run Android apps."]
+            ),
+        ],
+        freeCompletionPromise:
+            "Android Studio, Kotlin, Jetpack Compose, and the Android emulator are all free from Google, and an Android phone is optional. The C4T concept simulator models the lifecycle on any device but does not build or run apps. No paid software, developer account, or Play Store fee is needed.",
+        coreModules: [
+            moduleBlueprint(
+                "Set up Android Studio and run your first app",
+                3,
+                "A new project opens with dozens of folders and files, and the app will not launch because no emulator has been set up.",
+                "Create an Empty Activity project, find MainActivity.kt, the manifest, and the Gradle files, then run the app on an emulator or a phone.",
+                "Change the starter app's greeting and app name, run it, and write down where each change lives in the project.",
+                "diagram"
+            ),
+            moduleBlueprint(
+                "Learn Kotlin for Android",
+                2,
+                "A tip calculator crashes when the bill field is empty because the code assumes the value can never be null.",
+                "Write Kotlin with val and var, types, string templates, if and when, for loops, and functions, then handle a nullable value safely.",
+                "Write a Kotlin function that turns a bill and tip percentage into a total and returns a safe result when the input is missing.",
+                "code-editor"
+            ),
+            moduleBlueprint(
+                "Build screens with Jetpack Compose",
+                3,
+                "A profile screen looks right in the preview but overlaps and runs off the edge on a smaller phone.",
+                "Write composable functions, use @Preview, add Text, Image, and Button, and arrange them with Row, Column, Box, and modifiers.",
+                "Build a profile or business-card screen that stays readable in both a small and a large preview.",
+                "visualizer"
+            ),
+            moduleBlueprint(
+                "Make apps interactive with state",
+                3,
+                "A counter app updates when tapped, then resets to zero every time the phone is rotated.",
+                "Handle clicks and text input, hold values with remember and mutableStateOf, and trace what happens to state when the Activity is recreated.",
+                "Build a counter or tip calculator whose values survive rotation, using rememberSaveable or a ViewModel.",
+                "simulator"
+            ),
+            moduleBlueprint(
+                "Show lists and move between screens",
+                2,
+                "A recipe app with 50 recipes is slow and cramped because everything is on one screen.",
+                "Display a list of data with LazyColumn, then set up Navigation Compose to open a detail screen and return.",
+                "Build a two-screen app: a scrolling list and a detail screen for the item the user taps.",
+                "ordering"
+            ),
+            moduleBlueprint(
+                "Save data, debug, and share your app",
+                3,
+                "A habit tracker forgets everything when it closes, and a crash happens only after a certain button is pressed.",
+                "Save small values with DataStore, find a crash using Logcat and a breakpoint, and build a debug APK.",
+                "Add saved settings to your app, record one bug you found with Logcat or the debugger, and build an APK you can install on a phone.",
+                "debugging"
+            ),
+        ],
+        assignments: [
+            assignment(
+                "Interactive one-screen app",
+                "Build a one-screen Compose app, such as a tip calculator, unit converter, or score keeper, with a clear layout, a button, text input, and state that survives rotation.",
+                [3, 4]
+            ),
+            assignment(
+                "List and detail app",
+                "Build an app that shows a scrolling list of at least ten items and opens a detail screen when an item is tapped.",
+                [5, 6]
+            ),
+        ],
+        capstone: capstone(
+            "Your own Android app",
+            "Design and build an Android app of your choice with at least two screens, user input, state that survives rotation, a list, and saved data, then demo it on the emulator or a phone.",
+            [
+                "An Android Studio project that builds and runs",
+                "Two or more screens with navigation",
+                "User input, state, and a scrolling list",
+                "Saved data that persists after the app closes",
+                "A short demo and a note on one bug you fixed",
+            ]
+        ),
+    },
+    {
+        id: "course-28",
+        slug: "programming-with-scratch",
+        level: "absolute-beginner",
+        weeks: 6,
+        weeklyHours: 1.5,
+        liveSession: {
+            term: "fall-2026",
+            termLabel: "Fall 2026",
+            format: "Live online class",
+            meets: "Saturdays, 5:00–6:30 PM ET",
+            starts: "First week of November 2026",
+            weeks: 6,
+            minutesPerClass: 90,
+            continueWith: "course-03",
+            classTools: [
+                {
+                    name: "Scratch online editor",
+                    url: "https://scratch.mit.edu/projects/editor/",
+                    note: "Free in any modern browser, including Chromebooks. A free Scratch account saves projects online; without one, use File > Save to your computer.",
+                },
+                {
+                    name: "Scratch app (offline)",
+                    url: "https://scratch.mit.edu/download",
+                    note: "The free downloadable editor, for computers with a slow or unreliable internet connection.",
+                },
+            ],
+        },
+        summary:
+            "A six-week live class where young coders build animations, stories, and games in Scratch, ending with a game of their own design.",
+        description:
+            "Programming with Scratch is a live online class that meets once a week for 1.5 hours over six weeks. Students build in the free Scratch editor from the first class: moving sprites, animating them, reacting to keys and collisions, keeping score, and finally designing a game with levels. Each class ends with a project students can save, share, and keep improving at home.",
+        audience:
+            "Kids and beginners of any age who want to start coding by making games and animations, with no typing-heavy syntax.",
+        prerequisites: [
+            "No coding experience needed. Students should be comfortable using a mouse and keyboard.",
+        ],
+        recommendedPriorCourses: [],
+        outcomes: [
+            "Move, animate, and change sprites using coordinates, costumes, and events.",
+            "Use loops, conditions, sensing, and variables to make a project interactive.",
+            "Coordinate sprites with broadcasts, clones, and My Blocks.",
+            "Design, playtest, and share a complete game with levels.",
+        ],
+        tags: ["scratch", "animation", "creative-coding", "live-class", "fall-2026"],
+        icon: "puzzle",
+        accent: "#FFAB19",
+        primaryTool: tool(
+            "Scratch online editor",
+            "software",
+            "The free Scratch editor runs in a browser and can save projects to your computer without an account.",
+            [
+                "Open the Scratch editor in a browser.",
+                "Create a new project and find the sprite, stage, and block areas.",
+                "Use File > Save to your computer so your work is kept without an account.",
+            ],
+            "Make the cat sprite move ten steps when the green flag is clicked, then save the project file.",
+            "https://scratch.mit.edu/projects/editor/"
+        ),
+        simulators: [
+            simulator(
+                "scratch-class-lab",
+                "Scratch Class Lab",
+                "Practice event order, loops, and conditions away from the editor.",
+                ["Event order", "Loop tracing", "Condition checks"],
+                ["Does not reproduce every Scratch block."]
+            ),
+        ],
+        freeCompletionPromise:
+            "Scratch is free and runs in any modern browser, and projects can be saved to your computer without an account. Every class project and the final game are built in the free Scratch editor.",
+        coreModules: [
+            moduleBlueprint(
+                "Meet Scratch and move your sprites",
+                3,
+                "A story scene needs a character to walk onto the stage from the left and stop exactly in the middle.",
+                "Explore the editor, move a sprite with motion blocks, predict where x and y coordinates will place it, and switch costumes and backdrops.",
+                "Build a short scene where two sprites enter from different sides and stop at planned positions.",
+                "visualizer"
+            ),
+            moduleBlueprint(
+                "Animate with events and loops",
+                3,
+                "A dancing cat only moves once when the green flag is clicked, and its music plays at the wrong moment.",
+                "Start scripts with green flag, key, and click events, repeat motion with forever and repeat loops, and time sounds with wait blocks.",
+                "Create an animated greeting card where a key press starts music and a looping animation.",
+                "code-trace"
+            ),
+            moduleBlueprint(
+                "Make decisions and detect collisions",
+                2,
+                "In a maze game, the player sprite walks straight through the walls and off the edge of the stage.",
+                "Use if/else with touching, color, and key sensing blocks, and keep sprites on the stage with edge checks.",
+                "Build a maze where touching a wall sends the player back to the start.",
+                "debugging"
+            ),
+            moduleBlueprint(
+                "Keep score and send messages",
+                2,
+                "A catching game never shows a score, and the 'Game over' screen appears while the game is still running.",
+                "Create variables for score, lives, and a timer, and use broadcast messages so sprites react at the right time.",
+                "Add a score, a countdown timer, and a broadcast-driven game-over screen to a catching game.",
+                "simulator"
+            ),
+            moduleBlueprint(
+                "Use clones and My Blocks",
+                2,
+                "A space game needs twenty falling asteroids, and copying the same sprite twenty times makes every change painful.",
+                "Create clones with their own behavior, delete them when they leave the stage, and turn repeated scripts into My Blocks.",
+                "Make a wave of cloned enemies or collectibles that all share one script.",
+                "ordering"
+            ),
+            moduleBlueprint(
+                "Design, test, and share a game",
+                3,
+                "Friends who try your game finish it in thirty seconds and say it is too easy, then find a bug where the score goes negative.",
+                "Add levels and win or lose states, run a playtest with a checklist, and fix the bugs it uncovers.",
+                "Add a second level, playtest with someone else, fix two issues they find, and share or remix with credit.",
+                "design-review"
+            ),
+        ],
+        assignments: [
+            assignment(
+                "Animated story",
+                "Create an animated story or greeting card with at least two sprites, a backdrop change, sound, and a loop.",
+                [1, 2]
+            ),
+            assignment(
+                "Catch or dodge game",
+                "Build a game where the player catches or dodges objects, with collisions, a score variable, and a game-over message.",
+                [3, 4]
+            ),
+        ],
+        capstone: capstone(
+            "Your own Scratch game",
+            "Design and build an original Scratch game with instructions, a score or timer, collisions, clones, a My Block, and at least two levels, then present it to the class.",
+            [
+                "A saved Scratch project file or shared project link",
+                "Instructions, a score or timer, and win or lose states",
+                "Collisions, a clone, and a My Block",
+                "At least two levels",
+                "Playtest notes and one fix you made",
+            ]
+        ),
+    },
+    {
+        id: "course-29",
+        slug: "intermediate-ml-and-model-evaluation",
+        level: "intermediate",
+        weeks: 6,
+        weeklyHours: 1.5,
+        liveSession: {
+            term: "fall-2026",
+            termLabel: "Fall 2026",
+            format: "Live online class",
+            meets: "Sundays, 5:00–6:30 PM ET",
+            starts: "First week of November 2026",
+            weeks: 6,
+            minutesPerClass: 90,
+            continueWith: "course-19",
+            classTools: [
+                {
+                    name: "Google Colab",
+                    url: "https://colab.research.google.com/",
+                    note: "Free Python notebooks in the browser with pandas, scikit-learn, and matplotlib already installed. Needs a free Google account.",
+                },
+                {
+                    name: "JupyterLab on your computer",
+                    url: "https://jupyter.org/install",
+                    note: "A free option without a Google account: install Python, then run pip install jupyterlab pandas scikit-learn matplotlib.",
+                },
+                {
+                    name: "C4T ML Evaluation concept simulator",
+                    url: "/learn/tools/ml-evaluation-lab",
+                    note: "Explore how thresholds and class balance change metrics on any device. It models results; it does not train models.",
+                },
+            ],
+        },
+        summary:
+            "A six-week live class on evaluating machine learning models honestly with scikit-learn: baselines, pipelines, the right metrics, cross-validation, tuning, imbalance, and error analysis.",
+        description:
+            "Intermediate ML & Model Evaluation is a live online class that meets once a week for 1.5 hours over six weeks. Students who have trained a first model learn to tell whether it is actually good: start from a baseline, build leak-free pipelines, choose metrics that fit the problem, validate with cross-validation, compare and tune models, and check how errors are distributed before reporting results. Work happens in free Python notebooks such as Google Colab or JupyterLab; the C4T concept simulator on this site models metric trade-offs but does not train models.",
+        audience:
+            "High school students who know Python basics and have trained at least one simple model, and want to evaluate models the way practitioners do.",
+        prerequisites: [
+            "Python basics: variables, loops, functions, and lists",
+            "Some experience with pandas or training a first scikit-learn model",
+        ],
+        recommendedPriorCourses: ["course-16"],
+        outcomes: [
+            "Compare models against a baseline using a clean train/test workflow.",
+            "Build scikit-learn pipelines that prepare data without leaking information.",
+            "Choose, compute, and explain metrics, thresholds, and cross-validation results.",
+            "Tune and compare models, handle imbalance, and report errors and limitations honestly.",
+        ],
+        tags: [
+            "machine-learning",
+            "scikit-learn",
+            "evaluation",
+            "data",
+            "live-class",
+            "fall-2026",
+        ],
+        icon: "chart",
+        accent: "#22D3EE",
+        primaryTool: tool(
+            "C4T ML Evaluation Lab",
+            "compute",
+            "A guided concept simulator for metric, threshold, and class-balance trade-offs.",
+            [
+                "Open the lab and read the classification scenario.",
+                "Predict how changing the threshold will affect precision and recall.",
+                "Adjust one control and compare the result with your prediction.",
+            ],
+            "Explain why accuracy can look high while recall stays low on imbalanced data.",
+            "/learn/tools/ml-evaluation-lab"
+        ),
+        simulators: [
+            simulator(
+                "ml-evaluation-lab",
+                "ML Evaluation Lab",
+                "Model how thresholds and class balance change evaluation metrics.",
+                ["Threshold control", "Metric comparison", "Class balance"],
+                ["Does not train models or run notebooks."]
+            ),
+        ],
+        freeCompletionPromise:
+            "All class work runs in free tools: Google Colab with a free Google account, or JupyterLab installed locally with no account. The datasets used are public or synthetic, and no GPU, paid cloud service, or paid API is needed.",
+        coreModules: [
+            moduleBlueprint(
+                "Review the workflow and beat a baseline",
+                2,
+                "A team reports that their model is 90% accurate, but nobody checked what a model that always guesses the most common class would score.",
+                "Split data into training and test sets, train a DummyClassifier baseline and a first real model, and compare their scores.",
+                "Write a short report comparing your model with the baseline on the same test set.",
+                "data-lab"
+            ),
+            moduleBlueprint(
+                "Prepare data with leak-free pipelines",
+                3,
+                "A model scores well in testing but fails on new data because the scaler was fitted on the whole dataset before splitting.",
+                "Handle missing values, encode categories, and scale numbers inside a scikit-learn Pipeline and ColumnTransformer fitted only on training data.",
+                "Rebuild a leaky notebook as a single pipeline and show how the test score changes.",
+                "diagram"
+            ),
+            moduleBlueprint(
+                "Choose the right metrics",
+                2,
+                "A disease-screening model looks accurate but misses most of the people who are actually sick.",
+                "Read a confusion matrix, compute precision, recall, and F1, and move the decision threshold to see the trade-off.",
+                "Pick a metric and threshold for a real scenario and justify the choice in two or three sentences.",
+                "simulator"
+            ),
+            moduleBlueprint(
+                "Validate with cross-validation",
+                2,
+                "A model's score jumps between 70% and 88% depending on which random split is used.",
+                "Run k-fold cross-validation, report the mean and spread of scores, and use learning curves to diagnose overfitting or underfitting.",
+                "Report a cross-validated score with its variation and explain whether more data or a different model would help.",
+                "visualizer"
+            ),
+            moduleBlueprint(
+                "Compare and tune models",
+                2,
+                "A random forest beats a decision tree on one test split, but the comparison used different data for each model.",
+                "Compare several model types with the same cross-validation folds, then tune hyperparameters with GridSearchCV and RandomizedSearchCV.",
+                "Choose a final model from a fair, cross-validated comparison and record the search space you tried.",
+                "data-lab"
+            ),
+            moduleBlueprint(
+                "Handle imbalance and report results honestly",
+                3,
+                "A fraud model reports 99% accuracy on data where only 1% of transactions are fraud, and it performs much worse for one group of customers.",
+                "Use stratified splits and class weights for imbalance, compare errors across slices of the data, and write down the model's limits.",
+                "Write a one-page model report with metrics, slice results, known weaknesses, and a recommendation.",
+                "design-review"
+            ),
+        ],
+        assignments: [
+            assignment(
+                "Baseline and pipeline notebook",
+                "Build a notebook that compares a baseline with a real model, using a leak-free preprocessing pipeline on a public dataset.",
+                [1, 2]
+            ),
+            assignment(
+                "Metric and validation report",
+                "Evaluate a classifier with a confusion matrix, precision, recall, F1, a chosen threshold, and cross-validated scores, and explain what the numbers mean.",
+                [3, 4]
+            ),
+        ],
+        capstone: capstone(
+            "End-to-end model evaluation report",
+            "Choose a public dataset, build and tune at least two models in a leak-free pipeline, evaluate them with cross-validation and well-chosen metrics, analyze errors across slices, and present a recommendation with its limitations.",
+            [
+                "A notebook that runs from top to bottom",
+                "A baseline and at least two tuned models in pipelines",
+                "Cross-validated metrics with a justified threshold",
+                "Slice-based error analysis",
+                "A short written or spoken recommendation with limitations",
+            ]
+        ),
+    },
 ];
 
 const INTERNAL_TOOL_PREFIX = "/learn/tools/";
@@ -3595,8 +4200,10 @@ const normalizeSimulatorClaims = (definition) => ({
 
 const honestBlueprints = blueprints.map((blueprint) => ({
     ...blueprint,
+    // Scratch and the live classes describe their real tools themselves, so
+    // their descriptions are kept as written.
     description:
-        blueprint.id === "course-02"
+        blueprint.id === "course-02" || blueprint.liveSession
             ? blueprint.description
             : `${blueprint.summary} The course combines structured lessons, guided browser concept simulations, and learner-created project files made with freely installable or open tools described in the course instructions. ${NON_EXECUTION_NOTE}`,
     primaryTool: normalizeToolClaims(blueprint.primaryTool),

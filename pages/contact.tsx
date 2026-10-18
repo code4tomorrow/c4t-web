@@ -1,3 +1,4 @@
+import { withSiteAnnouncements } from "@utils/announcements";
 import Head from "next/head";
 import React, {
     FormEvent,
@@ -16,7 +17,7 @@ import { gql } from "graphql-request";
 import config from "config";
 import { INotificationFlag } from "common/interfaces/navigationFlag";
 import { IDepartmentContact } from "common/interfaces/departmentContact";
-import { makeStyles } from "tss-react/mui";
+import { makeStyles } from "@utils/tss";
 import clsx from "clsx";
 import BrandButton from "@components/BrandButton";
 import {
@@ -29,7 +30,7 @@ import { SEND_EMAIL } from "common/endpoints";
 import Loader from "@components/Loader";
 import { ISendEmailBody } from "./api/sendEmail";
 import { useStyles } from "styles/contact";
-import { useSetRecoilState } from "recoil";
+import { useSetAtom } from "@utils/store";
 import { snackBarState } from "@components/Snackbar/state";
 import { v1 } from "uuid";
 
@@ -44,7 +45,7 @@ const ContactPage: NextPageWithLayout<ContactProps> = ({
     const [departmentId, setDepartmentId] = useState<string | undefined>(
         departmentContacts[Math.floor(departmentContacts.length / 2)].sys.id
     );
-    const setSnackbar = useSetRecoilState(snackBarState);
+    const setSnackbar = useSetAtom(snackBarState);
 
     const [fullName, setFullName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
@@ -308,8 +309,10 @@ export async function getStaticProps() {
         }
     );
 
-    const notificationFlags: INotificationFlag[] =
-        response?.notificationFlagCollection?.items || [];
+    const notificationFlags: INotificationFlag[] = withSiteAnnouncements(
+        response?.notificationFlagCollection?.items || [],
+        { page: "/contact" }
+    );
     const departmentContacts = response?.contactCollection?.items || [];
 
     return {

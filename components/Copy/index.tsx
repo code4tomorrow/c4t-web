@@ -2,7 +2,7 @@ import { snackBarState } from "@components/Snackbar/state";
 import { CheckIcon, DuplicateIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import React, { useRef, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useSetAtom } from "@utils/store";
 import { v1 } from "uuid";
 
 interface CopyProps {
@@ -12,7 +12,7 @@ interface CopyProps {
 
 const Copy: React.FC<CopyProps> = ({ content, snackLabel = "Copied!" }) => {
     const [checked, setChecked] = useState(false);
-    const setSnackbar = useSetRecoilState(snackBarState);
+    const setSnackbar = useSetAtom(snackBarState);
 
     const checkTimeout = useRef<number>(-1);
 

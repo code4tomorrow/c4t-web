@@ -712,6 +712,11 @@ const buildCourse = (source, blueprint) => {
         topicOffset += module.topicCount;
         return buildCoreModule(courseBase, module, topics, index);
     });
+    if (topicOffset !== source.topics.length) {
+        throw new Error(
+            `${source.id}: core module topicCounts add up to ${topicOffset}, but the source curriculum lists ${source.topics.length} topics.`
+        );
+    }
 
     const partialCourse = {
         ...courseBase,
@@ -741,6 +746,14 @@ const buildCourse = (source, blueprint) => {
             screenReaderSummary: `${item.name} exposes every modeled control and result in text and can be completed with the keyboard.`,
         })),
         freeCompletionPromise: blueprint.freeCompletionPromise,
+        liveSession: blueprint.liveSession
+            ? {
+                  ...blueprint.liveSession,
+                  classTools: blueprint.liveSession.classTools.map(
+                      (item) => ({ ...item })
+                  ),
+              }
+            : null,
         sourceTopics: [...source.topics],
     };
     const capstoneModule = buildCapstoneModule(partialCourse, blueprint);
@@ -817,23 +830,47 @@ const buildCourse = (source, blueprint) => {
                 finalProjectWindow:
                     "Reserve the final 20% of the suggested schedule for the capstone and revision.",
             },
-            {
-                id: `${source.id}-weekly`,
-                type: "weekly",
-                estimatedTotalHours: partialCourse.estimatedTotalHours,
-                weeklyHours: blueprint.weeklyHours,
-                suggestedWeeks: blueprint.weeks,
-                releasePlan: modules.map(
-                    (module, index) =>
-                        `Week ${Math.min(index + 1, blueprint.weeks)}: ${
-                            module.title
-                        }`
-                ),
-                catchUpGuidance:
-                    "Previously released work remains available. Complete the setup and current prerequisite module before joining the newest release.",
-                finalProjectWindow:
-                    "The last scheduled week prioritizes capstone testing, feedback, revision, and reflection.",
-            },
+            blueprint.liveSession
+                ? {
+                      // One core module per live class, with setup before the
+                      // first class and the capstone after the last.
+                      id: `${source.id}-weekly`,
+                      type: "weekly",
+                      estimatedTotalHours: partialCourse.estimatedTotalHours,
+                      weeklyHours: blueprint.weeklyHours,
+                      suggestedWeeks: blueprint.weeks,
+                      releasePlan: [
+                          `Before week 1: ${setupModule.title}`,
+                          ...coreModules.map(
+                              (module, index) =>
+                                  `Week ${index + 1} live class: ${
+                                      module.title
+                                  }`
+                          ),
+                          `After week ${blueprint.weeks}: ${capstoneModule.title}`,
+                      ],
+                      catchUpGuidance:
+                          "Missed a class? Every week's lessons stay open here, so work through that module before the next class and bring questions to your instructor.",
+                      finalProjectWindow:
+                          "Plan the capstone during the last two weeks and present it after the final class.",
+                  }
+                : {
+                      id: `${source.id}-weekly`,
+                      type: "weekly",
+                      estimatedTotalHours: partialCourse.estimatedTotalHours,
+                      weeklyHours: blueprint.weeklyHours,
+                      suggestedWeeks: blueprint.weeks,
+                      releasePlan: modules.map(
+                          (module, index) =>
+                              `Week ${Math.min(index + 1, blueprint.weeks)}: ${
+                                  module.title
+                              }`
+                      ),
+                      catchUpGuidance:
+                          "Previously released work remains available. Complete the setup and current prerequisite module before joining the newest release.",
+                      finalProjectWindow:
+                          "The last scheduled week prioritizes capstone testing, feedback, revision, and reflection.",
+                  },
         ],
         certificateRules: {
             requiredLessonCompletionPercent: 100,

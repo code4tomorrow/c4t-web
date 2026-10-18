@@ -2,8 +2,8 @@ import React, { ReactElement, useEffect } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import { modalState } from "common/atoms";
-import { useRecoilState } from "recoil";
-import { makeStyles } from "tss-react/mui";
+import { useAtom } from "@utils/store";
+import { makeStyles } from "@utils/tss";
 
 export interface ModalProps {
     open: boolean;
@@ -18,7 +18,7 @@ const Modal: React.FC<ModalProps> = ({
     children,
     fullWidth = false,
 }) => {
-    const [_modalOpen, setModalOpen] = useRecoilState(modalState);
+    const [_modalOpen, setModalOpen] = useAtom(modalState);
 
     useEffect(() => {
         setModalOpen(open);

@@ -9,7 +9,7 @@ You need three things:
 | ------------------ | --------------------------------------- | ---------------------------------------- | ----------------- |
 | A database         | Stores accounts, progress, certificates | **Neon** (Postgres)                      | Free forever tier |
 | A sign-in method   | So learners can log in                  | **Email + password** (built in) and/or **GitHub OAuth** | Free |
-| A place to host it | To put it on the internet               | **Vercel**                               | Free Hobby tier   |
+| A place to host it | To put it on the internet               | **Vercel** (already set up for code4tomorrow.org) | Free Hobby tier   |
 
 You can do steps 1–5 and run everything on your own laptop first. Step 7
 (deploying) can wait until you're happy with it.
@@ -130,6 +130,10 @@ GITHUB_SECRET="abc123..."
 
 # Promoted to ADMIN on sign-in
 INITIAL_ADMIN_EMAILS="you@example.com"
+
+# Optional: lets /about read team roles live from Notion. Without it the page
+# shows the saved copy in data/ instead.
+NOTION_API_KEY="secret_..."
 ```
 
 To generate the secret, run this in Terminal and paste the output:
@@ -148,7 +152,7 @@ Run these three commands:
 
 ```bash
 npm run db:migrate      # creates all the tables in your Neon database
-npm run db:seed         # adds course settings and publishes 5 starter courses
+npm run db:seed         # adds course settings and publishes every course
 npm run dev             # starts the site
 ```
 
@@ -156,18 +160,32 @@ Open **http://localhost:3000/courses** — you should see the catalog.
 
 ### Make yourself an admin
 
-Add your email to `.env`:
+Add your email to `.env` (comma-separate several):
 
 ```bash
-INITIAL_ADMIN_EMAILS="you@example.com"
+INITIAL_ADMIN_EMAILS="shamsizafir@gmail.com,ishanya.malik@gmail.com"
 ```
 
-Then sign in at **http://localhost:3000/login** — you are promoted to admin
-automatically, and **/admin** is open. Grant everyone else their roles from
-**/admin/users**.
+Then sign in with **GitHub** (or an emailed sign-in link) using that email —
+you are promoted to admin automatically, and **/admin** is open. Email +
+password sign-ins are **not** promoted, because a password account never
+proves it owns the address; otherwise anyone could register an admin's email
+first.
 
-(If you would rather not use the env var, sign in first and then run
-`npm run db:make-admin -- you@example.com`.)
+If you signed up with email + password, either have an existing admin promote
+you, or run `npm run db:make-admin -- you@example.com`.
+
+### Add more admins
+
+Any admin can make someone else an admin:
+
+1. Have them create an account at /signup (or sign in with GitHub).
+2. Go to **/admin/users**, search for their email, and change their role to
+   **admin**. You'll be asked to confirm.
+
+Emails listed in `INITIAL_ADMIN_EMAILS` are founding admins: their admin role
+can't be removed from /admin/users, so nobody can lock them out. Take an email
+off the list to make it an ordinary account again.
 
 ### Preview the site as a student or teacher
 
@@ -194,49 +212,85 @@ flow yourself.
 
 ## Step 7 — Deploy to the internet (Vercel)
 
-1. Push your branch to GitHub.
-2. Go to **https://vercel.com**, sign in with GitHub, click **Add New…** →
-   **Project**, and import this repository.
-3. Before clicking Deploy, open **Environment Variables** and add every value
-   from your `.env`, **with these two changes**:
-    - `NEXTAUTH_URL` → your real Vercel URL, e.g.
-      `https://c4t-web.vercel.app` (no trailing slash)
-    - `NEXT_PUBLIC_SITE_URL` → the same URL
-4. Create a **second GitHub OAuth app** (step 3) using your Vercel URL, and use
-   its Client ID and secret in Vercel's environment variables.
-5. Click **Deploy**.
-6. After the first deploy, run the migration against production. Locally:
+### How the live site deploys
+
+code4tomorrow.org already runs on Vercel, in the team **c4t-website-team**,
+project **c4t-web**. That project is connected to the GitHub repo
+`code4tomorrow/c4t-web`, which you can confirm on GitHub: every commit on
+`master` has a "Vercel – c4t-web" check, and the deployments list shows
+`vercel[bot]` publishing to **Production**.
+
+So you don't need your own Vercel account to deploy:
+
+-   **Every push or merge to `master` goes live within a few minutes.** There's
+    no staging step in between.
+-   **Any other branch you push gets a preview deployment.** It has its own
+    `*.vercel.app` link (shown on the PR and in the branch's checks), so you
+    can click around before anything reaches the real site.
+
+### Environment variables, and when nobody can edit them
+
+Environment variables live in the Vercel project, and only members of the
+**c4t-website-team** Vercel team can change them. If nobody on that team is
+reachable, you can still ship: the site notices that its database and
+sign-in secret are missing and switches student accounts off cleanly
+(`lib/platform.ts`), while everything else goes live from a normal push to
+`master`. [GO_LIVE.md](GO_LIVE.md) has the two-stage plan for turning
+accounts on later in the same project.
+
+### Ship it
+
+1. Push your branch and open a pull request into `master`:
 
     ```bash
-    DATABASE_URL="your-neon-url" npm run db:migrate
-    DATABASE_URL="your-neon-url" npm run db:seed
+    git push -u origin online-modules
+    gh pr create --base master --head online-modules
     ```
 
-    (It's the same Neon database, so you may have already done this in step 6.)
+2. Open the PR's Vercel preview link and check it.
+3. Merge the PR. Vercel deploys `master` to code4tomorrow.org automatically.
 
-### One thing that will block the build
+### Contentful is still required
 
-This was already true before the learning platform existed: the site's original
-marketing pages (`/`, `/contact`, `/volunteer`, `/news`, `/internships`,
-`/jobboard`, `/learn`) fetch from **Contentful** at build time. Without valid
-Contentful keys, `npm run build` fails on those pages.
+The site's original marketing pages (`/`, `/contact`, `/volunteer`, `/news`,
+`/internships`, `/jobboard`, `/learn`) fetch from **Contentful** at build time,
+so `npm run build` fails without `CONTENTFUL_SPACE_ID`,
+`CONTENTFUL_ACCESS_TOKEN` and `CONTENTFUL_PREVIEW_ACCESS_TOKEN`. The live
+Vercel project already has them. The learning platform itself never touches
+Contentful.
 
-(`/about` is no longer one of them — the team and alumni directories now come
-from a checked-in snapshot in `data/`, refreshed with
-`npm run snapshot:directory`.)
+`/about` doesn't need Contentful. It reads team roles from Notion when
+`NOTION_API_KEY` is set and falls back to the saved copy in `data/`, so it
+builds either way.
 
-Everything in the learning platform builds fine without them — all 25 courses,
-`/login`, the dashboard, assignments, admin, and certificates.
+---
 
-So for a working deploy you need to either:
+## Session dates (the site updates itself)
 
--   **Add the existing keys** (recommended if you're keeping the current site):
-    `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ACCESS_TOKEN`,
-    and `CONTENTFUL_PREVIEW_ACCESS_TOKEN`. Ask whoever currently runs
-    code4tomorrow.org for these — they are the same values the live site
-    already uses.
--   **Or remove the pages you no longer want.** The learning platform itself
-    never touches Contentful.
+The homepage banner, the Fall/Winter cards, and the register buttons on the
+Courses page follow the dates in `utils/sessionSchedule.ts`. Edit a date
+there to move a deadline. Add `?asOf=2026-11-25` to any URL to see the site
+as it will look on that day. [GO_LIVE.md](GO_LIVE.md) lists what changes
+when.
+
+---
+
+## Editing the team page (/about)
+
+The team and alumni directories come from Notion. Change someone's position,
+department or projects there, and /about picks it up within about 15 minutes.
+There's nothing to redeploy.
+
+The page also keeps a saved copy in `data/team-directory.json` and
+`data/alumni-directory.json`. It uses that copy when Notion can't be reached.
+Refresh it every so often so the fallback stays current, then commit it:
+
+```bash
+npm run snapshot:directory
+```
+
+A Notion page with checkboxes on it is treated as internal notes, not a bio,
+and its text is never published.
 
 ---
 
@@ -261,7 +315,7 @@ signed up with. Verify a real domain to email anyone else. Also check spam.
 
 **"This course is not open for enrollment yet"**
 The course isn't published. Go to **/admin/courses** and click **Publish**, or
-run `npm run db:seed` which publishes five starter courses.
+run `npm run db:seed`, which publishes every course, including new ones.
 
 **I can't reach /admin**
 Run `npm run db:make-admin -- your@email.com` and sign out and back in.
@@ -282,8 +336,10 @@ npm run db:seed             # course settings + demo data (safe to re-run)
 npm run db:make-admin -- you@example.com [ROLE]
 npm run db:studio           # visual database browser
 
-npm run validate:curriculum # check all 25 courses are complete
+npm run validate:curriculum # check every course (self-paced and live) is complete
 npm run validate:learning   # check progress/completion rules
+
+npm run snapshot:directory  # save the Notion team/alumni directory to data/
 ```
 
 ## Roles

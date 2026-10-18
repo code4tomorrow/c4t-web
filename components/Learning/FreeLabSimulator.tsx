@@ -6,6 +6,8 @@ import type { FreeLabMode } from "./types";
 
 type CanonicalLabMode =
     | "logic-code"
+    | "android"
+    | "ml-evaluation"
     | "web"
     | "git"
     | "circuits"
@@ -83,6 +85,8 @@ const round = (value: number, digits = 1) => {
 
 const canonicalMode: Record<FreeLabMode, CanonicalLabMode> = {
     "logic-code": "logic-code",
+    android: "android",
+    "ml-evaluation": "ml-evaluation",
     web: "web",
     git: "git",
     hardware: "circuits",
@@ -165,6 +169,207 @@ const presets: Record<CanonicalLabMode, LabPreset> = {
                             (index + 1) * increment
                         }`
                 ),
+            };
+        },
+    },
+    android: {
+        label: "Android",
+        title: "Screen rotation state lab",
+        description:
+            "Tap a counter, rotate the virtual phone, and see which Jetpack Compose state holders keep their value when Android recreates the Activity. This models the lifecycle; it does not run Android Studio or an emulator.",
+        challenge:
+            "After the rotations, will the counter still show your taps, or reset to 0?",
+        controls: [
+            {
+                id: "taps",
+                label: "Taps before rotating",
+                help: "How many times the learner pressed the + button.",
+                min: 0,
+                max: 10,
+                step: 1,
+                initial: 3,
+            },
+            {
+                id: "rotations",
+                label: "Screen rotations",
+                help: "Each rotation is a configuration change that destroys and recreates the Activity.",
+                min: 0,
+                max: 3,
+                step: 1,
+                initial: 1,
+            },
+            {
+                id: "holder",
+                label: "Where the count is stored",
+                help: "0 = remember { mutableStateOf(0) }, 1 = rememberSaveable { mutableStateOf(0) }, 2 = a ViewModel property.",
+                min: 0,
+                max: 2,
+                step: 1,
+                initial: 0,
+            },
+        ],
+        predictions: [
+            { value: "keeps", label: "Keeps the tap count" },
+            { value: "resets", label: "Resets to 0" },
+        ],
+        evaluate: (values) => {
+            const taps = getValue(values, "taps");
+            const rotations = getValue(values, "rotations");
+            const holder = getValue(values, "holder");
+            const holderLabel =
+                holder === 0
+                    ? "remember { mutableStateOf(0) }"
+                    : holder === 1
+                    ? "rememberSaveable { mutableStateOf(0) }"
+                    : "ViewModel property";
+            const answer = rotations > 0 && holder === 0 ? "resets" : "keeps";
+            const shown = answer === "resets" ? 0 : taps;
+            const rotationTrace = Array.from(
+                { length: rotations },
+                (_, index) =>
+                    `Rotation ${
+                        index + 1
+                    }: onPause → onStop → onDestroy, then a new Activity runs onCreate → onStart → onResume`
+            );
+            return {
+                answer,
+                outcome:
+                    answer === "resets"
+                        ? "Counter reset to 0"
+                        : `Counter still shows ${taps}`,
+                explanation:
+                    rotations === 0
+                        ? "Without a configuration change the Activity is never recreated, so every state holder keeps its value. Rotate at least once to see the difference."
+                        : holder === 0
+                        ? "remember keeps a value across recompositions, but rotating the screen destroys the Activity and its composition. The new composition starts from mutableStateOf(0) again."
+                        : holder === 1
+                        ? "rememberSaveable writes the value into the saved instance state before the Activity is destroyed and restores it in the new one."
+                        : "A ViewModel lives outside the Activity and is kept across configuration changes, so the new Activity reconnects to the same ViewModel and its count.",
+                tone: answer === "resets" ? "warning" : "success",
+                metrics: [
+                    { label: "Counter shown", value: String(shown) },
+                    {
+                        label: "Activities created",
+                        value: String(1 + rotations),
+                    },
+                    { label: "State holder", value: holderLabel },
+                ],
+                trace: [
+                    "App launch: onCreate → setContent { CounterScreen() }",
+                    `Learner tapped + ${taps} time${
+                        taps === 1 ? "" : "s"
+                    }: count = ${taps}`,
+                    ...rotationTrace,
+                    rotations === 0
+                        ? `No configuration change: count stays ${taps}`
+                        : `${holderLabel} → count = ${shown}`,
+                ],
+            };
+        },
+    },
+    "ml-evaluation": {
+        label: "ML evaluation",
+        title: "Threshold and imbalance lab",
+        description:
+            "Change how rare the positive class is and where the decision threshold sits, then compare the modeled classifier with a baseline that always predicts 'no'. The classifier's behavior is a fixed teaching formula; this page does not train or run a model.",
+        challenge:
+            "Will the modeled classifier's accuracy beat a baseline that always predicts 'no'?",
+        controls: [
+            {
+                id: "positives",
+                label: "Positive cases per 100",
+                help: "How common the class you care about is, for example sick patients or fraud.",
+                min: 1,
+                max: 50,
+                step: 1,
+                initial: 10,
+            },
+            {
+                id: "threshold",
+                label: "Decision threshold",
+                help: "Predict 'yes' when the modeled score is at or above this value. Lower thresholds catch more positives and raise more false alarms.",
+                min: 10,
+                max: 90,
+                step: 5,
+                initial: 50,
+                unit: "%",
+            },
+        ],
+        predictions: [
+            { value: "beats", label: "Beats the baseline" },
+            { value: "loses", label: "Baseline wins on accuracy" },
+        ],
+        evaluate: (values) => {
+            const total = 1000;
+            const positives = Math.round(
+                (getValue(values, "positives", 10) / 100) * total
+            );
+            const negatives = total - positives;
+            const threshold = getValue(values, "threshold", 50) / 100;
+            // Teaching formula: recall falls and false alarms fall as the
+            // threshold rises.
+            const recallRate = Math.min(Math.max(1.1 - threshold, 0), 1);
+            const falseAlarmRate = Math.min(
+                Math.max((1 - threshold) * 0.4, 0),
+                1
+            );
+            const tp = Math.round(recallRate * positives);
+            const fn = positives - tp;
+            const fp = Math.round(falseAlarmRate * negatives);
+            const tn = negatives - fp;
+            const accuracy = (tp + tn) / total;
+            const baseline = negatives / total;
+            const precision = tp + fp === 0 ? 0 : tp / (tp + fp);
+            const recall = positives === 0 ? 0 : tp / positives;
+            const f1 =
+                precision + recall === 0
+                    ? 0
+                    : (2 * precision * recall) / (precision + recall);
+            const pct = (value: number) => `${round(value * 100)}%`;
+            const answer = accuracy > baseline ? "beats" : "loses";
+            return {
+                answer,
+                outcome:
+                    answer === "beats"
+                        ? `Accuracy ${pct(accuracy)} beats the ${pct(
+                              baseline
+                          )} baseline`
+                        : `Baseline ${pct(baseline)} beats accuracy ${pct(
+                              accuracy
+                          )}`,
+                explanation:
+                    answer === "beats"
+                        ? `The classifier is more accurate than always saying 'no', and it finds ${pct(
+                              recall
+                          )} of the positives, which the baseline never does. Check precision too: ${fp} of its ${
+                              tp + fp
+                          } 'yes' predictions are false alarms.`
+                        : `When positives are rare, always saying 'no' is already ${pct(
+                              baseline
+                          )} accurate while catching none of them. Accuracy alone hides that; precision (${pct(
+                              precision
+                          )}), recall (${pct(
+                              recall
+                          )}), and F1 show what the classifier actually does.`,
+                tone: answer === "beats" ? "success" : "warning",
+                metrics: [
+                    { label: "Accuracy", value: pct(accuracy) },
+                    { label: "Always-'no' baseline", value: pct(baseline) },
+                    { label: "Precision", value: pct(precision) },
+                    { label: "Recall", value: pct(recall) },
+                    { label: "F1", value: pct(f1) },
+                ],
+                trace: [
+                    `Modeled ${total} cases: ${positives} positive, ${negatives} negative`,
+                    `Threshold ${pct(threshold)}: predicted 'yes' for ${
+                        tp + fp
+                    } cases`,
+                    `Confusion matrix: TP ${tp}, FN ${fn}, FP ${fp}, TN ${tn}`,
+                    `Accuracy (TP + TN) / ${total} = ${pct(accuracy)}`,
+                    `Baseline always predicts 'no': ${negatives} / ${total} = ${pct(
+                        baseline
+                    )}`,
+                ],
             };
         },
     },

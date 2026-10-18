@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { Session } from "next-auth";
 import type { ZodType } from "zod";
 import { getSession } from "./auth";
+import { accountsEnabled } from "./platform";
 import { resolveEffectiveRole } from "./view-as";
 
 export class ApiError extends Error {
@@ -26,6 +27,19 @@ export const notFound = (message = "Not found.") =>
     new ApiError(404, message, "not_found");
 export const conflict = (message: string, code?: string) =>
     new ApiError(409, message, code);
+/** Thrown by account routes on a deployment without a database. */
+export const accountsUnavailable = () =>
+    new ApiError(
+        503,
+        "Student accounts aren't available on this site yet.",
+        "accounts_unavailable"
+    );
+
+/** Call first in any public route that touches accounts. */
+export const assertAccountsEnabled = () => {
+    if (!accountsEnabled()) throw accountsUnavailable();
+};
+
 export const tooManyRequests = (message = "Too many requests. Slow down.") =>
     new ApiError(429, message, "rate_limited");
 
@@ -108,6 +122,7 @@ export const authedRoute = (
     requiredRoles?: Role[]
 ) => {
     return route(methods, async ({ req, res }) => {
+        assertAccountsEnabled();
         const session = await getSession(req, res);
 
         if (!session?.user?.id) throw unauthorized();
