@@ -1,8 +1,4 @@
 import { describe, expect, it } from "vitest";
-import {
-    labModeForCourse,
-    labModeForToolSlug,
-} from "@components/Learning/labMode";
 import { courseRegistry } from "learning/course-registry";
 import { learningPaths } from "learning/learning-paths";
 
@@ -74,43 +70,5 @@ describe("Fall 2026 live classes", () => {
         courseRegistry
             .filter((course) => Number(course.id.slice(-2)) <= 25)
             .forEach((course) => expect(course.liveSession).toBeNull());
-    });
-});
-
-describe("lab selection", () => {
-    it("shows the same lab in lessons as on the course's tool page", () => {
-        courseRegistry.forEach((course) => {
-            const url = course.requirements[0].freePath.url || "";
-            if (!url.startsWith("/learn/tools/")) return;
-            expect(labModeForCourse(course.requirements)).toBe(
-                labModeForToolSlug(url.slice("/learn/tools/".length))
-            );
-        });
-    });
-
-    it("gives each class a lab that fits its subject", () => {
-        expect(labModeForCourse(byId("course-27").requirements)).toBe(
-            "android"
-        );
-        expect(labModeForCourse(byId("course-29").requirements)).toBe(
-            "ml-evaluation"
-        );
-        expect(labModeForCourse(byId("course-26").requirements)).toBe(
-            "logic-code"
-        );
-        // Scratch is built in the external editor, so it uses the general
-        // events/loops tracer rather than the Unity physics lab.
-        expect(labModeForCourse(byId("course-28").requirements)).toBe(
-            "logic-code"
-        );
-        expect(labModeForCourse(byId("course-02").requirements)).toBe(
-            "logic-code"
-        );
-    });
-
-    it("gives the self-paced ML courses the data and ML lab", () => {
-        ["course-15", "course-16", "course-19", "course-20"].forEach((id) =>
-            expect(labModeForCourse(byId(id).requirements)).toBe("data-ml")
-        );
     });
 });

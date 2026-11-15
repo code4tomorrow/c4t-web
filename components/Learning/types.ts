@@ -86,25 +86,3 @@ export interface ModuleOutlineItem {
     initiallyExpanded?: boolean;
 }
 
-export type FreeLabMode =
-    | "logic-code"
-    | "android"
-    | "ml-evaluation"
-    | "web"
-    | "git"
-    | "hardware"
-    | "circuits"
-    | "microbit"
-    | "gpio"
-    | "iot"
-    | "gpio-iot"
-    | "tinyml"
-    | "data"
-    | "ml"
-    | "data-ml"
-    | "unity"
-    | "game-physics"
-    | "unity-physics"
-    | "agent"
-    | "tool-workflow"
-    | "agent-tools";

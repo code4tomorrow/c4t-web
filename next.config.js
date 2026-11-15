@@ -99,6 +99,13 @@ const nextConfig = {
             // /courses/home; deeper paths are handled by the [...slug]
             // tombstone route, but a single segment would 404 in
             // [courseSlug].tsx before reaching it, so it is redirected here.
+            // The browser concept simulators were retired; send old links
+            // to the course catalog.
+            {
+                source: "/learn/tools/:path*",
+                destination: "/courses",
+                permanent: true,
+            },
             {
                 source: "/courses/home",
                 destination: "/courses",

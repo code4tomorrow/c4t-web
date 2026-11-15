@@ -27,7 +27,6 @@ interface CourseSummary {
     moduleCount: number;
     lessonCount: number;
     assignmentCount: number;
-    hasSimulator: boolean;
     isHardwareCourse: boolean;
     freeCompletionPromise: string;
     live: {
@@ -156,11 +155,6 @@ const CourseCatalogCard: React.FC<{ course: CourseSummary }> = ({ course }) => {
                     </span>
                     <div className="flex flex-wrap justify-end gap-2">
                         <CourseBadge tone="green">$0 required</CourseBadge>
-                        {course.hasSimulator && (
-                            <CourseBadge tone="blue">
-                                Free simulator
-                            </CourseBadge>
-                        )}
                     </div>
                 </div>
 
@@ -181,7 +175,7 @@ const CourseCatalogCard: React.FC<{ course: CourseSummary }> = ({ course }) => {
                 <div className="mt-auto pt-6">
                     <p className="mb-4 text-xs leading-5 text-medium-grey">
                         {course.isHardwareCourse
-                            ? "Complete every activity with the included browser simulator—physical hardware is optional."
+                            ? "Physical hardware is optional for this course."
                             : course.freeCompletionPromise}
                     </p>
                     <Link
@@ -343,9 +337,7 @@ const Courses: React.FC<CoursesProps> = ({ courses, liveTerms, paths }) => {
 
     const [query, setQuery] = useState("");
     const [level, setLevel] = useState<"all" | CourseLevel>("all");
-    const [access, setAccess] = useState<"all" | "simulator" | "hardware">(
-        "all"
-    );
+    const [access, setAccess] = useState<"all" | "hardware">("all");
 
     const filteredCourses = useMemo(() => {
         const normalizedQuery = query.trim().toLowerCase();
@@ -364,7 +356,6 @@ const Courses: React.FC<CoursesProps> = ({ courses, liveTerms, paths }) => {
             const matchesLevel = level === "all" || course.level === level;
             const matchesAccess =
                 access === "all" ||
-                (access === "simulator" && course.hasSimulator) ||
                 (access === "hardware" && course.isHardwareCourse);
             return matchesQuery && matchesLevel && matchesAccess;
         });
@@ -398,11 +389,10 @@ const Courses: React.FC<CoursesProps> = ({ courses, liveTerms, paths }) => {
                             </span>
                         </h1>
                         <p className="mt-5 max-w-3xl text-base leading-7 text-[#C7C3CE] sm:text-lg">
-                            Every course starts with a guided requirements and
-                            setup module. You will always find a complete free
-                            path—including browser simulators when hardware,
-                            cloud compute, GPUs, or paid AI APIs would otherwise
-                            be needed.
+                            Every course starts with a setup module that walks
+                            you through installing free tools. Nothing in any
+                            course requires paying for software, hardware, or
+                            cloud services.
                         </p>
                         <div className="mt-6 flex flex-wrap gap-3">
                             {process.env.NEXT_PUBLIC_ACCOUNTS_ENABLED !==
@@ -596,9 +586,6 @@ const Courses: React.FC<CoursesProps> = ({ courses, liveTerms, paths }) => {
                                         <option value="all">
                                             All free pathways
                                         </option>
-                                        <option value="simulator">
-                                            Includes simulator
-                                        </option>
                                         <option value="hardware">
                                             Hardware courses
                                         </option>
@@ -721,7 +708,6 @@ export async function getStaticProps() {
                 0
             ),
             assignmentCount: course.assignments.length,
-            hasSimulator: course.simulators.length > 0,
             isHardwareCourse: course.requirements.some(
                 (requirement) => requirement.category === "hardware"
             ),

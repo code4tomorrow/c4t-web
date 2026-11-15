@@ -25,12 +25,6 @@ export type {
 export { default as RequirementsSetup } from "./RequirementsSetup";
 export type { RequirementsSetupProps } from "./RequirementsSetup";
 
-export { default as FreeLabSimulator } from "./FreeLabSimulator";
-export type {
-    FreeLabCompletion,
-    FreeLabSimulatorProps,
-} from "./FreeLabSimulator";
-
 export { default as ModuleLessonOutline } from "./ModuleLessonOutline";
 export type { ModuleLessonOutlineProps } from "./ModuleLessonOutline";
 
@@ -48,7 +42,6 @@ export type {
     CourseBadgeTone,
     CourseDifficulty,
     CourseRequirement,
-    FreeLabMode,
     FreeSetupPath,
     LessonOutlineItem,
     LessonStatus,

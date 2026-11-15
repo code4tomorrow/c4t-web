@@ -1,12 +1,7 @@
 import CourseAttribution from "@components/Learning/CourseAttribution";
-import FreeLabSimulator from "@components/Learning/FreeLabSimulator";
-import { labModeForCourse } from "@components/Learning/labMode";
 import { LearningProgressBar } from "@components/Learning/LearningProgress";
 import ModuleLessonOutline from "@components/Learning/ModuleLessonOutline";
-import type {
-    FreeLabMode,
-    ModuleOutlineItem,
-} from "@components/Learning/types";
+import type { ModuleOutlineItem } from "@components/Learning/types";
 import { useActiveTime, useServerProgress } from "hooks/useServerProgress";
 import type { Course, CourseModule, Lesson } from "learning/course-models";
 import { getCourseBySlug } from "learning/course-registry";
@@ -19,6 +14,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { requireAuth } from "lib/guards";
 import { getCourseSnapshot } from "lib/learner";
 import { accountsEnabled } from "lib/platform";
+import { loadLessonHtml } from "lib/lesson-content";
 
 type LessonOutlineRecord = Pick<
     Lesson,
@@ -35,7 +31,8 @@ type LessonOutlineModule = Pick<
 };
 
 type LessonCourse = Pick<Course, "id" | "slug" | "title" | "tags"> & {
-    labMode: FreeLabMode;
+    /** Live classes label modules by week instead of number. */
+    live: boolean;
     modules: LessonOutlineModule[];
 };
 
@@ -43,6 +40,8 @@ interface LessonPageProps {
     course: LessonCourse;
     moduleId: string;
     lesson: Lesson;
+    /** Rendered hand-written lesson (learning/lesson-content), if there is one. */
+    contentHtml: string | null;
     /** lessonId -> interaction ids the server has recorded as finished. */
     completedByLesson: Record<string, string[]>;
     completedLessonIds: string[];
@@ -67,7 +66,7 @@ const toLessonCourse = (course: Course): LessonCourse => ({
     slug: course.slug,
     title: course.title,
     tags: course.tags,
-    labMode: labModeForCourse(course.requirements),
+    live: Boolean(course.liveSession),
     modules: course.modules.map((module) => ({
         id: module.id,
         order: module.order,
@@ -90,6 +89,7 @@ const LessonPage: React.FC<LessonPageProps> = ({
     completedByLesson,
     completedLessonIds,
     readOnly,
+    contentHtml,
 }) => {
     const router = useRouter();
     const lessonId = lesson.id;
@@ -121,10 +121,6 @@ const LessonPage: React.FC<LessonPageProps> = ({
     const next = flatLessons[currentIndex + 1];
     // Completion is whatever the server last told us.
     const lessonComplete = Boolean(progress.completedAt);
-    const interactionComplete = progress.completedInteractionIds.includes(
-        lesson.interaction.id
-    );
-    const canCompleteLesson = lessonComplete || interactionComplete;
 
     const completedSet = useMemo(
         () => new Set(completedLessonIds),
@@ -174,16 +170,7 @@ const LessonPage: React.FC<LessonPageProps> = ({
         })),
     }));
 
-    const completeInteraction = () => {
-        // Read-only lessons have no account to save to.
-        if (readOnly) return;
-        // The server records the interaction and decides whether that
-        // completes the lesson; we render whatever it returns.
-        void saveInteraction(lesson.interaction.id);
-    };
-
     const completeLesson = async () => {
-        if (!canCompleteLesson) return;
         const saved = await saveInteraction(lesson.interaction.id);
         if (saved && next) {
             await router.push(
@@ -191,8 +178,6 @@ const LessonPage: React.FC<LessonPageProps> = ({
             );
         }
     };
-
-    const { labMode } = course;
 
     return (
         <div className="min-h-screen w-full bg-dark-grey-primary text-white">
@@ -268,16 +253,22 @@ const LessonPage: React.FC<LessonPageProps> = ({
                                 <strong className="text-amber-100">
                                     Account access coming soon.
                                 </strong>{" "}
-                                You can read every lesson and use the labs now.
-                                Once accounts open, you&apos;ll be able to save
-                                your progress, submit assignments, and earn a
-                                certificate.
+                                You can read every lesson now. Once accounts
+                                open, you&apos;ll be able to save your progress,
+                                submit assignments, and earn a certificate.
                             </div>
                         )}
                         <header className="border-b border-white/10 pb-7">
                             <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-purple-secondary">
-                                Module {currentModule.order} · Lesson{" "}
-                                {lesson.order}
+                                {course.live
+                                    ? currentModule.order === 1
+                                        ? "Before week 1"
+                                        : currentModule.order ===
+                                          course.modules.length
+                                        ? "Capstone"
+                                        : `Week ${currentModule.order - 1}`
+                                    : `Module ${currentModule.order}`}{" "}
+                                · Lesson {lesson.order}
                             </p>
                             <h1 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl">
                                 {lesson.title}
@@ -302,235 +293,200 @@ const LessonPage: React.FC<LessonPageProps> = ({
                             </div>
                         </header>
 
-                        <section
-                            aria-labelledby="challenge-heading"
-                            className="mt-8 rounded-2xl border border-brand-purple-secondary/40 bg-brand-purple-secondary/[0.08] p-5 sm:p-7"
-                        >
-                            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-purple-secondary">
-                                Start with a challenge
-                            </p>
-                            <h2
-                                id="challenge-heading"
-                                className="mt-2 text-2xl font-bold"
-                            >
-                                Predict before you explore
-                            </h2>
-                            <p className="mt-3 text-base leading-7 text-[#D6D3DC]">
-                                {lesson.motivatingScenario}
-                            </p>
-                        </section>
-
-                        <section
-                            aria-labelledby="explanation-heading"
-                            className="mt-10"
-                        >
-                            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-purple-secondary">
-                                Core idea
-                            </p>
-                            <h2
-                                id="explanation-heading"
-                                className="mt-2 text-2xl font-bold"
-                            >
-                                Understand the concept
-                            </h2>
-                            <p className="mt-4 whitespace-pre-line text-base leading-8 text-[#D6D3DC]">
-                                {lesson.explanation}
-                            </p>
-                        </section>
-
-                        <section
-                            aria-labelledby="example-heading"
-                            className="mt-10 rounded-2xl border border-white/10 bg-dark-grey-secondary p-5 sm:p-7"
-                        >
-                            <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">
-                                Worked example
-                            </p>
-                            <h2
-                                id="example-heading"
-                                className="mt-2 text-2xl font-bold"
-                            >
-                                {lesson.workedExample.title}
-                            </h2>
-                            <p className="mt-3 text-sm leading-7 text-[#C7C3CE]">
-                                {lesson.workedExample.context}
-                            </p>
-                            <ol className="mt-5 space-y-3">
-                                {lesson.workedExample.steps.map(
-                                    (step, index) => (
-                                        <li
-                                            key={`${lesson.id}-step-${index}`}
-                                            className="flex gap-3 text-sm leading-7 text-[#D6D3DC]"
-                                        >
-                                            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-purple-primary/25 font-bold text-[#D8D3FF]">
-                                                {index + 1}
-                                            </span>
-                                            <span>{step}</span>
-                                        </li>
-                                    )
-                                )}
-                            </ol>
-                            <p className="mt-5 rounded-xl bg-dark-grey-primary/50 p-4 text-sm leading-7 text-white">
-                                <strong>Result:</strong>{" "}
-                                {lesson.workedExample.result}
-                            </p>
-                        </section>
-
-                        <section
-                            aria-labelledby="lab-heading"
-                            className="mt-10"
-                        >
-                            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-purple-secondary">
-                                Guided practice
-                            </p>
-                            <h2
-                                id="lab-heading"
-                                className="mt-2 text-2xl font-bold"
-                            >
-                                {lesson.interaction.title}
-                            </h2>
-                            <p className="mt-3 text-base leading-7 text-[#D6D3DC]">
-                                {lesson.interaction.prompt}
-                            </p>
-                            <ol className="mt-4 list-inside list-decimal space-y-2 text-sm leading-7 text-[#C7C3CE]">
-                                {lesson.interaction.instructions.map(
-                                    (instruction) => (
-                                        <li key={instruction}>{instruction}</li>
-                                    )
-                                )}
-                            </ol>
-                            <FreeLabSimulator
-                                className="mt-6"
-                                mode={labMode}
-                                onComplete={completeInteraction}
-                            />
+                        {contentHtml ? (
                             <div
-                                className="mt-4 min-h-[24px] text-sm"
-                                aria-live="polite"
-                            >
-                                {saving && (
-                                    <p className="text-medium-grey">
-                                        Saving your progress…
+                                className="lesson-prose mt-8"
+                                // Rendered at build time from the course's own
+                                // Markdown (scripts/build-lesson-content.js),
+                                // which escapes any raw HTML.
+                                dangerouslySetInnerHTML={{
+                                    __html: contentHtml,
+                                }}
+                            />
+                        ) : (
+                            <>
+                                <section
+                                    aria-labelledby="challenge-heading"
+                                    className="mt-8 rounded-2xl border border-brand-purple-secondary/40 bg-brand-purple-secondary/[0.08] p-5 sm:p-7"
+                                >
+                                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-purple-secondary">
+                                        Start with a challenge
                                     </p>
-                                )}
-                                {!saving && progressError && (
-                                    <p className="text-red-300" role="alert">
-                                        {progressError} Your work is safe —
-                                        finish the lab again to retry.
+                                    <h2
+                                        id="challenge-heading"
+                                        className="mt-2 text-2xl font-bold"
+                                    >
+                                        Predict before you explore
+                                    </h2>
+                                    <p className="mt-3 text-base leading-7 text-[#D6D3DC]">
+                                        {lesson.motivatingScenario}
                                     </p>
-                                )}
-                                {!saving &&
-                                    !progressError &&
-                                    interactionComplete && (
-                                        <p className="text-emerald-200">
-                                            {lesson.interaction.successFeedback}
+                                </section>
+
+                                <section
+                                    aria-labelledby="explanation-heading"
+                                    className="mt-10"
+                                >
+                                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-purple-secondary">
+                                        Core idea
+                                    </p>
+                                    <h2
+                                        id="explanation-heading"
+                                        className="mt-2 text-2xl font-bold"
+                                    >
+                                        Understand the concept
+                                    </h2>
+                                    <p className="mt-4 whitespace-pre-line text-base leading-8 text-[#D6D3DC]">
+                                        {lesson.explanation}
+                                    </p>
+                                </section>
+
+                                <section
+                                    aria-labelledby="example-heading"
+                                    className="mt-10 rounded-2xl border border-white/10 bg-dark-grey-secondary p-5 sm:p-7"
+                                >
+                                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">
+                                        Worked example
+                                    </p>
+                                    <h2
+                                        id="example-heading"
+                                        className="mt-2 text-2xl font-bold"
+                                    >
+                                        {lesson.workedExample.title}
+                                    </h2>
+                                    <p className="mt-3 text-sm leading-7 text-[#C7C3CE]">
+                                        {lesson.workedExample.context}
+                                    </p>
+                                    <ol className="mt-5 space-y-3">
+                                        {lesson.workedExample.steps.map(
+                                            (step, index) => (
+                                                <li
+                                                    key={`${lesson.id}-step-${index}`}
+                                                    className="flex gap-3 text-sm leading-7 text-[#D6D3DC]"
+                                                >
+                                                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-purple-primary/25 font-bold text-[#D8D3FF]">
+                                                        {index + 1}
+                                                    </span>
+                                                    <span>{step}</span>
+                                                </li>
+                                            )
+                                        )}
+                                    </ol>
+                                    <p className="mt-5 rounded-xl bg-dark-grey-primary/50 p-4 text-sm leading-7 text-white">
+                                        <strong>Result:</strong>{" "}
+                                        {lesson.workedExample.result}
+                                    </p>
+                                </section>
+
+                                <section
+                                    aria-labelledby="practice-heading"
+                                    className="mt-10 rounded-2xl border border-white/10 bg-dark-grey-secondary p-5 sm:p-7"
+                                >
+                                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-purple-secondary">
+                                        Independent practice
+                                    </p>
+                                    <h2
+                                        id="practice-heading"
+                                        className="mt-2 text-2xl font-bold"
+                                    >
+                                        Apply it yourself
+                                    </h2>
+                                    <p className="mt-3 text-base leading-7 text-[#D6D3DC]">
+                                        {lesson.practiceTask}
+                                    </p>
+                                    <label className="mt-5 block text-sm font-bold text-white">
+                                        What did you try, observe, or change?
+                                        <textarea
+                                            value={reflection}
+                                            onChange={(event) =>
+                                                setReflection(
+                                                    event.target.value
+                                                )
+                                            }
+                                            rows={5}
+                                            className="mt-2 w-full rounded-xl border border-white/15 bg-dark-grey-primary p-3 font-normal leading-6 text-white outline-none placeholder:text-dim-grey focus:border-brand-purple-secondary focus:ring-2 focus:ring-brand-purple-secondary/30"
+                                            placeholder="Write a short reflection for yourself. Nothing is uploaded."
+                                        />
+                                    </label>
+                                    <p className="mt-3 text-xs leading-5 text-medium-grey">
+                                        Your reflection stays in this page and
+                                        is never sent to a server. Copy it into
+                                        your project notes if you want to keep
+                                        it.
+                                    </p>
+                                </section>
+
+                                <section
+                                    aria-labelledby="checkpoint-heading"
+                                    className="mt-10 rounded-2xl border border-emerald-500/30 bg-emerald-500/[0.06] p-5 sm:p-7"
+                                >
+                                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">
+                                        Checkpoint
+                                    </p>
+                                    <h2
+                                        id="checkpoint-heading"
+                                        className="mt-2 text-2xl font-bold"
+                                    >
+                                        Confirm your understanding
+                                    </h2>
+                                    <p className="mt-3 text-base leading-7 text-[#D6D3DC]">
+                                        {lesson.checkpoint.prompt}
+                                    </p>
+                                    <ul className="mt-4 space-y-2">
+                                        {lesson.checkpoint.successCriteria.map(
+                                            (criterion) => (
+                                                <li
+                                                    key={criterion}
+                                                    className="flex gap-3 text-sm leading-7 text-[#D6D3DC]"
+                                                >
+                                                    <span
+                                                        aria-hidden="true"
+                                                        className="text-emerald-300"
+                                                    >
+                                                        ✓
+                                                    </span>
+                                                    <span>{criterion}</span>
+                                                </li>
+                                            )
+                                        )}
+                                    </ul>
+                                    <p className="mt-4 text-sm leading-7 text-emerald-100">
+                                        {lesson.checkpoint.feedback}
+                                    </p>
+                                </section>
+
+                                <section
+                                    aria-labelledby="summary-heading"
+                                    className="mt-10"
+                                >
+                                    <h2
+                                        id="summary-heading"
+                                        className="text-2xl font-bold"
+                                    >
+                                        Lesson summary
+                                    </h2>
+                                    <p className="mt-3 text-base leading-8 text-[#D6D3DC]">
+                                        {lesson.summary}
+                                    </p>
+                                    <p className="mt-3 text-sm leading-7 text-medium-grey">
+                                        <strong className="text-[#D6D3DC]">
+                                            Coming next:
+                                        </strong>{" "}
+                                        {lesson.nextLessonConnection}
+                                    </p>
+                                    <details className="mt-5 rounded-xl border border-white/10 bg-dark-grey-secondary">
+                                        <summary className="min-h-[44px] cursor-pointer px-4 py-3 font-semibold outline-none focus-visible:ring-2 focus-visible:ring-brand-purple-secondary">
+                                            Accessible alternative and review
+                                            support
+                                        </summary>
+                                        <p className="border-t border-white/10 px-4 py-4 text-sm leading-7 text-[#C7C3CE]">
+                                            {lesson.accessibilityAlternative}{" "}
+                                            {lesson.feedbackGuidance}
                                         </p>
-                                    )}
-                            </div>
-                        </section>
-
-                        <section
-                            aria-labelledby="practice-heading"
-                            className="mt-10 rounded-2xl border border-white/10 bg-dark-grey-secondary p-5 sm:p-7"
-                        >
-                            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-purple-secondary">
-                                Independent practice
-                            </p>
-                            <h2
-                                id="practice-heading"
-                                className="mt-2 text-2xl font-bold"
-                            >
-                                Apply it yourself
-                            </h2>
-                            <p className="mt-3 text-base leading-7 text-[#D6D3DC]">
-                                {lesson.practiceTask}
-                            </p>
-                            <label className="mt-5 block text-sm font-bold text-white">
-                                What did you try, observe, or change?
-                                <textarea
-                                    value={reflection}
-                                    onChange={(event) =>
-                                        setReflection(event.target.value)
-                                    }
-                                    rows={5}
-                                    className="mt-2 w-full rounded-xl border border-white/15 bg-dark-grey-primary p-3 font-normal leading-6 text-white outline-none placeholder:text-dim-grey focus:border-brand-purple-secondary focus:ring-2 focus:ring-brand-purple-secondary/30"
-                                    placeholder="Write a short reflection for yourself. Nothing is uploaded."
-                                />
-                            </label>
-                            <p className="mt-3 text-xs leading-5 text-medium-grey">
-                                Your reflection stays in this page and is never
-                                sent to a server. Copy it into your project
-                                notes if you want to keep it.
-                            </p>
-                        </section>
-
-                        <section
-                            aria-labelledby="checkpoint-heading"
-                            className="mt-10 rounded-2xl border border-emerald-500/30 bg-emerald-500/[0.06] p-5 sm:p-7"
-                        >
-                            <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">
-                                Checkpoint
-                            </p>
-                            <h2
-                                id="checkpoint-heading"
-                                className="mt-2 text-2xl font-bold"
-                            >
-                                Confirm your understanding
-                            </h2>
-                            <p className="mt-3 text-base leading-7 text-[#D6D3DC]">
-                                {lesson.checkpoint.prompt}
-                            </p>
-                            <ul className="mt-4 space-y-2">
-                                {lesson.checkpoint.successCriteria.map(
-                                    (criterion) => (
-                                        <li
-                                            key={criterion}
-                                            className="flex gap-3 text-sm leading-7 text-[#D6D3DC]"
-                                        >
-                                            <span
-                                                aria-hidden="true"
-                                                className="text-emerald-300"
-                                            >
-                                                ✓
-                                            </span>
-                                            <span>{criterion}</span>
-                                        </li>
-                                    )
-                                )}
-                            </ul>
-                            <p className="mt-4 text-sm leading-7 text-emerald-100">
-                                {lesson.checkpoint.feedback}
-                            </p>
-                        </section>
-
-                        <section
-                            aria-labelledby="summary-heading"
-                            className="mt-10"
-                        >
-                            <h2
-                                id="summary-heading"
-                                className="text-2xl font-bold"
-                            >
-                                Lesson summary
-                            </h2>
-                            <p className="mt-3 text-base leading-8 text-[#D6D3DC]">
-                                {lesson.summary}
-                            </p>
-                            <p className="mt-3 text-sm leading-7 text-medium-grey">
-                                <strong className="text-[#D6D3DC]">
-                                    Coming next:
-                                </strong>{" "}
-                                {lesson.nextLessonConnection}
-                            </p>
-                            <details className="mt-5 rounded-xl border border-white/10 bg-dark-grey-secondary">
-                                <summary className="min-h-[44px] cursor-pointer px-4 py-3 font-semibold outline-none focus-visible:ring-2 focus-visible:ring-brand-purple-secondary">
-                                    Accessible alternative and review support
-                                </summary>
-                                <p className="border-t border-white/10 px-4 py-4 text-sm leading-7 text-[#C7C3CE]">
-                                    {lesson.accessibilityAlternative}{" "}
-                                    {lesson.feedbackGuidance}
-                                </p>
-                            </details>
-                        </section>
+                                    </details>
+                                </section>
+                            </>
+                        )}
 
                         <div className="mt-10 flex flex-col-reverse gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
                             {previous ? (
@@ -565,13 +521,11 @@ const LessonPage: React.FC<LessonPageProps> = ({
                                 <button
                                     type="button"
                                     onClick={completeLesson}
-                                    disabled={!canCompleteLesson || saving}
+                                    disabled={saving}
                                     className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gradient-to-b from-brand-purple-primary to-brand-purple-secondary px-5 py-3 text-sm font-bold outline-none hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:brightness-100"
                                 >
                                     {saving
                                         ? "Saving…"
-                                        : !canCompleteLesson
-                                        ? "Complete the lab to continue"
                                         : lessonComplete
                                         ? next
                                             ? "Continue to next lesson →"
@@ -582,11 +536,12 @@ const LessonPage: React.FC<LessonPageProps> = ({
                                 </button>
                             )}
                         </div>
-                        {!readOnly && !canCompleteLesson && (
-                            <p className="mt-3 text-right text-xs leading-5 text-amber-200">
-                                Run the guided concept lab above once to unlock
-                                lesson completion. No account, payment, or
-                                physical equipment is required.
+                        {progressError && (
+                            <p
+                                className="mt-3 text-right text-sm text-red-300"
+                                role="alert"
+                            >
+                                {progressError} Press the button again to retry.
                             </p>
                         )}
 
@@ -597,6 +552,37 @@ const LessonPage: React.FC<LessonPageProps> = ({
         </div>
     );
 };
+
+/**
+ * A written lesson is shown from its HTML, so the generated fields it replaces
+ * are blanked rather than shipped in the page data.
+ */
+const lessonForPage = (lesson: Lesson, contentHtml: string | null): Lesson =>
+    contentHtml
+        ? {
+              ...lesson,
+              motivatingScenario: "",
+              explanation: "",
+              workedExample: { title: "", context: "", steps: [], result: "" },
+              interaction: {
+                  ...lesson.interaction,
+                  type: "reflection",
+                  title: "",
+                  prompt: "",
+                  instructions: [],
+                  successFeedback: "",
+                  retryFeedback: "",
+                  completionCondition: "",
+                  accessibleAlternative: "",
+              },
+              practiceTask: "",
+              feedbackGuidance: "",
+              checkpoint: { prompt: "", successCriteria: [], feedback: "" },
+              summary: "",
+              nextLessonConnection: "",
+              accessibilityAlternative: "",
+          }
+        : lesson;
 
 const findLesson = (params: Record<string, unknown> | undefined) => {
     const course = getCourseBySlug(String(params?.courseSlug || ""));
@@ -641,11 +627,16 @@ const signedInLesson = requireAuth<LessonPageProps>(
             if (row.completedAt) completedLessonIds.push(row.lessonId);
         });
 
+        const contentHtml = await loadLessonHtml(
+            course.id,
+            match.lesson.contentKey
+        );
         return {
             props: {
                 course: toLessonCourse(course),
                 moduleId: match.module.id,
-                lesson: match.lesson,
+                lesson: lessonForPage(match.lesson, contentHtml),
+                contentHtml,
                 completedByLesson,
                 completedLessonIds,
                 enrolled: true,
@@ -673,11 +664,16 @@ export const getServerSideProps: GetServerSideProps<LessonPageProps> = async (
         "Cache-Control",
         "public, s-maxage=300, stale-while-revalidate=3600"
     );
+    const contentHtml = await loadLessonHtml(
+        course.id,
+        match.lesson.contentKey
+    );
     return {
         props: {
             course: toLessonCourse(course),
             moduleId: match.module.id,
-            lesson: match.lesson,
+            lesson: lessonForPage(match.lesson, contentHtml),
+            contentHtml,
             completedByLesson: {},
             completedLessonIds: [],
             enrolled: false,

@@ -117,6 +117,11 @@ export interface Lesson {
     accessibilityAlternative: string;
     sourceTopics: string[];
     required: true;
+    /**
+     * Key of the hand-written lesson in learning/lesson-content/<course>.json,
+     * or null when the lesson still uses generated text.
+     */
+    contentKey: string | null;
 }
 
 export interface RubricCriterion {

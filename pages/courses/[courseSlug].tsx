@@ -246,16 +246,29 @@ const getStarterAssets = (course: CourseOverview) => [
     ).map(({ href, label, description }) => ({ href, label, description })),
 ];
 
-const toSetupRequirement = (
-    requirement: CourseRequirement,
-    course: CourseOverview
-): SetupRequirement => {
-    const simulator =
-        requirement.category === "hardware" ||
-        requirement.category === "compute"
-            ? course.simulators[0]
-            : undefined;
+/**
+ * Requirements that pointed at the retired browser concept simulators are not
+ * shown; the remaining ones keep their real setup steps and links.
+ */
+const isRetiredLab = (requirement: CourseRequirement) =>
+    Boolean(requirement.freePath.url?.startsWith("/learn/tools/")) &&
+    requirement.required;
 
+const visibleRequirements = (course: CourseOverview) =>
+    course.requirements
+        .filter((requirement) => !isRetiredLab(requirement))
+        .map((requirement) =>
+            requirement.freePath.url?.startsWith("/learn/tools/")
+                ? {
+                      ...requirement,
+                      freePath: { ...requirement.freePath, url: undefined },
+                  }
+                : requirement
+        );
+
+const toSetupRequirement = (
+    requirement: CourseRequirement
+): SetupRequirement => {
     return {
         id: requirement.id,
         name: requirement.name,
@@ -277,33 +290,28 @@ const toSetupRequirement = (
             description: option.description,
             priceNote: "Optional only—never required for course completion.",
         })),
-        simulator: simulator
-            ? {
-                  name: simulator.name,
-                  description: `${simulator.purpose} No hardware is required.`,
-              }
-            : undefined,
     };
 };
 
 const buildFreeSetupPath = (course: CourseOverview): FreeSetupPath => {
-    const requirementSteps = course.requirements.flatMap((requirement) =>
-        requirement.freePath.setupSteps.map((description, index) => ({
-            id: `${requirement.id}-step-${index + 1}`,
-            title:
-                index === 0
-                    ? `Set up ${requirement.freePath.name}`
-                    : `${requirement.name}: step ${index + 1}`,
-            description,
-            estimatedMinutes: 5,
-            link:
-                index === 0 && requirement.freePath.url
-                    ? {
-                          label: `Open ${requirement.freePath.name}`,
-                          href: requirement.freePath.url,
-                      }
-                    : undefined,
-        }))
+    const requirementSteps = visibleRequirements(course).flatMap(
+        (requirement) =>
+            requirement.freePath.setupSteps.map((description, index) => ({
+                id: `${requirement.id}-step-${index + 1}`,
+                title:
+                    index === 0
+                        ? `Set up ${requirement.freePath.name}`
+                        : `${requirement.name}: step ${index + 1}`,
+                description,
+                estimatedMinutes: 5,
+                link:
+                    index === 0 && requirement.freePath.url
+                        ? {
+                              label: `Open ${requirement.freePath.name}`,
+                              href: requirement.freePath.url,
+                          }
+                        : undefined,
+            }))
     );
 
     return {
@@ -315,14 +323,14 @@ const buildFreeSetupPath = (course: CourseOverview): FreeSetupPath => {
                 id: `${course.id}-choose-path`,
                 title: "Choose the free learning path",
                 description:
-                    "Use the browser-based tools and simulations throughout this course. Paid software, APIs, cloud credits, GPUs, and physical equipment are optional.",
+                    "Everything required for this course is free. Paid software, APIs, cloud credits, GPUs, and physical equipment are optional.",
                 estimatedMinutes: 2,
             },
             ...requirementSteps,
             {
                 id: `${course.id}-verify`,
                 title: "Run the setup check",
-                description: course.requirements
+                description: visibleRequirements(course)
                     .map(
                         (requirement) =>
                             `${requirement.name}: ${requirement.freePath.verification}`
@@ -581,19 +589,19 @@ const CoursePage: React.FC<CoursePageProps> = ({
     enrollable,
     accountsOn,
 }) => {
-    const software = course.requirements
+    const software = visibleRequirements(course)
         .filter((requirement) =>
             ["browser", "software", "compute", "dataset"].includes(
                 requirement.category
             )
         )
-        .map((requirement) => toSetupRequirement(requirement, course));
-    const hardware = course.requirements
+        .map((requirement) => toSetupRequirement(requirement));
+    const hardware = visibleRequirements(course)
         .filter((requirement) => requirement.category === "hardware")
-        .map((requirement) => toSetupRequirement(requirement, course));
-    const accounts = course.requirements
+        .map((requirement) => toSetupRequirement(requirement));
+    const accounts = visibleRequirements(course)
         .filter((requirement) => requirement.category === "account")
-        .map((requirement) => toSetupRequirement(requirement, course));
+        .map((requirement) => toSetupRequirement(requirement));
     const firstLessonHref = getFirstLessonHref(course);
     const starterAssets = getStarterAssets(course);
     const lessonCount = course.modules.reduce(
@@ -668,11 +676,6 @@ const CoursePage: React.FC<CoursePageProps> = ({
                                     <CourseBadge tone="amber">
                                         {course.live.termLabel} ·{" "}
                                         {course.live.format}
-                                    </CourseBadge>
-                                )}
-                                {course.simulators.length > 0 && (
-                                    <CourseBadge tone="purple">
-                                        Browser simulator included
                                     </CourseBadge>
                                 )}
                             </div>

@@ -1,5 +1,7 @@
 const sourceCurriculum = require("./source-curriculum");
 const courseBlueprints = require("./course-blueprints");
+// Titles and summaries of hand-written lessons (npm run content).
+const authoredLessons = require("./lesson-content/index.json");
 
 const slugify = (value) =>
     value
@@ -600,7 +602,7 @@ const buildCoreModule = (courseBase, blueprintModule, topics, coreIndex) => {
         }),
         practicalApplication: module.application,
         reviewSupport:
-            "Repeat the guided lab with a smaller input, use the text trace, and compare the first step where expected and actual behavior differ.",
+            "Reread the notes and code-along, redo the practice exercises, and compare your output with the examples line by line to find where they differ.",
     };
 };
 
@@ -688,8 +690,36 @@ const buildCapstoneModule = (courseBase, blueprint) => {
         }),
         practicalApplication: blueprint.capstone.brief,
         reviewSupport:
-            "Build the smallest passing version first, test one rubric criterion at a time, and use the simulator or supplied synthetic assets when physical or expensive resources are unavailable.",
+            "Build the smallest version that works first, then test and improve one checklist item at a time.",
     };
+};
+
+/**
+ * Swaps in a hand-written lesson wherever one exists for the module/lesson
+ * position (learning/content/<course-id>/m<module>-l<lesson>.md). The lesson
+ * keeps its id, so progress and grading are unaffected.
+ */
+const withAuthoredLessons = (courseId, modules) => {
+    const authored = authoredLessons[courseId] || {};
+    return modules.map((module) => ({
+        ...module,
+        // A written module is described by its first lesson's summary
+        // rather than the generated overview.
+        overview:
+            authored[`m${module.order}-l1`]?.summary || module.overview,
+        lessons: module.lessons.map((lesson) => {
+            const key = `m${module.order}-l${lesson.order}`;
+            const written = authored[key];
+            return written
+                ? {
+                      ...lesson,
+                      title: written.title,
+                      objective: written.summary,
+                      contentKey: key,
+                  }
+                : { ...lesson, contentKey: null };
+        }),
+    }));
 };
 
 const buildCourse = (source, blueprint) => {
@@ -757,7 +787,11 @@ const buildCourse = (source, blueprint) => {
         sourceTopics: [...source.topics],
     };
     const capstoneModule = buildCapstoneModule(partialCourse, blueprint);
-    const modules = [setupModule, ...coreModules, capstoneModule];
+    const modules = withAuthoredLessons(source.id, [
+        setupModule,
+        ...coreModules,
+        capstoneModule,
+    ]);
 
     const assignments = blueprint.assignments.map((item, index) => {
         const relatedModules = item.moduleOrders.map(
@@ -777,7 +811,7 @@ const buildCourse = (source, blueprint) => {
             rubric: rubric(
                 `${source.id}-assignment-${index + 1}-${slugify(item.title)}`
             ),
-            freeCompletionPath: `${blueprint.freeCompletionPromise} Submit a project file, text trace, screenshots with descriptions, or equivalent simulator evidence.`,
+            freeCompletionPath: `${blueprint.freeCompletionPromise} Submit your project file, or screenshots with descriptions, or a short demo.`,
         };
     });
 

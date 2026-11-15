@@ -3535,17 +3535,12 @@ const blueprints = [
                     url: "https://www.python.org/downloads/",
                     note: "The free official installer for Windows and macOS includes IDLE, the editor used in class. On a Chromebook, turn on the Linux development environment and install python3 and idle3.",
                 },
-                {
-                    name: "C4T Intro Python concept simulator",
-                    url: "/learn/tools/intro-python-lab",
-                    note: "Practice tracing programs on any device, including tablets. It explains programs step by step; it does not run Python.",
-                },
             ],
         },
         summary:
             "A six-week live class for first-time programmers: write real Python programs with variables, input, decisions, loops, lists, and functions, then build a small project of your own.",
         description:
-            "Intro to Python is a live online class that meets once a week for 1.5 hours over six weeks. Each class introduces one idea, practices it together, and ends with a short program students build themselves. Students write and run their programs in Python's free IDLE editor; the C4T concept simulator on this site helps them trace what a program will do, but it does not run code. By week six, students combine everything into a small text game, quiz, or calculator.",
+            "Intro to Python is a live online class that meets once a week for 1.5 hours over six weeks. Each class introduces one idea, practices it together, and ends with a short program students build themselves. Students write and run every program in Python's free IDLE editor. By week six, students combine everything into a small text game, quiz, or calculator.",
         audience:
             "Middle and high school students who have never written typed code, or who have only used block-based tools like Scratch.",
         prerequisites: ["No coding experience needed"],
@@ -3560,28 +3555,20 @@ const blueprints = [
         icon: "terminal",
         accent: "#FFD43B",
         primaryTool: tool(
-            "C4T Intro Python Lab",
+            "Python 3 with IDLE",
             "software",
-            "A guided Python concept simulator for predicting and tracing beginner programs.",
+            "Python's free official installer, which includes IDLE, the editor used in class.",
             [
-                "Open the lab and read the starting program.",
-                "Predict the output, then step through the trace.",
-                "Change one value and predict again.",
+                "Download Python 3 from python.org/downloads and run the installer (on Windows, tick “Add python.exe to PATH”).",
+                "Open IDLE from your apps or Start menu.",
+                "Choose File > New File, type print(\"Hello\"), save it as hello.py, and press F5 to run it.",
             ],
-            "Predict the output of a short program and explain it from the trace.",
-            "/learn/tools/intro-python-lab"
+            "Run hello.py and see Hello printed in the IDLE shell.",
+            "https://www.python.org/downloads/"
         ),
-        simulators: [
-            simulator(
-                "intro-python-lab",
-                "Intro Python Lab",
-                "Trace variables, branches, and loops one step at a time.",
-                ["Variable table", "Branch tracing", "Loop stepping"],
-                ["Covers the beginner subset taught in class."]
-            ),
-        ],
+        simulators: [],
         freeCompletionPromise:
-            "Everything in this class is free. Students write and run programs in Python's free IDLE editor and practice tracing on any device with the C4T concept simulator, which explains programs but does not execute them. No paid software or account is needed.",
+            "Everything in this class is free: Python and its IDLE editor are free downloads, and no paid software or account is needed.",
         coreModules: [
             moduleBlueprint(
                 "Write and run your first programs",
@@ -3682,17 +3669,12 @@ const blueprints = [
                     url: "https://developer.android.com/studio/run/device",
                     note: "Run your app on a real phone over USB or Wi-Fi after turning on developer options. The emulator works just as well for every assignment.",
                 },
-                {
-                    name: "C4T Android App concept simulator",
-                    url: "/learn/tools/android-app-lab",
-                    note: "Explore the Activity lifecycle and screen-rotation state on any device. It models how Android behaves; it does not build or run apps.",
-                },
             ],
         },
         summary:
-            "A six-week live class on building Android apps in Android Studio with Kotlin and Jetpack Compose: screens, buttons, state, lists, navigation, and an app you can install on a phone.",
+            "A six-week live class on building Android apps in Android Studio with Java and XML layouts: screens, buttons, user input, lists, multiple screens, saved data, and an app you can install on a phone.",
         description:
-            "Android Studio App Development is a live online class that meets once a week for 1.5 hours over six weeks. Students build real apps in Android Studio, Google's free development tool, using Kotlin and Jetpack Compose, the toolkit Android Studio uses for new projects. Each week adds one layer: the project and emulator, Kotlin basics, layouts, state and input, lists and navigation, and finally saving data and sharing an APK. The C4T concept simulator on this site models the Activity lifecycle; it does not build or run apps.",
+            "Android Studio App Development is a live online class that meets once a week for 1.5 hours over six weeks. Students build real apps in Android Studio, Google's free development tool, writing the code in Java and designing screens with XML layouts. Each week adds one layer: the project and emulator, Java basics, layouts, interactivity and the Activity lifecycle, RecyclerView lists and Intents, and finally saving data, debugging, and sharing an APK.",
         audience:
             "Students who have written some code in any language and want to build apps that run on Android phones.",
         prerequisites: [
@@ -3702,14 +3684,14 @@ const blueprints = [
         recommendedPriorCourses: ["course-03"],
         outcomes: [
             "Create, run, and debug an Android Studio project on the emulator or a phone.",
-            "Write Kotlin with variables, functions, conditions, loops, and null safety.",
-            "Build screens with Jetpack Compose layouts, state, user input, lists, and navigation.",
-            "Save simple data on the device and share a working APK.",
+            "Write Java with variables, methods, conditions, loops, and classes.",
+            "Build screens with XML layouts and connect them to Java code that reacts to input.",
+            "Show lists with RecyclerView, move between screens with Intents, save data, and share an APK.",
         ],
         tags: [
             "android",
-            "kotlin",
-            "jetpack-compose",
+            "java",
+            "xml-layouts",
             "mobile-apps",
             "live-class",
             "fall-2026",
@@ -3717,97 +3699,89 @@ const blueprints = [
         icon: "phone",
         accent: "#3DDC84",
         primaryTool: tool(
-            "C4T Android App Lab",
+            "Android Studio",
             "software",
-            "A guided concept simulator for the Activity lifecycle and Compose state.",
+            "Google's free tool for building Android apps. Students write Java and XML in it and run their apps on the built-in emulator or a phone.",
             [
-                "Open the lab and read the counter scenario.",
-                "Predict what happens to the counter when the phone rotates.",
-                "Try each state holder and compare the results.",
+                "Download Android Studio from developer.android.com/studio and run the installer.",
+                "Open it, finish the setup wizard, and let it download the Android SDK.",
+                "Create a new project with the Empty Views Activity template and Java as the language.",
             ],
-            "Explain why remember loses its value on rotation and rememberSaveable does not.",
-            "/learn/tools/android-app-lab"
+            "Run the new project on an emulator or a phone and see the Hello World screen.",
+            "https://developer.android.com/studio"
         ),
-        simulators: [
-            simulator(
-                "android-app-lab",
-                "Android App Lab",
-                "Model lifecycle callbacks and state across configuration changes.",
-                ["Lifecycle trace", "Rotation", "State holders"],
-                ["Does not build or run Android apps."]
-            ),
-        ],
+        simulators: [],
         freeCompletionPromise:
-            "Android Studio, Kotlin, Jetpack Compose, and the Android emulator are all free from Google, and an Android phone is optional. The C4T concept simulator models the lifecycle on any device but does not build or run apps. No paid software, developer account, or Play Store fee is needed.",
+            "Android Studio, the Android SDK, and the emulator are free from Google, and an Android phone is optional. No paid software, developer account, or Play Store fee is needed.",
         coreModules: [
             moduleBlueprint(
                 "Set up Android Studio and run your first app",
                 3,
-                "A new project opens with dozens of folders and files, and the app will not launch because no emulator has been set up.",
-                "Create an Empty Activity project, find MainActivity.kt, the manifest, and the Gradle files, then run the app on an emulator or a phone.",
-                "Change the starter app's greeting and app name, run it, and write down where each change lives in the project.",
+                "A brand-new project opens with dozens of files, and nothing runs until an emulator is set up.",
+                "Create an Empty Views Activity project in Java, find MainActivity.java, activity_main.xml, the manifest, and the Gradle files, then run the app.",
+                "Change the starter app's text and name and run it on an emulator or a phone.",
                 "diagram"
             ),
             moduleBlueprint(
-                "Learn Kotlin for Android",
-                2,
-                "A tip calculator crashes when the bill field is empty because the code assumes the value can never be null.",
-                "Write Kotlin with val and var, types, string templates, if and when, for loops, and functions, then handle a nullable value safely.",
-                "Write a Kotlin function that turns a bill and tip percentage into a total and returns a safe result when the input is missing.",
+                "Learn Java for Android",
+                3,
+                "A grade calculator gives wrong answers because of integer division and an if statement in the wrong order.",
+                "Write Java with variables, types, strings, methods, conditions, loops, and a small class.",
+                "Write and test a small Java class that models something from your own app idea.",
                 "code-editor"
             ),
             moduleBlueprint(
-                "Build screens with Jetpack Compose",
+                "Design screens with XML layouts",
                 3,
-                "A profile screen looks right in the preview but overlaps and runs off the edge on a smaller phone.",
-                "Write composable functions, use @Preview, add Text, Image, and Button, and arrange them with Row, Column, Box, and modifiers.",
-                "Build a profile or business-card screen that stays readable in both a small and a large preview.",
+                "A profile screen looks fine on one phone and overlaps on another.",
+                "Build layouts with LinearLayout and ConstraintLayout, add TextView, Button, ImageView, and EditText, and move text and colors into resources.",
+                "Build a business-card screen that works on small and large screens.",
                 "visualizer"
             ),
             moduleBlueprint(
-                "Make apps interactive with state",
+                "Make apps interactive",
                 3,
                 "A counter app updates when tapped, then resets to zero every time the phone is rotated.",
-                "Handle clicks and text input, hold values with remember and mutableStateOf, and trace what happens to state when the Activity is recreated.",
-                "Build a counter or tip calculator whose values survive rotation, using rememberSaveable or a ViewModel.",
-                "simulator"
+                "Connect views to Java code, handle clicks and text input, and save state across rotation.",
+                "Build a tip calculator or counter that reads input safely and survives rotation.",
+                "code-editor"
             ),
             moduleBlueprint(
                 "Show lists and move between screens",
                 2,
                 "A recipe app with 50 recipes is slow and cramped because everything is on one screen.",
-                "Display a list of data with LazyColumn, then set up Navigation Compose to open a detail screen and return.",
-                "Build a two-screen app: a scrolling list and a detail screen for the item the user taps.",
+                "Show data with RecyclerView and open a detail screen with an Intent.",
+                "Build a two-screen app: a scrolling list and a detail screen for the tapped item.",
                 "ordering"
             ),
             moduleBlueprint(
                 "Save data, debug, and share your app",
                 3,
-                "A habit tracker forgets everything when it closes, and a crash happens only after a certain button is pressed.",
-                "Save small values with DataStore, find a crash using Logcat and a breakpoint, and build a debug APK.",
-                "Add saved settings to your app, record one bug you found with Logcat or the debugger, and build an APK you can install on a phone.",
+                "A habit tracker forgets everything when it closes, and it crashes after one particular button press.",
+                "Save values with SharedPreferences, find a crash with Logcat and breakpoints, and build an APK.",
+                "Add saved settings to your app, fix one bug with Logcat, and install your APK on a phone.",
                 "debugging"
             ),
         ],
         assignments: [
             assignment(
                 "Interactive one-screen app",
-                "Build a one-screen Compose app, such as a tip calculator, unit converter, or score keeper, with a clear layout, a button, text input, and state that survives rotation.",
+                "Build a one-screen app, such as a tip calculator, unit converter, or score keeper, with an XML layout, a button, text input, and state that survives rotation.",
                 [3, 4]
             ),
             assignment(
                 "List and detail app",
-                "Build an app that shows a scrolling list of at least ten items and opens a detail screen when an item is tapped.",
+                "Build an app that shows a scrolling RecyclerView list of at least ten items and opens a detail screen with an Intent when an item is tapped.",
                 [5, 6]
             ),
         ],
         capstone: capstone(
             "Your own Android app",
-            "Design and build an Android app of your choice with at least two screens, user input, state that survives rotation, a list, and saved data, then demo it on the emulator or a phone.",
+            "Design and build an Android app of your choice in Java with at least two screens, user input, state that survives rotation, a RecyclerView list, and saved data, then demo it on the emulator or a phone.",
             [
                 "An Android Studio project that builds and runs",
-                "Two or more screens with navigation",
-                "User input, state, and a scrolling list",
+                "Two or more screens connected with Intents",
+                "User input, a RecyclerView list, and state that survives rotation",
                 "Saved data that persists after the app closes",
                 "A short demo and a note on one bug you fixed",
             ]
@@ -3872,15 +3846,7 @@ const blueprints = [
             "Make the cat sprite move ten steps when the green flag is clicked, then save the project file.",
             "https://scratch.mit.edu/projects/editor/"
         ),
-        simulators: [
-            simulator(
-                "scratch-class-lab",
-                "Scratch Class Lab",
-                "Practice event order, loops, and conditions away from the editor.",
-                ["Event order", "Loop tracing", "Condition checks"],
-                ["Does not reproduce every Scratch block."]
-            ),
-        ],
+        simulators: [],
         freeCompletionPromise:
             "Scratch is free and runs in any modern browser, and projects can be saved to your computer without an account. Every class project and the final game are built in the free Scratch editor.",
         coreModules: [
@@ -3983,17 +3949,12 @@ const blueprints = [
                     url: "https://jupyter.org/install",
                     note: "A free option without a Google account: install Python, then run pip install jupyterlab pandas scikit-learn matplotlib.",
                 },
-                {
-                    name: "C4T ML Evaluation concept simulator",
-                    url: "/learn/tools/ml-evaluation-lab",
-                    note: "Explore how thresholds and class balance change metrics on any device. It models results; it does not train models.",
-                },
             ],
         },
         summary:
             "A six-week live class on evaluating machine learning models honestly with scikit-learn: baselines, pipelines, the right metrics, cross-validation, tuning, imbalance, and error analysis.",
         description:
-            "Intermediate ML & Model Evaluation is a live online class that meets once a week for 1.5 hours over six weeks. Students who have trained a first model learn to tell whether it is actually good: start from a baseline, build leak-free pipelines, choose metrics that fit the problem, validate with cross-validation, compare and tune models, and check how errors are distributed before reporting results. Work happens in free Python notebooks such as Google Colab or JupyterLab; the C4T concept simulator on this site models metric trade-offs but does not train models.",
+            "Intermediate ML & Model Evaluation is a live online class that meets once a week for 1.5 hours over six weeks. Students who have trained a first model learn to tell whether it is actually good: start from a baseline, build leak-free pipelines, choose metrics that fit the problem, validate with cross-validation, compare and tune models, and check how errors are distributed before reporting results. All work happens in free Python notebooks: Google Colab or JupyterLab.",
         audience:
             "High school students who know Python basics and have trained at least one simple model, and want to evaluate models the way practitioners do.",
         prerequisites: [
@@ -4018,26 +3979,18 @@ const blueprints = [
         icon: "chart",
         accent: "#22D3EE",
         primaryTool: tool(
-            "C4T ML Evaluation Lab",
-            "compute",
-            "A guided concept simulator for metric, threshold, and class-balance trade-offs.",
+            "Google Colab",
+            "software",
+            "Free Python notebooks in the browser with pandas, scikit-learn, and matplotlib already installed. Needs a free Google account; JupyterLab on your own computer works too.",
             [
-                "Open the lab and read the classification scenario.",
-                "Predict how changing the threshold will affect precision and recall.",
-                "Adjust one control and compare the result with your prediction.",
+                "Go to colab.research.google.com and sign in with a Google account.",
+                "Choose File > New notebook.",
+                "Run import sklearn, pandas; print(sklearn.__version__) in the first cell.",
             ],
-            "Explain why accuracy can look high while recall stays low on imbalanced data.",
-            "/learn/tools/ml-evaluation-lab"
+            "Run a cell that prints the scikit-learn version.",
+            "https://colab.research.google.com/"
         ),
-        simulators: [
-            simulator(
-                "ml-evaluation-lab",
-                "ML Evaluation Lab",
-                "Model how thresholds and class balance change evaluation metrics.",
-                ["Threshold control", "Metric comparison", "Class balance"],
-                ["Does not train models or run notebooks."]
-            ),
-        ],
+        simulators: [],
         freeCompletionPromise:
             "All class work runs in free tools: Google Colab with a free Google account, or JupyterLab installed locally with no account. The datasets used are public or synthetic, and no GPU, paid cloud service, or paid API is needed.",
         coreModules: [

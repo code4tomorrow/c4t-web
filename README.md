@@ -29,7 +29,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 The repository includes a 25-course self-paced curriculum, plus the four Fall
 2026 live classes (Intro to Python, Android Studio App Development, Programming
 with Scratch, and Intermediate ML & Model Evaluation), with free setup modules,
-browser-based hardware and compute simulators, local learner progress,
+hand-written lessons with tested code (the Fall classes so far), learner progress,
 assignments, achievements, and certificates. No account, paid API, cloud
 credit, GPU, or physical hardware is required for the learner pathway.
 

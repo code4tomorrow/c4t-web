@@ -1,0 +1,394 @@
+{
+  "course-26": {
+    "m1-l1": {
+      "title": "Install Python 3 and IDLE",
+      "summary": "Install Python 3 and its IDLE editor on Windows, macOS, or a Chromebook, then confirm the install with one line of code."
+    },
+    "m1-l2": {
+      "title": "Your first run in IDLE",
+      "summary": "Write a three-line program in IDLE's editor, save it as a .py file, run it, and prove your setup works."
+    },
+    "m1-l3": {
+      "title": "How class works, saving your work, and fixing setup problems",
+      "summary": "Learn the weekly rhythm of the class, set up a tidy folder for your .py files, and fix the setup problems students hit most often."
+    },
+    "m2-l1": {
+      "title": "print(), text output, and comments",
+      "summary": "Learn how Python runs a program line by line, use print() to show text and numbers, and write comments that make code easy to read."
+    },
+    "m2-l2": {
+      "title": "Code-along: an adoption-day poster",
+      "summary": "Build a printed poster for an animal shelter step by step, using print(), sep, end, ASCII art, and comments."
+    },
+    "m2-l3": {
+      "title": "Practice: print() and comments",
+      "summary": "Work through six print() exercises, from introducing yourself to fixing broken code and printing a receipt that does its own math."
+    },
+    "m3-l1": {
+      "title": "Variables, data types, and input()",
+      "summary": "Store values in variables, tell strings, integers, floats, and Booleans apart, and read what the user types with input() and type conversion."
+    },
+    "m3-l2": {
+      "title": "Code-along: a space mission briefing",
+      "summary": "Build a program that asks a commander for mission details, converts the answers to the right types, and prints a personalized briefing."
+    },
+    "m3-l3": {
+      "title": "Practice: variables, types, and input()",
+      "summary": "Trace variables by hand, identify data types, convert user input, fix a quiet type bug, and build a bill splitter."
+    },
+    "m4-l1": {
+      "title": "Operators and if/elif/else",
+      "summary": "Use arithmetic and comparison operators, make your programs choose with if, elif, and else, and combine conditions with and, or, and not."
+    },
+    "m4-l2": {
+      "title": "Code-along: a roller coaster ticket booth",
+      "summary": "Build a ticket booth program that checks a rider's height, prices tickets by age, applies a free-ride deal, and unlocks a Fast Lane with combined conditions."
+    },
+    "m4-l3": {
+      "title": "Practice: operators and decisions",
+      "summary": "Solve six decision-making problems, from even-or-odd to leap years and a login check, ending with a game of rock, paper, scissors."
+    },
+    "m5-l1": {
+      "title": "for loops, range(), and while loops",
+      "summary": "Make Python repeat work for you with for loops, range(), and while loops that know when to stop."
+    },
+    "m5-l2": {
+      "title": "Code-along: Guess the Number",
+      "summary": "Build a number-guessing game step by step, using a while loop, a try counter, and a random secret number."
+    },
+    "m5-l3": {
+      "title": "Practice: Loops",
+      "summary": "Practice for loops, range(), counters, and while loops with six exercises that get harder as you go, plus a star-pyramid challenge."
+    },
+    "m6-l1": {
+      "title": "Lists, indexes, and len()",
+      "summary": "Store many values in one variable with a list, reach each item by its index, and use loops to read and update every item."
+    },
+    "m6-l2": {
+      "title": "Code-along: To-Do List Manager",
+      "summary": "Build a menu-driven to-do list app that adds, shows, and checks off tasks stored in a Python list."
+    },
+    "m6-l3": {
+      "title": "Practice: Lists",
+      "summary": "Practice indexing, looping over, searching, and updating lists with six exercises that build in difficulty, plus a vote-counting challenge."
+    },
+    "m7-l1": {
+      "title": "Functions, return values, and reading error messages",
+      "summary": "Package code into reusable functions with parameters and return values, and learn to read Python's error messages to find and fix bugs."
+    },
+    "m7-l2": {
+      "title": "Code-along: Pizza Party Planner",
+      "summary": "Build a pizza-ordering calculator out of small functions, then find and fix a logic bug and a TypeError along the way."
+    },
+    "m7-l3": {
+      "title": "Practice: Functions and Debugging",
+      "summary": "Write functions that take parameters and return values, then hunt down syntax, name, type, and logic bugs in broken programs."
+    },
+    "m8-l1": {
+      "title": "Capstone brief: plan your own Python program",
+      "summary": "Read the capstone requirements, pick a text game, quiz, or tool you actually want to build, and plan it on paper before you write any code."
+    },
+    "m8-l2": {
+      "title": "Capstone build: milestones, starter skeleton, and a worked example",
+      "summary": "Build your capstone in five working milestones, starting from a skeleton file, and follow a complete Space Trivia quiz as it's built the same way."
+    },
+    "m8-l3": {
+      "title": "Capstone finish: test, polish, and present",
+      "summary": "Break your own program on purpose with a test table, write up a bug you fixed, polish the code, and get ready for your demo with the final checklist."
+    }
+  },
+  "course-27": {
+    "m1-l1": {
+      "title": "Install Android Studio",
+      "summary": "Check that your computer can run Android Studio, install it on Windows, macOS, or Linux, and finish the setup wizard so the Android SDK is ready."
+    },
+    "m1-l2": {
+      "title": "Create and run your first app",
+      "summary": "Create an Empty Views Activity project in Java, set up an emulator or a real phone, and run the app to prove your setup works."
+    },
+    "m1-l3": {
+      "title": "How class works and fixing setup problems",
+      "summary": "Learn how the weekly live class runs, keep your projects organized, and fix the Gradle, emulator, and memory problems that stop most first-time Android setups."
+    },
+    "m2-l1": {
+      "title": "Inside an Android project",
+      "summary": "Walk the project tree file by file, from MainActivity.java and activity_main.xml to the manifest and the Gradle build files, and see what happens when you press Run."
+    },
+    "m2-l2": {
+      "title": "Code-along: make the starter app your own",
+      "summary": "Create a fresh Java project, then change its name, greeting, and colors through string and color resources and run it on an emulator or phone."
+    },
+    "m2-l3": {
+      "title": "Practice: explore, change, and run your project",
+      "summary": "Six exercises that have you find answers in the project files, change the version and layout, run on more than one device, and fix a broken layout."
+    },
+    "m3-l1": {
+      "title": "Java for Android developers",
+      "summary": "Learn the Java you need for Android, from variables, types, and strings to methods, conditions, loops, and your own classes, with runnable programs for each idea."
+    },
+    "m3-l2": {
+      "title": "Code-along: a weekly habit tracker in Java",
+      "summary": "Build a console habit tracker step by step, using a class with private fields, methods with conditions and loops, and an ArrayList of objects."
+    },
+    "m3-l3": {
+      "title": "Practice: Java fundamentals",
+      "summary": "Solve five plain-Java exercises on types, strings, methods, loops, and classes, then extend a class with inheritance in the stretch challenge."
+    },
+    "m4-l1": {
+      "title": "Layouts, views, and resources",
+      "summary": "Arrange screens with LinearLayout and ConstraintLayout, use TextView, Button, ImageView, and EditText, and keep text, colors, and sizes in resource files."
+    },
+    "m4-l2": {
+      "title": "Code-along: a digital business card",
+      "summary": "Build a polished business-card screen with a Material card, an avatar image, contact details, a note field, and a button, using only resource-based strings, colors, and dimensions."
+    },
+    "m4-l3": {
+      "title": "Practice: build and fix layouts",
+      "summary": "Six layout exercises covering resources, weights, constraints and bias, input types, image scaling, and unconstrained views, plus a stretch challenge that translates your business card."
+    },
+    "m5-l1": {
+      "title": "Connecting views, reading input, and the Activity lifecycle",
+      "summary": "Wire XML views to Java with findViewById, react to taps, read and safely parse user input, and keep your data when the phone rotates."
+    },
+    "m5-l2": {
+      "title": "Code-along: a tip calculator that survives rotation",
+      "summary": "Build a tip calculator that reads a bill and a tip percent, handles bad input without crashing, and keeps its result when the phone turns sideways."
+    },
+    "m5-l3": {
+      "title": "Practice: buttons, input, and rotation",
+      "summary": "Work through six exercises that connect views to code, validate typed input, and keep app state alive across rotation and lifecycle changes."
+    },
+    "m6-l1": {
+      "title": "RecyclerView lists and moving between screens with Intents",
+      "summary": "Show a long scrolling list efficiently with RecyclerView, then open a second screen and pass it data with an explicit Intent."
+    },
+    "m6-l2": {
+      "title": "Code-along: a Planet Facts list and detail app",
+      "summary": "Build a two-screen app where tapping a planet in a scrolling RecyclerView opens a detail screen that receives the planet's data through an Intent."
+    },
+    "m6-l3": {
+      "title": "Practice: lists, taps, and Intents",
+      "summary": "Extend the Planet Facts app with a count header, recycling-safe highlights, runtime additions, and a share button, then try deleting rows as a stretch."
+    },
+    "m7-l1": {
+      "title": "Saving data, debugging, and building an APK",
+      "summary": "Keep small pieces of data after the app closes with SharedPreferences, track down bugs with Logcat and breakpoints, and build an APK you can install on any Android phone."
+    },
+    "m7-l2": {
+      "title": "Code-along: a Quick Note app that remembers",
+      "summary": "Build a one-screen note app that saves with SharedPreferences, hunt down a planted bug using Logcat and a breakpoint, and export the finished app as an APK."
+    },
+    "m7-l3": {
+      "title": "Practice: saving, debugging, and signing",
+      "summary": "Save names, counts, and settings with SharedPreferences, read real crash traces, step through a logic bug, and produce a signed release APK."
+    },
+    "m8-l1": {
+      "title": "Capstone brief: your own Android app",
+      "summary": "Read the capstone requirements, pick an app idea that fits them, and plan its screens, data, and classes before writing any layout code."
+    },
+    "m8-l2": {
+      "title": "Capstone milestones and starter skeleton",
+      "summary": "Build your capstone in five milestones, starting from a working two-screen skeleton with a RecyclerView list, an add/edit screen, saved data, and rotation-proof state."
+    },
+    "m8-l3": {
+      "title": "Testing, polishing, and presenting your capstone",
+      "summary": "Try to break your app on a real device with rotation, odd input, and background kills, polish what people will notice, then present it against the grading checklist."
+    }
+  },
+  "course-28": {
+    "m1-l1": {
+      "title": "What you need and how to open Scratch",
+      "summary": "Get a computer, a browser, and the free Scratch editor ready, and decide with a grown-up whether to make a Scratch account."
+    },
+    "m1-l2": {
+      "title": "Tour the editor and build your first project",
+      "summary": "Learn the five main parts of the Scratch editor, then build a \"Meet Me\" project where the cat introduces you."
+    },
+    "m1-l3": {
+      "title": "How class works, saving your projects, and fixing problems",
+      "summary": "Learn the weekly class routine, save and reopen Scratch projects with or without an account, and fix the most common setup problems."
+    },
+    "m2-l1": {
+      "title": "Notes: Sprites, the stage, and moving around",
+      "summary": "Understand sprites and the stage, move sprites with x/y coordinates, and change how they look with costumes, backdrops, and Looks blocks."
+    },
+    "m2-l2": {
+      "title": "Code-along: The cat's trip to space",
+      "summary": "Build a two-scene animated story where the cat walks in, blasts off, and floats among the stars, using coordinates, costumes, backdrops, and Looks blocks."
+    },
+    "m2-l3": {
+      "title": "Practice: Move it, dress it, change the scene",
+      "summary": "Solve five challenges with coordinates, gliding, costumes, Looks effects, and backdrops, then time a two-sprite conversation."
+    },
+    "m3-l1": {
+      "title": "Notes: Events, loops, and sounds",
+      "summary": "Start scripts with the green flag, keys, and clicks, repeat actions with forever and repeat loops, and add sounds with the right timing."
+    },
+    "m3-l2": {
+      "title": "Code-along: Keyboard dance party",
+      "summary": "Build a dance party where music loops, the lights change, and you control the dancer with the keyboard and mouse."
+    },
+    "m3-l3": {
+      "title": "Practice: Make it react, repeat, and make noise",
+      "summary": "Solve five challenges with key, click, and backdrop events, repeat and forever loops, and sounds, then build a fish tank with two loops running at once."
+    },
+    "m4-l1": {
+      "title": "Notes: Decisions, sensing, and collisions",
+      "summary": "Make sprites decide what to do with if/then and if/else, ask questions with Sensing blocks, and detect when sprites touch each other, colors, or the edge."
+    },
+    "m4-l2": {
+      "title": "Code-along: Build a maze game",
+      "summary": "Draw a maze, steer a player through it with the arrow keys, stop it at the walls with color sensing, and win by reaching the goal."
+    },
+    "m4-l3": {
+      "title": "Practice: Choose, sense, and collide",
+      "summary": "Solve five challenges with if/then, if/else, ask and answer, invisible walls, and color and sprite collisions, then build a paddle-and-ball game."
+    },
+    "m5-l1": {
+      "title": "Variables and broadcast messages",
+      "summary": "Use variables to keep track of score, lives, and time, and use broadcast messages so sprites can tell each other what is happening."
+    },
+    "m5-l2": {
+      "title": "Code-along: Apple Catcher",
+      "summary": "Build a catching game with a score, three lives, a 30-second countdown, and a game-over screen that every sprite reacts to."
+    },
+    "m5-l3": {
+      "title": "Practice: Score, lives, and messages",
+      "summary": "Solve six challenges with variables, timers, and broadcasts, from a click counter to a knock-knock joke to a high score."
+    },
+    "m6-l1": {
+      "title": "Clones and My Blocks",
+      "summary": "Fill the stage with many copies of one sprite using clones, and make your own reusable blocks with My Blocks."
+    },
+    "m6-l2": {
+      "title": "Code-along: Space Shooter Waves",
+      "summary": "Build a space shooter where a rocket fires laser clones at waves of falling rock clones, with My Blocks that spawn each wave and handle explosions."
+    },
+    "m6-l3": {
+      "title": "Practice: Clones and My Blocks",
+      "summary": "Practice making, moving, and deleting clones, build My Blocks with one and two inputs, and fix a classic clone bug."
+    },
+    "m7-l1": {
+      "title": "Levels, playtesting, and sharing",
+      "summary": "Add levels and clear win and lose endings to a game, find and fix bugs like a detective, and share or remix projects safely on Scratch."
+    },
+    "m7-l2": {
+      "title": "Code-along: Maze Escape",
+      "summary": "Build a two-level maze game with walls you can't walk through, lava that costs a life, a goal star, and clear win and lose screens."
+    },
+    "m7-l3": {
+      "title": "Practice: Levels, bugs, and sharing",
+      "summary": "Add level-ups and a win screen to your games, hunt down four classic Scratch bugs, and practice writing safe, honest project pages."
+    },
+    "m8-l1": {
+      "title": "Capstone: Your own Scratch game",
+      "summary": "Read the capstone brief, pick a game idea that fits the requirements, and plan it with a pitch, a storyboard, and a list of sprites and variables."
+    },
+    "m8-l2": {
+      "title": "Build your game in milestones",
+      "summary": "Build your capstone one working piece at a time, using a Meteor Dodge example that shows a skeleton, a player, clones, levels, and endings."
+    },
+    "m8-l3": {
+      "title": "Playtest, polish, and present",
+      "summary": "Test your capstone game yourself and with a real player, make one fix from their feedback, save or share it safely, and present it using the grading checklist."
+    }
+  },
+  "course-29": {
+    "m1-l1": {
+      "title": "Choose and install your notebook",
+      "summary": "Pick Google Colab or JupyterLab, get it running on your computer, and confirm scikit-learn, pandas, numpy, and matplotlib are ready."
+    },
+    "m1-l2": {
+      "title": "Your first notebook run",
+      "summary": "Load the bundled wine dataset into pandas, look at it, plot it, and train a quick model to prove your setup works end to end."
+    },
+    "m1-l3": {
+      "title": "How class works, saving your work, and fixing setup problems",
+      "summary": "Learn the weekly rhythm of the class, keep your notebooks organized and backed up in Drive, GitHub, or a downloaded .ipynb, and fix the setup errors students hit most often."
+    },
+    "m2-l1": {
+      "title": "Notes: The workflow, honest splits, and baselines",
+      "summary": "Walk through the supervised learning workflow, split data so the test set stays honest, and measure every model against a do-nothing baseline."
+    },
+    "m2-l2": {
+      "title": "Code-along: A baseline leaderboard for wine",
+      "summary": "Build a small evaluation notebook that scores three dummy baselines and two real models on the same stratified split, ranks them, and checks whether the ranking survives different random splits."
+    },
+    "m2-l3": {
+      "title": "Practice: Splits and baselines",
+      "summary": "Work through five exercises on stratified splits and dummy baselines for classification and regression, then write a function that measures how far a model beats its baseline across many splits."
+    },
+    "m3-l1": {
+      "title": "Notes: Missing values, encoding, scaling, and leak-free pipelines",
+      "summary": "Fill in missing values with SimpleImputer, turn text categories into numbers with OneHotEncoder, scale features with StandardScaler, and combine them in a pipeline that learns only from training data."
+    },
+    "m3-l2": {
+      "title": "Code-along: Rescue k-NN with a leak-free pipeline",
+      "summary": "Take a messy version of the wine data with blanks and a text column, build one pipeline that imputes, encodes, and scales it, and watch k-NN jump from 64% to 98% without leaking test data."
+    },
+    "m3-l3": {
+      "title": "Practice: Imputers, encoders, and leak hunting",
+      "summary": "Choose imputation strategies, read one-hot output, fix a leaky script, build a full ColumnTransformer pipeline, test whether \"this value was missing\" is a useful signal, and measure how leakage grows with noise."
+    },
+    "m4-l1": {
+      "title": "Notes: Precision, recall, F1, and the decision threshold",
+      "summary": "Break a classifier's mistakes into a confusion matrix, measure them with precision, recall, and F1, and move the decision threshold to trade false alarms for missed cases."
+    },
+    "m4-l2": {
+      "title": "Code-along: Pick a fraud-alert threshold the honest way",
+      "summary": "Split data into train, validation, and test sets, build a threshold table on validation data, choose a cutoff that meets a recall target, and confirm it once on the test set."
+    },
+    "m4-l3": {
+      "title": "Practice: Metrics, matrices, and thresholds",
+      "summary": "Compute precision, recall, and F1 by hand, catch the wrong-positive-class mistake, expose an accuracy paradox, move a threshold, read a three-class confusion matrix, and choose a threshold that minimizes real-world cost."
+    },
+    "m5-l1": {
+      "title": "Cross-validation and learning curves",
+      "summary": "Score a model on five different splits instead of one, and use validation and learning curves to tell overfitting from underfitting."
+    },
+    "m5-l2": {
+      "title": "Code-along: a validation report for a wine classifier",
+      "summary": "Build a notebook that cross-validates a decision tree on the wine dataset, picks its depth with a validation curve, checks a learning curve, and touches the test set once."
+    },
+    "m5-l3": {
+      "title": "Practice: cross-validation and diagnosing fit",
+      "summary": "Work through five exercises on fold counts, stratification, multi-metric cross-validation, validation curves, and learning curves, then build a reusable CV report function."
+    },
+    "m6-l1": {
+      "title": "Comparing and tuning models",
+      "summary": "Compare decision trees, random forests, and logistic regression on identical folds, then tune their hyperparameters with GridSearchCV and RandomizedSearchCV without spending your test set."
+    },
+    "m6-l2": {
+      "title": "Code-along: a tuned model shootout on handwritten digits",
+      "summary": "Tune a decision tree, a logistic regression, and a random forest on the same folds, rank them on a leaderboard, and check only the winner against the test set."
+    },
+    "m6-l3": {
+      "title": "Practice: fair comparisons and hyperparameter search",
+      "summary": "Fix pipeline parameter names, budget a grid, run paired fold comparisons, tune a preprocessing step, sample C on a log scale, and compare two tuned models with nested cross-validation."
+    },
+    "m7-l1": {
+      "title": "Imbalanced classes, error slices, and honest reports",
+      "summary": "Pick metrics that survive class imbalance, compare class weights with threshold tuning, find where a model fails by slicing its errors, and write a one-page model report."
+    },
+    "m7-l2": {
+      "title": "Code-along: a screening model that rarely misses",
+      "summary": "Build a breast-tumor screening model with a recall target, choose its threshold from out-of-fold predictions, slice its mistakes by tumor texture, and print a model report generated from the results."
+    },
+    "m7-l3": {
+      "title": "Practice: imbalance, slices, and limitations",
+      "summary": "Expose the accuracy trap, test class weights on a tree, pick thresholds from a precision requirement and from error costs, slice a model's errors, write a limitations paragraph, and evaluate threshold tuning without leaks."
+    },
+    "m8-l1": {
+      "title": "Capstone brief: an end-to-end model evaluation report",
+      "summary": "Understand the capstone requirements, choose a dataset and a decision your model supports, and write a one-page plan before you train anything."
+    },
+    "m8-l2": {
+      "title": "Capstone build: milestones and a starter notebook",
+      "summary": "Build the capstone in eight milestones using a complete, runnable starter notebook, swapping in your own dataset, metric, threshold rule, and slice feature as you go."
+    },
+    "m8-l3": {
+      "title": "Capstone finish: checking, polishing, and presenting",
+      "summary": "Run four sanity checks that catch leaks and fragile results, tighten your written report, prepare a five-minute presentation, and grade your work against the checklist."
+    }
+  }
+}

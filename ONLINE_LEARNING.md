@@ -20,10 +20,9 @@ Every course must satisfy all of the following rules:
 -   Every software, account, compute, dataset, and hardware requirement has a
     documented free path.
 -   Paid services may appear only as clearly optional comparisons.
--   Hardware courses include a no-hardware browser simulation and safety
-    guidance for learners who optionally use physical equipment.
--   Advanced AI and agent courses include deterministic browser fixtures that do
-    not require model tokens. Local or paid models are optional extensions.
+-   Courses use real, free tools (Python, Android Studio, Scratch, Colab,
+    MakeCode, and so on). The site's old browser "concept simulators" were
+    retired; `/learn/tools/*` now redirects to `/courses`.
 -   Course pages display `Course created by Zafir Shamsi.` in small text.
 
 These invariants are enforced by the curriculum validator rather than relying
@@ -71,11 +70,9 @@ self-paced and weekly pacing templates, and configurable certificate rules.
     outcomes, projects, certificate rules, and full outline.
 -   `/learn/paths` — the seven learning paths with per-course status, path
     completion, and a recommended next course.
--   `/learn/courses/[courseSlug]/lessons/[lessonSlug]` — interactive lesson
-    player with scenario, explanation, worked example, simulator, practice,
-    feedback, checkpoint, progress, and resume behavior.
--   `/learn/tools/[toolSlug]` — standalone free browser labs and hardware/compute
-    simulations.
+-   `/learn/courses/[courseSlug]/lessons/[lessonSlug]` — the lesson page. It
+    shows the hand-written lesson when one exists (see "Writing lessons"
+    below), otherwise the older generated text, plus progress and resume.
 -   `/learn/dashboard` — active courses, real learning activity, pacing status,
     milestones, and cross-device resume links.
 -   `/learn/assignments` — checkpoints, project rubrics, submissions, scores, and
@@ -233,6 +230,24 @@ other account pages redirect to `/learn/unavailable`, and account APIs
 return 503. Progress, certificates and
 grading are all server-authoritative, so the database is not optional.
 
+## Writing lessons
+
+Lessons are written by hand in Markdown under `learning/content/<course-id>/`,
+one file per lesson (`m<module>-l<lesson>.md`). `learning/content/AUTHORING.md`
+is the style and format guide: real explanations, tested code with its output,
+practice with solutions, and further reading.
+
+After editing lessons:
+
+```bash
+npm run content                 # compile to learning/lesson-content/ (commit the output)
+node scripts/check-lesson-code.js course-26   # run every Python/Java example
+```
+
+`npm run content` fails on thin lessons, raw HTML, or text copied between
+lessons. The four Fall 2026 classes are fully written; the 25 self-paced
+courses still use generated text until their lessons are written.
+
 ## Live classes
 
 Instructor-led classes, such as the Fall 2026 session, are ordinary courses
@@ -287,8 +302,7 @@ When editing or adding a course:
 2. Update the corresponding course blueprint with complete module allocations,
    setup guidance, free paths, assignments, and capstone.
 3. Never make a paid or physical resource the only path.
-4. Add a safe simulator or supplied-data path for hardware and expensive
-   compute.
+4. Point hardware and compute work at a real free tool or supplied data.
 5. Keep paid tools explicitly optional.
 6. Run `npm run validate:curriculum`.
 7. Open the course, first setup lesson, a core lesson, assignments page, and

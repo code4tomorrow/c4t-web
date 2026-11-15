@@ -362,16 +362,24 @@ courseRegistry.forEach((course, courseIndex) => {
                 fail(`${livePrefix} must continue with a self-paced course.`);
             }
         }
+        // Live classes are taught from hand-written lessons, never the
+        // generated fallback text.
+        const unwritten = course.modules
+            .flatMap((module) => module.lessons)
+            .filter((lesson) => !lesson.contentKey);
+        if (unwritten.length) {
+            fail(
+                `${livePrefix} has ${unwritten.length} lesson(s) without written content (learning/content/${course.id}/), e.g. ${unwritten[0].id}.`
+            );
+        }
         if (!live.classTools.length) {
             fail(`${livePrefix} lists no class tools.`);
         }
         live.classTools.forEach((item) => {
             requireText(item.name, `${livePrefix} tool name`, 3);
             requireText(item.note, `${livePrefix} tool "${item.name}" note`, 30);
-            if (!/^(https:\/\/|\/learn\/tools\/)/.test(item.url || "")) {
-                fail(
-                    `${livePrefix} tool "${item.name}" needs an https:// or /learn/tools/ link.`
-                );
+            if (!/^https:\/\//.test(item.url || "")) {
+                fail(`${livePrefix} tool "${item.name}" needs an https:// link.`);
             }
             if (
                 item.url.startsWith("/learn/tools/") &&

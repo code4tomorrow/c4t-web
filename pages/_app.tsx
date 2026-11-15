@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/lesson.css";
 import React, { ReactElement } from "react";
 import type { AppProps } from "next/app";
 import { Raleway } from "next/font/google";
@@ -89,12 +90,9 @@ const DEBUG = process.env.NODE_ENV === "development";
  * every page view of the marketing site.
  */
 const SESSION_ROUTE_PREFIXES = ["/admin", "/learn/", "/courses/[courseSlug]"];
-const NO_SESSION_ROUTE_PREFIXES = ["/learn/tools/"];
-
 const routeNeedsSession = (pathname: string) =>
     process.env.NEXT_PUBLIC_ACCOUNTS_ENABLED !== "false" &&
-    SESSION_ROUTE_PREFIXES.some((prefix) => pathname.startsWith(prefix)) &&
-    !NO_SESSION_ROUTE_PREFIXES.some((prefix) => pathname.startsWith(prefix));
+    SESSION_ROUTE_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 
 const hasCookie = (name: string) =>
     document.cookie
