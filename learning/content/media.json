@@ -1,0 +1,2692 @@
+{
+  "videos": {
+    "--KxxMaiwSE": {
+      "title": "#224 🛑 STOP using Serial.print in your Arduino code! THIS is better.",
+      "author": "Ralph S Bacon",
+      "seconds": null
+    },
+    "-7I9ffz-kHk": {
+      "title": "Why Is \"random.seed()\" So Important In Python?",
+      "author": "Indently",
+      "seconds": 164
+    },
+    "-8s9KuNo5SA": {
+      "title": "Complete Guide to Cross Validation",
+      "author": "Rob Mulla",
+      "seconds": 1788
+    },
+    "-QVoIxEpFkM": {
+      "title": "What is a Context Window? Unlocking LLM Secrets",
+      "author": "IBM Technology",
+      "seconds": 690
+    },
+    "-Yicg2TTMPs": {
+      "title": "Understanding State Machines, Part 1: What Are They?",
+      "author": "MATLAB",
+      "seconds": 197
+    },
+    "-ZP2Xm-mY4E": {
+      "title": "An introduction to finite state machines and the state pattern for game development",
+      "author": "The Shaggy Dev",
+      "seconds": 654
+    },
+    "-tUd-bLmoO8": {
+      "title": "Cinemachine 2D Cameras",
+      "author": "Unity",
+      "seconds": 1077
+    },
+    "-uW5-TaVXu4": {
+      "title": "Most devs don’t understand how context windows work",
+      "author": "Matt Pocock",
+      "seconds": 573
+    },
+    "-w-VTw0tQlE": {
+      "title": "Circuit Analysis: Crash Course Physics #30",
+      "author": "CrashCourse",
+      "seconds": null
+    },
+    "06eQ41TuJRs": {
+      "title": "Debug Python Like a Pro in VS Code",
+      "author": "Visual Studio Code",
+      "seconds": null
+    },
+    "07EVpWb8dtg": {
+      "title": "HTML & CSS for Absolute Beginners: DOCTYPE, head, and body",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "07MG5hUWI1Q": {
+      "title": "How to code the Perfect \"DOUBLE JUMP\" in Scratch Tutorial 😺",
+      "author": "griffpatch",
+      "seconds": null
+    },
+    "09l-35Y5tJA": {
+      "title": "How to Install Android Studio on Mac | Install Android Studio on macOS (2026)",
+      "author": "ProgrammingKnowledge",
+      "seconds": null
+    },
+    "0E7ltQB7fM8": {
+      "title": "Inside the Token classification pipeline (PyTorch)",
+      "author": "Hugging Face",
+      "seconds": 181
+    },
+    "0VVJSvlUgtg": {
+      "title": "JavaScript Timers - setTimeout, setInterval, clearTimeout, and clearInterval",
+      "author": "Steve Griffith - Prof3ssorSt3v3",
+      "seconds": null
+    },
+    "0VdNflU08yA": {
+      "title": "Quantization explained with PyTorch - Post-Training Quantization, Quantization-Aware Training",
+      "author": "Umar Jamil",
+      "seconds": 3054
+    },
+    "0ZHalwPO1og": {
+      "title": "Scratch - How To Use Broadcast Blocks",
+      "author": "mrGcoding",
+      "seconds": null
+    },
+    "0chZFIZLR_0": {
+      "title": "Git MERGE vs REBASE: Everything You Need to Know",
+      "author": "ByteByteGo",
+      "seconds": null
+    },
+    "0yySumZTxJ0": {
+      "title": "ALL 11 LIST METHODS IN PYTHON EXPLAINED",
+      "author": "Indently",
+      "seconds": 563
+    },
+    "14K_a2kKTxU": {
+      "title": "API Pagination: Making Billions of Products Scrolling Possible",
+      "author": "ByteByteGo",
+      "seconds": 192
+    },
+    "17UVejOw3zA": {
+      "title": "3.4 Hiding API Keys with Environment Variables (dotenv) and Pushing Code to GitHub",
+      "author": "The Coding Train",
+      "seconds": 710
+    },
+    "1LK7sJVW9EA": {
+      "title": "Conditional Statements: Nesting, Debugging, and Beyond (Part 2)| Tutorial",
+      "author": "Scratch Team",
+      "seconds": 241
+    },
+    "1Lfv5tUGsn8": {
+      "title": "Unit Tests in Python || Python Tutorial || Learn Python Programming",
+      "author": "Socratica",
+      "seconds": 529
+    },
+    "1Y6O9nCo0-I": {
+      "title": "Use Pipeline to chain together multiple steps",
+      "author": "Data School",
+      "seconds": 191
+    },
+    "1pedAIvTWXk": {
+      "title": "What happens inside the pipeline function? (PyTorch)",
+      "author": "Hugging Face",
+      "seconds": 292
+    },
+    "216_5nu4aVQ": {
+      "title": "Secrets of Game Feel and Juice",
+      "author": "Game Maker's Toolkit",
+      "seconds": null
+    },
+    "276Djs2h18Y": {
+      "title": "Nested conditionals | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 255
+    },
+    "2AQKmw14mHM": {
+      "title": "R-squared, Clearly Explained!!!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 661
+    },
+    "2Fp1N6dof0Y": {
+      "title": "Python Tutorial: Calling External Commands Using the Subprocess Module",
+      "author": "Corey Schafer",
+      "seconds": 1141
+    },
+    "2MCtRv1ZIFQ": {
+      "title": "how to search a repo using `git grep` (beginner) anthony explains #231",
+      "author": "anthonywritescode",
+      "seconds": 347
+    },
+    "2WtPyqwTLKM": {
+      "title": "CS50x 2025 - Lecture 0 - Scratch",
+      "author": "CS50",
+      "seconds": 7136
+    },
+    "34CQxHXzD4w": {
+      "title": "what is a git tag? (beginner - intermediate) anthony explains #144",
+      "author": "anthonywritescode",
+      "seconds": null
+    },
+    "3AXZ9Iahvc4": {
+      "title": "HTML & CSS for Absolute Beginners: Root folder & your first HTML file",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "3CC4N4z3GJc": {
+      "title": "Gradient Boost Part 1 (of 4): Regression Main Ideas",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 952
+    },
+    "3JdQOExKtUY": {
+      "title": "Percentile Tail Latency Explained (95%, 99%) Monitor Backend performance with this metric",
+      "author": "Hussein Nasser",
+      "seconds": 375
+    },
+    "3OmfTIf-SOU": {
+      "title": "Unit testing | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": null
+    },
+    "3dt4OGnU5sM": {
+      "title": "Python Tutorial: Comprehensions - How they work and why you should be using them",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "3elGSZSWTbM": {
+      "title": "Flexbox or grid - How to decide?",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "3ohzBxoFHAY": {
+      "title": "Python OOP Tutorial 5: Special (Magic/Dunder) Methods",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "3p3p6kp39to": {
+      "title": "How Do You Read a Python Traceback?",
+      "author": "Real Python",
+      "seconds": null
+    },
+    "3q807OdvtH0": {
+      "title": "Raspberry Pi Pico W: Wireless Weather Station",
+      "author": "ExplainingComputers",
+      "seconds": 1033
+    },
+    "42QuXLucH3Q": {
+      "title": "Is Most Published Research Wrong?",
+      "author": "Veritasium",
+      "seconds": 742
+    },
+    "4CSYA9R70R8": {
+      "title": "How to Make an Indie Game Trailer",
+      "author": "Game Maker's Toolkit",
+      "seconds": 871
+    },
+    "4KHiSt0oLJ0": {
+      "title": "CORS in 100 Seconds",
+      "author": "Fireship",
+      "seconds": 151
+    },
+    "4N4bCdyGcUc": {
+      "title": "ConstraintLayout Tutorial Part 1 - UNDERSTANDING CONSTRAINTS - Android Studio Tutorial",
+      "author": "Coding in Flow",
+      "seconds": 588
+    },
+    "4S5ckWkMnMU": {
+      "title": "Planning with pseudo-code | Intro to JS: Drawing & Animation | Computer Programming | Khan Academy",
+      "author": "Khan Academy Computing",
+      "seconds": 207
+    },
+    "4axL8Gfw2nI": {
+      "title": "HTTP - CS50 Shorts",
+      "author": "CS50",
+      "seconds": 902
+    },
+    "4jRBRDbJemM": {
+      "title": "ROC and AUC, Clearly Explained!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 977
+    },
+    "4qVRBYAdLAo": {
+      "title": "Supervised Learning: Crash Course AI #2",
+      "author": "CrashCourse",
+      "seconds": 923
+    },
+    "52RHZdBSjTw": {
+      "title": "Variables and assignment | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 284
+    },
+    "589nCGeWG1w": {
+      "title": "One-Hot, Label, Target and K-Fold Target Encoding, Clearly Explained!!!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 923
+    },
+    "596LEqy6p7M": {
+      "title": "Scratch My Blocks, Part 3: Custom Blocks with Parameters | Tutorial",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "5HgVnu2LGfI": {
+      "title": "Introduction to build profiles in Unity 6",
+      "author": "Unity",
+      "seconds": 291
+    },
+    "5_GfLidQBIA": {
+      "title": "HTML & CSS for Absolute Beginners: Creating links to other pages",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "5irv30-bTJw": {
+      "title": "How to Fix NullReferenceException in C#! (4 Step Process)",
+      "author": "Code Monkey",
+      "seconds": 969
+    },
+    "5o8krh_Qduk": {
+      "title": "localStorage and sessionStorage #DevToolsTips",
+      "author": "Chrome for Developers",
+      "seconds": null
+    },
+    "5pf0_bpNbkw": {
+      "title": "Jupyter Notebook Complete Beginner Guide - From Jupyter to Jupyterlab, Google Colab and Kaggle!",
+      "author": "Rob Mulla",
+      "seconds": 1511
+    },
+    "5sgJsCah9bs": {
+      "title": "Google Colab for Python Beginners - Visually Explained",
+      "author": "Visually Explained",
+      "seconds": 465
+    },
+    "5sktFbX2rZo": {
+      "title": "Use State Diagrams for #Arduino",
+      "author": "Programming Electronics Academy",
+      "seconds": null
+    },
+    "68BZ5f7P94E": {
+      "title": "Neural Networks Pt. 3: ReLU In Action!!!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 538
+    },
+    "6ArSys5qHAU": {
+      "title": "Neural Networks Part 6: Cross Entropy",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 571
+    },
+    "6CEld3hZgqc": {
+      "title": "PyTorch TensorBoard Support",
+      "author": "PyTorch Foundation",
+      "seconds": 432
+    },
+    "6F1B_N6LuKw": {
+      "title": "Using the HC-SR04 Ultrasonic Distance Sensor with Arduino - Everything you need to know!",
+      "author": "DroneBot Workshop",
+      "seconds": null
+    },
+    "6QQta3Cc568": {
+      "title": "Elegoo Smart Robot Car Part 3 - Collision Avoidance & Line Following",
+      "author": "DroneBot Workshop",
+      "seconds": null
+    },
+    "6R_3jHeimiE": {
+      "title": "Driving DC motors, part 1/3:  Flyback diodes (Kevin Lynch)",
+      "author": "Northwestern Robotics",
+      "seconds": null
+    },
+    "6WReFkfrUIk": {
+      "title": "How to Use a Breadboard",
+      "author": "Science Buddies",
+      "seconds": null
+    },
+    "6XrL5jXmTwM": {
+      "title": "UML class diagrams",
+      "author": "Lucid Software",
+      "seconds": null
+    },
+    "6eT5cLL-2Vc": {
+      "title": "2.2 Baselines [Applied Machine Learning || Varada Kolhatkar || UBC]",
+      "author": "Applied Machine Learning ",
+      "seconds": 860
+    },
+    "6iF8Xb7Z3wQ": {
+      "title": "Python Tutorial for Beginners 7: Loops and Iterations - For/While Loops",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "6ngxBkx05Fs": {
+      "title": "MLFlow Tutorial | ML Ops Tutorial",
+      "author": "codebasics",
+      "seconds": 3031
+    },
+    "6uMFEM-napE": {
+      "title": "Simple Saving and Loading with JSON to a File (Unity Save System Tutorial for Beginners)",
+      "author": "Code Monkey",
+      "seconds": 915
+    },
+    "7AMjmCTumuo": {
+      "title": "Python FastAPI Tutorial (Part 1): Getting Started - Web App + REST API",
+      "author": "Corey Schafer",
+      "seconds": 1433
+    },
+    "7ATo0fW5qaU": {
+      "title": "Scratching the Surface: Direction and Costume Drawing",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "7NN5v2wSL4U": {
+      "title": "How to Make a Catch Game in Scratch | Tutorial",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "7f9_vjl9yC8": {
+      "title": "Sounds in Scratch: Add, Record, and Use Text to Speech Blocks | Tutorial",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "7jiPeIFXb6U": {
+      "title": "I don't like notebooks.- Joel Grus (Allen Institute for Artificial Intelligence)",
+      "author": "O'Reilly",
+      "seconds": 3372
+    },
+    "7z8weQnEbsc": {
+      "title": "ASCII Smuggling: Crafting Invisible Text and Decoding Hidden Secrets -New Threat for LLMs and beyond",
+      "author": "Embrace The Red",
+      "seconds": 469
+    },
+    "8G-QDBi7AOo": {
+      "title": "Advanced Topics: Clones | Tutorial",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "8GZ6516Kao4": {
+      "title": "What is the Principle of Least Privilege?",
+      "author": "Google Cloud Tech",
+      "seconds": 454
+    },
+    "8JJ101D3knE": {
+      "title": "Git Tutorial for Beginners: Learn Git in 1 Hour",
+      "author": "Programming with Mosh",
+      "seconds": 4153
+    },
+    "8ZtInClXe1Q": {
+      "title": "How NOT to Store Passwords! - Computerphile",
+      "author": "Computerphile",
+      "seconds": 564
+    },
+    "8dRzxH7Tfag": {
+      "title": "How to Make a Game in Scratch with Background Music | Tutorial",
+      "author": "Zinnea",
+      "seconds": 284
+    },
+    "8iApGVX--B0": {
+      "title": "How to Build and Upload a Unity 6 Webgl Game to itch.io",
+      "author": "Max O'Didily",
+      "seconds": 369
+    },
+    "8vXoMqWgbQQ": {
+      "title": "Top 8 Docker Best Practices for using Docker in Production",
+      "author": "TechWorld with Nana",
+      "seconds": 1106
+    },
+    "97i9pOa2EyE": {
+      "title": "What is Semantic Versioning? (semver)",
+      "author": "Syntax",
+      "seconds": null
+    },
+    "9C_wblf4FIE": {
+      "title": "Create a Sprite with the Scratch Paint Editor | Tutorial",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "9GHxnttXxrA": {
+      "title": "Python FastAPI Tutorial (Part 4): Pydantic Schemas - Request and Response Validation",
+      "author": "Corey Schafer",
+      "seconds": 1462
+    },
+    "9GLaU-BCEQM": {
+      "title": "How to Debug a Circuit (Lesson #3)",
+      "author": "Science Buddies",
+      "seconds": null
+    },
+    "9JYVOUKNQ3A": {
+      "title": "How to run a Post-Mortem meeting, step-by-step",
+      "author": "Bran van der Meer",
+      "seconds": 483
+    },
+    "9N6a-VLBa2I": {
+      "title": "Python Tutorial: Working with JSON Data using the json Module",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "9Os0o3wzS_I": {
+      "title": "Python Tutorial for Beginners 8: Functions",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "9Yomqk0C6kE": {
+      "title": "Valve's \"Secret Weapon\"",
+      "author": "Game Maker's Toolkit",
+      "seconds": 1051
+    },
+    "9cps7Q_IrX0": {
+      "title": "Collin's Lab: Schematics",
+      "author": "Make:",
+      "seconds": null
+    },
+    "9jTPZfhuVro": {
+      "title": "Getting Started with Scratch",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "9yeOJ0ZMUYw": {
+      "title": "SQL Joins Explained  |¦| Joins in SQL |¦| SQL Tutorial",
+      "author": "Socratica",
+      "seconds": 626
+    },
+    "9zn9t48cCug": {
+      "title": "How to code JUMPING and GRAVITY | Make a sprite jump | Realistic game effect - Scratch 3.0 Tutorial",
+      "author": "El Rincón de Primaria",
+      "seconds": null
+    },
+    "AC0Ql1mOw4s": {
+      "title": "Local and global scope | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 295
+    },
+    "AD-3nVI3-_U": {
+      "title": "How to Deploy a Static Website to GitHub Pages - Free Hosting Tutorial",
+      "author": "Corey Schafer",
+      "seconds": 1433
+    },
+    "AGmoCiMNBFw": {
+      "title": "How to install Android Studio on Windows 11 (Updated 2025)",
+      "author": "Amit Thinks",
+      "seconds": null
+    },
+    "AKUtkYZTUfo": {
+      "title": "How to Make a Maze Game in Scratch | Tutorial",
+      "author": "Zinnea",
+      "seconds": 589
+    },
+    "ANIzQ5G-XPE": {
+      "title": "C4W3L06 Intersection Over Union",
+      "author": "DeepLearningAI",
+      "seconds": 259
+    },
+    "AUOzvFzdIk4": {
+      "title": "Storing Objects with Local Storage in JavaScript",
+      "author": "dcode",
+      "seconds": null
+    },
+    "AWVTKBUnoIg": {
+      "title": "Top 5 Most-Used Deployment Strategies",
+      "author": "ByteByteGo",
+      "seconds": 600
+    },
+    "AXDByU3D1hA": {
+      "title": "Tuning Process (C2W3L01)",
+      "author": "DeepLearningAI",
+      "seconds": 430
+    },
+    "Ala6PHlYjmw": {
+      "title": "Git Will Finally Make Sense After This",
+      "author": "LearnThatStack",
+      "seconds": null
+    },
+    "AuolBPY8qdc": {
+      "title": "How to Use the Backpack in Scratch | Tutorial",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "B1j6k2j2eJg": {
+      "title": "Test-Driven Development In Python // The Power of Red-Green-Refactor",
+      "author": "ArjanCodes",
+      "seconds": null
+    },
+    "BH9mlmdXzzI": {
+      "title": "Satisficing and Optimizing Metrics (C3W1L04)",
+      "author": "DeepLearningAI",
+      "seconds": 358
+    },
+    "BLfNP4Sc_iA": {
+      "title": "How to make a HEALTH BAR in Unity!",
+      "author": "Brackeys",
+      "seconds": 1265
+    },
+    "BMuFBYw91UQ": {
+      "title": "What Is The Fastest Way To Load JavaScript",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "BQrohJ3PT7I": {
+      "title": "How to use GitHub Actions | GitHub for Beginners",
+      "author": "GitHub",
+      "seconds": null
+    },
+    "BR3Qx9AVHZE": {
+      "title": "Vectorization in Python : Data Science Code",
+      "author": "ritvikmath",
+      "seconds": 672
+    },
+    "BYKQ9rk0FEQ": {
+      "title": "Arduino Sketch with millis() instead of delay()",
+      "author": "Programming Electronics Academy",
+      "seconds": null
+    },
+    "Bc9lmHjqLZc": {
+      "title": "Collisions and Triggers (\"OnTriggerEnter not working!\" - Unity Tutorial)",
+      "author": "Code Monkey",
+      "seconds": 544
+    },
+    "BlmBDrnhd2I": {
+      "title": "How to Make a Pong Game in Scratch | Tutorial",
+      "author": "Scratch Team",
+      "seconds": 655
+    },
+    "C1N_PDHuJ6Q": {
+      "title": "Basic Recipe for Machine Learning (C2W1L03)",
+      "author": "DeepLearningAI",
+      "seconds": 382
+    },
+    "CO67EQ0ZWgA": {
+      "title": "Teachable Machine Tutorial 2: Train",
+      "author": "Experiments with Google",
+      "seconds": 55
+    },
+    "CODw8292uqE": {
+      "title": "Early Stopping. The Most Popular Regularization Technique In Machine Learning.",
+      "author": "Underfitted",
+      "seconds": 388
+    },
+    "CqvZ3vGoGs0": {
+      "title": "Python Tutorial for Beginners 9: Import Modules and Exploring The Standard Library",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "Ct5s4gXefn4": {
+      "title": "MQTT Retained messages | MQTT Essentials Part 9",
+      "author": "HiveMQ",
+      "seconds": 286
+    },
+    "Cxl_3ANnE0A": {
+      "title": "Stephen Lead - how to give a kick-ass demo",
+      "author": "Ignite Sydney",
+      "seconds": 319
+    },
+    "CzrCADdsXwE": {
+      "title": "Data Presentation, Step-by-Step | Google Data Analytics Certificate",
+      "author": "Grow with Google",
+      "seconds": 962
+    },
+    "D16hTnDGweo": {
+      "title": "Code a Platformer Game | 1. The Basics",
+      "author": "griffpatch",
+      "seconds": null
+    },
+    "D2cwvpJSBX4": {
+      "title": "Getting Started with Python in VS Code (Official Video)",
+      "author": "Visual Studio Code",
+      "seconds": null
+    },
+    "D3JvDWO-BY4": {
+      "title": "Python Tutorial: Sorting Lists, Tuples, and Objects",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "D7_ipDqhtwk": {
+      "title": "How We Build Effective Agents: Barry Zhang, Anthropic",
+      "author": "AI Engineer",
+      "seconds": 909
+    },
+    "DFBbSTvtpy4": {
+      "title": "Teachable Machine Tutorial 1: Gather",
+      "author": "Experiments with Google",
+      "seconds": 136
+    },
+    "DMtFhACPnTY": {
+      "title": "SHA: Secure Hashing Algorithm - Computerphile",
+      "author": "Computerphile",
+      "seconds": 621
+    },
+    "DSffdCT5Cx4": {
+      "title": "CS50 2018 - Lecture 0 - Phone Book",
+      "author": "CS50",
+      "seconds": 201
+    },
+    "DZwmZ8Usvnk": {
+      "title": "Python Tutorial for Beginners 6: Conditionals and Booleans - If, Else, and Elif Statements",
+      "author": "Corey Schafer",
+      "seconds": 988
+    },
+    "DabrWAKNQZc": {
+      "title": "Episode 1: What is AI Red Teaming? | AI Red Teaming 101 with Amanda and Gary",
+      "author": "Microsoft Developer",
+      "seconds": 375
+    },
+    "DfKAwrBievM": {
+      "title": "Arduino - Debounce a Push Button (+ Visual Explanation)",
+      "author": "Robotics Back-End",
+      "seconds": null
+    },
+    "DhRoTONcyZE": {
+      "title": "What is Low-Rank Adaptation (LoRA) | explained by the inventor",
+      "author": "Edward Hu",
+      "seconds": 448
+    },
+    "E6NO0rgFub4": {
+      "title": "How To Write a USEFUL README On Github",
+      "author": "Learn Fast Make Things",
+      "seconds": null
+    },
+    "E91bGT9BjYk": {
+      "title": "How to spot a misleading graph - Lea Gaslowitz",
+      "author": "TED-Ed",
+      "seconds": 250
+    },
+    "ENKzK2K4Go0": {
+      "title": "How to Run an Android App on Your Phone",
+      "author": "Codecademy",
+      "seconds": null
+    },
+    "EUJlVYggR1Y": {
+      "title": "How to get started with VS Code",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "E_ME4P9fQbo": {
+      "title": "Are University Admissions Biased? | Simpson's Paradox Part 2",
+      "author": "minutephysics",
+      "seconds": 216
+    },
+    "EnfjYwe2A0w": {
+      "title": "Electronic Basics #27: ADC (Analog to Digital Converter)",
+      "author": "GreatScott!",
+      "seconds": null
+    },
+    "EuBBz3bI-aA": {
+      "title": "Machine Learning Fundamentals: Bias and Variance",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 396
+    },
+    "Ex1ktxOxVgI": {
+      "title": "MIT Explains: How To Make a Video Game",
+      "author": "MITK12Videos",
+      "seconds": 270
+    },
+    "F8NKVhkZZWI": {
+      "title": "What are AI Agents?",
+      "author": "IBM Technology",
+      "seconds": 748
+    },
+    "FKekzzj5844": {
+      "title": "How to Blink an LED with Arduino (Lesson #2)",
+      "author": "Science Buddies",
+      "seconds": null
+    },
+    "FN2RM-CHkuI": {
+      "title": "Exact Instructions Challenge PB&J Classroom Friendly | Josh Darnit",
+      "author": "Josh Darnit",
+      "seconds": 404
+    },
+    "FOD408a0EzU": {
+      "title": "How To Create/Use Functions - JavaScript Essentials",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "FQM13HkEfBk": {
+      "title": "C4W2L09 Transfer Learning",
+      "author": "DeepLearningAI",
+      "seconds": 528
+    },
+    "FadvtbvAoWk": {
+      "title": "Tracing loop execution | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 296
+    },
+    "FbEJN8FsJ9U": {
+      "title": "Argparse Basics - How I run my scripts via the Command Line",
+      "author": "John Watson Rooney",
+      "seconds": null
+    },
+    "Fe2bWQjJS68": {
+      "title": "How does a browser render a page?",
+      "author": "freeCodeCamp Concepts",
+      "seconds": null
+    },
+    "FmpWi5a0yIU": {
+      "title": "Connecting To The Internet | Raspberry Pi Pico Workshop: Chapter 5.2",
+      "author": "Core Electronics",
+      "seconds": 427
+    },
+    "Fv0nwb1Qn6A": {
+      "title": "Blameless Postmortem Culture In Software Engineering",
+      "author": "Clément Mihailescu",
+      "seconds": 563
+    },
+    "G-fXV-o9QV8": {
+      "title": "Hyperparameters Tuning: Grid Search vs Random Search",
+      "author": "DataMListic",
+      "seconds": 195
+    },
+    "GAe5oB742dw": {
+      "title": "ACID Properties in Databases With Examples",
+      "author": "ByteByteGo",
+      "seconds": 297
+    },
+    "GoQG6Tin-1E": {
+      "title": "Check Yourself with Lateral Reading: Crash Course Navigating Digital Information #3",
+      "author": "CrashCourse",
+      "seconds": 831
+    },
+    "GtV-VYdNt_g": {
+      "title": "Correlation Doesn't Equal Causation: Crash Course Statistics #8",
+      "author": "CrashCourse",
+      "seconds": 737
+    },
+    "Gv9_4yMHFhI": {
+      "title": "A Gentle Introduction to Machine Learning",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 765
+    },
+    "H0XScE08hy8": {
+      "title": "Debugging JavaScript - Chrome DevTools 101",
+      "author": "Chrome for Developers",
+      "seconds": null
+    },
+    "H5o1P8RMiMw": {
+      "title": "Build Your Own Agentic Harness in Python - Full Tutorial",
+      "author": "Tech With Tim",
+      "seconds": 2263
+    },
+    "HCzQJMdHcy0": {
+      "title": "Pub Sub Model | MQTT Essentials Part 3",
+      "author": "HiveMQ",
+      "seconds": 348
+    },
+    "HDCOUXE3HMM": {
+      "title": "p-hacking: What it is and how to avoid it!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 824
+    },
+    "HEikzVL-lZU": {
+      "title": "Byte Pair Encoding Tokenization",
+      "author": "Hugging Face",
+      "seconds": 323
+    },
+    "HGIgUH11nVo": {
+      "title": "Machine Learning Monitoring: What Is Data Drift?",
+      "author": "Evidently AI",
+      "seconds": 186
+    },
+    "HGwBXDKFk9I": {
+      "title": "Neural Networks Part 8: Image Classification with Convolutional Neural Networks (CNNs)",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 923
+    },
+    "HVXime0nQeI": {
+      "title": "StatQuest: K-nearest neighbors, Clearly Explained",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 330
+    },
+    "HW__or3B9pw": {
+      "title": "Tracing variables | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 347
+    },
+    "HosPml1qkrg": {
+      "title": "The EXTREMELY helpful guide to merge conflicts",
+      "author": "Visual Studio Code",
+      "seconds": null
+    },
+    "HsLLq6Rm5tU": {
+      "title": "Ohms Law Explained - The basics circuit theory",
+      "author": "The Engineering Mindset",
+      "seconds": null
+    },
+    "IHZwWFHWa-w": {
+      "title": "Gradient descent, how neural networks learn | Deep Learning Chapter 2",
+      "author": "3Blue1Brown",
+      "seconds": 1233
+    },
+    "IL5grHtz_MU": {
+      "title": "Calibrating the micro:bit compass",
+      "author": "Microsoft MakeCode",
+      "seconds": 49
+    },
+    "In0nB0ABaUk": {
+      "title": "JavaScript Form Validation",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "ItcTxWW3c5Q": {
+      "title": "How to use a micro:bit | Tutorial #1",
+      "author": "Science Buddies",
+      "seconds": 667
+    },
+    "IvU8m_30iK0": {
+      "title": "What is Switch Bounce and How to Debounce – ATM | Digi-Key Electronics",
+      "author": "DigiKey",
+      "seconds": 209
+    },
+    "J4Wdy0Wc_xQ": {
+      "title": "StatQuest: Random Forests Part 1 - Building, Using and Evaluating",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 594
+    },
+    "JiJUo3rRwEA": {
+      "title": "Unity Tutorial: Prefabs, Prefab Variants, and Nested Prefabs",
+      "author": "Unity",
+      "seconds": 826
+    },
+    "JivuXdrIHK0": {
+      "title": "PAUSE MENU in Unity",
+      "author": "Brackeys",
+      "seconds": 732
+    },
+    "JkFkUTxMkCk": {
+      "title": "LED Circuit Design: Choose Resistor Value",
+      "author": "Science Buddies",
+      "seconds": null
+    },
+    "JoAxZsdw_3w": {
+      "title": "Carrying Out Error Analysis (C3W2L01)",
+      "author": "DeepLearningAI",
+      "seconds": 632
+    },
+    "JrXazCEACVo": {
+      "title": "How Neural Networks Work",
+      "author": "CodeAI",
+      "seconds": 304
+    },
+    "JyMMrtaJWOg": {
+      "title": "Best Arduino Simulator Online for Arduino Programming | WOKWI Simulator Tutorial for Beginners",
+      "author": "Tech at Home",
+      "seconds": null
+    },
+    "K0lWSB2QoIQ": {
+      "title": "PyTorch Tutorial 15 - Transfer Learning",
+      "author": "Patrick Loeber",
+      "seconds": 894
+    },
+    "KXJSjte_OAI": {
+      "title": "How Binary Search Makes Computers Much, Much Faster",
+      "author": "Tom Scott",
+      "seconds": 411
+    },
+    "KZpYtNtGxSU": {
+      "title": "Python if __name__ == '__main__': Visually Explained",
+      "author": "Visually Explained",
+      "seconds": null
+    },
+    "KdmPHEnPJPs": {
+      "title": "Python Pandas Tutorial (Part 9): Cleaning Data - Casting Datatypes and Handling Missing Values",
+      "author": "Corey Schafer",
+      "seconds": 1914
+    },
+    "Kdsp6soqA7o": {
+      "title": "Machine Learning Fundamentals: The Confusion Matrix",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 432
+    },
+    "Klapmal6cRM": {
+      "title": "Introduction to Embedded Machine Learning 3.3.1 - Deploy Keyword Spotting System",
+      "author": "Edge Impulse",
+      "seconds": 390
+    },
+    "KuXjwB4LzSA": {
+      "title": "But what is a convolution?",
+      "author": "3Blue1Brown",
+      "seconds": 1381
+    },
+    "Kv5jhbSkqLE": {
+      "title": "Dependency Inversion: Write BETTER PYTHON CODE Part 2",
+      "author": "ArjanCodes",
+      "seconds": null
+    },
+    "LFCzUKCwj04": {
+      "title": "Adding a level in Scratch",
+      "author": "Katherine Pavri",
+      "seconds": null
+    },
+    "LPZh9BOjkQs": {
+      "title": "Large Language Models explained briefly",
+      "author": "3Blue1Brown",
+      "seconds": 478
+    },
+    "LUDkXMXf3P8": {
+      "title": "HTML & CSS for Absolute Beginners: Specificity",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "LWdsF79H1Pg": {
+      "title": "print() vs. return in Python Functions",
+      "author": "Coding with Estefania",
+      "seconds": 287
+    },
+    "LheeJPkdCu8": {
+      "title": "How to Review a Pull Request Like a Senior Developer",
+      "author": "Matt Stauffer",
+      "seconds": 920
+    },
+    "LjOfOQkpPnU": {
+      "title": "What is Scratch?",
+      "author": "Scratch Team",
+      "seconds": 97
+    },
+    "MANoa78BQAQ": {
+      "title": "Machine Learning: Bias in, Bias out | Experience AI",
+      "author": "Raspberry Pi Foundation",
+      "seconds": 204
+    },
+    "MepM1juFYzA": {
+      "title": "Raspberry Pi Imager 2.0: Set Up Your Raspberry Pi in Minutes",
+      "author": "Gary Explains",
+      "seconds": 244
+    },
+    "N4ZQQqyIf6k": {
+      "title": "Using Bootstrapping to Calculate p-values!!!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 487
+    },
+    "N6hyN6BW6ao": {
+      "title": "Python Pandas Tutorial (Part 11): Reading/Writing Data to Different Sources - Excel, JSON, SQL, Etc",
+      "author": "Corey Schafer",
+      "seconds": 1965
+    },
+    "N9I7smAOspM": {
+      "title": "Data Privacy: Study Hall Data Literacy #10: ASU + Crash Course",
+      "author": "Arizona State University",
+      "seconds": 659
+    },
+    "NGq8wnH5VSo": {
+      "title": "Use ColumnTransformer to apply different preprocessing to different columns",
+      "author": "Data School",
+      "seconds": 203
+    },
+    "NIWwJbo-9_8": {
+      "title": "Python Tutorial: Using Try/Except Blocks for Error Handling",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "NOzH2bkot2I": {
+      "title": "Make a DODGING Game in Scratch | Tutorial",
+      "author": "The STEAMist",
+      "seconds": 374
+    },
+    "NUELGzIHT-I": {
+      "title": "The ultimate beginner's guide to GitHub in 2026",
+      "author": "GitHub",
+      "seconds": null
+    },
+    "NbYgm0r7u6o": {
+      "title": "Array vs. ArrayList in Java Tutorial - What's The Difference?",
+      "author": "Coding with John",
+      "seconds": 1056
+    },
+    "O14Wb3N4wDQ": {
+      "title": "How do forms, labels and inputs work in HTML?",
+      "author": "freeCodeCamp Concepts",
+      "seconds": null
+    },
+    "O2L2Uv9pdDA": {
+      "title": "Naive Bayes, Clearly Explained!!!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 912
+    },
+    "OESqS4gLfEs": {
+      "title": "How to install Python 3.14.0 on Windows 11",
+      "author": "Amit Thinks",
+      "seconds": null
+    },
+    "OGpENuxjRWM": {
+      "title": "Forecasting Principles & Practice: 5.10 Time series cross-validation",
+      "author": "OTexts",
+      "seconds": 413
+    },
+    "ORMx45xqWkA": {
+      "title": "PyTorch in 100 Seconds",
+      "author": "Fireship",
+      "seconds": 162
+    },
+    "Obyqku2vWc4": {
+      "title": "Iteration in the Engineering Design Process",
+      "author": "Science Buddies",
+      "seconds": 99
+    },
+    "OeU5m6vRyCk": {
+      "title": "AI: What is Machine Learning?",
+      "author": "CodeAI",
+      "seconds": 176
+    },
+    "OejCJL2EC3k": {
+      "title": "What is MLOps?",
+      "author": "IBM Technology",
+      "seconds": 415
+    },
+    "P6sfmUTpUmc": {
+      "title": "Building makemore Part 3: Activations & Gradients, BatchNorm",
+      "author": "Andrej Karpathy",
+      "seconds": 6957
+    },
+    "PCfTiO8vD8A": {
+      "title": "Python Strings: Escape Sequences",
+      "author": "Real Python",
+      "seconds": 285
+    },
+    "PHO6TBq_auI": {
+      "title": "CSS Variables - An introduction to CSS custom properties",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "PIAPzioNt9Y": {
+      "title": "Humans and AI working together: Crash Course AI #14",
+      "author": "CrashCourse",
+      "seconds": 613
+    },
+    "PTq2IvkSoM8": {
+      "title": "Scratching the Surface: X & Y",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "PVk9RUW1Hwo": {
+      "title": "Air Guitar: Using TinyML to Identify Complex Gestures (Harvard CS249R)",
+      "author": "RobJMal",
+      "seconds": 455
+    },
+    "PaFPbb66DxQ": {
+      "title": "The Main Ideas of Fitting a Line to Data (The Main Ideas of Least Squares and Linear Regression.)",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 561
+    },
+    "PeMlggyqz0Y": {
+      "title": "Machine Learning Explained in 100 Seconds",
+      "author": "Fireship",
+      "seconds": 154
+    },
+    "PxfPs1zwKl0": {
+      "title": "Direct flashing from MakeCode",
+      "author": "Micro:bit Educational Foundation",
+      "seconds": 75
+    },
+    "Q7NFzES5GMU": {
+      "title": "How to Convert Input Manager to Input System (Unity 6.3 LTS)",
+      "author": "Code Monkey",
+      "seconds": 514
+    },
+    "QI1dCZa1c2Q": {
+      "title": "Android Studio Tutorial for Beginners (Java) – First App Hello World + Project Tour (Class-01)",
+      "author": "Coder Reborn",
+      "seconds": null
+    },
+    "QQAqQp06nXo": {
+      "title": "Step Through Python Scripts With Thonny",
+      "author": "Real Python",
+      "seconds": 342
+    },
+    "QVdf0LgmICw": {
+      "title": "Python Tutorial: Variable Scope - Understanding the LEGB rule and global/nonlocal statements",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "QW0o21ZjmDM": {
+      "title": "RecyclerView (Android Development Fundamentals, Unit 2: Lesson 4.4)",
+      "author": "Google for Developers India",
+      "seconds": 907
+    },
+    "QXuvUW4B7jU": {
+      "title": "What is Edge AI?",
+      "author": "Edge Impulse",
+      "seconds": 631
+    },
+    "QZ-56lncbKA": {
+      "title": "Master XY Coordinates in Scratch in 6 Minutes [Scratch Basics]",
+      "author": "Building Blocks Education Centre",
+      "seconds": 401
+    },
+    "Qb_NUn0TSAU": {
+      "title": "Super Keyword in Java Full Tutorial - How to Use \"super\"",
+      "author": "Coding with John",
+      "seconds": 693
+    },
+    "Qj3u_kzfJVo": {
+      "title": "LLM-as-a-judge: evaluating LLMs with LLMs",
+      "author": "Evidently AI",
+      "seconds": 341
+    },
+    "Qmj5UQRkL4s": {
+      "title": "Traceback (most recent call last): Python's tracebacks explained",
+      "author": "Python Morsels",
+      "seconds": 219
+    },
+    "R4yfNi_8Kqw": {
+      "title": "Measures of Spread: Crash Course Statistics #4",
+      "author": "CrashCourse",
+      "seconds": 707
+    },
+    "R8rmfD9Y5-c": {
+      "title": "8 Must Know JavaScript Array Methods",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "RFix_Kg2Di0": {
+      "title": "Coyote Time & Jump Buffering In Unity",
+      "author": "bendux",
+      "seconds": 228
+    },
+    "RSl87lqOXDE": {
+      "title": "Python OOP Tutorial 4: Inheritance - Creating Subclasses",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "RT-hUXUWQ2I": {
+      "title": "Bubble Sort - CS50 Shorts",
+      "author": "CS50",
+      "seconds": 355
+    },
+    "Re3H2ISfQE8": {
+      "title": "Behind the MakeCode Hardware - Radio in micro:bit",
+      "author": "Microsoft MakeCode",
+      "seconds": 385
+    },
+    "SH3M1WZs7FM": {
+      "title": "How to use buttons on a micro:bit | Tutorial #2",
+      "author": "Science Buddies",
+      "seconds": 406
+    },
+    "SJo7vPgRlBQ": {
+      "title": "Mel Frequency Cepstral Coefficients (MFCC) Explained",
+      "author": "DataMListic",
+      "seconds": 357
+    },
+    "SOLnbKI73Wo": {
+      "title": "User input | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 253
+    },
+    "STMtgEsi2Ik": {
+      "title": "Conditional Statements: Make Interactive Projects (Part 1)| Tutorial",
+      "author": "Scratch Team",
+      "seconds": 273
+    },
+    "S_hzUenqAM0": {
+      "title": "MakeCode for micro:bit - Reaction Time Game",
+      "author": "Microsoft MakeCode",
+      "seconds": 2028
+    },
+    "ScEQRKwUePI": {
+      "title": "pytest: everything you need to know about fixtures (intermediate) anthony explains #487",
+      "author": "anthonywritescode",
+      "seconds": null
+    },
+    "T-D1OfcDW1M": {
+      "title": "What is Retrieval-Augmented Generation (RAG)?",
+      "author": "IBM Technology",
+      "seconds": 395
+    },
+    "T2qQGqZxkD0": {
+      "title": "Teachable Machine 2.0: Making AI easier for everyone",
+      "author": "Google",
+      "seconds": 129
+    },
+    "TFGeefF82o8": {
+      "title": "Data logging on micro:bit | Tutorial #12",
+      "author": "Science Buddies",
+      "seconds": 627
+    },
+    "TOrVsLklltM": {
+      "title": "Teachable Machine 3: Sound Classifiication",
+      "author": "The Coding Train",
+      "seconds": 874
+    },
+    "TWWsW1w-BVo": {
+      "title": "Gender Shades",
+      "author": "MIT Media Lab",
+      "seconds": 299
+    },
+    "TcTgbVudLyQ": {
+      "title": "How to Restore Variables When Rotating the Device - Android Studio Tutorial",
+      "author": "Coding in Flow",
+      "seconds": null
+    },
+    "TqOeMYtOc1w": {
+      "title": "Confidence Intervals, Clearly Explained!!!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 401
+    },
+    "TyT8i8YIcwI": {
+      "title": "Machine Learning Crash Course: Generalization",
+      "author": "Google for Developers",
+      "seconds": 118
+    },
+    "U2ZN104hIcc": {
+      "title": "Python Tutorial: pip - An in-depth look at the package management system",
+      "author": "Corey Schafer",
+      "seconds": 546
+    },
+    "UG_X_7g63rY": {
+      "title": "How I'm fighting bias in algorithms | Joy Buolamwini",
+      "author": "TED",
+      "seconds": 524
+    },
+    "UJN3AL4tiqw": {
+      "title": "The Activity Lifecycle Explained - Android Studio Tutorial",
+      "author": "Coding in Flow",
+      "seconds": null
+    },
+    "UMIG4KnM8xw": {
+      "title": "Free and Open Source software licenses explained",
+      "author": "The Linux Experiment",
+      "seconds": null
+    },
+    "UPgxnGC8oBU": {
+      "title": "Teachable Machine 2: Snake Game",
+      "author": "The Coding Train",
+      "seconds": 478
+    },
+    "UabBYexBD4k": {
+      "title": "Is RAG Still Needed? Choosing the Best Approach for LLMs",
+      "author": "IBM Technology",
+      "seconds": 669
+    },
+    "Uh2ebFW8OYM": {
+      "title": "Python Tutorial: File Objects - Reading and Writing to Files",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "UmNKiV7Lekk": {
+      "title": "Functions | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 281
+    },
+    "UtSSMs6ObqY": {
+      "title": "Learn Ollama in 15 Minutes - Run LLM Models Locally for FREE",
+      "author": "Tech With Tim",
+      "seconds": 841
+    },
+    "UvCri1tqIxQ": {
+      "title": "Making Your First Game: Minimum Viable Product - Scope Small, Start Right - Extra Credits",
+      "author": "Extra Credits",
+      "seconds": null
+    },
+    "VAo84c1hQX8": {
+      "title": "C4W3L07 Nonmax Suppression",
+      "author": "DeepLearningAI",
+      "seconds": 482
+    },
+    "VCllZKM7Njk": {
+      "title": "How to Read CSV files in Google Colab from Drive (from computer) (python pandas)",
+      "author": "Koolac",
+      "seconds": 354
+    },
+    "VMj-3S1tku0": {
+      "title": "The spelled-out intro to neural networks and backpropagation: building micrograd",
+      "author": "Andrej Karpathy",
+      "seconds": 8752
+    },
+    "VQraviuwbzU": {
+      "title": "5 simple tips to making responsive layouts the easy way",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "VX_M3tIyiYk": {
+      "title": "Power Analysis, Clearly Explained!!!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 1004
+    },
+    "VyoGAoxQhxM": {
+      "title": "Python FastAPI Tutorial (Part 6): Completing CRUD - Update and Delete (PUT, PATCH, DELETE)",
+      "author": "Corey Schafer",
+      "seconds": 2182
+    },
+    "W3hKjXg7fXM": {
+      "title": "Lecture 05: Deployment (FSDL 2022)",
+      "author": "The Full Stack",
+      "seconds": 3448
+    },
+    "W6lCo2gSDdA": {
+      "title": "Signal Smoothing",
+      "author": "MATLAB",
+      "seconds": 224
+    },
+    "WAdrXVnOTIM": {
+      "title": "Set a \"random_state\" to make your code reproducible",
+      "author": "Data School",
+      "seconds": 156
+    },
+    "WHvUdmbDeDc": {
+      "title": "Board Walkthrough & Pinout | Raspberry Pi Pico Workshop: Chapter 1.4",
+      "author": "Core Electronics",
+      "seconds": 215
+    },
+    "WIlQukiXs-E": {
+      "title": "What is Python IDLE and How to Use the IDLE Shell",
+      "author": "Real Python",
+      "seconds": null
+    },
+    "WRjXIA5pMtk": {
+      "title": "Python FastAPI Tutorial (Part 3): Path Parameters - Validation and Error Handling",
+      "author": "Corey Schafer",
+      "seconds": 2216
+    },
+    "WUoCSkSW4cs": {
+      "title": "Debugging with stack traces | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 350
+    },
+    "W_9-bL4br98": {
+      "title": "Machine Learning Using Your Mobile Phone with Edge Impulse",
+      "author": "Edge Impulse",
+      "seconds": 258
+    },
+    "WldXhauP024": {
+      "title": "Getting started with open source contributions for beginners",
+      "author": "GitHub",
+      "seconds": null
+    },
+    "WztFcaz4yS8": {
+      "title": "Android App Development Tutorial 36 - Passing Data to Another Activity with putExtra | Java",
+      "author": "Caleb Curry",
+      "seconds": 533
+    },
+    "X-AWdfSFCHQ": {
+      "title": "How Chatbots and Large Language Models Work",
+      "author": "CodeAI",
+      "seconds": 441
+    },
+    "XF1_MlZ5l6M": {
+      "title": "Learn JavaScript Event Listeners In 18 Minutes",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "XXFLFWHP9Nc": {
+      "title": "11.5 Nested CV for Algorithm Selection (L11 Model Eval. Part 4)",
+      "author": "Sebastian Raschka",
+      "seconds": 1039
+    },
+    "XamMbnzI5vE": {
+      "title": "Building interfaces with ConstraintLayout in Android Studio",
+      "author": "Android Developers",
+      "seconds": 240
+    },
+    "XcBywSyQ-gY": {
+      "title": "FREE Raspberry Pi Pico Simulator You NEED to Try!",
+      "author": "IoT Frontier",
+      "seconds": 757
+    },
+    "XmpIBsnc3xU": {
+      "title": "Stop Using print(): Learn the VSCode Debugger",
+      "author": "ArjanCodes",
+      "seconds": null
+    },
+    "XnnA9z7lv4Q": {
+      "title": "Missing Data Mechanisms",
+      "author": "ritvikmath",
+      "seconds": 413
+    },
+    "Xnzjr0Pcx-A": {
+      "title": "break and continue | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 316
+    },
+    "XtQMytORBmM": {
+      "title": "The Unity Tutorial For Complete Beginners",
+      "author": "Game Maker's Toolkit",
+      "seconds": 2799
+    },
+    "XwJQJnY6iUs": {
+      "title": "How to Use a Photoresistor (Light Sensor) with Arduino (Lesson #27)",
+      "author": "Science Buddies",
+      "seconds": null
+    },
+    "Xz0x-8-cgaQ": {
+      "title": "Bootstrapping Main Ideas!!!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 567
+    },
+    "Y21OR1OPC9A": {
+      "title": "Python Virtual Environments - Full Tutorial for Beginners",
+      "author": "Tech With Tim",
+      "seconds": null
+    },
+    "YLtlz88zrLg": {
+      "title": "CI/CD Tutorial using GitHub Actions - Automated Testing & Automated Deployments",
+      "author": "Tom Shaw",
+      "seconds": null
+    },
+    "YOsMJQfwqow": {
+      "title": "HTML & CSS for Absolute Beginners: Semantic HTML",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "YslfY4W-NAg": {
+      "title": "Knowledge clip: Keeping research data organized",
+      "author": "UGent Open Science",
+      "seconds": 343
+    },
+    "YvU-AprWuW8": {
+      "title": "What is a Syntax Error in Python? (Examples + How to solve it)",
+      "author": "Indently",
+      "seconds": 414
+    },
+    "Z8Cv60f75LI": {
+      "title": "Proportional Line Follower for LEGO 51515 - Fast and Reliable",
+      "author": "Builderdude35",
+      "seconds": null
+    },
+    "ZDa-Z5JzLYM": {
+      "title": "Python OOP Tutorial 1: Classes and Instances",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "ZMQbHMgK2rw": {
+      "title": "The Fastest Maze-Solving Competition On Earth",
+      "author": "Veritasium",
+      "seconds": 1522
+    },
+    "Zcjl8xPLmPw": {
+      "title": "Use stratified sampling with train_test_split",
+      "author": "Data School",
+      "seconds": 265
+    },
+    "ZyhVh-qRZPA": {
+      "title": "Python Pandas Tutorial (Part 1): Getting Started with Data Analysis - Installation and Loading Data",
+      "author": "Corey Schafer",
+      "seconds": 1381
+    },
+    "_L39rN6gz7Y": {
+      "title": "Decision and Classification Trees, Clearly Explained!!!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 1088
+    },
+    "_Tl-6HeV0Rc": {
+      "title": "Live Server Extension for Visual Studio Code | Full Tutorial",
+      "author": "Coding with Estefania",
+      "seconds": null
+    },
+    "_gQaygjm_hg": {
+      "title": "Good APIs Vs Bad APIs: 7 Tips for API Design",
+      "author": "ByteByteGo",
+      "seconds": 348
+    },
+    "_uQrJ0TkZlc": {
+      "title": "Python Full Course for Beginners",
+      "author": "Programming with Mosh",
+      "seconds": 22447
+    },
+    "a0_lo_GDcFw": {
+      "title": "What Is Artificial Intelligence? Crash Course AI #1",
+      "author": "CrashCourse",
+      "seconds": 705
+    },
+    "a3P6LWwPBqM": {
+      "title": "micro:bit compass",
+      "author": "Micro:bit Educational Foundation",
+      "seconds": 99
+    },
+    "aFHu65LiFok": {
+      "title": "Arduino Tutorial 30: Understanding and Using Servos in Projects",
+      "author": "Paul McWhorter",
+      "seconds": null
+    },
+    "ai6qS13gKRo": {
+      "title": "Replay Attacks - CompTIA Security+ SY0-701- 2.4",
+      "author": "Professor Messer",
+      "seconds": 345
+    },
+    "aircAruvnKk": {
+      "title": "But what is a neural network? | Deep learning chapter 1",
+      "author": "3Blue1Brown",
+      "seconds": 1120
+    },
+    "apdD69J4bEc": {
+      "title": "Quick guide to CSS focus states",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "auv10y-dN4s": {
+      "title": "How To Debug",
+      "author": "CodeAI",
+      "seconds": 132
+    },
+    "b0MhF8pkSLw": {
+      "title": "How to Make a Game with a Start Screen in Scratch | Tutorial",
+      "author": "Zinnea",
+      "seconds": null
+    },
+    "b2r9Cdvssi0": {
+      "title": "Getting started with GitHub Pages for beginners | Tutorial",
+      "author": "GitHub",
+      "seconds": null
+    },
+    "b9LTz6joMf8": {
+      "title": "Git: branches in Visual Studio Code",
+      "author": "Visual Studio Code",
+      "seconds": null
+    },
+    "b9U1dcUS_-w": {
+      "title": "HOW TO PLAYTEST!",
+      "author": "Brackeys",
+      "seconds": null
+    },
+    "bSXUJRnQPPo": {
+      "title": "MLOps Tutorial #5: Automated Testing for Machine Learning",
+      "author": "DVCorg",
+      "seconds": 596
+    },
+    "bdvYIumllx8": {
+      "title": "Thonny | Great Python IDE for beginners",
+      "author": "Pythonology",
+      "seconds": 567
+    },
+    "bhhs4bwYyhc": {
+      "title": "RecyclerView + CardView - Part 4 - ON-ITEM-CLICK INTERFACE - Android Studio Tutorial",
+      "author": "Coding in Flow",
+      "seconds": 461
+    },
+    "bj0Z_GncIwY": {
+      "title": "Breakpoint-Free CSS Grid Layouts",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "bro4rwYVo0I": {
+      "title": "How to write a Game Design Document",
+      "author": "Game Dev Beginner",
+      "seconds": 743
+    },
+    "bwuwRFvNuW8": {
+      "title": "Using Variables and Lists in Scratch (Part 2) | Tutorial",
+      "author": "Scratch Team",
+      "seconds": 434
+    },
+    "bxp4G-oJATM": {
+      "title": "Difficulty in Video Games - Game Design",
+      "author": "Brackeys",
+      "seconds": null
+    },
+    "bxr4p5Ik4js": {
+      "title": "What is the difference between absolute and relative paths?",
+      "author": "freeCodeCamp Concepts",
+      "seconds": null
+    },
+    "byngcwjO51U": {
+      "title": "Behind the MakeCode Hardware - Accelerometer on micro:bit",
+      "author": "Microsoft MakeCode",
+      "seconds": 348
+    },
+    "c0kfcP_nD9E": {
+      "title": "CSS Specificity explained",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "c67GaAkf1BE": {
+      "title": "How to use GitHub issues and projects | GitHub for Beginners",
+      "author": "GitHub",
+      "seconds": null
+    },
+    "cFTFtuEQ-10": {
+      "title": "try, catch, finally, throw - error handling in JavaScript",
+      "author": "freeCodeCamp.org",
+      "seconds": null
+    },
+    "cGuyrANVi4A": {
+      "title": "How Model Context Protocol (MCP) actually works",
+      "author": "Google Cloud Tech",
+      "seconds": 478
+    },
+    "cOoP8-NPLSo": {
+      "title": "Learn Event Delegation In 10 Minutes",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "cRHQNNcYf6s": {
+      "title": "JavaScript ES6 Modules",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "cfqtFvWOfg0": {
+      "title": "Why Large Language Models Hallucinate",
+      "author": "IBM Technology",
+      "seconds": 577
+    },
+    "ciNHn38EyRc": {
+      "title": "Running an SQL Injection Attack - Computerphile",
+      "author": "Computerphile",
+      "seconds": 1031
+    },
+    "cjXI-yxqGTI": {
+      "title": "Containers vs VMs: What's the difference?",
+      "author": "IBM Technology",
+      "seconds": 488
+    },
+    "cuEtnrL9-H0": {
+      "title": "Learn Fetch API In 6 Minutes",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "d2GLtZjaGhY": {
+      "title": "Android Project Structure - Beginner's Guide to Android App Development",
+      "author": "AstrosCoding",
+      "seconds": 673
+    },
+    "d8d9EZHU7fw": {
+      "title": "Securing AI Agents with Zero Trust",
+      "author": "IBM Technology",
+      "seconds": 812
+    },
+    "dB-4nVc0s10": {
+      "title": "Complete Raspberry Pi Pins Overview GPIO Header",
+      "author": "Robotics Back-End",
+      "seconds": 919
+    },
+    "dBmIkEvEBtA": {
+      "title": "Super Mario 3D World's 4 Step Level Design",
+      "author": "Game Maker's Toolkit",
+      "seconds": null
+    },
+    "daefaLgNkw0": {
+      "title": "Python Tutorial for Beginners 5: Dictionaries - Working with Key-Value Pairs",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "db0KWYaWfeM": {
+      "title": "Simple Enemy AI in Unity (State Machine, Find Target, Chase, Attack)",
+      "author": "Code Monkey",
+      "seconds": null
+    },
+    "dyjo_ggEtVU": {
+      "title": "Controlling DC Motors with the L298N H Bridge and Arduino",
+      "author": "DroneBot Workshop",
+      "seconds": null
+    },
+    "e1gAyQuIFQo": {
+      "title": "Inspect Network Activity - Chrome DevTools 101",
+      "author": "Chrome for Developers",
+      "seconds": null
+    },
+    "e9U0QAFbfLI": {
+      "title": "Cosine Similarity, Clearly Explained!!!",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 613
+    },
+    "e9lnsKot_SQ": {
+      "title": "How Git Works: Explained in 4 Minutes",
+      "author": "ByteByteGo",
+      "seconds": null
+    },
+    "eMlx5fFNoYc": {
+      "title": "Attention in transformers, step-by-step | Deep Learning Chapter 6",
+      "author": "3Blue1Brown",
+      "seconds": 1569
+    },
+    "eNmRjbVIZ0s": {
+      "title": "Debugging with test cases | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 247
+    },
+    "ebEkn-BiW5k": {
+      "title": "Simpson's Paradox",
+      "author": "minutephysics",
+      "seconds": 279
+    },
+    "ebZB8dPrrog": {
+      "title": "Why You Need Custom Exception Classes",
+      "author": "ArjanCodes",
+      "seconds": null
+    },
+    "eiC58R16hb8": {
+      "title": "JavaScript Visualized - Event Loop, Web APIs, (Micro)task Queue",
+      "author": "Lydia Hallie",
+      "seconds": null
+    },
+    "eirjjyP2qcQ": {
+      "title": "Python Tutorial: Datetime Module - How to work with Dates, Times, Timedeltas, and Timezones",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "f7kokNyRe7U": {
+      "title": "Simulate mobile devices with Device Mode #DevToolsTips",
+      "author": "Chrome for Developers",
+      "seconds": 280
+    },
+    "f8_uF_IDV50": {
+      "title": "Learn Visual Studio Code in 15 minutes: 2026 Official Beginner Tutorial",
+      "author": "Visual Studio Code",
+      "seconds": null
+    },
+    "f98ogUP80KI": {
+      "title": "What is \"rubber duck debugging?\"",
+      "author": "MIT OpenCourseWare",
+      "seconds": 315
+    },
+    "fCMrO_VzeL8": {
+      "title": "How do I handle missing values in pandas?",
+      "author": "Data School",
+      "seconds": 867
+    },
+    "fE_25esn-5U": {
+      "title": "Data Leakage",
+      "author": "Cynthia Rudin",
+      "seconds": 200
+    },
+    "fJEFZ6EOM9o": {
+      "title": "How to Save Variables in SharedPreferences - Android Studio Tutorial",
+      "author": "Coding in Flow",
+      "seconds": 693
+    },
+    "fNcJuPIZ2WE": {
+      "title": "Learn HTML Forms In 25 Minutes",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "fSytzGwwBVw": {
+      "title": "Machine Learning Fundamentals: Cross Validation",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 364
+    },
+    "fYq5PXgSsbE": {
+      "title": "Learn Flexbox in 15 Minutes",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "fis26HvvDII": {
+      "title": "Android Development for Beginners - Full Course",
+      "author": "freeCodeCamp.org",
+      "seconds": 41786
+    },
+    "fjF2ALrdd5A": {
+      "title": "Exact Instructions Challenge Drawing Edition | Josh Darnit",
+      "author": "Josh Darnit",
+      "seconds": 541
+    },
+    "fuwGvZ-eOrc": {
+      "title": "The Engineering Design Process: An Eggstronaut Mission",
+      "author": "Science Buddies",
+      "seconds": 493
+    },
+    "fw42BYQmuJ4": {
+      "title": "Paper Prototyping 101",
+      "author": "NNgroup",
+      "seconds": 167
+    },
+    "fzMIjWFYQl0": {
+      "title": "MAC / HMAC - Message Authentication Code / Hash Bashed Message Authentication Codes",
+      "author": "Practical Networking",
+      "seconds": 412
+    },
+    "g8-Xrpl_Uhk": {
+      "title": "What is \"State\" in Programming?",
+      "author": "Academind",
+      "seconds": null
+    },
+    "gV0_raKR2UQ": {
+      "title": "Algorithmic Bias and Fairness: Crash Course AI #18",
+      "author": "CrashCourse",
+      "seconds": 680
+    },
+    "gbFBWxtpgpQ": {
+      "title": "Simple Battle System in Unity (Spawn Enemy Waves, Trigger)",
+      "author": "Code Monkey",
+      "seconds": 1443
+    },
+    "gd7BXuUQ91w": {
+      "title": "60 Linux Commands you NEED to know (in 10 minutes)",
+      "author": "NetworkChuck",
+      "seconds": 650
+    },
+    "gjfYr_RpyDU": {
+      "title": "HTML & CSS for Absolute Beginners: box-sizing",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "h5wLuVDr0oc": {
+      "title": "Deploy ML models with FastAPI, Docker, and Heroku | Tutorial",
+      "author": "AssemblyAI",
+      "seconds": 1125
+    },
+    "h8gMhXYAv1k": {
+      "title": "What is Tool Calling? Connecting LLMs to Your Data",
+      "author": "IBM Technology",
+      "seconds": 296
+    },
+    "hTRsEjJnKZM": {
+      "title": "How to use micro:bit sound sensor | Tutorial #7",
+      "author": "Science Buddies",
+      "seconds": 448
+    },
+    "h_BC6QMWDbA": {
+      "title": "What is Threat Modeling and Why Is It Important?",
+      "author": "CBT Nuggets",
+      "seconds": 366
+    },
+    "hd1W4CyPX58": {
+      "title": "Getting started in scikit-learn with the famous iris dataset",
+      "author": "Data School",
+      "seconds": 926
+    },
+    "hh3CR64otvE": {
+      "title": "11.4 Statistical Tests for Algorithm Comparison (L11 Model Eval. Part 4)",
+      "author": "Sebastian Raschka",
+      "seconds": 495
+    },
+    "hkaysu1Z-N8": {
+      "title": "2D Animation in Unity (Tutorial)",
+      "author": "Brackeys",
+      "seconds": 1313
+    },
+    "hvhtJORsE5Y": {
+      "title": "MQTT QoS - Quality of Service | MQTT Essentials Part 7",
+      "author": "HiveMQ",
+      "seconds": 341
+    },
+    "hxGOiiR9ZKg": {
+      "title": "The Flaws of Inheritance",
+      "author": "CodeAesthetic",
+      "seconds": null
+    },
+    "hyIEUCIVhQQ": {
+      "title": "How Microcontroller Memory Works | Embedded System Project Series #16",
+      "author": "Artful Bytes",
+      "seconds": 2066
+    },
+    "i1gMzQv0hWU": {
+      "title": "Accessibility scanner - Accessibility on Android",
+      "author": "Android Developers",
+      "seconds": 295
+    },
+    "iH_wV8BbS24": {
+      "title": "Sandboxes Aren't Optional: 4 Ways to Isolate Coding Agents — Robert Brennan, OpenHands",
+      "author": "AI Engineer",
+      "seconds": 862
+    },
+    "iLVoA1DTE60": {
+      "title": "Testing APIs with the cURL Command",
+      "author": "Steve Griffith - Prof3ssorSt3v3",
+      "seconds": 623
+    },
+    "iNdZFKfExZ8": {
+      "title": "How Should AI Be Governed?: Crash Course Futures of AI #5",
+      "author": "CrashCourse",
+      "seconds": 753
+    },
+    "iSFXFG4CMUU": {
+      "title": "HTML & CSS for Absolute Beginners: HTML Headings",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "iWS9ogMPOI0": {
+      "title": "Python FastAPI Tutorial: Build a REST API in 15 Minutes",
+      "author": "pixegami",
+      "seconds": 916
+    },
+    "iY2AZYdZAr0": {
+      "title": "Data processing for Token Classification",
+      "author": "Hugging Face",
+      "seconds": 202
+    },
+    "i_23KUAEtUM": {
+      "title": "Using Git with Visual Studio Code (Official Beginner Tutorial)",
+      "author": "Visual Studio Code",
+      "seconds": null
+    },
+    "inN8seMm7UI": {
+      "title": "Get started with Google Colaboratory (Coding TensorFlow)",
+      "author": "TensorFlow",
+      "seconds": 190
+    },
+    "iyw-qZF_vF8": {
+      "title": "What happens after leaking an API key on GitHub? Experiment leaking AWS API key into GitHub",
+      "author": "GitGuardian",
+      "seconds": 495
+    },
+    "j3wlBRrzlkM": {
+      "title": "How to download and install Unity 6 Editor using Unity Hub",
+      "author": "Code Flow",
+      "seconds": 301
+    },
+    "jCzT9XFZ5bw": {
+      "title": "Python OOP Tutorial 6: Property Decorators - Getters, Setters, and Deleters",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "jF43_wj_DCQ": {
+      "title": "Training with PyTorch",
+      "author": "PyTorch Foundation",
+      "seconds": 897
+    },
+    "jLM6n4mdRuA": {
+      "title": "MCP Tutorial: Build Your First MCP Server",
+      "author": "codebasics",
+      "seconds": 832
+    },
+    "jM-zWp8dNQA": {
+      "title": "Python Unit Testing | FastAPI with Pytest Tutorial (fast & easy)",
+      "author": "Eric Roby",
+      "seconds": 544
+    },
+    "jUiyXCwauJA": {
+      "title": "Introduction to Embedded Machine Learning 2.2.1 - How to Evaluate a Model",
+      "author": "Edge Impulse",
+      "seconds": 645
+    },
+    "jizZKNnx9wA": {
+      "title": "7 Effective Tips for Presenting Data at Work!",
+      "author": "Jeff Su",
+      "seconds": 452
+    },
+    "jrHRe9lSqqA": {
+      "title": "What Is a Prompt Injection Attack?",
+      "author": "IBM Technology",
+      "seconds": 657
+    },
+    "juq_l70Vg1w": {
+      "title": "MQTT Topic Best Practices | MQTT Essentials Part 6",
+      "author": "HiveMQ",
+      "seconds": 350
+    },
+    "k9TUPpGqYTo": {
+      "title": "Python Tutorial for Beginners 2: Strings - Working with Textual Data",
+      "author": "Corey Schafer",
+      "seconds": 1271
+    },
+    "kCc8FmEb1nY": {
+      "title": "Let's build GPT: from scratch, in code, spelled out.",
+      "author": "Andrej Karpathy",
+      "seconds": 6980
+    },
+    "kLKBcPonMYw": {
+      "title": "Versioning Data with DVC (Hands-On Tutorial!)",
+      "author": "DVCorg",
+      "seconds": 784
+    },
+    "kRJ37shzFp0": {
+      "title": "What Are Variables and Lists in Scratch? (Part 1)| Tutorial",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "kXDtRKN7qmE": {
+      "title": "What is Decomposition? | All About Computers | Tynker",
+      "author": "Tynker",
+      "seconds": 229
+    },
+    "kaf2dCd8Zfs": {
+      "title": "RecyclerView + CardView - Part 3 - INSERT & REMOVE ITEMS - Android Studio Tutorial",
+      "author": "Coding in Flow",
+      "seconds": 643
+    },
+    "kflJd26x_u8": {
+      "title": "Tracing function calls | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 333
+    },
+    "kqNy5N3WLtM": {
+      "title": "Discover micro:bit CreateAI",
+      "author": "Micro:bit Educational Foundation",
+      "seconds": 104
+    },
+    "kwcillcWOg0": {
+      "title": "Teachable Machine 1: Image Classification",
+      "author": "The Coding Train",
+      "seconds": 1201
+    },
+    "l46QvPrSpno": {
+      "title": "Study design, batch effects, and confounding",
+      "author": "Jeff Leek",
+      "seconds": 464
+    },
+    "lD4nwMomrF0": {
+      "title": "Tiny Sorter: A fun starter project with Arduino + machine learning",
+      "author": "Experiments with Google",
+      "seconds": 101
+    },
+    "lG4VkPoG3ko": {
+      "title": "The medical test paradox, and redesigning Bayes' rule",
+      "author": "3Blue1Brown",
+      "seconds": 1273
+    },
+    "lH3ZkwbVp5E": {
+      "title": "Git Stash In 5 Minutes",
+      "author": "Colt Steele",
+      "seconds": null
+    },
+    "lSnbOtw4izI": {
+      "title": "How to Review a Pull Request in GitHub the RIGHT Way",
+      "author": "CoderDave",
+      "seconds": null
+    },
+    "lVr4pGeSQKg": {
+      "title": "Introduction to Embedded Machine Learning 1.3.1 - Getting Started with Edge Impulse",
+      "author": "Edge Impulse",
+      "seconds": 399
+    },
+    "lX9UQp2NwTk": {
+      "title": "The Ultimate Guide to Writing Classes in Python",
+      "author": "ArjanCodes",
+      "seconds": null
+    },
+    "l_sVz-J6jBE": {
+      "title": "How To Use A Servo With Raspberry Pi Pico",
+      "author": "Core Electronics",
+      "seconds": 709
+    },
+    "lgCNTuLBMK4": {
+      "title": "A Beginners Guide To The Data Analysis Process",
+      "author": "CareerFoundry",
+      "seconds": 620
+    },
+    "lkQT8zb0_A8": {
+      "title": "Print statements and expressions | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 289
+    },
+    "ln5hc-zprEM": {
+      "title": "The Full Guide to Debugging Your Android Apps - Android Studio Tutorial",
+      "author": "Philipp Lackner",
+      "seconds": 688
+    },
+    "lsMQRaeKNDk": {
+      "title": "What is a REST API?",
+      "author": "IBM Technology",
+      "seconds": 552
+    },
+    "m61h9YEB1fw": {
+      "title": "HTML & CSS for Absolute Beginners: HTML Lists (ol and ul)",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "mH7e7fs9gaE": {
+      "title": "From Spaghetti Code to Clean Python",
+      "author": "ArjanCodes",
+      "seconds": null
+    },
+    "mzlH8lp4ISA": {
+      "title": "getting started with pytest (beginner - intermediate) anthony explains #518",
+      "author": "anthonywritescode",
+      "seconds": null
+    },
+    "n-zeeRLBgd0": {
+      "title": "Teachable Machine Tutorial 3: Export",
+      "author": "Experiments with Google",
+      "seconds": 60
+    },
+    "n3HsvqBJrlY": {
+      "title": "Getting Started with the People + AI Guidebook",
+      "author": "Google Design",
+      "seconds": 265
+    },
+    "nCKdihvneS0": {
+      "title": "How to create a pull request in 4 min | GitHub for Beginners",
+      "author": "GitHub",
+      "seconds": null
+    },
+    "nKJlF-olKmg": {
+      "title": "9 Examples of Specification Gaming",
+      "author": "Robert Miles AI Safety ",
+      "seconds": 580
+    },
+    "nf26Yv5JTOc": {
+      "title": "Dictionaries | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 261
+    },
+    "nghuHvKLhJA": {
+      "title": "Python Quick Tip: F-Strings - How to Use Them and Advanced String Formatting",
+      "author": "Corey Schafer",
+      "seconds": 822
+    },
+    "nuDpLN2dazU": {
+      "title": "Form Styling Essentials | The basics to modern CSS tips & tricks",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "oDFxBjcvrQU": {
+      "title": "Introduction to Embedded Machine Learning 1.4.1 - Feature Extraction from Motion Data",
+      "author": "Edge Impulse",
+      "seconds": 633
+    },
+    "oOZr4kRJgFE": {
+      "title": "When calibration beats metrics",
+      "author": "Probabl",
+      "seconds": 730
+    },
+    "oX9T2bvE2Qs": {
+      "title": "Arduino Sleep and Interrupts - Electronics with Becky Stern | DigiKey",
+      "author": "DigiKey",
+      "seconds": 196
+    },
+    "on7endO4lPY": {
+      "title": "Playtesting - How to Get Good Feedback on Your Game - Extra Credits",
+      "author": "Extra Credits",
+      "seconds": 415
+    },
+    "p7pJMvD2sag": {
+      "title": "Evaluating compound boolean expressions | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 276
+    },
+    "p7uvqb8fcdA": {
+      "title": "Evaluating Photos & Videos: Crash Course Navigating Digital Information #7",
+      "author": "CrashCourse",
+      "seconds": 799
+    },
+    "pL2GVrcKD30": {
+      "title": "Run AI Models Locally With Ollama and Python",
+      "author": "Real Python",
+      "seconds": 551
+    },
+    "pTB30aXS77U": {
+      "title": "Uncle Bob’s SOLID Principles Made Easy 🍀 - In Python!",
+      "author": "ArjanCodes",
+      "seconds": null
+    },
+    "pTFZFxd4hOI": {
+      "title": "Docker Tutorial for Beginners",
+      "author": "Programming with Mosh",
+      "seconds": 3363
+    },
+    "pbjR20eTLVs": {
+      "title": "Image Classification with ml5.js",
+      "author": "The Coding Train",
+      "seconds": 1910
+    },
+    "pd-0G0MigUA": {
+      "title": "Python SQLite Tutorial: Complete Overview - Creating a Database, Table, and Running Queries",
+      "author": "Corey Schafer",
+      "seconds": 1789
+    },
+    "prLQYFB2jP4": {
+      "title": "PWM Outputs | Raspberry Pi Pico Workshop: Chapter 2.7",
+      "author": "Core Electronics",
+      "seconds": 445
+    },
+    "pss3RKf9gP4": {
+      "title": "Introduction to AI, Lesson 6.1 - Multiclass Confusion Matrix",
+      "author": "Code for Schools",
+      "seconds": 248
+    },
+    "py5byOOHZM8": {
+      "title": "CNN: Convolutional Neural Networks Explained - Computerphile",
+      "author": "Computerphile",
+      "seconds": 856
+    },
+    "pyZmtVB7ofY": {
+      "title": "Your Lists Are Being Copied WRONG In Python (Shallow Copy VS. Deep Copy)",
+      "author": "Indently",
+      "seconds": null
+    },
+    "q0bQrGhdPm4": {
+      "title": "if-elif-else | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 285
+    },
+    "q8SA3rM6ckI": {
+      "title": "Building makemore Part 4: Becoming a Backprop Ninja",
+      "author": "Andrej Karpathy",
+      "seconds": 6924
+    },
+    "qBigTkBLU6g": {
+      "title": "StatQuest: Histograms, Clearly Explained",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 222
+    },
+    "qS4mvrWWO_M": {
+      "title": "How I Plan My Coding Projects",
+      "author": "ForrestKnight",
+      "seconds": null
+    },
+    "qWfzIYCvBqo": {
+      "title": "Never Forget Again! // Precision vs Recall with a Clear Example of Precision and Recall",
+      "author": "Kimberly Fessel",
+      "seconds": 323
+    },
+    "qg4PchTECck": {
+      "title": "Gradient Descent in 3 minutes",
+      "author": "Visually Explained",
+      "seconds": 186
+    },
+    "qmpUfWN7hh4": {
+      "title": "HTTP Status Codes Explained In 5 Minutes",
+      "author": "ByteByteGo",
+      "seconds": 306
+    },
+    "qnS-WAjkI18": {
+      "title": "HTML & CSS for Absolute Beginners: Dev tools",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "qozj78W2v5U": {
+      "title": "Sharing a Scratch Project and Adding it to a Studio",
+      "author": "RCDSB Tech Academy",
+      "seconds": 103
+    },
+    "qppV3n3YlF8": {
+      "title": "RAG Explained",
+      "author": "IBM Technology",
+      "seconds": 483
+    },
+    "qpv6ms_t_1A": {
+      "title": "WordPiece Tokenization",
+      "author": "Hugging Face",
+      "seconds": 230
+    },
+    "qqBmvHD5bCw": {
+      "title": "Behind the MakeCode Hardware - LEDs on micro:bit",
+      "author": "Microsoft MakeCode",
+      "seconds": 288
+    },
+    "r5_34YnCmMY": {
+      "title": "Telling Stories with Data in 3 Steps (Quick Study)",
+      "author": "Harvard Business Review",
+      "seconds": 287
+    },
+    "r8jQ9hVA2qs": {
+      "title": "A brief introduction to Git for beginners | GitHub",
+      "author": "GitHub",
+      "seconds": null
+    },
+    "rAEqP9VEhe8": {
+      "title": "Generative AI's Greatest Flaw - Computerphile",
+      "author": "Computerphile",
+      "seconds": 742
+    },
+    "rC1gK2tkTRI": {
+      "title": "How save and open scratch project/how to load project from computer/Learn IT",
+      "author": "Learn IT 9M",
+      "seconds": 179
+    },
+    "rEnJYNkUde0": {
+      "title": "STRIDE Threat Modeling for Beginners - In 20 Minutes",
+      "author": "Netsec Explained",
+      "seconds": 1309
+    },
+    "rQsMSamqDvM": {
+      "title": "Scratch Clones and Local Variables Tutorial",
+      "author": "Surfing Scratcher",
+      "seconds": 559
+    },
+    "rfklBqvDl-s": {
+      "title": "Scratch My Blocks, Part 1: Create Custom Blocks | Tutorial",
+      "author": "Scratch Team",
+      "seconds": 241
+    },
+    "rg7Fvvl3taU": {
+      "title": "Learn CSS Grid the easy way",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "riDzcEQbX6k": {
+      "title": "Build A Quiz App With JavaScript",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "rvegdyumjrA": {
+      "title": "Using radio with the micro:bit",
+      "author": "Micro:bit Educational Foundation",
+      "seconds": 166
+    },
+    "ryISV_nH8qw": {
+      "title": "TILEMAPS in Unity",
+      "author": "Brackeys",
+      "seconds": 825
+    },
+    "sDv4f4s2SB8": {
+      "title": "Gradient Descent, Step-by-Step",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 1434
+    },
+    "sN5ZcJLDMaE": {
+      "title": "Ensemble (Boosting, Bagging, and Stacking) in Machine Learning: Easy Explanation for Data Scientists",
+      "author": "Emma Ding",
+      "seconds": 482
+    },
+    "sT_-owjKIbA": {
+      "title": "How to Give a Great Research Talk",
+      "author": "Microsoft Research",
+      "seconds": 3521
+    },
+    "skut_4jdvzc": {
+      "title": "How AI Agents Work: Prompt, Context, Harness & Loop Explained",
+      "author": "JetBrains",
+      "seconds": 745
+    },
+    "soWh2vVgqYk": {
+      "title": "How to Animate in Scratch | Tutorial",
+      "author": "Zinnea",
+      "seconds": 426
+    },
+    "sofffBNhVSo": {
+      "title": "Single Number Evaluation Metric (C3W1L03)",
+      "author": "DeepLearningAI",
+      "seconds": 436
+    },
+    "sqsNb0s7Oq4": {
+      "title": "Code a Fun Space Shooter Game 🚀 | 1. Move & Shoot | Scratch Tutorial",
+      "author": "griffpatch",
+      "seconds": 992
+    },
+    "stkBtGRWkFI": {
+      "title": "Easy Modes Aren't Easy - Designing Dynamic Difficulty - Extra Credits",
+      "author": "Extra Credits",
+      "seconds": null
+    },
+    "sugvnHA7ElY": {
+      "title": "Python Tutorial: if __name__ == '__main__'",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "sxEqtjLC0aM": {
+      "title": "Standardization vs Normalization Clearly Explained!",
+      "author": "Normalized Nerd",
+      "seconds": 348
+    },
+    "tIeHLnjs5U8": {
+      "title": "Backpropagation calculus | Deep Learning Chapter 4",
+      "author": "3Blue1Brown",
+      "seconds": 617
+    },
+    "tLd5GsixfU4": {
+      "title": "Deploy Your Python API to Render Cloud in 5 Mins | Free & Easy!",
+      "author": "pixegami",
+      "seconds": 693
+    },
+    "tOgVbOG5QAo": {
+      "title": "Micro:bit Name Tag Tutorial",
+      "author": "Microsoft MakeCode",
+      "seconds": 109
+    },
+    "tZy9Ev21B4c": {
+      "title": "Science Experiments 01 Data Collection",
+      "author": "Microsoft MakeCode",
+      "seconds": 510
+    },
+    "t_Qujjd_38o": {
+      "title": "Behind the MakeCode Hardware - Buttons on micro:bit",
+      "author": "Microsoft MakeCode",
+      "seconds": 341
+    },
+    "t_hPrz7rs34": {
+      "title": "Voltage divider | Circuit analysis | Electrical engineering | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": null
+    },
+    "ta3Oxx7Yqbo": {
+      "title": "HTML & CSS for Beginners Part 7: File Structure",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "tc713anE3UY": {
+      "title": "This Is How You Write an Efficient Python Dockerfile",
+      "author": "ArjanCodes",
+      "seconds": 1126
+    },
+    "tiZFewofSLM": {
+      "title": "The pipeline function",
+      "author": "Hugging Face",
+      "seconds": 275
+    },
+    "tj5sLSFjVj4": {
+      "title": "Lambda Expressions in Java - Full Simple Tutorial",
+      "author": "Coding with John",
+      "seconds": 785
+    },
+    "trfUBIDeI1Y": {
+      "title": "LLM as a Judge: Scaling AI Evaluation Strategies",
+      "author": "IBM Technology",
+      "seconds": 368
+    },
+    "tw7ror9x32s": {
+      "title": "Introduction To Lists In Python (Python Tutorial #4)",
+      "author": "CS Dojo",
+      "seconds": 595
+    },
+    "u2u7UJSRuko": {
+      "title": "Introduction to the BBC micro:bit",
+      "author": "Micro:bit Educational Foundation",
+      "seconds": 130
+    },
+    "uUh61R8Hu0o": {
+      "title": "Introduction to Embedded Machine Learning 2.3.3 - How to Deploy a Trained Model to Arduino",
+      "author": "Edge Impulse",
+      "seconds": 589
+    },
+    "ubNGX0VUeBo": {
+      "title": "Essential tips for searching Google Scholar (2022)",
+      "author": "Cardiff University Library",
+      "seconds": 270
+    },
+    "uv8mbL-MC58": {
+      "title": "How to Make a Story in Scratch | Tutorial",
+      "author": "Scratch Team",
+      "seconds": 547
+    },
+    "vBH6GRJ1REM": {
+      "title": "Python dataclasses will save you HOURS, also featuring attrs",
+      "author": "mCoding",
+      "seconds": null
+    },
+    "vHGRXuOtFnE": {
+      "title": "Passthrough some columns and drop others in a ColumnTransformer",
+      "author": "Data School",
+      "seconds": 191
+    },
+    "vMhDkt5JNN0": {
+      "title": "Introduction to secret leaks and getting started with GitHub Secret Protection",
+      "author": "GitHub",
+      "seconds": 191
+    },
+    "vP06aMoz4v8": {
+      "title": "Machine Learning Fundamentals: Sensitivity and Specificity",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 706
+    },
+    "vdBxfFVXnc0": {
+      "title": "Get Started with GitHub Copilot in VS Code (2025)",
+      "author": "Visual Studio Code",
+      "seconds": 1287
+    },
+    "vuBvf7ZRKTA": {
+      "title": "How to evaluate agents in practice",
+      "author": "Google Cloud Tech",
+      "seconds": 653
+    },
+    "vyd1bFxPjL8": {
+      "title": "EfficientML.ai Lecture 10 - MCUNet and TinyML (MIT 6.5940 Fall 2026)",
+      "author": "MIT HAN Lab",
+      "seconds": 3755
+    },
+    "vzZ7TXGIQ3Y": {
+      "title": "HTML & CSS for Absolute Beginners: Creating and linking to a CSS file",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "w9078dAjcrY": {
+      "title": "JavaScript ARRAYS of OBJECTS are easy! 🍎",
+      "author": "Bro Code",
+      "seconds": null
+    },
+    "wfTk7Lb9uPg": {
+      "title": "6. Baselines - ML Projects - Full Stack Deep Learning",
+      "author": "The Full Stack",
+      "seconds": 490
+    },
+    "wjZofJX0v4M": {
+      "title": "Transformers, the tech behind LLMs | Deep Learning Chapter 5",
+      "author": "3Blue1Brown",
+      "seconds": 1634
+    },
+    "wkfEZmsQqiA": {
+      "title": "What Is PID Control? | Understanding PID Control, Part 1",
+      "author": "MATLAB",
+      "seconds": null
+    },
+    "wlSG3pEiQdc": {
+      "title": "Securing Stream Ciphers (HMAC) - Computerphile",
+      "author": "Computerphile",
+      "seconds": 563
+    },
+    "wzN1UyfRSWI": {
+      "title": "How to combine DataFrames in Pandas | Merge, Join, Concat, & Append",
+      "author": "Chart Explorers",
+      "seconds": 820
+    },
+    "x2mRoFNm22g": {
+      "title": "AI: Training Data & Bias",
+      "author": "CodeAI",
+      "seconds": 160
+    },
+    "x3Yno9VUYBY": {
+      "title": "USING WIREFRAMES IN WEB DESIGN: Free Web Design Course | Episode 9",
+      "author": "Flux Academy",
+      "seconds": null
+    },
+    "x3v9zMX1s4s": {
+      "title": "Python Tutorial: Duck Typing and Asking Forgiveness, Not Permission (EAFP)",
+      "author": "Corey Schafer",
+      "seconds": null
+    },
+    "x4u1yp3Msao": {
+      "title": "A practical guide to responsive web design",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "xRlN8CFJwAM": {
+      "title": "How to code Rock Paper Scissors (Beginner Python Tutorial)",
+      "author": "Kylie Ying",
+      "seconds": 525
+    },
+    "xa42PII04N8": {
+      "title": "Scratching the Surface: Costume Center",
+      "author": "Scratch Team",
+      "seconds": null
+    },
+    "xi0vhXFPegw": {
+      "title": "Exploratory Data Analysis with Pandas Python",
+      "author": "Rob Mulla",
+      "seconds": 2421
+    },
+    "xjsqv8nj0cw": {
+      "title": "Unity Profiler Walkthrough & Tutorial | Unity",
+      "author": "Unity",
+      "seconds": 905
+    },
+    "y-FlANhhNiA": {
+      "title": "Type casting | Intro to CS - Python | Khan Academy",
+      "author": "Khan Academy",
+      "seconds": 244
+    },
+    "y17RuWkWdn8": {
+      "title": "Learn DOM Manipulation In 18 Minutes",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "yBgMJssXqHY": {
+      "title": "How to Use a Button with an Arduino (Lesson #5)",
+      "author": "Science Buddies",
+      "seconds": null
+    },
+    "yFviqqPlWyQ": {
+      "title": "MakeCode for micro:bit - Hand Washing Timer",
+      "author": "Microsoft MakeCode",
+      "seconds": 1832
+    },
+    "yGhfUcPjXuE": {
+      "title": "Dear Game Developers, Stop Messing This Up!",
+      "author": "Jonas Tyroller",
+      "seconds": 1339
+    },
+    "yIYKR4sgzI8": {
+      "title": "StatQuest: Logistic Regression",
+      "author": "StatQuest with Josh Starmer",
+      "seconds": 527
+    },
+    "yU7jJ3NbPdA": {
+      "title": "Learn CSS Media Query In 7 Minutes",
+      "author": "Web Dev Simplified",
+      "seconds": null
+    },
+    "yVP3sYgd0bY": {
+      "title": "Create & Add SSH Keys To GitHub For Authentication",
+      "author": "NeuralNine",
+      "seconds": null
+    },
+    "yWqrx08UeUs": {
+      "title": "Sampling, Aliasing & Nyquist Theorem",
+      "author": "0612 TV w/ NERDfirst",
+      "seconds": 647
+    },
+    "ybCMXqsQyDw": {
+      "title": "How To Set Up MQTT With Raspberry Pi Pico W | Guide For Beginners",
+      "author": "Core Electronics",
+      "seconds": 540
+    },
+    "ykn4XNDwW7Q": {
+      "title": "Web design tips for developers",
+      "author": "Kevin Powell",
+      "seconds": null
+    },
+    "ylhcZZ7O3Tk": {
+      "title": "Variables - CS50P Shorts",
+      "author": "CS50",
+      "seconds": 449
+    },
+    "yoHDdnnofeE": {
+      "title": "41.  How to Generate Signed APK or App Bundle (AAB) in Android Studio | Step-by-Step Tutorial",
+      "author": "Leela Web Dev",
+      "seconds": 487
+    },
+    "z4sxiLseh-8": {
+      "title": "print() vs. return in Python",
+      "author": "Python Morsels",
+      "seconds": null
+    },
+    "zAe-sau06io": {
+      "title": "How AI Coding Agents Understand Your Codebase & Developer Tools",
+      "author": "IBM Technology",
+      "seconds": 413
+    },
+    "zM9MYI6bVMk": {
+      "title": "How to Make an \"About Me\" Project in Scratch | Tutorial",
+      "author": "Scratch Team",
+      "seconds": 515
+    },
+    "zNxw5gJtHLc": {
+      "title": "Ethics & AI: Privacy & the Future of Work",
+      "author": "CodeAI",
+      "seconds": 207
+    },
+    "zOa5o9Yq_ZU": {
+      "title": "Scratch Basics - A Beginners Guide to Scratch",
+      "author": "griffpatch",
+      "seconds": null
+    },
+    "zYGDpG-pTho": {
+      "title": "RAG vs Fine-Tuning vs Prompt Engineering: Optimizing AI Models",
+      "author": "IBM Technology",
+      "seconds": 790
+    },
+    "zc8ac_qUXQY": {
+      "title": "START MENU in Unity",
+      "author": "Brackeys",
+      "seconds": 772
+    },
+    "zduSFxRajkE": {
+      "title": "Let's build the GPT Tokenizer",
+      "author": "Andrej Karpathy",
+      "seconds": 8014
+    },
+    "zhdHP9beK1U": {
+      "title": "Test Keyboard Accessibility On Your Website",
+      "author": "NNgroup",
+      "seconds": null
+    },
+    "zjkBMFhNj_g": {
+      "title": "[1hr Talk] Intro to Large Language Models",
+      "author": "Andrej Karpathy",
+      "seconds": 3588
+    },
+    "zroT8YEKpmI": {
+      "title": "How to use micro:bit radio communication | Tutorial #11",
+      "author": "Science Buddies",
+      "seconds": 498
+    }
+  },
+  "images": {
+    "https://upload.wikimedia.org/wikipedia/commons/9/95/Metal_contacts_within_a_breadboard.jpg": {
+      "ok": true
+    },
+    "https://upload.wikimedia.org/wikipedia/commons/b/b2/Survivorship-bias.svg": {
+      "ok": true
+    }
+  }
+}

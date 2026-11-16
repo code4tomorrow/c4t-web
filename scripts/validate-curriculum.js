@@ -99,8 +99,8 @@ courseRegistry.forEach((course, courseIndex) => {
     const setup = course.modules[0];
     const capstone = course.modules[course.modules.length - 1];
     if (
-        setup?.kind !== "setup" ||
-        !/start here|requirements|setup/i.test(setup.title)
+        // Rewritten courses give the setup module their own title.
+        setup?.kind !== "setup"
     ) {
         fail(`${prefix} must begin with a requirements/free-setup module.`);
     }
@@ -294,9 +294,15 @@ courseRegistry.forEach((course, courseIndex) => {
         (requirement) => requirement.category === "hardware"
     );
     if (hardwareRequirements.length) {
-        if (!course.simulators.length) {
-            fail(`${prefix} has hardware but no no-hardware simulator.`);
-        }
+        // Physical kits are always optional: every lesson works in the
+        // course's free tool (e.g. MakeCode's or Wokwi's built-in simulator).
+        hardwareRequirements
+            .filter((requirement) => requirement.required !== false)
+            .forEach((requirement) =>
+                fail(
+                    `${prefix} requires hardware ("${requirement.name}"); it must be optional.`
+                )
+            );
         if (!course.certificateRules.safetyAcknowledgementRequired) {
             fail(`${prefix} hardware safety acknowledgement is not required.`);
         }
@@ -316,6 +322,21 @@ courseRegistry.forEach((course, courseIndex) => {
             );
         }
     });
+
+    // Every course is taught from hand-written lessons with real tools, never
+    // the generated fallback text or the retired concept simulators.
+    {
+        const lessons = course.modules.flatMap((module) => module.lessons);
+        const unwrittenLessons = lessons.filter((lesson) => !lesson.contentKey);
+        if (unwrittenLessons.length) {
+            fail(
+                `${course.id} has ${unwrittenLessons.length} lesson(s) without written content (learning/content/${course.id}/), e.g. ${unwrittenLessons[0].id}.`
+            );
+        }
+        if (course.simulators.length) {
+            fail(`${course.id} still lists a concept simulator.`);
+        }
+    }
 
     if (course.liveSession) {
         const live = course.liveSession;
@@ -353,7 +374,9 @@ courseRegistry.forEach((course, courseIndex) => {
             );
         }
         if (!sourceIds.has(live.continueWith)) {
-            fail(`${livePrefix} continueWith "${live.continueWith}" is unknown.`);
+            fail(
+                `${livePrefix} continueWith "${live.continueWith}" is unknown.`
+            );
         } else {
             const next = courseRegistry.find(
                 (item) => item.id === live.continueWith
@@ -377,9 +400,15 @@ courseRegistry.forEach((course, courseIndex) => {
         }
         live.classTools.forEach((item) => {
             requireText(item.name, `${livePrefix} tool name`, 3);
-            requireText(item.note, `${livePrefix} tool "${item.name}" note`, 30);
+            requireText(
+                item.note,
+                `${livePrefix} tool "${item.name}" note`,
+                30
+            );
             if (!/^https:\/\//.test(item.url || "")) {
-                fail(`${livePrefix} tool "${item.name}" needs an https:// link.`);
+                fail(
+                    `${livePrefix} tool "${item.name}" needs an https:// link.`
+                );
             }
             if (
                 item.url.startsWith("/learn/tools/") &&

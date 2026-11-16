@@ -1,0 +1,64 @@
+{
+  "summary": "Build the server side of a web app in Python: read real HTTP traffic with curl, design REST endpoints and JSON contracts, write routes with FastAPI, store data in SQLite, protect and validate requests, and connect a web page to your own tested API.",
+  "description": "This course follows one project from an empty folder to a working backend. You start by installing Python, VS Code, and FastAPI in a virtual environment, then run a server on your own laptop and poke it with curl and FastAPI's built-in /docs page. Next you read real requests and responses from GitHub's public API, learning methods, status codes, headers, query strings, and JSON by looking at actual traffic. You design a REST contract for a notes API on paper (endpoints, status codes, error shapes, pagination, versioning), then build it in FastAPI with Pydantic models and test it with FastAPI's TestClient. Later modules swap the in-memory list for a SQLite database using Python's built-in sqlite3 module and safe parameterized queries, add authentication basics and input validation, connect a browser front end with fetch, and finish with a capstone app you plan, build, test, and present. The runnable examples on these pages were run when each lesson was built, so the JSON you see is what FastAPI actually returned. Each module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions.",
+  "audience": "Teens and early college students who already write Python (functions, lists, dictionaries, and a little about classes) and want to build the server and database behind web and mobile apps.",
+  "prerequisites": [
+    "Python basics: functions, lists, dictionaries, loops, and reading a traceback",
+    "Comfort typing commands in a terminal, or willingness to learn it in Module 1",
+    "Some HTML and JavaScript helps for the later module that connects a web page, but isn't needed before then"
+  ],
+  "outcomes": [
+    "Read and write HTTP by hand: methods, URLs and query strings, headers, status codes, and JSON bodies, using curl -i against real APIs.",
+    "Design a REST contract for a resource, with consistent endpoints, status codes, error shapes, pagination, and a plan for versioning.",
+    "Build a FastAPI service with path and query parameters, Pydantic request and response models, and correct 201, 204, 404, and 422 responses.",
+    "Model related data in SQLite tables and query it from Python with parameterized SQL.",
+    "Protect actions so users can only change their own data, and validate every input at the boundary.",
+    "Ship a tested, documented, database-backed web app and explain how its pieces talk to each other."
+  ],
+  "tags": [
+    "backend",
+    "api",
+    "http",
+    "rest",
+    "fastapi",
+    "sql",
+    "python",
+    "intermediate"
+  ],
+  "primaryTool": {
+    "name": "Python 3 with FastAPI, in VS Code",
+    "description": "FastAPI is a free, open-source Python framework for building web APIs. You write ordinary Python functions with type hints, and FastAPI turns them into HTTP endpoints that validate their input, return JSON, and document themselves on an interactive /docs page. It runs on Uvicorn, a small web server that installs with it, and its TestClient lets you send requests to your app from a test file without starting a server. VS Code is the editor, curl is the command-line client, and SQLite comes built into Python.",
+    "setupSteps": [
+      "Install Python 3.11 or newer from python.org (on a Chromebook, turn on Linux and install python3 with apt).",
+      "Install VS Code and Microsoft's Python extension.",
+      "Make a folder called backend-course, open it in VS Code, and create a virtual environment with python -m venv .venv.",
+      "Activate the environment and run python -m pip install \"fastapi[standard]\" (keep the quotes).",
+      "Save a short main.py that creates a FastAPI app with one route, then run fastapi dev main.py.",
+      "Open http://127.0.0.1:8000/docs in your browser, or run curl -i http://127.0.0.1:8000/ in a second terminal."
+    ],
+    "verification": "The terminal prints 'Server started at http://127.0.0.1:8000', the /docs page lists your route, and curl -i shows HTTP/1.1 200 OK followed by your JSON.",
+    "url": "https://fastapi.tiangolo.com/"
+  },
+  "freeCompletionPromise": "Every lesson can be completed for $0. Python, FastAPI, Uvicorn, SQLite, VS Code, and curl are all free, and curl already ships with Windows 10 and 11, macOS, and most Linux systems. The public API examples use GitHub's API, which answers simple read requests without an account or key. Everything runs on your own computer, with no hosting or paid services.",
+  "assignments": [
+    {
+      "title": "CRUD API with TestClient tests",
+      "brief": "Build a small FastAPI app with Pydantic models, create, list, read, update, and delete routes, and the correct status code for each case, then call it with curl and prove every route works with a TestClient test suite."
+    },
+    {
+      "title": "API contract and SQLite schema",
+      "brief": "Design the endpoint table, status codes, and JSON shapes for a new resource before writing a server, then build its SQLite tables with foreign keys, the queries the routes will need, and a transaction that saves related rows together."
+    }
+  ],
+  "capstone": {
+    "title": "Database-backed web app",
+    "brief": "Build a FastAPI app on SQLite, such as a book club tracker or event sign-up, with three or more related tables, full CRUD, accounts with hashed passwords, owner-only edits, validated input, clear errors, and a browser page that uses fetch.",
+    "deliverables": [
+      "FastAPI app with a 3+ table SQLite schema",
+      "Browser page that shows errors and empty states",
+      "TestClient test for every row of the route table",
+      "README with a route table and example JSON",
+      "Three-minute demo"
+    ]
+  }
+}

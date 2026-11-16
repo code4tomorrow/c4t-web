@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="460.8pt" height="148.063799pt" viewBox="0 0 460.8 148.063799" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 148.063799 
+L 460.8 148.063799 
+L 460.8 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g clip-path="url(#p31131d0105)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABfUlEQVR4nO3bQY2DUBRA0d/JGEACRQKVgAUsYAELxQISQAK1AA5AAkhgJLy7+GkyyT3rFyA3f/FC6eO+7ztlMI5jOPN+v8OZ1+uF7jdNE5rL4edrd/rHjAQYCTASYCTASICRACMBD7JMHscRXqiu63CGLJzzPIczKaW073s4s64rulbEkwQYCTASYCTASICRACMBRgJ+yRBZJskbxbZtw5mmacgjoblhGMKZvu/DGU8SYCTASICRACMBRgKMBBgJQMvkdV3hDHkzSRRFgebI8kqem/AkAUYCjAQYCTASYCTASICRACMBaOMmW/CyLOEM+bCUopt5Dp4kwEiAkQAjAUYCjAQYCTASkG2Z3LYtnCHfFDyfT/JI6KPRXK+UPUmAkQAjAUYCjAQYCTASYCQALZNkKSvLMpypqiqcIR+fppTS5/MJZ7quQ9eKeJIAIwFGAowEGAkwEmAkwEgAWiaJXP8Ioj9fn+eZ7VoRTxJgJMBIgJEAIwFGAowEGAn4Az0rQyp29278AAAAAElFTkSuQmCC" id="image39b8a6a2e7" transform="scale(1 -1) translate(0 -47.781818)" x="7.2" y="-20.505981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="30.944681" y="14.798438" transform="rotate(-0 30.944681 14.798438)">0</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g clip-path="url(#p876926876e)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABOUlEQVR4nO3bUQ2DQBAA0dJUAE5AAhJwAFKQgAOwgBOkgIKrhJ2mm0vTzPu+LM3kPi6Ua0op5VHJOI7hmuM40KxpmsI1+76jWZFnypQ/ZyTASICRACMBRgKMBBgJeGUNuq4rXEMPisQwDGmzIu4kwEiAkQAjAUYCjAQYCTASYCTASICRACMBRgKMBBgJMBJgJCDtzWRtfd9Xe5Y7CTASYCTASICRACMBRgKMBBgJQCfudV3DNcuyfPlTPtO2bbVnuZMAIwFGAowEGAkwEmAkwEhAk3VL6TzPcA35GPS+b/S8bdvCNfM8o1kRdxJgJMBIgJEAIwFGAowEGAlI+xaA/DdPDpP0JhM5vGZxJwFGAowEGAkwEmAkwEiAkYCqH5aSa/Fd16FZXnn/MUYCjAQYCTASYCTASICRgDda+ysW4EO/NwAAAABJRU5ErkJggg==" id="image0e1a6bec4f" transform="scale(1 -1) translate(0 -47.781818)" x="64.187234" y="-20.505981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="87.931915" y="14.798438" transform="rotate(-0 87.931915 14.798438)">1</text>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g clip-path="url(#p3e7449d18c)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABdElEQVR4nO3bQXGFMBRA0f5O9yABCeAAByABByABHCABB4ACLIADJOCASnh3kemm96zfkM6dLDI/zed93/frj5znGc6M44i+te97ONP3fTgzz3M4803+oP/OSICRACMBRgKMBBgJMBLwQ4bIIbDrunDmui6yHNI0TThT13WStdxJgJEAIwFGAowEGAkwEmAkAB0ml2UJZ1IdFNd1RXNt2yZZj3AnAUYCjAQYCTASYCTASICRgA+55n6eJ/wQuS7eti2cue87nKFzeZ6jb0XcSYCRACMBRgKMBBgJMBJgJMBIADpxE+RUTk7cwzCg9cg9P1mPcCcBRgKMBBgJMBJgJMBIgJGAZIdJ8rqIHO7oHf80TeFMqgdY7iTASICRACMBRgKMBBgJMBKQ7DBJXjJVVRXOZFmG1iP3/PT/CiLuJMBIgJEAIwFGAowEGAkwEoBeKRFlWYYzx3GEM/SXyaIo0FwK7iTASICRACMBRgKMBBgJMBLwC2auVJ2lhITYAAAAAElFTkSuQmCC" id="image1ced35d492" transform="scale(1 -1) translate(0 -47.781818)" x="121.174468" y="-20.505981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="144.919149" y="14.798438" transform="rotate(-0 144.919149 14.798438)">2</text>
+   </g>
+  </g>
+  <g id="axes_4">
+   <g clip-path="url(#p8eee37a57d)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABaUlEQVR4nO3bQa2DUBBA0elPDSCBIAELYAUsIAEkgAQ0YAUsIIFKeDfppIufe9YTaG7eYvLavp7neSLBsizFmXVdM14VERF93//sfX8pT/nnjAQYCTASYCTASICRACMB76wH3fddnNm2LeU5ERHDMKC5ErJwepIAIwFGAowEGAkwEmAkwEhA2jI5z3PKc+gySW4mq6r69uNEhCcJMRJgJMBIgJEAIwFGAowEvLK+5ibIoth1Xdr7juMozpCF05MEGAkwEmAkwEiAkQAjAUYCjASkXd9e11WcaZqmOEM37n3fizNe3/6QkQAjAUYCjAQYCTASYCQALZNkUSSLW13XxZnzPMlHSlsUCU8SYCTASICRACMBRgKMBBgJQMsk+XcRuSmcpqk4M44j+Ujoe/6s3xV4kgAjAUYCjAQYCTASYCTASABaJsk/kMhNIVkUye1lRETbtmgugycJMBJgJMBIgJEAIwFGAowEfACmwj3AcRjjEwAAAABJRU5ErkJggg==" id="image680ff87518" transform="scale(1 -1) translate(0 -47.781818)" x="178.161702" y="-20.505981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="201.906383" y="14.798438" transform="rotate(-0 201.906383 14.798438)">3</text>
+   </g>
+  </g>
+  <g id="axes_5">
+   <g clip-path="url(#p3294d45e43)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABdUlEQVR4nO3bQY2EQBQA0Wazd5AACrCAhHEADkACDrCABByABRyMA0ABK+HXgXDY1Dv/NEmlD52enuy+7zu95Pv9hjNVVaG11nUNZ5qmQWtFfh5Z5Z8zEmAkwEiAkQAjAUYCjAT8vvmx8zzDmTzP0VrzPIczHiZfZCTASICRACMBRgKMBBgJyMjN5LZt4UKfzyecua4rnKnrOpxJKaV938OZ4zjCmaIowhl3EmAkwEiAkQAjAUYCjAQYCUA3k+RGkRwU27YNZ8iNY0opZVkWzizLEs50XRfOuJMAIwFGAowEGAkwEmAkwEiAkQB04iZXs9M0hTPjOJLPIX3fhzPkISvhTgKMBBgJMBJgJMBIgJEAIwHoLQBBrnjJQ89hGND3nno0WpZlOONOAowEGAkwEmAkwEiAkQAjAY/9S4k80CS/u9PbRHIIfIo7CTASYCTASICRACMBRgKMBLz6l3dymCQzb3MnAUYCjAQYCTASYCTASICRgD8HUESYc7Gn2wAAAABJRU5ErkJggg==" id="imagedc70525e58" transform="scale(1 -1) translate(0 -47.781818)" x="235.148936" y="-20.505981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="258.893617" y="14.798438" transform="rotate(-0 258.893617 14.798438)">4</text>
+   </g>
+  </g>
+  <g id="axes_6">
+   <g clip-path="url(#pc576b10efd)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABbUlEQVR4nO3cQY2DUBRA0d/J7EFCpVAHdYCEIgEHBQdIoAoKDpCAhKKAkfDu4qWLyT3rF35y8xcvzZ+5nOd5lgRd14Uz4zhmHFVKKaVt23BmmqaUs35SvvLPGQkwEmAkwEiAkQAjAUYCLlnL5DzP4Uxd1+FM3/fovHVdw5n3+x3ONE0TzniTACMBRgKMBBgJMBJgJMBIQNoymWVZFjR3u93CmcfjEc4MwxDOeJMAIwFGAowEGAkwEmAkwEjA7zcPI4vitm1p512v15TveJMAIwFGAowEGAkwEmAkwEiAkYC0jft+v4czr9cr67jyfD7DGfLYlfAmAUYCjAQYCTASYCTASICRgLRlct/3lO9UVYXmyM+8n88nnCGPXb1JgJEAIwFGAowEGAkwEmAkIG2ZJIsbcRwHmiPvCsiiSHiTACMBRgKMBBgJMBJgJMBIQNoySR5xkj8vz/qfR5m8SYCRACMBRgKMBBgJMBJgJOAPn5k/7rbwoRsAAAAASUVORK5CYII=" id="image00af2bc420" transform="scale(1 -1) translate(0 -47.781818)" x="292.13617" y="-20.505981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="315.880851" y="14.798438" transform="rotate(-0 315.880851 14.798438)">5</text>
+   </g>
+  </g>
+  <g id="axes_7">
+   <g clip-path="url(#p37ea03dabc)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABWElEQVR4nO3cQQ2DUBAA0d+mApCABCTgAHCEBRwgAQlIAAdIAAX00vtO0k3Tw7zzppDJP2yg7eO+77skOM8znBnHMZyZ5xldr23blOs1TRPOPOPbkZEAIwFGAowEGAkwEmAk4JX1QWQJnKYpnOm6Dl1vXddwZlmWcMZlMomRACMBRgKMBBgJMBJgJOCnyyRxHAeau64rnOn7/rub+fAkAUYCjAQYCTASYCTASICRgEfWa+6qqsIZ8hSQLoBkrq5r9FkRTxJgJMBIgJEAIwFGAowEGAkwEpC2cZPtlmzl27Z9fS/ZPEmAkQAjAUYCjAQYCTASYCQg7bsAZFHc9z2cocskeRScxZMEGAkwEmAkwEiAkQAjAUYC0pZJ8vPyYRjCGfLLolJcJv+OkQAjAUYCjAQYCTASYCQg7TU3Qf7ziPwPUym/fR3uSQKMBBgJMBJgJMBIgJEAIwFvciNB4GVcBwYAAAAASUVORK5CYII=" id="image540f524b6c" transform="scale(1 -1) translate(0 -47.781818)" x="349.123404" y="-20.505981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="372.868085" y="14.798437" transform="rotate(-0 372.868085 14.798437)">6</text>
+   </g>
+  </g>
+  <g id="axes_8">
+   <g clip-path="url(#p4b1282a3d9)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABXklEQVR4nO3bUY3qQBiA0Xaz7yAFCUhAAhKQgAScgAQs4AAJOOhKmJPs5N5s8p3nP23zZR4mk+m6bdu2THA4HIYz1+t1OHM6nX79LbN9/e8P+AuKBIoEigSKBIoEigSKBL5nPeh4PA5nzufzcOb9ftP79vs9zc3QSgJFAkUCRQJFAkUCRQJFAuusk0l62boOZ+73Oz3rX55gtpJAkUCRQJFAkUCRQJFAkQBtJuW08HK5DGeezyd8knk8HsMZOS0VrSRQJFAkUCRQJFAkUCRQJFAkQDtu2SnP2k3fbrcpz9Fnyf2EVhIoEigSKBIoEigSKBIoEqCLpXIMOuuoVMnx7az7Aq0kUCRQJFAkUCRQJFAkUCQw7WLprBNF+XVe3/f5fIYzcqLaSgJFAkUCRQJFAkUCRQJFAtN+eReyuZMLqsuyLK/Xaziz2+2GM/JNrSRQJFAkUCRQJFAkUCRQJPADCNBIQLv8JNUAAAAASUVORK5CYII=" id="image4496f1c100" transform="scale(1 -1) translate(0 -47.781818)" x="406.110638" y="-20.505981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="429.855319" y="14.798437" transform="rotate(-0 429.855319 14.798437)">7</text>
+   </g>
+  </g>
+  <g id="axes_9">
+   <g clip-path="url(#pb3556ce9e4)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABe0lEQVR4nO3bQbGDQBAA0cmv3IMEHBAUAA5wECTggEiIhFjAAU6CBFDAlzB92GO/8xSkuvaw2Vpu13VdUcA4junMuq7pzOPxQO/r+z6d+X6/6UxVVenMX/5zZCTASICRACMBRgKMBBgJuJHN5HEc6YPquk5n9n0vMhMR0bZtOrMsSzrzfr/TGVcSYCTASICRACMBRgKMBBgJuJMhssE7zzOd+Xw+Rd4VEdE0TTozTRN6VsaVBBgJMBJgJMBIgJEAIwFGAtDJJLFtWzozDEOJV0VExO/3S2fIaSnhSgKMBBgJMBJgJMBIgJEAIwFGAtDxLUEuaBJd16E5crGU/Asgu3JXEmAkwEiAkQAjAUYCjAQYCSi2mSRfBL1eryLPiWCbV3KvwM1kIUYCjAQYCTASYCTASICRgGJ3AchJIb00SpBNIDmZJFxJgJEAIwFGAowEGAkwEmAkoNjJ5PP5TGfIZpJ+WTTPM5orwZUEGAkwEmAkwEiAkQAjAUYC/gEbmkvxYvrnlgAAAABJRU5ErkJggg==" id="image42c78e42e7" transform="scale(1 -1) translate(0 -47.781818)" x="7.2" y="-93.081981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="30.944681" y="87.374438" transform="rotate(-0 30.944681 87.374438)">8</text>
+   </g>
+  </g>
+  <g id="axes_10">
+   <g clip-path="url(#pa6045dc4ed)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABWElEQVR4nO3bQY3CUBRAUZggBBSABCTgBCQhAQlIAAc4AAcdCf8k88Nics/6pW1u/uKllPWyLMtqgsvlMpx5PB7Dmc/nQ/e7Xq/DmcPhQNca+ZlylX+uSKBIoEigSKBIoEigSGA9a5mcRZbS1cqWydvtNpw5Ho/DmU4SKBIoEigSKBIoEigSKBL46jIpbyb1baIsna/XazgjC2cnCRQJFAkUCRQJFAkUCRQJbGZdSJbA5/M5nDmfz3Q/eTMpy6voJIEigSKBIoEigSKBIoEigSIB2rjlY0/Zpt/v93DmdDrBE5ntdjvlOp0kUCRQJFAkUCRQJFAkUCRAy6T8pi5kUdQFcNYziU4SKBIoEigSKBIoEigSKBKgD0tlcdvtdjOeh+33++FM3wJ8UZFAkUCRQJFAkUCRQJHAtH8pyVtH+bn8fr//+Vlm6ySBIoEigSKBIoEigSKBIoFf8DBREFz5cwUAAAAASUVORK5CYII=" id="image3a880a64ab" transform="scale(1 -1) translate(0 -47.781818)" x="64.187234" y="-93.081981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="87.931915" y="87.374438" transform="rotate(-0 87.931915 87.374438)">9</text>
+   </g>
+  </g>
+  <g id="axes_11">
+   <g clip-path="url(#p2520cafc48)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABWUlEQVR4nO3bQY0CMRiA0e5mBSABCUjAARaQgASkgAKwgAOk4GBWQt+hl9187/ynQ7700JSZr23btrHA5/OZzlwul+nM+/2m591ut+nM4XCgtWa+l6zyzxUJFAkUCRQJFAkUCRQJfK06TB6PxxXLjP1+v2SdMezAKdpJoEigSKBIoEigSKBIoEjgR4bk1vH1ek1nHo/HdEYPpefzeTojt5xye9lOAkUCRQJFAkUCRQJFAkUCdJjUv55ndrvdkpkx7BD4fD6XrNNOAkUCRQJFAkUCRQJFAkUCRQJ04l71guZf1U4CRQJFAkUCRQJFAkUCRQLL3gUQ8qKnvguw6jeJdhIoEigSKBIoEigSKBIoEqDDpHw5dDqdpjP3+33Js8aw//mv1yutNdNOAkUCRQJFAkUCRQJFAkUCyz55l5tCOdzpZ+pygykHTtFOAkUCRQJFAkUCRQJFAkUCv9IAQ36ee66bAAAAAElFTkSuQmCC" id="imagef408e660ef" transform="scale(1 -1) translate(0 -47.781818)" x="121.174468" y="-93.081981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="144.919149" y="87.374438" transform="rotate(-0 144.919149 87.374438)">0</text>
+   </g>
+  </g>
+  <g id="axes_12">
+   <g clip-path="url(#pe132582f54)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABU0lEQVR4nO3cQQ2DQBBA0W1TATgAJ2ABB0hAGhLAASgAFIADKmH+YbM99L/zZGl+9jAlaV/P8zypkPu+w5mu69BZ27aFM9d1hTNVVYUzb/KB/p2RACMBRgKMBBgJMBJgJOBT8mHruoYzZElMKaW6rsMZsigS3iTASICRACMBRgKMBBgJMBJQdJkkbyZ/cVbEmwQYCTASYCTASICRACMBRgLQMkneKI7jGM4cx0EehwzDkO2siDcJMBJgJMBIgJEAIwFGAowEGAlAG3fTNFlmlmUhj0PIt4BcvEmAkQAjAUYCjAQYCTASYCTgVfJXSmThPM8TndW2bTgzzzM6K+JNAowEGAkwEmAkwEiAkQAjAUWXyWmawpm+77M9b9/3cIYsuN4kwEiAkQAjAUYCjAQYCTASUHSZJMhylxL7OTt5M+n/J2ViJMBIgJEAIwFGAowEGAn4ApdcQIosvfB2AAAAAElFTkSuQmCC" id="imaged81ee79635" transform="scale(1 -1) translate(0 -47.781818)" x="178.161702" y="-93.081981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="201.906383" y="87.374438" transform="rotate(-0 201.906383 87.374438)">1</text>
+   </g>
+  </g>
+  <g id="axes_13">
+   <g clip-path="url(#p9ddf8ea641)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABXklEQVR4nO3cUQ2DMBRA0XaZAByABCQhAQlIQAISwAESkIADcNBJeHdZQ/Zxz/cLkJt+NB0sl1JKquA4jnBmmqZwpu97dL91XcOZpmnCGfJMr/hxZCTASICRACMBRgKMBBgJeNe60LIs4cy2beHMvu/ofsMwhDNkM9l1XTjjSgKMBBgJMBJgJMBIgJEAIwG51skkQTac4ziia933/dOzfMOVBBgJMBJgJMBIgJEAIwFGAqptJs/zDGfIKWDOGd3vuq5whpxMEq4kwEiAkQAjAUYCjAQYCTASYCQAvQtAdtPkBU1yfNu2bfxAqd5umnAlAUYCjAQYCTASYCTASICRALSZJMeu5Csl8vs9udfTXEmAkQAjAUYCjAQYCTASYCSg2ldK5PSSfM5OXyx9kisJMBJgJMBIgJEAIwFGAowEVHuxlPyf0TzPVa6Tkj9z/x0jAUYCjAQYCTASYCTASMAHWRxDtwyUpN0AAAAASUVORK5CYII=" id="image1376cdfd83" transform="scale(1 -1) translate(0 -47.781818)" x="235.148936" y="-93.081981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="258.893617" y="87.374438" transform="rotate(-0 258.893617 87.374438)">2</text>
+   </g>
+  </g>
+  <g id="axes_14">
+   <g clip-path="url(#pd6b88ea3d9)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABcElEQVR4nO3bQQ2DUBAA0aWpACQgAQlIQAIOQAoowAISkAAOkIADeup5Jynh0Mw7b2gz+YfNLy2u67oicRxHNhJd16UzxHmeaK6qqnRmWZafvsvX65an/DkjAUYCjAQYCTASYCTASEBBlkmy4K3rms6Q54zjmM5EROz7ns7M85zOkCXYkwQYCTASYCTASICRACMBRgLQMvkkcgsaEVHXdTpDbiabpklnPEmAkQAjAUYCjAQYCTASYCTg/eSHkUWRLIkRbAkkM4QnCTASYCTASICRACMBRgKMBBgJePT6tm3bdGbbNvQs8u4BefmU8CQBRgKMBBgJMBJgJMBIgJGAR69v71wmyTUvWTjJczxJgJEAIwFGAowEGAkwEmAkAC2TZCkbhiGdIcskmYmImKYpnSEvlrpM3sRIgJEAIwFGAowEGAkwEoCWSfJzMXmJk/ydvSzLdCYiou/7dIYuphlPEmAkwEiAkQAjAUYCjAQYCfgAJSdO94bX4TUAAAAASUVORK5CYII=" id="imagea9835f275e" transform="scale(1 -1) translate(0 -47.781818)" x="292.13617" y="-93.081981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="315.880851" y="87.374438" transform="rotate(-0 315.880851 87.374438)">3</text>
+   </g>
+  </g>
+  <g id="axes_15">
+   <g clip-path="url(#pb7a6e20211)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABdElEQVR4nO3bQY2EQBBA0Z7N3gEHOAAJSMABSEACEpAADpCABCzgAAfMac71k+3MYfPfudJMfjhUgHk9z/OkLxnHMZzZ9x2dRea6rkNnRX6ynPLPGQkwEmAkwEiAkQAjAUYCXt9cJu/7DmeqqkJnDcMQzqzris6KeCcBRgKMBBgJMBJgJMBIgJGAXzJElsBpmsIZ+tSROI4j21kR7yTASICRACMBRgKMBBgJMBKAlsl5nsOZbdvCmaZpwhmyuKaU0nVd4QxZXvu+D2e8kwAjAUYCjAQYCTASYCTASICRALRx13Wd5WLkw1IykxL7ZuA8z3DGjTsTIwFGAowEGAkwEmAkwEgAWibJe36yuJHHwPSfRUVRhDPkNxHeSYCRACMBRgKMBBgJMBJgJCDbv5TIO/y2bcOZsizR9XJ9WEqu550EGAkwEmAkwEiAkQAjAUYC0JNJgixl5BX2six//i0fdDGNeCcBRgKMBBgJMBJgJMBIgJGAN5a8RWG3NWWhAAAAAElFTkSuQmCC" id="image2491b0f041" transform="scale(1 -1) translate(0 -47.781818)" x="349.123404" y="-93.081981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="372.868085" y="87.374437" transform="rotate(-0 372.868085 87.374437)">4</text>
+   </g>
+  </g>
+  <g id="axes_16">
+   <g clip-path="url(#p5c59c81d7f)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAABa0lEQVR4nO3cUYmEYBRA4TvL9NAIRjCCNrCKDYxghIlgAzWB2EATuBHugflZWDjf88WRw/9wEZ3X8zxPJJZlyUai67p05r7vdOY4jnQmIqKuazRXws+f/dI/ZiTASICRACMBRgKMBBgJeJFl8rqu9EJk4RyGIZ2hS+K2bWiuBE8SYCTASICRACMBRgKMBBgJQMtkKZ/PJ53p+x5da13XdKZpGnStjCcJMBJgJMBIgJEAIwFGAowEvMkQeTJJFsWSSi2KhCcJMBJgJMBIgJEAIwFGAowEGAlAG/c0TenMOI7f3ktERFRVVeQ6JXmSACMBRgKMBBgJMBJgJMBIAFomCbIEkkeu8zx/fzOFeZIAIwFGAowEGAkwEmAkwEgAWibJF0HneaYz5J0C8hQ0IqJt2yIzhCcJMBJgJMBIgJEAIwFGAowEoK+UyEujZAkky+S+7+kMRf6LiXxi70kCjAQYCTASYCTASICRACMBvzHsS2eTJTfbAAAAAElFTkSuQmCC" id="imagebc188b2ca6" transform="scale(1 -1) translate(0 -47.781818)" x="406.110638" y="-93.081981" width="47.781818" height="47.781818"/>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="429.855319" y="87.374437" transform="rotate(-0 429.855319 87.374437)">5</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p31131d0105">
+   <rect x="7.2" y="20.798438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="p876926876e">
+   <rect x="64.187234" y="20.798438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="p3e7449d18c">
+   <rect x="121.174468" y="20.798438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="p8eee37a57d">
+   <rect x="178.161702" y="20.798438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="p3294d45e43">
+   <rect x="235.148936" y="20.798438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="pc576b10efd">
+   <rect x="292.13617" y="20.798438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="p37ea03dabc">
+   <rect x="349.123404" y="20.798437" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="p4b1282a3d9">
+   <rect x="406.110638" y="20.798437" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="pb3556ce9e4">
+   <rect x="7.2" y="93.374438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="pa6045dc4ed">
+   <rect x="64.187234" y="93.374438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="p2520cafc48">
+   <rect x="121.174468" y="93.374438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="pe132582f54">
+   <rect x="178.161702" y="93.374438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="p9ddf8ea641">
+   <rect x="235.148936" y="93.374438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="pd6b88ea3d9">
+   <rect x="292.13617" y="93.374438" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="pb7a6e20211">
+   <rect x="349.123404" y="93.374437" width="47.489362" height="47.489362"/>
+  </clipPath>
+  <clipPath id="p5c59c81d7f">
+   <rect x="406.110638" y="93.374437" width="47.489362" height="47.489362"/>
+  </clipPath>
+ </defs>
+</svg>

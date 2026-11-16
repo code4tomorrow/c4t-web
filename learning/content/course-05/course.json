@@ -1,0 +1,54 @@
+{
+  "summary": "Go from scripts full of parallel lists to Python programs built from small, well-named classes, and prove they work with pytest.",
+  "description": "You will write every line in VS Code with Python 3 and pytest, starting with a bank account that replaces a tangle of parallel lists and growing it into a small library and inventory system. Along the way you model state with classes and methods, choose between composition and inheritance, protect interfaces with properties, express intent with dunder methods, dataclasses, and type hints, raise your own exceptions, split code into modules, and refactor with tests holding the behaviour steady. Every lesson pairs notes with diagrams, step-through traces of objects changing, and code that was really run, then a build-along and a practice set with worked solutions. The course ends with a capstone application you design, test, and explain.",
+  "audience": "Students who already write Python functions and use lists and dicts, and now want their programs to stay understandable as they grow past a few hundred lines.",
+  "prerequisites": [
+    "Write and call Python functions with parameters and return values",
+    "Use lists, dicts, loops, and if statements comfortably",
+    "Read a basic error message and find the line it points to"
+  ],
+  "outcomes": [
+    "Model a problem with classes whose methods keep each object's state valid.",
+    "Decide between composition and inheritance for a relationship and explain the trade-off.",
+    "Protect an interface with properties, dunder methods, dataclasses, and type hints.",
+    "Signal failures with custom exceptions and organize code into importable modules.",
+    "Write pytest tests and use them to refactor a multi-module program safely.",
+    "Design, build, and present a tested object-oriented application with a class diagram."
+  ],
+  "tags": ["python", "oop", "software-design", "pytest", "intermediate"],
+  "primaryTool": {
+    "name": "VS Code with Python 3 and pytest",
+    "description": "Visual Studio Code is a free editor; with Microsoft's Python extension it runs, debugs, and tests Python files. pytest is the free testing tool the course uses to check every class you write.",
+    "setupSteps": [
+      "Install Python 3.10 or newer from python.org (on Windows, the Python install manager; on a Chromebook, turn on the Linux development environment and install python3 with apt).",
+      "Install VS Code from code.visualstudio.com, then install the Python extension by Microsoft from the Extensions view.",
+      "Make a project folder, open it in VS Code, and create a virtual environment with python -m venv .venv (python3 on macOS, Linux, and Chromebooks).",
+      "Select the .venv interpreter, open a new terminal, and run python -m pip install pytest.",
+      "Save a file named test_first.py with one test function and run python -m pytest."
+    ],
+    "verification": "The terminal prints a green line ending in \"passed\", and the beaker icon's Testing view lists your test with a green check.",
+    "url": "https://code.visualstudio.com/docs/python/python-tutorial"
+  },
+  "freeCompletionPromise": "Python, VS Code, the Python extension, and pytest are all free and open to everyone, so every lesson, exercise, and the capstone can be finished on a home or school computer, including a Chromebook with Linux turned on, for $0.",
+  "assignments": [
+    {
+      "title": "Classes for a small system",
+      "brief": "Write Python classes for a small system, such as library loans or a delivery fleet, whose objects validate every change through methods, with at least one has-a relationship, one subclass, and pytest tests for the main rules."
+    },
+    {
+      "title": "Tested inventory behind a clean interface",
+      "brief": "Build a school-shop inventory in Python with properties that guard its values, frozen dataclasses for records, and an abstract storage interface with two backends, writing pytest tests first, including one that uses a fake."
+    }
+  ],
+  "capstone": {
+    "title": "Object-oriented command-line app",
+    "brief": "Design and build a command-line Python app, such as library loans, a text adventure engine, or a turn-based arena, with five or more focused classes, composition, an interface with two implementations, custom exceptions, and a package that runs with python -m.",
+    "deliverables": [
+      "Python package with 3+ modules",
+      "12+ passing pytest tests, including error paths and a fake",
+      "DESIGN.md with a class diagram and justified relationships",
+      "One documented refactor",
+      "Five-minute demo"
+    ]
+  }
+}

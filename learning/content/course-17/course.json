@@ -1,0 +1,70 @@
+{
+  "summary": "Wire and program a Raspberry Pi Pico W in a free browser simulator, then grow it into a connected sensor station: read sensors, drive LEDs and servos, log and smooth time-series data, publish it over MQTT to a dashboard, and lock down remote control.",
+  "description": "Every circuit in this course runs on a simulated Raspberry Pi Pico W in Wokwi, a free in-browser simulator, so you can wire buttons, potentiometers, temperature and light sensors, LEDs, and servos without buying parts. You write real MicroPython (machine.Pin, machine.ADC, machine.PWM, network.WLAN), the same code a physical Pico W runs, and the simulated board joins a virtual Wi-Fi network called Wokwi-GUEST to reach the internet. Data work happens in regular Python cells that run right on the lesson page: parsing CSV logs, smoothing noisy readings, spotting gaps, and drawing charts with matplotlib. Along the way you learn the Linux terminal (the same commands work on a Raspberry Pi, a Mac, WSL on Windows, or a Chromebook's Linux environment), GPIO numbering, and the electrical rules that keep real pins alive. Later modules send readings as JSON over MQTT, build a live dashboard, authenticate devices before they can act on commands, keep passwords out of source code, and plan for sensor, network, and dashboard failures. Each module has notes that teach the ideas, a build-along that makes one working project, and a practice set with hints and full solutions. The course ends with a secure monitoring capstone such as a smart greenhouse or weather station. A real Pico W, or a Raspberry Pi 4 or 5 running Raspberry Pi OS, is optional; where it helps, lessons show the gpiozero version of the same idea.",
+  "audience": "High school and early college learners who already write Python with functions, loops, and dictionaries, and want to connect code to sensors, networks, dashboards, and the security decisions real devices need.",
+  "prerequisites": [
+    "Write Python programs with functions, loops, lists, and dictionaries",
+    "Know what voltage, current, and resistance are, at least roughly (the course reviews the parts you need)",
+    "Comfortable copying text between browser tabs and editing a file"
+  ],
+  "outcomes": [
+    "Navigate a Linux system from the terminal and set up a project folder with safe permissions.",
+    "Map Raspberry Pi and Pico W GPIO pins correctly and keep circuits within 3.3 V logic and current limits.",
+    "Read digital and analog sensors and control LEDs and servos from MicroPython without blocking the main loop.",
+    "Log timestamped readings to CSV, smooth and chart them with Python, and buffer data through network outages.",
+    "Publish sensor data as JSON over MQTT and show fresh and stale values on a dashboard.",
+    "Protect remote device control with authentication, safe credential storage, and planned failure states."
+  ],
+  "tags": ["raspberry-pi", "pico-w", "micropython", "iot", "mqtt", "linux", "sensors", "security", "simulation", "intermediate"],
+  "primaryTool": {
+    "name": "Wokwi (free Raspberry Pi Pico W simulator with MicroPython)",
+    "description": "Wokwi runs a Raspberry Pi Pico W with real MicroPython firmware in your web browser, along with LEDs, resistors, buttons, potentiometers, sensors, and servos. The simulated board can join a virtual Wi-Fi network with internet access, so networking lessons work too. Nothing to install and nothing to buy; a free account is only needed to save projects online.",
+    "setupSteps": [
+      "Open wokwi.com in Chrome, Edge, Firefox, or Safari and click the Pi Pico tile.",
+      "Under Starter Templates, choose Micropython Pico W (or go straight to wokwi.com/projects/new/micropython-pi-pico-w).",
+      "Paste the lesson's code into main.py and, when the lesson gives one, its circuit into diagram.json.",
+      "Press the green play button and watch the terminal under the diagram for your program's output."
+    ],
+    "verification": "The template prints Hello, Pi Pico W! in the terminal, and the Module 1 blink program makes the board's onboard LED flash twice a second.",
+    "url": "https://wokwi.com/pi-pico"
+  },
+  "optionalGear": [
+    {
+      "name": "Raspberry Pi Pico W (or Pico WH, with headers already soldered)",
+      "description": "Optional. A real board runs the same MicroPython from every lesson. Add a micro-USB data cable, a breadboard, jumper wires, LEDs, 330 ohm resistors, a pushbutton, and a 10k potentiometer to build Modules 1 to 4 on a desk.",
+      "url": "https://www.adafruit.com/product/5526"
+    },
+    {
+      "name": "Raspberry Pi 4 or 5 with Raspberry Pi OS",
+      "description": "Optional. A full Linux computer with a 40-pin GPIO header. It can run the gpiozero versions of the circuits, the MQTT broker, and the dashboard. You also need its official power supply and a microSD card of 16 GB or more, written with Raspberry Pi Imager.",
+      "url": "https://www.adafruit.com/product/5812"
+    },
+    {
+      "name": "Sensors for an environmental station",
+      "description": "Optional. A DHT22 temperature and humidity sensor, a 10k NTC thermistor module, a photoresistor module, and a micro servo cover the sensor and output lessons and the capstone.",
+      "url": "https://www.adafruit.com/category/35"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson can be finished for $0 in a web browser: circuits and MicroPython run in Wokwi's free simulator without an account, and the data analysis runs in Python cells that show their output on the lesson page. Hardware is optional, and no lesson requires buying anything.",
+  "assignments": [
+    {
+      "title": "Sensor logger that survives an outage",
+      "brief": "In Wokwi, program a Pico W in MicroPython to read and smooth two sensors on a non-blocking schedule, log timestamped readings to a CSV file, and post them over Wi-Fi in batches without losing any during an outage you trigger."
+    },
+    {
+      "title": "MQTT station with a signed command",
+      "brief": "Publish JSON readings from a Wokwi Pico W over MQTT with a retained status and last will, show them on a browser dashboard that marks stale values, and accept one remote command only if its HMAC signature and sequence number check out."
+    }
+  ],
+  "capstone": {
+    "title": "Secure monitoring system",
+    "brief": "Build a Pico W monitoring system in Wokwi, such as a smart greenhouse or weather station, that publishes validated readings over MQTT to a dashboard showing fresh, stale, and offline states, with one HMAC-signed remote action, git-ignored secrets, and planned failure handling.",
+    "deliverables": [
+      "Wokwi project with MicroPython code and secrets.example.py",
+      "Browser dashboard",
+      "Test plan covering normal use, boundaries, failures, and attacks",
+      "README with architecture diagram, topic plan, and threat and failure tables",
+      "Four-minute demo"
+    ]
+  }
+}

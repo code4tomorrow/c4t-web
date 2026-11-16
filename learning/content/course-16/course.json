@@ -1,0 +1,61 @@
+{
+  "summary": "Train your first machine-learning models in Python with scikit-learn: turn tables into features and targets, split and preprocess data without fooling yourself, and compare k-nearest neighbors, linear and logistic regression, and decision trees using the right metrics.",
+  "description": "This course is for Python programmers meeting machine learning for the first time. Everything runs in Google Colab, a free notebook in the browser with scikit-learn, pandas, NumPy, and matplotlib already installed, so a school Chromebook works as well as any laptop. You train a model on the classic iris flowers in the first module, then learn the workflow behind it: choosing features and a target, spotting columns that leak the answer, splitting off a test set with train_test_split and stratify, and scaling and one-hot encoding data inside a pipeline. Next you open up two models completely, building k-nearest neighbors by hand and writing gradient descent from scratch to fit a line, then checking both against scikit-learn. Later modules add logistic regression and decision trees, the metrics that tell you whether a model is good enough (accuracy, precision, recall, F1, and confusion matrices), and how to diagnose overfitting and compare models fairly. A capstone pulls it together into a documented comparison of several models on one dataset. Every dataset ships with scikit-learn or is built in the notebook, and every code example and chart on these pages ran for real when the lesson was built. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions.",
+  "audience": "Teens and early college students who already write Python and want to understand how machine-learning models learn from data, not just call them.",
+  "prerequisites": [
+    "Python basics: variables, lists, dictionaries, loops, functions, and reading an error message",
+    "A first look at pandas helps (making a DataFrame, selecting columns, head()), but the course reviews what it uses",
+    "School algebra: averages, squaring, and the slope of a line"
+  ],
+  "outcomes": [
+    "Turn a table into a feature table X and a target y, dropping identifiers and columns that won't be known at prediction time.",
+    "Split data with train_test_split and stratify, and scale and encode it in a scikit-learn pipeline that never learns from the test set.",
+    "Explain how k-nearest neighbors and linear regression make predictions, including how k shapes a decision boundary and how gradient descent fits a line.",
+    "Train and interpret logistic regression and decision-tree models.",
+    "Choose and calculate suitable metrics, read a confusion matrix, and recognize overfitting.",
+    "Compare several models on one dataset against a baseline and justify which one to use."
+  ],
+  "tags": [
+    "python",
+    "machine-learning",
+    "scikit-learn",
+    "data-science",
+    "beginner"
+  ],
+  "primaryTool": {
+    "name": "Google Colab with scikit-learn",
+    "description": "Google Colab is a free, browser-based Jupyter notebook from Google. Your code runs on a Google machine and your notebooks save to your Google Drive. It comes with scikit-learn (the machine-learning library), pandas (tables), NumPy (fast math on arrays), and matplotlib (charts) preinstalled, and every lesson in this course runs on its free CPU machines. Learners who prefer to work offline can use JupyterLab on their own computer with the same code.",
+    "setupSteps": [
+      "Sign in to a Google account (a personal account is safest, since some schools turn Colab off).",
+      "Go to colab.research.google.com and click New notebook, or use File → New notebook in Drive.",
+      "Rename the notebook from Untitled0.ipynb to something like m1-setup.ipynb.",
+      "In the first cell, run: import sklearn, pandas, numpy, matplotlib and print sklearn.__version__.",
+      "Press Shift + Enter to run the cell."
+    ],
+    "verification": "The cell prints a scikit-learn version of 1.4 or newer with no errors, and the top right of the notebook shows RAM and Disk meters for the connected runtime.",
+    "url": "https://colab.research.google.com/"
+  },
+  "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab is free with a Google account and needs no paid plan or GPU for this course. scikit-learn, pandas, NumPy, matplotlib, and JupyterLab are free, open-source software, and every dataset either ships inside scikit-learn or is generated in the notebook, so nothing has to be bought or downloaded.",
+  "assignments": [
+    {
+      "title": "Predictor that beats a baseline",
+      "brief": "In Colab, write a column plan for a table, build X and y for scikit-learn, hold out the newest rows for checking, and show that your model beats a do-nothing baseline, catching any leaky column before it inflates the score."
+    },
+    {
+      "title": "Classifier with a chosen threshold",
+      "brief": "Train logistic regression and a decision tree in Colab on a rare-event task, report precision, recall, and F1 with a confusion matrix, pick a threshold on validation data to meet a stated requirement, and confirm it once on the test set."
+    }
+  ],
+  "capstone": {
+    "title": "Classical model comparison",
+    "brief": "Build one Colab notebook that compares a baseline and three or more scikit-learn models on one dataset, with the test set split off first, preprocessing inside pipelines, cross-validation on two metrics, and a recommendation backed by error analysis.",
+    "deliverables": [
+      "Data card and plan written before modeling",
+      "Notebook that passes restart-and-run-all",
+      "Cross-validated comparison of a baseline and 3+ models",
+      "Training-versus-validation curve with a fit diagnosis",
+      "Error analysis and a written recommendation",
+      "Three-minute presentation"
+    ]
+  }
+}

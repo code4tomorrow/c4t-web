@@ -1,0 +1,1684 @@
+{
+  "course-01": {
+    "summary": "Learn to think like a programmer before you learn a programming language: break problems into pieces, write steps a computer can't misread, use loops and decisions, hunt down bugs, and compare algorithms by counting their steps.",
+    "description": "This course teaches the thinking behind every programming language, using everyday problems: sharing computers fairly at a community center, steering a delivery robot around a room, printing hundreds of name labels, deciding whether a library book can be borrowed, and finding a name in a list. About half the work happens on paper, with unplugged puzzles like robots on a grid, scrambled recipes, and a deck of cards. The other half happens in Scratch 3, MIT's free block-based editor, where your algorithms run for real: you build a fair-share calculator, a delivery robot, pen drawings made with loops, a library kiosk, a buggy alarm clock to fix, and a number-guessing robot that uses binary search. Step-through animations show the same algorithms written in Python, so you can watch the computer follow each step and see its variables change, without needing to learn Python. Each module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions, and the course ends with an algorithm of your own that you design, test, and explain.",
+    "audience": "Absolute beginners, roughly ages 10 to 14, who have never written code and want a strong problem-solving foundation before choosing a programming language.",
+    "prerequisites": [
+      "None. If you can follow a recipe and use a mouse, you're ready."
+    ],
+    "outcomes": [
+      "Describe any problem by its goal, inputs, constraints, and output, and decompose it into pieces small enough to solve.",
+      "Write exact, ordered algorithms in plain English, as flowcharts, and as Scratch scripts, and track their state step by step.",
+      "Spot repeated steps and replace them with counting or condition-controlled loops, including loops inside loops.",
+      "Plan decisions with if/else and combined conditions, and test the edge cases where rules break.",
+      "Find and fix bugs by predicting, tracing by hand, and comparing expected results with actual ones.",
+      "Compare two correct algorithms, such as linear and binary search, by counting the steps each one takes."
+    ],
+    "tags": [
+      "computational thinking",
+      "algorithms",
+      "scratch",
+      "debugging",
+      "beginner"
+    ],
+    "primaryTool": {
+      "name": "Scratch 3 (free, in the browser)",
+      "description": "MIT's free block-based coding editor, used alongside a notebook and pencil for the unplugged activities. You snap blocks together instead of typing code, so every algorithm in the course can be built and tested in seconds without worrying about spelling or punctuation. It runs in any current browser with no account required, and there's a free offline app for Windows, macOS, and Chromebooks.",
+      "setupSteps": [
+        "Get a notebook (or a folder of paper) and a pencil with an eraser for planning and unplugged puzzles.",
+        "Open Chrome, Edge, Firefox, or Safari and go to scratch.mit.edu/projects/editor.",
+        "Wait for the editor to load: block categories on the left, an empty code area in the middle, and the stage with an orange cat on the right.",
+        "Optional: with a parent or guardian, click Join Scratch on scratch.mit.edu to make a free account that saves projects online.",
+        "Optional: for offline use, install the Scratch app from scratch.mit.edu/download."
+      ],
+      "verification": "Clicking the blue 'move (10) steps' block in the Motion category moves the cat a little to the right on the stage.",
+      "url": "https://scratch.mit.edu/projects/editor/"
+    },
+    "freeCompletionPromise": "Every lesson can be completed for $0: Scratch is free in the browser with no account needed, and the unplugged activities use only paper and a pencil (scraps of paper numbered 1 to 10 stand in for a deck of cards).",
+    "assignments": [
+      {
+        "title": "Shape-drawing helper",
+        "brief": "Plan a Scratch program as separate pieces on paper, then build it: ask for a number of sides and petals, and draw the pattern with the Pen extension using a loop inside a loop. Test it with inputs like 0 and 1."
+      },
+      {
+        "title": "Rule-checking kiosk with a test plan",
+        "brief": "Build a Scratch kiosk that asks a few questions, applies a set of rules in order, and explains every \"no\". Write a test table of edge cases before you run it, and keep a fix log for every bug you find."
+      }
+    ],
+    "capstone": {
+      "title": "Design and defend an algorithm",
+      "brief": "Design, build, and test a Scratch algorithm for a maze, a puzzle, a sorting task, or a real-world process, with at least one decision and one loop, then explain its inputs, outputs, steps, edge cases, and results.",
+      "deliverables": [
+        "Scratch project that runs the algorithm",
+        "Algorithm card with plain-English steps and a flowchart",
+        "Test table with 8+ tests, including edge cases",
+        "Fix log with the cause and fix of each bug",
+        "2 to 3 minute explanation (talk, video, or one page)"
+      ]
+    }
+  },
+  "course-02": {
+    "summary": "Design and build real games in Scratch, from a two-player race and an underwater catch game to a platformer, a clone-powered shooter, and a multi-level game of your own.",
+    "description": "A self-paced game-design course in Scratch 3, the free block-based editor from the Scratch Foundation. You start by placing sprites on the stage's x–y grid and wiring scripts to events, then build a firefly scene, a key-mash race with a fair start and a referee that runs on broadcasts and a state variable, and Reef Catch, a catch game with easing, animation, sound, and visual feedback. Later modules add collisions, gravity, and jumping in a platformer, then clones, custom blocks (including run without screen refresh), and lists in a lane shooter that grows waves, a story, and difficulty that adapts to the player. Each module has Notes with quizzes, a step-by-step Build-along, and Practice exercises with hints and full solutions. The course ends with a capstone: a multi-level game you plan, build in milestones, playtest, and present.",
+    "audience": "Beginners around ages 10 to 15 who want to make their own games, with no coding experience needed.",
+    "prerequisites": [
+      "Comfortable using a mouse and keyboard and following multi-step instructions",
+      "A computer with a keyboard and an up-to-date web browser"
+    ],
+    "outcomes": [
+      "Place and move sprites precisely with x and y coordinates, directions, costumes, and layers.",
+      "Coordinate many sprites with broadcasts, variables, conditions, and a game state variable instead of fragile timers.",
+      "Make movement feel good with easing, animation timing, sound, and graphic effects, and write fair scoring rules.",
+      "Build collisions, gravity, and jumping for a platformer.",
+      "Manage many objects with clones, reusable custom blocks, and lists.",
+      "Design, test, and tune a multi-level game with a difficulty curve."
+    ],
+    "tags": [
+      "scratch",
+      "game-design",
+      "games",
+      "beginner",
+      "creative-coding"
+    ],
+    "primaryTool": {
+      "name": "Scratch 3 (free online editor or Scratch app)",
+      "description": "Scratch is a free visual programming language where you snap blocks together instead of typing code. The online editor runs in any current browser, and the free Scratch app works offline on Windows, macOS, Chromebooks, and Android tablets. Every lesson works without an account.",
+      "setupSteps": [
+        "Open scratch.mit.edu in Chrome, Firefox, Edge, or Safari and click Create, or go straight to scratch.mit.edu/projects/editor.",
+        "Optional: install the Scratch app from scratch.mit.edu/download (Microsoft Store on Windows, Mac App Store or direct download on macOS, Google Play on Chromebooks) if your internet is unreliable.",
+        "Optional, with a parent or guardian: click Join Scratch to make an account for saving online, the Backpack, and sharing.",
+        "Drag a move (10) steps block into the code area and click it to check that Scratch responds."
+      ],
+      "verification": "The editor opens with the Scratch cat on the stage, and clicking a move (10) steps block slides the cat right while the x box under the stage changes from 0 to 10.",
+      "url": "https://scratch.mit.edu/projects/editor/"
+    },
+    "freeCompletionPromise": "Scratch is free, needs no account, and runs in a web browser, so every lesson, exercise, and the capstone can be completed for $0 on any computer with a keyboard.",
+    "assignments": [
+      {
+        "title": "Animated scene with game states",
+        "brief": "Build a Scratch project where sprites wander, animate with costume changes, and react to clicks or keys, then use broadcasts to move from a title screen to play to an ending while keeping a score on screen."
+      },
+      {
+        "title": "Platformer with hazards and pickups",
+        "brief": "Build a Scratch platformer where the player walks, falls with gravity, jumps only from the ground, and stops at walls, then add hazards and pickups with sound and score feedback, plus a goal that ends the level."
+      }
+    ],
+    "capstone": {
+      "title": "Multi-level Scratch game",
+      "brief": "Build a Scratch game with at least three levels and all eight requirements: title and endings, instructions, visible progress, collisions that matter, sound or animation, a custom block, clones, and rising or adaptive difficulty.",
+      "deliverables": [
+        "Playable Scratch project with 3+ levels",
+        "Written test plan, run and fixed",
+        "Playtest notes and the fixes they led to",
+        "Project page with instructions and credits",
+        "Two-minute presentation"
+      ]
+    }
+  },
+  "course-03": {
+    "summary": "A self-paced first course in Python for teens who have never typed code: write real programs in Thonny, watch every value change as they run, and finish with a text app of your own.",
+    "description": "You'll install Thonny, a free Python editor that comes with Python built in, and use its Variables panel and step-by-step debugger to see exactly what your code does. Each module teaches one idea in a Notes lesson, uses it to build one complete program (a text-adventure status tracker, a club sign-up slip that cleans up messy typing, a bike-share fare calculator, a mental math game, a race pace calculator, and a virtual pet), then sets fresh practice problems with hints and worked solutions. Every code example on the page has been run, so the output and error messages you see are the real ones. The course ends with a capstone: a text-based app you plan, build in milestones, and test yourself.",
+    "audience": "Middle and high school students with no programming experience, working at their own pace. Comfort with typing and saving files is enough.",
+    "prerequisites": [
+      "No programming experience needed",
+      "A Windows 10 or 11 PC, a Mac with macOS 10.15 or newer, or a Chromebook that allows Linux apps"
+    ],
+    "outcomes": [
+      "Write, save, run, and step through Python programs in Thonny, and read an error message from the bottom up.",
+      "Store and update values in variables, and tell strings, integers, floats, and Booleans apart.",
+      "Read what people type with input(), clean it with string methods, convert it with int() and float(), and format output with f-strings.",
+      "Make programs choose with if, elif, and else, combine conditions with and, or, and not, and check decisions with boundary tests.",
+      "Repeat work with loops and organize code into functions that take parameters and return values.",
+      "Plan, build, test, and present a complete text-based Python app."
+    ],
+    "tags": [
+      "python",
+      "beginner",
+      "self-paced",
+      "thonny",
+      "debugging"
+    ],
+    "primaryTool": {
+      "name": "Thonny (free Python editor)",
+      "description": "Thonny is a free, open-source Python editor made for beginners at the University of Tartu. Its installer includes Python, so there is only one thing to install, and its Variables panel and step-by-step debugger let you watch a program change its values one line at a time.",
+      "setupSteps": [
+        "Go to thonny.org and download the installer for your computer (Windows, or Apple silicon or Intel Mac). On a Chromebook, turn on Linux in Settings › About ChromeOS › Developers, then run sudo apt install thonny in the Terminal.",
+        "Run the installer and keep the suggested settings. On Windows, no administrator password is needed.",
+        "Open Thonny, leave Initial settings on Standard, and click Let's go!",
+        "In the Shell at the bottom, type 2 ** 100 and press Enter."
+      ],
+      "verification": "The Shell prints 1267650600228229401496703205376, and a saved four-line program runs with its output shown under %Run in the Shell.",
+      "url": "https://thonny.org/"
+    },
+    "optionalGear": [],
+    "freeCompletionPromise": "Every lesson uses Thonny and Python, which are both free, and needs no account or paid service. If a school-managed Chromebook can't install apps, the early modules can be followed in the free Python Tutor site in a browser.",
+    "assignments": [
+      {
+        "title": "Quiz with a results slip",
+        "brief": "Write a Python quiz in Thonny that asks several questions in a loop, cleans up and converts what the player types, rejects answers that aren't numbers, lets them skip or quit, and prints an aligned score summary with f-strings."
+      },
+      {
+        "title": "Fare calculator built from functions",
+        "brief": "Turn a page of pricing rules into a Python program in Thonny built from small functions, using if/elif/else and one validation function for every question, then check each rule with boundary tests at its cutoffs."
+      }
+    ],
+    "capstone": {
+      "title": "Text app of your own",
+      "brief": "Build a complete text-based Python app, such as a flashcard trainer, word game, budget tracker, or text adventure, that a stranger can use without help and that meets all eight requirements, from validation to a clean exit.",
+      "deliverables": [
+        "Python file that no input can crash",
+        "Test table with 12+ rows of normal, edge, and nasty input",
+        "Automatic checks for your functions",
+        "README explaining how to use the app",
+        "Two-minute demo"
+      ]
+    }
+  },
+  "course-04": {
+    "summary": "Go from short Python exercises to real command-line tools: a grade book, a contacts manager, and a quiz that saves its scores, built with collections, small functions, JSON files, validation, and debugging.",
+    "description": "This self-paced course picks up where basic Python leaves off and moves from one-file exercises to programs with several files and saved data. Learners set up VS Code with Microsoft's Python extension and a virtual environment, then build a grade book that turns messy text into a ranked report, a contacts manager made of small testable functions, and a quiz game that loads its questions from JSON and keeps a score history that survives crashes and damaged files. Later modules cover libraries and input validation, systematic debugging, and designing a complete command-line project, ending with a capstone: a flash-card, expense, or inventory tool that remembers its data and comes with tests. Code on the lesson pages runs for real and shows its actual output, and every module ends with practice exercises that have hints and worked solutions.",
+    "audience": "Teens and other learners who can already write Python variables, conditions, loops, and simple functions, and want to build bigger programs that people could actually use.",
+    "prerequisites": [
+      "Variables, if/elif/else, for and while loops, and basic functions in Python",
+      "Saving and running a .py file in any editor"
+    ],
+    "outcomes": [
+      "Model records with lists, dictionaries, sets, and tuples, and reshape them with comprehensions and sorted(key=...).",
+      "Write small functions that return values, replace deep nesting with guard clauses, and keep input and printing in one place.",
+      "Save and load text and JSON files with pathlib, handling missing and damaged files without losing data.",
+      "Validate user input and manage a project's libraries inside a virtual environment.",
+      "Track down bugs by reading tracebacks and gathering evidence, and confirm fixes with tests.",
+      "Plan, build, and test a complete command-line program that keeps its data between runs."
+    ],
+    "tags": [
+      "python",
+      "projects",
+      "json",
+      "files",
+      "functions",
+      "debugging",
+      "testing"
+    ],
+    "primaryTool": {
+      "name": "VS Code with the Python extension",
+      "description": "Visual Studio Code is a free code editor from Microsoft. With its Python extension it shows a whole project folder at once, runs programs in a built-in terminal, and underlines many mistakes as you type, which suits projects made of several files. Python 3 itself is a separate free install from python.org.",
+      "setupSteps": [
+        "Install Python 3.10 or newer from python.org. On a Chromebook, turn on the Linux development environment and install python3-venv and python3-pip.",
+        "Install VS Code from code.visualstudio.com.",
+        "In VS Code's Extensions view, install the extension named Python published by Microsoft.",
+        "Open a project folder and create a .venv virtual environment with the Python: Create Environment command."
+      ],
+      "verification": "In VS Code's terminal, python --version (python3 --version on macOS or a Chromebook) prints Python 3.10 or newer, and hello.py prints its output when you press Run Python File.",
+      "url": "https://code.visualstudio.com/"
+    },
+    "optionalGear": [],
+    "freeCompletionPromise": "Python, VS Code, and the Python extension are all free, and every lesson and project uses only them, Python's built-in modules, and free libraries installed with pip.",
+    "assignments": [
+      {
+        "title": "Contacts manager that saves to JSON",
+        "brief": "Build a command-line contacts manager in VS Code from small functions that clean phone numbers, check emails, add, search, and delete, and save the contacts to a JSON file that loads on the next run and survives a damaged file."
+      },
+      {
+        "title": "Crash-proof command-line tool",
+        "brief": "Build a command-line tool with argparse options, the random or datetime module, and input checks that never crash, then find and fix one real bug with VS Code breakpoints and add a check that keeps it fixed."
+      }
+    ],
+    "capstone": {
+      "title": "Persistent productivity tool",
+      "brief": "Build a multi-file Python command-line tool, such as a to-do list, habit tracker, flash-card trainer, or expense tracker, that saves to JSON, has four or more subcommands including update and search, and never shows a traceback for user mistakes.",
+      "deliverables": [
+        "Tool split into interface, logic, and storage modules",
+        "JSON storage that handles missing and damaged files",
+        "8+ passing unittest tests, including edge cases",
+        "README covering setup, usage, files, and limits",
+        "Three-minute demo"
+      ]
+    }
+  },
+  "course-05": {
+    "summary": "Go from scripts full of parallel lists to Python programs built from small, well-named classes, and prove they work with pytest.",
+    "description": "You will write every line in VS Code with Python 3 and pytest, starting with a bank account that replaces a tangle of parallel lists and growing it into a small library and inventory system. Along the way you model state with classes and methods, choose between composition and inheritance, protect interfaces with properties, express intent with dunder methods, dataclasses, and type hints, raise your own exceptions, split code into modules, and refactor with tests holding the behaviour steady. Every lesson pairs notes with diagrams, step-through traces of objects changing, and code that was really run, then a build-along and a practice set with worked solutions. The course ends with a capstone application you design, test, and explain.",
+    "audience": "Students who already write Python functions and use lists and dicts, and now want their programs to stay understandable as they grow past a few hundred lines.",
+    "prerequisites": [
+      "Write and call Python functions with parameters and return values",
+      "Use lists, dicts, loops, and if statements comfortably",
+      "Read a basic error message and find the line it points to"
+    ],
+    "outcomes": [
+      "Model a problem with classes whose methods keep each object's state valid.",
+      "Decide between composition and inheritance for a relationship and explain the trade-off.",
+      "Protect an interface with properties, dunder methods, dataclasses, and type hints.",
+      "Signal failures with custom exceptions and organize code into importable modules.",
+      "Write pytest tests and use them to refactor a multi-module program safely.",
+      "Design, build, and present a tested object-oriented application with a class diagram."
+    ],
+    "tags": [
+      "python",
+      "oop",
+      "software-design",
+      "pytest",
+      "intermediate"
+    ],
+    "primaryTool": {
+      "name": "VS Code with Python 3 and pytest",
+      "description": "Visual Studio Code is a free editor; with Microsoft's Python extension it runs, debugs, and tests Python files. pytest is the free testing tool the course uses to check every class you write.",
+      "setupSteps": [
+        "Install Python 3.10 or newer from python.org (on Windows, the Python install manager; on a Chromebook, turn on the Linux development environment and install python3 with apt).",
+        "Install VS Code from code.visualstudio.com, then install the Python extension by Microsoft from the Extensions view.",
+        "Make a project folder, open it in VS Code, and create a virtual environment with python -m venv .venv (python3 on macOS, Linux, and Chromebooks).",
+        "Select the .venv interpreter, open a new terminal, and run python -m pip install pytest.",
+        "Save a file named test_first.py with one test function and run python -m pytest."
+      ],
+      "verification": "The terminal prints a green line ending in \"passed\", and the beaker icon's Testing view lists your test with a green check.",
+      "url": "https://code.visualstudio.com/docs/python/python-tutorial"
+    },
+    "freeCompletionPromise": "Python, VS Code, the Python extension, and pytest are all free and open to everyone, so every lesson, exercise, and the capstone can be finished on a home or school computer, including a Chromebook with Linux turned on, for $0.",
+    "assignments": [
+      {
+        "title": "Classes for a small system",
+        "brief": "Write Python classes for a small system, such as library loans or a delivery fleet, whose objects validate every change through methods, with at least one has-a relationship, one subclass, and pytest tests for the main rules."
+      },
+      {
+        "title": "Tested inventory behind a clean interface",
+        "brief": "Build a school-shop inventory in Python with properties that guard its values, frozen dataclasses for records, and an abstract storage interface with two backends, writing pytest tests first, including one that uses a fake."
+      }
+    ],
+    "capstone": {
+      "title": "Object-oriented command-line app",
+      "brief": "Design and build a command-line Python app, such as library loans, a text adventure engine, or a turn-based arena, with five or more focused classes, composition, an interface with two implementations, custom exceptions, and a package that runs with python -m.",
+      "deliverables": [
+        "Python package with 3+ modules",
+        "12+ passing pytest tests, including error paths and a fake",
+        "DESIGN.md with a class diagram and justified relationships",
+        "One documented refactor",
+        "Five-minute demo"
+      ]
+    }
+  },
+  "course-06": {
+    "summary": "Write web pages by hand with HTML and CSS: a profile site, a recipe page, a styled sign-up form, responsive layouts with Flexbox and Grid, and finally a multi-page website of your own.",
+    "description": "You type every page yourself in VS Code, see it update the moment you save with the free Live Server extension, and look inside it with Chrome or Firefox DevTools. Every lesson shows code next to a live result, so you can see exactly what each tag and rule does. The course starts with how a browser turns a file into a page, then covers document structure, links, images and file paths, semantic landmarks, lists, tables, and accessible forms. Next come selectors, the cascade, specificity, and the box model, followed by Flexbox, Grid, responsive layouts, keyboard and screen reader access, typography, and sharing one stylesheet across several pages. Each module has a Notes lesson, a step-by-step build, and practice problems with hints and hidden solutions. The course ends with a capstone: a responsive multi-page website you plan, build, test, and publish.",
+    "audience": "Beginners, including middle and high school students, who want to build websites and understand how browsers turn files into pages. No coding experience needed.",
+    "prerequisites": [
+      "No web development or coding experience required",
+      "Comfortable creating folders, saving files, and downloading an app on your computer"
+    ],
+    "outcomes": [
+      "Explain how a browser requests a page, builds the DOM, and renders it, and use DevTools to inspect what it built.",
+      "Write valid, semantic HTML with headings, links, images with useful alt text, lists, tables, and forms where every field has a label.",
+      "Organize a project into folders and link files to each other with correct relative paths.",
+      "Predict which CSS rule wins using specificity and source order, and size elements precisely with the box model.",
+      "Lay out pages with Flexbox and Grid that adapt from phone to desktop and work with a keyboard.",
+      "Build and publish a consistent multi-page website that shares one stylesheet."
+    ],
+    "tags": [
+      "html",
+      "css",
+      "web",
+      "accessibility",
+      "responsive-design",
+      "beginner"
+    ],
+    "primaryTool": {
+      "name": "VS Code with the Live Server extension",
+      "description": "VS Code is Microsoft's free code editor for Windows, macOS, and Linux, including Chromebooks with Linux turned on. Live Server, a free extension, serves your project folder at a local web address and reloads the browser every time you save. Chrome or Firefox DevTools let you inspect every element and see which CSS rules apply. On a computer where you can't install anything, CodePen in the browser covers single-page exercises.",
+      "setupSteps": [
+        "Download and install VS Code from code.visualstudio.com (on a Chromebook, turn on the Linux development environment first and install the .deb file).",
+        "Open the Extensions view (Ctrl+Shift+X, or Cmd+Shift+X on a Mac), search for Live Server by Ritwick Dey, and install it.",
+        "Make a folder called first-page, open it with File › Open Folder, and create index.html.",
+        "Type ! and press Enter to generate a page skeleton, add an h1 heading, save, and click Go Live in the status bar."
+      ],
+      "verification": "Your page opens in the browser at an address starting with http://127.0.0.1:5500, and when you change the heading and save, the browser updates on its own. Right-clicking the heading and choosing Inspect shows it in the DevTools Elements (Chrome) or Inspector (Firefox) panel.",
+      "url": "https://code.visualstudio.com/"
+    },
+    "optionalGear": [
+      {
+        "name": "CodePen (free account)",
+        "description": "Optional. A browser-based editor for school Chromebooks and other computers that block installs. A free account lets you save your work; multi-file projects are easiest in VS Code.",
+        "url": "https://codepen.io/"
+      }
+    ],
+    "freeCompletionPromise": "Every tool is free: VS Code, the Live Server extension, and Chrome or Firefox. Publishing the capstone uses a free hosting option, and no lesson needs a purchase, a paid account, or a domain name.",
+    "assignments": [
+      {
+        "title": "Two-page site with a card grid",
+        "brief": "Hand-code a two-page site in VS Code with Live Server: one page with an ordered heading outline, alt text, and working relative links, and one page of cards laid out with CSS Grid under a Flexbox navigation bar."
+      },
+      {
+        "title": "Responsive event page with a sign-up form",
+        "brief": "Build a mobile-first event page with header, nav, main, and footer landmarks, a schedule table, and a registration form with a label on every field, then make it work from 360px up and pass a keyboard and contrast check."
+      }
+    ],
+    "capstone": {
+      "title": "Responsive multi-page website",
+      "brief": "Build a site of three or more linked pages on a topic you choose, with semantic landmarks, one stylesheet built from design tokens, mobile-first Flexbox and Grid layouts, a labeled form, and full keyboard access, then publish it on GitHub Pages.",
+      "deliverables": [
+        "Live GitHub Pages URL and repository link",
+        "Planning notes: goal, sitemap, wireframes, and tokens",
+        "Test log with one bug write-up",
+        "Two- to three-minute presentation"
+      ]
+    }
+  },
+  "course-07": {
+    "summary": "Learn JavaScript by making web pages respond to people: a click counter, a tip calculator, a to-do list, a sign-up form that explains its errors, and finally an app of your own design.",
+    "description": "You write real JavaScript in VS Code, run it in your browser with the free Live Server extension, and watch what it does in the browser's DevTools Console. Lessons show code that actually runs, with its real output, and live previews you can click and type into. You start with values, arrays, objects, and functions, then use conditions, loops, and array methods to build page content from data, respond to clicks and typing, and validate a form. Later modules cover timers and saving progress in the browser, loading data with fetch and async/await, and keeping app state and error handling under control. The course ends with a capstone you plan, build, and test yourself, such as a quiz, a dashboard, a game, or a habit tracker.",
+    "audience": "Teens and other beginners who know basic HTML and CSS and want to make pages that react to what people do. Some experience with any programming language helps but isn't required.",
+    "prerequisites": [
+      "Basic HTML: headings, paragraphs, buttons, lists, and form inputs",
+      "Basic CSS: selectors, classes, colors, and spacing",
+      "Comfortable creating folders and files on your computer"
+    ],
+    "outcomes": [
+      "Model app data with strings, numbers, arrays, objects, and functions, and check it with console.log.",
+      "Use conditions, loops, and array methods like map and filter to decide what a page shows.",
+      "Build and update page content from data with querySelector, textContent, classList, and createElement.",
+      "Respond to clicks, key presses, typing, and form submissions, and write validation messages people can act on.",
+      "Use timers, browser storage, and fetch with async/await to make apps that remember and load data.",
+      "Plan, build, and test a complete browser app with loading, empty, success, and error states."
+    ],
+    "tags": [
+      "javascript",
+      "dom",
+      "events",
+      "forms",
+      "browser-apps"
+    ],
+    "primaryTool": {
+      "name": "VS Code with the Live Server extension",
+      "description": "VS Code is Microsoft's free code editor for Windows, macOS, and Linux, including Chromebooks with Linux turned on. The Live Server extension serves your project folder at a local web address and reloads the browser every time you save, and the browser's DevTools Console shows your messages and errors.",
+      "setupSteps": [
+        "Download and install VS Code from code.visualstudio.com.",
+        "Open the Extensions view (Ctrl+Shift+X, or Cmd+Shift+X on a Mac), search for Live Server by Ritwick Dey, and install it.",
+        "Create a js-course folder and open it with File › Open Folder.",
+        "In Chrome or Edge, open the Console with Ctrl+Shift+J (Cmd+Option+J on a Mac) and type 2 + 2."
+      ],
+      "verification": "Right-click a project's index.html and choose Open with Live Server: the page opens at an address starting with http://127.0.0.1:5500, and a console.log message from script.js appears in the Console.",
+      "url": "https://code.visualstudio.com/"
+    },
+    "freeCompletionPromise": "Every tool in the course is free: VS Code, the Live Server extension, and a web browser you already have. No lesson requires a purchase or a paid account.",
+    "assignments": [
+      {
+        "title": "Reading tracker drawn from data",
+        "brief": "Build a reading tracker page in JavaScript that stores books as an array of objects, draws them with a render function, lets you add and tick off books, and shows totals like pages read and percent finished."
+      },
+      {
+        "title": "Practice log that survives a refresh",
+        "brief": "Build a practice log page where a form validates each entry with a message beside the problem field, a timer counts the session, and every entry saves to localStorage so the log is still there after a page refresh."
+      }
+    ],
+    "capstone": {
+      "title": "Your own browser app",
+      "brief": "Build a browser app, such as a habit tracker, quiz show, or weather dashboard, that draws the page from one state object, works by mouse and keyboard, validates input, saves to localStorage, and fetches data with loading, empty, and error states.",
+      "deliverables": [
+        "Working app with one state object and render()",
+        "Node checks for the app's rules",
+        "Completed test plan with results",
+        "README covering how to run it and how it handles problems",
+        "Three-minute demo"
+      ]
+    }
+  },
+  "course-08": {
+    "summary": "Learn Git and GitHub the way teams use them: clear commits, branches, pull requests, issues, code review, merge conflicts, documentation, licenses, releases, and automated checks.",
+    "description": "You'll version a real project from the first commit, then put it on GitHub and change it the way working developers do: plan each change as an issue, build it on a branch, open a pull request, review a partner's work with line comments and suggested changes, and merge. Later modules cover resolving merge conflicts without losing anyone's work, writing a README, choosing an open-source license, tagging releases with a changelog, and running automatic checks with GitHub Actions. Lessons show each command with the output it prints, and each idea is also shown in VS Code's Source Control view. The course uses Git, a free GitHub account, and VS Code, all free on Windows, macOS, and Chromebooks with Linux turned on.",
+    "audience": "Middle and high school students (and anyone else) who have a small coding or writing project and want to track it properly and work on it with other people. No prior Git experience needed.",
+    "prerequisites": [
+      "A small text or code project you'd like to version, or willingness to build the course's small website",
+      "Comfort creating folders and saving files on your computer",
+      "Age 13 or older for a GitHub account (younger learners can do the local Git lessons)"
+    ],
+    "outcomes": [
+      "Record a project's history in focused commits with clear messages, and use status, diff, log, .gitignore, and restore to inspect and undo changes.",
+      "Develop features on branches and explain when a merge fast-forwards and when it creates a merge commit.",
+      "Push to GitHub, open and update pull requests, and merge them so linked issues close automatically.",
+      "Plan work with issues, labels, and project boards, and give and answer code reviews with line comments and suggested changes.",
+      "Resolve merge conflicts while keeping both contributors' intentions.",
+      "Document, license, release, and automatically check a shared project with a README, a license, tags, a changelog, and GitHub Actions."
+    ],
+    "tags": [
+      "git",
+      "github",
+      "version-control",
+      "collaboration",
+      "code-review",
+      "open-source",
+      "ci"
+    ],
+    "primaryTool": {
+      "name": "Git (free version control) with VS Code and GitHub",
+      "description": "Git records every version of a project on your own computer; GitHub hosts a shared copy and adds pull requests, issues, and reviews; VS Code is the editor, with a built-in terminal and Source Control view. All three are what professional teams use, and all are free.",
+      "setupSteps": [
+        "Install VS Code from code.visualstudio.com.",
+        "Install Git from git-scm.com. On a Mac, run git --version in Terminal and accept the developer tools prompt; on a Chromebook, turn on Linux and run sudo apt install git.",
+        "Create a free account at github.com and turn on Keep my email addresses private in Settings > Emails.",
+        "Run git config --global user.name and user.email with your name and GitHub noreply address, then set init.defaultBranch to main and core.editor to code --wait.",
+        "Connect to GitHub with an SSH key, or with Git Credential Manager over HTTPS (built into Git for Windows)."
+      ],
+      "verification": "git --version in VS Code's terminal prints a version number, cloning github.com/octocat/Spoon-Knife succeeds, and ssh -T git@github.com (or your first push over HTTPS) greets you by your GitHub username.",
+      "url": "https://git-scm.com/"
+    },
+    "optionalGear": [
+      {
+        "name": "GitHub CLI (gh)",
+        "description": "Optional; lets you create pull requests and sign in from the terminal. Every lesson can be done with Git and the GitHub website instead.",
+        "url": "https://cli.github.com/"
+      }
+    ],
+    "freeCompletionPromise": "Git, VS Code, and a GitHub account with unlimited public and private repositories are all free, so every lesson can be completed for $0 on a Windows PC, Mac, or Chromebook with Linux turned on.",
+    "assignments": [
+      {
+        "title": "Club website through a pull request",
+        "brief": "Build a small website in a Git repository with a .gitignore and focused commits that say what and why, then push it to GitHub, add a page on a branch, open a pull request, review it yourself, and merge."
+      },
+      {
+        "title": "Reviewed change and a resolved conflict",
+        "brief": "Take a change from a labeled GitHub issue to a reviewed, merged pull request that closes it, then resolve a merge conflict in VS Code's merge editor so both sides survive, and record the choice in a decision record."
+      }
+    ],
+    "capstone": {
+      "title": "Safe open-source contribution",
+      "brief": "Take one change from a GitHub issue to a merged pull request, on a fork or your own repo: focused commits, a PR that links the issue and explains testing, replies to review, a sync with main, updated docs, and a passing automated check.",
+      "deliverables": [
+        "Link to the merged pull request (or screenshots)",
+        "git log --oneline --graph output for your branch",
+        "Green automated check on the final commit",
+        "Written reflection",
+        "Three-minute presentation"
+      ]
+    }
+  },
+  "course-09": {
+    "summary": "Build real inventions with the BBC micro:bit in free Microsoft MakeCode: a name badge, a reaction-time game, a step counter with a compass, radio messengers, and a sensor logger, all testable in the browser simulator.",
+    "description": "You program the BBC micro:bit in Microsoft MakeCode, a free browser editor whose built-in simulator runs every program in the course, so no hardware is required. After a setup module, each core module pairs a notes lesson that teaches the ideas with a build-along that makes one working invention, then a set of practice problems with hints and full solutions. You start with buttons, the LED screen, and events, then read the accelerometer, compass, light, temperature, and microphone, send radio messages between boards, compare MakeCode with MicroPython, collect sensor data, and finish by designing, testing, and documenting a connected invention of your own. Programs are shown as MakeCode JavaScript that you can paste into the editor and view as blocks.",
+    "audience": "Middle and high school beginners who have tried a little coding, in Scratch or any language, and want to make things that sense the world and react to it.",
+    "prerequisites": [
+      "Comfortable with sequences, simple loops, and if/else in Scratch or any language",
+      "A computer or Chromebook with a current web browser"
+    ],
+    "outcomes": [
+      "Set up MakeCode, test programs in the simulator, and transfer them safely to a real micro:bit.",
+      "Program the LED screen, buttons, and touch logo using events, loops, and variables.",
+      "Turn noisy accelerometer, compass, light, temperature, and sound readings into reliable decisions.",
+      "Exchange radio messages between micro:bits and read the same program in MakeCode and MicroPython.",
+      "Collect and chart sensor data, then design, test, and document a connected invention."
+    ],
+    "tags": [
+      "hardware",
+      "microbit",
+      "makecode",
+      "micropython",
+      "sensors",
+      "beginner"
+    ],
+    "primaryTool": {
+      "name": "Microsoft MakeCode for micro:bit",
+      "description": "A free editor from Microsoft that runs in any current browser. It has blocks, JavaScript, and Python views of the same program and a built-in micro:bit simulator, so every lesson can be finished without hardware. With Chrome or Edge it can also send programs straight to a real board over USB.",
+      "setupSteps": [
+        "Open makecode.microbit.org in Chrome, Edge, Firefox, or Safari (Chrome or Edge if you'll connect a real board).",
+        "Under My Projects, click New Project, type a name such as c4t-hello, and click Create.",
+        "From the Basic category, drag a show icon block into on start."
+      ],
+      "verification": "The simulator on the left side of the editor shows a micro:bit with your chosen icon lit on its LED screen.",
+      "url": "https://makecode.microbit.org/"
+    },
+    "optionalGear": [
+      {
+        "name": "BBC micro:bit V2",
+        "description": "Optional; the in-browser simulator covers every lesson. A real board lets you shake, tilt, wear, and carry your inventions. Get a V2, which adds the speaker, microphone, and touch logo.",
+        "url": "https://microbit.org/buy/"
+      },
+      {
+        "name": "Micro-USB data cable",
+        "description": "Needed only with a real board, to send programs from the computer. Charge-only cables won't work.",
+        "url": "https://microbit.org/get-started/user-guide/transfer-code-to-the-microbit/"
+      },
+      {
+        "name": "Battery pack for 2 AAA batteries",
+        "description": "Optional, for projects you carry or wear, such as the badge and the step counter. Use alkaline batteries, not rechargeables.",
+        "url": "https://microbit.org/get-started/user-guide/safety/"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson, exercise, and project runs in the free MakeCode simulator in a web browser, with no account, download, or purchase needed. A real micro:bit is an optional extra.",
+    "assignments": [
+      {
+        "title": "Two-player reaction duel",
+        "brief": "Build a two-player reaction duel for the micro:bit in MakeCode that waits a random time, flashes the LEDs, works out whether A or B was pressed first, punishes false starts, and keeps both scores. Test it in the MakeCode simulator."
+      },
+      {
+        "title": "Sensor gadget with a state machine",
+        "brief": "Build a micro:bit gadget in MakeCode that reads a sensor such as the accelerometer or light level, uses a threshold with a reset margin so readings don't flicker, and runs a state machine of three or more states driven by button events."
+      }
+    ],
+    "capstone": {
+      "title": "Connected micro:bit invention",
+      "brief": "Build a network of two or more micro:bit roles that talk by radio, such as a voting system or relay race timer, with event-driven inputs, a state machine, logged data you chart, and visible feedback when a message is lost.",
+      "deliverables": [
+        "MakeCode project with 2+ radio roles",
+        "Protocol table and state diagrams",
+        "Test plan with a measured reliability rate",
+        "Data CSV with a chart and a conclusion",
+        "README with safety notes",
+        "Three-minute demo"
+      ]
+    }
+  },
+  "course-10": {
+    "summary": "Build and debug real Arduino circuits in a free browser simulator, from your first blinking LED to sensors, motors, state machines, and a working robot.",
+    "description": "Every circuit in this course runs on a simulated Arduino Uno in Wokwi, a free in-browser simulator, so you can wire LEDs, buttons, potentiometers, light and temperature sensors, servos, and motors without buying parts or risking damage. You write real Arduino C++ (the same code runs unchanged on a physical Uno), and you check the electrical math first with short Python programs that show their real output and charts on the page: Ohm's law, LED resistor sizing, voltage dividers, and ADC conversions. Each module has notes that teach the ideas, a build-along that makes one working project step by step, and a practice set with hints and full solutions. Later modules drive motors safely through a driver, organize robot behavior as state machines with feedback, test robots under changing conditions, and finish with an obstacle-avoiding or line-following robot capstone. Tinkercad Circuits works as a backup simulator, and an optional starter kit lets you build everything for real with Arduino IDE 2.",
+    "audience": "Teens and beginners who have written a few programs with conditions and loops, and want to understand circuits, sensors, motors, and how robots make decisions.",
+    "prerequisites": [
+      "Write simple programs with variables, if/else, and loops (in any language)",
+      "Comfortable using a web browser and copying text between windows"
+    ],
+    "outcomes": [
+      "Apply Ohm's law and power calculations to size resistors and keep circuits within safe current and heat limits.",
+      "Lay out breadboard circuits with LEDs, buttons, and potentiometers, and find wiring faults by tracing nodes.",
+      "Read digital and analog sensors, convert raw readings to volts and real units, and smooth noisy signals.",
+      "Drive servos and DC motors safely through a motor driver with a separate power supply.",
+      "Organize robot behavior as a state machine with feedback, and test it under varied conditions.",
+      "Build, test, and present a simulated or physical obstacle-avoiding or line-following robot."
+    ],
+    "tags": [
+      "arduino",
+      "electronics",
+      "robotics",
+      "circuits",
+      "sensors",
+      "simulation",
+      "beginner"
+    ],
+    "primaryTool": {
+      "name": "Wokwi (free Arduino simulator in the browser)",
+      "description": "Wokwi simulates an Arduino Uno together with LEDs, resistors, buttons, potentiometers, sensors, servos, and more, right in a web browser. Nothing to install, nothing to buy, and nothing can burn out, so you can test every circuit before touching real parts. A free account is only needed to save projects online.",
+      "setupSteps": [
+        "Open wokwi.com in Chrome, Edge, Firefox, or Safari.",
+        "Click the Arduino (Uno, Mega, Nano) tile, then choose Arduino Uno under Start from Scratch.",
+        "Paste the lesson's code into sketch.ino and, when given, its circuit into diagram.json.",
+        "Press the green play button to compile and run the simulation."
+      ],
+      "verification": "The official Blink project runs and the small L LED on the simulated Uno blinks about once per second.",
+      "url": "https://wokwi.com/arduino"
+    },
+    "optionalGear": [
+      {
+        "name": "Arduino Uno starter kit",
+        "description": "Optional. A Uno (or compatible) board with a USB cable, breadboard, LEDs, resistors, buttons, and a potentiometer lets you build Modules 2 to 4 for real. Wokwi covers every lesson without it.",
+        "url": "https://store.arduino.cc/products/arduino-starter-kit-multi-language"
+      },
+      {
+        "name": "Extra sensors",
+        "description": "Optional. A photoresistor, a TMP36 temperature sensor, an ultrasonic distance sensor, or a soil moisture probe for building the sensor projects on a desk.",
+        "url": "https://www.adafruit.com/category/35"
+      },
+      {
+        "name": "2WD robot chassis kit",
+        "description": "Optional. A small chassis with two DC motors and wheels for building the capstone robot physically. Most kits also need a motor driver board and a AA battery pack.",
+        "url": "https://www.adafruit.com/product/2939"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson can be finished for $0 in a web browser: circuits run in Wokwi's free simulator without an account, and the Python calculations show their output right on the lesson page. Hardware is optional, and no lesson requires buying anything.",
+    "assignments": [
+      {
+        "title": "Sensor and button panel",
+        "brief": "Wire a pushbutton, a potentiometer, and a light or temperature sensor in Wokwi, then debounce the button, convert and smooth the sensor readings, and switch LEDs on thresholds using millis() timers instead of delay()."
+      },
+      {
+        "title": "Motor controller with a state machine",
+        "brief": "Build a Wokwi controller that drives a motor through driver signals with a speed ramp and a stop button, and runs a state machine with millis() timers, such as a sliding door that reverses when something blocks it."
+      }
+    ],
+    "capstone": {
+      "title": "Obstacle-avoiding or line-following robot",
+      "brief": "Build a robot in Wokwi, or on a real chassis, that avoids obstacles or follows a line, with filtered sensor readings, motor control through driver signals, one case per state, and safety features like a stop button and a speed limit.",
+      "deliverables": [
+        "Wokwi project with a circuit diagram and pin plan",
+        "State diagram that matches the code",
+        "Safety checklist",
+        "10-test plan with logged results",
+        "Iteration report",
+        "Two-minute demo"
+      ]
+    }
+  },
+  "course-11": {
+    "summary": "Build the server side of a web app in Python: read real HTTP traffic with curl, design REST endpoints and JSON contracts, write routes with FastAPI, store data in SQLite, protect and validate requests, and connect a web page to your own tested API.",
+    "description": "This course follows one project from an empty folder to a working backend. You start by installing Python, VS Code, and FastAPI in a virtual environment, then run a server on your own laptop and poke it with curl and FastAPI's built-in /docs page. Next you read real requests and responses from GitHub's public API, learning methods, status codes, headers, query strings, and JSON by looking at actual traffic. You design a REST contract for a notes API on paper (endpoints, status codes, error shapes, pagination, versioning), then build it in FastAPI with Pydantic models and test it with FastAPI's TestClient. Later modules swap the in-memory list for a SQLite database using Python's built-in sqlite3 module and safe parameterized queries, add authentication basics and input validation, connect a browser front end with fetch, and finish with a capstone app you plan, build, test, and present. The runnable examples on these pages were run when each lesson was built, so the JSON you see is what FastAPI actually returned. Each module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions.",
+    "audience": "Teens and early college students who already write Python (functions, lists, dictionaries, and a little about classes) and want to build the server and database behind web and mobile apps.",
+    "prerequisites": [
+      "Python basics: functions, lists, dictionaries, loops, and reading a traceback",
+      "Comfort typing commands in a terminal, or willingness to learn it in Module 1",
+      "Some HTML and JavaScript helps for the later module that connects a web page, but isn't needed before then"
+    ],
+    "outcomes": [
+      "Read and write HTTP by hand: methods, URLs and query strings, headers, status codes, and JSON bodies, using curl -i against real APIs.",
+      "Design a REST contract for a resource, with consistent endpoints, status codes, error shapes, pagination, and a plan for versioning.",
+      "Build a FastAPI service with path and query parameters, Pydantic request and response models, and correct 201, 204, 404, and 422 responses.",
+      "Model related data in SQLite tables and query it from Python with parameterized SQL.",
+      "Protect actions so users can only change their own data, and validate every input at the boundary.",
+      "Ship a tested, documented, database-backed web app and explain how its pieces talk to each other."
+    ],
+    "tags": [
+      "backend",
+      "api",
+      "http",
+      "rest",
+      "fastapi",
+      "sql",
+      "python",
+      "intermediate"
+    ],
+    "primaryTool": {
+      "name": "Python 3 with FastAPI, in VS Code",
+      "description": "FastAPI is a free, open-source Python framework for building web APIs. You write ordinary Python functions with type hints, and FastAPI turns them into HTTP endpoints that validate their input, return JSON, and document themselves on an interactive /docs page. It runs on Uvicorn, a small web server that installs with it, and its TestClient lets you send requests to your app from a test file without starting a server. VS Code is the editor, curl is the command-line client, and SQLite comes built into Python.",
+      "setupSteps": [
+        "Install Python 3.11 or newer from python.org (on a Chromebook, turn on Linux and install python3 with apt).",
+        "Install VS Code and Microsoft's Python extension.",
+        "Make a folder called backend-course, open it in VS Code, and create a virtual environment with python -m venv .venv.",
+        "Activate the environment and run python -m pip install \"fastapi[standard]\" (keep the quotes).",
+        "Save a short main.py that creates a FastAPI app with one route, then run fastapi dev main.py.",
+        "Open http://127.0.0.1:8000/docs in your browser, or run curl -i http://127.0.0.1:8000/ in a second terminal."
+      ],
+      "verification": "The terminal prints 'Server started at http://127.0.0.1:8000', the /docs page lists your route, and curl -i shows HTTP/1.1 200 OK followed by your JSON.",
+      "url": "https://fastapi.tiangolo.com/"
+    },
+    "freeCompletionPromise": "Every lesson can be completed for $0. Python, FastAPI, Uvicorn, SQLite, VS Code, and curl are all free, and curl already ships with Windows 10 and 11, macOS, and most Linux systems. The public API examples use GitHub's API, which answers simple read requests without an account or key. Everything runs on your own computer, with no hosting or paid services.",
+    "assignments": [
+      {
+        "title": "CRUD API with TestClient tests",
+        "brief": "Build a small FastAPI app with Pydantic models, create, list, read, update, and delete routes, and the correct status code for each case, then call it with curl and prove every route works with a TestClient test suite."
+      },
+      {
+        "title": "API contract and SQLite schema",
+        "brief": "Design the endpoint table, status codes, and JSON shapes for a new resource before writing a server, then build its SQLite tables with foreign keys, the queries the routes will need, and a transaction that saves related rows together."
+      }
+    ],
+    "capstone": {
+      "title": "Database-backed web app",
+      "brief": "Build a FastAPI app on SQLite, such as a book club tracker or event sign-up, with three or more related tables, full CRUD, accounts with hashed passwords, owner-only edits, validated input, clear errors, and a browser page that uses fetch.",
+      "deliverables": [
+        "FastAPI app with a 3+ table SQLite schema",
+        "Browser page that shows errors and empty states",
+        "TestClient test for every row of the route table",
+        "README with a route table and example JSON",
+        "Three-minute demo"
+      ]
+    }
+  },
+  "course-12": {
+    "summary": "Build a complete 2D platformer in Unity 6 with C#: scenes and prefabs, keyboard movement, physics and collisions, a Cinemachine camera, animation, UI, sound, enemies, levels, saving, and a shareable build.",
+    "description": "You build one 2D game from an empty Universal 2D project to a finished build, using the free Unity 6.3 LTS Editor installed through Unity Hub and C# scripts written in Visual Studio or VS Code. Early modules compose a level from GameObjects, components, and prefabs, script frame-rate-independent movement with the Input System package, and then switch to Rigidbody 2D physics with colliders, triggers, layers, a jump with a ground check, and a Cinemachine follow camera. Later modules make the game readable to players with Animator states, a TextMeshPro HUD, and sound effects, add enemies with state-based behavior and levels that teach one mechanic at a time, save progress between sessions, and export a build to share. Every script is a real MonoBehaviour written against Unity 6 APIs. Each module has a Notes lesson that explains the ideas with diagrams and videos, a Build-along that adds a working system to the game step by step, and a Practice set with hints and full solutions. The course ends with a capstone game of your own, planned, tested, and presented with a rubric.",
+    "audience": "Students who already program a little (in Python, JavaScript, Java, or C#) and want to learn how real games are structured and built, from strong middle schoolers through early college.",
+    "prerequisites": [
+      "Comfort with variables, if statements, loops, functions, and the idea of objects and classes in any language",
+      "A Windows 10/11 PC, a Mac on macOS 13 or newer, or an Ubuntu 22.04/24.04 computer with about 15 GB free (Chromebooks can't run the Unity Editor)"
+    ],
+    "outcomes": [
+      "Organize a game from scenes, GameObjects, components, and prefabs, and explain when Awake, Start, Update, and FixedUpdate run.",
+      "Write C# MonoBehaviour scripts that read the keyboard and mouse with the Input System and move objects at the same speed on any frame rate.",
+      "Build platformer physics with Rigidbody 2D, colliders, triggers, layers, a ground-checked jump, and a comfortable Cinemachine follow camera.",
+      "Give players clear feedback with sprite animation, an on-screen HUD, and sound.",
+      "Design enemy behavior and levels that teach, test, and then twist one mechanic.",
+      "Save progress, test a build outside the Editor, and present a finished game."
+    ],
+    "tags": [
+      "unity",
+      "csharp",
+      "game development",
+      "2d",
+      "physics",
+      "intermediate"
+    ],
+    "primaryTool": {
+      "name": "Unity 6.3 LTS (free Unity Personal) with Unity Hub",
+      "description": "Unity is the game engine behind games like Hollow Knight and Cuphead. Unity Hub installs the Editor and manages your projects, and the free Personal plan covers every student project. The course uses the Universal 2D project template, the built-in Input System package for keyboard and mouse input, and the free Cinemachine package for cameras. You write C# in Visual Studio Community (Windows) or VS Code with Microsoft's Unity extension (Windows, macOS, Linux).",
+      "setupSteps": [
+        "Go to unity.com/download, sign in or create a free Unity account, and install Unity Hub for your operating system.",
+        "Open the Hub and sign in; it activates a free Unity Personal license (or use Settings > Licenses > Add license > Get a free personal license).",
+        "In Installs > Install Editor, install the newest Unity version that starts with 6000.3 and is marked LTS.",
+        "Install a C# editor: Visual Studio Community with the Game development with Unity workload (Windows), or VS Code with the Unity extension by Microsoft.",
+        "In Projects > New project, create a project from the Universal 2D template, then set Edit > Preferences > External Tools > External Script Editor to your code editor."
+      ],
+      "verification": "A script attached to a sprite in your new Universal 2D project makes it spin when you press Play, and its Debug.Log message appears in the Console.",
+      "url": "https://unity.com/products/unity-personal"
+    },
+    "freeCompletionPromise": "Every lesson can be completed for $0. Unity Personal, Unity Hub, the Input System and Cinemachine packages, Visual Studio Community, and VS Code are all free, and the course uses Unity's built-in shapes and free sample art instead of paid assets. You need a Windows, macOS, or Ubuntu computer; if you only have a Chromebook, a school or library computer works.",
+    "assignments": [
+      {
+        "title": "Top-down explorer and hazard course",
+        "brief": "Build a Unity scene where a top-down explorer moves at the same speed in every direction and on every computer, with smooth acceleration, a sprint key, and walls, through a course of hazards made from one prefab and its variants."
+      },
+      {
+        "title": "Platformer level with a HUD",
+        "brief": "Build a Unity platformer level where a Rigidbody 2D player jumps only from the ground, a Cinemachine camera follows it, coins raise a score, hazards drain a health bar with sound and a hurt animation, and a game-over panel restarts."
+      }
+    ],
+    "capstone": {
+      "title": "Complete 2D game of your own",
+      "brief": "Build and ship a 2D Unity game with two short levels or one full loop, Input System controls, physics and triggers, a Cinemachine camera, animation, a HUD and menu, sound, an enemy state machine, and saved progress.",
+      "deliverables": [
+        "Web build playable on itch.io",
+        "One-page game design document",
+        "Written test plan and two playtest rounds",
+        "itch.io page with screenshots and a 30 to 60 second trailer",
+        "Three-minute live demo"
+      ]
+    }
+  },
+  "course-13": {
+    "summary": "Load, clean, summarize, and chart real-world tables with pandas, NumPy, and Matplotlib in free Google Colab notebooks, and learn to make claims your data can actually support.",
+    "description": "This course turns Python you already know into a working data-science toolkit. Every lesson runs in Google Colab, a free notebook in the browser with pandas, NumPy, Matplotlib, and seaborn already installed, so you see real tables and real charts from the first lesson. You'll inspect CSV and JSON exports and catch the text hiding in number columns, replace slow loops with vectorized NumPy and pandas code, summarize and join tables with groupby and merge, and clean messy observations step by step: disguised missing values, duplicates, mixed units, misspelled categories, and impossible readings. Later modules cover summary statistics and honest, accessible charts, the limits of correlation and the ways samples mislead, and notebooks that anyone can rerun from top to bottom. The datasets are small and realistic: survey exports, bike-share trips, weather stations, air sensors, and a street-tree survey. Each core module has a Notes lesson with runnable examples, a Build-along that makes one real analysis, and a Practice set with hints and full solutions, and the course ends with a reproducible investigation of a dataset you choose.",
+    "audience": "Middle and high school students, and early college learners, who can already write basic Python (variables, lists, dictionaries, loops, functions) and want to answer real questions with data.",
+    "prerequisites": [
+      "Basic Python: variables, lists, dictionaries, loops, if statements, and functions.",
+      "Comfort reading a short error message and trying a fix.",
+      "No statistics or prior pandas experience needed."
+    ],
+    "outcomes": [
+      "Load CSV and JSON data into pandas and check shapes, types, and missing values before trusting any number.",
+      "Write vectorized NumPy and pandas code with boolean masks, loc and iloc, new columns, groupby, and merge.",
+      "Clean messy data step by step (missing markers, duplicates, units, inconsistent categories, impossible values) and log every decision.",
+      "Summarize data with the right statistics and draw clear, accessible Matplotlib charts.",
+      "Explain what a dataset can and cannot show, including sampling bias and the difference between correlation and causation.",
+      "Build a notebook that reruns from top to bottom and present its findings to others."
+    ],
+    "tags": [
+      "data-science",
+      "python",
+      "pandas",
+      "numpy",
+      "matplotlib",
+      "visualization",
+      "intermediate"
+    ],
+    "primaryTool": {
+      "name": "Google Colab (free notebooks in the browser)",
+      "description": "Colab is Google's free version of the Jupyter notebook. It runs Python on a Google machine and shows the results, tables and charts included, right under each cell. pandas, NumPy, Matplotlib, seaborn, and scikit-learn come preinstalled, so there is nothing to install, and it works the same on Windows, macOS, and Chromebooks. Notebooks save to your Google Drive. Learners who prefer to work offline can use JupyterLab on their own computer instead; every lesson runs in both.",
+      "setupSteps": [
+        "Sign in to a Google account in your browser. A personal account always works; some school accounts have Colab switched off.",
+        "Go to colab.research.google.com and click New notebook (or use File › New notebook in Drive).",
+        "Click into the first code cell, type print(\"ready\"), and press Shift + Enter.",
+        "Wait a few seconds while Colab connects; RAM and Disk bars appear at the top right and the word ready prints under the cell.",
+        "Optional, for offline work: install Python from python.org, run python -m pip install jupyterlab pandas numpy matplotlib seaborn scikit-learn, then start JupyterLab with python -m jupyterlab."
+      ],
+      "verification": "A cell that imports pandas, NumPy, and Matplotlib prints their version numbers with no error, and a small bar chart appears directly under the cell that draws it.",
+      "url": "https://colab.research.google.com/"
+    },
+    "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab is free with a Google account, JupyterLab is free and open source, and every dataset in the course is either built inside the lesson's code or ships with the libraries, so there is nothing to buy or download.",
+    "assignments": [
+      {
+        "title": "Cleaning log and group summary",
+        "brief": "In Colab, clean a messy table with pandas one logged step at a time, then answer a question about it with groupby and a merge, and show how the answer changes between the raw and cleaned data."
+      },
+      {
+        "title": "Honest charts from cleaned data",
+        "brief": "Clean a small dataset in Colab, choose a mean or median for each variable based on its shape, and make three Matplotlib charts with honest axes, styling that reads without color, and titles that state the finding."
+      }
+    ],
+    "capstone": {
+      "title": "Reproducible data investigation",
+      "brief": "In a Google Colab notebook, answer one clear question with data you document, clean in code with a log and assertions, summarize, and chart three ways, then discuss bias and limits in a summary whose numbers are computed.",
+      "deliverables": [
+        "Colab notebook that runs top to bottom without errors",
+        "Cleaning log and assertions",
+        "3+ charts with titles that state findings",
+        "Dashboard figure or one-page report",
+        "Bias and limitations section",
+        "Five-minute presentation"
+      ]
+    }
+  },
+  "course-14": {
+    "summary": "Find out what AI and machine learning can and can't do by training real models in your browser with Google's Teachable Machine, then learn to judge their scores, their fairness, their use of personal data, and whether AI belongs in a problem at all.",
+    "description": "This is a no-coding course about how machine learning actually works and how to think clearly about it. You'll train real models in Teachable Machine, Google's free in-browser tool: a thumbs-up detector, a clap-and-snap sound classifier, and a recycling sorter that you deliberately break and fix by changing only its examples. You'll tell rules from learned models, name the task a system does (classification, regression, clustering, recommendation, or generation), and find out what chatbots are really doing when they answer. You'll describe data as features and labels, see decision boundaries drawn on charts, hold out test data, catch overfitting and leaks, and watch a neural network learn inside TensorFlow Playground. Later modules cover confidence scores and bias, privacy and consent, deepfakes and checking AI-made claims, and deciding when AI is the wrong tool. Charts in the lessons are drawn by short Python programs that run for you, so you read the picture, not the code; Google Colab is an optional extra for the curious. Modules 2 to 7 each have a Notes lesson, a hands-on Build-along, and a Practice set of judgement problems with worked solutions, and the course ends with a written recommendation on whether and how to use AI for a proposed project.",
+    "audience": "Curious beginners, roughly ages 12 and up, plus teachers and parents, who want to understand AI well enough to use it, question it, and explain it, before or instead of learning to program it.",
+    "prerequisites": [
+      "None. No coding, math beyond percentages, or AI experience needed.",
+      "A laptop or desktop computer with Chrome or Firefox. A webcam and microphone help but aren't required."
+    ],
+    "outcomes": [
+      "Tell a rule-based system from a machine learning model, and name the task family of any AI product from the kind of answer it gives.",
+      "Describe a dataset as examples, features, and labels, and spot features that leak the answer or won't exist at prediction time.",
+      "Train, test, and improve image and sound models in Teachable Machine by changing their examples, and catch shortcuts a model has learned.",
+      "Explain why models are scored on held-out test data, recognize overfitting on a chart, and describe how a neural network learns by nudging its weights.",
+      "Interpret confidence scores, check whether errors fall unevenly on different groups, and plan data collection that respects privacy and consent.",
+      "Decide whether AI fits a proposed problem, and write a recommendation that weighs data, risks, oversight, and simpler alternatives."
+    ],
+    "tags": [
+      "ai",
+      "machine-learning",
+      "teachable-machine",
+      "ethics",
+      "data-literacy",
+      "beginner"
+    ],
+    "primaryTool": {
+      "name": "Google Teachable Machine (free, in the browser)",
+      "description": "A free website from Google that trains image, sound, and pose models from examples you record or upload, without any code. Training runs inside your browser tab, and your samples aren't sent to any server unless you choose to save them to your own Google Drive. It makes every idea in the course testable in minutes: you change the examples, retrain, and watch the model's behavior change.",
+      "setupSteps": [
+        "Open Chrome or Firefox on a laptop or desktop and go to teachablemachine.withgoogle.com.",
+        "Click Get Started, then Image Project, then Standard image model.",
+        "Click Webcam on the Class 1 card and allow camera access when the browser asks (or use Upload with photo files if you have no webcam).",
+        "Optional: TensorFlow Playground (playground.tensorflow.org) and Google Colab (colab.research.google.com) are used in later lessons and also run free in the browser."
+      ],
+      "verification": "A live view from your webcam appears inside the Class 1 card with a Hold to Record button under it. No account or install is needed.",
+      "url": "https://teachablemachine.withgoogle.com/"
+    },
+    "optionalGear": [
+      {
+        "name": "Google Colab",
+        "description": "Optional. Runs the course's chart programs in your browser if you want to change the numbers yourself. Needs a Google account.",
+        "url": "https://colab.research.google.com/"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson can be completed for $0 with no account: Teachable Machine and TensorFlow Playground are free in the browser, every chart is drawn for you on the lesson page, and photo uploads replace the webcam if you don't have one.",
+    "assignments": [
+      {
+        "title": "Rule versus learned model",
+        "brief": "Train a Teachable Machine model for a task you could also try with a simple rule, test both on the same new examples, and explain where each breaks; then make a TensorFlow Playground network overfit and fix it one change at a time."
+      },
+      {
+        "title": "Stress test and data plan",
+        "brief": "Stress-test a Teachable Machine gesture or image model in conditions it never saw, turn the log into a confusion matrix and accuracy by condition, and write a one-page data and consent plan for collecting its training data."
+      }
+    ],
+    "capstone": {
+      "title": "Should AI do this job?",
+      "brief": "Pick a proposed use of AI, map everyone it affects, test the claims with a Teachable Machine prototype, a claims log, or interviews, compare it with a no-AI option, and write a memo ending in Go, Go with conditions, Not yet, or Don't.",
+      "deliverables": [
+        "800 to 1,500 word recommendation memo",
+        "Stakeholder map",
+        "Prototype stress test, claims log, or interviews",
+        "Three-minute presentation with up to five slides"
+      ]
+    }
+  },
+  "course-15": {
+    "summary": "Train your own image, sound, and pose models in the browser with Google's Teachable Machine, no code required, and learn to collect fair data, read confidence honestly, test on examples the model has never seen, and fix the mistakes you find.",
+    "description": "A hands-on, no-code machine learning course built on Teachable Machine, Google's free browser tool for training image, audio, and pose models. You start with a two-class model in five minutes, then build a rock, paper, scissors recognizer the careful way: a written data plan, classes a single camera frame can tell apart, examples recorded in rounds across lighting, distance, and both hands, and only people who agreed to be in the data. You balance the classes and watch what a ten-to-one imbalance does, read the accuracy and loss graphs under the hood, and learn what epochs, batch size, and learning rate control. Then you test properly: a folder of photos from new rooms, light, and people that never goes into training, a test sheet with every answer's confidence, and a recycling sorter tested on objects held out from the start. Later modules turn test results into confusion matrices, separate false positives from false negatives, repair weak data with targeted examples, export a model with the labels and limits someone else needs, and connect its predictions to an interactive project. Charts and step-through animations explain what the model is doing; you never have to write code. Each core module has Notes with quizzes, a step-by-step Build-along, and Practice experiments with expected results, and the course ends with a prototype of your own.",
+    "audience": "Beginners, roughly ages 12 to 18, who know what AI is and want to build and test real models without programming.",
+    "prerequisites": [
+      "Comfortable using a web browser, saving files, and finding them in folders",
+      "A rough idea of what classification, labels, and test data mean (the course explains each again)"
+    ],
+    "outcomes": [
+      "Define classes a model can tell apart, and collect balanced, varied examples with the consent of everyone who appears in them.",
+      "Train image, sound, and pose models in Teachable Machine, and explain what epochs, batch size, learning rate, and the accuracy and loss graphs show.",
+      "Read confidence bars cautiously and explain why a model can be 99% sure and wrong.",
+      "Build an unseen test set from new people, places, and lighting, and report results honestly with a test sheet.",
+      "Find false positives and false negatives, trace them to gaps in the data, and fix the data with targeted examples.",
+      "Export a model with its labels, version, and limitations, and connect its predictions to an interactive project."
+    ],
+    "tags": [
+      "machine-learning",
+      "no-code",
+      "teachable-machine",
+      "responsible-ai",
+      "beginner"
+    ],
+    "primaryTool": {
+      "name": "Google Teachable Machine (free, in the browser)",
+      "description": "A free web tool from Google that trains real image, audio, and pose classification models inside your browser tab, from webcam or microphone recordings or uploaded files. It needs no install and no account, and your samples stay on your computer unless you choose to save them to Google Drive. Models are built with TensorFlow.js using transfer learning, so tens of examples per class are enough to start.",
+      "setupSteps": [
+        "Open teachablemachine.withgoogle.com in Chrome (or Edge or Firefox) on a laptop, desktop, or Chromebook.",
+        "Click Get Started, then Image Project, then Standard image model.",
+        "Click Webcam on the Class 1 card and allow camera access when the browser asks. If the camera stays dark, turn on camera access for the browser in your operating system's privacy settings and reload.",
+        "No webcam? Use Upload on each class card to add .jpg or .png photos instead.",
+        "Before closing the tab, open the ☰ menu and choose Download project as file to save your work as a .tm file."
+      ],
+      "verification": "After recording two classes and clicking Train Model, the button reads Model Trained and the Preview panel shows a bar for each class whose percentages change as you move in front of the camera.",
+      "url": "https://teachablemachine.withgoogle.com/"
+    },
+    "freeCompletionPromise": "Every lesson can be completed for $0: Teachable Machine is free in the browser with no account, a built-in webcam or photos from any phone cover all the data collection, and the projects use household items like cans, bottles, and your own hands.",
+    "assignments": [
+      {
+        "title": "Balanced image model, two versions",
+        "brief": "Train a Teachable Machine image model with a Nothing class from recordings made under the course's consent rules, read its per-class accuracy and confusion matrix, then make one balanced fix, retrain, and save both versions with a project log."
+      },
+      {
+        "title": "Unseen test and one repair round",
+        "brief": "Photograph 10+ unseen test items per class in new places and light, record each answer and its confidence on a test sheet, build a confusion matrix, then make one targeted data change and retest on the same items."
+      }
+    ],
+    "capstone": {
+      "title": "Interactive ML prototype",
+      "brief": "Build an app that a Teachable Machine image, sound, or pose model controls, such as a gesture slide clicker or a doorbell alert, using consented data, an unseen test, one repair round, and a threshold, hold time, and cooldown before acting.",
+      "deliverables": [
+        "Teachable Machine project file and exported model",
+        "App sketch with a keyboard fallback",
+        "Project log with test sheets and a confusion matrix",
+        "Model card",
+        "Three-minute live demo with one explained failure"
+      ]
+    }
+  },
+  "course-16": {
+    "summary": "Train your first machine-learning models in Python with scikit-learn: turn tables into features and targets, split and preprocess data without fooling yourself, and compare k-nearest neighbors, linear and logistic regression, and decision trees using the right metrics.",
+    "description": "This course is for Python programmers meeting machine learning for the first time. Everything runs in Google Colab, a free notebook in the browser with scikit-learn, pandas, NumPy, and matplotlib already installed, so a school Chromebook works as well as any laptop. You train a model on the classic iris flowers in the first module, then learn the workflow behind it: choosing features and a target, spotting columns that leak the answer, splitting off a test set with train_test_split and stratify, and scaling and one-hot encoding data inside a pipeline. Next you open up two models completely, building k-nearest neighbors by hand and writing gradient descent from scratch to fit a line, then checking both against scikit-learn. Later modules add logistic regression and decision trees, the metrics that tell you whether a model is good enough (accuracy, precision, recall, F1, and confusion matrices), and how to diagnose overfitting and compare models fairly. A capstone pulls it together into a documented comparison of several models on one dataset. Every dataset ships with scikit-learn or is built in the notebook, and every code example and chart on these pages ran for real when the lesson was built. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions.",
+    "audience": "Teens and early college students who already write Python and want to understand how machine-learning models learn from data, not just call them.",
+    "prerequisites": [
+      "Python basics: variables, lists, dictionaries, loops, functions, and reading an error message",
+      "A first look at pandas helps (making a DataFrame, selecting columns, head()), but the course reviews what it uses",
+      "School algebra: averages, squaring, and the slope of a line"
+    ],
+    "outcomes": [
+      "Turn a table into a feature table X and a target y, dropping identifiers and columns that won't be known at prediction time.",
+      "Split data with train_test_split and stratify, and scale and encode it in a scikit-learn pipeline that never learns from the test set.",
+      "Explain how k-nearest neighbors and linear regression make predictions, including how k shapes a decision boundary and how gradient descent fits a line.",
+      "Train and interpret logistic regression and decision-tree models.",
+      "Choose and calculate suitable metrics, read a confusion matrix, and recognize overfitting.",
+      "Compare several models on one dataset against a baseline and justify which one to use."
+    ],
+    "tags": [
+      "python",
+      "machine-learning",
+      "scikit-learn",
+      "data-science",
+      "beginner"
+    ],
+    "primaryTool": {
+      "name": "Google Colab with scikit-learn",
+      "description": "Google Colab is a free, browser-based Jupyter notebook from Google. Your code runs on a Google machine and your notebooks save to your Google Drive. It comes with scikit-learn (the machine-learning library), pandas (tables), NumPy (fast math on arrays), and matplotlib (charts) preinstalled, and every lesson in this course runs on its free CPU machines. Learners who prefer to work offline can use JupyterLab on their own computer with the same code.",
+      "setupSteps": [
+        "Sign in to a Google account (a personal account is safest, since some schools turn Colab off).",
+        "Go to colab.research.google.com and click New notebook, or use File → New notebook in Drive.",
+        "Rename the notebook from Untitled0.ipynb to something like m1-setup.ipynb.",
+        "In the first cell, run: import sklearn, pandas, numpy, matplotlib and print sklearn.__version__.",
+        "Press Shift + Enter to run the cell."
+      ],
+      "verification": "The cell prints a scikit-learn version of 1.4 or newer with no errors, and the top right of the notebook shows RAM and Disk meters for the connected runtime.",
+      "url": "https://colab.research.google.com/"
+    },
+    "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab is free with a Google account and needs no paid plan or GPU for this course. scikit-learn, pandas, NumPy, matplotlib, and JupyterLab are free, open-source software, and every dataset either ships inside scikit-learn or is generated in the notebook, so nothing has to be bought or downloaded.",
+    "assignments": [
+      {
+        "title": "Predictor that beats a baseline",
+        "brief": "In Colab, write a column plan for a table, build X and y for scikit-learn, hold out the newest rows for checking, and show that your model beats a do-nothing baseline, catching any leaky column before it inflates the score."
+      },
+      {
+        "title": "Classifier with a chosen threshold",
+        "brief": "Train logistic regression and a decision tree in Colab on a rare-event task, report precision, recall, and F1 with a confusion matrix, pick a threshold on validation data to meet a stated requirement, and confirm it once on the test set."
+      }
+    ],
+    "capstone": {
+      "title": "Classical model comparison",
+      "brief": "Build one Colab notebook that compares a baseline and three or more scikit-learn models on one dataset, with the test set split off first, preprocessing inside pipelines, cross-validation on two metrics, and a recommendation backed by error analysis.",
+      "deliverables": [
+        "Data card and plan written before modeling",
+        "Notebook that passes restart-and-run-all",
+        "Cross-validated comparison of a baseline and 3+ models",
+        "Training-versus-validation curve with a fit diagnosis",
+        "Error analysis and a written recommendation",
+        "Three-minute presentation"
+      ]
+    }
+  },
+  "course-17": {
+    "summary": "Wire and program a Raspberry Pi Pico W in a free browser simulator, then grow it into a connected sensor station: read sensors, drive LEDs and servos, log and smooth time-series data, publish it over MQTT to a dashboard, and lock down remote control.",
+    "description": "Every circuit in this course runs on a simulated Raspberry Pi Pico W in Wokwi, a free in-browser simulator, so you can wire buttons, potentiometers, temperature and light sensors, LEDs, and servos without buying parts. You write real MicroPython (machine.Pin, machine.ADC, machine.PWM, network.WLAN), the same code a physical Pico W runs, and the simulated board joins a virtual Wi-Fi network called Wokwi-GUEST to reach the internet. Data work happens in regular Python cells that run right on the lesson page: parsing CSV logs, smoothing noisy readings, spotting gaps, and drawing charts with matplotlib. Along the way you learn the Linux terminal (the same commands work on a Raspberry Pi, a Mac, WSL on Windows, or a Chromebook's Linux environment), GPIO numbering, and the electrical rules that keep real pins alive. Later modules send readings as JSON over MQTT, build a live dashboard, authenticate devices before they can act on commands, keep passwords out of source code, and plan for sensor, network, and dashboard failures. Each module has notes that teach the ideas, a build-along that makes one working project, and a practice set with hints and full solutions. The course ends with a secure monitoring capstone such as a smart greenhouse or weather station. A real Pico W, or a Raspberry Pi 4 or 5 running Raspberry Pi OS, is optional; where it helps, lessons show the gpiozero version of the same idea.",
+    "audience": "High school and early college learners who already write Python with functions, loops, and dictionaries, and want to connect code to sensors, networks, dashboards, and the security decisions real devices need.",
+    "prerequisites": [
+      "Write Python programs with functions, loops, lists, and dictionaries",
+      "Know what voltage, current, and resistance are, at least roughly (the course reviews the parts you need)",
+      "Comfortable copying text between browser tabs and editing a file"
+    ],
+    "outcomes": [
+      "Navigate a Linux system from the terminal and set up a project folder with safe permissions.",
+      "Map Raspberry Pi and Pico W GPIO pins correctly and keep circuits within 3.3 V logic and current limits.",
+      "Read digital and analog sensors and control LEDs and servos from MicroPython without blocking the main loop.",
+      "Log timestamped readings to CSV, smooth and chart them with Python, and buffer data through network outages.",
+      "Publish sensor data as JSON over MQTT and show fresh and stale values on a dashboard.",
+      "Protect remote device control with authentication, safe credential storage, and planned failure states."
+    ],
+    "tags": [
+      "raspberry-pi",
+      "pico-w",
+      "micropython",
+      "iot",
+      "mqtt",
+      "linux",
+      "sensors",
+      "security",
+      "simulation",
+      "intermediate"
+    ],
+    "primaryTool": {
+      "name": "Wokwi (free Raspberry Pi Pico W simulator with MicroPython)",
+      "description": "Wokwi runs a Raspberry Pi Pico W with real MicroPython firmware in your web browser, along with LEDs, resistors, buttons, potentiometers, sensors, and servos. The simulated board can join a virtual Wi-Fi network with internet access, so networking lessons work too. Nothing to install and nothing to buy; a free account is only needed to save projects online.",
+      "setupSteps": [
+        "Open wokwi.com in Chrome, Edge, Firefox, or Safari and click the Pi Pico tile.",
+        "Under Starter Templates, choose Micropython Pico W (or go straight to wokwi.com/projects/new/micropython-pi-pico-w).",
+        "Paste the lesson's code into main.py and, when the lesson gives one, its circuit into diagram.json.",
+        "Press the green play button and watch the terminal under the diagram for your program's output."
+      ],
+      "verification": "The template prints Hello, Pi Pico W! in the terminal, and the Module 1 blink program makes the board's onboard LED flash twice a second.",
+      "url": "https://wokwi.com/pi-pico"
+    },
+    "optionalGear": [
+      {
+        "name": "Raspberry Pi Pico W (or Pico WH, with headers already soldered)",
+        "description": "Optional. A real board runs the same MicroPython from every lesson. Add a micro-USB data cable, a breadboard, jumper wires, LEDs, 330 ohm resistors, a pushbutton, and a 10k potentiometer to build Modules 1 to 4 on a desk.",
+        "url": "https://www.adafruit.com/product/5526"
+      },
+      {
+        "name": "Raspberry Pi 4 or 5 with Raspberry Pi OS",
+        "description": "Optional. A full Linux computer with a 40-pin GPIO header. It can run the gpiozero versions of the circuits, the MQTT broker, and the dashboard. You also need its official power supply and a microSD card of 16 GB or more, written with Raspberry Pi Imager.",
+        "url": "https://www.adafruit.com/product/5812"
+      },
+      {
+        "name": "Sensors for an environmental station",
+        "description": "Optional. A DHT22 temperature and humidity sensor, a 10k NTC thermistor module, a photoresistor module, and a micro servo cover the sensor and output lessons and the capstone.",
+        "url": "https://www.adafruit.com/category/35"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson can be finished for $0 in a web browser: circuits and MicroPython run in Wokwi's free simulator without an account, and the data analysis runs in Python cells that show their output on the lesson page. Hardware is optional, and no lesson requires buying anything.",
+    "assignments": [
+      {
+        "title": "Sensor logger that survives an outage",
+        "brief": "In Wokwi, program a Pico W in MicroPython to read and smooth two sensors on a non-blocking schedule, log timestamped readings to a CSV file, and post them over Wi-Fi in batches without losing any during an outage you trigger."
+      },
+      {
+        "title": "MQTT station with a signed command",
+        "brief": "Publish JSON readings from a Wokwi Pico W over MQTT with a retained status and last will, show them on a browser dashboard that marks stale values, and accept one remote command only if its HMAC signature and sequence number check out."
+      }
+    ],
+    "capstone": {
+      "title": "Secure monitoring system",
+      "brief": "Build a Pico W monitoring system in Wokwi, such as a smart greenhouse or weather station, that publishes validated readings over MQTT to a dashboard showing fresh, stale, and offline states, with one HMAC-signed remote action, git-ignored secrets, and planned failure handling.",
+      "deliverables": [
+        "Wokwi project with MicroPython code and secrets.example.py",
+        "Browser dashboard",
+        "Test plan covering normal use, boundaries, failures, and attacks",
+        "README with architecture diagram, topic plan, and threat and failure tables",
+        "Four-minute demo"
+      ]
+    }
+  },
+  "course-18": {
+    "summary": "Build machine learning models small enough to run on a microcontroller: slice sensor streams into windows, extract features with NumPy, train tiny classifiers, quantize them to int8 by hand, and plan a deployment that fits real limits on memory, latency, power, and privacy.",
+    "description": "TinyML is machine learning on chips with kilobytes of memory, like the ones inside fitness bands, smart speakers, and wildlife sensors. This course teaches it the way an engineer meets it: as a set of trade-offs you can measure. You start by deciding when a model should run on the device and when it should run in the cloud, using latency, bandwidth, privacy, power, cost, and connectivity numbers you calculate yourself. Then you work in Google Colab with NumPy, scikit-learn, and PyTorch to turn a raw accelerometer stream into labeled windows, compute features such as RMS and FFT peaks, train small classifiers, and check them without data leakage. You build spectrograms and MFCCs from audio, train a keyword spotter, and quantize its weights from float32 to int8 with your own scale and zero-point code, measuring the size and accuracy before and after. Later modules budget RAM, flash, and response time, plan a deployment and test it against real-world accuracy, and trade battery life against privacy with duty cycles and on-device decisions. Edge Impulse Studio, on its free Developer plan, shows the same pipeline in a production tool, with your phone working as a free sensor. Every Python example on these pages runs for real when the lesson is built, so the charts and numbers you see are real outputs. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions, and the course ends with a capstone device plan.",
+    "audience": "High school and early college students who already write Python and know the basics of training and testing a machine learning model, and who want to put models on small devices.",
+    "prerequisites": [
+      "Python: functions, lists, loops, and reading a traceback",
+      "NumPy arrays at a basic level (creating them, slicing, and calling np.mean)",
+      "Machine learning basics: features, labels, a train/test split, and accuracy",
+      "No electronics experience needed; a development board is optional"
+    ],
+    "outcomes": [
+      "Choose between on-device and cloud inference for a product by calculating latency, data volume, energy, cost, and privacy exposure.",
+      "Turn a continuous sensor stream into labeled windows with a chosen sampling rate, window size, and stride, and extract time and frequency features from them.",
+      "Pick the right task type (classification, anomaly detection, or regression) and evaluate it without leakage between overlapping windows.",
+      "Build spectrogram and MFCC features from audio with NumPy and train a small keyword-spotting model.",
+      "Quantize a model from float32 to int8 with scale and zero-point, and measure what it costs in accuracy and saves in memory.",
+      "Write a deployment plan for a constrained device that covers memory, latency, accuracy on real hardware, power, and local data handling."
+    ],
+    "tags": [
+      "tinyml",
+      "edge-ai",
+      "machine-learning",
+      "python",
+      "numpy",
+      "quantization",
+      "hardware",
+      "intermediate"
+    ],
+    "primaryTool": {
+      "name": "Google Colab, with Edge Impulse Studio",
+      "description": "Google Colab is a free Jupyter notebook that runs in your browser on a Google computer, with NumPy, scikit-learn, matplotlib, SciPy, and PyTorch already installed. Every Python lesson runs there, so nothing needs installing on your own machine. Edge Impulse Studio is a free web tool (Developer plan) for collecting real sensor data, designing a processing pipeline, training a model, and building it for a phone or a microcontroller. Your phone's browser can act as an Edge Impulse sensor, so you can record real motion data without buying anything.",
+      "setupSteps": [
+        "Go to colab.research.google.com, sign in with a Google account, and create a new notebook.",
+        "Run a first cell that imports numpy, sklearn, matplotlib, scipy, and torch and prints their versions.",
+        "Create an Edge Impulse account at studio.edgeimpulse.com (Edge Impulse requires account holders to be 18 or older, so younger learners use an account owned by a parent, guardian, or teacher).",
+        "Create a private project, open Devices, choose Connect a new device, then Mobile phone, and scan the QR code with your phone.",
+        "Record a 10-second accelerometer sample from Data acquisition and check that three lines appear in the graph."
+      ],
+      "verification": "Colab prints a version number for every library, and Edge Impulse shows your phone with a green dot under Devices plus a 10-second sample with x, y, and z lines under Data acquisition.",
+      "url": "https://colab.research.google.com/"
+    },
+    "optionalGear": [
+      {
+        "name": "Arduino Nano 33 BLE Sense (Rev2)",
+        "description": "Optional. A microcontroller board with an accelerometer, microphone, 1 MB of flash, and 256 KB of RAM that Edge Impulse fully supports, so you can deploy your models to real hardware. The original Nano 33 BLE Sense works too. Every lesson can be finished without it.",
+        "url": "https://store.arduino.cc/products/nano-33-ble-sense-rev2"
+      },
+      {
+        "name": "BBC micro:bit V2",
+        "description": "Optional. A cheaper board with an accelerometer that runs motion models trained in the free micro:bit CreateAI tool. It shows the train-then-deploy loop on real hardware without an Edge Impulse account.",
+        "url": "https://microbit.org/buy/"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab's free tier runs all the Python, and Edge Impulse's Developer plan costs nothing. Your phone works as a free sensor for real data, and the course builds synthetic sensor and audio data in code, so you never need a board. If you can't use an Edge Impulse account, each Edge Impulse step has a Colab version that teaches the same idea.",
+    "assignments": [
+      {
+        "title": "Tiny classifier, quantized to int8",
+        "brief": "In Colab, cut sensor or audio recordings into windows, extract features, split by recording so nothing leaks, and train a small classifier, then quantize it to int8 with your own scale and zero-point code and compare accuracy and size."
+      },
+      {
+        "title": "Device budget and field-test report",
+        "brief": "Profile two candidate models for a named microcontroller, fit the winner into a flash, RAM, and latency budget, then score a set of field-test logs with a confusion matrix, per-class recall, per-person accuracy, and a confidence interval."
+      }
+    ],
+    "capstone": {
+      "title": "Constrained edge-AI device plan",
+      "brief": "Plan an edge-AI device, such as a gesture remote or keyword spotter, with measurable targets, two candidate models trained in Colab or Edge Impulse, a flash, RAM, and latency budget, test results, a power estimate, and a privacy data-flow table.",
+      "deliverables": [
+        "Design doc with every number labeled measured or estimated",
+        "Colab notebook that reruns every budget and test number",
+        "Edge Impulse project or training code, plus any field logs",
+        "Five-minute presentation"
+      ]
+    }
+  },
+  "course-19": {
+    "summary": "Learn to compare machine learning models in a way that survives scrutiny: feature engineering inside scikit-learn pipelines, the right cross-validation for your data, tuning on a compute budget, class imbalance, ensembles, leakage hunting, calibration, interpretation, and error analysis by slice.",
+    "description": "Most model comparisons fall apart under one good question: was the test data really unseen, would the ranking survive a different split, is the probability of 0.8 really 80%? This course teaches the habits that make the answer yes. You work in Google Colab with scikit-learn, pandas, NumPy, SciPy, and matplotlib. Early modules put every feature-engineering step inside a Pipeline and ColumnTransformer (including FunctionTransformer and transformer classes you write yourself), then measure performance with KFold, StratifiedKFold, GroupKFold, TimeSeriesSplit, and nested cross-validation, and tune with grid, randomized, and successive-halving searches plus early stopping, all sized to finish in seconds. Later modules handle rare classes, compare forests and gradient boosting, hunt down leakage, check whether predicted probabilities are calibrated, explain what a model relies on, and find the slices of data where it fails. Every example uses data that ships with scikit-learn or is generated in the notebook, and every Python cell on these pages was run to produce the numbers and charts you see. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions. The course ends with a capstone: a reproducible model-comparison report with a recommendation and its limitations.",
+    "audience": "Students who have already trained and scored a scikit-learn model and want their results to hold up: strong high schoolers, early college students, and self-taught practitioners.",
+    "prerequisites": [
+      "Python: functions, classes at a basic level, lists and dictionaries, and reading a traceback",
+      "pandas and NumPy basics: selecting columns, filtering rows, and array shapes",
+      "One complete scikit-learn workflow: train_test_split, fit, predict, and score",
+      "Classification metrics: accuracy, precision, recall, and ROC AUC"
+    ],
+    "outcomes": [
+      "Build pipelines that engineer, impute, encode, and scale features from raw mixed-type rows, with custom transformers and no leakage between training and evaluation data.",
+      "Choose and justify a cross-validation scheme for independent, grouped, imbalanced, or time-ordered data, and report fold-to-fold variation instead of a single score.",
+      "Tune hyperparameters with randomized and successive-halving search, sensible distributions, and early stopping, and estimate the tuned model's performance with nested cross-validation.",
+      "Handle class imbalance and compare ensembles such as random forests and gradient boosting without leaking information.",
+      "Check calibration, explain what a model relies on, and find the data slices where it fails.",
+      "Write a reproducible model-comparison report that states a recommendation and its limitations."
+    ],
+    "tags": [
+      "machine-learning",
+      "scikit-learn",
+      "evaluation",
+      "pipelines",
+      "cross-validation",
+      "hyperparameter-tuning",
+      "python",
+      "advanced"
+    ],
+    "primaryTool": {
+      "name": "Google Colab (free) with scikit-learn",
+      "description": "Colab is Google's free hosted Jupyter notebook. Python runs on a Google machine and your notebooks save to your own Google Drive, so it works on any computer with a browser, Chromebooks included. scikit-learn, pandas, NumPy, SciPy, and matplotlib come preinstalled. The course needs scikit-learn 1.6 or newer, and the first lesson shows how to check your version and upgrade it inside Colab when needed.",
+      "setupSteps": [
+        "Go to colab.research.google.com and sign in with a Google account (a personal account is the safe choice if your school account blocks Colab).",
+        "Choose File > New notebook in Drive, then click the Untitled name at the top left and rename the notebook.",
+        "Run a cell that imports sklearn and prints sklearn.__version__.",
+        "If the version is older than 1.6, run %pip install -U scikit-learn in a cell, choose Runtime > Restart session, and check the version again."
+      ],
+      "verification": "Your version-check cell prints scikit-learn 1.6 or newer and ends with the line \"Ready for the course\", and the notebook appears in your Drive's Colab Notebooks folder.",
+      "url": "https://colab.research.google.com/"
+    },
+    "optionalGear": [
+      {
+        "name": "Python 3.10+ with JupyterLab on your own computer",
+        "description": "Optional. A local install works offline and has no session time limits; the first lesson has the steps for Windows, macOS, and Linux.",
+        "url": "https://jupyter.org/install"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab's free tier is enough for every notebook in the course, the libraries are open source, and every dataset either ships with scikit-learn or is generated by code on the page, so nothing has to be bought or downloaded.",
+    "assignments": [
+      {
+        "title": "Reproducible feature pipeline",
+        "brief": "In Colab, build a scikit-learn pipeline that turns raw columns into engineered features, pin every source of randomness with random_state, log each experiment to a CSV, and check each new feature with cross-validation before scoring raw rows."
+      },
+      {
+        "title": "Tuned ensemble race with leak checks",
+        "brief": "Tune a gradient boosting model with early stopping and a randomized search sized to a time budget, race it against a random forest on the same folds, and check for leaks such as a column recorded after the outcome or groups split across folds."
+      }
+    ],
+    "capstone": {
+      "title": "Rigorous model-comparison report",
+      "brief": "Compare up to three model families plus a baseline in a seeded Colab notebook, with a sealed test set, repeated cross-validation with nested tuning, leak checks, calibration, interpretation, and error slices, ending in a recommendation with specific limits.",
+      "deliverables": [
+        "Notebook that passes restart-and-run-all",
+        "Plan written before any results",
+        "Unit tests for the evaluation code",
+        "One- to two-page write-up with a recommendation",
+        "Five-slide presentation"
+      ]
+    }
+  },
+  "course-20": {
+    "summary": "An advanced, self-paced course in deep learning for images with PyTorch: trace every tensor, derive and check gradients, write honest training loops, then train convolutional networks, adapt pretrained models, and evaluate vision systems responsibly.",
+    "description": "You'll work in Google Colab, where PyTorch, torchvision, and scikit-learn come preinstalled and a free NVIDIA T4 GPU is one menu choice away. The first half builds the mechanics from the ground up on scikit-learn's 8×8 handwritten digits: tensor shapes traced layer by layer with a tracer you write yourself, gradients derived by hand and confirmed with autograd and finite differences, and a complete training loop with validation curves, best checkpoints, early stopping, and a learning-rate range test. The second half moves to real images: convolutional networks and augmentation, fine-tuning pretrained torchvision models, comparing classification with detection and segmentation outputs, tracking experiments and GPU use, and evaluating errors honestly. Each module has a Notes lesson, a Build-along, and a Practice lesson with worked solutions, and every output and chart on the page came from running the code shown. The course ends with a capstone: a documented computer-vision model study with its metrics, resource use, errors, and responsible-use limits.",
+    "audience": "Strong high school and early college students who already write Python comfortably and have trained classical machine learning models, and now want to understand how neural networks and vision models actually work.",
+    "prerequisites": [
+      "Confident Python: functions, classes, loops, lists, and dictionaries",
+      "Classical machine learning with scikit-learn: train/test splits, overfitting, and accuracy",
+      "High school algebra; derivatives help, and Module 3 reviews the chain rule as it goes",
+      "A Google account that can open Google Colab"
+    ],
+    "outcomes": [
+      "Trace tensor shapes, dtypes, and devices through layers and activations, and fix shape, dtype, and device errors from the message alone.",
+      "Derive gradients for small models by hand, verify them with autograd and finite differences, and choose a loss and learning rate with evidence.",
+      "Write training loops that log honest training and validation curves, keep the best checkpoint, and diagnose overfitting and learning-rate problems.",
+      "Design and evaluate convolutional network, augmentation, and transfer-learning experiments in PyTorch and torchvision.",
+      "Compare classification, detection, and segmentation outputs, and document resource use, errors, limitations, and responsible-use constraints."
+    ],
+    "tags": [
+      "deep-learning",
+      "computer-vision",
+      "pytorch",
+      "cnn",
+      "transfer-learning",
+      "responsible-ai",
+      "advanced",
+      "self-paced"
+    ],
+    "primaryTool": {
+      "name": "Google Colab with PyTorch (free GPU)",
+      "description": "Colab is Google's free, browser-based notebook service. Code runs on a Google virtual machine with PyTorch and torchvision already installed, and the free tier can attach an NVIDIA T4 GPU, so the course needs no installs and no graphics card of your own.",
+      "setupSteps": [
+        "Go to colab.research.google.com, sign in with a Google account, and create a notebook with File › New notebook in Drive.",
+        "Open Runtime › Change runtime type, choose T4 GPU under Hardware accelerator, and click Save.",
+        "In a code cell, run: import torch; print(torch.__version__, torch.cuda.is_available())",
+        "In another cell, run !nvidia-smi to see the GPU's name and memory."
+      ],
+      "verification": "The first cell prints a PyTorch version followed by True, and nvidia-smi lists a Tesla T4 with about 15 GB of memory. On a CPU runtime the first cell prints False, which is fine for Modules 1 to 4.",
+      "url": "https://colab.research.google.com/"
+    },
+    "optionalGear": [],
+    "freeCompletionPromise": "Every lesson runs in Google Colab's free tier and uses only free, open-source libraries and datasets. Modules 1 to 4 run comfortably on a CPU, so if Colab's free GPU allowance runs out you can keep working on the CPU runtime and come back to the GPU later.",
+    "assignments": [
+      {
+        "title": "Network tracer and hand-checked gradients",
+        "brief": "In Colab with PyTorch, trace a batch through a small network shape by shape with forward hooks and flag saturated layers, then derive a neuron's gradient by hand, check it with autograd and finite differences, and sweep the learning rate."
+      },
+      {
+        "title": "Training loop and fine-tuning study",
+        "brief": "Write a PyTorch training loop with a three-way split, per-epoch train and validation logging, and a best checkpoint, then fine-tune a pretrained ResNet-18 in two phases and compare it with training from scratch, smoke-testing on CPU first."
+      }
+    ],
+    "capstone": {
+      "title": "Responsible vision model study",
+      "brief": "Train and evaluate a vision model in Colab with PyTorch, such as a digit reader under blur or a fine-tuned flower classifier, with a datasheet, a logged baseline, seeded experiments, per-class and subgroup results with intervals, and a failure gallery.",
+      "deliverables": [
+        "Notebook that reruns top to bottom",
+        "Experiment log with 3+ runs, including a baseline",
+        "Datasheet for the dataset",
+        "One- to two-page model card",
+        "Five-minute presentation"
+      ]
+    }
+  },
+  "course-21": {
+    "summary": "Learn how language models read text by building the pieces yourself: tokenizers, word vectors, similarity search, text classifiers, entity extractors, attention, and finally a grounded document question-answering system with citations and an evaluation harness.",
+    "description": "This course takes text from raw characters to grounded, checked answers, and every step is something you build and measure. You'll normalize and tokenize text, train a byte-pair-encoding tokenizer from scratch, learn word vectors from co-occurrence counts, and compare one-hot, count, TF-IDF, and embedding representations. Then you'll rank documents by cosine similarity, train naive Bayes and logistic regression classifiers on realistic support tickets, and evaluate them honestly with confusion matrices, cross-validation, and confidence thresholds. Module 4 opens up a real transformer: you'll run a named-entity model from the Hugging Face Hub, combine it with regex rules, and follow a sentence from tokens to ids to logits, then chart its attention heads. Later modules cover attention and context budgets, prompts with structured outputs and validation, retrieval-augmented generation with citations, hallucination checks, the choice between retrieval and fine-tuning, and evaluation before deployment. You work in Google Colab with scikit-learn, NumPy, matplotlib, and Hugging Face transformers. Code that runs on the lesson pages uses small datasets typed into the cell, and the output you see came from actually running it; cells that download models are marked to run in Colab, with their real output shown. Later modules can call a hosted model through the Gemini API's free tier or a local model through Ollama, and include offline stand-ins so they also work without a key. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions, and the course ends with a capstone: a grounded question-answering system for documents you choose.",
+    "audience": "Strong high schoolers, early college students, and self-taught programmers who have already trained and evaluated a machine-learning model in Python and want to understand and build language systems, not just call them.",
+    "prerequisites": [
+      "Python: functions, lists, dictionaries, loops, and reading a traceback",
+      "NumPy basics: arrays, shapes, indexing, and matrix multiplication",
+      "One complete scikit-learn workflow: train_test_split, fit, predict, and score",
+      "Classification metrics: accuracy, precision, and recall"
+    ],
+    "outcomes": [
+      "Normalize and tokenize text, train a BPE tokenizer from scratch, and explain how subword vocabularies handle words they have never seen.",
+      "Represent text as counts, TF-IDF vectors, and learned embeddings, and use cosine similarity to search and deduplicate documents.",
+      "Train and evaluate text classifiers with pipelines, cross-validation, confusion matrices, and confidence thresholds, and explain their mistakes.",
+      "Extract entities with BIO tagging, combine a transformer NER model with rules, and score extractors at the span level.",
+      "Inspect a transformer's tokens, logits, and attention weights, and explain attention, masks, and context-window limits.",
+      "Build and evaluate a privacy-aware, retrieval-grounded question-answering system that validates its output and cites its sources."
+    ],
+    "tags": [
+      "nlp",
+      "generative-ai",
+      "transformers",
+      "hugging-face",
+      "scikit-learn",
+      "rag",
+      "evaluation",
+      "python",
+      "advanced"
+    ],
+    "primaryTool": {
+      "name": "Google Colab (free) with Hugging Face transformers and scikit-learn",
+      "description": "Colab is Google's free hosted Jupyter notebook. Python runs on a Google machine and notebooks save to your own Google Drive, so it works on any computer with a browser, Chromebooks included. transformers, PyTorch, scikit-learn, NumPy, and matplotlib come preinstalled, and models download from the Hugging Face Hub onto the Colab machine. The free CPU runtime is enough for every lesson; a free T4 GPU runtime is optional and only makes transformer cells faster.",
+      "setupSteps": [
+        "Go to colab.research.google.com and sign in with a Google account (a personal account is the safe choice if your school account blocks Colab).",
+        "Choose File > New notebook in Drive, then click the Untitled name at the top left and rename the notebook.",
+        "Run the version-check cell from the first lesson; if transformers or scikit-learn is missing or too old, run %pip install -q -U transformers (or scikit-learn) and choose Runtime > Restart session.",
+        "Run the first-lesson check cell, which downloads the dslim/distilbert-NER model and confirms it finds a person and a place in a test sentence."
+      ],
+      "verification": "The version cell prints \"Ready for the course\", and the check cell prints [('PER', 'Ada Lovelace'), ('LOC', 'London')] followed by \"Model download and inference: OK\".",
+      "url": "https://colab.research.google.com/"
+    },
+    "optionalGear": [
+      {
+        "name": "Free Hugging Face account and read token",
+        "description": "Optional. Every model in the course is public; a token stored in Colab Secrets as HF_TOKEN only raises download rate limits and unlocks gated models.",
+        "url": "https://huggingface.co/join"
+      },
+      {
+        "name": "Python 3.10+ with JupyterLab on your own computer",
+        "description": "Optional. A local install works offline and has no session limits; the first lesson has the steps for Windows, macOS, and Linux.",
+        "url": "https://jupyter.org/install"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab's free tier runs every notebook, the libraries and models are open and free to download, the datasets are typed into the lessons, and the lessons that can use a hosted language model also run with an offline stand-in, so no paid service or API key is ever required.",
+    "assignments": [
+      {
+        "title": "Support-ticket triage tool",
+        "brief": "In a seeded Colab notebook, train a TF-IDF and logistic regression classifier on labelled support tickets, hold out a test set, prove each improvement with cross-validation, add similar-case search, and send low-confidence tickets to a human."
+      },
+      {
+        "title": "Retrieval pipeline with checked citations",
+        "brief": "Chunk a small set of non-sensitive documents with overlap, retrieve with TF-IDF, pack a grounded prompt with numbered sources into a token budget, and reject any reply that fails its schema or cites a source it was never shown."
+      }
+    ],
+    "capstone": {
+      "title": "Grounded document Q&A",
+      "brief": "Build a question-answering system over documents you're allowed to use, such as class syllabi or a club handbook: scrub and chunk them, retrieve with a measured hit rate, answer in a strict schema with citations, and abstain when checks fail.",
+      "deliverables": [
+        "Colab notebook with the full pipeline",
+        "Eval set of 25+ questions, a fifth unanswerable, with a launch gate",
+        "Unit tests for the checks",
+        "Limits statement with real numbers",
+        "Five-minute presentation that shows a failure"
+      ]
+    }
+  },
+  "course-22": {
+    "summary": "Use machine learning as a careful scientific instrument: frame questions that can come out wrong, read papers like a referee, audit datasets for provenance and batch effects, beat simple baselines, put intervals on every number, test for leakage, and reproduce a published result.",
+    "description": "Many published ML results in science don't survive a second look: a test set from the same hospital as the training data, a deep network that a two-parameter logistic regression matches, a 2-point gain measured on 60 images. This course teaches the habits that catch those problems before your own project makes them. You work in Google Colab (or Jupyter) with NumPy, pandas, SciPy, statsmodels, scikit-learn, and matplotlib. You start by setting up a project that can be rerun: a folder that keeps raw data raw, pinned library versions, seeds, data fingerprints, and run records. Then you turn hunches into testable questions, build an evidence table that recomputes what papers left out, audit multi-site datasets for missingness, batch effects, and confounding, design randomized and blocked follow-up experiments sized with a power analysis, and climb a baseline ladder from dummy models to linear models before anything complex. Later modules quantify uncertainty with confidence and bootstrap intervals, run ablations, sensitivity checks, and leakage hunts, and practice reproducing and reporting results honestly, including discrepancies. Real cases from the literature, such as the pneumonia model that learned to recognize hospitals and Kapoor and Narayanan's survey of leakage across 30 fields, appear throughout. Every example uses simulated scientific data with realistic structure (sites, batches, repeated measurements) or datasets that ship with scikit-learn, and every Python cell on these pages was run to produce the numbers and charts you see. Each core module has a Notes lesson, a Build-along, and a Practice set with worked solutions, and the course ends with a reproduction study of a published result.",
+    "audience": "Strong high school and early college students doing research projects, such as science fair work or lab internships, who already train models and want results that hold up to a skeptical reviewer.",
+    "prerequisites": [
+      "Python in notebooks: functions, loops, dictionaries, and reading a traceback",
+      "pandas and NumPy basics: selecting columns, grouping, and array shapes",
+      "One complete scikit-learn workflow: split, fit, predict, and score with cross-validation",
+      "Introductory statistics: means, standard deviations, and what a p-value is"
+    ],
+    "outcomes": [
+      "Turn a research idea into a testable question with a population, inputs, a comparison, an outcome metric, and a success threshold, and distinguish prediction questions from causal ones.",
+      "Read ML papers critically, recomputing confidence intervals, majority-class baselines, and effect sizes that papers omit.",
+      "Audit a dataset's provenance, missingness patterns, batch effects, and confounders, and design a randomized, blocked, controlled experiment sized with a power analysis.",
+      "Compare models fairly with a baseline ladder on the right held-out groups, reporting spread across folds and seeds.",
+      "Quantify uncertainty and test results with ablations, sensitivity analyses, and leakage checks.",
+      "Package an experiment so it reruns from one configuration, and reproduce and report a published result with its discrepancies and limitations."
+    ],
+    "tags": [
+      "machine-learning",
+      "research-methods",
+      "reproducibility",
+      "statistics",
+      "experimental-design",
+      "scikit-learn",
+      "statsmodels",
+      "python",
+      "advanced"
+    ],
+    "primaryTool": {
+      "name": "Google Colab (free) with scikit-learn and statsmodels",
+      "description": "Colab is Google's free hosted Jupyter notebook. Your code runs on a Google machine, notebooks save to your Google Drive, and it works in any modern browser, Chromebooks included. NumPy, pandas, SciPy, statsmodels, scikit-learn, and matplotlib normally come preinstalled. The first lesson connects the notebook to Drive so project files survive a restart, and records the exact library versions in requirements.txt. A local JupyterLab install works just as well.",
+      "setupSteps": [
+        "Go to colab.research.google.com and sign in with a Google account (a personal account avoids school restrictions on Drive access).",
+        "Choose File > New notebook in Drive and rename the notebook 00-setup.ipynb.",
+        "Run a cell with from google.colab import drive and drive.mount(\"/content/drive\"), and approve access, so files you write under /content/drive/MyDrive are kept.",
+        "Run the version cell from the first lesson, which prints and saves the versions of Python, NumPy, pandas, SciPy, statsmodels, scikit-learn, and matplotlib."
+      ],
+      "verification": "The version cell prints all six library versions, writes environment.json and requirements.txt into your project folder in Drive, and the drift check prints \"Environment matches results/environment.json\".",
+      "url": "https://colab.research.google.com/"
+    },
+    "optionalGear": [
+      {
+        "name": "Python 3.10+ with JupyterLab on your own computer",
+        "description": "Optional. A local virtual environment works offline and has no session limits; the first lesson has the install steps for Windows, macOS, and Linux.",
+        "url": "https://jupyter.org/install"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab's free tier runs every notebook in the course, all the libraries are open source, the key papers discussed are open access or have free copies, and every dataset is either generated by code on the page or ships with scikit-learn.",
+    "assignments": [
+      {
+        "title": "Dataset audit and experiment design",
+        "brief": "In Colab, fingerprint a pilot dataset with SHA-256, audit it for provenance, independent units, missing values, and site effects, test whether a model's score holds on a new site, and design a randomized, blocked follow-up sized with a power analysis."
+      },
+      {
+        "title": "Baseline ladder with intervals",
+        "brief": "Score a ladder of baselines and one complex model on held-out batches, compare them on paired cross-validation folds with a corrected interval and on a locked test set with bootstrap intervals, and package the experiment as one function that writes a run record."
+      }
+    ],
+    "capstone": {
+      "title": "Published-result reproduction",
+      "brief": "Reproduce one published machine-learning result, such as the wrong-way cross-validation example in Elements of Statistical Learning, with a plan and match rule written first, provenance checks, a baseline and controls, intervals on every number, and sensitivity checks.",
+      "deliverables": [
+        "Colab notebook that regenerates every number and figure",
+        "4 to 6 page report with a discrepancy log",
+        "Completed REFORMS checklist",
+        "Five-minute talk"
+      ]
+    }
+  },
+  "course-23": {
+    "summary": "Take a scikit-learn model from a file on your laptop to a tested, versioned, containerized service: FastAPI endpoints, Docker images, batch and online serving, a model registry, CI/CD with GitHub Actions, monitoring and drift, canary releases, rollbacks, and incident response.",
+    "description": "A model that works in a notebook still has to answer requests, survive bad input, run the same way on every machine, and be traceable when something goes wrong. This course builds those habits on a running project: a service that predicts whether a food delivery will arrive late. You save a full scikit-learn pipeline with joblib, define the request contract with Pydantic, serve it from FastAPI with /health and /predict endpoints, test it with FastAPI's TestClient, and package it with Docker on a python:3.12-slim base. You then decide between batch, online, streaming, and edge serving with measured latency percentiles, throughput, and cost; schedule a batch job with GitHub Actions and deploy the API to a free host. Later modules version models and data with SHA-256 hashes, semantic versions, aliases, and model cards (with a file-based registry you write yourself and the equivalent MLflow calls), automate training pipelines and integration checks, deploy continuously, monitor latency, failures, and drift, and practise canaries, rollbacks, cost tuning, and incident response. Every Python cell on these pages was run to produce the output shown, and Dockerfiles, workflows, and shell commands are written exactly as the real tools expect them. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions, and the course ends with a capstone: a production-style ML service with its own deployment, monitoring, and rollback plan.",
+    "audience": "Strong high schoolers, early college students, and self-taught developers who have trained and evaluated a scikit-learn model and want to learn how models are shipped and operated as real services.",
+    "prerequisites": [
+      "Python: functions, classes at a basic level, dictionaries, and reading a traceback",
+      "One complete scikit-learn workflow: train_test_split, fit, predict_proba, and a metric such as ROC AUC",
+      "Comfort running commands in a terminal and changing directories",
+      "Helpful but not required: what an HTTP request, a status code, and JSON are"
+    ],
+    "outcomes": [
+      "Package a trained scikit-learn pipeline as a FastAPI service with a validated input contract, honest health checks, tests, and a non-root Docker image.",
+      "Choose batch, online, streaming, or edge serving from measured latency percentiles, throughput, Little's law sizing, and cost, and deploy a batch job and an API on free tiers.",
+      "Version models and data with content hashes, semantic versions, aliases, registry records, and model cards, and roll back by moving an alias.",
+      "Build training pipelines and CI/CD workflows in GitHub Actions that refuse to publish a model that fails its checks.",
+      "Monitor latency, failures, and data drift, run canary releases, and respond to incidents with a rollback plan and a clear owner."
+    ],
+    "tags": [
+      "mlops",
+      "machine-learning",
+      "deployment",
+      "docker",
+      "fastapi",
+      "github-actions",
+      "mlflow",
+      "monitoring",
+      "python",
+      "advanced"
+    ],
+    "primaryTool": {
+      "name": "Python 3.12 and Docker (Docker Desktop or Docker Engine)",
+      "description": "Python 3.12 in a virtual environment runs training, the FastAPI service, and the tests; Docker builds the service into an image and runs it as a container, exactly as a cloud host would. Python 3.12 matches the python:3.12-slim image the container is built from, so local tests describe what ships. Docker Desktop is free for personal use, education, and small businesses, and Docker Engine on Linux is open source. Without admin rights, or on a Chromebook, a free GitHub Codespace with the course's devcontainer.json provides Python 3.12, Docker, and Git in the browser.",
+      "setupSteps": [
+        "Install Python 3.12 (winget, python.org, Homebrew, or apt) and Git, and create a free GitHub account.",
+        "Install Docker Desktop (Windows or macOS) or Docker Engine (Linux), start it, and run docker run hello-world.",
+        "Create the late-delivery project folder, make a virtual environment with Python 3.12, and activate it.",
+        "Install the pinned libraries with python -m pip install -r requirements-dev.txt, then run check_setup.py and smoke_test.py."
+      ],
+      "verification": "docker run hello-world prints \"Hello from Docker!\", check_setup.py shows [OK] for Python 3.12, the virtual environment, the pinned libraries, docker, and git, and smoke_test.py ends with \"Smoke test passed.\"",
+      "url": "https://docs.docker.com/get-started/get-docker/"
+    },
+    "optionalGear": [
+      {
+        "name": "GitHub Codespaces",
+        "description": "Optional. A browser-based Linux machine with VS Code; the free monthly allowance covers the course, and usage stops at the limit if no payment method is on file.",
+        "url": "https://github.com/features/codespaces"
+      },
+      {
+        "name": "Render free web service",
+        "description": "Optional. A public URL for your Docker service; free instances sleep after 15 idle minutes and take about a minute to wake. Every lesson also works entirely on your own machine.",
+        "url": "https://render.com/docs/free"
+      },
+      {
+        "name": "MLflow",
+        "description": "Optional. The open-source tracking server and model registry shown alongside the course's own file-based registry; install it in your development environment only.",
+        "url": "https://mlflow.org/"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson can be completed for $0. Python, scikit-learn, FastAPI, Docker Engine, and MLflow are open source; Docker Desktop is free for personal and educational use; GitHub accounts, public-repository Actions minutes, and the Codespaces allowance are free; and all data is generated by code on the page. Cloud hosting is optional, and the free tiers mentioned are never required.",
+    "assignments": [
+      {
+        "title": "Containerized, versioned prediction API",
+        "brief": "Train the late-delivery model, serve it with FastAPI /health and /predict endpoints and validated inputs, package it in a Docker image, register each version with a hashed record, and compare batch and online serving with measured latency."
+      },
+      {
+        "title": "Gated CI and a drift monitor",
+        "brief": "Write a GitHub Actions workflow whose data, model, and contract tests block a weak candidate, then build a monitor that reads the prediction log, computes PSI and the KS test, and raises the right alerts."
+      }
+    ],
+    "capstone": {
+      "title": "Production-style ML service",
+      "brief": "Ship an ML service an on-call team could run: a registered, versioned model behind a validated FastAPI contract in Docker, CI gates, prediction logging with drift alerts, a canary release, and a timed rollback drill, deployed on a free host.",
+      "deliverables": [
+        "Dockerized FastAPI service with a model registry",
+        "CI workflow with data, model, and contract gates",
+        "Monitoring with drift and SLO alerts",
+        "Canary release and rollback runbook",
+        "README and model card",
+        "Five-minute demo of a failure and recovery"
+      ]
+    }
+  },
+  "course-24": {
+    "summary": "Use and build tool-using coding agents without giving up review or security: scope tasks, verify an agent's claims about a repo, critique its plans and diffs, require test evidence, design validated tools and MCP servers, and enforce permissions, approvals, and defenses against prompt injection.",
+    "description": "You work the way a careful engineer works with an AI coding assistant, using Python 3, Git, VS Code, and an assistant of your choice: GitHub Copilot Free, or a local model served by Ollama, with paid assistants optional. Early modules set up a practice repository where every agent task starts on its own branch, then teach the agent loop itself (model, tool call, result, model) by building a small harness around a scripted fake model, so every example runs offline with no API key. From there you write task specs with acceptance criteria an agent can't misread, map unfamiliar repositories and check the AI's claims with git ls-files, git grep, and the tests, run plans through a checker that catches invented files and out-of-scope edits, and review diffs for weakened tests and plausible-but-wrong fixes, using unittest, Ruff, and mypy for evidence. Later modules design narrow tools validated with JSON Schema (the jsonschema package), serve them over the Model Context Protocol with the MCP Python SDK, put a permission gate and human approval step in front of every sensitive action, and defend against prompt injection hidden in repository files and tool output. Each core module has a Notes lesson, a Build-along that produces working Python, and a Practice set with full solutions. The course ends with a capstone: a sandboxed coding agent that plans, makes scoped edits, runs checks, respects permissions, asks before sensitive actions, and produces an auditable report.",
+    "audience": "Strong high school students, early college students, and working developers who already write Python and use Git, and want to use or build coding agents while staying responsible for what ships.",
+    "prerequisites": [
+      "Comfortable writing Python functions, classes, and unittest tests",
+      "Everyday Git on the command line: commit, branch, diff, and merge",
+      "Basic familiarity with the terminal and with how web APIs and JSON work"
+    ],
+    "outcomes": [
+      "Choose between autocomplete, chat, and an agent for a task, and write a task spec with scope, checkable acceptance criteria, and a stop-and-ask rule.",
+      "Explain and build the agent loop, including step limits, error results, write-scope enforcement, and an independent finish-line check.",
+      "Verify an AI's claims about a repository with search and tests, and reject plans that are ungrounded, out of scope, unordered, or unverified.",
+      "Review diffs for edited expectations, skipped tests, and silenced failures, and demand reproducible evidence: command, output, and exit code.",
+      "Design narrow tools with validated arguments and connect them to agents through MCP clients and servers.",
+      "Enforce least-privilege permissions, human approval for sensitive actions, and defenses against prompt injection and untrusted tool output."
+    ],
+    "tags": [
+      "agents",
+      "coding-agents",
+      "mcp",
+      "tool-calling",
+      "code-review",
+      "testing",
+      "security",
+      "python",
+      "advanced"
+    ],
+    "primaryTool": {
+      "name": "Python 3, Git, and VS Code with an AI assistant (GitHub Copilot Free or a local model through Ollama)",
+      "description": "Python runs every example and test, Git records each agent change on its own branch so it can be reviewed and undone, and VS Code is where you talk to the assistant and read its diffs. For the assistant, sign in to GitHub Copilot Free from VS Code, or install Ollama and a small local model such as qwen3:1.7b so nothing leaves your computer. The course stays provider-neutral: every concept runs offline against a scripted fake model, and the habits carry over to any assistant.",
+      "setupSteps": [
+        "Install Python 3.10 or newer from python.org (on Windows, the Python install manager).",
+        "Install Git from git-scm.com and set user.name, user.email, and init.defaultBranch main.",
+        "Install VS Code and Microsoft's Python extension.",
+        "Create an agent-course folder with a virtual environment (python -m venv .venv) and install jsonschema into it.",
+        "Connect an assistant: sign in to GitHub Copilot Free from the Copilot icon in VS Code's Status Bar, or install Ollama and run ollama pull qwen3:1.7b."
+      ],
+      "verification": "Inside the activated virtual environment, check_setup.py prints your Python and Git versions and confirms jsonschema is installed, and your assistant answers a question in the VS Code Chat view.",
+      "url": "https://code.visualstudio.com/docs/copilot/setup"
+    },
+    "optionalGear": [
+      {
+        "name": "Ollama with a small local model",
+        "description": "Optional; runs a model such as qwen3:1.7b on your own computer, so no account is needed and prompts never leave your machine. Smaller models make more mistakes on agent tasks.",
+        "url": "https://ollama.com/download"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson can be completed for $0. Python, Git, VS Code, Ollama, jsonschema, Ruff, mypy, and the MCP Python SDK are free, and GitHub Copilot Free costs nothing for individual accounts. Every runnable example uses a scripted fake model, so no API key or paid plan is ever required.",
+    "assignments": [
+      {
+        "title": "Validated tools served over MCP",
+        "brief": "Write JSON Schema definitions for three repository tools, validate every call before it runs, cap the agent loop, then serve the same tools from an MCP server and connect it to a host such as VS Code."
+      },
+      {
+        "title": "Plan and patch review",
+        "brief": "Give an AI agent a bug to fix, then check its plan against the real repo, write tests from the spec rather than from its patch, and approve or reject the change with the failing and passing test output."
+      }
+    ],
+    "capstone": {
+      "title": "Safe sandboxed coding agent",
+      "brief": "Build an offline coding agent that fixes a failing test inside a sandboxed repository, with validated tools, a path sandbox, read/write/external permission tiers, human approval bound to the exact call, and a red-team suite that blocks prompt injection and secret exfiltration.",
+      "deliverables": [
+        "Agent repo with schemas, sandbox, and approval gate",
+        "Threat model and task profile",
+        "Red-team and normal-work test suite, all passing",
+        "Audit log and harness-written report",
+        "Four-minute demo showing a blocked attack"
+      ]
+    }
+  },
+  "course-25": {
+    "summary": "Build your own agent harness in plain Python: a runtime loop with validated tools, a subprocess sandbox with timeouts and output limits, retries that know when to give up, JSONL traces you can replay, eval sets with deterministic and model-based graders, and then specialized agents with routing, loop controls, approvals, rollback, and adversarial tests.",
+    "description": "Frameworks hide the parts of an agent that decide whether it is safe and whether it works. In this course you write those parts yourself, as one Python package called harness that grows module by module in a project folder called harness-lab. You start with a single model interface, complete(messages, tools), that both a scripted fake model and a real client implement; the real client speaks the OpenAI-compatible chat API, so it works with a free local model through Ollama or with a hosted provider. Then you build the runtime loop (message history, a tool registry with JSON Schema validation, structured errors, stop rules, and a verify step), run model-written code in a child process with a time limit, an output cap, and a stripped environment, and learn exactly what that does not protect against and when you need a container or VM instead. You record every model call and tool call as JSONL traces with tokens and latency, replay runs for free, and turn traces into versioned eval cases with graders. Later modules attack your own graders, measure success rate, latency, tokens, and cost, route work across planner, worker, and reviewer agents, and add loop limits, human approvals, and rollback before anything reaches a repository. The harness uses only the Python standard library, and every runnable cell on these pages uses the scripted model, so the code you see ran offline to produce the output shown. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions, and the course ends with a capstone: a secure, evaluated multi-agent system you attack and improve.",
+    "audience": "Strong high school students, early college students, and self-taught developers who have already built a tool-using agent or used an agentic coding tool, and now want to build and measure the runtime underneath one.",
+    "prerequisites": [
+      "Python: functions, classes and dataclasses, dictionaries, exceptions, and reading a traceback",
+      "Running Python scripts and Git commands from a terminal",
+      "How tool calling works at a high level: a model asks for a function call and the program runs it",
+      "Writing basic unit tests"
+    ],
+    "outcomes": [
+      "Write an observe, plan, act, and verify runtime with a tool registry, argument validation, structured errors, and stop rules for steps, repeats, and budget.",
+      "Run model-written code in a child process with a timeout, an output limit, and an allowlisted environment, and explain what a container or VM adds that a subprocess cannot.",
+      "Retry only the failures worth retrying, with capped exponential backoff and jitter, and make side-effecting tools safe to repeat.",
+      "Record complete JSONL traces with tokens and latency, replay a run deterministically, and build versioned eval cases from real traces.",
+      "Grade agents with deterministic checks and with a justified model-based judge, and detect graders that can be gamed.",
+      "Coordinate specialized agents with routing, loop controls, human approval, and rollback, backed by adversarial tests."
+    ],
+    "tags": [
+      "agent-harness",
+      "evaluation",
+      "multi-agent",
+      "sandboxing",
+      "tracing",
+      "python",
+      "llm",
+      "advanced"
+    ],
+    "primaryTool": {
+      "name": "Python 3.10 or newer (standard library only)",
+      "description": "The whole harness is written with Python's standard library: dataclasses for messages, urllib for talking to model APIs, subprocess and tempfile for the sandbox, and json for traces. There is nothing to pip install. You work in a project folder with its own virtual environment, in any editor, and run everything from a terminal.",
+      "setupSteps": [
+        "Check your version with python3 --version (macOS and Linux) or py --version (Windows); install Python 3.10 or newer from python.org if it is older or missing.",
+        "Create a folder called harness-lab, then run python3 -m venv .venv (or py -m venv .venv on Windows) inside it.",
+        "Activate the environment with source .venv/bin/activate (macOS and Linux) or .venv\\Scripts\\Activate.ps1 (Windows PowerShell).",
+        "Create the harness, tests, workspace, traces, and evals folders, plus an empty harness/__init__.py and tests/__init__.py.",
+        "Write harness/model.py and check_setup.py from Module 1, then run python check_setup.py."
+      ],
+      "verification": "python check_setup.py prints [ok] for Python 3.10 or newer, the virtual environment, and the scripted model, then ends with the line \"Ready for the course\".",
+      "url": "https://www.python.org/downloads/"
+    },
+    "optionalGear": [
+      {
+        "name": "Ollama with a small tool-calling model",
+        "description": "Optional and free. Runs open-weight models such as qwen2.5:3b on your own computer and serves an OpenAI-compatible API at localhost:11434, so you can watch a real model drive your harness without sending data anywhere.",
+        "url": "https://ollama.com/download"
+      },
+      {
+        "name": "An API key from a hosted model provider",
+        "description": "Optional and usually paid per token. Any provider with an OpenAI-compatible chat completions endpoint works with the harness's real client; set a spending limit before you start.",
+        "url": "https://platform.openai.com/docs/guides/function-calling"
+      },
+      {
+        "name": "Docker or another container runtime",
+        "description": "Optional. Module 3 shows how to run generated code in a locked-down container for real isolation; the lessons themselves only need Python.",
+        "url": "https://docs.docker.com/get-started/get-docker/"
+      }
+    ],
+    "freeCompletionPromise": "Every lesson can be completed for $0. The harness uses only the Python standard library, every runnable example uses a scripted model that works offline, and the optional real-model steps can use Ollama, which is free and runs on your own computer.",
+    "assignments": [
+      {
+        "title": "Agent loop with validated tools",
+        "brief": "Write a Python agent harness with a complete(messages, tools) model interface, a tool registry that validates arguments and never raises, file tools locked to one workspace folder, and a loop with stop rules and a verify step, tested offline with a scripted model."
+      },
+      {
+        "title": "Sandboxed eval runner",
+        "brief": "Build a subprocess sandbox with time, CPU, file, and output limits, then an eval runner that grades scripted agents on a pinned task set, keeps hidden tests outside the sandbox, and reports pass@k, cost, and bootstrap intervals."
+      }
+    ],
+    "capstone": {
+      "title": "Secure, evaluated agent team",
+      "brief": "On your own Python harness, build a planner, workers, and a read-only reviewer for a job such as fixing seeded bugs, with run budgets, approval gates, scoped credentials, and an audit log, then test it against a single-agent baseline and eight automated attacks.",
+      "deliverables": [
+        "Code that reproduces every number offline with ScriptedModel",
+        "REPORT.md with dev and held-out results and bootstrap intervals",
+        "SECURITY.md with the threat model and attack results",
+        "Five-minute demo with one live task and one live attack"
+      ]
+    }
+  }
+}

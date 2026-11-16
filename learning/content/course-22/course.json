@@ -1,0 +1,70 @@
+{
+  "summary": "Use machine learning as a careful scientific instrument: frame questions that can come out wrong, read papers like a referee, audit datasets for provenance and batch effects, beat simple baselines, put intervals on every number, test for leakage, and reproduce a published result.",
+  "description": "Many published ML results in science don't survive a second look: a test set from the same hospital as the training data, a deep network that a two-parameter logistic regression matches, a 2-point gain measured on 60 images. This course teaches the habits that catch those problems before your own project makes them. You work in Google Colab (or Jupyter) with NumPy, pandas, SciPy, statsmodels, scikit-learn, and matplotlib. You start by setting up a project that can be rerun: a folder that keeps raw data raw, pinned library versions, seeds, data fingerprints, and run records. Then you turn hunches into testable questions, build an evidence table that recomputes what papers left out, audit multi-site datasets for missingness, batch effects, and confounding, design randomized and blocked follow-up experiments sized with a power analysis, and climb a baseline ladder from dummy models to linear models before anything complex. Later modules quantify uncertainty with confidence and bootstrap intervals, run ablations, sensitivity checks, and leakage hunts, and practice reproducing and reporting results honestly, including discrepancies. Real cases from the literature, such as the pneumonia model that learned to recognize hospitals and Kapoor and Narayanan's survey of leakage across 30 fields, appear throughout. Every example uses simulated scientific data with realistic structure (sites, batches, repeated measurements) or datasets that ship with scikit-learn, and every Python cell on these pages was run to produce the numbers and charts you see. Each core module has a Notes lesson, a Build-along, and a Practice set with worked solutions, and the course ends with a reproduction study of a published result.",
+  "audience": "Strong high school and early college students doing research projects, such as science fair work or lab internships, who already train models and want results that hold up to a skeptical reviewer.",
+  "prerequisites": [
+    "Python in notebooks: functions, loops, dictionaries, and reading a traceback",
+    "pandas and NumPy basics: selecting columns, grouping, and array shapes",
+    "One complete scikit-learn workflow: split, fit, predict, and score with cross-validation",
+    "Introductory statistics: means, standard deviations, and what a p-value is"
+  ],
+  "outcomes": [
+    "Turn a research idea into a testable question with a population, inputs, a comparison, an outcome metric, and a success threshold, and distinguish prediction questions from causal ones.",
+    "Read ML papers critically, recomputing confidence intervals, majority-class baselines, and effect sizes that papers omit.",
+    "Audit a dataset's provenance, missingness patterns, batch effects, and confounders, and design a randomized, blocked, controlled experiment sized with a power analysis.",
+    "Compare models fairly with a baseline ladder on the right held-out groups, reporting spread across folds and seeds.",
+    "Quantify uncertainty and test results with ablations, sensitivity analyses, and leakage checks.",
+    "Package an experiment so it reruns from one configuration, and reproduce and report a published result with its discrepancies and limitations."
+  ],
+  "tags": [
+    "machine-learning",
+    "research-methods",
+    "reproducibility",
+    "statistics",
+    "experimental-design",
+    "scikit-learn",
+    "statsmodels",
+    "python",
+    "advanced"
+  ],
+  "primaryTool": {
+    "name": "Google Colab (free) with scikit-learn and statsmodels",
+    "description": "Colab is Google's free hosted Jupyter notebook. Your code runs on a Google machine, notebooks save to your Google Drive, and it works in any modern browser, Chromebooks included. NumPy, pandas, SciPy, statsmodels, scikit-learn, and matplotlib normally come preinstalled. The first lesson connects the notebook to Drive so project files survive a restart, and records the exact library versions in requirements.txt. A local JupyterLab install works just as well.",
+    "setupSteps": [
+      "Go to colab.research.google.com and sign in with a Google account (a personal account avoids school restrictions on Drive access).",
+      "Choose File > New notebook in Drive and rename the notebook 00-setup.ipynb.",
+      "Run a cell with from google.colab import drive and drive.mount(\"/content/drive\"), and approve access, so files you write under /content/drive/MyDrive are kept.",
+      "Run the version cell from the first lesson, which prints and saves the versions of Python, NumPy, pandas, SciPy, statsmodels, scikit-learn, and matplotlib."
+    ],
+    "verification": "The version cell prints all six library versions, writes environment.json and requirements.txt into your project folder in Drive, and the drift check prints \"Environment matches results/environment.json\".",
+    "url": "https://colab.research.google.com/"
+  },
+  "optionalGear": [
+    {
+      "name": "Python 3.10+ with JupyterLab on your own computer",
+      "description": "Optional. A local virtual environment works offline and has no session limits; the first lesson has the install steps for Windows, macOS, and Linux.",
+      "url": "https://jupyter.org/install"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab's free tier runs every notebook in the course, all the libraries are open source, the key papers discussed are open access or have free copies, and every dataset is either generated by code on the page or ships with scikit-learn.",
+  "assignments": [
+    {
+      "title": "Dataset audit and experiment design",
+      "brief": "In Colab, fingerprint a pilot dataset with SHA-256, audit it for provenance, independent units, missing values, and site effects, test whether a model's score holds on a new site, and design a randomized, blocked follow-up sized with a power analysis."
+    },
+    {
+      "title": "Baseline ladder with intervals",
+      "brief": "Score a ladder of baselines and one complex model on held-out batches, compare them on paired cross-validation folds with a corrected interval and on a locked test set with bootstrap intervals, and package the experiment as one function that writes a run record."
+    }
+  ],
+  "capstone": {
+    "title": "Published-result reproduction",
+    "brief": "Reproduce one published machine-learning result, such as the wrong-way cross-validation example in Elements of Statistical Learning, with a plan and match rule written first, provenance checks, a baseline and controls, intervals on every number, and sensitivity checks.",
+    "deliverables": [
+      "Colab notebook that regenerates every number and figure",
+      "4 to 6 page report with a discrepancy log",
+      "Completed REFORMS checklist",
+      "Five-minute talk"
+    ]
+  }
+}

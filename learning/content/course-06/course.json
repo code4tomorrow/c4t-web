@@ -1,0 +1,58 @@
+{
+  "summary": "Write web pages by hand with HTML and CSS: a profile site, a recipe page, a styled sign-up form, responsive layouts with Flexbox and Grid, and finally a multi-page website of your own.",
+  "description": "You type every page yourself in VS Code, see it update the moment you save with the free Live Server extension, and look inside it with Chrome or Firefox DevTools. Every lesson shows code next to a live result, so you can see exactly what each tag and rule does. The course starts with how a browser turns a file into a page, then covers document structure, links, images and file paths, semantic landmarks, lists, tables, and accessible forms. Next come selectors, the cascade, specificity, and the box model, followed by Flexbox, Grid, responsive layouts, keyboard and screen reader access, typography, and sharing one stylesheet across several pages. Each module has a Notes lesson, a step-by-step build, and practice problems with hints and hidden solutions. The course ends with a capstone: a responsive multi-page website you plan, build, test, and publish.",
+  "audience": "Beginners, including middle and high school students, who want to build websites and understand how browsers turn files into pages. No coding experience needed.",
+  "prerequisites": [
+    "No web development or coding experience required",
+    "Comfortable creating folders, saving files, and downloading an app on your computer"
+  ],
+  "outcomes": [
+    "Explain how a browser requests a page, builds the DOM, and renders it, and use DevTools to inspect what it built.",
+    "Write valid, semantic HTML with headings, links, images with useful alt text, lists, tables, and forms where every field has a label.",
+    "Organize a project into folders and link files to each other with correct relative paths.",
+    "Predict which CSS rule wins using specificity and source order, and size elements precisely with the box model.",
+    "Lay out pages with Flexbox and Grid that adapt from phone to desktop and work with a keyboard.",
+    "Build and publish a consistent multi-page website that shares one stylesheet."
+  ],
+  "tags": ["html", "css", "web", "accessibility", "responsive-design", "beginner"],
+  "primaryTool": {
+    "name": "VS Code with the Live Server extension",
+    "description": "VS Code is Microsoft's free code editor for Windows, macOS, and Linux, including Chromebooks with Linux turned on. Live Server, a free extension, serves your project folder at a local web address and reloads the browser every time you save. Chrome or Firefox DevTools let you inspect every element and see which CSS rules apply. On a computer where you can't install anything, CodePen in the browser covers single-page exercises.",
+    "setupSteps": [
+      "Download and install VS Code from code.visualstudio.com (on a Chromebook, turn on the Linux development environment first and install the .deb file).",
+      "Open the Extensions view (Ctrl+Shift+X, or Cmd+Shift+X on a Mac), search for Live Server by Ritwick Dey, and install it.",
+      "Make a folder called first-page, open it with File › Open Folder, and create index.html.",
+      "Type ! and press Enter to generate a page skeleton, add an h1 heading, save, and click Go Live in the status bar."
+    ],
+    "verification": "Your page opens in the browser at an address starting with http://127.0.0.1:5500, and when you change the heading and save, the browser updates on its own. Right-clicking the heading and choosing Inspect shows it in the DevTools Elements (Chrome) or Inspector (Firefox) panel.",
+    "url": "https://code.visualstudio.com/"
+  },
+  "optionalGear": [
+    {
+      "name": "CodePen (free account)",
+      "description": "Optional. A browser-based editor for school Chromebooks and other computers that block installs. A free account lets you save your work; multi-file projects are easiest in VS Code.",
+      "url": "https://codepen.io/"
+    }
+  ],
+  "freeCompletionPromise": "Every tool is free: VS Code, the Live Server extension, and Chrome or Firefox. Publishing the capstone uses a free hosting option, and no lesson needs a purchase, a paid account, or a domain name.",
+  "assignments": [
+    {
+      "title": "Two-page site with a card grid",
+      "brief": "Hand-code a two-page site in VS Code with Live Server: one page with an ordered heading outline, alt text, and working relative links, and one page of cards laid out with CSS Grid under a Flexbox navigation bar."
+    },
+    {
+      "title": "Responsive event page with a sign-up form",
+      "brief": "Build a mobile-first event page with header, nav, main, and footer landmarks, a schedule table, and a registration form with a label on every field, then make it work from 360px up and pass a keyboard and contrast check."
+    }
+  ],
+  "capstone": {
+    "title": "Responsive multi-page website",
+    "brief": "Build a site of three or more linked pages on a topic you choose, with semantic landmarks, one stylesheet built from design tokens, mobile-first Flexbox and Grid layouts, a labeled form, and full keyboard access, then publish it on GitHub Pages.",
+    "deliverables": [
+      "Live GitHub Pages URL and repository link",
+      "Planning notes: goal, sitemap, wireframes, and tokens",
+      "Test log with one bug write-up",
+      "Two- to three-minute presentation"
+    ]
+  }
+}

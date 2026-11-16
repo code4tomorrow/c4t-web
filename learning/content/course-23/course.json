@@ -1,0 +1,82 @@
+{
+  "summary": "Take a scikit-learn model from a file on your laptop to a tested, versioned, containerized service: FastAPI endpoints, Docker images, batch and online serving, a model registry, CI/CD with GitHub Actions, monitoring and drift, canary releases, rollbacks, and incident response.",
+  "description": "A model that works in a notebook still has to answer requests, survive bad input, run the same way on every machine, and be traceable when something goes wrong. This course builds those habits on a running project: a service that predicts whether a food delivery will arrive late. You save a full scikit-learn pipeline with joblib, define the request contract with Pydantic, serve it from FastAPI with /health and /predict endpoints, test it with FastAPI's TestClient, and package it with Docker on a python:3.12-slim base. You then decide between batch, online, streaming, and edge serving with measured latency percentiles, throughput, and cost; schedule a batch job with GitHub Actions and deploy the API to a free host. Later modules version models and data with SHA-256 hashes, semantic versions, aliases, and model cards (with a file-based registry you write yourself and the equivalent MLflow calls), automate training pipelines and integration checks, deploy continuously, monitor latency, failures, and drift, and practise canaries, rollbacks, cost tuning, and incident response. Every Python cell on these pages was run to produce the output shown, and Dockerfiles, workflows, and shell commands are written exactly as the real tools expect them. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions, and the course ends with a capstone: a production-style ML service with its own deployment, monitoring, and rollback plan.",
+  "audience": "Strong high schoolers, early college students, and self-taught developers who have trained and evaluated a scikit-learn model and want to learn how models are shipped and operated as real services.",
+  "prerequisites": [
+    "Python: functions, classes at a basic level, dictionaries, and reading a traceback",
+    "One complete scikit-learn workflow: train_test_split, fit, predict_proba, and a metric such as ROC AUC",
+    "Comfort running commands in a terminal and changing directories",
+    "Helpful but not required: what an HTTP request, a status code, and JSON are"
+  ],
+  "outcomes": [
+    "Package a trained scikit-learn pipeline as a FastAPI service with a validated input contract, honest health checks, tests, and a non-root Docker image.",
+    "Choose batch, online, streaming, or edge serving from measured latency percentiles, throughput, Little's law sizing, and cost, and deploy a batch job and an API on free tiers.",
+    "Version models and data with content hashes, semantic versions, aliases, registry records, and model cards, and roll back by moving an alias.",
+    "Build training pipelines and CI/CD workflows in GitHub Actions that refuse to publish a model that fails its checks.",
+    "Monitor latency, failures, and data drift, run canary releases, and respond to incidents with a rollback plan and a clear owner."
+  ],
+  "tags": [
+    "mlops",
+    "machine-learning",
+    "deployment",
+    "docker",
+    "fastapi",
+    "github-actions",
+    "mlflow",
+    "monitoring",
+    "python",
+    "advanced"
+  ],
+  "primaryTool": {
+    "name": "Python 3.12 and Docker (Docker Desktop or Docker Engine)",
+    "description": "Python 3.12 in a virtual environment runs training, the FastAPI service, and the tests; Docker builds the service into an image and runs it as a container, exactly as a cloud host would. Python 3.12 matches the python:3.12-slim image the container is built from, so local tests describe what ships. Docker Desktop is free for personal use, education, and small businesses, and Docker Engine on Linux is open source. Without admin rights, or on a Chromebook, a free GitHub Codespace with the course's devcontainer.json provides Python 3.12, Docker, and Git in the browser.",
+    "setupSteps": [
+      "Install Python 3.12 (winget, python.org, Homebrew, or apt) and Git, and create a free GitHub account.",
+      "Install Docker Desktop (Windows or macOS) or Docker Engine (Linux), start it, and run docker run hello-world.",
+      "Create the late-delivery project folder, make a virtual environment with Python 3.12, and activate it.",
+      "Install the pinned libraries with python -m pip install -r requirements-dev.txt, then run check_setup.py and smoke_test.py."
+    ],
+    "verification": "docker run hello-world prints \"Hello from Docker!\", check_setup.py shows [OK] for Python 3.12, the virtual environment, the pinned libraries, docker, and git, and smoke_test.py ends with \"Smoke test passed.\"",
+    "url": "https://docs.docker.com/get-started/get-docker/"
+  },
+  "optionalGear": [
+    {
+      "name": "GitHub Codespaces",
+      "description": "Optional. A browser-based Linux machine with VS Code; the free monthly allowance covers the course, and usage stops at the limit if no payment method is on file.",
+      "url": "https://github.com/features/codespaces"
+    },
+    {
+      "name": "Render free web service",
+      "description": "Optional. A public URL for your Docker service; free instances sleep after 15 idle minutes and take about a minute to wake. Every lesson also works entirely on your own machine.",
+      "url": "https://render.com/docs/free"
+    },
+    {
+      "name": "MLflow",
+      "description": "Optional. The open-source tracking server and model registry shown alongside the course's own file-based registry; install it in your development environment only.",
+      "url": "https://mlflow.org/"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson can be completed for $0. Python, scikit-learn, FastAPI, Docker Engine, and MLflow are open source; Docker Desktop is free for personal and educational use; GitHub accounts, public-repository Actions minutes, and the Codespaces allowance are free; and all data is generated by code on the page. Cloud hosting is optional, and the free tiers mentioned are never required.",
+  "assignments": [
+    {
+      "title": "Containerized, versioned prediction API",
+      "brief": "Train the late-delivery model, serve it with FastAPI /health and /predict endpoints and validated inputs, package it in a Docker image, register each version with a hashed record, and compare batch and online serving with measured latency."
+    },
+    {
+      "title": "Gated CI and a drift monitor",
+      "brief": "Write a GitHub Actions workflow whose data, model, and contract tests block a weak candidate, then build a monitor that reads the prediction log, computes PSI and the KS test, and raises the right alerts."
+    }
+  ],
+  "capstone": {
+    "title": "Production-style ML service",
+    "brief": "Ship an ML service an on-call team could run: a registered, versioned model behind a validated FastAPI contract in Docker, CI gates, prediction logging with drift alerts, a canary release, and a timed rollback drill, deployed on a free host.",
+    "deliverables": [
+      "Dockerized FastAPI service with a model registry",
+      "CI workflow with data, model, and contract gates",
+      "Monitoring with drift and SLO alerts",
+      "Canary release and rollback runbook",
+      "README and model card",
+      "Five-minute demo of a failure and recovery"
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "summary": "Learn how language models read text by building the pieces yourself: tokenizers, word vectors, similarity search, text classifiers, entity extractors, attention, and finally a grounded document question-answering system with citations and an evaluation harness.",
+  "description": "This course takes text from raw characters to grounded, checked answers, and every step is something you build and measure. You'll normalize and tokenize text, train a byte-pair-encoding tokenizer from scratch, learn word vectors from co-occurrence counts, and compare one-hot, count, TF-IDF, and embedding representations. Then you'll rank documents by cosine similarity, train naive Bayes and logistic regression classifiers on realistic support tickets, and evaluate them honestly with confusion matrices, cross-validation, and confidence thresholds. Module 4 opens up a real transformer: you'll run a named-entity model from the Hugging Face Hub, combine it with regex rules, and follow a sentence from tokens to ids to logits, then chart its attention heads. Later modules cover attention and context budgets, prompts with structured outputs and validation, retrieval-augmented generation with citations, hallucination checks, the choice between retrieval and fine-tuning, and evaluation before deployment. You work in Google Colab with scikit-learn, NumPy, matplotlib, and Hugging Face transformers. Code that runs on the lesson pages uses small datasets typed into the cell, and the output you see came from actually running it; cells that download models are marked to run in Colab, with their real output shown. Later modules can call a hosted model through the Gemini API's free tier or a local model through Ollama, and include offline stand-ins so they also work without a key. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions, and the course ends with a capstone: a grounded question-answering system for documents you choose.",
+  "audience": "Strong high schoolers, early college students, and self-taught programmers who have already trained and evaluated a machine-learning model in Python and want to understand and build language systems, not just call them.",
+  "prerequisites": [
+    "Python: functions, lists, dictionaries, loops, and reading a traceback",
+    "NumPy basics: arrays, shapes, indexing, and matrix multiplication",
+    "One complete scikit-learn workflow: train_test_split, fit, predict, and score",
+    "Classification metrics: accuracy, precision, and recall"
+  ],
+  "outcomes": [
+    "Normalize and tokenize text, train a BPE tokenizer from scratch, and explain how subword vocabularies handle words they have never seen.",
+    "Represent text as counts, TF-IDF vectors, and learned embeddings, and use cosine similarity to search and deduplicate documents.",
+    "Train and evaluate text classifiers with pipelines, cross-validation, confusion matrices, and confidence thresholds, and explain their mistakes.",
+    "Extract entities with BIO tagging, combine a transformer NER model with rules, and score extractors at the span level.",
+    "Inspect a transformer's tokens, logits, and attention weights, and explain attention, masks, and context-window limits.",
+    "Build and evaluate a privacy-aware, retrieval-grounded question-answering system that validates its output and cites its sources."
+  ],
+  "tags": [
+    "nlp",
+    "generative-ai",
+    "transformers",
+    "hugging-face",
+    "scikit-learn",
+    "rag",
+    "evaluation",
+    "python",
+    "advanced"
+  ],
+  "primaryTool": {
+    "name": "Google Colab (free) with Hugging Face transformers and scikit-learn",
+    "description": "Colab is Google's free hosted Jupyter notebook. Python runs on a Google machine and notebooks save to your own Google Drive, so it works on any computer with a browser, Chromebooks included. transformers, PyTorch, scikit-learn, NumPy, and matplotlib come preinstalled, and models download from the Hugging Face Hub onto the Colab machine. The free CPU runtime is enough for every lesson; a free T4 GPU runtime is optional and only makes transformer cells faster.",
+    "setupSteps": [
+      "Go to colab.research.google.com and sign in with a Google account (a personal account is the safe choice if your school account blocks Colab).",
+      "Choose File > New notebook in Drive, then click the Untitled name at the top left and rename the notebook.",
+      "Run the version-check cell from the first lesson; if transformers or scikit-learn is missing or too old, run %pip install -q -U transformers (or scikit-learn) and choose Runtime > Restart session.",
+      "Run the first-lesson check cell, which downloads the dslim/distilbert-NER model and confirms it finds a person and a place in a test sentence."
+    ],
+    "verification": "The version cell prints \"Ready for the course\", and the check cell prints [('PER', 'Ada Lovelace'), ('LOC', 'London')] followed by \"Model download and inference: OK\".",
+    "url": "https://colab.research.google.com/"
+  },
+  "optionalGear": [
+    {
+      "name": "Free Hugging Face account and read token",
+      "description": "Optional. Every model in the course is public; a token stored in Colab Secrets as HF_TOKEN only raises download rate limits and unlocks gated models.",
+      "url": "https://huggingface.co/join"
+    },
+    {
+      "name": "Python 3.10+ with JupyterLab on your own computer",
+      "description": "Optional. A local install works offline and has no session limits; the first lesson has the steps for Windows, macOS, and Linux.",
+      "url": "https://jupyter.org/install"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab's free tier runs every notebook, the libraries and models are open and free to download, the datasets are typed into the lessons, and the lessons that can use a hosted language model also run with an offline stand-in, so no paid service or API key is ever required.",
+  "assignments": [
+    {
+      "title": "Support-ticket triage tool",
+      "brief": "In a seeded Colab notebook, train a TF-IDF and logistic regression classifier on labelled support tickets, hold out a test set, prove each improvement with cross-validation, add similar-case search, and send low-confidence tickets to a human."
+    },
+    {
+      "title": "Retrieval pipeline with checked citations",
+      "brief": "Chunk a small set of non-sensitive documents with overlap, retrieve with TF-IDF, pack a grounded prompt with numbered sources into a token budget, and reject any reply that fails its schema or cites a source it was never shown."
+    }
+  ],
+  "capstone": {
+    "title": "Grounded document Q&A",
+    "brief": "Build a question-answering system over documents you're allowed to use, such as class syllabi or a club handbook: scrub and chunk them, retrieve with a measured hit rate, answer in a strict schema with citations, and abstain when checks fail.",
+    "deliverables": [
+      "Colab notebook with the full pipeline",
+      "Eval set of 25+ questions, a fifth unanswerable, with a launch gate",
+      "Unit tests for the checks",
+      "Limits statement with real numbers",
+      "Five-minute presentation that shows a failure"
+    ]
+  }
+}

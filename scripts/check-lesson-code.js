@@ -26,12 +26,14 @@ let ran = 0;
 
 const blocksOf = (markdown) => {
     const blocks = [];
-    const pattern = /^```(\w+)[^\n]*\n([\s\S]*?)^```/gm;
+    const pattern = /^```(\w+)([^\n]*)\n([\s\S]*?)^```/gm;
     let match;
     while ((match = pattern.exec(markdown))) {
+        // `run` blocks are executed by the lesson compiler itself.
+        if (/\b(run|preview)\b/.test(match[2])) continue;
         blocks.push({
             lang: match[1].toLowerCase(),
-            code: match[2],
+            code: match[3],
             before: markdown.slice(Math.max(0, match.index - 400), match.index),
         });
     }
@@ -70,6 +72,21 @@ for (const courseId of fs.readdirSync(CONTENT_DIR).sort()) {
                 if (/^\s*>>>/m.test(block.code)) return; // shell transcript
                 if (/^[ \t]+\S/.test(block.code)) return; // indented fragment
                 if (/google\.colab/.test(block.code)) return; // Colab only
+                // Code that needs the network, a GPU, an API key, or a package
+                // this checker doesn't install is shown, not run.
+                if (
+                    /download=True|weights=\w|from_pretrained\(|torch\.hub\.load|hf_hub_download|load_dataset\(|fetch_openml|\.cuda\(\)|device=["']cuda|SummaryWriter|^\s*(import|from)\s+(mlflow|mcp|ollama|anthropic|openai|tensorflow|tflite_runtime|edge_impulse|paho|gradio|streamlit|flask)\b|requests\.(get|post)|urlopen\(/m.test(
+                        block.code
+                    )
+                )
+                    return;
+                // Device-only MicroPython / board libraries can't run here.
+                if (
+                    /^\s*(from|import)\s+(microbit|machine|network|umqtt|utime|ujson|neopixel|radio|music|speech|rp2|board|digitalio|RPi|gpiozero|picamera2|sense_hat)\b/m.test(
+                        block.code
+                    )
+                )
+                    return;
                 const intentional =
                     expectsError ||
                     /\b(bug|broken|buggy|crash|error|infinite|never stops|wrong)\b/i.test(

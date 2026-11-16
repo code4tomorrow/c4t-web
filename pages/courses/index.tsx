@@ -29,6 +29,8 @@ interface CourseSummary {
     assignmentCount: number;
     isHardwareCourse: boolean;
     freeCompletionPromise: string;
+    /** Videos and step-throughs in the hand-written lessons, when written. */
+    media: { videos: number; traces: number; quizQuestions: number } | null;
     live: {
         term: string;
         termLabel: string;
@@ -136,6 +138,24 @@ const CourseCatalogCard: React.FC<{ course: CourseSummary }> = ({ course }) => {
             label: `${course.estimatedTotalHours} hours`,
             tone: "blue" as const,
         },
+        ...(course.media?.videos
+            ? [
+                  {
+                      id: "videos",
+                      label: `${course.media.videos} videos`,
+                      tone: "green" as const,
+                  },
+              ]
+            : []),
+        ...(course.media?.traces
+            ? [
+                  {
+                      id: "traces",
+                      label: `${course.media.traces} step-throughs`,
+                      tone: "green" as const,
+                  },
+              ]
+            : []),
     ];
 
     return (
@@ -712,6 +732,13 @@ export async function getStaticProps() {
                 (requirement) => requirement.category === "hardware"
             ),
             freeCompletionPromise: course.freeCompletionPromise,
+            media: course.contentSummary
+                ? {
+                      videos: course.contentSummary.videos,
+                      traces: course.contentSummary.traces,
+                      quizQuestions: course.contentSummary.quizQuestions,
+                  }
+                : null,
             live: course.liveSession
                 ? {
                       term: course.liveSession.term,

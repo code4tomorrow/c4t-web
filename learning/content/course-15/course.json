@@ -1,0 +1,59 @@
+{
+  "summary": "Train your own image, sound, and pose models in the browser with Google's Teachable Machine, no code required, and learn to collect fair data, read confidence honestly, test on examples the model has never seen, and fix the mistakes you find.",
+  "description": "A hands-on, no-code machine learning course built on Teachable Machine, Google's free browser tool for training image, audio, and pose models. You start with a two-class model in five minutes, then build a rock, paper, scissors recognizer the careful way: a written data plan, classes a single camera frame can tell apart, examples recorded in rounds across lighting, distance, and both hands, and only people who agreed to be in the data. You balance the classes and watch what a ten-to-one imbalance does, read the accuracy and loss graphs under the hood, and learn what epochs, batch size, and learning rate control. Then you test properly: a folder of photos from new rooms, light, and people that never goes into training, a test sheet with every answer's confidence, and a recycling sorter tested on objects held out from the start. Later modules turn test results into confusion matrices, separate false positives from false negatives, repair weak data with targeted examples, export a model with the labels and limits someone else needs, and connect its predictions to an interactive project. Charts and step-through animations explain what the model is doing; you never have to write code. Each core module has Notes with quizzes, a step-by-step Build-along, and Practice experiments with expected results, and the course ends with a prototype of your own.",
+  "audience": "Beginners, roughly ages 12 to 18, who know what AI is and want to build and test real models without programming.",
+  "prerequisites": [
+    "Comfortable using a web browser, saving files, and finding them in folders",
+    "A rough idea of what classification, labels, and test data mean (the course explains each again)"
+  ],
+  "outcomes": [
+    "Define classes a model can tell apart, and collect balanced, varied examples with the consent of everyone who appears in them.",
+    "Train image, sound, and pose models in Teachable Machine, and explain what epochs, batch size, learning rate, and the accuracy and loss graphs show.",
+    "Read confidence bars cautiously and explain why a model can be 99% sure and wrong.",
+    "Build an unseen test set from new people, places, and lighting, and report results honestly with a test sheet.",
+    "Find false positives and false negatives, trace them to gaps in the data, and fix the data with targeted examples.",
+    "Export a model with its labels, version, and limitations, and connect its predictions to an interactive project."
+  ],
+  "tags": [
+    "machine-learning",
+    "no-code",
+    "teachable-machine",
+    "responsible-ai",
+    "beginner"
+  ],
+  "primaryTool": {
+    "name": "Google Teachable Machine (free, in the browser)",
+    "description": "A free web tool from Google that trains real image, audio, and pose classification models inside your browser tab, from webcam or microphone recordings or uploaded files. It needs no install and no account, and your samples stay on your computer unless you choose to save them to Google Drive. Models are built with TensorFlow.js using transfer learning, so tens of examples per class are enough to start.",
+    "setupSteps": [
+      "Open teachablemachine.withgoogle.com in Chrome (or Edge or Firefox) on a laptop, desktop, or Chromebook.",
+      "Click Get Started, then Image Project, then Standard image model.",
+      "Click Webcam on the Class 1 card and allow camera access when the browser asks. If the camera stays dark, turn on camera access for the browser in your operating system's privacy settings and reload.",
+      "No webcam? Use Upload on each class card to add .jpg or .png photos instead.",
+      "Before closing the tab, open the ☰ menu and choose Download project as file to save your work as a .tm file."
+    ],
+    "verification": "After recording two classes and clicking Train Model, the button reads Model Trained and the Preview panel shows a bar for each class whose percentages change as you move in front of the camera.",
+    "url": "https://teachablemachine.withgoogle.com/"
+  },
+  "freeCompletionPromise": "Every lesson can be completed for $0: Teachable Machine is free in the browser with no account, a built-in webcam or photos from any phone cover all the data collection, and the projects use household items like cans, bottles, and your own hands.",
+  "assignments": [
+    {
+      "title": "Balanced image model, two versions",
+      "brief": "Train a Teachable Machine image model with a Nothing class from recordings made under the course's consent rules, read its per-class accuracy and confusion matrix, then make one balanced fix, retrain, and save both versions with a project log."
+    },
+    {
+      "title": "Unseen test and one repair round",
+      "brief": "Photograph 10+ unseen test items per class in new places and light, record each answer and its confidence on a test sheet, build a confusion matrix, then make one targeted data change and retest on the same items."
+    }
+  ],
+  "capstone": {
+    "title": "Interactive ML prototype",
+    "brief": "Build an app that a Teachable Machine image, sound, or pose model controls, such as a gesture slide clicker or a doorbell alert, using consented data, an unseen test, one repair round, and a threshold, hold time, and cooldown before acting.",
+    "deliverables": [
+      "Teachable Machine project file and exported model",
+      "App sketch with a keyboard fallback",
+      "Project log with test sheets and a confusion matrix",
+      "Model card",
+      "Three-minute live demo with one explained failure"
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "summary": "Learn to think like a programmer before you learn a programming language: break problems into pieces, write steps a computer can't misread, use loops and decisions, hunt down bugs, and compare algorithms by counting their steps.",
+  "description": "This course teaches the thinking behind every programming language, using everyday problems: sharing computers fairly at a community center, steering a delivery robot around a room, printing hundreds of name labels, deciding whether a library book can be borrowed, and finding a name in a list. About half the work happens on paper, with unplugged puzzles like robots on a grid, scrambled recipes, and a deck of cards. The other half happens in Scratch 3, MIT's free block-based editor, where your algorithms run for real: you build a fair-share calculator, a delivery robot, pen drawings made with loops, a library kiosk, a buggy alarm clock to fix, and a number-guessing robot that uses binary search. Step-through animations show the same algorithms written in Python, so you can watch the computer follow each step and see its variables change, without needing to learn Python. Each module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions, and the course ends with an algorithm of your own that you design, test, and explain.",
+  "audience": "Absolute beginners, roughly ages 10 to 14, who have never written code and want a strong problem-solving foundation before choosing a programming language.",
+  "prerequisites": [
+    "None. If you can follow a recipe and use a mouse, you're ready."
+  ],
+  "outcomes": [
+    "Describe any problem by its goal, inputs, constraints, and output, and decompose it into pieces small enough to solve.",
+    "Write exact, ordered algorithms in plain English, as flowcharts, and as Scratch scripts, and track their state step by step.",
+    "Spot repeated steps and replace them with counting or condition-controlled loops, including loops inside loops.",
+    "Plan decisions with if/else and combined conditions, and test the edge cases where rules break.",
+    "Find and fix bugs by predicting, tracing by hand, and comparing expected results with actual ones.",
+    "Compare two correct algorithms, such as linear and binary search, by counting the steps each one takes."
+  ],
+  "tags": [
+    "computational thinking",
+    "algorithms",
+    "scratch",
+    "debugging",
+    "beginner"
+  ],
+  "primaryTool": {
+    "name": "Scratch 3 (free, in the browser)",
+    "description": "MIT's free block-based coding editor, used alongside a notebook and pencil for the unplugged activities. You snap blocks together instead of typing code, so every algorithm in the course can be built and tested in seconds without worrying about spelling or punctuation. It runs in any current browser with no account required, and there's a free offline app for Windows, macOS, and Chromebooks.",
+    "setupSteps": [
+      "Get a notebook (or a folder of paper) and a pencil with an eraser for planning and unplugged puzzles.",
+      "Open Chrome, Edge, Firefox, or Safari and go to scratch.mit.edu/projects/editor.",
+      "Wait for the editor to load: block categories on the left, an empty code area in the middle, and the stage with an orange cat on the right.",
+      "Optional: with a parent or guardian, click Join Scratch on scratch.mit.edu to make a free account that saves projects online.",
+      "Optional: for offline use, install the Scratch app from scratch.mit.edu/download."
+    ],
+    "verification": "Clicking the blue 'move (10) steps' block in the Motion category moves the cat a little to the right on the stage.",
+    "url": "https://scratch.mit.edu/projects/editor/"
+  },
+  "freeCompletionPromise": "Every lesson can be completed for $0: Scratch is free in the browser with no account needed, and the unplugged activities use only paper and a pencil (scraps of paper numbered 1 to 10 stand in for a deck of cards).",
+  "assignments": [
+    {
+      "title": "Shape-drawing helper",
+      "brief": "Plan a Scratch program as separate pieces on paper, then build it: ask for a number of sides and petals, and draw the pattern with the Pen extension using a loop inside a loop. Test it with inputs like 0 and 1."
+    },
+    {
+      "title": "Rule-checking kiosk with a test plan",
+      "brief": "Build a Scratch kiosk that asks a few questions, applies a set of rules in order, and explains every \"no\". Write a test table of edge cases before you run it, and keep a fix log for every bug you find."
+    }
+  ],
+  "capstone": {
+    "title": "Design and defend an algorithm",
+    "brief": "Design, build, and test a Scratch algorithm for a maze, a puzzle, a sorting task, or a real-world process, with at least one decision and one loop, then explain its inputs, outputs, steps, edge cases, and results.",
+    "deliverables": [
+      "Scratch project that runs the algorithm",
+      "Algorithm card with plain-English steps and a flowchart",
+      "Test table with 8+ tests, including edge cases",
+      "Fix log with the cause and fix of each bug",
+      "2 to 3 minute explanation (talk, video, or one page)"
+    ]
+  }
+}

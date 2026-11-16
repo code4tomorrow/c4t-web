@@ -1,0 +1,53 @@
+{
+  "summary": "Go from short Python exercises to real command-line tools: a grade book, a contacts manager, and a quiz that saves its scores, built with collections, small functions, JSON files, validation, and debugging.",
+  "description": "This self-paced course picks up where basic Python leaves off and moves from one-file exercises to programs with several files and saved data. Learners set up VS Code with Microsoft's Python extension and a virtual environment, then build a grade book that turns messy text into a ranked report, a contacts manager made of small testable functions, and a quiz game that loads its questions from JSON and keeps a score history that survives crashes and damaged files. Later modules cover libraries and input validation, systematic debugging, and designing a complete command-line project, ending with a capstone: a flash-card, expense, or inventory tool that remembers its data and comes with tests. Code on the lesson pages runs for real and shows its actual output, and every module ends with practice exercises that have hints and worked solutions.",
+  "audience": "Teens and other learners who can already write Python variables, conditions, loops, and simple functions, and want to build bigger programs that people could actually use.",
+  "prerequisites": [
+    "Variables, if/elif/else, for and while loops, and basic functions in Python",
+    "Saving and running a .py file in any editor"
+  ],
+  "outcomes": [
+    "Model records with lists, dictionaries, sets, and tuples, and reshape them with comprehensions and sorted(key=...).",
+    "Write small functions that return values, replace deep nesting with guard clauses, and keep input and printing in one place.",
+    "Save and load text and JSON files with pathlib, handling missing and damaged files without losing data.",
+    "Validate user input and manage a project's libraries inside a virtual environment.",
+    "Track down bugs by reading tracebacks and gathering evidence, and confirm fixes with tests.",
+    "Plan, build, and test a complete command-line program that keeps its data between runs."
+  ],
+  "tags": ["python", "projects", "json", "files", "functions", "debugging", "testing"],
+  "primaryTool": {
+    "name": "VS Code with the Python extension",
+    "description": "Visual Studio Code is a free code editor from Microsoft. With its Python extension it shows a whole project folder at once, runs programs in a built-in terminal, and underlines many mistakes as you type, which suits projects made of several files. Python 3 itself is a separate free install from python.org.",
+    "setupSteps": [
+      "Install Python 3.10 or newer from python.org. On a Chromebook, turn on the Linux development environment and install python3-venv and python3-pip.",
+      "Install VS Code from code.visualstudio.com.",
+      "In VS Code's Extensions view, install the extension named Python published by Microsoft.",
+      "Open a project folder and create a .venv virtual environment with the Python: Create Environment command."
+    ],
+    "verification": "In VS Code's terminal, python --version (python3 --version on macOS or a Chromebook) prints Python 3.10 or newer, and hello.py prints its output when you press Run Python File.",
+    "url": "https://code.visualstudio.com/"
+  },
+  "optionalGear": [],
+  "freeCompletionPromise": "Python, VS Code, and the Python extension are all free, and every lesson and project uses only them, Python's built-in modules, and free libraries installed with pip.",
+  "assignments": [
+    {
+      "title": "Contacts manager that saves to JSON",
+      "brief": "Build a command-line contacts manager in VS Code from small functions that clean phone numbers, check emails, add, search, and delete, and save the contacts to a JSON file that loads on the next run and survives a damaged file."
+    },
+    {
+      "title": "Crash-proof command-line tool",
+      "brief": "Build a command-line tool with argparse options, the random or datetime module, and input checks that never crash, then find and fix one real bug with VS Code breakpoints and add a check that keeps it fixed."
+    }
+  ],
+  "capstone": {
+    "title": "Persistent productivity tool",
+    "brief": "Build a multi-file Python command-line tool, such as a to-do list, habit tracker, flash-card trainer, or expense tracker, that saves to JSON, has four or more subcommands including update and search, and never shows a traceback for user mistakes.",
+    "deliverables": [
+      "Tool split into interface, logic, and storage modules",
+      "JSON storage that handles missing and damaged files",
+      "8+ passing unittest tests, including edge cases",
+      "README covering setup, usage, files, and limits",
+      "Three-minute demo"
+    ]
+  }
+}

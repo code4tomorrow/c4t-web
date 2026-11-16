@@ -1,0 +1,60 @@
+{
+  "summary": "Build a complete 2D platformer in Unity 6 with C#: scenes and prefabs, keyboard movement, physics and collisions, a Cinemachine camera, animation, UI, sound, enemies, levels, saving, and a shareable build.",
+  "description": "You build one 2D game from an empty Universal 2D project to a finished build, using the free Unity 6.3 LTS Editor installed through Unity Hub and C# scripts written in Visual Studio or VS Code. Early modules compose a level from GameObjects, components, and prefabs, script frame-rate-independent movement with the Input System package, and then switch to Rigidbody 2D physics with colliders, triggers, layers, a jump with a ground check, and a Cinemachine follow camera. Later modules make the game readable to players with Animator states, a TextMeshPro HUD, and sound effects, add enemies with state-based behavior and levels that teach one mechanic at a time, save progress between sessions, and export a build to share. Every script is a real MonoBehaviour written against Unity 6 APIs. Each module has a Notes lesson that explains the ideas with diagrams and videos, a Build-along that adds a working system to the game step by step, and a Practice set with hints and full solutions. The course ends with a capstone game of your own, planned, tested, and presented with a rubric.",
+  "audience": "Students who already program a little (in Python, JavaScript, Java, or C#) and want to learn how real games are structured and built, from strong middle schoolers through early college.",
+  "prerequisites": [
+    "Comfort with variables, if statements, loops, functions, and the idea of objects and classes in any language",
+    "A Windows 10/11 PC, a Mac on macOS 13 or newer, or an Ubuntu 22.04/24.04 computer with about 15 GB free (Chromebooks can't run the Unity Editor)"
+  ],
+  "outcomes": [
+    "Organize a game from scenes, GameObjects, components, and prefabs, and explain when Awake, Start, Update, and FixedUpdate run.",
+    "Write C# MonoBehaviour scripts that read the keyboard and mouse with the Input System and move objects at the same speed on any frame rate.",
+    "Build platformer physics with Rigidbody 2D, colliders, triggers, layers, a ground-checked jump, and a comfortable Cinemachine follow camera.",
+    "Give players clear feedback with sprite animation, an on-screen HUD, and sound.",
+    "Design enemy behavior and levels that teach, test, and then twist one mechanic.",
+    "Save progress, test a build outside the Editor, and present a finished game."
+  ],
+  "tags": [
+    "unity",
+    "csharp",
+    "game development",
+    "2d",
+    "physics",
+    "intermediate"
+  ],
+  "primaryTool": {
+    "name": "Unity 6.3 LTS (free Unity Personal) with Unity Hub",
+    "description": "Unity is the game engine behind games like Hollow Knight and Cuphead. Unity Hub installs the Editor and manages your projects, and the free Personal plan covers every student project. The course uses the Universal 2D project template, the built-in Input System package for keyboard and mouse input, and the free Cinemachine package for cameras. You write C# in Visual Studio Community (Windows) or VS Code with Microsoft's Unity extension (Windows, macOS, Linux).",
+    "setupSteps": [
+      "Go to unity.com/download, sign in or create a free Unity account, and install Unity Hub for your operating system.",
+      "Open the Hub and sign in; it activates a free Unity Personal license (or use Settings > Licenses > Add license > Get a free personal license).",
+      "In Installs > Install Editor, install the newest Unity version that starts with 6000.3 and is marked LTS.",
+      "Install a C# editor: Visual Studio Community with the Game development with Unity workload (Windows), or VS Code with the Unity extension by Microsoft.",
+      "In Projects > New project, create a project from the Universal 2D template, then set Edit > Preferences > External Tools > External Script Editor to your code editor."
+    ],
+    "verification": "A script attached to a sprite in your new Universal 2D project makes it spin when you press Play, and its Debug.Log message appears in the Console.",
+    "url": "https://unity.com/products/unity-personal"
+  },
+  "freeCompletionPromise": "Every lesson can be completed for $0. Unity Personal, Unity Hub, the Input System and Cinemachine packages, Visual Studio Community, and VS Code are all free, and the course uses Unity's built-in shapes and free sample art instead of paid assets. You need a Windows, macOS, or Ubuntu computer; if you only have a Chromebook, a school or library computer works.",
+  "assignments": [
+    {
+      "title": "Top-down explorer and hazard course",
+      "brief": "Build a Unity scene where a top-down explorer moves at the same speed in every direction and on every computer, with smooth acceleration, a sprint key, and walls, through a course of hazards made from one prefab and its variants."
+    },
+    {
+      "title": "Platformer level with a HUD",
+      "brief": "Build a Unity platformer level where a Rigidbody 2D player jumps only from the ground, a Cinemachine camera follows it, coins raise a score, hazards drain a health bar with sound and a hurt animation, and a game-over panel restarts."
+    }
+  ],
+  "capstone": {
+    "title": "Complete 2D game of your own",
+    "brief": "Build and ship a 2D Unity game with two short levels or one full loop, Input System controls, physics and triggers, a Cinemachine camera, animation, a HUD and menu, sound, an enemy state machine, and saved progress.",
+    "deliverables": [
+      "Web build playable on itch.io",
+      "One-page game design document",
+      "Written test plan and two playtest rounds",
+      "itch.io page with screenshots and a 30 to 60 second trailer",
+      "Three-minute live demo"
+    ]
+  }
+}

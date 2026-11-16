@@ -1,0 +1,61 @@
+{
+  "summary": "Learn Git and GitHub the way teams use them: clear commits, branches, pull requests, issues, code review, merge conflicts, documentation, licenses, releases, and automated checks.",
+  "description": "You'll version a real project from the first commit, then put it on GitHub and change it the way working developers do: plan each change as an issue, build it on a branch, open a pull request, review a partner's work with line comments and suggested changes, and merge. Later modules cover resolving merge conflicts without losing anyone's work, writing a README, choosing an open-source license, tagging releases with a changelog, and running automatic checks with GitHub Actions. Lessons show each command with the output it prints, and each idea is also shown in VS Code's Source Control view. The course uses Git, a free GitHub account, and VS Code, all free on Windows, macOS, and Chromebooks with Linux turned on.",
+  "audience": "Middle and high school students (and anyone else) who have a small coding or writing project and want to track it properly and work on it with other people. No prior Git experience needed.",
+  "prerequisites": [
+    "A small text or code project you'd like to version, or willingness to build the course's small website",
+    "Comfort creating folders and saving files on your computer",
+    "Age 13 or older for a GitHub account (younger learners can do the local Git lessons)"
+  ],
+  "outcomes": [
+    "Record a project's history in focused commits with clear messages, and use status, diff, log, .gitignore, and restore to inspect and undo changes.",
+    "Develop features on branches and explain when a merge fast-forwards and when it creates a merge commit.",
+    "Push to GitHub, open and update pull requests, and merge them so linked issues close automatically.",
+    "Plan work with issues, labels, and project boards, and give and answer code reviews with line comments and suggested changes.",
+    "Resolve merge conflicts while keeping both contributors' intentions.",
+    "Document, license, release, and automatically check a shared project with a README, a license, tags, a changelog, and GitHub Actions."
+  ],
+  "tags": ["git", "github", "version-control", "collaboration", "code-review", "open-source", "ci"],
+  "primaryTool": {
+    "name": "Git (free version control) with VS Code and GitHub",
+    "description": "Git records every version of a project on your own computer; GitHub hosts a shared copy and adds pull requests, issues, and reviews; VS Code is the editor, with a built-in terminal and Source Control view. All three are what professional teams use, and all are free.",
+    "setupSteps": [
+      "Install VS Code from code.visualstudio.com.",
+      "Install Git from git-scm.com. On a Mac, run git --version in Terminal and accept the developer tools prompt; on a Chromebook, turn on Linux and run sudo apt install git.",
+      "Create a free account at github.com and turn on Keep my email addresses private in Settings > Emails.",
+      "Run git config --global user.name and user.email with your name and GitHub noreply address, then set init.defaultBranch to main and core.editor to code --wait.",
+      "Connect to GitHub with an SSH key, or with Git Credential Manager over HTTPS (built into Git for Windows)."
+    ],
+    "verification": "git --version in VS Code's terminal prints a version number, cloning github.com/octocat/Spoon-Knife succeeds, and ssh -T git@github.com (or your first push over HTTPS) greets you by your GitHub username.",
+    "url": "https://git-scm.com/"
+  },
+  "optionalGear": [
+    {
+      "name": "GitHub CLI (gh)",
+      "description": "Optional; lets you create pull requests and sign in from the terminal. Every lesson can be done with Git and the GitHub website instead.",
+      "url": "https://cli.github.com/"
+    }
+  ],
+  "freeCompletionPromise": "Git, VS Code, and a GitHub account with unlimited public and private repositories are all free, so every lesson can be completed for $0 on a Windows PC, Mac, or Chromebook with Linux turned on.",
+  "assignments": [
+    {
+      "title": "Club website through a pull request",
+      "brief": "Build a small website in a Git repository with a .gitignore and focused commits that say what and why, then push it to GitHub, add a page on a branch, open a pull request, review it yourself, and merge."
+    },
+    {
+      "title": "Reviewed change and a resolved conflict",
+      "brief": "Take a change from a labeled GitHub issue to a reviewed, merged pull request that closes it, then resolve a merge conflict in VS Code's merge editor so both sides survive, and record the choice in a decision record."
+    }
+  ],
+  "capstone": {
+    "title": "Safe open-source contribution",
+    "brief": "Take one change from a GitHub issue to a merged pull request, on a fork or your own repo: focused commits, a PR that links the issue and explains testing, replies to review, a sync with main, updated docs, and a passing automated check.",
+    "deliverables": [
+      "Link to the merged pull request (or screenshots)",
+      "git log --oneline --graph output for your branch",
+      "Green automated check on the final commit",
+      "Written reflection",
+      "Three-minute presentation"
+    ]
+  }
+}

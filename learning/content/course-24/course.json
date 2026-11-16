@@ -1,0 +1,71 @@
+{
+  "summary": "Use and build tool-using coding agents without giving up review or security: scope tasks, verify an agent's claims about a repo, critique its plans and diffs, require test evidence, design validated tools and MCP servers, and enforce permissions, approvals, and defenses against prompt injection.",
+  "description": "You work the way a careful engineer works with an AI coding assistant, using Python 3, Git, VS Code, and an assistant of your choice: GitHub Copilot Free, or a local model served by Ollama, with paid assistants optional. Early modules set up a practice repository where every agent task starts on its own branch, then teach the agent loop itself (model, tool call, result, model) by building a small harness around a scripted fake model, so every example runs offline with no API key. From there you write task specs with acceptance criteria an agent can't misread, map unfamiliar repositories and check the AI's claims with git ls-files, git grep, and the tests, run plans through a checker that catches invented files and out-of-scope edits, and review diffs for weakened tests and plausible-but-wrong fixes, using unittest, Ruff, and mypy for evidence. Later modules design narrow tools validated with JSON Schema (the jsonschema package), serve them over the Model Context Protocol with the MCP Python SDK, put a permission gate and human approval step in front of every sensitive action, and defend against prompt injection hidden in repository files and tool output. Each core module has a Notes lesson, a Build-along that produces working Python, and a Practice set with full solutions. The course ends with a capstone: a sandboxed coding agent that plans, makes scoped edits, runs checks, respects permissions, asks before sensitive actions, and produces an auditable report.",
+  "audience": "Strong high school students, early college students, and working developers who already write Python and use Git, and want to use or build coding agents while staying responsible for what ships.",
+  "prerequisites": [
+    "Comfortable writing Python functions, classes, and unittest tests",
+    "Everyday Git on the command line: commit, branch, diff, and merge",
+    "Basic familiarity with the terminal and with how web APIs and JSON work"
+  ],
+  "outcomes": [
+    "Choose between autocomplete, chat, and an agent for a task, and write a task spec with scope, checkable acceptance criteria, and a stop-and-ask rule.",
+    "Explain and build the agent loop, including step limits, error results, write-scope enforcement, and an independent finish-line check.",
+    "Verify an AI's claims about a repository with search and tests, and reject plans that are ungrounded, out of scope, unordered, or unverified.",
+    "Review diffs for edited expectations, skipped tests, and silenced failures, and demand reproducible evidence: command, output, and exit code.",
+    "Design narrow tools with validated arguments and connect them to agents through MCP clients and servers.",
+    "Enforce least-privilege permissions, human approval for sensitive actions, and defenses against prompt injection and untrusted tool output."
+  ],
+  "tags": [
+    "agents",
+    "coding-agents",
+    "mcp",
+    "tool-calling",
+    "code-review",
+    "testing",
+    "security",
+    "python",
+    "advanced"
+  ],
+  "primaryTool": {
+    "name": "Python 3, Git, and VS Code with an AI assistant (GitHub Copilot Free or a local model through Ollama)",
+    "description": "Python runs every example and test, Git records each agent change on its own branch so it can be reviewed and undone, and VS Code is where you talk to the assistant and read its diffs. For the assistant, sign in to GitHub Copilot Free from VS Code, or install Ollama and a small local model such as qwen3:1.7b so nothing leaves your computer. The course stays provider-neutral: every concept runs offline against a scripted fake model, and the habits carry over to any assistant.",
+    "setupSteps": [
+      "Install Python 3.10 or newer from python.org (on Windows, the Python install manager).",
+      "Install Git from git-scm.com and set user.name, user.email, and init.defaultBranch main.",
+      "Install VS Code and Microsoft's Python extension.",
+      "Create an agent-course folder with a virtual environment (python -m venv .venv) and install jsonschema into it.",
+      "Connect an assistant: sign in to GitHub Copilot Free from the Copilot icon in VS Code's Status Bar, or install Ollama and run ollama pull qwen3:1.7b."
+    ],
+    "verification": "Inside the activated virtual environment, check_setup.py prints your Python and Git versions and confirms jsonschema is installed, and your assistant answers a question in the VS Code Chat view.",
+    "url": "https://code.visualstudio.com/docs/copilot/setup"
+  },
+  "optionalGear": [
+    {
+      "name": "Ollama with a small local model",
+      "description": "Optional; runs a model such as qwen3:1.7b on your own computer, so no account is needed and prompts never leave your machine. Smaller models make more mistakes on agent tasks.",
+      "url": "https://ollama.com/download"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson can be completed for $0. Python, Git, VS Code, Ollama, jsonschema, Ruff, mypy, and the MCP Python SDK are free, and GitHub Copilot Free costs nothing for individual accounts. Every runnable example uses a scripted fake model, so no API key or paid plan is ever required.",
+  "assignments": [
+    {
+      "title": "Validated tools served over MCP",
+      "brief": "Write JSON Schema definitions for three repository tools, validate every call before it runs, cap the agent loop, then serve the same tools from an MCP server and connect it to a host such as VS Code."
+    },
+    {
+      "title": "Plan and patch review",
+      "brief": "Give an AI agent a bug to fix, then check its plan against the real repo, write tests from the spec rather than from its patch, and approve or reject the change with the failing and passing test output."
+    }
+  ],
+  "capstone": {
+    "title": "Safe sandboxed coding agent",
+    "brief": "Build an offline coding agent that fixes a failing test inside a sandboxed repository, with validated tools, a path sandbox, read/write/external permission tiers, human approval bound to the exact call, and a red-team suite that blocks prompt injection and secret exfiltration.",
+    "deliverables": [
+      "Agent repo with schemas, sandbox, and approval gate",
+      "Threat model and task profile",
+      "Red-team and normal-work test suite, all passing",
+      "Audit log and harness-written report",
+      "Four-minute demo showing a blocked attack"
+    ]
+  }
+}

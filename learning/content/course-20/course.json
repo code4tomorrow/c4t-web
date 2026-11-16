@@ -1,0 +1,54 @@
+{
+  "summary": "An advanced, self-paced course in deep learning for images with PyTorch: trace every tensor, derive and check gradients, write honest training loops, then train convolutional networks, adapt pretrained models, and evaluate vision systems responsibly.",
+  "description": "You'll work in Google Colab, where PyTorch, torchvision, and scikit-learn come preinstalled and a free NVIDIA T4 GPU is one menu choice away. The first half builds the mechanics from the ground up on scikit-learn's 8×8 handwritten digits: tensor shapes traced layer by layer with a tracer you write yourself, gradients derived by hand and confirmed with autograd and finite differences, and a complete training loop with validation curves, best checkpoints, early stopping, and a learning-rate range test. The second half moves to real images: convolutional networks and augmentation, fine-tuning pretrained torchvision models, comparing classification with detection and segmentation outputs, tracking experiments and GPU use, and evaluating errors honestly. Each module has a Notes lesson, a Build-along, and a Practice lesson with worked solutions, and every output and chart on the page came from running the code shown. The course ends with a capstone: a documented computer-vision model study with its metrics, resource use, errors, and responsible-use limits.",
+  "audience": "Strong high school and early college students who already write Python comfortably and have trained classical machine learning models, and now want to understand how neural networks and vision models actually work.",
+  "prerequisites": [
+    "Confident Python: functions, classes, loops, lists, and dictionaries",
+    "Classical machine learning with scikit-learn: train/test splits, overfitting, and accuracy",
+    "High school algebra; derivatives help, and Module 3 reviews the chain rule as it goes",
+    "A Google account that can open Google Colab"
+  ],
+  "outcomes": [
+    "Trace tensor shapes, dtypes, and devices through layers and activations, and fix shape, dtype, and device errors from the message alone.",
+    "Derive gradients for small models by hand, verify them with autograd and finite differences, and choose a loss and learning rate with evidence.",
+    "Write training loops that log honest training and validation curves, keep the best checkpoint, and diagnose overfitting and learning-rate problems.",
+    "Design and evaluate convolutional network, augmentation, and transfer-learning experiments in PyTorch and torchvision.",
+    "Compare classification, detection, and segmentation outputs, and document resource use, errors, limitations, and responsible-use constraints."
+  ],
+  "tags": ["deep-learning", "computer-vision", "pytorch", "cnn", "transfer-learning", "responsible-ai", "advanced", "self-paced"],
+  "primaryTool": {
+    "name": "Google Colab with PyTorch (free GPU)",
+    "description": "Colab is Google's free, browser-based notebook service. Code runs on a Google virtual machine with PyTorch and torchvision already installed, and the free tier can attach an NVIDIA T4 GPU, so the course needs no installs and no graphics card of your own.",
+    "setupSteps": [
+      "Go to colab.research.google.com, sign in with a Google account, and create a notebook with File › New notebook in Drive.",
+      "Open Runtime › Change runtime type, choose T4 GPU under Hardware accelerator, and click Save.",
+      "In a code cell, run: import torch; print(torch.__version__, torch.cuda.is_available())",
+      "In another cell, run !nvidia-smi to see the GPU's name and memory."
+    ],
+    "verification": "The first cell prints a PyTorch version followed by True, and nvidia-smi lists a Tesla T4 with about 15 GB of memory. On a CPU runtime the first cell prints False, which is fine for Modules 1 to 4.",
+    "url": "https://colab.research.google.com/"
+  },
+  "optionalGear": [],
+  "freeCompletionPromise": "Every lesson runs in Google Colab's free tier and uses only free, open-source libraries and datasets. Modules 1 to 4 run comfortably on a CPU, so if Colab's free GPU allowance runs out you can keep working on the CPU runtime and come back to the GPU later.",
+  "assignments": [
+    {
+      "title": "Network tracer and hand-checked gradients",
+      "brief": "In Colab with PyTorch, trace a batch through a small network shape by shape with forward hooks and flag saturated layers, then derive a neuron's gradient by hand, check it with autograd and finite differences, and sweep the learning rate."
+    },
+    {
+      "title": "Training loop and fine-tuning study",
+      "brief": "Write a PyTorch training loop with a three-way split, per-epoch train and validation logging, and a best checkpoint, then fine-tune a pretrained ResNet-18 in two phases and compare it with training from scratch, smoke-testing on CPU first."
+    }
+  ],
+  "capstone": {
+    "title": "Responsible vision model study",
+    "brief": "Train and evaluate a vision model in Colab with PyTorch, such as a digit reader under blur or a fine-tuned flower classifier, with a datasheet, a logged baseline, seeded experiments, per-class and subgroup results with intervals, and a failure gallery.",
+    "deliverables": [
+      "Notebook that reruns top to bottom",
+      "Experiment log with 3+ runs, including a baseline",
+      "Datasheet for the dataset",
+      "One- to two-page model card",
+      "Five-minute presentation"
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "summary": "Design and build real games in Scratch, from a two-player race and an underwater catch game to a platformer, a clone-powered shooter, and a multi-level game of your own.",
+  "description": "A self-paced game-design course in Scratch 3, the free block-based editor from the Scratch Foundation. You start by placing sprites on the stage's x–y grid and wiring scripts to events, then build a firefly scene, a key-mash race with a fair start and a referee that runs on broadcasts and a state variable, and Reef Catch, a catch game with easing, animation, sound, and visual feedback. Later modules add collisions, gravity, and jumping in a platformer, then clones, custom blocks (including run without screen refresh), and lists in a lane shooter that grows waves, a story, and difficulty that adapts to the player. Each module has Notes with quizzes, a step-by-step Build-along, and Practice exercises with hints and full solutions. The course ends with a capstone: a multi-level game you plan, build in milestones, playtest, and present.",
+  "audience": "Beginners around ages 10 to 15 who want to make their own games, with no coding experience needed.",
+  "prerequisites": [
+    "Comfortable using a mouse and keyboard and following multi-step instructions",
+    "A computer with a keyboard and an up-to-date web browser"
+  ],
+  "outcomes": [
+    "Place and move sprites precisely with x and y coordinates, directions, costumes, and layers.",
+    "Coordinate many sprites with broadcasts, variables, conditions, and a game state variable instead of fragile timers.",
+    "Make movement feel good with easing, animation timing, sound, and graphic effects, and write fair scoring rules.",
+    "Build collisions, gravity, and jumping for a platformer.",
+    "Manage many objects with clones, reusable custom blocks, and lists.",
+    "Design, test, and tune a multi-level game with a difficulty curve."
+  ],
+  "tags": [
+    "scratch",
+    "game-design",
+    "games",
+    "beginner",
+    "creative-coding"
+  ],
+  "primaryTool": {
+    "name": "Scratch 3 (free online editor or Scratch app)",
+    "description": "Scratch is a free visual programming language where you snap blocks together instead of typing code. The online editor runs in any current browser, and the free Scratch app works offline on Windows, macOS, Chromebooks, and Android tablets. Every lesson works without an account.",
+    "setupSteps": [
+      "Open scratch.mit.edu in Chrome, Firefox, Edge, or Safari and click Create, or go straight to scratch.mit.edu/projects/editor.",
+      "Optional: install the Scratch app from scratch.mit.edu/download (Microsoft Store on Windows, Mac App Store or direct download on macOS, Google Play on Chromebooks) if your internet is unreliable.",
+      "Optional, with a parent or guardian: click Join Scratch to make an account for saving online, the Backpack, and sharing.",
+      "Drag a move (10) steps block into the code area and click it to check that Scratch responds."
+    ],
+    "verification": "The editor opens with the Scratch cat on the stage, and clicking a move (10) steps block slides the cat right while the x box under the stage changes from 0 to 10.",
+    "url": "https://scratch.mit.edu/projects/editor/"
+  },
+  "freeCompletionPromise": "Scratch is free, needs no account, and runs in a web browser, so every lesson, exercise, and the capstone can be completed for $0 on any computer with a keyboard.",
+  "assignments": [
+    {
+      "title": "Animated scene with game states",
+      "brief": "Build a Scratch project where sprites wander, animate with costume changes, and react to clicks or keys, then use broadcasts to move from a title screen to play to an ending while keeping a score on screen."
+    },
+    {
+      "title": "Platformer with hazards and pickups",
+      "brief": "Build a Scratch platformer where the player walks, falls with gravity, jumps only from the ground, and stops at walls, then add hazards and pickups with sound and score feedback, plus a goal that ends the level."
+    }
+  ],
+  "capstone": {
+    "title": "Multi-level Scratch game",
+    "brief": "Build a Scratch game with at least three levels and all eight requirements: title and endings, instructions, visible progress, collisions that matter, sound or animation, a custom block, clones, and rising or adaptive difficulty.",
+    "deliverables": [
+      "Playable Scratch project with 3+ levels",
+      "Written test plan, run and fixed",
+      "Playtest notes and the fixes they led to",
+      "Project page with instructions and credits",
+      "Two-minute presentation"
+    ]
+  }
+}

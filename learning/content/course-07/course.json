@@ -1,0 +1,53 @@
+{
+  "summary": "Learn JavaScript by making web pages respond to people: a click counter, a tip calculator, a to-do list, a sign-up form that explains its errors, and finally an app of your own design.",
+  "description": "You write real JavaScript in VS Code, run it in your browser with the free Live Server extension, and watch what it does in the browser's DevTools Console. Lessons show code that actually runs, with its real output, and live previews you can click and type into. You start with values, arrays, objects, and functions, then use conditions, loops, and array methods to build page content from data, respond to clicks and typing, and validate a form. Later modules cover timers and saving progress in the browser, loading data with fetch and async/await, and keeping app state and error handling under control. The course ends with a capstone you plan, build, and test yourself, such as a quiz, a dashboard, a game, or a habit tracker.",
+  "audience": "Teens and other beginners who know basic HTML and CSS and want to make pages that react to what people do. Some experience with any programming language helps but isn't required.",
+  "prerequisites": [
+    "Basic HTML: headings, paragraphs, buttons, lists, and form inputs",
+    "Basic CSS: selectors, classes, colors, and spacing",
+    "Comfortable creating folders and files on your computer"
+  ],
+  "outcomes": [
+    "Model app data with strings, numbers, arrays, objects, and functions, and check it with console.log.",
+    "Use conditions, loops, and array methods like map and filter to decide what a page shows.",
+    "Build and update page content from data with querySelector, textContent, classList, and createElement.",
+    "Respond to clicks, key presses, typing, and form submissions, and write validation messages people can act on.",
+    "Use timers, browser storage, and fetch with async/await to make apps that remember and load data.",
+    "Plan, build, and test a complete browser app with loading, empty, success, and error states."
+  ],
+  "tags": ["javascript", "dom", "events", "forms", "browser-apps"],
+  "primaryTool": {
+    "name": "VS Code with the Live Server extension",
+    "description": "VS Code is Microsoft's free code editor for Windows, macOS, and Linux, including Chromebooks with Linux turned on. The Live Server extension serves your project folder at a local web address and reloads the browser every time you save, and the browser's DevTools Console shows your messages and errors.",
+    "setupSteps": [
+      "Download and install VS Code from code.visualstudio.com.",
+      "Open the Extensions view (Ctrl+Shift+X, or Cmd+Shift+X on a Mac), search for Live Server by Ritwick Dey, and install it.",
+      "Create a js-course folder and open it with File › Open Folder.",
+      "In Chrome or Edge, open the Console with Ctrl+Shift+J (Cmd+Option+J on a Mac) and type 2 + 2."
+    ],
+    "verification": "Right-click a project's index.html and choose Open with Live Server: the page opens at an address starting with http://127.0.0.1:5500, and a console.log message from script.js appears in the Console.",
+    "url": "https://code.visualstudio.com/"
+  },
+  "freeCompletionPromise": "Every tool in the course is free: VS Code, the Live Server extension, and a web browser you already have. No lesson requires a purchase or a paid account.",
+  "assignments": [
+    {
+      "title": "Reading tracker drawn from data",
+      "brief": "Build a reading tracker page in JavaScript that stores books as an array of objects, draws them with a render function, lets you add and tick off books, and shows totals like pages read and percent finished."
+    },
+    {
+      "title": "Practice log that survives a refresh",
+      "brief": "Build a practice log page where a form validates each entry with a message beside the problem field, a timer counts the session, and every entry saves to localStorage so the log is still there after a page refresh."
+    }
+  ],
+  "capstone": {
+    "title": "Your own browser app",
+    "brief": "Build a browser app, such as a habit tracker, quiz show, or weather dashboard, that draws the page from one state object, works by mouse and keyboard, validates input, saves to localStorage, and fetches data with loading, empty, and error states.",
+    "deliverables": [
+      "Working app with one state object and render()",
+      "Node checks for the app's rules",
+      "Completed test plan with results",
+      "README covering how to run it and how it handles problems",
+      "Three-minute demo"
+    ]
+  }
+}

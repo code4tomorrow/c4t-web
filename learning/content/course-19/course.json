@@ -1,0 +1,70 @@
+{
+  "summary": "Learn to compare machine learning models in a way that survives scrutiny: feature engineering inside scikit-learn pipelines, the right cross-validation for your data, tuning on a compute budget, class imbalance, ensembles, leakage hunting, calibration, interpretation, and error analysis by slice.",
+  "description": "Most model comparisons fall apart under one good question: was the test data really unseen, would the ranking survive a different split, is the probability of 0.8 really 80%? This course teaches the habits that make the answer yes. You work in Google Colab with scikit-learn, pandas, NumPy, SciPy, and matplotlib. Early modules put every feature-engineering step inside a Pipeline and ColumnTransformer (including FunctionTransformer and transformer classes you write yourself), then measure performance with KFold, StratifiedKFold, GroupKFold, TimeSeriesSplit, and nested cross-validation, and tune with grid, randomized, and successive-halving searches plus early stopping, all sized to finish in seconds. Later modules handle rare classes, compare forests and gradient boosting, hunt down leakage, check whether predicted probabilities are calibrated, explain what a model relies on, and find the slices of data where it fails. Every example uses data that ships with scikit-learn or is generated in the notebook, and every Python cell on these pages was run to produce the numbers and charts you see. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions. The course ends with a capstone: a reproducible model-comparison report with a recommendation and its limitations.",
+  "audience": "Students who have already trained and scored a scikit-learn model and want their results to hold up: strong high schoolers, early college students, and self-taught practitioners.",
+  "prerequisites": [
+    "Python: functions, classes at a basic level, lists and dictionaries, and reading a traceback",
+    "pandas and NumPy basics: selecting columns, filtering rows, and array shapes",
+    "One complete scikit-learn workflow: train_test_split, fit, predict, and score",
+    "Classification metrics: accuracy, precision, recall, and ROC AUC"
+  ],
+  "outcomes": [
+    "Build pipelines that engineer, impute, encode, and scale features from raw mixed-type rows, with custom transformers and no leakage between training and evaluation data.",
+    "Choose and justify a cross-validation scheme for independent, grouped, imbalanced, or time-ordered data, and report fold-to-fold variation instead of a single score.",
+    "Tune hyperparameters with randomized and successive-halving search, sensible distributions, and early stopping, and estimate the tuned model's performance with nested cross-validation.",
+    "Handle class imbalance and compare ensembles such as random forests and gradient boosting without leaking information.",
+    "Check calibration, explain what a model relies on, and find the data slices where it fails.",
+    "Write a reproducible model-comparison report that states a recommendation and its limitations."
+  ],
+  "tags": [
+    "machine-learning",
+    "scikit-learn",
+    "evaluation",
+    "pipelines",
+    "cross-validation",
+    "hyperparameter-tuning",
+    "python",
+    "advanced"
+  ],
+  "primaryTool": {
+    "name": "Google Colab (free) with scikit-learn",
+    "description": "Colab is Google's free hosted Jupyter notebook. Python runs on a Google machine and your notebooks save to your own Google Drive, so it works on any computer with a browser, Chromebooks included. scikit-learn, pandas, NumPy, SciPy, and matplotlib come preinstalled. The course needs scikit-learn 1.6 or newer, and the first lesson shows how to check your version and upgrade it inside Colab when needed.",
+    "setupSteps": [
+      "Go to colab.research.google.com and sign in with a Google account (a personal account is the safe choice if your school account blocks Colab).",
+      "Choose File > New notebook in Drive, then click the Untitled name at the top left and rename the notebook.",
+      "Run a cell that imports sklearn and prints sklearn.__version__.",
+      "If the version is older than 1.6, run %pip install -U scikit-learn in a cell, choose Runtime > Restart session, and check the version again."
+    ],
+    "verification": "Your version-check cell prints scikit-learn 1.6 or newer and ends with the line \"Ready for the course\", and the notebook appears in your Drive's Colab Notebooks folder.",
+    "url": "https://colab.research.google.com/"
+  },
+  "optionalGear": [
+    {
+      "name": "Python 3.10+ with JupyterLab on your own computer",
+      "description": "Optional. A local install works offline and has no session time limits; the first lesson has the steps for Windows, macOS, and Linux.",
+      "url": "https://jupyter.org/install"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab's free tier is enough for every notebook in the course, the libraries are open source, and every dataset either ships with scikit-learn or is generated by code on the page, so nothing has to be bought or downloaded.",
+  "assignments": [
+    {
+      "title": "Reproducible feature pipeline",
+      "brief": "In Colab, build a scikit-learn pipeline that turns raw columns into engineered features, pin every source of randomness with random_state, log each experiment to a CSV, and check each new feature with cross-validation before scoring raw rows."
+    },
+    {
+      "title": "Tuned ensemble race with leak checks",
+      "brief": "Tune a gradient boosting model with early stopping and a randomized search sized to a time budget, race it against a random forest on the same folds, and check for leaks such as a column recorded after the outcome or groups split across folds."
+    }
+  ],
+  "capstone": {
+    "title": "Rigorous model-comparison report",
+    "brief": "Compare up to three model families plus a baseline in a seeded Colab notebook, with a sealed test set, repeated cross-validation with nested tuning, leak checks, calibration, interpretation, and error slices, ending in a recommendation with specific limits.",
+    "deliverables": [
+      "Notebook that passes restart-and-run-all",
+      "Plan written before any results",
+      "Unit tests for the evaluation code",
+      "One- to two-page write-up with a recommendation",
+      "Five-slide presentation"
+    ]
+  }
+}

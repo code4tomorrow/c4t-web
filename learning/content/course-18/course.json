@@ -1,0 +1,75 @@
+{
+  "summary": "Build machine learning models small enough to run on a microcontroller: slice sensor streams into windows, extract features with NumPy, train tiny classifiers, quantize them to int8 by hand, and plan a deployment that fits real limits on memory, latency, power, and privacy.",
+  "description": "TinyML is machine learning on chips with kilobytes of memory, like the ones inside fitness bands, smart speakers, and wildlife sensors. This course teaches it the way an engineer meets it: as a set of trade-offs you can measure. You start by deciding when a model should run on the device and when it should run in the cloud, using latency, bandwidth, privacy, power, cost, and connectivity numbers you calculate yourself. Then you work in Google Colab with NumPy, scikit-learn, and PyTorch to turn a raw accelerometer stream into labeled windows, compute features such as RMS and FFT peaks, train small classifiers, and check them without data leakage. You build spectrograms and MFCCs from audio, train a keyword spotter, and quantize its weights from float32 to int8 with your own scale and zero-point code, measuring the size and accuracy before and after. Later modules budget RAM, flash, and response time, plan a deployment and test it against real-world accuracy, and trade battery life against privacy with duty cycles and on-device decisions. Edge Impulse Studio, on its free Developer plan, shows the same pipeline in a production tool, with your phone working as a free sensor. Every Python example on these pages runs for real when the lesson is built, so the charts and numbers you see are real outputs. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions, and the course ends with a capstone device plan.",
+  "audience": "High school and early college students who already write Python and know the basics of training and testing a machine learning model, and who want to put models on small devices.",
+  "prerequisites": [
+    "Python: functions, lists, loops, and reading a traceback",
+    "NumPy arrays at a basic level (creating them, slicing, and calling np.mean)",
+    "Machine learning basics: features, labels, a train/test split, and accuracy",
+    "No electronics experience needed; a development board is optional"
+  ],
+  "outcomes": [
+    "Choose between on-device and cloud inference for a product by calculating latency, data volume, energy, cost, and privacy exposure.",
+    "Turn a continuous sensor stream into labeled windows with a chosen sampling rate, window size, and stride, and extract time and frequency features from them.",
+    "Pick the right task type (classification, anomaly detection, or regression) and evaluate it without leakage between overlapping windows.",
+    "Build spectrogram and MFCC features from audio with NumPy and train a small keyword-spotting model.",
+    "Quantize a model from float32 to int8 with scale and zero-point, and measure what it costs in accuracy and saves in memory.",
+    "Write a deployment plan for a constrained device that covers memory, latency, accuracy on real hardware, power, and local data handling."
+  ],
+  "tags": [
+    "tinyml",
+    "edge-ai",
+    "machine-learning",
+    "python",
+    "numpy",
+    "quantization",
+    "hardware",
+    "intermediate"
+  ],
+  "primaryTool": {
+    "name": "Google Colab, with Edge Impulse Studio",
+    "description": "Google Colab is a free Jupyter notebook that runs in your browser on a Google computer, with NumPy, scikit-learn, matplotlib, SciPy, and PyTorch already installed. Every Python lesson runs there, so nothing needs installing on your own machine. Edge Impulse Studio is a free web tool (Developer plan) for collecting real sensor data, designing a processing pipeline, training a model, and building it for a phone or a microcontroller. Your phone's browser can act as an Edge Impulse sensor, so you can record real motion data without buying anything.",
+    "setupSteps": [
+      "Go to colab.research.google.com, sign in with a Google account, and create a new notebook.",
+      "Run a first cell that imports numpy, sklearn, matplotlib, scipy, and torch and prints their versions.",
+      "Create an Edge Impulse account at studio.edgeimpulse.com (Edge Impulse requires account holders to be 18 or older, so younger learners use an account owned by a parent, guardian, or teacher).",
+      "Create a private project, open Devices, choose Connect a new device, then Mobile phone, and scan the QR code with your phone.",
+      "Record a 10-second accelerometer sample from Data acquisition and check that three lines appear in the graph."
+    ],
+    "verification": "Colab prints a version number for every library, and Edge Impulse shows your phone with a green dot under Devices plus a 10-second sample with x, y, and z lines under Data acquisition.",
+    "url": "https://colab.research.google.com/"
+  },
+  "optionalGear": [
+    {
+      "name": "Arduino Nano 33 BLE Sense (Rev2)",
+      "description": "Optional. A microcontroller board with an accelerometer, microphone, 1 MB of flash, and 256 KB of RAM that Edge Impulse fully supports, so you can deploy your models to real hardware. The original Nano 33 BLE Sense works too. Every lesson can be finished without it.",
+      "url": "https://store.arduino.cc/products/nano-33-ble-sense-rev2"
+    },
+    {
+      "name": "BBC micro:bit V2",
+      "description": "Optional. A cheaper board with an accelerometer that runs motion models trained in the free micro:bit CreateAI tool. It shows the train-then-deploy loop on real hardware without an Edge Impulse account.",
+      "url": "https://microbit.org/buy/"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab's free tier runs all the Python, and Edge Impulse's Developer plan costs nothing. Your phone works as a free sensor for real data, and the course builds synthetic sensor and audio data in code, so you never need a board. If you can't use an Edge Impulse account, each Edge Impulse step has a Colab version that teaches the same idea.",
+  "assignments": [
+    {
+      "title": "Tiny classifier, quantized to int8",
+      "brief": "In Colab, cut sensor or audio recordings into windows, extract features, split by recording so nothing leaks, and train a small classifier, then quantize it to int8 with your own scale and zero-point code and compare accuracy and size."
+    },
+    {
+      "title": "Device budget and field-test report",
+      "brief": "Profile two candidate models for a named microcontroller, fit the winner into a flash, RAM, and latency budget, then score a set of field-test logs with a confusion matrix, per-class recall, per-person accuracy, and a confidence interval."
+    }
+  ],
+  "capstone": {
+    "title": "Constrained edge-AI device plan",
+    "brief": "Plan an edge-AI device, such as a gesture remote or keyword spotter, with measurable targets, two candidate models trained in Colab or Edge Impulse, a flash, RAM, and latency budget, test results, a power estimate, and a privacy data-flow table.",
+    "deliverables": [
+      "Design doc with every number labeled measured or estimated",
+      "Colab notebook that reruns every budget and test number",
+      "Edge Impulse project or training code, plus any field logs",
+      "Five-minute presentation"
+    ]
+  }
+}

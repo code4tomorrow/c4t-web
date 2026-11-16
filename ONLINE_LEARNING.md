@@ -36,7 +36,8 @@ on individual page authors to remember them.
     source topic.
 -   `learning/course-blueprints.js` contains course-specific descriptions,
     audiences, outcomes, setup paths, six core module blueprints, projects,
-    capstones, simulators, and free alternatives.
+    capstones, and free alternatives (each course's `course.json` overrides the
+    description and tools).
 -   `learning/build-course-registry.js` builds the fully structured curriculum.
 -   `learning/course-registry.ts` exposes the typed catalog to Next.js.
 -   `learning/course-models.ts` defines courses, modules, lessons, interactions,
@@ -232,21 +233,38 @@ grading are all server-authoritative, so the database is not optional.
 
 ## Writing lessons
 
-Lessons are written by hand in Markdown under `learning/content/<course-id>/`,
-one file per lesson (`m<module>-l<lesson>.md`). `learning/content/AUTHORING.md`
-is the style and format guide: real explanations, tested code with its output,
-practice with solutions, and further reading.
+Every course is written by hand in Markdown under
+`learning/content/<course-id>/`, one file per lesson (`m<module>-l<lesson>.md`),
+plus a `course.json` that names the course's real tools and replaces the
+blueprint's description. `learning/content/AUTHORING.md` is the format and
+style guide. Lessons are built from a few blocks:
 
-After editing lessons:
+-   `python run` / `javascript run` / `java run` code: the compiler runs it and
+    shows the **real** output (or traceback, with `raises`). Python lessons can
+    be notebook-style (`notebook: true`), and matplotlib charts are saved to
+    `public/lesson-media/`.
+-   `:::trace`: a step-through animation of a short Python program (line by
+    line, with variables, call stack, and output), recorded at build time by
+    `scripts/lesson-runtime/trace.py`.
+-   `:::video <youtube-id>`: checked against YouTube at build time; the page
+    loads only a thumbnail until it's played (youtube-nocookie.com).
+-   `mermaid` diagrams (parsed at build time), `html preview` live results in a
+    sandboxed frame, `scratch` blocks rendered as real Scratch blocks,
+    `:::quiz` with instant feedback, `:::tabs` for per-OS steps, and
+    objectives / takeaways / tip / warning / hint / solution boxes.
+
+Find videos with `node scripts/find-videos.js "search words"`. After editing:
 
 ```bash
-npm run content                 # compile to learning/lesson-content/ (commit the output)
-node scripts/check-lesson-code.js course-26   # run every Python/Java example
+npm run content                       # compile everything (commit the output)
+npm run content -- --check course-03  # validate one course, write nothing
+node scripts/check-lesson-code.js course-03   # run code blocks not marked run
 ```
 
-`npm run content` fails on thin lessons, raw HTML, or text copied between
-lessons. The four Fall 2026 classes are fully written; the 25 self-paced
-courses still use generated text until their lessons are written.
+`npm run content` fails on thin lessons, filler phrases, raw HTML, code that
+crashes, broken videos or diagrams, missing quizzes/objectives, or text copied
+between lessons. The curriculum validator fails if any course still has an
+unwritten lesson. Run results are cached in `node_modules/.cache/lesson-content`.
 
 ## Live classes
 

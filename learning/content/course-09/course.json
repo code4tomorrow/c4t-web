@@ -1,0 +1,68 @@
+{
+  "summary": "Build real inventions with the BBC micro:bit in free Microsoft MakeCode: a name badge, a reaction-time game, a step counter with a compass, radio messengers, and a sensor logger, all testable in the browser simulator.",
+  "description": "You program the BBC micro:bit in Microsoft MakeCode, a free browser editor whose built-in simulator runs every program in the course, so no hardware is required. After a setup module, each core module pairs a notes lesson that teaches the ideas with a build-along that makes one working invention, then a set of practice problems with hints and full solutions. You start with buttons, the LED screen, and events, then read the accelerometer, compass, light, temperature, and microphone, send radio messages between boards, compare MakeCode with MicroPython, collect sensor data, and finish by designing, testing, and documenting a connected invention of your own. Programs are shown as MakeCode JavaScript that you can paste into the editor and view as blocks.",
+  "audience": "Middle and high school beginners who have tried a little coding, in Scratch or any language, and want to make things that sense the world and react to it.",
+  "prerequisites": [
+    "Comfortable with sequences, simple loops, and if/else in Scratch or any language",
+    "A computer or Chromebook with a current web browser"
+  ],
+  "outcomes": [
+    "Set up MakeCode, test programs in the simulator, and transfer them safely to a real micro:bit.",
+    "Program the LED screen, buttons, and touch logo using events, loops, and variables.",
+    "Turn noisy accelerometer, compass, light, temperature, and sound readings into reliable decisions.",
+    "Exchange radio messages between micro:bits and read the same program in MakeCode and MicroPython.",
+    "Collect and chart sensor data, then design, test, and document a connected invention."
+  ],
+  "tags": ["hardware", "microbit", "makecode", "micropython", "sensors", "beginner"],
+  "primaryTool": {
+    "name": "Microsoft MakeCode for micro:bit",
+    "description": "A free editor from Microsoft that runs in any current browser. It has blocks, JavaScript, and Python views of the same program and a built-in micro:bit simulator, so every lesson can be finished without hardware. With Chrome or Edge it can also send programs straight to a real board over USB.",
+    "setupSteps": [
+      "Open makecode.microbit.org in Chrome, Edge, Firefox, or Safari (Chrome or Edge if you'll connect a real board).",
+      "Under My Projects, click New Project, type a name such as c4t-hello, and click Create.",
+      "From the Basic category, drag a show icon block into on start."
+    ],
+    "verification": "The simulator on the left side of the editor shows a micro:bit with your chosen icon lit on its LED screen.",
+    "url": "https://makecode.microbit.org/"
+  },
+  "optionalGear": [
+    {
+      "name": "BBC micro:bit V2",
+      "description": "Optional; the in-browser simulator covers every lesson. A real board lets you shake, tilt, wear, and carry your inventions. Get a V2, which adds the speaker, microphone, and touch logo.",
+      "url": "https://microbit.org/buy/"
+    },
+    {
+      "name": "Micro-USB data cable",
+      "description": "Needed only with a real board, to send programs from the computer. Charge-only cables won't work.",
+      "url": "https://microbit.org/get-started/user-guide/transfer-code-to-the-microbit/"
+    },
+    {
+      "name": "Battery pack for 2 AAA batteries",
+      "description": "Optional, for projects you carry or wear, such as the badge and the step counter. Use alkaline batteries, not rechargeables.",
+      "url": "https://microbit.org/get-started/user-guide/safety/"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson, exercise, and project runs in the free MakeCode simulator in a web browser, with no account, download, or purchase needed. A real micro:bit is an optional extra.",
+  "assignments": [
+    {
+      "title": "Two-player reaction duel",
+      "brief": "Build a two-player reaction duel for the micro:bit in MakeCode that waits a random time, flashes the LEDs, works out whether A or B was pressed first, punishes false starts, and keeps both scores. Test it in the MakeCode simulator."
+    },
+    {
+      "title": "Sensor gadget with a state machine",
+      "brief": "Build a micro:bit gadget in MakeCode that reads a sensor such as the accelerometer or light level, uses a threshold with a reset margin so readings don't flicker, and runs a state machine of three or more states driven by button events."
+    }
+  ],
+  "capstone": {
+    "title": "Connected micro:bit invention",
+    "brief": "Build a network of two or more micro:bit roles that talk by radio, such as a voting system or relay race timer, with event-driven inputs, a state machine, logged data you chart, and visible feedback when a message is lost.",
+    "deliverables": [
+      "MakeCode project with 2+ radio roles",
+      "Protocol table and state diagrams",
+      "Test plan with a measured reliability rate",
+      "Data CSV with a chart and a conclusion",
+      "README with safety notes",
+      "Three-minute demo"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "summary": "Find out what AI and machine learning can and can't do by training real models in your browser with Google's Teachable Machine, then learn to judge their scores, their fairness, their use of personal data, and whether AI belongs in a problem at all.",
+  "description": "This is a no-coding course about how machine learning actually works and how to think clearly about it. You'll train real models in Teachable Machine, Google's free in-browser tool: a thumbs-up detector, a clap-and-snap sound classifier, and a recycling sorter that you deliberately break and fix by changing only its examples. You'll tell rules from learned models, name the task a system does (classification, regression, clustering, recommendation, or generation), and find out what chatbots are really doing when they answer. You'll describe data as features and labels, see decision boundaries drawn on charts, hold out test data, catch overfitting and leaks, and watch a neural network learn inside TensorFlow Playground. Later modules cover confidence scores and bias, privacy and consent, deepfakes and checking AI-made claims, and deciding when AI is the wrong tool. Charts in the lessons are drawn by short Python programs that run for you, so you read the picture, not the code; Google Colab is an optional extra for the curious. Modules 2 to 7 each have a Notes lesson, a hands-on Build-along, and a Practice set of judgement problems with worked solutions, and the course ends with a written recommendation on whether and how to use AI for a proposed project.",
+  "audience": "Curious beginners, roughly ages 12 and up, plus teachers and parents, who want to understand AI well enough to use it, question it, and explain it, before or instead of learning to program it.",
+  "prerequisites": [
+    "None. No coding, math beyond percentages, or AI experience needed.",
+    "A laptop or desktop computer with Chrome or Firefox. A webcam and microphone help but aren't required."
+  ],
+  "outcomes": [
+    "Tell a rule-based system from a machine learning model, and name the task family of any AI product from the kind of answer it gives.",
+    "Describe a dataset as examples, features, and labels, and spot features that leak the answer or won't exist at prediction time.",
+    "Train, test, and improve image and sound models in Teachable Machine by changing their examples, and catch shortcuts a model has learned.",
+    "Explain why models are scored on held-out test data, recognize overfitting on a chart, and describe how a neural network learns by nudging its weights.",
+    "Interpret confidence scores, check whether errors fall unevenly on different groups, and plan data collection that respects privacy and consent.",
+    "Decide whether AI fits a proposed problem, and write a recommendation that weighs data, risks, oversight, and simpler alternatives."
+  ],
+  "tags": [
+    "ai",
+    "machine-learning",
+    "teachable-machine",
+    "ethics",
+    "data-literacy",
+    "beginner"
+  ],
+  "primaryTool": {
+    "name": "Google Teachable Machine (free, in the browser)",
+    "description": "A free website from Google that trains image, sound, and pose models from examples you record or upload, without any code. Training runs inside your browser tab, and your samples aren't sent to any server unless you choose to save them to your own Google Drive. It makes every idea in the course testable in minutes: you change the examples, retrain, and watch the model's behavior change.",
+    "setupSteps": [
+      "Open Chrome or Firefox on a laptop or desktop and go to teachablemachine.withgoogle.com.",
+      "Click Get Started, then Image Project, then Standard image model.",
+      "Click Webcam on the Class 1 card and allow camera access when the browser asks (or use Upload with photo files if you have no webcam).",
+      "Optional: TensorFlow Playground (playground.tensorflow.org) and Google Colab (colab.research.google.com) are used in later lessons and also run free in the browser."
+    ],
+    "verification": "A live view from your webcam appears inside the Class 1 card with a Hold to Record button under it. No account or install is needed.",
+    "url": "https://teachablemachine.withgoogle.com/"
+  },
+  "optionalGear": [
+    {
+      "name": "Google Colab",
+      "description": "Optional. Runs the course's chart programs in your browser if you want to change the numbers yourself. Needs a Google account.",
+      "url": "https://colab.research.google.com/"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson can be completed for $0 with no account: Teachable Machine and TensorFlow Playground are free in the browser, every chart is drawn for you on the lesson page, and photo uploads replace the webcam if you don't have one.",
+  "assignments": [
+    {
+      "title": "Rule versus learned model",
+      "brief": "Train a Teachable Machine model for a task you could also try with a simple rule, test both on the same new examples, and explain where each breaks; then make a TensorFlow Playground network overfit and fix it one change at a time."
+    },
+    {
+      "title": "Stress test and data plan",
+      "brief": "Stress-test a Teachable Machine gesture or image model in conditions it never saw, turn the log into a confusion matrix and accuracy by condition, and write a one-page data and consent plan for collecting its training data."
+    }
+  ],
+  "capstone": {
+    "title": "Should AI do this job?",
+    "brief": "Pick a proposed use of AI, map everyone it affects, test the claims with a Teachable Machine prototype, a claims log, or interviews, compare it with a no-AI option, and write a memo ending in Go, Go with conditions, Not yet, or Don't.",
+    "deliverables": [
+      "800 to 1,500 word recommendation memo",
+      "Stakeholder map",
+      "Prototype stress test, claims log, or interviews",
+      "Three-minute presentation with up to five slides"
+    ]
+  }
+}

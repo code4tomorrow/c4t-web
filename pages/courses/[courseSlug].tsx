@@ -57,6 +57,7 @@ type CourseOverview = Pick<
     | "visualTreatment"
     | "requirements"
     | "simulators"
+    | "contentSummary"
     | "freeCompletionPromise"
     | "certificateRules"
 > & {
@@ -374,6 +375,7 @@ const toCourseOverview = (course: Course): CourseOverview => ({
     visualTreatment: course.visualTreatment,
     requirements: course.requirements,
     simulators: course.simulators,
+    contentSummary: course.contentSummary,
     freeCompletionPromise: course.freeCompletionPromise,
     certificateRules: course.certificateRules,
     modules: course.modules.map((module) => ({
@@ -603,11 +605,31 @@ const CoursePage: React.FC<CoursePageProps> = ({
         .filter((requirement) => requirement.category === "account")
         .map((requirement) => toSetupRequirement(requirement));
     const firstLessonHref = getFirstLessonHref(course);
-    const starterAssets = getStarterAssets(course);
+
     const lessonCount = course.modules.reduce(
         (total, module) => total + module.lessons.length,
         0
     );
+    const summary = course.contentSummary;
+    const fullyWritten = Boolean(
+        summary && summary.lessonsWritten >= lessonCount
+    );
+    // Rewritten courses teach with their own lessons; the old shared
+    // starter files belong to the generated versions.
+    const starterAssets = fullyWritten ? [] : getStarterAssets(course);
+    const inside = summary
+        ? [
+              { value: summary.lessonsWritten, label: "hand-written lessons" },
+              { value: summary.videos, label: "videos" },
+              { value: summary.traces, label: "step-through animations" },
+              {
+                  value: summary.visuals,
+                  label: "diagrams, charts & live previews",
+              },
+              { value: summary.quizQuestions, label: "quiz questions" },
+              { value: summary.codeExamples, label: "code examples" },
+          ].filter((item) => item.value > 0)
+        : [];
     // Public page: the outline shows structure only. Per-learner status lives
     // behind the sign-in wall on the lesson player and dashboard.
     const outline = buildOutline(course);
@@ -704,6 +726,28 @@ const CoursePage: React.FC<CoursePageProps> = ({
                                 <strong>Free completion promise:</strong>{" "}
                                 {course.freeCompletionPromise}
                             </p>
+                            {inside.length > 0 && (
+                                <div className="mt-6">
+                                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-medium-grey">
+                                        What&apos;s inside
+                                    </p>
+                                    <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                                        {inside.map((item) => (
+                                            <li
+                                                key={item.label}
+                                                className="rounded-2xl border border-white/10 bg-dark-grey-primary/40 px-4 py-3"
+                                            >
+                                                <span className="block text-2xl font-extrabold text-white">
+                                                    {item.value}
+                                                </span>
+                                                <span className="text-xs font-semibold leading-5 text-medium-grey">
+                                                    {item.label}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
 
                         <aside className="rounded-2xl border border-white/10 bg-dark-grey-primary/40 p-5">
@@ -730,7 +774,14 @@ const CoursePage: React.FC<CoursePageProps> = ({
                                 <div>
                                     <dt className="text-medium-grey">Time</dt>
                                     <dd className="mt-1 font-bold text-white">
-                                        {course.estimatedTotalHours} hours
+                                        {fullyWritten && summary
+                                            ? `${Math.max(
+                                                  1,
+                                                  Math.round(
+                                                      summary.minutes / 60
+                                                  )
+                                              )} hours`
+                                            : `${course.estimatedTotalHours} hours`}
                                     </dd>
                                 </div>
                                 <div>
@@ -831,42 +882,44 @@ const CoursePage: React.FC<CoursePageProps> = ({
                             </ul>
                         </section>
 
-                        <section className="rounded-2xl border border-white/10 bg-dark-grey-secondary p-5 sm:p-7">
-                            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                                <div>
-                                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-purple-secondary">
-                                        Included downloads
-                                    </p>
-                                    <h2 className="mt-2 text-2xl font-bold text-white">
-                                        Free starter assets
-                                    </h2>
+                        {starterAssets.length > 0 && (
+                            <section className="rounded-2xl border border-white/10 bg-dark-grey-secondary p-5 sm:p-7">
+                                <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                                    <div>
+                                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-purple-secondary">
+                                            Included downloads
+                                        </p>
+                                        <h2 className="mt-2 text-2xl font-bold text-white">
+                                            Free starter assets
+                                        </h2>
+                                    </div>
+                                    <CourseBadge tone="green">
+                                        Original · synthetic · licensed
+                                    </CourseBadge>
                                 </div>
-                                <CourseBadge tone="green">
-                                    Original · synthetic · licensed
-                                </CourseBadge>
-                            </div>
-                            <p className="mt-3 text-sm leading-6 text-[#C7C3CE]">
-                                These small files contain no personal data,
-                                credentials, or secrets. Dataset fixtures are
-                                CC0 and starter code is MIT licensed.
-                            </p>
-                            <div className="mt-5 grid gap-3 md:grid-cols-2">
-                                {starterAssets.map((asset) => (
-                                    <a
-                                        key={asset.href}
-                                        href={asset.href}
-                                        className="rounded-xl border border-white/10 bg-dark-grey-primary/30 p-4 outline-none hover:border-brand-purple-secondary/60 hover:bg-brand-purple-secondary/[0.06] focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
-                                    >
-                                        <span className="font-bold text-white">
-                                            {asset.label}
-                                        </span>
-                                        <span className="mt-1 block text-sm leading-6 text-medium-grey">
-                                            {asset.description}
-                                        </span>
-                                    </a>
-                                ))}
-                            </div>
-                        </section>
+                                <p className="mt-3 text-sm leading-6 text-[#C7C3CE]">
+                                    These small files contain no personal data,
+                                    credentials, or secrets. Dataset fixtures
+                                    are CC0 and starter code is MIT licensed.
+                                </p>
+                                <div className="mt-5 grid gap-3 md:grid-cols-2">
+                                    {starterAssets.map((asset) => (
+                                        <a
+                                            key={asset.href}
+                                            href={asset.href}
+                                            className="rounded-xl border border-white/10 bg-dark-grey-primary/30 p-4 outline-none hover:border-brand-purple-secondary/60 hover:bg-brand-purple-secondary/[0.06] focus-visible:ring-2 focus-visible:ring-brand-purple-secondary"
+                                        >
+                                            <span className="font-bold text-white">
+                                                {asset.label}
+                                            </span>
+                                            <span className="mt-1 block text-sm leading-6 text-medium-grey">
+                                                {asset.description}
+                                            </span>
+                                        </a>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
 
                         <section className="rounded-2xl border border-white/10 bg-dark-grey-secondary p-5 sm:p-7">
                             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">

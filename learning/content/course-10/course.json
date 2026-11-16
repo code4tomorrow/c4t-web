@@ -1,0 +1,70 @@
+{
+  "summary": "Build and debug real Arduino circuits in a free browser simulator, from your first blinking LED to sensors, motors, state machines, and a working robot.",
+  "description": "Every circuit in this course runs on a simulated Arduino Uno in Wokwi, a free in-browser simulator, so you can wire LEDs, buttons, potentiometers, light and temperature sensors, servos, and motors without buying parts or risking damage. You write real Arduino C++ (the same code runs unchanged on a physical Uno), and you check the electrical math first with short Python programs that show their real output and charts on the page: Ohm's law, LED resistor sizing, voltage dividers, and ADC conversions. Each module has notes that teach the ideas, a build-along that makes one working project step by step, and a practice set with hints and full solutions. Later modules drive motors safely through a driver, organize robot behavior as state machines with feedback, test robots under changing conditions, and finish with an obstacle-avoiding or line-following robot capstone. Tinkercad Circuits works as a backup simulator, and an optional starter kit lets you build everything for real with Arduino IDE 2.",
+  "audience": "Teens and beginners who have written a few programs with conditions and loops, and want to understand circuits, sensors, motors, and how robots make decisions.",
+  "prerequisites": [
+    "Write simple programs with variables, if/else, and loops (in any language)",
+    "Comfortable using a web browser and copying text between windows"
+  ],
+  "outcomes": [
+    "Apply Ohm's law and power calculations to size resistors and keep circuits within safe current and heat limits.",
+    "Lay out breadboard circuits with LEDs, buttons, and potentiometers, and find wiring faults by tracing nodes.",
+    "Read digital and analog sensors, convert raw readings to volts and real units, and smooth noisy signals.",
+    "Drive servos and DC motors safely through a motor driver with a separate power supply.",
+    "Organize robot behavior as a state machine with feedback, and test it under varied conditions.",
+    "Build, test, and present a simulated or physical obstacle-avoiding or line-following robot."
+  ],
+  "tags": ["arduino", "electronics", "robotics", "circuits", "sensors", "simulation", "beginner"],
+  "primaryTool": {
+    "name": "Wokwi (free Arduino simulator in the browser)",
+    "description": "Wokwi simulates an Arduino Uno together with LEDs, resistors, buttons, potentiometers, sensors, servos, and more, right in a web browser. Nothing to install, nothing to buy, and nothing can burn out, so you can test every circuit before touching real parts. A free account is only needed to save projects online.",
+    "setupSteps": [
+      "Open wokwi.com in Chrome, Edge, Firefox, or Safari.",
+      "Click the Arduino (Uno, Mega, Nano) tile, then choose Arduino Uno under Start from Scratch.",
+      "Paste the lesson's code into sketch.ino and, when given, its circuit into diagram.json.",
+      "Press the green play button to compile and run the simulation."
+    ],
+    "verification": "The official Blink project runs and the small L LED on the simulated Uno blinks about once per second.",
+    "url": "https://wokwi.com/arduino"
+  },
+  "optionalGear": [
+    {
+      "name": "Arduino Uno starter kit",
+      "description": "Optional. A Uno (or compatible) board with a USB cable, breadboard, LEDs, resistors, buttons, and a potentiometer lets you build Modules 2 to 4 for real. Wokwi covers every lesson without it.",
+      "url": "https://store.arduino.cc/products/arduino-starter-kit-multi-language"
+    },
+    {
+      "name": "Extra sensors",
+      "description": "Optional. A photoresistor, a TMP36 temperature sensor, an ultrasonic distance sensor, or a soil moisture probe for building the sensor projects on a desk.",
+      "url": "https://www.adafruit.com/category/35"
+    },
+    {
+      "name": "2WD robot chassis kit",
+      "description": "Optional. A small chassis with two DC motors and wheels for building the capstone robot physically. Most kits also need a motor driver board and a AA battery pack.",
+      "url": "https://www.adafruit.com/product/2939"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson can be finished for $0 in a web browser: circuits run in Wokwi's free simulator without an account, and the Python calculations show their output right on the lesson page. Hardware is optional, and no lesson requires buying anything.",
+  "assignments": [
+    {
+      "title": "Sensor and button panel",
+      "brief": "Wire a pushbutton, a potentiometer, and a light or temperature sensor in Wokwi, then debounce the button, convert and smooth the sensor readings, and switch LEDs on thresholds using millis() timers instead of delay()."
+    },
+    {
+      "title": "Motor controller with a state machine",
+      "brief": "Build a Wokwi controller that drives a motor through driver signals with a speed ramp and a stop button, and runs a state machine with millis() timers, such as a sliding door that reverses when something blocks it."
+    }
+  ],
+  "capstone": {
+    "title": "Obstacle-avoiding or line-following robot",
+    "brief": "Build a robot in Wokwi, or on a real chassis, that avoids obstacles or follows a line, with filtered sensor readings, motor control through driver signals, one case per state, and safety features like a stop button and a speed limit.",
+    "deliverables": [
+      "Wokwi project with a circuit diagram and pin plan",
+      "State diagram that matches the code",
+      "Safety checklist",
+      "10-test plan with logged results",
+      "Iteration report",
+      "Two-minute demo"
+    ]
+  }
+}

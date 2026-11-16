@@ -1,0 +1,63 @@
+{
+  "summary": "Load, clean, summarize, and chart real-world tables with pandas, NumPy, and Matplotlib in free Google Colab notebooks, and learn to make claims your data can actually support.",
+  "description": "This course turns Python you already know into a working data-science toolkit. Every lesson runs in Google Colab, a free notebook in the browser with pandas, NumPy, Matplotlib, and seaborn already installed, so you see real tables and real charts from the first lesson. You'll inspect CSV and JSON exports and catch the text hiding in number columns, replace slow loops with vectorized NumPy and pandas code, summarize and join tables with groupby and merge, and clean messy observations step by step: disguised missing values, duplicates, mixed units, misspelled categories, and impossible readings. Later modules cover summary statistics and honest, accessible charts, the limits of correlation and the ways samples mislead, and notebooks that anyone can rerun from top to bottom. The datasets are small and realistic: survey exports, bike-share trips, weather stations, air sensors, and a street-tree survey. Each core module has a Notes lesson with runnable examples, a Build-along that makes one real analysis, and a Practice set with hints and full solutions, and the course ends with a reproducible investigation of a dataset you choose.",
+  "audience": "Middle and high school students, and early college learners, who can already write basic Python (variables, lists, dictionaries, loops, functions) and want to answer real questions with data.",
+  "prerequisites": [
+    "Basic Python: variables, lists, dictionaries, loops, if statements, and functions.",
+    "Comfort reading a short error message and trying a fix.",
+    "No statistics or prior pandas experience needed."
+  ],
+  "outcomes": [
+    "Load CSV and JSON data into pandas and check shapes, types, and missing values before trusting any number.",
+    "Write vectorized NumPy and pandas code with boolean masks, loc and iloc, new columns, groupby, and merge.",
+    "Clean messy data step by step (missing markers, duplicates, units, inconsistent categories, impossible values) and log every decision.",
+    "Summarize data with the right statistics and draw clear, accessible Matplotlib charts.",
+    "Explain what a dataset can and cannot show, including sampling bias and the difference between correlation and causation.",
+    "Build a notebook that reruns from top to bottom and present its findings to others."
+  ],
+  "tags": [
+    "data-science",
+    "python",
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "visualization",
+    "intermediate"
+  ],
+  "primaryTool": {
+    "name": "Google Colab (free notebooks in the browser)",
+    "description": "Colab is Google's free version of the Jupyter notebook. It runs Python on a Google machine and shows the results, tables and charts included, right under each cell. pandas, NumPy, Matplotlib, seaborn, and scikit-learn come preinstalled, so there is nothing to install, and it works the same on Windows, macOS, and Chromebooks. Notebooks save to your Google Drive. Learners who prefer to work offline can use JupyterLab on their own computer instead; every lesson runs in both.",
+    "setupSteps": [
+      "Sign in to a Google account in your browser. A personal account always works; some school accounts have Colab switched off.",
+      "Go to colab.research.google.com and click New notebook (or use File › New notebook in Drive).",
+      "Click into the first code cell, type print(\"ready\"), and press Shift + Enter.",
+      "Wait a few seconds while Colab connects; RAM and Disk bars appear at the top right and the word ready prints under the cell.",
+      "Optional, for offline work: install Python from python.org, run python -m pip install jupyterlab pandas numpy matplotlib seaborn scikit-learn, then start JupyterLab with python -m jupyterlab."
+    ],
+    "verification": "A cell that imports pandas, NumPy, and Matplotlib prints their version numbers with no error, and a small bar chart appears directly under the cell that draws it.",
+    "url": "https://colab.research.google.com/"
+  },
+  "freeCompletionPromise": "Every lesson can be completed for $0. Google Colab is free with a Google account, JupyterLab is free and open source, and every dataset in the course is either built inside the lesson's code or ships with the libraries, so there is nothing to buy or download.",
+  "assignments": [
+    {
+      "title": "Cleaning log and group summary",
+      "brief": "In Colab, clean a messy table with pandas one logged step at a time, then answer a question about it with groupby and a merge, and show how the answer changes between the raw and cleaned data."
+    },
+    {
+      "title": "Honest charts from cleaned data",
+      "brief": "Clean a small dataset in Colab, choose a mean or median for each variable based on its shape, and make three Matplotlib charts with honest axes, styling that reads without color, and titles that state the finding."
+    }
+  ],
+  "capstone": {
+    "title": "Reproducible data investigation",
+    "brief": "In a Google Colab notebook, answer one clear question with data you document, clean in code with a log and assertions, summarize, and chart three ways, then discuss bias and limits in a summary whose numbers are computed.",
+    "deliverables": [
+      "Colab notebook that runs top to bottom without errors",
+      "Cleaning log and assertions",
+      "3+ charts with titles that state findings",
+      "Dashboard figure or one-page report",
+      "Bias and limitations section",
+      "Five-minute presentation"
+    ]
+  }
+}

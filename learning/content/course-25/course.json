@@ -1,0 +1,80 @@
+{
+  "summary": "Build your own agent harness in plain Python: a runtime loop with validated tools, a subprocess sandbox with timeouts and output limits, retries that know when to give up, JSONL traces you can replay, eval sets with deterministic and model-based graders, and then specialized agents with routing, loop controls, approvals, rollback, and adversarial tests.",
+  "description": "Frameworks hide the parts of an agent that decide whether it is safe and whether it works. In this course you write those parts yourself, as one Python package called harness that grows module by module in a project folder called harness-lab. You start with a single model interface, complete(messages, tools), that both a scripted fake model and a real client implement; the real client speaks the OpenAI-compatible chat API, so it works with a free local model through Ollama or with a hosted provider. Then you build the runtime loop (message history, a tool registry with JSON Schema validation, structured errors, stop rules, and a verify step), run model-written code in a child process with a time limit, an output cap, and a stripped environment, and learn exactly what that does not protect against and when you need a container or VM instead. You record every model call and tool call as JSONL traces with tokens and latency, replay runs for free, and turn traces into versioned eval cases with graders. Later modules attack your own graders, measure success rate, latency, tokens, and cost, route work across planner, worker, and reviewer agents, and add loop limits, human approvals, and rollback before anything reaches a repository. The harness uses only the Python standard library, and every runnable cell on these pages uses the scripted model, so the code you see ran offline to produce the output shown. Each core module has a Notes lesson, a Build-along, and a Practice set with hints and worked solutions, and the course ends with a capstone: a secure, evaluated multi-agent system you attack and improve.",
+  "audience": "Strong high school students, early college students, and self-taught developers who have already built a tool-using agent or used an agentic coding tool, and now want to build and measure the runtime underneath one.",
+  "prerequisites": [
+    "Python: functions, classes and dataclasses, dictionaries, exceptions, and reading a traceback",
+    "Running Python scripts and Git commands from a terminal",
+    "How tool calling works at a high level: a model asks for a function call and the program runs it",
+    "Writing basic unit tests"
+  ],
+  "outcomes": [
+    "Write an observe, plan, act, and verify runtime with a tool registry, argument validation, structured errors, and stop rules for steps, repeats, and budget.",
+    "Run model-written code in a child process with a timeout, an output limit, and an allowlisted environment, and explain what a container or VM adds that a subprocess cannot.",
+    "Retry only the failures worth retrying, with capped exponential backoff and jitter, and make side-effecting tools safe to repeat.",
+    "Record complete JSONL traces with tokens and latency, replay a run deterministically, and build versioned eval cases from real traces.",
+    "Grade agents with deterministic checks and with a justified model-based judge, and detect graders that can be gamed.",
+    "Coordinate specialized agents with routing, loop controls, human approval, and rollback, backed by adversarial tests."
+  ],
+  "tags": [
+    "agent-harness",
+    "evaluation",
+    "multi-agent",
+    "sandboxing",
+    "tracing",
+    "python",
+    "llm",
+    "advanced"
+  ],
+  "primaryTool": {
+    "name": "Python 3.10 or newer (standard library only)",
+    "description": "The whole harness is written with Python's standard library: dataclasses for messages, urllib for talking to model APIs, subprocess and tempfile for the sandbox, and json for traces. There is nothing to pip install. You work in a project folder with its own virtual environment, in any editor, and run everything from a terminal.",
+    "setupSteps": [
+      "Check your version with python3 --version (macOS and Linux) or py --version (Windows); install Python 3.10 or newer from python.org if it is older or missing.",
+      "Create a folder called harness-lab, then run python3 -m venv .venv (or py -m venv .venv on Windows) inside it.",
+      "Activate the environment with source .venv/bin/activate (macOS and Linux) or .venv\\Scripts\\Activate.ps1 (Windows PowerShell).",
+      "Create the harness, tests, workspace, traces, and evals folders, plus an empty harness/__init__.py and tests/__init__.py.",
+      "Write harness/model.py and check_setup.py from Module 1, then run python check_setup.py."
+    ],
+    "verification": "python check_setup.py prints [ok] for Python 3.10 or newer, the virtual environment, and the scripted model, then ends with the line \"Ready for the course\".",
+    "url": "https://www.python.org/downloads/"
+  },
+  "optionalGear": [
+    {
+      "name": "Ollama with a small tool-calling model",
+      "description": "Optional and free. Runs open-weight models such as qwen2.5:3b on your own computer and serves an OpenAI-compatible API at localhost:11434, so you can watch a real model drive your harness without sending data anywhere.",
+      "url": "https://ollama.com/download"
+    },
+    {
+      "name": "An API key from a hosted model provider",
+      "description": "Optional and usually paid per token. Any provider with an OpenAI-compatible chat completions endpoint works with the harness's real client; set a spending limit before you start.",
+      "url": "https://platform.openai.com/docs/guides/function-calling"
+    },
+    {
+      "name": "Docker or another container runtime",
+      "description": "Optional. Module 3 shows how to run generated code in a locked-down container for real isolation; the lessons themselves only need Python.",
+      "url": "https://docs.docker.com/get-started/get-docker/"
+    }
+  ],
+  "freeCompletionPromise": "Every lesson can be completed for $0. The harness uses only the Python standard library, every runnable example uses a scripted model that works offline, and the optional real-model steps can use Ollama, which is free and runs on your own computer.",
+  "assignments": [
+    {
+      "title": "Agent loop with validated tools",
+      "brief": "Write a Python agent harness with a complete(messages, tools) model interface, a tool registry that validates arguments and never raises, file tools locked to one workspace folder, and a loop with stop rules and a verify step, tested offline with a scripted model."
+    },
+    {
+      "title": "Sandboxed eval runner",
+      "brief": "Build a subprocess sandbox with time, CPU, file, and output limits, then an eval runner that grades scripted agents on a pinned task set, keeps hidden tests outside the sandbox, and reports pass@k, cost, and bootstrap intervals."
+    }
+  ],
+  "capstone": {
+    "title": "Secure, evaluated agent team",
+    "brief": "On your own Python harness, build a planner, workers, and a read-only reviewer for a job such as fixing seeded bugs, with run budgets, approval gates, scoped credentials, and an audit log, then test it against a single-agent baseline and eight automated attacks.",
+    "deliverables": [
+      "Code that reproduces every number offline with ScriptedModel",
+      "REPORT.md with dev and held-out results and bootstrap intervals",
+      "SECURITY.md with the threat model and attack results",
+      "Five-minute demo with one live task and one live attack"
+    ]
+  }
+}

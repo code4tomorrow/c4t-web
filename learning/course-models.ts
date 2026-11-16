@@ -234,6 +234,17 @@ export interface LiveSession {
     classTools: LiveClassTool[];
 }
 
+/** Totals across a course's hand-written lessons (npm run content). */
+export interface CourseContentSummary {
+    lessonsWritten: number;
+    minutes: number;
+    videos: number;
+    traces: number;
+    visuals: number;
+    quizQuestions: number;
+    codeExamples: number;
+}
+
 export interface Course {
     id: string;
     order: number;
@@ -262,6 +273,7 @@ export interface Course {
     freeCompletionPromise: string;
     /** null for self-paced courses. */
     liveSession: LiveSession | null;
+    contentSummary: CourseContentSummary | null;
     modules: CourseModule[];
     assignments: AppliedAssignment[];
     finalAssessment: Assessment;

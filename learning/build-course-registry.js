@@ -2,6 +2,46 @@ const sourceCurriculum = require("./source-curriculum");
 const courseBlueprints = require("./course-blueprints");
 // Titles and summaries of hand-written lessons (npm run content).
 const authoredLessons = require("./lesson-content/index.json");
+// Course descriptions and real tools for rewritten courses
+// (learning/content/<course-id>/course.json, compiled by npm run content).
+const courseMeta = require("./lesson-content/courses.json");
+
+/** A rewritten course describes itself and its real tools; no simulators. */
+const applyCourseMeta = (blueprint, meta) =>
+    meta
+        ? {
+              ...blueprint,
+              summary: meta.summary || blueprint.summary,
+              description: meta.description || blueprint.description,
+              audience: meta.audience || blueprint.audience,
+              prerequisites: meta.prerequisites || blueprint.prerequisites,
+              outcomes: meta.outcomes || blueprint.outcomes,
+              tags: meta.tags || blueprint.tags,
+              freeCompletionPromise:
+                  meta.freeCompletionPromise || blueprint.freeCompletionPromise,
+              primaryTool: {
+                  category: "software",
+                  paidOptions: [],
+                  ...meta.primaryTool,
+              },
+              extraRequirements: (meta.optionalGear || []).map((gear) => ({
+                  name: gear.name,
+                  category: gear.category || "hardware",
+                  description: gear.description,
+                  setupSteps: gear.setupSteps || [],
+                  verification: gear.verification || "",
+                  url: gear.url,
+                  paidOptions: [],
+              })),
+              simulators: [],
+              // Projects described by the course's own lessons, when given.
+              assignments: blueprint.assignments.map((item, index) => ({
+                  ...item,
+                  ...(meta.assignments?.[index] || {}),
+              })),
+              capstone: { ...blueprint.capstone, ...(meta.capstone || {}) },
+          }
+        : blueprint;
 
 const slugify = (value) =>
     value
@@ -29,7 +69,7 @@ const rubric = (prefix) => [
         id: `${prefix}-application`,
         label: "Working application",
         description:
-            "Completes the required behavior or a faithful simulator-based equivalent.",
+            "Completes the required behavior, including the edge cases the brief names.",
         points: 30,
     },
     {
@@ -69,7 +109,7 @@ const assessment = ({
     feedbackPolicy:
         "Compare the result with every rubric criterion. Correct work receives a reason, and incomplete work receives a specific next step.",
     remediation:
-        "Revisit the module explanation and worked example, repeat the simulator with a smaller case, then retry with new evidence.",
+        "Reread the module notes, work a smaller example by hand, then retry.",
 });
 
 const interaction = ({ id, type, title, prompt, practice, application }) => ({
@@ -260,11 +300,36 @@ const buildRequirements = (blueprint) => {
                 required: false,
             })),
             accessibilityNotes:
-                "Use keyboard controls and the text trace or written alternative when a visual or pointer interaction is not suitable.",
+                "Every lesson is readable text with copyable code, keyboard-friendly quizzes and step-throughs, and videos with YouTube captions.",
         },
     ];
 
     (blueprint.extraRequirements || []).forEach((extra, index) => {
+        if (!simulator) {
+            requirements.push({
+                id: `${blueprint.id}-requirement-extra-${index + 1}`,
+                category: extra.category,
+                name: extra.name,
+                required: false,
+                reason: extra.description,
+                freePath: {
+                    name: primary.name,
+                    description: `Optional. Every lesson can be completed with ${primary.name}; ${extra.name} is an extra for learners who have it.`,
+                    setupSteps: [
+                        ...extra.setupSteps,
+                        `Every lesson works in ${primary.name}, so ${extra.name} is never required.`,
+                        `If you have ${extra.name}, use it where a lesson mentions it and compare your result with the lesson's.`,
+                        `If it doesn't match, finish that step in ${primary.name} and keep going.`,
+                    ].slice(0, Math.max(3, extra.setupSteps.length)),
+                    verification: extra.verification || primary.verification,
+                    url: extra.url || primary.url,
+                },
+                paidOptions: [],
+                accessibilityNotes:
+                    "Optional equipment: every assessed outcome can be completed without it.",
+            });
+            return;
+        }
         const isPhysical = extra.category === "hardware";
         requirements.push({
             id: `${blueprint.id}-requirement-extra-${index + 1}`,
@@ -699,14 +764,14 @@ const buildCapstoneModule = (courseBase, blueprint) => {
  * position (learning/content/<course-id>/m<module>-l<lesson>.md). The lesson
  * keeps its id, so progress and grading are unaffected.
  */
-const withAuthoredLessons = (courseId, modules) => {
+const withAuthoredLessons = (courseId, modules, live = false) => {
     const authored = authoredLessons[courseId] || {};
     return modules.map((module) => ({
         ...module,
+        title: authored[`m${module.order}-l1`]?.module || module.title,
         // A written module is described by its first lesson's summary
         // rather than the generated overview.
-        overview:
-            authored[`m${module.order}-l1`]?.summary || module.overview,
+        overview: authored[`m${module.order}-l1`]?.summary || module.overview,
         lessons: module.lessons.map((lesson) => {
             const key = `m${module.order}-l${lesson.order}`;
             const written = authored[key];
@@ -715,11 +780,43 @@ const withAuthoredLessons = (courseId, modules) => {
                       ...lesson,
                       title: written.title,
                       objective: written.summary,
+                      // Live classes keep their in-class time plan.
+                      estimatedMinutes: live
+                          ? lesson.estimatedMinutes
+                          : written.minutes || lesson.estimatedMinutes,
                       contentKey: key,
                   }
                 : { ...lesson, contentKey: null };
         }),
     }));
+};
+
+const summarizeContent = (courseId) => {
+    const lessons = Object.values(authoredLessons[courseId] || {});
+    if (!lessons.length) return null;
+    const total = (pick) =>
+        lessons.reduce(
+            (sum, lesson) => sum + (pick(lesson.stats || {}) || 0),
+            0
+        );
+    return {
+        lessonsWritten: lessons.length,
+        minutes: lessons.reduce(
+            (sum, lesson) => sum + (lesson.minutes || 0),
+            0
+        ),
+        videos: total((stats) => stats.videos),
+        traces: total((stats) => stats.traces),
+        visuals: total(
+            (stats) =>
+                (stats.diagrams || 0) +
+                (stats.charts || 0) +
+                (stats.previews || 0) +
+                (stats.images || 0)
+        ),
+        quizQuestions: total((stats) => stats.quizzes),
+        codeExamples: total((stats) => stats.code),
+    };
 };
 
 const buildCourse = (source, blueprint) => {
@@ -776,22 +873,23 @@ const buildCourse = (source, blueprint) => {
             screenReaderSummary: `${item.name} exposes every modeled control and result in text and can be completed with the keyboard.`,
         })),
         freeCompletionPromise: blueprint.freeCompletionPromise,
+        contentSummary: summarizeContent(source.id),
         liveSession: blueprint.liveSession
             ? {
                   ...blueprint.liveSession,
-                  classTools: blueprint.liveSession.classTools.map(
-                      (item) => ({ ...item })
-                  ),
+                  classTools: blueprint.liveSession.classTools.map((item) => ({
+                      ...item,
+                  })),
               }
             : null,
         sourceTopics: [...source.topics],
     };
     const capstoneModule = buildCapstoneModule(partialCourse, blueprint);
-    const modules = withAuthoredLessons(source.id, [
-        setupModule,
-        ...coreModules,
-        capstoneModule,
-    ]);
+    const modules = withAuthoredLessons(
+        source.id,
+        [setupModule, ...coreModules, capstoneModule],
+        Boolean(blueprint.liveSession)
+    );
 
     const assignments = blueprint.assignments.map((item, index) => {
         const relatedModules = item.moduleOrders.map(
@@ -935,7 +1033,10 @@ const courseRegistry = sourceCurriculum.map((source) => {
     if (!blueprint) {
         throw new Error(`Missing course blueprint for ${source.id}`);
     }
-    return buildCourse(source, blueprint);
+    return buildCourse(
+        source,
+        applyCourseMeta(blueprint, courseMeta[source.id])
+    );
 });
 
 const coursesBySlug = new Map(

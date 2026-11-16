@@ -1,0 +1,53 @@
+{
+  "summary": "A self-paced first course in Python for teens who have never typed code: write real programs in Thonny, watch every value change as they run, and finish with a text app of your own.",
+  "description": "You'll install Thonny, a free Python editor that comes with Python built in, and use its Variables panel and step-by-step debugger to see exactly what your code does. Each module teaches one idea in a Notes lesson, uses it to build one complete program (a text-adventure status tracker, a club sign-up slip that cleans up messy typing, a bike-share fare calculator, a mental math game, a race pace calculator, and a virtual pet), then sets fresh practice problems with hints and worked solutions. Every code example on the page has been run, so the output and error messages you see are the real ones. The course ends with a capstone: a text-based app you plan, build in milestones, and test yourself.",
+  "audience": "Middle and high school students with no programming experience, working at their own pace. Comfort with typing and saving files is enough.",
+  "prerequisites": [
+    "No programming experience needed",
+    "A Windows 10 or 11 PC, a Mac with macOS 10.15 or newer, or a Chromebook that allows Linux apps"
+  ],
+  "outcomes": [
+    "Write, save, run, and step through Python programs in Thonny, and read an error message from the bottom up.",
+    "Store and update values in variables, and tell strings, integers, floats, and Booleans apart.",
+    "Read what people type with input(), clean it with string methods, convert it with int() and float(), and format output with f-strings.",
+    "Make programs choose with if, elif, and else, combine conditions with and, or, and not, and check decisions with boundary tests.",
+    "Repeat work with loops and organize code into functions that take parameters and return values.",
+    "Plan, build, test, and present a complete text-based Python app."
+  ],
+  "tags": ["python", "beginner", "self-paced", "thonny", "debugging"],
+  "primaryTool": {
+    "name": "Thonny (free Python editor)",
+    "description": "Thonny is a free, open-source Python editor made for beginners at the University of Tartu. Its installer includes Python, so there is only one thing to install, and its Variables panel and step-by-step debugger let you watch a program change its values one line at a time.",
+    "setupSteps": [
+      "Go to thonny.org and download the installer for your computer (Windows, or Apple silicon or Intel Mac). On a Chromebook, turn on Linux in Settings › About ChromeOS › Developers, then run sudo apt install thonny in the Terminal.",
+      "Run the installer and keep the suggested settings. On Windows, no administrator password is needed.",
+      "Open Thonny, leave Initial settings on Standard, and click Let's go!",
+      "In the Shell at the bottom, type 2 ** 100 and press Enter."
+    ],
+    "verification": "The Shell prints 1267650600228229401496703205376, and a saved four-line program runs with its output shown under %Run in the Shell.",
+    "url": "https://thonny.org/"
+  },
+  "optionalGear": [],
+  "freeCompletionPromise": "Every lesson uses Thonny and Python, which are both free, and needs no account or paid service. If a school-managed Chromebook can't install apps, the early modules can be followed in the free Python Tutor site in a browser.",
+  "assignments": [
+    {
+      "title": "Quiz with a results slip",
+      "brief": "Write a Python quiz in Thonny that asks several questions in a loop, cleans up and converts what the player types, rejects answers that aren't numbers, lets them skip or quit, and prints an aligned score summary with f-strings."
+    },
+    {
+      "title": "Fare calculator built from functions",
+      "brief": "Turn a page of pricing rules into a Python program in Thonny built from small functions, using if/elif/else and one validation function for every question, then check each rule with boundary tests at its cutoffs."
+    }
+  ],
+  "capstone": {
+    "title": "Text app of your own",
+    "brief": "Build a complete text-based Python app, such as a flashcard trainer, word game, budget tracker, or text adventure, that a stranger can use without help and that meets all eight requirements, from validation to a clean exit.",
+    "deliverables": [
+      "Python file that no input can crash",
+      "Test table with 12+ rows of normal, edge, and nasty input",
+      "Automatic checks for your functions",
+      "README explaining how to use the app",
+      "Two-minute demo"
+    ]
+  }
+}
